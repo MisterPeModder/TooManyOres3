@@ -1,0 +1,15 @@
+[
+{
+  "modid": "tmo",
+  "name": "Too Many Ores",
+  "description": "Ores, tools and some machinery",
+  "credits": "The forge and MCP teams",
+  "logoFile": "",
+  "url": "",
+  "updateUrl": "",
+  "authorList": [ "MisterPeModder" ],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+}
+]

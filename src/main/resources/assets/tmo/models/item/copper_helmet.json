@@ -1,0 +1,14 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "tmo:items/copper_helmet"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "probe": 1
+            },
+            "model": "tmo:item/copper_helmet_probe"
+        }
+    ]
+}

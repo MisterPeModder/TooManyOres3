@@ -1,0 +1,14 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "tmo:items/hallowed_helmet"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "probe": 1
+            },
+            "model": "tmo:item/hallowed_helmet_probe"
+        }
+    ]
+}

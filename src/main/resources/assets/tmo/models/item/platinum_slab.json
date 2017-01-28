@@ -1,0 +1,6 @@
+{
+    "parent": "tmo:block/half_slab_all",
+	"textures": {
+        "all": "tmo:blocks/platinum_brick"
+    }
+}

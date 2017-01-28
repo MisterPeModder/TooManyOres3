@@ -1,0 +1,209 @@
+
+#Misc
+itemGroup.TMO=Too Many Ores III
+item.tabIcon.name=Tab Icon
+item.hasNBT.desc=Has NBT data!
+tmo.missingNo.name=MISSINGNO. (throw me away pls :3)
+tmo.config.gui.mainTitle=Too Many Ores Config
+
+#Items
+item.itemIngot.titanium.name=Titanium Ingot
+item.itemIngot.titaniumDark.name=Dark Titanium Ingot
+item.itemIngot.copper.name=Copper Ingot
+item.itemIngot.darkanium.name=Darkanium Ingot
+item.itemIngot.darkanium.desc=It vibes with a dark energy.
+item.itemIngot.enderMatter.name=Ender Matter Ingot
+item.itemIngot.goldAncient.name=Ancient Gold Ingot
+item.itemIngot.platinum.name=Platinum Ingot
+item.itemIngot.redstone.name=Redstone Ingot
+item.itemIngot.carbon.name=Carbon Ingot
+
+item.itemGem.frozium.name=Frozium Gem
+item.itemGem.ignum.name=Ignum Gem
+
+item.itemPlate.titanium.name=Titanium Plate
+item.itemPlate.iron.name=Iron Plate
+item.itemPlate.redstone.name=Compressed Redstone Block
+item.itemPlate.hallowed.name=Hallowed Plate
+
+item.itemLock.basic.name=Titanium Security Lock
+item.itemLock.basic.desc=Can protect your machines from thieves. can be enchanted with Unbreaking
+item.itemLock.reinforced.name=Smart Security Lock
+item.itemLock.reinforced.desc=A more advanced version of the lock that has less chances to be broken.\ncan be enchanted with Unbreaking
+item.itemLock.broken.title=Broken
+item.itemLock.broken.desc=Repair with %dx %ss in an anvil.
+
+#Tools
+item.pickaxeTitanium.name=Titanium Pickaxe
+item.pickaxeTitaniumDark.name=Dark Titanium Pickaxe
+item.pickaxeCopper.name=Copper Pickaxe
+item.pickaxeFrozium.name=Frozium Pickaxe
+item.pickaxeIgnum.name=Ignum Pickaxe
+
+item.axeTitanium.name=Titanium Axe
+item.axeTitaniumDark.name=Dark Titanium Axe
+item.axeCopper.name=Copper Axe
+item.axeFrozium.name=Frozium Axe
+item.axeIgnum.name=Ignum Axe
+
+item.shovelTitanium.name=Titanium Shovel
+item.shovelTitaniumDark.name=Dark Titanium Shovel
+item.shovelCopper.name=Copper Shovel
+item.shovelFrozium.name=Frozium Shovel
+item.shovelIgnum.name=Ignum Shovel
+
+item.swordTitanium.name=Titanium Sword
+item.swordTitaniumDark.name=Dark Titanium Sword
+item.swordCopper.name=Copper Sword
+item.swordFrozium.name=Frozium Sword
+item.swordIgnum.name=Ignum Sword
+
+item.hoeTitanium.name=Titanium Hoe
+item.hoeTitaniumDark.name=Dark Titanium Hoe
+item.hoeCopper.name=Copper Hoe
+item.hoeFrozium.name=Frozium Hoe
+item.hoeIgnum.name=Ignum Hoe
+
+#Armor
+item.helmetTitanium.name=Titanium Helmet
+item.helmetTitanium.probe.name=Titanium Helmet with Probe
+item.helmetTitaniumDark.name=Dark Titanium Helmet
+item.helmetTitaniumDark.probe.name=Dark Titanium Helmet with Probe
+item.helmetCopper.name=Copper Helmet
+item.helmetCopper.probe.name=Copper Helmet with Probe
+item.helmetFrozium.name=Frozium Helmet
+item.helmetFrozium.probe.name=Frozium Helmet with Probe
+item.helmetIgnum.name=Ignum Helmet
+item.helmetIgnum.probe.name=Ignum Helmet with Probe
+item.helmetDarkanium.name=Darkanium Helmet
+item.helmetDarkanium.probe.name=Darkanium Helmet with Probe
+item.helmetHallowed.name=Hallowed Helmet
+item.helmetHallowed.probe.name=Hallowed Helmet with Probe
+
+item.chestplateTitanium.name=Titanium Chestplate
+item.chestplateTitaniumDark.name=Dark Titanium Chestplate
+item.chestplateCopper.name=Copper Chestplate
+item.chestplateFrozium.name=Frozium Chestplate
+item.chestplateIgnum.name=Ignum Chestplate
+item.chestplateDarkanium.name=Darkanium Chestplate
+item.chestplateHallowed.name=Hallowed Chestplate
+
+item.leggingsTitanium.name=Titanium Leggings
+item.leggingsTitaniumDark.name=Dark Titanium Leggings
+item.leggingsCopper.name=Copper Leggings
+item.leggingsFrozium.name=Frozium Leggings
+item.leggingsIgnum.name=Ignum Leggings
+item.leggingsDarkanium.name=Darkanium Leggings
+item.leggingsHallowed.name=Hallowed Leggings
+
+item.bootsTitanium.name=Titanium Boots
+item.bootsTitaniumDark.name=Dark Titanium Boots
+item.bootsCopper.name=Copper Boots
+item.bootsFrozium.name=Frozium Boots
+item.bootsIgnum.name=Ignum Boots
+item.bootsDarkanium.name=Darkanium Boots
+item.bootsHallowed.name=Hallowed Boots
+
+item.wrenchCopper.name=Copper Wrench
+item.wrenchAdmin.name=Admin Wrench
+item.wrench.OwnerRemoved=Owner has been removed!
+item.wrench.NoPermissions=You don't have the required permissions to use this wrench!
+
+item.titaniumBucket.name=Titanium Bucket
+item.titaniumBucket.empty=Titanium Bucket (empty)
+item.titaniumBucket.filled=Titanium Bucket (%dmb of %s)
+item.titaniumBucket.message.empty=Bucket is empty!
+item.titaniumBucket.message.notEnougthLiquid=Not enougth liquid!
+item.titaniumBucket.message.notEnougthCapacity=Not enougth capacity!
+item.titaniumBucket.message.content=%1$s ~ %2$d/%3$dmb
+item.titaniumBucket.desc.content=Contains: %2$d/%3$dmb of %1$s.
+item.titaniumBucket.desc.emptyContent=Contains: nothing.
+item.titaniumBucket.desc=A reinforced bucket that can hold multiple buckets worth of any fluid.\nRight-click to place fluids.\nShift-right-click to take fluids.
+
+#Blocks
+tile.blockTest.name=TEST BLOCK
+tile.blockStorage.blockTitanium.name=Titanium Block
+tile.blockStorage.blockCopper.name=Copper Block
+tile.blockFrozium.name=Frozium Block
+tile.blockStorage.blockIgnum.name=Ignum Block
+tile.blockStorage.blockEnderMatter.name=Ender Matter Block
+tile.blockStorage.blockDarkanium.name=Darkanium Block
+tile.blockStorage.blockGoldAncient.name=Ancient Gold Block
+tile.blockStorage.blockPlatinum.name=Platinum Block
+tile.blockDecoration.titaniumPlating.name=Titanium Plating
+tile.blockBrick.name=Bricks
+tile.blockBrick.goldAncient.name=Ancient Gold Bricks
+tile.blockBrick.goldAncientCarved.name=Chiseled Ancient Gold Bricks
+tile.blockBrick.darkanium.name=Darkanium Bricks
+tile.blockBrick.endstoneClean.name=Polished Endstone Bricks
+tile.blockBrick.frozium.name=Frozium Bricks
+tile.blockBrick.ignum.name=Ignum Bricks
+tile.blockBrick.gold.name=Gold Bricks
+tile.blockBrick.platinum.name=Platinum Bricks
+tile.blockBrick.platinumCarved.name=Chiseled Platinum Bricks
+tile.blockOre.name=The Ultimate Unammed Ore of Doom
+tile.blockOre.titanium.name=Titanium Ore
+tile.blockOre.goldAncient.name=Ancient Gold Ore
+tile.blockOre.darkanium.name=Darkanium Ore
+tile.blockOre.darkaniumNether.name=Nether Darkanium Ore
+tile.blockOre.frozium.name=Frozium Ore
+tile.blockOre.ignum.name=Ignum Ore
+tile.blockOre.ignumNether.name=Nether Ignum Ore
+tile.blockOre.platinum.name=Platinum Ore
+tile.blockOre.platinumNether.name=Nether Platinum Ore
+tile.blockOre.enderMatter.name=Ender Matter Ore
+tile.blockOre.copper.name=Copper Ore
+tile.blockOre.carbon.name=Carbon Ore
+tile.blockSlab.goldAncient.name=Ancient Gold Slab
+tile.blockSlab.darkanium.name=Darkanium Slab
+tile.blockSlab.endstoneClean.name=Polished Endstone Slab
+tile.blockSlab.frozium.name=Frozium Slab
+tile.blockSlab.ignum.name=Ignum Slab
+tile.blockSlab.gold.name=Gold Slab
+tile.blockSlab.platinum.name=Platinum Slab
+tile.blockGoldAncientLamp.name=Ancient Gold Lamp
+tile.blockDarkaniumLamp.name=Darkanium Lamp
+tile.blockLamp.mode.title=Mode:
+tile.blockLamp.mode.normal=Normal
+tile.blockLamp.mode.inverted=Inverted
+tile.blockLamp.mode.hint=(right click with a redstone torch to toggle)
+tile.blockItemKeeper.name=§4Item Keeper
+tile.blockItemKeeper.empty=§6This item keeper is empty... =(
+tile.blockItemKeeper.item=§6Contains: §2%dx §f
+tile.blockTitaniumChest.name=Titanium Chest
+tile.blockTitaniumChest.locked=This Titanium Chest is locked!
+tile.blockTitaniumChest.lockBroken=You broke the chest's lock!
+
+#GUI
+gui.tab.main.name=Main
+gui.tab.info.name=Info
+gui.tab.redstone.name=Redstone
+gui.tab.security.name=Security
+gui.tab.playerInv.name=Inventory
+gui.tab.io.name=IO
+gui.slot.lock.name=Lock Slot
+gui.slot.lock.desc=Put a lock there to unlock security options.
+
+#Commands
+commands.info.usage=/item_info
+commands.info.success.start=§6[========Info========]
+commands.info.success.reg=§2Registry name:§f %s        
+commands.info.success.unl=§2Unlocalized name:§f %s
+commands.info.success.meta=§2Meta:§f %d
+commands.info.success.metaunl=§2Meta Unlocalized name:§f %s
+commands.info.success.ore=§2OreDict values:§f %s
+commands.info.success.end=§6[====================]
+
+
+#JEI
+item.itemIngot.titanium.jeidesc=Titanium is a very sturdy material that have a lot of uses...\nPerhaps you could upgrade your diamond with this?
+
+item.titaniumBucket.jeidesc=A reinforced bucket that can hold multiple buckets worth of any fluid.\nIts capacity may vary depending on the configuration.\nControls:\nRight-click to place fluids.\nShift-right-click to take fluids.
+
+tile.blockTitaniumChest.jeidesc=This blastproof titanium-plated chest has more than twice the capacity of a vanilla double chest.\nBy installing a lock on it, the chest can only be accessed by its owner.\nBut don't worry! if steal some stuff from it, TNT is your way to go! Locks has a chance to break when exploded. 
+
+#The One Probe Info
+top.info.titaniumChest.owner.title=Owner:
+top.info.titaniumChest.owner.empty=none
+top.info.titaniumChest.lock.unlocked=Unlocked
+top.info.titaniumChest.lock.locked=Locked

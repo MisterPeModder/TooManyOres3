@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+		"particle": "tmo:blocks/platinum_brick",
+        "all": "tmo:blocks/platinum_brick"
+    }
+}

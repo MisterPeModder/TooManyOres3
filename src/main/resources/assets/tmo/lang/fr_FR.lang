@@ -1,0 +1,202 @@
+
+#Divers
+itemGroup.TMO=Too Many Ores III
+item.tabIcon.name=Icône
+item.hasNBT.desc=contient des données NBT!
+tmo.missingNo.name=MISSINGNO. (jette-moi loin... §4TRES LOIN§f ok?)
+tmo.config.gui.mainTitle=Confguration de "Beacoup Trop de Minerais" (a.k.a Too Many Ores)
+
+#Objets
+item.itemIngot.titanium.name=Lingot de Titane
+item.itemIngot.titaniumDark.name=Lingot de Titane Noir
+item.itemIngot.copper.name=Lingot de Cuivre
+item.itemIngot.darkanium.name=Lingot de Sombranium
+item.itemIngot.enderMatter.name=Lingot de Matière de L'Ender
+item.itemIngot.goldAncient.name=Lingot d'Or Ancien
+item.itemIngot.platinum.name=Lingot de Platine
+item.itemIngot.redstone.name=Lingot de Redstone
+item.itemIngot.carbon.name=Lingot de Carbone
+
+item.itemGem.frozium.name=Gème de Frozium
+item.itemGem.ignum.name=Gème d'Ignum
+
+item.itemPlate.titanium.name=Plaque de Titane
+item.itemPlate.iron.name=Plaque de Fer
+item.itemPlate.redstone.name=Bloc de Redstone Compressé
+item.itemPlate.hallowed.name=Plaque Sacrée
+
+item.itemLock.basic.name=Cadenas de Securité en Titane
+item.itemLock.basic.desc=Protège vos machines des voleurs. Peut être enchanté avec Solidité
+item.itemLock.reinforced.name=Cadenas de Sécurité Digital
+item.itemLock.reinforced.desc=Une version plus résistante du cadenas avec plus d'options de sécurité.\nPeut être enchanté avec Solidité
+item.itemLock.broken.title=Cassé
+item.itemLock.broken.desc=Réparez le avec %d %s dans une enclume
+
+
+#Outils
+item.pickaxeTitanium.name=Pioche en Titane
+item.pickaxeTitaniumDark.name=Pioche en Titane Noir
+item.pickaxeCopper.name=Pioche en Cuivre
+item.pickaxeFrozium.name=Pioche en Frozium
+item.pickaxeIgnum.name=Pioche en Ignum
+
+item.axeTitanium.name=Hache en Titane
+item.axeTitaniumDark.name=Hache en Titane Noir
+item.axeCopper.name=Hache en Cuivre
+item.axeFrozium.name=Hache en Frozium
+item.axeIgnum.name=Hache en Ignum
+
+item.shovelTitanium.name=Pelle en Titane
+item.shovelTitaniumDark.name=Pelle en Titane Noir
+item.shovelCopper.name=Pelle en Cuivre
+item.shovelFrozium.name=Pelle en Frozium
+item.shovelIgnum.name=Pelle en Ignum
+
+item.swordTitanium.name=Épée en Titane
+item.swordTitaniumDark.name=Épée ne Titane Noir
+item.swordCopper.name=Épée en Cuivre
+item.swordFrozium.name=Épée en Frozium
+item.swordIgnum.name=Épée en Ignum
+
+item.hoeTitanium.name=Houe en Titane
+item.hoeTitanium.name.desc=un peu inutile.
+item.hoeTitaniumDark.name=Houe en Titane Noir
+item.hoeTitaniumDark.name.desc=VRAIMENT inutile.
+item.hoeCopper.name=Houe en Cuivre
+item.hoeFrozium.name=Houe en Frozium
+item.hoeIgnum.name=Houe en Ignum
+
+#Armures
+item.helmetTitanium.name=Casque en Titane
+item.helmetTitanium.probe.name=Casque en Titane avec Sonde
+item.helmetTitaniumDark.name=Casque en Titane Noir
+item.helmetTitaniumDark.probe.name=Casque en Titane Noir avec Sonde
+item.helmetCopper.name=Casque en Cuivre
+item.helmetCopper.probe.name=Casque en Cuivre avec Sonde
+item.helmetFrozium.name=Casque en Frozium
+item.helmetFrozium.probe.name=Casque en Frozium avec Sonde
+item.helmetIgnum.name=Casque en Ignum
+item.helmetIgnum.probe.name=Casque en Ignum avec Sonde
+item.helmetDarkanium.name=Casque en Sombranium
+item.helmetDarkanium.probe.name=Casque en Sombranium avec Sonde
+item.helmetHallowed.name=Casque Sacré
+item.helmetHallowed.probe.name=Casque Sacré avec Sonde
+
+item.chestplateTitanium.name=Plastron en Titane
+item.chestplateTitaniumDark.name=Plastron en Titane Noir
+item.chestplateCopper.name=Plastron en Cuivre
+item.chestplateFrozium.name=Plastron en Frozium
+item.chestplateIgnum.name=Plastron en Ignum
+item.chestplateDarkanium.name=Plastron en Sombranium
+item.chestplateHallowed.name=Plastron Sacré
+
+item.leggingsTitanium.name=Jambières en Titane
+item.leggingsTitaniumDark.name=Jambières en Titane Noir
+item.leggingsCopper.name=Jambières en Cuivre
+item.leggingsFrozium.name=Jambières en Frozium
+item.leggingsIgnum.name=Jambières en Ignum
+item.leggingsDarkanium.name=Jambières en Sombranium
+item.leggingsHallowed.name=Jambières Sacrées
+
+item.bootsTitanium.name=Bottes en Titane
+item.bootsTitaniumDark.name=Bottes en Titane Noir
+item.bootsCopper.name=Bottes en Cuivre
+item.bootsFrozium.name=Bottes en Frozium
+item.bootsIgnum.name=Bottes en Ignum
+item.bootsDarkanium.name=Bottes en Sombranium
+item.bootsHallowed.name=Bottes Sacrées
+
+item.wrenchCopper.name=Clé en Cuivre
+item.wrenchCopper.desc=N'ouvre pas les portes!
+item.wrenchAdmin.name=Clé pour Administrateur
+item.wrench.OwnerRemoved=Le propriétaire à été enlevé
+item.wrench.NoPermissions=Vous n'avez pas les permissions pour utiliser cette clé!
+
+item.titaniumBucket.name=Seau en Titane
+item.titaniumBucket.empty=Seau en Titane (vide)
+item.titaniumBucket.filled=Seau en Titane (%s, %dmb)
+item.titaniumBucket.message.empty=Ce seau est vide!
+item.titaniumBucket.message.notEnougthLiquid=Pas assez de liquide!
+item.titaniumBucket.message.notEnougthCapacity=Capacité insuffisante!
+item.titaniumBucket.message.content=%1$s ~ %2$d/%3$dmb
+item.titaniumBucket.desc.content=Contient: %1$s, %2$d/%3$dmb.
+item.titaniumBucket.desc.emptyContent=Contient: rien.
+item.titaniumBucket.desc=Un sceau renforcé capable de contenir l'équivalent de plusieurs sceau de n'importe quel fluide \nClic droit pour placer des fluides. \nShift+Clic droit pour prendre des fluides.
+
+#Blocs
+tile.blockTest.name=TEST BLOCK
+tile.blockStorage.blockTitanium.name=Bloc de Titane
+tile.blockStorage.blockCopper.name=Block de Cuivre
+tile.blockFrozium.name=Bloc de Frozium
+tile.blockStorage.blockIgnum.name=Bloc d'Ignum
+tile.blockStorage.blockEnderMatter.name=Bloc de Matière de L'Ender
+tile.blockStorage.blockDarkanium.name=Block de Sombranium
+tile.blockStorage.blockGoldAncient.name=Bloc d'Or Ancien
+tile.blockStorage.blockPlatinum.name=Bloc de Platine
+tile.blockBrick.name=Briques
+tile.blockBrick.goldAncient.name=Briques d'Or Ancien
+tile.blockBrick.goldAncientCarved.name=Briques d'Or Ancien scupltées
+tile.blockBrick.darkanium.name=Briques de Sombranium
+tile.blockBrick.endstoneClean.name=Briques polies de L'Ender
+tile.blockBrick.frozium.name=Briques de Frozium
+tile.blockBrick.ignum.name=Briques d'Ignum
+tile.blockBrick.gold.name=Briques d'Or
+tile.blockBrick.platinum.name=Briques de Platine
+tile.blockBrick.platinumCarved.name=Briques de Platine scupltées
+tile.blockOre.name=LE MINERAI SANS NOM DU TURFU
+tile.blockOre.titanium.name=Minerai de Titane
+tile.blockOre.goldAncient.name=Minerai d'Or Ancien
+tile.blockOre.darkanium.name=Minerai de Sombranium
+tile.blockOre.darkaniumNether.name=Minerai de Sombranium du Nether
+tile.blockOre.frozium.name=Minerai de Frozium
+tile.blockOre.ignum.name=Minerai d'Ignum
+tile.blockOre.ignumNether.name=Minerai d'Ignum du Nether
+tile.blockOre.platinum.name=Minerai de Platine
+tile.blockOre.platinumNether.name=Minerai de Platine du Nether
+tile.blockOre.enderMatter.name=Minerai de Matière de L'Ender
+tile.blockOre.copper.name=Minerai de Cuivre
+tile.blockOre.carbon.name=Minerai de Carbone
+tile.blockSlab.goldAncient.name=Dalle d'Or Ancien
+tile.blockSlab.darkanium.name=Dalle de Sombranium
+tile.blockSlab.endstoneClean.name=Dalle de Briques Polies de l'Ender
+tile.blockSlab.frozium.name=Dalle de Frozium
+tile.blockSlab.ignum.name=Dalle de Ignum
+tile.blockSlab.gold.name=Dalle d'Or
+tile.blockSlab.platinum.name=Dalle de Platine
+tile.blockGoldAncientLamp.name=Lampe d'Or Ancien
+tile.blockDarkaniumLamp.name=Lanterne de Sombranium
+tile.blockLamp.mode.title=Mode:
+tile.blockLamp.mode.normal=Normal
+tile.blockLamp.mode.inverted=Inversé
+tile.blockLamp.mode.hint=(cliquez droit avec une torche de redstone pour inverser)
+tile.blockItemKeeper.name=§4Item Keeper
+tile.blockItemKeeper.name=§4Stockeur d'Objets
+tile.blockItemKeeper.empty=§6Ce stockeur d'objets est vide... =( 
+tile.blockItemKeeper.item=§6Contient: §2%dx §f
+tile.blockTitaniumChest.name=Coffre en Titane
+tile.blockTitaniumChest.locked=Ce Coffre en Titane est Verrouillé!
+tile.blockTitaniumChest.lockBroken=Vous avez cassé le cadenas du coffre!
+
+#Catégories interface
+gui.tab.main.name=Principal
+gui.tab.info.name=Infos
+gui.tab.redstone.name=Redstone
+gui.tab.security.name=Sécurité
+gui.tab.playerInv.name=Inventaire
+gui.tab.io.name=Import/Export?
+gui.slot.lock.name=Emplacement du cadenas
+gui.slot.lock.desc=Mettez un cadenas ici pour débloquer les options de sécurité
+
+#JEI
+item.itemIngot.titanium.jeidesc=Le titane est un materiau avec beacoup d'utilisations possibles.\nPeut-être que l'on peut améliorer nos outils en diamant avec?
+
+item.titaniumBucket.jeidesc=Un sceau capable de contenir l'équivalent de plusieurs seaux de n'importe quel liquide\nSa capacité peut varier selon la configuration\nContrôles:\nClic droit pour placer des fluides. \nShift+Clic droit pour prendre des fluides.
+
+tile.blockTitaniumChest.jeidesc=This blastproof titanium-plated chest has more than twice the capacity of a vanilla double chest.\nBy installing a lock on it, the chest can only be accessed by its owner.\nBut don't worry! if steal some stuff from it, TNT is your way to go! Locks has a chance to break when exploded. 
+tile.blockTitaniumChest.jeidesc=Ce coffre résistant aux explosions plaqué titane à plus de deux fois la capacité d'un double coffre vanilla\nEn installant un verrou dessus, le coffre ne peut être ouvert que par le propriétaire\nMais ne vous faîtes pas de soucis! si souhaitez "emprunter" du materiel venant du coffre, de la TNT (ou n'importe quel source d'explosion) fera l'affaire!\nLes verrous ont des chances de casser quand soumis à des explosions
+
+#The One Probe Info
+top.info.titaniumChest.owner.title=Propriétaire:
+top.info.titaniumChest.owner.empty=aucun
+top.info.titaniumChest.lock.unlocked=Déverrouillé
+top.info.titaniumChest.lock.locked=Verrouillé

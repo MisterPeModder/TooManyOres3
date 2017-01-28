@@ -1,0 +1,14 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "tmo:items/frozium_helmet"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "probe": 1
+            },
+            "model": "tmo:item/frozium_helmet_probe"
+        }
+    ]
+}

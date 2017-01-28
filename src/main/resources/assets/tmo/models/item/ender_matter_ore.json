@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "tmo:blocks/ender_matter_ore"
+    }
+}

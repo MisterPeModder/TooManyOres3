@@ -1,0 +1,28 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "all": "tmo:blocks/ancient_gold_brick"
+        },
+        "model": "tmo:half_slab_all",
+        "uvlock": true,
+		"transform": "forge:default-block"
+    },
+	"variants": {
+        "normal": [{}],
+        "inventory": [{}],
+		"half": {
+			"bottom":{},
+			"top": {"model": "tmo:upper_half_slab_all"}
+		},
+		"variant": {
+			"ancient_gold": {"textures": {"all": "tmo:blocks/ancient_gold_brick"}},
+			"darkanium": {"textures": {"all": "tmo:blocks/darkanium_brick"}},
+			"endstone": {"textures": {"all": "tmo:blocks/endstone_brick_clean"}},
+			"frozium": {"textures": {"all": "tmo:blocks/frozium_brick"}},
+			"ignum": {"textures": {"all": "tmo:blocks/ignum_brick"}},
+			"gold": {"textures": {"all": "tmo:blocks/gold_brick"}},
+			"platinum": {"textures": {"all": "tmo:blocks/platinum_brick"}}
+		}
+    }
+}
