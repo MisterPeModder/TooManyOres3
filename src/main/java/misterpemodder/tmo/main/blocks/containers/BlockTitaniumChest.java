@@ -6,16 +6,11 @@ import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoAccessor;
 import mcjty.theoneprobe.api.ProbeMode;
-import mcjty.theoneprobe.api.TextStyleClass;
-import mcjty.theoneprobe.config.Config;
+import misterpemodder.tmo.api.item.IItemLock;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
 import misterpemodder.tmo.main.client.gui.GuiHandler;
-import misterpemodder.tmo.main.init.ModItems;
-import misterpemodder.tmo.main.items.ItemLock;
-import misterpemodder.tmo.main.items.ItemsVariants;
-import misterpemodder.tmo.main.items.ItemsVariants.Lock;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
 import misterpemodder.tmo.main.network.TMOPacketHandler;
 import misterpemodder.tmo.main.network.packet.PacketServerToClient;
@@ -24,16 +19,15 @@ import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -167,32 +161,20 @@ public class BlockTitaniumChest extends BlockContainerBase<TileEntityTitaniumChe
 		TileEntityTitaniumChest chest = (TileEntityTitaniumChest)world.getTileEntity(pos);
 		if(chest != null && !world.isRemote) {
 			ItemStack stack = chest.getLockItemHandler().getStackInSlot(0);
-			if(!stack.isEmpty() && stack.getItem() == ModItems.Items.LOCK.getItem()) {
-				ItemLock lock = (ItemLock)stack.getItem();
+			if(!stack.isEmpty() && stack.getItem() instanceof IItemLock) {
+				IItemLock lock = (IItemLock)stack.getItem();
 				if(!lock.isBroken(stack)) {
-					float breakChance;
-					ItemsVariants.Lock variant = lock.getVariant(stack.getMetadata());
-					if(variant == Lock.BASIC) {
-						breakChance = 0.5F;
-					} else {
-						breakChance = 0.2F;
-					}
-					Random random = new Random();
-					if(random.nextInt(EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, stack)+1) == 0) {
-						if(random.nextFloat()<breakChance) {
-							stack.setItemDamage(variant.getOtherVariant().getMetadata());
-							world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F, true);
-							
-							NetworkRegistry.TargetPoint target = new TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64);
-							NBTTagCompound toSend = new NBTTagCompound();
-							toSend.setLong("pos", pos.toLong());
-							toSend.setTag("lock", chest.getLockItemHandler().serializeNBT());
-							TMOPacketHandler.network.sendToAllAround(new PacketServerToClient(PacketDataHandlers.TE_UPDATE_HANDLER, toSend), target);
-							
-							if(explosion.getExplosivePlacedBy() instanceof EntityPlayer) {
-								((EntityPlayer)explosion.getExplosivePlacedBy()).sendMessage(new TextComponentString(TextFormatting.DARK_RED+Tmo.proxy.translate("tile.blockTitaniumChest.lockBroken")));
-							}
-						}
+					
+					if(lock.attemptBreak(stack, new Random()) == EnumActionResult.SUCCESS) {
+						world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F, true);
+						
+						NetworkRegistry.TargetPoint target = new TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64);
+						NBTTagCompound toSend = new NBTTagCompound();
+						toSend.setLong("pos", pos.toLong());
+						toSend.setTag("lock", chest.getLockItemHandler().serializeNBT());
+						TMOPacketHandler.network.sendToAllAround(new PacketServerToClient(PacketDataHandlers.TE_UPDATE_HANDLER, toSend), target);
+						
+						lock.onLockBroken(world, pos, explosion.getExplosivePlacedBy());
 					}
 				}
 			}
@@ -220,20 +202,17 @@ public class BlockTitaniumChest extends BlockContainerBase<TileEntityTitaniumChe
 			String unlocked = Tmo.proxy.translate("top.info.titaniumChest.lock.unlocked");
 			String locked = Tmo.proxy.translate("top.info.titaniumChest.lock.locked");
 			
-			try {
-				IProbeInfo vertical = null;
-				vertical = probeInfo.vertical(probeInfo.defaultLayoutStyle().borderColor(0xff006699).spacing(0));
-				vertical.text(TextFormatting.GREEN+title+" "+(chest.hasOwner()?TextFormatting.YELLOW+chest.getOwner():TextFormatting.RED+empty));
-				ItemStack lock = chest.getLockItemHandler().getStackInSlot(0);
-				String txt = lock.isEmpty() || ((ItemLock)lock.getItem()).isBroken(lock)? TextFormatting.GREEN+unlocked: TextFormatting.RED+locked;
-				if(lock.isEmpty()) {
-					vertical.horizontal().text(txt);
-				}
-				else {
-					vertical.horizontal().item(lock).text(txt);
-				}
-			} catch(Exception e) {
-				e.printStackTrace();
+			
+			IProbeInfo vertical = null;
+			vertical = probeInfo.vertical(probeInfo.defaultLayoutStyle().borderColor(0xff006699).spacing(0));
+			vertical.text(TextFormatting.GREEN+title+" "+(chest.hasOwner()?TextFormatting.YELLOW+chest.getOwner():TextFormatting.RED+empty));
+			ItemStack lock = chest.getLockItemHandler().getStackInSlot(0);
+			String txt = lock.isEmpty() || ((IItemLock)lock.getItem()).isBroken(lock)? TextFormatting.GREEN+unlocked: TextFormatting.RED+locked;
+			if(lock.isEmpty()) {
+				vertical.horizontal().text(txt);
+			}
+			else {
+				vertical.horizontal().item(lock).text(txt);
 			}
 		}
 		

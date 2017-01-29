@@ -1,9 +1,8 @@
 package misterpemodder.tmo.main.tileentity;
 
+import misterpemodder.tmo.api.item.IItemLock;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest;
-import misterpemodder.tmo.main.init.ModItems;
-import misterpemodder.tmo.main.items.ItemLock;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
 import misterpemodder.tmo.main.network.TMOPacketHandler;
 import misterpemodder.tmo.main.network.packet.PacketClientToServer;
@@ -24,7 +23,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityTitaniumChest extends TileEntityContainerBase implements TileEntityLockable, ITickable, IOwnable  {
@@ -224,8 +222,7 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
     @Override
     public boolean isLocked() {
     	ItemStack lock = this.getLockItemHandler().getStackInSlot(0).copy();
-    	boolean z = !ItemLock.isBroken(lock);
-    	return lock.isEmpty() || lock.getItem() != ModItems.Items.LOCK.getItem()? false : !ItemLock.isBroken(lock);
+    	return lock.isEmpty() || !(lock.getItem() instanceof IItemLock)? false : !((IItemLock)lock.getItem()).isBroken(lock);
     }
     
 }
