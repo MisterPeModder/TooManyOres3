@@ -13,8 +13,8 @@ import net.minecraft.creativetab.CreativeTabs;
 public class TMOHelper {
 	public static final String MOD_ID = "tmo";
 	public static final String MOD_NAME = "Too Many Ores";
-	public static final String MOD_VERSION = "1.0";
-	public static final String ACCEPTED_MC_VERSIONS = "[1.10.2,)";
+	public static final String MOD_VERSION = "1.0.0.0";
+	public static final String ACCEPTED_MC_VERSIONS = "[1.11.2,)";
 	
 	public static final String CLIENT_PROXY_CLASS = "misterpemodder.tmo.proxy.ClientProxy";
 	public static final String SERVER_PROXY_CLASS = "misterpemodder.tmo.proxy.ServerProxy";
@@ -30,14 +30,5 @@ public class TMOHelper {
 	
 	public static boolean topLoaded = false;
 	public static final String TOP_TAG = "theoneprobe";
-	
-	public static String convertToLocation(String name) {
-		Matcher matcher = Pattern.compile("[A-Z]").matcher(name);
-		while(matcher.find()) {
-			String str = matcher.group(0).toLowerCase();
-			name = name.replaceFirst("[A-Z]", "_"+str);
-		}
-		return name;
-	}
 	
 }
