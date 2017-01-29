@@ -16,8 +16,8 @@ public class TMOHelper {
 	public static final String MOD_VERSION = "1.0.0";
 	public static final String ACCEPTED_MC_VERSIONS = "[1.11.2,)";
 	
-	public static final String CLIENT_PROXY_CLASS = "misterpemodder.tmo.proxy.ClientProxy";
-	public static final String SERVER_PROXY_CLASS = "misterpemodder.tmo.proxy.ServerProxy";
+	public static final String CLIENT_PROXY_CLASS = "misterpemodder.tmo.main.proxy.ClientProxy";
+	public static final String SERVER_PROXY_CLASS = "misterpemodder.tmo.main.proxy.ServerProxy";
 	
 	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 	
