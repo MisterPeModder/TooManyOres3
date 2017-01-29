@@ -5,9 +5,9 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import misterpemodder.tmo.Tmo;
+import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.items.base.ItemBase;
-import misterpemodder.tmo.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMOHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockLiquid;

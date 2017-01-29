@@ -1,13 +1,13 @@
 package misterpemodder.tmo.main.tileentity;
 
-import misterpemodder.tmo.Tmo;
+import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.items.ItemLock;
-import misterpemodder.tmo.network.PacketDataHandlers;
-import misterpemodder.tmo.network.TMOPacketHandler;
-import misterpemodder.tmo.network.packet.PacketClientToServer;
-import misterpemodder.tmo.network.packet.PacketServerToClient;
+import misterpemodder.tmo.main.network.PacketDataHandlers;
+import misterpemodder.tmo.main.network.TMOPacketHandler;
+import misterpemodder.tmo.main.network.packet.PacketClientToServer;
+import misterpemodder.tmo.main.network.packet.PacketServerToClient;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;

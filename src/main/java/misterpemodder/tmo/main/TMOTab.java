@@ -1,6 +1,6 @@
 package misterpemodder.tmo.main;
 
-import misterpemodder.tmo.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMOHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

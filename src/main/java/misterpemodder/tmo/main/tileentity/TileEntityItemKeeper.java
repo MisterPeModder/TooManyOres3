@@ -1,6 +1,6 @@
 package misterpemodder.tmo.main.tileentity;
 
-import misterpemodder.tmo.Tmo;
+import misterpemodder.tmo.main.Tmo;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;

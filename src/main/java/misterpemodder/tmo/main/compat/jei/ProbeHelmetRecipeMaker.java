@@ -6,7 +6,7 @@ import java.util.List;
 import mezz.jei.api.ingredients.IIngredientRegistry;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.items.ItemTmoArmor;
-import misterpemodder.tmo.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMOHelper;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 

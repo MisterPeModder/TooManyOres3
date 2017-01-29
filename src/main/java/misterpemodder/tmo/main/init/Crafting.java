@@ -1,7 +1,7 @@
 package misterpemodder.tmo.main.init;
 
 import misterpemodder.tmo.main.items.ItemTmoArmor;
-import misterpemodder.tmo.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMOHelper;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;

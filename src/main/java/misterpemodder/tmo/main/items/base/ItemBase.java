@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import misterpemodder.tmo.main.items.EnumItemsNames;
-import misterpemodder.tmo.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMOHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;

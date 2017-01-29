@@ -5,7 +5,7 @@ import java.util.List;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.wrapper.ICraftingRecipeWrapper;
-import misterpemodder.tmo.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMOHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

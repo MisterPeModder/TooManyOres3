@@ -3,7 +3,7 @@ package misterpemodder.tmo.main.items.tools;
 import misterpemodder.tmo.main.items.EnumItemsNames;
 import misterpemodder.tmo.main.items.base.TMOItem;
 import misterpemodder.tmo.main.items.materials.TmoToolMaterial;
-import misterpemodder.tmo.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMOHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemHoe;

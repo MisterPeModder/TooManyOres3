@@ -4,7 +4,7 @@ import com.typesafe.config.ConfigValueType;
 
 import misterpemodder.tmo.main.config.ConfigValues;
 import misterpemodder.tmo.main.config.ConfigValues.BoolValues;
-import misterpemodder.tmo.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMOHelper;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
