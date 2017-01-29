@@ -111,7 +111,7 @@ item.wrench.NoPermissions=You don't have the required permissions to use this wr
 
 item.titaniumBucket.name=Titanium Bucket
 item.titaniumBucket.empty=Titanium Bucket (empty)
-item.titaniumBucket.filled=Titanium Bucket (%dmb of %s)
+item.titaniumBucket.filled=Titanium Bucket (%1$dmb of %2$s)
 item.titaniumBucket.message.empty=Bucket is empty!
 item.titaniumBucket.message.notEnougthLiquid=Not enougth liquid!
 item.titaniumBucket.message.notEnougthCapacity=Not enougth capacity!

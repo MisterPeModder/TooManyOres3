@@ -114,14 +114,14 @@ item.wrench.NoPermissions=Vous n'avez pas les permissions pour utiliser cette cl
 
 item.titaniumBucket.name=Seau en Titane
 item.titaniumBucket.empty=Seau en Titane (vide)
-item.titaniumBucket.filled=Seau en Titane (%s, %dmb)
+item.titaniumBucket.filled=Seau en Titane (%2$s, %1$dmb)
 item.titaniumBucket.message.empty=Ce seau est vide!
 item.titaniumBucket.message.notEnougthLiquid=Pas assez de liquide!
 item.titaniumBucket.message.notEnougthCapacity=Capacité insuffisante!
 item.titaniumBucket.message.content=%1$s ~ %2$d/%3$dmb
 item.titaniumBucket.desc.content=Contient: %1$s, %2$d/%3$dmb.
 item.titaniumBucket.desc.emptyContent=Contient: rien.
-item.titaniumBucket.desc=Un sceau renforcé capable de contenir l'équivalent de plusieurs sceau de n'importe quel fluide \nClic droit pour placer des fluides. \nShift+Clic droit pour prendre des fluides.
+item.titaniumBucket.desc=Un seau renforcé capable de contenir l'équivalent de plusieurs sceau de n'importe quel fluide \nClic droit pour placer des fluides. \nShift+Clic droit pour prendre des fluides.
 
 #Blocs
 tile.blockTest.name=TEST BLOCK
@@ -190,7 +190,7 @@ gui.slot.lock.desc=Mettez un cadenas ici pour débloquer les options de sécurit
 #JEI
 item.itemIngot.titanium.jeidesc=Le titane est un materiau avec beacoup d'utilisations possibles.\nPeut-être que l'on peut améliorer nos outils en diamant avec?
 
-item.titaniumBucket.jeidesc=Un sceau capable de contenir l'équivalent de plusieurs seaux de n'importe quel liquide\nSa capacité peut varier selon la configuration\nContrôles:\nClic droit pour placer des fluides. \nShift+Clic droit pour prendre des fluides.
+item.titaniumBucket.jeidesc=Un seau capable de contenir l'équivalent de plusieurs seaux de n'importe quel liquide\nSa capacité peut varier selon la configuration\nContrôles:\nClic droit pour placer des fluides. \nShift+Clic droit pour prendre des fluides.
 
 tile.blockTitaniumChest.jeidesc=This blastproof titanium-plated chest has more than twice the capacity of a vanilla double chest.\nBy installing a lock on it, the chest can only be accessed by its owner.\nBut don't worry! if steal some stuff from it, TNT is your way to go! Locks has a chance to break when exploded. 
 tile.blockTitaniumChest.jeidesc=Ce coffre résistant aux explosions plaqué titane à plus de deux fois la capacité d'un double coffre vanilla\nEn installant un verrou dessus, le coffre ne peut être ouvert que par le propriétaire\nMais ne vous faîtes pas de soucis! si souhaitez "emprunter" du materiel venant du coffre, de la TNT (ou n'importe quel source d'explosion) fera l'affaire!\nLes verrous ont des chances de casser quand soumis à des explosions

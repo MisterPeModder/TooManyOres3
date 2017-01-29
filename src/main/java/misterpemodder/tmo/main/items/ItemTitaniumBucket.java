@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 
 import misterpemodder.tmo.Tmo;
 import misterpemodder.tmo.main.items.base.ItemBase;
+import misterpemodder.tmo.utils.TMOHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockLiquid;
@@ -94,7 +95,7 @@ public class ItemTitaniumBucket extends ItemBase {
         	return Tmo.proxy.translate(unloc + EMPTY_UNLOC_NAME);
         }
 
-        return Tmo.proxy.translate(unloc + FILLED_UNLOC_NAME, fluidStack.amount, fluidStack.getFluid().getLocalizedName(fluidStack), CAPACITY);
+        return Tmo.proxy.translate(unloc + FILLED_UNLOC_NAME, fluidStack.amount, fluidStack.getFluid().getLocalizedName(fluidStack));
     }
 	
 	private static boolean canEditFluid(World world, EntityPlayer player, BlockPos pos, EnumFacing sideHit, ItemStack stack) {
@@ -113,7 +114,7 @@ public class ItemTitaniumBucket extends ItemBase {
 		if(fluidStack == null || fluidStack.amount == 0) {
 			str = Tmo.proxy.translate("item.titaniumBucket.desc.emptyContent");
 		} else {
-			str = Tmo.proxy.translate("item.titaniumBucket.desc.content", fluidStack.amount, fluidStack.getFluid().getLocalizedName(fluidStack));
+			str = Tmo.proxy.translate("item.titaniumBucket.desc.content", fluidStack.getFluid().getLocalizedName(fluidStack), fluidStack.amount, CAPACITY);
 		}
 		
 		tooltip.add(TextFormatting.GREEN+str);
