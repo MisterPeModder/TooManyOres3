@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import misterpemodder.tmo.main.config.ConfigValues.ConfigCategories;
-import misterpemodder.tmo.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMOHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;

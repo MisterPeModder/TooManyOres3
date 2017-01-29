@@ -1,9 +1,9 @@
 package misterpemodder.tmo.main.blocks.containers;
 
-import misterpemodder.tmo.Tmo;
-import misterpemodder.tmo.client.gui.GuiHandler;
+import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
+import misterpemodder.tmo.main.client.gui.GuiHandler;
 import misterpemodder.tmo.main.tileentity.TileEntityItemKeeper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

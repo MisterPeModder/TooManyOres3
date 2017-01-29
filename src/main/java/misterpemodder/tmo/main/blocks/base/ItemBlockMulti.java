@@ -3,7 +3,7 @@ package misterpemodder.tmo.main.blocks.base;
 import java.util.List;
 
 import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
-import misterpemodder.tmo.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMOHelper;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

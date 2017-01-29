@@ -1,7 +1,7 @@
 package misterpemodder.tmo.main.events;
 
 import buildcraft.api.tools.IToolWrench;
-import misterpemodder.tmo.Tmo;
+import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.BlockLamp;
 import misterpemodder.tmo.main.blocks.containers.BlockContainerBase;
 import misterpemodder.tmo.main.blocks.containers.BlockItemKeeper;
@@ -11,8 +11,8 @@ import misterpemodder.tmo.main.items.ItemsVariants;
 import misterpemodder.tmo.main.items.tools.ItemWrench;
 import misterpemodder.tmo.main.tileentity.IOwnable;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
-import misterpemodder.tmo.utils.ServerUtils;
-import misterpemodder.tmo.utils.StringUtils;
+import misterpemodder.tmo.main.utils.ServerUtils;
+import misterpemodder.tmo.main.utils.StringUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
