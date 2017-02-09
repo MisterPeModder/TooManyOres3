@@ -1,4 +1,4 @@
-package misterpemodder.tmo.main.tileentity;
+package misterpemodder.tmo.api.block;
 
 import net.minecraft.world.IWorldNameable;
 

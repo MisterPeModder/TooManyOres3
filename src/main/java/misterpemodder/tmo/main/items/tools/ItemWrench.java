@@ -10,19 +10,24 @@ import misterpemodder.tmo.main.utils.TMOHelper;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.oredict.OreDictionary;
 
+//TODO Fix it!
 public class ItemWrench extends ItemBase implements IToolWrench {
 	
 	public TmoToolMaterial m;
@@ -61,14 +66,13 @@ public class ItemWrench extends ItemBase implements IToolWrench {
 	
 	@Override
 	public void wrenchUsed(EntityPlayer player, BlockPos pos) {
-		ItemStack stack = player.inventory.getCurrentItem();
+		ItemStack stack = player.getHeldItem(player.getActiveHand());
 		
-		if(stack.isEmpty()) return;
 		if(!this.isUnbreakable) {
-			stack.attemptDamageItem(1, new Random());
-			if(stack.getItemDamage() >= this.maxStackSize) {
-				stack = stack.EMPTY;
-				player.playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0F, new Random().nextFloat() + 1.0F);
+			stack.damageItem(1, player);
+			if(stack.getItemDamage() > stack.getMaxDamage()) {
+				ForgeEventFactory.onPlayerDestroyItem(player, stack, player.getActiveHand());
+				player.world.playSound(player, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0F, new Random().nextFloat() + 1.0F);
 			}
 		}
 	}

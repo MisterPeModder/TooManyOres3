@@ -173,6 +173,7 @@ tile.blockItemKeeper.item=§6Contains: §2%dx §f
 tile.blockTitaniumChest.name=Titanium Chest
 tile.blockTitaniumChest.locked=This Titanium Chest is locked!
 tile.blockTitaniumChest.lockBroken=You broke the chest's lock!
+tile.blockTitaniumChest.noBreaking=You don't have the permissions to break this chest!
 
 #GUI
 gui.tab.main.name=Main
@@ -183,6 +184,9 @@ gui.tab.playerInv.name=Inventory
 gui.tab.io.name=IO
 gui.slot.lock.name=Lock Slot
 gui.slot.lock.desc=Put a lock there to unlock security options.
+
+#Security
+protectedBlock.noBreaking=You don't have the permissions to break this %s!
 
 #Commands
 commands.info.usage=/item_info

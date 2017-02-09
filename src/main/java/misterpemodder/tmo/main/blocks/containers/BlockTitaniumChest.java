@@ -6,6 +6,7 @@ import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoAccessor;
 import mcjty.theoneprobe.api.ProbeMode;
+import misterpemodder.tmo.api.block.IOwnable;
 import misterpemodder.tmo.api.item.IItemLock;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
@@ -14,7 +15,6 @@ import misterpemodder.tmo.main.client.gui.GuiHandler;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
 import misterpemodder.tmo.main.network.TMOPacketHandler;
 import misterpemodder.tmo.main.network.packet.PacketServerToClient;
-import misterpemodder.tmo.main.tileentity.IOwnable;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
@@ -50,6 +50,7 @@ public class BlockTitaniumChest extends BlockContainerBase<TileEntityTitaniumChe
 	
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	protected static final AxisAlignedBB CHEST_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.875D, 0.9375D);
+	
 	
 	public BlockTitaniumChest() {
 		super(EnumBlocksNames.TITANIUM_CHEST, EnumBlocksValues.TITANIUM_CHEST);
@@ -114,6 +115,7 @@ public class BlockTitaniumChest extends BlockContainerBase<TileEntityTitaniumChe
 		}
 		else if(this.getTileEntity(world, pos) != null) {
 			TileEntityTitaniumChest te = this.getTileEntity(world, pos);
+			te.sync();
 			if(te.hasOwner()) {
 				if(!(player.getDisplayNameString().equals(te.getOwner())) && te.isLocked()) {
 					player.sendStatusMessage(new TextComponentString(TextFormatting.RED+Tmo.proxy.translate("tile.blockTitaniumChest.locked")), true);
@@ -132,7 +134,7 @@ public class BlockTitaniumChest extends BlockContainerBase<TileEntityTitaniumChe
 			ItemStack stack) {
 		if (te instanceof IOwnable && ((IOwnable)te).hasCustomName()) {
             player.addExhaustion(0.005F);
-
+            
             if (worldIn.isRemote) {
                 return;
             }
@@ -151,6 +153,7 @@ public class BlockTitaniumChest extends BlockContainerBase<TileEntityTitaniumChe
         }
 	}
 	
+	
 	@Override
 	public boolean canDropFromExplosion(Explosion explosionIn) {
 		return false;
@@ -167,13 +170,7 @@ public class BlockTitaniumChest extends BlockContainerBase<TileEntityTitaniumChe
 					
 					if(lock.attemptBreak(stack, new Random()) == EnumActionResult.SUCCESS) {
 						world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F, true);
-						
-						NetworkRegistry.TargetPoint target = new TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64);
-						NBTTagCompound toSend = new NBTTagCompound();
-						toSend.setLong("pos", pos.toLong());
-						toSend.setTag("lock", chest.getLockItemHandler().serializeNBT());
-						TMOPacketHandler.network.sendToAllAround(new PacketServerToClient(PacketDataHandlers.TE_UPDATE_HANDLER, toSend), target);
-						
+						chest.sync();
 						lock.onLockBroken(world, pos, explosion.getExplosivePlacedBy());
 					}
 				}

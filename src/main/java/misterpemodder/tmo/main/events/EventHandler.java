@@ -1,35 +1,33 @@
 package misterpemodder.tmo.main.events;
 
+import java.util.List;
+
 import buildcraft.api.tools.IToolWrench;
+import misterpemodder.tmo.api.block.ILockable;
+import misterpemodder.tmo.api.block.IOwnable;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.BlockLamp;
-import misterpemodder.tmo.main.blocks.containers.BlockContainerBase;
 import misterpemodder.tmo.main.blocks.containers.BlockItemKeeper;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.items.ItemLock;
 import misterpemodder.tmo.main.items.ItemsVariants;
 import misterpemodder.tmo.main.items.tools.ItemWrench;
-import misterpemodder.tmo.main.tileentity.IOwnable;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import misterpemodder.tmo.main.utils.ServerUtils;
 import misterpemodder.tmo.main.utils.StringUtils;
+import misterpemodder.tmo.main.utils.TMOHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Mirror;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
@@ -47,7 +45,7 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = TMOHelper.MOD_ID)
 public class EventHandler {
 	
 	//Cancels the sneak effect
@@ -96,7 +94,7 @@ public class EventHandler {
 					return;
 				}
 			}
-			else if(!player.isSneaking() && !world.isRemote) {
+			else if(!player.isSneaking()) {
 				EnumFacing facing = event.getFace();
 				TileEntity tets = world.getTileEntity(pos);
 				if(b.rotateBlock(world, pos, facing)) {
@@ -182,15 +180,28 @@ public class EventHandler {
 	
 	@SubscribeEvent
 	public static void blockBreakEvent(BlockEvent.BreakEvent event) {
-		TileEntity tileEntity = event.getWorld().getTileEntity(event.getPos());
-		if(tileEntity != null && tileEntity instanceof IOwnable) {
-			IOwnable te = (IOwnable) tileEntity;
-			if(te.hasOwner()) {
-				if(event.getPlayer().getName() != te.getOwner()) {
-					event.setCanceled(true);
+		World world = event.getWorld();
+		BlockPos pos = event.getPos();
+		TileEntity t = world.getTileEntity(pos);
+		
+		
+		
+		if(t != null) {
+			
+			boolean flag1 = t instanceof ILockable && ((ILockable)t).isLocked();
+			boolean flag2 = t instanceof IOwnable && ((IOwnable)t).hasOwner() && !((IOwnable)t).getOwner().equals(event.getPlayer().getName());
+			
+			if(flag1 && flag2) {
+				IBlockState state = world.getBlockState(pos);
+				event.getPlayer().sendMessage(new TextComponentString(TextFormatting.RED + Tmo.proxy.translate("protectedBlock.noBreaking", state.getBlock().getItem(world, pos, state).getDisplayName())));
+				event.setCanceled(true);
+				if(t instanceof TileEntityContainerBase) {
+					((TileEntityContainerBase)t).sync();
+					t.markDirty();
 				}
 			}
 		}
+		
 	}
 	
 }

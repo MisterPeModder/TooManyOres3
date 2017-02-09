@@ -1,9 +1,9 @@
 package misterpemodder.tmo.main.client.gui;
 
+import misterpemodder.tmo.api.block.ILockable;
 import misterpemodder.tmo.main.client.gui.GuiTabs.EnumTabs;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
-import misterpemodder.tmo.main.tileentity.TileEntityLockable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -41,8 +41,8 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 				
 				boolean b1 = selectedTabs[1] != EnumTabs.PLAYER_INVENTORY && h == playerInv;
 				boolean b2 = selectedTabs[0] != EnumTabs.MAIN && h == te.getInventory();
-				boolean b3 = this.te instanceof TileEntityLockable
-						? selectedTabs[0] != EnumTabs.SECURITY && h == ((TileEntityLockable) te).getLockItemHandler()
+				boolean b3 = this.te instanceof ILockable
+						? selectedTabs[0] != EnumTabs.SECURITY && h == ((ILockable) te).getLockItemHandler()
 						: false;
 
 				slot.enabled = !(b1||b2||b3);
@@ -81,10 +81,10 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 	}
 	
 	protected void setLockSlot() {
-		if(this.te instanceof TileEntityLockable) {
+		if(this.te instanceof ILockable) {
 			NonNullList<ItemStack> list = NonNullList.create();
 			list.add(new ItemStack(ModItems.Items.LOCK.getItem()));
-			this.addSlotToContainer(new SlotFiltered(((TileEntityLockable)this.te).getLockItemHandler(), 0, 8, 18, list, true, true));
+			this.addSlotToContainer(new SlotFiltered(((ILockable)this.te).getLockItemHandler(), 0, 8, 18, list, true, true));
 		}
 	}
 	

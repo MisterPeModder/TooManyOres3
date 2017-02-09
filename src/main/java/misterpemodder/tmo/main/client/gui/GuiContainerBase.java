@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import misterpemodder.tmo.api.block.ILockable;
+import misterpemodder.tmo.api.block.IOwnable;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.client.gui.GuiTabs.EnumTabs;
-import misterpemodder.tmo.main.tileentity.IOwnable;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
-import misterpemodder.tmo.main.tileentity.TileEntityLockable;
 import misterpemodder.tmo.main.utils.TMOHelper;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -63,9 +63,9 @@ public abstract class GuiContainerBase<C extends ContainerBase> extends GuiConta
 			GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 		    this.mc.getTextureManager().bindTexture(new ResourceLocation(selectedTabs[0].getScreenPath()));
 		    this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.INV_SIZE_TE.height);
-		    if(container.te instanceof TileEntityLockable) {
+		    if(container.te instanceof ILockable) {
 		    	try{
-		    	if(selectedTabs[0] == EnumTabs.SECURITY && ((TileEntityLockable)container.te).getLockItemHandler().getStackInSlot(0).isEmpty()) {
+		    	if(selectedTabs[0] == EnumTabs.SECURITY && ((ILockable)container.te).getLockItemHandler().getStackInSlot(0).isEmpty()) {
 		    		this.mc.getTextureManager().bindTexture(new ResourceLocation(TMOHelper.PREFIX+"textures/items/empty_lock_slot.png"));
 		    		this.drawModalRectWithCustomSizedTexture(this.guiLeft+8, this.guiTop+18, 0, 0, 16, 16, 16, 16);
 		    	}
@@ -117,7 +117,7 @@ public abstract class GuiContainerBase<C extends ContainerBase> extends GuiConta
 		    }
 	    }
 	    
-	    if(selectedTabs[0] == EnumTabs.SECURITY && ((TileEntityLockable)container.te).getLockItemHandler().getStackInSlot(0).isEmpty()) {
+	    if(selectedTabs[0] == EnumTabs.SECURITY && ((ILockable)container.te).getLockItemHandler().getStackInSlot(0).isEmpty()) {
 	    	if(isPointInRegion(8, 18, 16, 16, mouseX, mouseY)) {
 	    		GuiUtils.drawHoveringText(Arrays.asList(Tmo.proxy.translate("gui.slot.lock.name"), Tmo.proxy.translate("gui.slot.lock.desc")), mouseX-this.getGuiLeft(), mouseY-this.getGuiTop(), width, height, 200, this.fontRendererObj);
 		    }

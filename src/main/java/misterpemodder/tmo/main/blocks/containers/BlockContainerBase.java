@@ -3,6 +3,8 @@ package misterpemodder.tmo.main.blocks.containers;
 import java.util.Random;
 
 import buildcraft.api.tools.IToolWrench;
+import misterpemodder.tmo.api.block.ILockable;
+import misterpemodder.tmo.api.block.IOwnable;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockValues;
@@ -10,9 +12,7 @@ import misterpemodder.tmo.main.items.tools.ItemWrench;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
 import misterpemodder.tmo.main.network.TMOPacketHandler;
 import misterpemodder.tmo.main.network.packet.PacketServerToClient;
-import misterpemodder.tmo.main.tileentity.IOwnable;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
-import misterpemodder.tmo.main.tileentity.TileEntityLockable;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import misterpemodder.tmo.main.utils.ServerUtils;
 import net.minecraft.block.state.IBlockState;
@@ -70,8 +70,8 @@ public abstract class BlockContainerBase<TE extends TileEntityContainerBase> ext
 			if(!rules.getBoolean("dropInvContents")) {
 				world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), this.toItem(te, state)));
 			} else {
-				if(te instanceof TileEntityLockable) {
-					IItemHandler lockItemHandler = ((TileEntityLockable) te).getLockItemHandler();
+				if(te instanceof ILockable) {
+					IItemHandler lockItemHandler = ((ILockable) te).getLockItemHandler();
 					if(!lockItemHandler.getStackInSlot(0).isEmpty()) {
 						world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), lockItemHandler.getStackInSlot(0)));
 					}
@@ -108,15 +108,14 @@ public abstract class BlockContainerBase<TE extends TileEntityContainerBase> ext
             	}
             	((IOwnable)tileentity).setOwner(owner.isEmpty()? ((EntityPlayer) placer).getDisplayNameString():owner );
             }
-            if(tileentity instanceof TileEntityTitaniumChest && !worldIn.isRemote) {
-            	TileEntityTitaniumChest t = (TileEntityTitaniumChest) tileentity;
-            	if(!t.getLockItemHandler().getStackInSlot(0).isEmpty()) {
-            		NetworkRegistry.TargetPoint target = new TargetPoint(worldIn.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64);
-					NBTTagCompound toSend = new NBTTagCompound();
-					toSend.setLong("pos", pos.toLong());
-					toSend.setTag("lock", t.getLockItemHandler().serializeNBT());
-					TMOPacketHandler.network.sendToAllAround(new PacketServerToClient(PacketDataHandlers.TE_UPDATE_HANDLER, toSend), target);
-            	}
+            if(!worldIn.isRemote) {
+            	TargetPoint target = new TargetPoint(worldIn.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64);
+            	NBTTagCompound toSend = new NBTTagCompound();
+            	
+            	toSend.setLong("pos", pos.toLong());
+            	toSend.setTag("tileEntity", tileentity.serializeNBT());
+            	
+            	TMOPacketHandler.network.sendToAllAround(new PacketServerToClient(PacketDataHandlers.TE_UPDATE_HANDLER, toSend), target); 
             }
         }
 	}

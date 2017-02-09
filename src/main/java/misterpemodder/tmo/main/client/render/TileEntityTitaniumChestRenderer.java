@@ -34,9 +34,6 @@ public class TileEntityTitaniumChestRenderer extends TileEntitySpecialRenderer<T
         int i;
         IBlockState state = null;
         if (te.hasWorld()) {
-        	if(te.getOwner() == "LOL") {
-        		Minecraft.getMinecraft().player.sendChatMessage("lol");
-        	}
             Block block = te.getBlockType();
             i = te.getBlockMetadata();
             state = block.getStateFromMeta(i);

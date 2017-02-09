@@ -1,21 +1,27 @@
 package misterpemodder.tmo.main.tileentity;
 
+import java.util.List;
+
+import misterpemodder.tmo.api.block.ILockable;
+import misterpemodder.tmo.api.block.IOwnable;
 import misterpemodder.tmo.api.item.IItemLock;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
 import misterpemodder.tmo.main.network.TMOPacketHandler;
-import misterpemodder.tmo.main.network.packet.PacketClientToServer;
 import misterpemodder.tmo.main.network.packet.PacketServerToClient;
+import misterpemodder.tmo.main.utils.ServerUtils;
+import misterpemodder.tmo.main.utils.TMOHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTUtil;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
@@ -25,16 +31,19 @@ import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityTitaniumChest extends TileEntityContainerBase implements TileEntityLockable, ITickable, IOwnable  {
+public class TileEntityTitaniumChest extends TileEntityContainerBase implements ILockable, ITickable, IOwnable  {
 	
 	private ItemStackHandler inventory = new ItemStackHandler(66);
 	private ItemStackHandler lock = new ItemStackHandler(1);
 	private String customName;
 	private String owner;
 	
-    public float lidAngle;
-    public float prevLidAngle;
+    public static final int MAX_UPDATE_TIME = 200;
     public int numPlayersUsing;
+    
+    public int ticksSinceUpdate;
+    public float prevLidAngle;
+    public float lidAngle;
 	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
@@ -66,14 +75,7 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
 	@Override
 	public void handleUpdateTag(NBTTagCompound tag) {
 		super.handleUpdateTag(tag);
-		if(world.isRemote) {
-			NBTTagCompound toSend = new NBTTagCompound();
-			toSend.setBoolean("client_flag", true);
-			toSend.setInteger("world_dim_id", world.provider.getDimension());
-			toSend.setTag("player_id", NBTUtil.createUUIDTag(Minecraft.getMinecraft().player.getUniqueID()));
-			toSend.setLong("pos", this.pos.toLong());
-			TMOPacketHandler.network.sendToServer(new PacketClientToServer(PacketDataHandlers.TE_UPDATE_HANDLER, toSend));
-		}
+		this.sync();
 	}
 	
 	@Override
@@ -123,50 +125,57 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
         int j = this.pos.getY();
         int k = this.pos.getZ();
         
-      
         Block b = this.world.getBlockState(pos).getBlock();
         
-        if(this.world.isRemote) {
+		if (this.world.isRemote) {
+			
+			if(ticksSinceUpdate >= MAX_UPDATE_TIME) {
+				ticksSinceUpdate = 0;
+				this.sync();
+			} else {
+				ticksSinceUpdate++;
+			}
+			
+			//Chest lid animation
+			this.prevLidAngle = this.lidAngle;
+			float f1 = 0.1F;
 
-        this.prevLidAngle = this.lidAngle;
-        float f1 = 0.1F;
+			if (this.numPlayersUsing > 0 && this.lidAngle == 0.0F) {
+				double d1 = (double) i + 0.5D;
+				double d2 = (double) k + 0.5D;
 
-        if (this.numPlayersUsing > 0 && this.lidAngle == 0.0F) {
-            double d1 = (double)i + 0.5D;
-            double d2 = (double)k + 0.5D;
+				Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_CHEST_OPEN, 0.5F,
+						this.world.rand.nextFloat() * 0.1F + 0.9F);
+			}
 
-            Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_CHEST_OPEN, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
-        }
+			if (this.numPlayersUsing == 0 && this.lidAngle > 0.0F || this.numPlayersUsing > 0 && this.lidAngle < 1.0F) {
+				float f2 = this.lidAngle;
 
-        if (this.numPlayersUsing == 0 && this.lidAngle > 0.0F || this.numPlayersUsing > 0 && this.lidAngle < 1.0F) {
-            float f2 = this.lidAngle;
+				if (this.numPlayersUsing > 0) {
+					this.lidAngle += 0.1F;
+				} else {
+					this.lidAngle -= 0.1F;
+				}
 
-            if (this.numPlayersUsing > 0) {
-                this.lidAngle += 0.1F;
-            }
-            else {
-                this.lidAngle -= 0.1F;
-            }
+				if (this.lidAngle > 1.0F) {
+					this.lidAngle = 1.0F;
+				}
 
-            if (this.lidAngle > 1.0F) {
-                this.lidAngle = 1.0F;
-            }
+				float f3 = 0.5F;
 
-            float f3 = 0.5F;
+				if (this.lidAngle < 0.5F && f2 >= 0.5F) {
+					double d3 = (double) i + 0.5D;
+					double d0 = (double) k + 0.5D;
 
-            if (this.lidAngle < 0.5F && f2 >= 0.5F) {
-                double d3 = (double)i + 0.5D;
-                double d0 = (double)k + 0.5D;
-                
-                Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_CHEST_CLOSE, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
-            }
+					Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_CHEST_CLOSE, 0.5F,
+							this.world.rand.nextFloat() * 0.1F + 0.9F);
+				}
 
-            if (this.lidAngle < 0.0F)
-            {
-                this.lidAngle = 0.0F;
-            }
-        }
-        }
+				if (this.lidAngle < 0.0F) {
+					this.lidAngle = 0.0F;
+				}
+			}
+		}
     }
 
 	@Override
