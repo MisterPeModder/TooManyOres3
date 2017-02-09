@@ -1,5 +1,9 @@
 package misterpemodder.tmo.main.init;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import misterpemodder.tmo.main.blocks.base.ItemBlockBase;
 import misterpemodder.tmo.main.items.EnumItemsNames;
 import misterpemodder.tmo.main.items.ItemLock;
 import misterpemodder.tmo.main.items.ItemMulti;
@@ -16,11 +20,18 @@ import misterpemodder.tmo.main.items.tools.ItemTmoPickaxe;
 import misterpemodder.tmo.main.items.tools.ItemTmoShovel;
 import misterpemodder.tmo.main.items.tools.ItemTmoSword;
 import misterpemodder.tmo.main.items.tools.ItemWrench;
+import misterpemodder.tmo.main.utils.TMOHelper;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 
+@Mod.EventBusSubscriber(modid = TMOHelper.MOD_ID)
 public class ModItems {
+	
+	static  List<ItemBlockBase> ITEM_BLOCKS = new ArrayList<>();
 	
 	public enum Items  {
 		TAB_ICON(new ItemBase(EnumItemsNames.TAB_ICON, false)),
@@ -115,9 +126,21 @@ public class ModItems {
 		
 	}
 	
-	public static void register() {
+	@SubscribeEvent
+	public static void registerBlocksEvent(RegistryEvent.Register<Item> event) {
+		register(event.getRegistry());
+	}
+	
+	private static void register(IForgeRegistry<Item> registry) {
+		TMOHelper.LOGGER.info("Registering Items...");
 		for(Items i : Items.values()) {
-			GameRegistry.register(i.getItem());
+			registry.register(i.getItem());
+		}
+		if(!ITEM_BLOCKS.isEmpty()) {
+			TMOHelper.LOGGER.info("Registering ItemsBlocks...");
+			for(ItemBlockBase i : ITEM_BLOCKS) {
+				registry.register(i);
+			}
 		}
 	}
 	

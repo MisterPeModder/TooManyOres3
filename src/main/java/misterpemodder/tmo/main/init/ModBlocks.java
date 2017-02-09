@@ -15,8 +15,15 @@ import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
 import misterpemodder.tmo.main.blocks.slab.BlockFullSlab;
 import misterpemodder.tmo.main.blocks.slab.BlockHalfSlab;
+import misterpemodder.tmo.main.utils.TMOHelper;
+import net.minecraft.block.Block;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 
+@Mod.EventBusSubscriber(modid = TMOHelper.MOD_ID)
 public class ModBlocks {
 	
 	public static enum Blocks {
@@ -46,11 +53,17 @@ public class ModBlocks {
 		
 	}
 	
-	public static void register() {
+	@SubscribeEvent
+	public static void registerBlocksEvent(RegistryEvent.Register<Block> event) {
+		register(event.getRegistry());
+	}
+	
+	private static void register(IForgeRegistry<Block> registry) {
+		TMOHelper.LOGGER.info("Registering Blocks...");
 		for(Blocks b : Blocks.values()) {
 			BlockBase block = b.getBlock();
-			GameRegistry.register(block);
-			if(block.hasOwnItemBlock()) GameRegistry.register(block.getItemBlock());
+			registry.register(block);
+			if(block.hasOwnItemBlock()) ModItems.ITEM_BLOCKS.add(block.getItemBlock());
 			if(block instanceof BlockTileEntity) {
 				GameRegistry.registerTileEntity(((BlockTileEntity<?>)block).getTileEntityClass(), block.getRegistryName().toString());
 			}

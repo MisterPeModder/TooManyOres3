@@ -60,8 +60,8 @@ public class Tmo {
 		new ConfigHandler(event.getSuggestedConfigurationFile());
 		TMOPacketHandler.init();
 		PacketDataHandlers.registerHandlers();
-		ModItems.register();
-		ModBlocks.register();
+		//ModItems.register();
+		//ModBlocks.register();
 		GameRegistry.registerWorldGenerator(new OreGen(), 5141);
 
 		proxy.preInit();

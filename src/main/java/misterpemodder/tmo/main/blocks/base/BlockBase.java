@@ -109,12 +109,10 @@ public class BlockBase extends Block implements BlockTMO {
         return this.isOpaqueCube(state);
     }
     
-    
     @Override
     public boolean isOpaqueCube(IBlockState state) {
     	return this.values != null?this.values.isOpaqueCube(state):true;
     }
-
     
     public boolean hasOwnItemBlock() {
     	return true;
