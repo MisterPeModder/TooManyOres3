@@ -198,6 +198,23 @@ commands.info.success.metaunl=§2Meta Unlocalized name:§f %s
 commands.info.success.ore=§2OreDict values:§f %s
 commands.info.success.end=§6[====================]
 
+commands.tmo.generic.usage=/tmo <subcommand|help> ...
+commands.tmo.generic.wrongSubcommand=Subcommand %s doesn't exist!
+commands.tmo.help.usage=/tmo help [subcommand]
+commands.tmo.help.list=Subcommands: %s.
+commands.tmo.help.header=--- Showing help page %d of %d (/tmo help <page>) ---
+commands.tmo.help.hint=Use /tmo help <subcommand> to get more detailled infos about a subcommand.
+commands.tmo.help.hover=-click to write command-
+commands.tmo.owner.usage=/tmo owner <get|clear|set|force> <x> <y> <z> ...
+commands.tmo.owner.outOfWorld=The target block is outside the world
+commands.tmo.owner.invalid=The target block is not an owner holder block
+commands.tmo.owner.get.noOwner=The block at %d,%d,%d does not have an owner.
+commands.tmo.owner.get.onwerName=The block at %d,%d,%d is owned by [%s].
+commands.tmo.owner.clear.success=Block owner has been cleared
+commands.tmo.owner.set.usage=/tmo owner set <x> <y> <z> <entityPlayer>
+commands.tmo.owner.set.notPlayer=%s is not a player
+commands.tmo.owner.force.usage=/tmo owner force <x> <y> <z> <name> <UUID> OR /tmo owner force <x> <y> <z> <name> <UUIDLeast> <UUIDMost>
+commands.tmo.owner.force.success=Block owner updated to: [%s]
 
 #JEI
 item.itemIngot.titanium.jeidesc=Titanium is a very sturdy material that have a lot of uses...\nPerhaps you could upgrade your diamond with this?

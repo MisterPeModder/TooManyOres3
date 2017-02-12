@@ -190,6 +190,26 @@ gui.slot.lock.desc=Mettez un cadenas ici pour débloquer les options de sécurit
 #Sécurité
 protectedBlock.noBreaking=Vous n'avez pas les permissions pour casser ce(tte) %s!
 
+#Commandes
+commands.tmo.generic.usage=/tmo <sous-commande|help> ...
+commands.tmo.generic.wrongSubcommand=La sous-commande %s n'existe pas!
+commands.tmo.help.usage=/tmo help [sous-commande]
+commands.tmo.help.list=Sous-commandes: %s.
+commands.tmo.help.header=--- Page %d sur %d (/tmo help <page>) ---
+commands.tmo.help.hint=Utilisez /tmo help <sous-commande> pour avoir plus d'infos sur une sous-commande.
+commands.tmo.help.hover=-clique pour écrire la commande-
+commands.tmo.owner.usage=/tmo owner <get|clear|set|force> <x> <y> <z> ...
+commands.tmo.owner.outOfWorld=Le bloc ciblé est en dehors du monde
+commands.tmo.owner.invalid=Le bloc ciblé ne peut pas avoir de propriétaire
+commands.tmo.owner.get.noOwner=Le bloc situé à %d,%d,%d n'a pas de propriétaire.
+commands.tmo.owner.get.onwerName=Le bloc situé à %d,%d,%d est possédé par [%s].
+commands.tmo.owner.clear.success=Le propriétaire du bloc à été supprimé
+commands.tmo.owner.set.usage=/tmo owner set <x> <y> <z> <joueur(entité)>
+commands.tmo.owner.set.notPlayer=%s n'est pas un joueur
+commands.tmo.owner.force.usage=/tmo owner force <x> <y> <z> <name> <UUID> OU /tmo owner force <x> <y> <z> <name> <UUIDLeast> <UUIDMost>
+commands.tmo.owner.force.success=Le propriétaire du bloc à été changé pour: [%s]
+
+
 #JEI
 item.itemIngot.titanium.jeidesc=Le titane est un materiau avec beacoup d'utilisations possibles.\nPeut-être que l'on peut améliorer nos outils en diamant avec?
 
