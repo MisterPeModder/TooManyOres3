@@ -37,12 +37,13 @@ public class GuiHandler implements IGuiHandler {
 	}
 	
 	public GuiElement getElementByID(int ID) {
-		try {
-			return EnumGuiElements.values()[ID];
-		} catch(ArrayIndexOutOfBoundsException e) {
-			TMOHelper.LOGGER.error("Invalid GUI Element ID!", e);
-			return null;
+		for(EnumGuiElements el : EnumGuiElements.values()) {
+			if(el.ID == ID) {
+				return el;
+			}
 		}
+		TMOHelper.LOGGER.error("Invalid GUI Element ID!");
+		return null;
 	}
 
 	@Override
