@@ -212,7 +212,7 @@ public class ItemTitaniumBucket extends ItemBase {
         return ActionResult.newResult(EnumActionResult.FAIL, itemstack);
     }
 	
-	//A version of FluidUtil.tryPlaceFluid that doesn't place stil lava and water sources
+	//A version of FluidUtil.tryPlaceFluid that doesn't place still lava and water sources
     public static FluidActionResult tryPlaceFluid(@Nullable EntityPlayer player, World world, BlockPos pos, @Nonnull ItemStack container, FluidStack resource) {
         if (world == null || resource == null || pos == null) {
             return FluidActionResult.FAILURE;

@@ -1,13 +1,12 @@
 package misterpemodder.tmo.main.events;
 
-import java.util.List;
-
 import buildcraft.api.tools.IToolWrench;
 import misterpemodder.tmo.api.block.ILockable;
-import misterpemodder.tmo.api.block.IOwnable;
+import misterpemodder.tmo.api.owner.IOwnerHandler;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.BlockLamp;
 import misterpemodder.tmo.main.blocks.containers.BlockItemKeeper;
+import misterpemodder.tmo.main.capability.CapabilityOwner;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.items.ItemLock;
 import misterpemodder.tmo.main.items.ItemsVariants;
@@ -68,11 +67,11 @@ public class EventHandler {
 				if(((IToolWrench) stack.getItem()).canWrench(player, pos)) {
 					((IToolWrench) stack.getItem()).wrenchUsed(player, pos);
 					if(stack.getItem() instanceof ItemWrench) {
-						if(((ItemWrench) stack.getItem()).isAdminWrench && tileEntity instanceof IOwnable && !world.isRemote) {
+						IOwnerHandler ownerHandler = tileEntity.getCapability(CapabilityOwner.OWNER_HANDLER_CAPABILITY, event.getFace());
+						if(((ItemWrench) stack.getItem()).isAdminWrench && ownerHandler != null && !world.isRemote) {
 							if(ServerUtils.isOp(player)) {
-								IOwnable te = (IOwnable) tileEntity;
-								if (te.hasOwner()) {
-									te.setOwner("");
+								if (ownerHandler.hasOwner()) {
+									ownerHandler.setOwner(null);
 									player.sendMessage(new TextComponentString(Tmo.proxy.translate("item.wrench.OwnerRemoved")));
 									event.setCanceled(true);
 									return;
@@ -184,12 +183,15 @@ public class EventHandler {
 		BlockPos pos = event.getPos();
 		TileEntity t = world.getTileEntity(pos);
 		
-		
-		
 		if(t != null) {
 			
 			boolean flag1 = t instanceof ILockable && ((ILockable)t).isLocked();
-			boolean flag2 = t instanceof IOwnable && ((IOwnable)t).hasOwner() && !((IOwnable)t).getOwner().equals(event.getPlayer().getName());
+			
+			IOwnerHandler ownerHandler = t.getCapability(CapabilityOwner.OWNER_HANDLER_CAPABILITY, null);
+			boolean flag2 = false;
+			if(ownerHandler != null) {
+				flag2 = ownerHandler.hasOwner() && !ownerHandler.isOwner(event.getPlayer());
+			}
 			
 			if(flag1 && flag2) {
 				IBlockState state = world.getBlockState(pos);

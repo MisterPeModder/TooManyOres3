@@ -21,7 +21,9 @@
 
 package misterpemodder.tmo.main;
 
+import misterpemodder.tmo.main.capability.CapabilityOwner;
 import misterpemodder.tmo.main.commands.CommandInfo;
+import misterpemodder.tmo.main.commands.CommandTMO;
 import misterpemodder.tmo.main.config.ConfigHandler;
 import misterpemodder.tmo.main.init.Crafting;
 import misterpemodder.tmo.main.init.ModBlocks;
@@ -31,6 +33,7 @@ import misterpemodder.tmo.main.network.TMOPacketHandler;
 import misterpemodder.tmo.main.proxy.CommonProxy;
 import misterpemodder.tmo.main.utils.TMOHelper;
 import misterpemodder.tmo.main.world.OreGen;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -60,8 +63,9 @@ public class Tmo {
 		new ConfigHandler(event.getSuggestedConfigurationFile());
 		TMOPacketHandler.init();
 		PacketDataHandlers.registerHandlers();
-		//ModItems.register();
-		//ModBlocks.register();
+		
+		CapabilityOwner.register();
+		
 		GameRegistry.registerWorldGenerator(new OreGen(), 5141);
 
 		proxy.preInit();
@@ -90,5 +94,6 @@ public class Tmo {
 	@EventHandler
 	public void serverStating(FMLServerStartingEvent event) {
 		event.registerServerCommand(new CommandInfo());
+		event.registerServerCommand(new CommandTMO());
 	}
 }

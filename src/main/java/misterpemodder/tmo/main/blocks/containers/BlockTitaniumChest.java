@@ -6,15 +6,13 @@ import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoAccessor;
 import mcjty.theoneprobe.api.ProbeMode;
-import misterpemodder.tmo.api.block.IOwnable;
 import misterpemodder.tmo.api.item.IItemLock;
+import misterpemodder.tmo.api.owner.IOwnerHandler;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
+import misterpemodder.tmo.main.capability.CapabilityOwner;
 import misterpemodder.tmo.main.client.gui.GuiHandler;
-import misterpemodder.tmo.main.network.PacketDataHandlers;
-import misterpemodder.tmo.main.network.TMOPacketHandler;
-import misterpemodder.tmo.main.network.packet.PacketServerToClient;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
@@ -25,7 +23,6 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumBlockRenderType;
@@ -40,9 +37,9 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IWorldEventListener;
+import net.minecraft.world.IWorldNameable;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -116,8 +113,10 @@ public class BlockTitaniumChest extends BlockContainerBase<TileEntityTitaniumChe
 		else if(this.getTileEntity(world, pos) != null) {
 			TileEntityTitaniumChest te = this.getTileEntity(world, pos);
 			te.sync();
-			if(te.hasOwner()) {
-				if(!(player.getDisplayNameString().equals(te.getOwner())) && te.isLocked()) {
+			IOwnerHandler ownerHandler = te.getCapability(CapabilityOwner.OWNER_HANDLER_CAPABILITY, null);
+			
+			if(ownerHandler != null && ownerHandler.hasOwner()) {
+				if(!ownerHandler.isOwner(player) && te.isLocked()) {
 					player.sendStatusMessage(new TextComponentString(TextFormatting.RED+Tmo.proxy.translate("tile.blockTitaniumChest.locked")), true);
 					return true;
 				}
@@ -132,7 +131,7 @@ public class BlockTitaniumChest extends BlockContainerBase<TileEntityTitaniumChe
 	@Override
 	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te,
 			ItemStack stack) {
-		if (te instanceof IOwnable && ((IOwnable)te).hasCustomName()) {
+		if (te instanceof IWorldNameable && ((IWorldNameable)te).hasCustomName()) {
             player.addExhaustion(0.005F);
             
             if (worldIn.isRemote) {
@@ -145,7 +144,7 @@ public class BlockTitaniumChest extends BlockContainerBase<TileEntityTitaniumChe
             }
 
             ItemStack itemstack = new ItemStack(item, 1);
-            itemstack.setStackDisplayName(((IOwnable)te).getName());
+            itemstack.setStackDisplayName(((IWorldNameable)te).getName());
             spawnAsEntity(worldIn, pos, itemstack);
         }
         else {
@@ -202,7 +201,9 @@ public class BlockTitaniumChest extends BlockContainerBase<TileEntityTitaniumChe
 			
 			IProbeInfo vertical = null;
 			vertical = probeInfo.vertical(probeInfo.defaultLayoutStyle().borderColor(0xff006699).spacing(0));
-			vertical.text(TextFormatting.GREEN+title+" "+(chest.hasOwner()?TextFormatting.YELLOW+chest.getOwner():TextFormatting.RED+empty));
+			
+			IOwnerHandler ownerHandler = chest.getCapability(CapabilityOwner.OWNER_HANDLER_CAPABILITY, null);
+			vertical.text(TextFormatting.GREEN+title+" "+(ownerHandler!=null && ownerHandler.hasOwner()?TextFormatting.YELLOW+ownerHandler.getOwnerName():TextFormatting.RED+empty));
 			ItemStack lock = chest.getLockItemHandler().getStackInSlot(0);
 			String txt = lock.isEmpty() || ((IItemLock)lock.getItem()).isBroken(lock)? TextFormatting.GREEN+unlocked: TextFormatting.RED+locked;
 			if(lock.isEmpty()) {

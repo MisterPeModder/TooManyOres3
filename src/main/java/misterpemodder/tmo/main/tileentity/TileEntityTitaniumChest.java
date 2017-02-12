@@ -1,27 +1,23 @@
 package misterpemodder.tmo.main.tileentity;
 
-import java.util.List;
-
 import misterpemodder.tmo.api.block.ILockable;
-import misterpemodder.tmo.api.block.IOwnable;
+import misterpemodder.tmo.api.block.IWorldNameableModifiable;
 import misterpemodder.tmo.api.item.IItemLock;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest;
+import misterpemodder.tmo.main.capability.CapabilityOwner;
+import misterpemodder.tmo.main.capability.OwnerHandlerUUID;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
 import misterpemodder.tmo.main.network.TMOPacketHandler;
 import misterpemodder.tmo.main.network.packet.PacketServerToClient;
-import misterpemodder.tmo.main.utils.ServerUtils;
-import misterpemodder.tmo.main.utils.TMOHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
@@ -31,10 +27,12 @@ import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityTitaniumChest extends TileEntityContainerBase implements ILockable, ITickable, IOwnable  {
+public class TileEntityTitaniumChest extends TileEntityContainerBase implements ILockable, ITickable, IWorldNameableModifiable  {
 	
 	private ItemStackHandler inventory = new ItemStackHandler(66);
 	private ItemStackHandler lock = new ItemStackHandler(1);
+	private OwnerHandlerUUID ownerHandler = new OwnerHandlerUUID();
+	
 	private String customName;
 	private String owner;
 	
@@ -49,12 +47,10 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		compound.setTag("inventory", inventory.serializeNBT());
 		compound.setTag("lock", lock.serializeNBT());
+		compound.setTag("owner", ownerHandler.serializeNBT());
 		if (this.hasCustomName()) {
 			compound.setString("customName", customName);
         }
-		if(this.hasOwner()) {
-			compound.setString("owner", owner); 
-		}
 		return super.writeToNBT(compound);
 	}
 	
@@ -62,12 +58,10 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
 	public void readFromNBT(NBTTagCompound compound) {
 		this.inventory.deserializeNBT(compound.getCompoundTag("inventory"));
 		this.lock.deserializeNBT(compound.getCompoundTag("lock"));
+		this.ownerHandler.deserializeNBT(compound.getCompoundTag("owner"));
 		
 		if(compound.hasKey("customName")) {
 			this.customName = compound.getString("customName");
-		}
-		if(compound.hasKey("owner")) {
-			this.owner  = compound.getString("owner");
 		}
 		super.readFromNBT(compound);
 	}
@@ -90,12 +84,18 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
 	
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || capability == CapabilityOwner.OWNER_HANDLER_CAPABILITY) {
+			return true;
+		}
+		return super.hasCapability(capability, facing);
 	}
 	
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		return this.hasCapability(capability, facing)? (T)inventory : super.getCapability(capability, facing);
+		if(this.hasCapability(capability, facing)) {
+			return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY? (T)inventory : (T)ownerHandler;
+		}
+		return super.getCapability(capability, facing);
 	}
 	
 	@Override
@@ -210,22 +210,6 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
     @Override
     public String getName() {
         return this.hasCustomName() ? this.customName : this.getDisplayName().getUnformattedText();
-    }
-    
-    @Override
-    public boolean hasOwner() {
-    	return this.owner != null && !this.owner.isEmpty();
-    }
-    
-    @Override
-    public String getOwner() {
-    	return this.owner;
-    }
-    
-    @Override
-    public void setOwner(String owner) {
-    	this.owner = owner;
-    	markDirty();
     }
     
     @Override

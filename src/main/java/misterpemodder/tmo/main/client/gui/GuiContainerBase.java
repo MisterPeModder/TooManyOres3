@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import misterpemodder.tmo.api.block.ILockable;
-import misterpemodder.tmo.api.block.IOwnable;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.client.gui.GuiTabs.EnumTabs;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
@@ -22,6 +21,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.IWorldNameable;
 import net.minecraftforge.fml.client.config.GuiUtils;
 
 public abstract class GuiContainerBase<C extends ContainerBase> extends GuiContainer {
@@ -92,8 +92,8 @@ public abstract class GuiContainerBase<C extends ContainerBase> extends GuiConta
 		
 		String dispName = "";
 		
-		if(te instanceof IOwnable) {
-			dispName = ((IOwnable)te).getName();
+		if(te instanceof IWorldNameable) {
+			dispName = ((IWorldNameable)te).getName();
 		} else {
 			dispName = te.getDisplayName().getUnformattedText();
 		}
