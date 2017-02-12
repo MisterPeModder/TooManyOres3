@@ -5,7 +5,6 @@ import misterpemodder.tmo.api.block.ILockable;
 import misterpemodder.tmo.api.owner.IOwnerHandler;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.BlockLamp;
-import misterpemodder.tmo.main.blocks.containers.BlockItemKeeper;
 import misterpemodder.tmo.main.capability.CapabilityOwner;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.items.ItemLock;
@@ -39,10 +38,8 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.items.CapabilityItemHandler;
 
 @Mod.EventBusSubscriber(modid = TMOHelper.MOD_ID)
 public class EventHandler {
@@ -54,11 +51,7 @@ public class EventHandler {
 		Block b = world.getBlockState(event.getPos()).getBlock();
 		ItemStack stack = event.getItemStack();
 		BlockPos pos = event.getPos();
-		if(b instanceof BlockItemKeeper) {
-			if(((BlockItemKeeper) b).getTileEntity(world, pos).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, event.getFace()).getStackInSlot(0).isEmpty()) {
-				event.setUseBlock(Event.Result.ALLOW);
-			}
-		} else if (stack.getItem() instanceof IToolWrench) {
+		if (stack.getItem() instanceof IToolWrench) {
 
 			TileEntity tileEntity = world.getTileEntity(pos);
 

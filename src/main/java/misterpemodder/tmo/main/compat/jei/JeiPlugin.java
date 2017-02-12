@@ -36,8 +36,6 @@ public class JeiPlugin implements IModPlugin {
 		//Hiding the 'tmo tab item'
 		IItemBlacklist blacklist = registry.getJeiHelpers().getItemBlacklist();
 		blacklist.addItemToBlacklist(new ItemStack(ModItems.Items.TAB_ICON.getItem()));
-		blacklist.addItemToBlacklist(new ItemStack(ModBlocks.Blocks.TEST_BLOCK.getBlock().getItemBlock()));
-		blacklist.addItemToBlacklist(new ItemStack(ModBlocks.Blocks.KEEPER_BLOCK.getBlock().getItemBlock()));
 		
 		for(ModItems.Items item : ModItems.Items.values()) {
 			if(!item.getTMOItem().isEnabled()) {

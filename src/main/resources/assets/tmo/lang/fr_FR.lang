@@ -124,7 +124,6 @@ item.titaniumBucket.desc.emptyContent=Contient: rien.
 item.titaniumBucket.desc=Un seau renforcé capable de contenir l'équivalent de plusieurs seau de n'importe quel fluide \nClic droit pour placer des fluides. \nShift+Clic droit pour prendre des fluides.
 
 #Blocs
-tile.blockTest.name=TEST BLOCK
 tile.blockStorage.blockTitanium.name=Bloc de Titane
 tile.blockStorage.blockCopper.name=Block de Cuivre
 tile.blockFrozium.name=Bloc de Frozium
@@ -169,10 +168,6 @@ tile.blockLamp.mode.title=Mode:
 tile.blockLamp.mode.normal=Normal
 tile.blockLamp.mode.inverted=Inversé
 tile.blockLamp.mode.hint=(cliquez droit avec une torche de redstone pour inverser)
-tile.blockItemKeeper.name=§4Item Keeper
-tile.blockItemKeeper.name=§4Stockeur d'Objets
-tile.blockItemKeeper.empty=§6Ce stockeur d'objets est vide... =( 
-tile.blockItemKeeper.item=§6Contient: §2%dx §f
 tile.blockTitaniumChest.name=Coffre en Titane
 tile.blockTitaniumChest.locked=Ce Coffre en Titane est Verrouillé!
 tile.blockTitaniumChest.lockBroken=Vous avez cassé le cadenas du coffre!

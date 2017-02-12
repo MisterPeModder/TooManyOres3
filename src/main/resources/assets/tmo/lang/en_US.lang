@@ -121,7 +121,6 @@ item.titaniumBucket.desc.emptyContent=Contains: nothing.
 item.titaniumBucket.desc=A reinforced bucket that can hold multiple buckets worth of any fluid.\nRight-click to place fluids.\nShift-right-click to take fluids.
 
 #Blocks
-tile.blockTest.name=TEST BLOCK
 tile.blockStorage.blockTitanium.name=Titanium Block
 tile.blockStorage.blockCopper.name=Copper Block
 tile.blockFrozium.name=Frozium Block
@@ -167,9 +166,6 @@ tile.blockLamp.mode.title=Mode:
 tile.blockLamp.mode.normal=Normal
 tile.blockLamp.mode.inverted=Inverted
 tile.blockLamp.mode.hint=(right click with a redstone torch to toggle)
-tile.blockItemKeeper.name=§4Item Keeper
-tile.blockItemKeeper.empty=§6This item keeper is empty... =(
-tile.blockItemKeeper.item=§6Contains: §2%dx §f
 tile.blockTitaniumChest.name=Titanium Chest
 tile.blockTitaniumChest.locked=This Titanium Chest is locked!
 tile.blockTitaniumChest.lockBroken=You broke the chest's lock!

@@ -1,7 +1,5 @@
 package misterpemodder.tmo.main.client.gui;
 
-import misterpemodder.tmo.main.blocks.containers.BlockItemKeeper;
-import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest;
 import misterpemodder.tmo.main.tileentity.TileEntityItemKeeper;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import misterpemodder.tmo.main.utils.TMOHelper;
@@ -20,14 +18,6 @@ public class GuiHandler implements IGuiHandler {
 	
 	public enum EnumGuiElements implements GuiElement {
 		
-		ITEM_KEEPER(0) {
-			public Object getServerGuiElement(EntityPlayer player, World world, int x, int y, int z) {
-				return new ContainerItemKeeper((TileEntityItemKeeper)world.getTileEntity(new BlockPos(x, y, z)), player.inventory);
-			}
-			public Object getClientGuiElement(EntityPlayer player, World world, int x, int y, int z) {
-				return new GuiContainerItemKeeper(player.inventory, (TileEntityItemKeeper)world.getTileEntity(new BlockPos(x, y, z)));
-			}
-		},
 		TITANIUM_CHEST(1) {
 			public Object getServerGuiElement(EntityPlayer player, World world, int x, int y, int z) {
 				return new ContainerTitaniumChest((TileEntityTitaniumChest)world.getTileEntity(new BlockPos(x, y, z)), new PlayerMainInvWrapper(player.inventory));

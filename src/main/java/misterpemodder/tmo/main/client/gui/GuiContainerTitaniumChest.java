@@ -1,25 +1,14 @@
 package misterpemodder.tmo.main.client.gui;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
-import org.lwjgl.input.Mouse;
-
 import misterpemodder.tmo.main.client.gui.GuiTabs.EnumTabs;
-import misterpemodder.tmo.main.init.ModBlocks;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
-import misterpemodder.tmo.main.utils.TMOGuiUtils;
 import misterpemodder.tmo.main.utils.TMOHelper;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.items.wrapper.PlayerMainInvWrapper;
 
 public class GuiContainerTitaniumChest extends GuiContainerBase<ContainerTitaniumChest> {

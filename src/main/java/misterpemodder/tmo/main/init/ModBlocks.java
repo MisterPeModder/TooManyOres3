@@ -5,10 +5,8 @@ import misterpemodder.tmo.main.blocks.BlockDeco;
 import misterpemodder.tmo.main.blocks.BlockLamp;
 import misterpemodder.tmo.main.blocks.BlockOre;
 import misterpemodder.tmo.main.blocks.BlockStorage;
-import misterpemodder.tmo.main.blocks.BlockTest;
 import misterpemodder.tmo.main.blocks.BlockTransparent;
 import misterpemodder.tmo.main.blocks.base.BlockBase;
-import misterpemodder.tmo.main.blocks.containers.BlockItemKeeper;
 import misterpemodder.tmo.main.blocks.containers.BlockTileEntity;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
@@ -27,7 +25,6 @@ import net.minecraftforge.fml.common.registry.IForgeRegistry;
 public class ModBlocks {
 	
 	public static enum Blocks {
-		TEST_BLOCK(new BlockTest()),
 		BRICK(new BlockBrick()),
 		ORE(new BlockOre()),
 		FROZIUM_BLOCK(new BlockTransparent(EnumBlocksNames.FROZIUM_BLOCK, EnumBlocksValues.FROZIUM_BLOCK)),
@@ -37,7 +34,6 @@ public class ModBlocks {
 		FULL_SLAB_BRICK(new BlockFullSlab((BlockHalfSlab)HALF_SLAB_BRICK.getBlock())),
 		ANCIENT_GOLD_LAMP(new BlockLamp(EnumBlocksNames.ANCIENT_GOLD_LAMP, EnumBlocksValues.LAMP)),
 		DARKANIUM_LAMP(new BlockLamp(EnumBlocksNames.DARKANIUM_LAMP, EnumBlocksValues.LAMP)),
-		KEEPER_BLOCK(new BlockItemKeeper()),
 		TITANIUM_CHEST(new BlockTitaniumChest()),
 		
 		;
