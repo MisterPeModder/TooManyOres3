@@ -22,6 +22,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemLock extends ItemMulti<ItemsVariants.Lock> implements IItemLock {
+	
+	private static final int PERCENT_DECREASE_PER_UNBREAKING_LEVEL = 5;
 
 	public ItemLock() {
 		super(EnumItemsNames.LOCK, ItemsVariants.Lock.values(), "_lock");
@@ -53,17 +55,16 @@ public class ItemLock extends ItemMulti<ItemsVariants.Lock> implements IItemLock
 	@Override
 	public EnumActionResult attemptBreak(ItemStack lockStack, Random random) {
 		ItemLock lock = (ItemLock)lockStack.getItem();
-		float breakChance;
+		int breakChance;
 		ItemsVariants.Lock variant = lock.getVariant(lockStack.getMetadata());
 		if(variant == Lock.BASIC) {
-			breakChance = 0.5F;
+			breakChance = 50;
 		} else {
-			breakChance = 0.2F;
+			breakChance = 20;
 		}
-		
+		breakChance -= EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, lockStack)*PERCENT_DECREASE_PER_UNBREAKING_LEVEL;
 		EnumActionResult result;
-		
-		if(random.nextInt(EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, lockStack)+1) == 0 || random.nextFloat()<breakChance) {
+		if(random.nextInt(100) < breakChance) {
 			lockStack.setItemDamage(variant.getOtherVariant().getMetadata());
 			result = EnumActionResult.SUCCESS;
 		} else {
