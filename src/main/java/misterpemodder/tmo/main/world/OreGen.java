@@ -58,7 +58,7 @@ public class OreGen implements IWorldGenerator {
 		}
 		
 		private Ores(BlockOre.EnumVariant ore , int dim, int minY, int maxY, int minOres, int maxOres, int chances, Block spawnIn, ConfigValues.BoolValues configValue) {
-			this.ore = ModBlocks.Blocks.ORE.getBlock().getDefaultState().withProperty(BlockOre.VARIANT, ore);
+			this.ore = ModBlocks.TheBlocks.ORE.getBlock().getDefaultState().withProperty(BlockOre.VARIANT, ore);
 			this.dim = dim;
 			this.minY = minY;
 			this.maxY = maxY;

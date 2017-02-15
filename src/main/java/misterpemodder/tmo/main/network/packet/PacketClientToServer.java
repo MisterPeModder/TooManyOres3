@@ -6,7 +6,7 @@ import java.util.Arrays;
 import io.netty.buffer.ByteBuf;
 import misterpemodder.tmo.main.network.IPacketDataHandler;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;

@@ -9,6 +9,7 @@ tmo.config.gui.mainTitle=Confguration de "Beacoup Trop de Minerais" (a.k.a Too M
 #Objets
 item.itemIngot.titanium.name=Lingot de Titane
 item.itemIngot.titaniumDark.name=Lingot de Titane Noir
+item.itemIngot.titaniumPoor.name=Lingot de Titane
 item.itemIngot.copper.name=Lingot de Cuivre
 item.itemIngot.darkanium.name=Lingot de Sombranium
 item.itemIngot.enderMatter.name=Lingot de Matière de L'Ender

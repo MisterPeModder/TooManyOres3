@@ -2,7 +2,7 @@ package misterpemodder.tmo.main.blocks.base;
 
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockValues;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -38,7 +38,7 @@ public class BlockBase extends Block implements BlockTMO {
 	
 	@Override
 	public void registerItemRender() {
-		ModelResourceLocation location = new ModelResourceLocation(TMOHelper.PREFIX + names.getRegistryName(), "inventory");
+		ModelResourceLocation location = new ModelResourceLocation(TMORefs.PREFIX + names.getRegistryName(), "inventory");
 		ModelLoader.setCustomModelResourceLocation(this.getItemBlock(), 0, location);
 	}
 	
@@ -144,7 +144,7 @@ public class BlockBase extends Block implements BlockTMO {
 		this.slipperiness = (values.getSlipperiness(defaultState));
 		this.setHarvestLevel("shovel", 0);
 
-		if(values.getUseDefaultTab() == true) setCreativeTab(TMOHelper.TMO_TAB);
+		if(values.getUseDefaultTab() == true) setCreativeTab(TMORefs.TMO_TAB);
 	}
 	
 	

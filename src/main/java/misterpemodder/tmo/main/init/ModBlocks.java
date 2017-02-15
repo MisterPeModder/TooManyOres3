@@ -13,7 +13,7 @@ import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
 import misterpemodder.tmo.main.blocks.slab.BlockFullSlab;
 import misterpemodder.tmo.main.blocks.slab.BlockHalfSlab;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.Block;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -21,10 +21,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 
-@Mod.EventBusSubscriber(modid = TMOHelper.MOD_ID)
+@Mod.EventBusSubscriber(modid = TMORefs.MOD_ID)
 public class ModBlocks {
 	
-	public static enum Blocks {
+	public static enum TheBlocks {
 		BRICK(new BlockBrick()),
 		ORE(new BlockOre()),
 		FROZIUM_BLOCK(new BlockTransparent(EnumBlocksNames.FROZIUM_BLOCK, EnumBlocksValues.FROZIUM_BLOCK)),
@@ -43,7 +43,7 @@ public class ModBlocks {
 			return this.block;
 		}
 		
-		Blocks(BlockBase block) {
+		TheBlocks(BlockBase block) {
 			this.block = block;
 		}
 		
@@ -55,8 +55,8 @@ public class ModBlocks {
 	}
 	
 	private static void register(IForgeRegistry<Block> registry) {
-		TMOHelper.LOGGER.info("Registering Blocks...");
-		for(Blocks b : Blocks.values()) {
+		TMORefs.LOGGER.info("Registering Blocks...");
+		for(TheBlocks b : TheBlocks.values()) {
 			BlockBase block = b.getBlock();
 			registry.register(block);
 			if(block.hasOwnItemBlock()) ModItems.ITEM_BLOCKS.add(block.getItemBlock());
@@ -67,14 +67,14 @@ public class ModBlocks {
 	}
 	
 	public static void registerRenders() {
-		for(Blocks bl : Blocks.values()) {
+		for(TheBlocks bl : TheBlocks.values()) {
 			BlockBase b = bl.getBlock();
 			b.registerItemRender();
 		}
 	}
 	
 	public static void registerOreDict() {
-		for (Blocks b : Blocks.values()) {
+		for (TheBlocks b : TheBlocks.values()) {
 			b.getBlock().registerOreDict();
 		}
 	}

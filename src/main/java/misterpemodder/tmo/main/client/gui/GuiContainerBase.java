@@ -12,7 +12,7 @@ import misterpemodder.tmo.api.block.ILockable;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.client.gui.GuiTabs.EnumTabs;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -66,7 +66,7 @@ public abstract class GuiContainerBase<C extends ContainerBase> extends GuiConta
 		    if(container.te instanceof ILockable) {
 		    	try{
 		    	if(selectedTabs[0] == EnumTabs.SECURITY && ((ILockable)container.te).getLockItemHandler().getStackInSlot(0).isEmpty()) {
-		    		this.mc.getTextureManager().bindTexture(new ResourceLocation(TMOHelper.PREFIX+"textures/items/empty_lock_slot.png"));
+		    		this.mc.getTextureManager().bindTexture(new ResourceLocation(TMORefs.PREFIX+"textures/items/empty_lock_slot.png"));
 		    		this.drawModalRectWithCustomSizedTexture(this.guiLeft+8, this.guiTop+18, 0, 0, 16, 16, 16, 16);
 		    	}
 		    	} catch(Exception e) {

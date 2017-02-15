@@ -25,7 +25,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 import misterpemodder.tmo.main.capability.OwnerHandlerUUID;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 
 public class SubCommandOwner extends SubCommandBase{
 

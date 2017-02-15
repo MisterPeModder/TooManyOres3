@@ -5,7 +5,7 @@ import java.util.List;
 
 import misterpemodder.tmo.main.client.gui.GuiTabs.EnumTabs;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
@@ -27,7 +27,7 @@ public class GuiContainerTitaniumChest extends GuiContainerBase<ContainerTitaniu
 	@Override
 	protected void drawTeInv(float partialTicks, int mouseX, int mouseY) {
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-	    this.mc.getTextureManager().bindTexture(new ResourceLocation(TMOHelper.PREFIX + GuiContainerTitaniumChest.MAIN_TAB));
+	    this.mc.getTextureManager().bindTexture(new ResourceLocation(TMORefs.PREFIX + GuiContainerTitaniumChest.MAIN_TAB));
 	    this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.INV_SIZE_TE.height);
 	}
 	

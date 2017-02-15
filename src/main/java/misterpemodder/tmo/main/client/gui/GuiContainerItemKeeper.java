@@ -3,7 +3,7 @@ package misterpemodder.tmo.main.client.gui;
 import java.awt.Color;
 
 import misterpemodder.tmo.main.tileentity.TileEntityItemKeeper;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.inventory.IInventory;
@@ -27,7 +27,7 @@ public class GuiContainerItemKeeper extends GuiContainer {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 	    GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-	    this.mc.getTextureManager().bindTexture(new ResourceLocation(TMOHelper.PREFIX + GuiContainerItemKeeper.path));
+	    this.mc.getTextureManager().bindTexture(new ResourceLocation(TMORefs.PREFIX + GuiContainerItemKeeper.path));
 	    this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 	}
 	

@@ -5,7 +5,7 @@ import misterpemodder.tmo.main.items.base.IItemVariant;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ItemsVariants {
+public final class ItemsVariants {
 	
 	public static ItemStack getVariantStack(IItemVariant variant) {
 		return ItemsVariants.getVariantStack(variant, 1);
@@ -16,8 +16,9 @@ public class ItemsVariants {
 	}
 	
 	public static enum Ingot implements IItemVariant {
-		TITANIUM_INGOT("titanium", "titanium", "ingotTitaniumBlue", "ingotTitanium"),
+		TITANIUM_INGOT("titanium", "titanium", "ingotTitaniumBlue"),
 		TITANIUM_INGOT_DARK("titanium_dark", "titaniumDark", "ingotTitaniumDark"),
+		TITANIUM_INGOT_POOR("titanium_poor", "titaniumPoor", "ingotTitanium"),
 		CARBON_INGOT("carbon", "carbon", "ingotCarbon"),
 		COPPER_INGOT("copper", "copper", "ingotCopper"),
 		DARKANIUM_INGOT("darkanium", "darkanium", "ingotDarkanium"),
@@ -53,7 +54,7 @@ public class ItemsVariants {
 		
 		@Override
 		public ItemMulti getItem() {
-			return (ItemMulti)ModItems.Items.INGOT.getItem();
+			return (ItemMulti)ModItems.TheItems.INGOT.getItem();
 		}
 		
 		private Ingot(String name, String unlocalizedName, String... oreDictNames) {
@@ -93,7 +94,7 @@ public class ItemsVariants {
 		
 		@Override
 		public ItemMulti getItem() {
-			return (ItemMulti)ModItems.Items.GEM.getItem();
+			return (ItemMulti)ModItems.TheItems.GEM.getItem();
 		}
 		
 		private Gem(String name, String unlocalizedName, String... oreDictNames) {
@@ -136,7 +137,7 @@ public class ItemsVariants {
 		
 		@Override
 		public ItemMulti getItem() {
-			return (ItemMulti)ModItems.Items.PLATE.getItem();
+			return (ItemMulti)ModItems.TheItems.PLATE.getItem();
 		}
 		
 		private Plate(String name, String unlocalizedName, String... oreDictNames) {
@@ -183,7 +184,7 @@ public class ItemsVariants {
 		
 		@Override
 		public ItemMulti getItem() {
-			return (ItemMulti)ModItems.Items.LOCK.getItem();
+			return (ItemMulti)ModItems.TheItems.LOCK.getItem();
 		}
 		
 

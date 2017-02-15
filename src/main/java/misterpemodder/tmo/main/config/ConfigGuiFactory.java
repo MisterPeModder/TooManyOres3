@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import misterpemodder.tmo.main.config.ConfigValues.ConfigCategories;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
@@ -38,7 +38,7 @@ public class ConfigGuiFactory implements IModGuiFactory {
 		
 		public ConfigGui(GuiScreen parent) {
 
-			super(parent, getConfigElements(), TMOHelper.MOD_ID, false, false, I18n.format("tmo.config.gui.mainTitle", new Object[]{}));
+			super(parent, getConfigElements(), TMORefs.MOD_ID, false, false, I18n.format("tmo.config.gui.mainTitle", new Object[]{}));
 
 		}
 

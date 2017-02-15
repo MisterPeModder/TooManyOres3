@@ -1,7 +1,7 @@
 package misterpemodder.tmo.main.init;
 
 import misterpemodder.tmo.main.items.ItemTmoArmor;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -17,10 +17,10 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 public final class Crafting {
 
 	public static void registerRecipes() {
-		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.Items.PICKAXE_TITANIUM.getItem(), "III", " S ", " S ", 'I', "ingotTitanium", 'S', "stickWood"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.TheItems.PICKAXE_TITANIUM.getItem(), "III", " S ", " S ", 'I', "ingotTitanium", 'S', "stickWood"));
 		
-		if(TMOHelper.topLoaded) {
-			RecipeSorter.register(TMOHelper.PREFIX+"proberecipe", Crafting.ProbeRecipe.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
+		if(TMORefs.topLoaded) {
+			RecipeSorter.register(TMORefs.PREFIX+"proberecipe", Crafting.ProbeRecipe.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
 			GameRegistry.addRecipe(new ProbeRecipe());
 		}
 	}
@@ -35,7 +35,7 @@ public final class Crafting {
 			for (int i = 0; i < inv.getSizeInventory(); ++i) {
                 ItemStack stack = inv.getStackInSlot(i);
                 
-                if(stack.getItem() instanceof ItemTmoArmor && (!stack.hasTagCompound() || !stack.getTagCompound().hasKey(TMOHelper.TOP_TAG))) {
+                if(stack.getItem() instanceof ItemTmoArmor && (!stack.hasTagCompound() || !stack.getTagCompound().hasKey(TMORefs.TOP_TAG))) {
                 	if(((ItemTmoArmor)stack.getItem()).armorType == EntityEquipmentSlot.HEAD) {
                 		helmetCount++;
                 	}
@@ -68,7 +68,7 @@ public final class Crafting {
                 		} else {
                 			compound = new NBTTagCompound();
                 		}
-                		compound.setInteger(TMOHelper.TOP_TAG, 1);
+                		compound.setInteger(TMORefs.TOP_TAG, 1);
                 		result.setTagCompound(compound);
                 	}
                 }

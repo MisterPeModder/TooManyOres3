@@ -2,7 +2,7 @@ package misterpemodder.tmo.main.client.gui;
 
 import misterpemodder.tmo.main.tileentity.TileEntityItemKeeper;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -42,7 +42,7 @@ public class GuiHandler implements IGuiHandler {
 				return el;
 			}
 		}
-		TMOHelper.LOGGER.error("Invalid GUI Element ID!");
+		TMORefs.LOGGER.error("Invalid GUI Element ID!");
 		return null;
 	}
 

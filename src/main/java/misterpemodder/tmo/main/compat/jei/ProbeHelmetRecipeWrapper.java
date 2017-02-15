@@ -5,7 +5,7 @@ import java.util.List;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.wrapper.ICraftingRecipeWrapper;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,7 +23,7 @@ public class ProbeHelmetRecipeWrapper implements ICraftingRecipeWrapper {
 		this.inputs = Arrays.asList(helmetStack, probeStack);
 		
 		NBTTagCompound compound = new NBTTagCompound();
-		compound.setInteger(TMOHelper.TOP_TAG, 1);
+		compound.setInteger(TMORefs.TOP_TAG, 1);
 		
 		output = helmetStack.copy();
 		output.setTagCompound(compound);

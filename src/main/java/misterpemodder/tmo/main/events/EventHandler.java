@@ -13,7 +13,7 @@ import misterpemodder.tmo.main.items.tools.ItemWrench;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import misterpemodder.tmo.main.utils.ServerUtils;
 import misterpemodder.tmo.main.utils.StringUtils;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -41,7 +41,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Mod.EventBusSubscriber(modid = TMOHelper.MOD_ID)
+@Mod.EventBusSubscriber(modid = TMORefs.MOD_ID)
 public class EventHandler {
 	
 	//Cancels the sneak effect
@@ -124,7 +124,7 @@ public class EventHandler {
 	@SubscribeEvent
 	public static void anvilUpdateEvent(AnvilUpdateEvent event) {
 		
-		if(event.getLeft().getItem() == ModItems.Items.LOCK.getItem()) {
+		if(event.getLeft().getItem() == ModItems.TheItems.LOCK.getItem()) {
 			ItemStack lStack = event.getLeft();
 			ItemStack rStack = event.getRight();
 			ItemsVariants.Lock variant = ((ItemLock)lStack.getItem()).getVariant(lStack.getMetadata());

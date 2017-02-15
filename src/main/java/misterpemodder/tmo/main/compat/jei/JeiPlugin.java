@@ -15,7 +15,7 @@ import misterpemodder.tmo.main.blocks.base.BlockTMO;
 import misterpemodder.tmo.main.init.ModBlocks;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.items.base.TMOItem;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemBlock;
@@ -35,9 +35,9 @@ public class JeiPlugin implements IModPlugin {
 	public void register(IModRegistry registry) {
 		//Hiding the 'tmo tab item'
 		IItemBlacklist blacklist = registry.getJeiHelpers().getItemBlacklist();
-		blacklist.addItemToBlacklist(new ItemStack(ModItems.Items.TAB_ICON.getItem()));
+		blacklist.addItemToBlacklist(new ItemStack(ModItems.TheItems.TAB_ICON.getItem()));
 		
-		for(ModItems.Items item : ModItems.Items.values()) {
+		for(ModItems.TheItems item : ModItems.TheItems.values()) {
 			if(!item.getTMOItem().isEnabled()) {
 				blacklist.addItemToBlacklist(new ItemStack(item.getItem(), 1 , OreDictionary.WILDCARD_VALUE));
 			}
@@ -45,7 +45,7 @@ public class JeiPlugin implements IModPlugin {
 		
 		addDescriptions(registry, registry.getIngredientRegistry());
 		
-		if(TMOHelper.topLoaded) {
+		if(TMORefs.topLoaded) {
 			registry.addRecipeHandlers(new ProbeHelmetRecipeHandler());
 			
 			registry.addRecipes(ProbeHelmetRecipeMaker.getProbeRecipes(registry.getIngredientRegistry()));
@@ -59,7 +59,7 @@ public class JeiPlugin implements IModPlugin {
 		
 		for(ItemStack ingredient : ingredients) {
 			if(ingredient.getItem() instanceof TMOItem || Block.getBlockFromItem(ingredient.getItem()) instanceof BlockTMO) {
-				String unlocName = ingredient.getItem().getUnlocalizedNameInefficiently(ingredient) + TMOHelper.JEI_DESC_UNLOC_NAME;
+				String unlocName = ingredient.getItem().getUnlocalizedNameInefficiently(ingredient) + TMORefs.JEI_DESC_UNLOC_NAME;
 				if(I18n.hasKey(unlocName)) {
 					registry.addDescription(ingredient , Tmo.proxy.translate(unlocName));
 				}

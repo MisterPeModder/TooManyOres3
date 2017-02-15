@@ -20,7 +20,7 @@ import misterpemodder.tmo.main.items.tools.ItemTmoPickaxe;
 import misterpemodder.tmo.main.items.tools.ItemTmoShovel;
 import misterpemodder.tmo.main.items.tools.ItemTmoSword;
 import misterpemodder.tmo.main.items.tools.ItemWrench;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
@@ -28,12 +28,12 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 
-@Mod.EventBusSubscriber(modid = TMOHelper.MOD_ID)
+@Mod.EventBusSubscriber(modid = TMORefs.MOD_ID)
 public class ModItems {
 	
 	static  List<ItemBlockBase> ITEM_BLOCKS = new ArrayList<>();
 	
-	public enum Items  {
+	public enum TheItems  {
 		TAB_ICON(new ItemBase(EnumItemsNames.TAB_ICON, false)),
 		INGOT(new ItemMulti<ItemsVariants.Ingot>(EnumItemsNames.INGOT, ItemsVariants.Ingot.values(), "_ingot")),
 		GEM(new ItemMulti<ItemsVariants.Gem>(EnumItemsNames.GEM, ItemsVariants.Gem.values(), "_gem")),
@@ -120,7 +120,7 @@ public class ModItems {
 			return this.item;
 		}
 		
-		Items(TMOItem item) {
+		TheItems(TMOItem item) {
 			this.item = item;
 		}
 		
@@ -132,12 +132,12 @@ public class ModItems {
 	}
 	
 	private static void register(IForgeRegistry<Item> registry) {
-		TMOHelper.LOGGER.info("Registering Items...");
-		for(Items i : Items.values()) {
+		TMORefs.LOGGER.info("Registering Items...");
+		for(TheItems i : TheItems.values()) {
 			registry.register(i.getItem());
 		}
 		if(!ITEM_BLOCKS.isEmpty()) {
-			TMOHelper.LOGGER.info("Registering ItemsBlocks...");
+			TMORefs.LOGGER.info("Registering ItemsBlocks...");
 			for(ItemBlockBase i : ITEM_BLOCKS) {
 				registry.register(i);
 			}
@@ -145,7 +145,7 @@ public class ModItems {
 	}
 	
 	public static void registerOreDict() {
-		for (Items i : Items.values()) {
+		for (TheItems i : TheItems.values()) {
 			if(i.getItem() instanceof ItemBase) {
 				((ItemBase) i.getItem()).registerOreDict();
 			}
@@ -153,7 +153,7 @@ public class ModItems {
 	}
 	
 	public static void registerRenders() {
-		for(Items i : Items.values()) {
+		for(TheItems i : TheItems.values()) {
 			i.getTMOItem().registerRender();
 		}
 	}

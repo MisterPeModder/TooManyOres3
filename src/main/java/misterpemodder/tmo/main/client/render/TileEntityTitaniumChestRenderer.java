@@ -2,7 +2,7 @@ package misterpemodder.tmo.main.client.render;
 
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class TileEntityTitaniumChestRenderer extends TileEntitySpecialRenderer<TileEntityTitaniumChest> {
 	
-	private static final ResourceLocation TEXTURE = new ResourceLocation(TMOHelper.MOD_ID,"textures/entity/titanium_chest.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(TMORefs.MOD_ID,"textures/entity/titanium_chest.png");
 	private final ModelChest simpleChest = new ModelChest();
 	
 	public TileEntityTitaniumChestRenderer() {

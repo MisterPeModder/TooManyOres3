@@ -83,7 +83,7 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 	protected void setLockSlot() {
 		if(this.te instanceof ILockable) {
 			NonNullList<ItemStack> list = NonNullList.create();
-			list.add(new ItemStack(ModItems.Items.LOCK.getItem()));
+			list.add(new ItemStack(ModItems.TheItems.LOCK.getItem()));
 			this.addSlotToContainer(new SlotFiltered(((ILockable)this.te).getLockItemHandler(), 0, 8, 18, list, true, true));
 		}
 	}

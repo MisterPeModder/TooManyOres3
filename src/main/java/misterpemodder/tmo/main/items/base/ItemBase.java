@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import misterpemodder.tmo.main.items.EnumItemsNames;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -25,7 +25,7 @@ public class ItemBase extends Item implements TMOItem {
 	
 	@Override
 	public void registerRender() {
-		ModelResourceLocation location = new ModelResourceLocation(TMOHelper.PREFIX + names.getRegistryName(), "inventory");
+		ModelResourceLocation location = new ModelResourceLocation(TMORefs.PREFIX + names.getRegistryName(), "inventory");
 		ModelLoader.setCustomModelResourceLocation(this, 0, location);
 	}
 	
@@ -65,7 +65,7 @@ public class ItemBase extends Item implements TMOItem {
 	}
 	
 	protected void attemptSetCreativeTab() {
-		if(isEnabled()) setCreativeTab(TMOHelper.TMO_TAB);
+		if(isEnabled()) setCreativeTab(TMORefs.TMO_TAB);
 	}
 	
 	public ItemBase(EnumItemsNames names) {

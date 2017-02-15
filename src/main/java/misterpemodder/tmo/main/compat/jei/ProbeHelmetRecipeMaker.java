@@ -6,7 +6,7 @@ import java.util.List;
 import mezz.jei.api.ingredients.IIngredientRegistry;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.items.ItemTmoArmor;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 
@@ -17,7 +17,7 @@ public final class ProbeHelmetRecipeMaker {
 		List<ItemStack> ingredients = ingredientRegistry.getIngredients(ItemStack.class);
 		
 		for(ItemStack stack : ingredients) {
-			if(stack.getItem() instanceof ItemTmoArmor && (!stack.hasTagCompound() || !stack.getTagCompound().hasKey(TMOHelper.TOP_TAG))) {
+			if(stack.getItem() instanceof ItemTmoArmor && (!stack.hasTagCompound() || !stack.getTagCompound().hasKey(TMORefs.TOP_TAG))) {
             	if(((ItemTmoArmor)stack.getItem()).armorType == EntityEquipmentSlot.HEAD) {
             		recipes.add(new ProbeHelmetRecipeWrapper(stack));
             	}

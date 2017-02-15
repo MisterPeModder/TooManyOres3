@@ -6,7 +6,7 @@ import misterpemodder.tmo.main.blocks.BlockBrick.EnumVariant;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockValues;
 import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -89,7 +89,7 @@ public abstract class BlockMulti<V extends Enum<V> & IBlockVariant> extends Bloc
 		int vNum = variants.length;
 		for(int i=0; i<vNum; i++) {
 			String name = variants[i].getName();
-			ModelResourceLocation location = new ModelResourceLocation(TMOHelper.PREFIX + name + suffix , name);
+			ModelResourceLocation location = new ModelResourceLocation(TMORefs.PREFIX + name + suffix , name);
 			ModelLoader.setCustomModelResourceLocation(this.getItemBlock(),  variants[i].getMeta(), location);
 		}
 	}

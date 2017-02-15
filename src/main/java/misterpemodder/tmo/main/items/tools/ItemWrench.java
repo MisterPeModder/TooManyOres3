@@ -6,7 +6,7 @@ import buildcraft.api.tools.IToolWrench;
 import misterpemodder.tmo.main.items.EnumItemsNames;
 import misterpemodder.tmo.main.items.base.ItemBase;
 import misterpemodder.tmo.main.items.materials.TmoToolMaterial;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.IBlockState;
@@ -45,7 +45,7 @@ public class ItemWrench extends ItemBase implements IToolWrench {
 		this.m = material;
 		this.maxStackSize = 1;
 		this.setMaxDamage(this.m.material.getMaxUses());
-		if(this.isEnabled()) this.setCreativeTab(TMOHelper.TMO_TAB);
+		if(this.isEnabled()) this.setCreativeTab(TMORefs.TMO_TAB);
 	}
 	
 	@Override

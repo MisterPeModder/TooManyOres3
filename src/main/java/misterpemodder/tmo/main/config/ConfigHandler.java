@@ -2,7 +2,7 @@ package misterpemodder.tmo.main.config;
 
 import java.io.File;
 
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
@@ -31,7 +31,7 @@ public class ConfigHandler {
 	
 	@SubscribeEvent
 	public void onConfigChangeEvent(OnConfigChangedEvent event) {
-		if(event.getModID().equalsIgnoreCase(TMOHelper.MOD_ID)) updateConfig();
+		if(event.getModID().equalsIgnoreCase(TMORefs.MOD_ID)) updateConfig();
 	}
 	
 }

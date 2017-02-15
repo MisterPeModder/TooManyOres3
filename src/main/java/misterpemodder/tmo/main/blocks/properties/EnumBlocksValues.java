@@ -122,7 +122,6 @@ public enum EnumBlocksValues implements IBlockValues{
 			return state.getValue(BlockOre.VARIANT).getMiningLevel(state);
 		}
 	},
-	//registerBlock(123, "redstone_lamp", (new BlockRedstoneLight(false)).setHardness(0.3F).setSoundType(SoundType.GLASS).setUnlocalizedName("redstoneLight").setCreativeTab(CreativeTabs.REDSTONE));
 	LAMP() {
 		public float getHardness(IBlockState state) {
 			return 0.3F;
@@ -147,7 +146,7 @@ public enum EnumBlocksValues implements IBlockValues{
 			if(state == null) {
 				return MapColor.YELLOW;
 			}
-			if(state.getBlock() == ModBlocks.Blocks.DARKANIUM_LAMP.getBlock()) {
+			if(state.getBlock() == ModBlocks.TheBlocks.DARKANIUM_LAMP.getBlock()) {
 				return MapColor.PURPLE;
 			}
 			return MapColor.YELLOW;

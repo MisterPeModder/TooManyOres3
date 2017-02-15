@@ -16,7 +16,7 @@ public class TileEntityTitaniumChestInvRenderer extends TileEntityItemStackRende
 	@Override
 	public void renderByItem(ItemStack itemStack) {
 		Block block = Block.getBlockFromItem(itemStack.getItem());
-		if (block == ModBlocks.Blocks.TITANIUM_CHEST.getBlock()) {
+		if (block == ModBlocks.TheBlocks.TITANIUM_CHEST.getBlock()) {
 			TileEntityRendererDispatcher.instance.renderTileEntityAt(this.tileEntityTitaniumChest, 0.0D, 0.0D, 0.0D, 0.0F);
 		} else {
 			super.renderByItem(itemStack);

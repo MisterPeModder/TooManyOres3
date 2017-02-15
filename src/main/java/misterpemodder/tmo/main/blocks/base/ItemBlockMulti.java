@@ -3,7 +3,7 @@ package misterpemodder.tmo.main.blocks.base;
 import java.util.List;
 
 import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -47,7 +47,7 @@ public class ItemBlockMulti extends ItemBlockBase {
 		int meta = stack.getMetadata();
 		String type = ((BlockMulti)this.getBlock()).getVariant(meta).getUnlocalizedName();
 		String name = Block.getBlockFromItem(stack.getItem()).getUnlocalizedName()+'.'+type;
-		return ((BlockMulti) getBlock()).isValidVariant(meta)? name:TMOHelper.DEFAULT_ITEM_NAME;
+		return ((BlockMulti) getBlock()).isValidVariant(meta)? name:TMORefs.DEFAULT_ITEM_NAME;
 	}
 	
 }

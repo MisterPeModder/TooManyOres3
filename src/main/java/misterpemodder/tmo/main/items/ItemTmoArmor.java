@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 
 import misterpemodder.tmo.main.items.base.TMOItem;
 import misterpemodder.tmo.main.items.materials.TmoArmorMaterial;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -33,13 +33,13 @@ public class ItemTmoArmor extends ItemArmor implements TMOItem{
 		this.itemRefs = itemRefs;
 		setUnlocalizedName(itemRefs.getUnlocalizedName());
 		setRegistryName(itemRefs.getRegistryName());
-		if(isEnabled()) setCreativeTab(TMOHelper.TMO_TAB);
+		if(isEnabled()) setCreativeTab(TMORefs.TMO_TAB);
 		
 		if(slot == EntityEquipmentSlot.HEAD) {
 			this.addPropertyOverride(new ResourceLocation("probe"), new IItemPropertyGetter() {
 	            @SideOnly(Side.CLIENT)
 	            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
-	            	if(stack.hasTagCompound() && stack.getTagCompound().hasKey(TMOHelper.TOP_TAG)) {
+	            	if(stack.hasTagCompound() && stack.getTagCompound().hasKey(TMORefs.TOP_TAG)) {
 	            		return 1.0F;
 	            	}
 	            	return 0.0F;
@@ -55,7 +55,7 @@ public class ItemTmoArmor extends ItemArmor implements TMOItem{
 		if(((ItemTmoArmor) itemIn).armorType == EntityEquipmentSlot.HEAD) {
 			ItemStack helmetStack = new ItemStack(itemIn);
 			NBTTagCompound tag = new NBTTagCompound();
-			tag.setInteger(TMOHelper.TOP_TAG, 1);
+			tag.setInteger(TMORefs.TOP_TAG, 1);
 			helmetStack.setTagCompound(tag);
 			subItems.add(helmetStack);
 		}
@@ -79,7 +79,7 @@ public class ItemTmoArmor extends ItemArmor implements TMOItem{
 
 	@Override
 	public void registerRender() {
-		ModelResourceLocation location = new ModelResourceLocation(TMOHelper.PREFIX + itemRefs.getRegistryName(), "inventory");
+		ModelResourceLocation location = new ModelResourceLocation(TMORefs.PREFIX + itemRefs.getRegistryName(), "inventory");
 		ModelLoader.setCustomModelResourceLocation(this, 0, location);
 	}
 

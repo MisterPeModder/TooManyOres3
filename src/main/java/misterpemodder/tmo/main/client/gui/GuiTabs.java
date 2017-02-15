@@ -7,7 +7,7 @@ import java.util.List;
 
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -16,7 +16,7 @@ import net.minecraft.item.ItemBlock;
 
 public final class GuiTabs {
 	
-	public static final String PATH = TMOHelper.PREFIX + "textures/gui/container/tabs.png";
+	public static final String PATH = TMORefs.PREFIX + "textures/gui/container/tabs.png";
 	
 	public enum EnumTabs {
 		MAIN("gui.tab.main.name", null, null, new Point(0,0), new Point(32, 0)),
@@ -27,7 +27,7 @@ public final class GuiTabs {
 		IO("gui.tab.io.name", ItemBlock.getItemFromBlock(Blocks.HOPPER), "textures/gui/container/io.png", new Point(0, 56), new Point(32, 56), false, true),
 		;
 		public static final Dimension SIZE = new Dimension(32, 28);
-		public static final String PATH = TMOHelper.PREFIX + "textures/gui/container/tabs.png";
+		public static final String PATH = TMORefs.PREFIX + "textures/gui/container/tabs.png";
 		private final String name;
 		private final String screenPath;
 		public final Item item;
@@ -49,7 +49,7 @@ public final class GuiTabs {
 		}
 
 		public String getScreenPath() {
-			return TMOHelper.PREFIX + screenPath;
+			return TMORefs.PREFIX + screenPath;
 		}
 
 		public static List<EnumTabs> getTabs() {

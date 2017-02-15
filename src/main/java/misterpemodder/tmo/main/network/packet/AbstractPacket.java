@@ -3,7 +3,7 @@ package misterpemodder.tmo.main.network.packet;
 import io.netty.buffer.ByteBuf;
 import misterpemodder.tmo.main.network.IPacketDataHandler;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
@@ -38,7 +38,7 @@ public abstract class AbstractPacket implements IMessage {
 			}
 			
 		} catch (Exception e) {
-			TMOHelper.LOGGER.error("Something went wrong when trying to read packet!");
+			TMORefs.LOGGER.error("Something went wrong when trying to read packet!");
 			e.printStackTrace();
 		}
 	}

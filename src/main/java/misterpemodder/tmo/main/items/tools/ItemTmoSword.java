@@ -4,7 +4,7 @@ import misterpemodder.tmo.main.config.ConfigValues;
 import misterpemodder.tmo.main.items.EnumItemsNames;
 import misterpemodder.tmo.main.items.base.TMOItem;
 import misterpemodder.tmo.main.items.materials.TmoToolMaterial;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemSword;
@@ -21,7 +21,7 @@ public class ItemTmoSword extends ItemSword implements TMOItem {
 		this.material = material;
 		setUnlocalizedName(itemRefs.getUnlocalizedName());
 		setRegistryName(itemRefs.getRegistryName());
-		if(isEnabled()) setCreativeTab(TMOHelper.TMO_TAB);
+		if(isEnabled()) setCreativeTab(TMORefs.TMO_TAB);
 	}
 	
 	@Override
@@ -31,7 +31,7 @@ public class ItemTmoSword extends ItemSword implements TMOItem {
 
 	@Override
 	public void registerRender() {
-		ModelResourceLocation location = new ModelResourceLocation(TMOHelper.PREFIX + itemRefs.getRegistryName(), "inventory");
+		ModelResourceLocation location = new ModelResourceLocation(TMORefs.PREFIX + itemRefs.getRegistryName(), "inventory");
 		ModelLoader.setCustomModelResourceLocation(this, 0, location);
 	}
 	

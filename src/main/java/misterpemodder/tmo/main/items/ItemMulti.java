@@ -2,7 +2,7 @@ package misterpemodder.tmo.main.items;
 
 import misterpemodder.tmo.main.items.base.IItemVariant;
 import misterpemodder.tmo.main.items.base.ItemBase;
-import misterpemodder.tmo.main.utils.TMOHelper;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -32,7 +32,7 @@ public class ItemMulti<V extends IItemVariant> extends ItemBase {
 		int vNum = variants.length;
 		for(int i=0; i<vNum; i++) {
 			String name = variants[i].getName();
-			ModelResourceLocation location = new ModelResourceLocation(TMOHelper.PREFIX + name + suffix , name);
+			ModelResourceLocation location = new ModelResourceLocation(TMORefs.PREFIX + name + suffix , name);
 			ModelLoader.setCustomModelResourceLocation(this,  variants[i].getMeta(), location);
 		}
 	};
