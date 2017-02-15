@@ -1,6 +1,7 @@
 package misterpemodder.tmo.main.items;
 
-import misterpemodder.tmo.main.items.base.IItemVariant;
+import java.util.List;
+
 import misterpemodder.tmo.main.items.base.ItemBase;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -13,12 +14,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ItemMulti<V extends IItemVariant> extends ItemBase {
+public class ItemMulti<V extends ItemVariant> extends ItemBase {
 	
-	private V[] variants;
+	private List<V> variants;
 	private String suffix;
 
-	public ItemMulti(EnumItemsNames names, V[] variants, String suffix) {
+	public ItemMulti(EnumItemsNames names, List<V> variants, String suffix) {
 		super(names);
 		setHasSubtypes(true);
 		this.getHasSubtypes();
@@ -26,14 +27,13 @@ public class ItemMulti<V extends IItemVariant> extends ItemBase {
 		this.variants = variants;
 	}
 	
-	
 	@Override
 	public void registerRender() {
-		int vNum = variants.length;
+		int vNum = variants.size();
 		for(int i=0; i<vNum; i++) {
-			String name = variants[i].getName();
+			String name = variants.get(i).getName();
 			ModelResourceLocation location = new ModelResourceLocation(TMORefs.PREFIX + name + suffix , name);
-			ModelLoader.setCustomModelResourceLocation(this,  variants[i].getMeta(), location);
+			ModelLoader.setCustomModelResourceLocation(this,  variants.get(i).getMeta(), location);
 		}
 	};
 	
@@ -43,10 +43,10 @@ public class ItemMulti<V extends IItemVariant> extends ItemBase {
 				return variant;
 			}
 		}
-		return variants[0];
+		return variants.get(0);
 	}
 	
-	public V[] getVariants() {
+	public List<V> getVariants() {
 		return this.variants;
 	}
 	
@@ -60,7 +60,7 @@ public class ItemMulti<V extends IItemVariant> extends ItemBase {
 	
 	@Override
 	public void registerOreDict() {
-		for(IItemVariant variant : variants) {
+		for(V variant : variants) {
 			String[] oreDictNames = variant.getOreDictNames();
 			if(oreDictNames.length != 0) {
 				for (String str : oreDictNames) {
@@ -74,7 +74,7 @@ public class ItemMulti<V extends IItemVariant> extends ItemBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems) {
-		for(int i = 0, len = variants.length; i<len; i++) {
+		for(int i = 0, len = variants.size(); i<len; i++) {
 			subItems.add(new ItemStack(itemIn, 1, i));
 		}
 	}

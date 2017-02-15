@@ -2,10 +2,9 @@ package misterpemodder.tmo.main.compat.aa;
 
 import de.ellpeck.actuallyadditions.api.ActuallyAdditionsAPI;
 import misterpemodder.tmo.main.init.ModItems.TheItems;
-import misterpemodder.tmo.main.items.ItemsVariants.Ingot;
+import misterpemodder.tmo.main.items.ItemVariant.IngotVariant;
 import misterpemodder.tmo.main.utils.ItemStackUtils;
 import misterpemodder.tmo.main.utils.TMORefs;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
@@ -36,11 +35,11 @@ public final class ActAddCompat {
 	
 	private static void registerEmpowererRecipes() {
 		ItemStack lapis = new ItemStack(Items.DYE, 1, 4);
-		ActuallyAdditionsAPI.addEmpowererRecipe(ItemStackUtils.newVariantStack(TheItems.INGOT, Ingot.TITANIUM_INGOT_POOR), ItemStackUtils.newVariantStack(TheItems.INGOT, Ingot.TITANIUM_INGOT), lapis, lapis, lapis, new ItemStack(Items.DIAMOND), 2000, 50, new float[]{0F, 51F/255F, 108F/255F});
+		ActuallyAdditionsAPI.addEmpowererRecipe(ItemStackUtils.newVariantStack(TheItems.INGOT, IngotVariant.TITANIUM_INGOT_POOR), ItemStackUtils.newVariantStack(TheItems.INGOT, IngotVariant.TITANIUM_INGOT), lapis, lapis, lapis, new ItemStack(Items.DIAMOND), 2000, 50, new float[]{0F, 51F/255F, 108F/255F});
 	}
 	
 	private static void registerReconstructorRecipes() {
-		ActuallyAdditionsAPI.addReconstructorLensConversionRecipe(ItemStackUtils.newVariantStack(TheItems.INGOT, Ingot.CARBON_INGOT), new ItemStack(Items.COAL, 3), 5000);
+		ActuallyAdditionsAPI.addReconstructorLensConversionRecipe(ItemStackUtils.newVariantStack(TheItems.INGOT, IngotVariant.CARBON_INGOT), new ItemStack(Items.COAL, 3), 5000);
 	}
 	
 }

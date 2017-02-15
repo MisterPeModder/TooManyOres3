@@ -8,7 +8,7 @@ import misterpemodder.tmo.main.blocks.BlockLamp;
 import misterpemodder.tmo.main.capability.CapabilityOwner;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.items.ItemLock;
-import misterpemodder.tmo.main.items.ItemsVariants;
+import misterpemodder.tmo.main.items.ItemVariant;
 import misterpemodder.tmo.main.items.tools.ItemWrench;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import misterpemodder.tmo.main.utils.ServerUtils;
@@ -127,7 +127,7 @@ public class EventHandler {
 		if(event.getLeft().getItem() == ModItems.TheItems.LOCK.getItem()) {
 			ItemStack lStack = event.getLeft();
 			ItemStack rStack = event.getRight();
-			ItemsVariants.Lock variant = ((ItemLock)lStack.getItem()).getVariant(lStack.getMetadata());
+			ItemVariant.LockVariant variant = ((ItemLock)lStack.getItem()).getVariant(lStack.getMetadata());
 			ItemStack repairItem = variant.getRepairItem();
 			
 			if(rStack.isItemEqual(repairItem) && variant.isBroken() && rStack.getCount() >= repairItem.getCount()) {

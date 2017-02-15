@@ -9,7 +9,7 @@ import misterpemodder.tmo.main.items.ItemLock;
 import misterpemodder.tmo.main.items.ItemMulti;
 import misterpemodder.tmo.main.items.ItemTitaniumBucket;
 import misterpemodder.tmo.main.items.ItemTmoArmor;
-import misterpemodder.tmo.main.items.ItemsVariants;
+import misterpemodder.tmo.main.items.ItemVariant;
 import misterpemodder.tmo.main.items.base.ItemBase;
 import misterpemodder.tmo.main.items.base.TMOItem;
 import misterpemodder.tmo.main.items.materials.TmoArmorMaterial;
@@ -35,9 +35,9 @@ public class ModItems {
 	
 	public enum TheItems  {
 		TAB_ICON(new ItemBase(EnumItemsNames.TAB_ICON, false)),
-		INGOT(new ItemMulti<ItemsVariants.Ingot>(EnumItemsNames.INGOT, ItemsVariants.Ingot.values(), "_ingot")),
-		GEM(new ItemMulti<ItemsVariants.Gem>(EnumItemsNames.GEM, ItemsVariants.Gem.values(), "_gem")),
-		PLATE(new ItemMulti<ItemsVariants.Plate>(EnumItemsNames.PLATE, ItemsVariants.Plate.values(), "_plate")),
+		INGOT(new ItemMulti<ItemVariant.IngotVariant>(EnumItemsNames.INGOT, ItemVariant.IngotVariant.ingotVariants, "_ingot")),
+		GEM(new ItemMulti<ItemVariant.GemVariant>(EnumItemsNames.GEM, ItemVariant.GemVariant.gemVariants, "_gem")),
+		PLATE(new ItemMulti<ItemVariant.PlateVariant>(EnumItemsNames.PLATE, ItemVariant.PlateVariant.plateVariants, "_plate")),
 		LOCK(new ItemLock()),
 		TITANIUM_BUCKET(new ItemTitaniumBucket()),
 		
