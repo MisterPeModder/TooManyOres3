@@ -2,6 +2,7 @@ package misterpemodder.tmo.main.client.render;
 
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
+import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -13,14 +14,13 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformT
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityTitaniumChestRenderer extends TileEntitySpecialRenderer<TileEntityTitaniumChest> {
 	
-	private static final ResourceLocation TEXTURE = new ResourceLocation(TMORefs.MOD_ID,"textures/entity/titanium_chest.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocationTmo("textures/entity/titanium_chest.png");
 	private final ModelChest simpleChest = new ModelChest();
 	
 	public TileEntityTitaniumChestRenderer() {
