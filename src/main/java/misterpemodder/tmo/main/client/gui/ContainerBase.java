@@ -1,16 +1,16 @@
 package misterpemodder.tmo.main.client.gui;
 
+import org.apache.commons.lang3.tuple.MutablePair;
+
 import misterpemodder.tmo.api.block.ILockable;
-import misterpemodder.tmo.main.client.gui.GuiTabs.EnumTabs;
+import misterpemodder.tmo.main.client.gui.tabs.TabBase;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.PlayerMainInvWrapper;
 
 public abstract class ContainerBase<TE extends TileEntityContainerBase> extends Container {
@@ -18,13 +18,11 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 	protected TE te;
 	protected PlayerMainInvWrapper playerInv;
 	
-	protected EnumTabs[] selectedTabs = new EnumTabs[2];
+	protected MutablePair<TabBase, TabBase> selectedTabs = new MutablePair<>();
 	
 	public ContainerBase(TE te, PlayerMainInvWrapper playerInv) {
 		this.te = te;
 		this.playerInv = playerInv;
-		this.selectedTabs[0] = EnumTabs.DEFAULT_TOP;
-		this.selectedTabs[1] = EnumTabs.DEFAULT_BOTTOM;
 		
 		setTeSlots(te, playerInv);
 		setPlayerInvSlots();
@@ -33,20 +31,15 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 		hideSlots();
 	}
 
-	protected void hideSlots() {
+	public void hideSlots() {
 		for(Slot sl : this.inventorySlots) {
 			if(sl instanceof SlotHidable) {
 				SlotHidable slot = (SlotHidable) sl;
-				IItemHandler h = slot.getItemHandler();
-				
-				boolean b1 = selectedTabs[1] != EnumTabs.PLAYER_INVENTORY && h == playerInv;
-				boolean b2 = selectedTabs[0] != EnumTabs.MAIN && h == te.getInventory();
-				boolean b3 = this.te instanceof ILockable
-						? selectedTabs[0] != EnumTabs.SECURITY && h == ((ILockable) te).getLockItemHandler()
-						: false;
-
-				slot.enabled = !(b1||b2||b3);
-				//slot.enabled = !(b1||b2)&&h != te.getInventory();
+				if(selectedTabs.getLeft() != null && selectedTabs.getRight() != null) {
+					slot.enabled = selectedTabs.getLeft().shouldDisplaySlot(slot) || selectedTabs.getRight().shouldDisplaySlot(slot);
+				} else {
+					slot.enabled = slot.getItemHandler() == te.getInventory() || slot.getItemHandler() == playerInv;
+				}
 			}
 		}
 	}
@@ -86,24 +79,6 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 			list.add(new ItemStack(ModItems.TheItems.LOCK.getItem()));
 			this.addSlotToContainer(new SlotFiltered(((ILockable)this.te).getLockItemHandler(), 0, 8, 18, list, true, true));
 		}
-	}
-	
-	private class TestSlot extends Slot{
-
-		public TestSlot(IInventory inventoryIn, int index, int xPosition, int yPosition) {
-			super(inventoryIn, index, xPosition, yPosition);
-		}
-		
-		@Override
-		public boolean canBeHovered() {
-			return false;
-		}
-		
-		@Override
-		public boolean canTakeStack(EntityPlayer playerIn) {
-			return false;
-		}
-
 	}
 	
 	@Override

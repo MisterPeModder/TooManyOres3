@@ -69,6 +69,8 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
 	@Override
 	public void handleUpdateTag(NBTTagCompound tag) {
 		super.handleUpdateTag(tag);
+		this.lidAngle = 0;
+		this.prevLidAngle = 0;
 		this.sync();
 	}
 	

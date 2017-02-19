@@ -22,7 +22,7 @@ public class ContainerTitaniumChest extends ContainerBase<TileEntityTitaniumChes
 	 * Player Hotbar	0-8 ... 93 - 101
 	 * Lock Slot        0-0 ... 102 - 102
 	 */
-	
+
 	public ContainerTitaniumChest(TileEntityTitaniumChest te, PlayerMainInvWrapper playerInv) {
 		super(te, playerInv);
 	}
@@ -84,5 +84,6 @@ public class ContainerTitaniumChest extends ContainerBase<TileEntityTitaniumChes
 
         return itemstack;
     }
+
 
 }

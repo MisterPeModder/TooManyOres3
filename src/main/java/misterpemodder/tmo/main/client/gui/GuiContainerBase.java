@@ -3,16 +3,21 @@ package misterpemodder.tmo.main.client.gui;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import misterpemodder.tmo.api.block.ILockable;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.MutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.client.gui.GuiTabs.EnumTabs;
+import misterpemodder.tmo.main.client.gui.tabs.TabBase;
+import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabPos;
+import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabTexture;
+import misterpemodder.tmo.main.client.gui.tabs.TabMain;
+import misterpemodder.tmo.main.client.gui.tabs.TabPlayerInventory;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
-import misterpemodder.tmo.main.utils.TMORefs;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -20,159 +25,164 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.IWorldNameable;
-import net.minecraftforge.fml.client.config.GuiUtils;
 
-public abstract class GuiContainerBase<C extends ContainerBase> extends GuiContainer {
+public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends TileEntityContainerBase> extends GuiContainer {
 	
-	public static final Dimension INV_SIZE_TE = new Dimension(212, 132);
-	public static final Dimension INV_SIZE_PLAYER = new Dimension(212, 100);
-	public static final int tabOffset = 4;
-	protected C container;
+	public static final int TAB_OFFSET = 4;
+	public C container;
 	
-	protected EnumTabs[] selectedTabs = new EnumTabs[]{EnumTabs.DEFAULT_TOP, EnumTabs.DEFAULT_BOTTOM};
-	protected Map<EnumTabs,Point> tabsPos = new HashMap<>();
+	protected ImmutablePair<TabBase, TabBase> defaultTabs;
+	protected MutablePair<TabBase, TabBase> selectedTabs;
+	protected List<TabBase> tabs;
 	
 	public GuiContainerBase(C container) {
 		super(container);
 		this.container = container;
-		this.xSize = (INV_SIZE_TE.width + GuiTabs.EnumTabs.SIZE.width) - tabOffset;
-        this.ySize = INV_SIZE_TE.height + INV_SIZE_PLAYER.height;
-        setTabsPos();
+		this.tabs = registerTabs();
+		
+		if(tabs.size() < 2) throw new IllegalArgumentException("There must be at least 2 tabs!");
+		initTabs();
+		
+		Pair<TabBase, TabBase> p = getDefaultPair();
+        this.selectedTabs = MutablePair.of(p.getLeft(), p.getRight());
+        this.defaultTabs = ImmutablePair.of(p.getLeft(), p.getRight());
+        
+        Dimension dl = selectedTabs.left.getTabTexture().dim;
+		Dimension dr = selectedTabs.right.getTabTexture().dim;
+        this.xSize = (Math.max(dl.width, dr.width) + TabBase.WIDTH);
+      	this.ySize = dl.height + dr.height;
 	}
+	
+	private void initTabs() {
+		for(TabBase tab : tabs) {
+			tab.setGuiContainer(this);
+		}
+	}
+	
+	private Pair<TabBase, TabBase> getDefaultPair() {
+		MutablePair<TabBase, TabBase> p = new MutablePair<>();
+		for(TabBase tab : tabs) {
+			if(tab instanceof TabMain) {
+				p.setLeft(tab);
+			} else if(tab instanceof TabPlayerInventory) {
+				p.setRight(tab);
+			}
+		}
+		if(p.getLeft() == null || p.getRight() == null) {
+			p.setLeft(tabs.get(0));
+			p.setRight(tabs.get(1));
+		}
+		return p;
+	}
+	
+	public abstract List<TabBase> registerTabs();
 	
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		
-		selectedTabs[0] = selectedTabs[1] == EnumTabs.IO? EnumTabs.MAIN : selectedTabs[0];
-		
 	    //Disabled Tabs
+		GlStateManager.pushMatrix();
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-		this.mc.getTextureManager().bindTexture(new ResourceLocation(GuiTabs.PATH));
 	    this.drawDisabledTabs();
 	    
-	    //Bottom part
-	    this.mc.getTextureManager().bindTexture(new ResourceLocation(selectedTabs[1].getScreenPath()));
-		this.drawModalRectWithCustomSizedTexture(this.getGuiLeft(), this.getGuiTop()+INV_SIZE_TE.height, 0, 0, 212, 100, 256, 128);
-		
 		//Top Part
-		if(selectedTabs[0] == EnumTabs.MAIN) {
-			drawTeInv(partialTicks, mouseX, mouseY);
-		} else {
-			GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-		    this.mc.getTextureManager().bindTexture(new ResourceLocation(selectedTabs[0].getScreenPath()));
-		    this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.INV_SIZE_TE.height);
-		    if(container.te instanceof ILockable) {
-		    	try{
-		    	if(selectedTabs[0] == EnumTabs.SECURITY && ((ILockable)container.te).getLockItemHandler().getStackInSlot(0).isEmpty()) {
-		    		this.mc.getTextureManager().bindTexture(new ResourceLocation(TMORefs.PREFIX+"textures/items/empty_lock_slot.png"));
-		    		this.drawModalRectWithCustomSizedTexture(this.guiLeft+8, this.guiTop+18, 0, 0, 16, 16, 16, 16);
-		    	}
-		    	} catch(Exception e) {
-		    		
-		    	}
-		    }
-		}
-	    
+	    TabTexture lt = selectedTabs.getLeft().getTabTexture();
+		this.mc.getTextureManager().bindTexture(lt.screenTexture);
+		this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, lt.dim.width, lt.dim.height);
+		
+		//Bottom part
+		TabTexture rt = selectedTabs.getRight().getTabTexture();
+	    this.mc.getTextureManager().bindTexture(rt.screenTexture);
+		this.drawModalRectWithCustomSizedTexture(this.guiLeft, getBottomPartPos(), 0, 0, rt.dim.width, rt.dim.height, 256, 128);
+		
 	    //Enabled Tabs
-	    GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-	    this.mc.getTextureManager().bindTexture(new ResourceLocation(GuiTabs.PATH));
-	    GuiTabs.drawTab(this, selectedTabs[0], tabsPos.get(selectedTabs[0]), true);
-	    GuiTabs.drawTab(this, selectedTabs[1], tabsPos.get(selectedTabs[1]), true);
-
+	    this.drawTab(selectedTabs.getLeft(), true);
+	    selectedTabs.getLeft().drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
+	    this.drawTab(selectedTabs.getRight(), true);
+	    selectedTabs.getRight().drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
+	    GlStateManager.popMatrix();
 	}
 	
-	protected abstract void drawTeInv(float partialTicks, int mouseX, int mouseY);
+	protected void drawTab(TabBase tab, boolean enabled) {
+		TabTexture texture = tab.getTabTexture();
+		Point uv = enabled? texture.enabledCoords : texture.disabledCoords;
+		Point coords = tab.getPos();
+		this.mc.getTextureManager().bindTexture(tab.getTabTexture().tabTexture);
+		this.drawModalRectWithCustomSizedTexture(this.getGuiLeft()+coords.x , this.getGuiTop()+coords.y, (float) uv.x, (float) uv.y, TabBase.WIDTH, TabBase.HEIGHT, 128F, 128F);
+	}
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		
-		TileEntityContainerBase te = this.container.getTileEntity();
-		
-		String dispName = "";
-		
-		if(te instanceof IWorldNameable) {
-			dispName = ((IWorldNameable)te).getName();
-		} else {
-			dispName = te.getDisplayName().getUnformattedText();
-		}
-		
-		String nameTop = selectedTabs[0] == EnumTabs.MAIN? dispName : selectedTabs[0].getLocalizedName();
-	    this.fontRendererObj.drawString(nameTop, 8, 6, 4210752);
-	    
-	    String nameBottom = selectedTabs[1] == EnumTabs.PLAYER_INVENTORY? this.container.getPlayerInv().getInventoryPlayer().getDisplayName().getUnformattedText() : selectedTabs[1].getLocalizedName(); 
-	    this.fontRendererObj.drawString(nameBottom, 26, 139, 4210752);
-        
-	    
 	    Item teItem = ItemBlock.getItemFromBlock(this.container.getTileEntity().getBlockType());
-	    for(EnumTabs tab : tabsPos.keySet()) {
+	    selectedTabs.getLeft().drawGuiContainerForegroundLayer(mouseX, mouseY);
+	    selectedTabs.getRight().drawGuiContainerForegroundLayer(mouseX, mouseY);
+	    for(TabBase tab : tabs) {
 	    	RenderHelper.enableGUIStandardItemLighting();
-	    	ItemStack stack = new ItemStack(tab.getItem(teItem));
-	    	this.itemRender.renderItemIntoGUI(stack, tabsPos.get(tab).x + 8, tabsPos.get(tab).y + 6);
-		    this.itemRender.renderItemOverlays(this.fontRendererObj, stack, tabsPos.get(tab).x + 8, tabsPos.get(tab).y + 6);
+	    	ItemStack stack = tab.getItemStack();
+	    	Point tabPos = tab.getPos();
+	    	this.itemRender.renderItemIntoGUI(stack, tabPos.x + 8, tabPos.y + 6);
+		    this.itemRender.renderItemOverlays(this.fontRendererObj, stack, tabPos.x + 8, tabPos.y + 6);
 		    RenderHelper.disableStandardItemLighting();
-		    if(isPointInRegion(tabsPos.get(tab).x+1, tabsPos.get(tab).y, EnumTabs.SIZE.width, EnumTabs.SIZE.height-1, mouseX, mouseY)) {
-		    	drawCreativeTabHoveringText(tab.getLocalizedName(), mouseX-this.getGuiLeft(), mouseY-this.getGuiTop());
+		    if(isPointInRegion(tab.getPos().x+1, tab.getPos().y, TabBase.WIDTH, TabBase.HEIGHT-1, mouseX, mouseY)) {
+		    	drawCreativeTabHoveringText(Tmo.proxy.translate(tab.getUnlocalizedName()), mouseX-this.getGuiLeft(), mouseY-this.getGuiTop());
 		    }
 	    }
-	    
-	    if(selectedTabs[0] == EnumTabs.SECURITY && ((ILockable)container.te).getLockItemHandler().getStackInSlot(0).isEmpty()) {
-	    	if(isPointInRegion(8, 18, 16, 16, mouseX, mouseY)) {
-	    		GuiUtils.drawHoveringText(Arrays.asList(Tmo.proxy.translate("gui.slot.lock.name"), Tmo.proxy.translate("gui.slot.lock.desc")), mouseX-this.getGuiLeft(), mouseY-this.getGuiTop(), width, height, 200, this.fontRendererObj);
-		    }
-    	}
-        
 	}
 	
 	@Override
 	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-		for(EnumTabs tab : tabsPos.keySet()) {
-		    if(isPointInRegion(tabsPos.get(tab).x+1, tabsPos.get(tab).y, EnumTabs.SIZE.width, EnumTabs.SIZE.height-1, mouseX, mouseY)) {
-		    	onTabClick(tab);
-		    }
-	    }
+		
+		for(TabBase tab : tabs) {
+			Point pos = tab.getPos();
+			if(isPointInRegion(pos.x+1, pos.y, TabBase.WIDTH, TabBase.HEIGHT-1, mouseX, mouseY)) {
+				if(selectedTabs.getLeft() != tab && selectedTabs.getRight() != tab) {
+					this.mc.player.playSound(SoundEvents.UI_BUTTON_CLICK, 1.0F, 1.0F);
+					TabPos tabPos = tab.getTabPos();
+					if(tabPos == TabPos.TOP_LEFT || tabPos == TabPos.TOP_RIGHT) {
+						selectedTabs.setLeft(tab);
+					} else {
+						selectedTabs.setRight(tab);
+					}
+					selectedTabs = tab.forceTabConfig();
+					this.container.selectedTabs = selectedTabs;
+					this.container.hideSlots();
+
+				}
+			}
+		}
 		super.mouseClicked(mouseX, mouseY, mouseButton);
 	}
 	
-	protected void onTabClick(EnumTabs tab) {
-		
-		if(tab != selectedTabs[1] && tab != selectedTabs[0]) {
-			this.mc.player.playSound(SoundEvents.UI_BUTTON_CLICK, 1.0F, 1.0F);
-			selectedTabs[tab.isBottom ? 1 : 0] = tab;
-			if (selectedTabs[1] == EnumTabs.IO && !tab.isBottom)
-				selectedTabs[1] = EnumTabs.DEFAULT_BOTTOM;
-			this.container.selectedTabs = selectedTabs;
-			this.container.hideSlots();
-
-		}
-		
+	public FontRenderer getFontRenderer() {
+		return this.fontRendererObj;
 	}
 	
-	private void setTabsPos() {
-		Point pRight = new Point(INV_SIZE_TE.width - tabOffset, 0);
-		Point pLeft = new Point(tabOffset-EnumTabs.SIZE.width, 0);
-		Point pBottom = new Point(INV_SIZE_TE.width - tabOffset, INV_SIZE_TE.height);
-
-		for(EnumTabs tab : getTabs()) {
-			Point p = tab.isLeft?pLeft:(tab.isBottom?pBottom:pRight);
-			tabsPos.put(tab, (Point)p.clone());
-			p.translate(0, EnumTabs.SIZE.height+1);
-		}
+	public int getBottomPartPos() {
+		return this.getGuiTop() + selectedTabs.getLeft().getTabTexture().dim.height;
 	}
 	
 	protected void drawDisabledTabs() {
-		for(EnumTabs tab : tabsPos.keySet()) {
-			boolean tet = tab == EnumTabs.SECURITY;;
-			if(tab == EnumTabs.SECURITY) {
-				int lool = 5;
-			}
-			if(tab != selectedTabs[0] && tab != selectedTabs[1]) {
-				GuiTabs.drawTab(this, tab, tabsPos.get(tab), false);
+		for(TabBase tab : tabs) {
+			if(tab != selectedTabs.getLeft() && tab != selectedTabs.getRight()) {
+				this.drawTab(tab, false);
 			}
 		}
 	}
 	
-	public abstract List<EnumTabs> getTabs();
+	@Override
+	public boolean isPointInRegion(int rectX, int rectY, int rectWidth, int rectHeight, int pointX, int pointY) {
+		return super.isPointInRegion(rectX, rectY, rectWidth, rectHeight, pointX, pointY);
+	}
+	
+	public MutablePair<TabBase, TabBase> getSelectedTabs() {
+		return this.selectedTabs;
+	}
+
+	public List<TabBase> getRegisteredTabs() {
+		return this.tabs;
+	}
+	
+	public Minecraft getMinecraft() {
+		return this.mc;
+	}
 	
 }

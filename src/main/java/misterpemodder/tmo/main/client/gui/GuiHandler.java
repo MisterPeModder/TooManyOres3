@@ -55,5 +55,5 @@ public class GuiHandler implements IGuiHandler {
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		return getElementByID(ID).getClientGuiElement(player, world, x, y, z);
 	}
-
+	
 }
