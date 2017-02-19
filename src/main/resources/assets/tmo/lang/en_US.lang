@@ -130,6 +130,7 @@ tile.blockStorage.blockEnderMatter.name=Ender Matter Block
 tile.blockStorage.blockDarkanium.name=Darkanium Block
 tile.blockStorage.blockGoldAncient.name=Ancient Gold Block
 tile.blockStorage.blockPlatinum.name=Platinum Block
+tile.blockStorage.desc=Can be used as beacon base
 tile.blockDecoration.titaniumPlating.name=Titanium Plating
 tile.blockBrick.name=Bricks
 tile.blockBrick.goldAncient.name=Ancient Gold Bricks
