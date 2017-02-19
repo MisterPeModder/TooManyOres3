@@ -1,9 +1,7 @@
 package misterpemodder.tmo.main.capability;
 
 import java.util.UUID;
-
 import javax.annotation.Nullable;
-
 import misterpemodder.tmo.api.owner.IOwnerHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -39,7 +37,7 @@ public class OwnerHandlerUUID implements IOwnerHandler, INBTSerializable<NBTTagC
 	@Override
 	public void setOwner(@Nullable EntityPlayer player) {
 		if(player != null) {
-			playerId = player.getUUID(player.getGameProfile());
+			playerId = EntityPlayer.getUUID(player.getGameProfile());
 			playerName = player.getDisplayNameString();
 		} else {
 			playerId = null;
@@ -56,7 +54,7 @@ public class OwnerHandlerUUID implements IOwnerHandler, INBTSerializable<NBTTagC
 	public boolean isOwner(EntityPlayer player) {
 		EntityPlayer owner = this.getOwner(player.getEntityWorld());
 		if(owner != null) return player.isEntityEqual(owner);
-		return playerId.equals(player.getUUID(player.getGameProfile()));
+		return playerId.equals(EntityPlayer.getUUID(player.getGameProfile()));
 	}
 
 	@Override

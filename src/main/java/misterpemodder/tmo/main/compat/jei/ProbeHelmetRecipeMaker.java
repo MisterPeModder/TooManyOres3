@@ -2,9 +2,7 @@ package misterpemodder.tmo.main.compat.jei;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import mezz.jei.api.ingredients.IIngredientRegistry;
-import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.items.ItemTmoArmor;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.inventory.EntityEquipmentSlot;

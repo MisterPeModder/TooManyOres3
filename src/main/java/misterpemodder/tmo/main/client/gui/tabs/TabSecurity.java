@@ -10,6 +10,7 @@ import misterpemodder.tmo.main.client.gui.ContainerBase;
 import misterpemodder.tmo.main.client.gui.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -52,7 +53,7 @@ public class TabSecurity<C extends ContainerBase<TE>, TE extends TileEntityConta
 		if(guiContainer.container.getTileEntity() instanceof ILockable) {
 			if(((ILockable)guiContainer.container.getTileEntity()).getLockItemHandler().getStackInSlot(0).isEmpty()) {
 				guiContainer.getMinecraft().getTextureManager().bindTexture(new ResourceLocationTmo("textures/items/empty_lock_slot.png"));
-				guiContainer.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+8, guiContainer.getGuiTop()+18, 0, 0, 16, 16, 16, 16);
+				Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+8, guiContainer.getGuiTop()+18, 0, 0, 16, 16, 16, 16);
 			}
 		}
 	}

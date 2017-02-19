@@ -1,7 +1,5 @@
 package misterpemodder.tmo.main.items.materials;
 
-import com.typesafe.config.ConfigValue;
-
 import misterpemodder.tmo.main.config.ConfigValues;
 import misterpemodder.tmo.main.config.ConfigValues.BoolValues;
 import net.minecraft.item.Item.ToolMaterial;

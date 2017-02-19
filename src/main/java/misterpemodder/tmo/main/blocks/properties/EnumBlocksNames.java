@@ -1,7 +1,5 @@
 package misterpemodder.tmo.main.blocks.properties;
 
-import java.util.HashMap;
-
 public enum EnumBlocksNames implements IBlockNames {
 	TEST_BLOCK("test_block", "blockTest"),
 	TITANIUM_BLOCK("titanium_block", "blockTitanium", "blockTitanium", "blockTitaniumBlue"),

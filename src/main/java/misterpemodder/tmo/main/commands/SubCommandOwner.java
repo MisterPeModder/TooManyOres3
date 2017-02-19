@@ -1,6 +1,5 @@
 package misterpemodder.tmo.main.commands;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -11,7 +10,6 @@ import com.mojang.authlib.GameProfile;
 
 import misterpemodder.tmo.api.owner.IOwnerHandler;
 import misterpemodder.tmo.main.capability.CapabilityOwner;
-import net.minecraft.block.Block;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.CommandResultStats;
 import net.minecraft.command.ICommandSender;
@@ -24,8 +22,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
-import misterpemodder.tmo.main.capability.OwnerHandlerUUID;
-import misterpemodder.tmo.main.utils.TMORefs;
 
 public class SubCommandOwner extends SubCommandBase{
 

@@ -2,12 +2,8 @@ package misterpemodder.tmo.main.client.gui.tabs;
 
 import java.awt.Dimension;
 import java.awt.Point;
-
 import misterpemodder.tmo.main.client.gui.ContainerBase;
-import misterpemodder.tmo.main.client.gui.GuiContainerBase;
 import misterpemodder.tmo.main.client.gui.SlotHidable;
-import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabPos;
-import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabTexture;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.init.Items;

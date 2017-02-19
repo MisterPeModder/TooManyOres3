@@ -35,7 +35,6 @@ public class SubCommandHelp extends SubCommandBase {
 		
 		if(args.length == 0) {
 			List<SubCommandBase> list = this.getSortedPossibleCommands(sender, server);
-        	int i = 7;
         	int j = (list.size() - 1) / 7;
         	int k = 0;
 

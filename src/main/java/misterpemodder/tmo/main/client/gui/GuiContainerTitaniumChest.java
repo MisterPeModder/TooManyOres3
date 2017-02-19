@@ -2,9 +2,7 @@ package misterpemodder.tmo.main.client.gui;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import misterpemodder.tmo.main.client.gui.tabs.TabBase;
-import misterpemodder.tmo.main.client.gui.tabs.TabIO;
 import misterpemodder.tmo.main.client.gui.tabs.TabInfo;
 import misterpemodder.tmo.main.client.gui.tabs.TabMainTitaniumChest;
 import misterpemodder.tmo.main.client.gui.tabs.TabPlayerInventory;

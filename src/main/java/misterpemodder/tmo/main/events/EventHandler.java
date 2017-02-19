@@ -110,7 +110,6 @@ public class EventHandler {
 			if(hitPos.getBlockPos() != null) {
 				IBlockState state = mc.world.getBlockState(hitPos.getBlockPos());
 				if(state.getBlock() instanceof BlockLamp) {
-					EntityPlayer player = mc.player;
 					String txt = state.getValue(BlockLamp.INVERTED)? TextFormatting.RED+Tmo.proxy.translate("tile.blockLamp.mode.inverted") : TextFormatting.GREEN+Tmo.proxy.translate("tile.blockLamp.mode.normal");
 					ScaledResolution res = event.getResolution();
 					int h = res.getScaledHeight()/20;
@@ -149,7 +148,6 @@ public class EventHandler {
 				if (enchants != null) {
 		            for (int i = 0; i < enchants.tagCount(); ++i) {
 		                int id = enchants.getCompoundTagAt(i).getShort("id");
-		                int lvl = enchants.getCompoundTagAt(i).getShort("lvl");
 		                if (Enchantment.getEnchantmentByID(id) == Enchantments.UNBREAKING) {
 		                   valid = true;
 		                }

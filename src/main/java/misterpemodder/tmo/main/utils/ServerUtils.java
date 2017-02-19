@@ -1,13 +1,8 @@
 package misterpemodder.tmo.main.utils;
 
-import java.util.Map;
-
-import net.minecraft.command.ICommand;
-import net.minecraft.command.ICommandManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.management.UserListOpsEntry;
 import net.minecraftforge.fml.server.FMLServerHandler;
 
 public final class ServerUtils {

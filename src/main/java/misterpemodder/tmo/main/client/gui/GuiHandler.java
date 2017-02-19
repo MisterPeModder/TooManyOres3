@@ -1,6 +1,5 @@
 package misterpemodder.tmo.main.client.gui;
 
-import misterpemodder.tmo.main.tileentity.TileEntityItemKeeper;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.entity.player.EntityPlayer;

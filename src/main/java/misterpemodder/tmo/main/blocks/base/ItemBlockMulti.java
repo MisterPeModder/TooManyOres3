@@ -1,7 +1,5 @@
 package misterpemodder.tmo.main.blocks.base;
 
-import java.util.List;
-
 import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.Block;
@@ -43,6 +41,7 @@ public class ItemBlockMulti extends ItemBlockBase {
 	}
 	
 	@Override
+	@SuppressWarnings("rawtypes")
 	public String getUnlocalizedName(ItemStack stack) {
 		int meta = stack.getMetadata();
 		String type = ((BlockMulti)this.getBlock()).getVariant(meta).getUnlocalizedName();

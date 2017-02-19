@@ -1,10 +1,8 @@
 package misterpemodder.tmo.main.client.gui;
 
-import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
 
 public class SlotFiltered extends SlotHidable {
 	

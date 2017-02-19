@@ -7,7 +7,6 @@ import misterpemodder.tmo.main.client.render.TileEntityTitaniumChestRenderer;
 import misterpemodder.tmo.main.init.ModBlocks;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.client.registry.ClientRegistry;

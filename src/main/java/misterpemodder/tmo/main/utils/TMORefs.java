@@ -1,13 +1,9 @@
 package misterpemodder.tmo.main.utils;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import misterpemodder.tmo.main.TMOTab;
-import misterpemodder.tmo.main.Tmo;
 import net.minecraft.creativetab.CreativeTabs;
 
 public class TMORefs {

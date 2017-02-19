@@ -26,7 +26,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.EnumHelper;
 
 public class BlockLamp extends BlockBase implements IProbeInfoAccessor{
 	
@@ -73,7 +72,6 @@ public class BlockLamp extends BlockBase implements IProbeInfoAccessor{
         if(heldItem.getItem() == ItemBlock.getItemFromBlock(Blocks.REDSTONE_TORCH) && player.capabilities.allowEdit) {
         	if(!world.isRemote) {
         		float f = state.getValue(ACTIVATED) == true ? 0.55F : 0.5F;
-        		IBlockState newState = state.cycleProperty(INVERTED);
         		world.setBlockState(pos, state.cycleProperty(INVERTED), 2);
         		world.playSound(player, pos, SoundEvents.BLOCK_COMPARATOR_CLICK, SoundCategory.BLOCKS, 0.3F, f);
         		world.scheduleUpdate(pos, this, 4);

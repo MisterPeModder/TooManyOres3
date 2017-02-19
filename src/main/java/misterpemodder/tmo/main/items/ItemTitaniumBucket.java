@@ -1,13 +1,10 @@
 package misterpemodder.tmo.main.items;
 
 import java.util.List;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.items.base.ItemBase;
-import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockLiquid;
@@ -185,11 +182,6 @@ public class ItemTitaniumBucket extends ItemBase {
         		return ActionResult.newResult(EnumActionResult.PASS, itemstack);
         	}
     		if(canEditFluid(world, player, rtrSolid.getBlockPos(), rtrSolid.sideHit, itemstack)) {
-    			
-    			FluidStack f = fluidStack;
-    			if(creative && fluidStack.amount < Fluid.BUCKET_VOLUME) {
-    				f = new FluidStack(fluidStack, Fluid.BUCKET_VOLUME);
-    			}
     			FluidActionResult result = ItemTitaniumBucket.tryPlaceFluid(player, world, rtrSolid.getBlockPos().offset(rtrSolid.sideHit), itemstack, fluidStack);
     			if (result.isSuccess() && !creative) {
     				player.addStat(StatList.getObjectUseStats(this));

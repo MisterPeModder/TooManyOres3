@@ -4,11 +4,9 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.io.IOException;
 import java.util.List;
-
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabPos;
@@ -18,12 +16,11 @@ import misterpemodder.tmo.main.client.gui.tabs.TabPlayerInventory;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends TileEntityContainerBase> extends GuiContainer {
@@ -92,7 +89,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		//Bottom part
 		TabTexture rt = selectedTabs.getRight().getTabTexture();
 	    this.mc.getTextureManager().bindTexture(rt.screenTexture);
-		this.drawModalRectWithCustomSizedTexture(this.guiLeft, getBottomPartPos(), 0, 0, rt.dim.width, rt.dim.height, 256, 128);
+	    Gui.drawModalRectWithCustomSizedTexture(this.guiLeft, getBottomPartPos(), 0, 0, rt.dim.width, rt.dim.height, 256, 128);
 		
 	    //Enabled Tabs
 	    this.drawTab(selectedTabs.getLeft(), true);
@@ -107,12 +104,11 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		Point uv = enabled? texture.enabledCoords : texture.disabledCoords;
 		Point coords = tab.getPos();
 		this.mc.getTextureManager().bindTexture(tab.getTabTexture().tabTexture);
-		this.drawModalRectWithCustomSizedTexture(this.getGuiLeft()+coords.x , this.getGuiTop()+coords.y, (float) uv.x, (float) uv.y, TabBase.WIDTH, TabBase.HEIGHT, 128F, 128F);
+		Gui.drawModalRectWithCustomSizedTexture(this.getGuiLeft()+coords.x , this.getGuiTop()+coords.y, (float) uv.x, (float) uv.y, TabBase.WIDTH, TabBase.HEIGHT, 128F, 128F);
 	}
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-	    Item teItem = ItemBlock.getItemFromBlock(this.container.getTileEntity().getBlockType());
 	    selectedTabs.getLeft().drawGuiContainerForegroundLayer(mouseX, mouseY);
 	    selectedTabs.getRight().drawGuiContainerForegroundLayer(mouseX, mouseY);
 	    for(TabBase tab : tabs) {

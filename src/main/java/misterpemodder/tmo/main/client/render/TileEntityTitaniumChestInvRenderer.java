@@ -3,10 +3,8 @@ package misterpemodder.tmo.main.client.render;
 import misterpemodder.tmo.main.init.ModBlocks;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 public class TileEntityTitaniumChestInvRenderer extends TileEntityItemStackRenderer{

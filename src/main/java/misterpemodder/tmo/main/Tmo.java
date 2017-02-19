@@ -21,8 +21,6 @@
 
 package misterpemodder.tmo.main;
 
-import javax.activation.CommandInfo;
-
 import de.ellpeck.actuallyadditions.api.ActuallyAdditionsAPI;
 import misterpemodder.tmo.main.capability.CapabilityOwner;
 import misterpemodder.tmo.main.commands.CommandTMO;

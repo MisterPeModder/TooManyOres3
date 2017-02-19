@@ -1,6 +1,5 @@
 package misterpemodder.tmo.main.blocks.slab;
 
-import java.util.Collection;
 import java.util.Random;
 
 import misterpemodder.tmo.main.blocks.base.BlockMulti;

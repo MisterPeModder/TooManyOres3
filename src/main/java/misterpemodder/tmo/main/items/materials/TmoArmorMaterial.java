@@ -1,14 +1,9 @@
 package misterpemodder.tmo.main.items.materials;
 
-import com.typesafe.config.ConfigValueType;
-
 import misterpemodder.tmo.main.config.ConfigValues;
-import misterpemodder.tmo.main.config.ConfigValues.BoolValues;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class TmoArmorMaterial {

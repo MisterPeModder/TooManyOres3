@@ -4,13 +4,9 @@ import io.netty.buffer.ByteBuf;
 import misterpemodder.tmo.main.network.IPacketDataHandler;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
 import misterpemodder.tmo.main.utils.TMORefs;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public abstract class AbstractPacket implements IMessage {
 
@@ -46,7 +42,6 @@ public abstract class AbstractPacket implements IMessage {
 	@Override
 	public void toBytes(ByteBuf buf) {
 		PacketBuffer buffer = new PacketBuffer(buf);
-		int h = PacketDataHandlers.HANDLERS.indexOf(dataHandler);
 		
 		buffer.writeInt(PacketDataHandlers.HANDLERS.indexOf(dataHandler));
 		

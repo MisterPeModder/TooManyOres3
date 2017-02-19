@@ -10,7 +10,7 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 
-public class BlockDeco extends BlockMulti {
+public class BlockDeco extends BlockMulti<BlockDeco.EnumVariant> {
 	
 	public static final PropertyEnum<BlockDeco.EnumVariant> VARIANT = PropertyEnum.create("variant", BlockDeco.EnumVariant.class);
 	public static BlockDeco.EnumVariant[] blockVariants = EnumVariant.values();
@@ -91,7 +91,7 @@ public class BlockDeco extends BlockMulti {
 	}
 
 	@Override
-	protected Enum[] getVariants() {
+	protected BlockDeco.EnumVariant[] getVariants() {
 		return blockVariants;
 	}
 

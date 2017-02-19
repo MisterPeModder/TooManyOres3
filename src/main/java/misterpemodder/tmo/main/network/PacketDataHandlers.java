@@ -3,10 +3,8 @@ package misterpemodder.tmo.main.network;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import misterpemodder.tmo.main.network.packet.PacketServerToClient;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
-import misterpemodder.tmo.main.utils.ServerUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.player.EntityPlayer;

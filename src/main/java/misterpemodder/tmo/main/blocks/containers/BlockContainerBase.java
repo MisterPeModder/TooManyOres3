@@ -95,7 +95,7 @@ public abstract class BlockContainerBase<TE extends TileEntityContainerBase> ext
             	((IWorldNameableModifiable)tileentity).setCustomName(stack.getDisplayName());
             }
             if(placer instanceof EntityPlayer) {
-            	String owner = "";
+            	/*String owner;
             	if(stack.serializeNBT().hasKey("tag")) {
             		NBTTagCompound tag = stack.serializeNBT().getCompoundTag("tag");
             		if(tag.hasKey("BlockEntityTag")) {
@@ -104,7 +104,7 @@ public abstract class BlockContainerBase<TE extends TileEntityContainerBase> ext
             				owner = blockEntityTag.getString("owner");
             			}
             		}
-            	}
+            	}*/
             	IOwnerHandler ownerHandler = tileentity.getCapability(CapabilityOwner.OWNER_HANDLER_CAPABILITY, null);
             	if(ownerHandler != null)
             		ownerHandler.setOwner((EntityPlayer)placer);

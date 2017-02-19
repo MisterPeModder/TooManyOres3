@@ -3,7 +3,6 @@ package misterpemodder.tmo.main.utils;
 import java.awt.Color;
 
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.util.text.TextFormatting;
 
 public class StringUtils {
 	

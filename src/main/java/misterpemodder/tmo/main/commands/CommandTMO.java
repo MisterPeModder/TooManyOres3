@@ -1,13 +1,8 @@
 package misterpemodder.tmo.main.commands;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-import java.util.function.Consumer;
-
-import com.google.common.collect.Sets;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;

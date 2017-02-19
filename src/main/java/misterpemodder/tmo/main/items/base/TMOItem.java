@@ -1,7 +1,5 @@
 package misterpemodder.tmo.main.items.base;
 
-import net.minecraft.item.ItemStack;
-
 public interface TMOItem {
 	
 	public String getUnlocalizedName();

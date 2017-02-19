@@ -1,7 +1,6 @@
 package misterpemodder.tmo.main.compat.jei;
 
 import java.util.List;
-
 import mezz.jei.api.IItemBlacklist;
 import mezz.jei.api.IJeiRuntime;
 import mezz.jei.api.IModPlugin;
@@ -12,13 +11,11 @@ import mezz.jei.api.ingredients.IIngredientRegistry;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.base.BlockTMO;
-import misterpemodder.tmo.main.init.ModBlocks;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.items.base.TMOItem;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 

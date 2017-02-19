@@ -1,8 +1,5 @@
 package misterpemodder.tmo.main.blocks.base;
 
-import java.util.List;
-
-import misterpemodder.tmo.main.blocks.BlockBrick.EnumVariant;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockValues;
 import misterpemodder.tmo.main.blocks.properties.IBlockVariant;

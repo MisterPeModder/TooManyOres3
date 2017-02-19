@@ -10,7 +10,6 @@ import misterpemodder.tmo.main.capability.OwnerHandlerUUID;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
 import misterpemodder.tmo.main.network.TMOPacketHandler;
 import misterpemodder.tmo.main.network.packet.PacketServerToClient;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -34,9 +33,7 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
 	private OwnerHandlerUUID ownerHandler = new OwnerHandlerUUID();
 	
 	private String customName;
-	private String owner;
-	
-    public static final int MAX_UPDATE_TIME = 200;
+	public static final int MAX_UPDATE_TIME = 200;
     public int numPlayersUsing;
     
     public int ticksSinceUpdate;
@@ -123,11 +120,6 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
 	
 	@Override
 	public void update() {
-        int i = this.pos.getX();
-        int j = this.pos.getY();
-        int k = this.pos.getZ();
-        
-        Block b = this.world.getBlockState(pos).getBlock();
         
 		if (this.world.isRemote) {
 			
@@ -140,11 +132,8 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
 			
 			//Chest lid animation
 			this.prevLidAngle = this.lidAngle;
-			float f1 = 0.1F;
 
 			if (this.numPlayersUsing > 0 && this.lidAngle == 0.0F) {
-				double d1 = (double) i + 0.5D;
-				double d2 = (double) k + 0.5D;
 
 				Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_CHEST_OPEN, 0.5F,
 						this.world.rand.nextFloat() * 0.1F + 0.9F);
@@ -163,14 +152,8 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
 					this.lidAngle = 1.0F;
 				}
 
-				float f3 = 0.5F;
-
 				if (this.lidAngle < 0.5F && f2 >= 0.5F) {
-					double d3 = (double) i + 0.5D;
-					double d0 = (double) k + 0.5D;
-
-					Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_CHEST_CLOSE, 0.5F,
-							this.world.rand.nextFloat() * 0.1F + 0.9F);
+					Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_CHEST_CLOSE, 0.5F,this.world.rand.nextFloat() * 0.1F + 0.9F);
 				}
 
 				if (this.lidAngle < 0.0F) {
