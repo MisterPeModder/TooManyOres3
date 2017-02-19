@@ -16,7 +16,7 @@ build
 .gradle
 
 eclipse
-run
+run*
 .zip
 .bat
 .txt
