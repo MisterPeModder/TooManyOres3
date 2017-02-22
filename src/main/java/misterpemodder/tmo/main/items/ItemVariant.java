@@ -109,6 +109,7 @@ public abstract class ItemVariant {
 		public static final LockVariant BASIC = new LockVariant("basic", "basic", 1);
 		public static final LockVariant BASIC_BROKEN = new LockVariant("basic_broken", "basic", ItemStackUtils.newVariantStack(TheItems.PLATE, PlateVariant.TITANIUM_PLATE, 2), 0, 10);
 		public static final LockVariant REINFORCED = new LockVariant("reinforced", "reinforced", 3);
+		public static final LockVariant REINFORCED_BROKEN = new LockVariant("reinforced_broken", "reinforced", ItemStackUtils.newVariantStack(TheItems.PLATE, PlateVariant.TITANIUM_PLATE, 4), 2, 20);
 		
 		private ItemStack repairItem;
 		private int otherVariant;

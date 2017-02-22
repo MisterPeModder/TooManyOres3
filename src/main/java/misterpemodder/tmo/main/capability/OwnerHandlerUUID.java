@@ -1,12 +1,18 @@
 package misterpemodder.tmo.main.capability;
 
 import java.util.UUID;
+
 import javax.annotation.Nullable;
+
+import com.mojang.authlib.GameProfile;
+
 import misterpemodder.tmo.api.owner.IOwnerHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.INBTSerializable;
 
 public class OwnerHandlerUUID implements IOwnerHandler, INBTSerializable<NBTTagCompound> {
@@ -30,7 +36,11 @@ public class OwnerHandlerUUID implements IOwnerHandler, INBTSerializable<NBTTagC
 	@Override
 	public EntityPlayer getOwner(World world) {
 		EntityPlayer owner = world.getPlayerEntityByUUID(playerId);
-		if(owner != null) updateName(owner);
+		if(owner != null) {
+			updateName(owner);
+		} else if(!world.isRemote){
+			owner = new FakePlayer((WorldServer)world, new GameProfile(playerId, playerName));
+		}
 		return owner;
 	}
 

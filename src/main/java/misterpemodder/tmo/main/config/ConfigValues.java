@@ -6,8 +6,9 @@ public final class ConfigValues {
 	
 	public enum ConfigCategories {
 		ORE_GEN("ore gen", "in world ore generation."),
-		TOOLS("tools", "too op for you?"),
+		TOOLS("tools", "too OP for you?"),
 		ARMOR("armor", "you don't like a special armor set? disable it right there!"),
+		COMPAT("compatibility", "enable/disables mod compatibility features.")
 		;
 		
 		public final String name;
@@ -46,6 +47,12 @@ public final class ConfigValues {
 		IGNUM_ARMOR(ConfigCategories.ARMOR, "ignum armor", true, "Enable ignum armor?"),
 		DARKANIUM_ARMOR(ConfigCategories.ARMOR, "darkanium armor", true, "Enable darkanium armor?"),
 		HALLOWED_ARMOR(ConfigCategories.ARMOR, "hallowed armor", true, "Enable hallowed armor?"),
+		
+		ACT_ADD_COMPAT_EMPOWERER(ConfigCategories.COMPAT, "Actually Additions empowerer recipes", true, "Add custom recipes to the ewmpowerer?"),
+		ACT_ADD_COMPAT_RECONSTRUCTOR(ConfigCategories.COMPAT, "Actually Additions atomic reconstructor recipes", true, "Molecular Shiftulator? Spatial Replacer?"),
+		ACT_ADD_COMPAT_MINING(ConfigCategories.COMPAT, "Actually Additions mining lens", true, "Add TMO ores to the mining lens?"),
+		TOP_COMPAT(ConfigCategories.COMPAT, "The One Probe compat", true, "The One Probe compatibility?"),
+		BAUBLES_COMPAT(ConfigCategories.COMPAT, "baubles inventory", true, "Enable baubles compatibility?"),
 		;
 		
 		public boolean currentValue;

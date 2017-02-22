@@ -27,6 +27,7 @@ public class ConfigHandler {
 		if(config.hasChanged()) {
 			config.save();
 		}
+		TMORefs.baublesEnabled = TMORefs.baublesLoaded && ConfigValues.BoolValues.BAUBLES_COMPAT.currentValue;
 	}
 	
 	@SubscribeEvent

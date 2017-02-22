@@ -1,7 +1,8 @@
 package misterpemodder.tmo.main.client.gui.tabs;
 
 import misterpemodder.tmo.main.client.gui.ContainerBase;
-import misterpemodder.tmo.main.client.gui.SlotHidable;
+import misterpemodder.tmo.main.client.gui.slot.IHidable;
+import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IWorldNameable;
@@ -32,8 +33,8 @@ public abstract class TabMain<C extends ContainerBase<TE>, TE extends TileEntity
 		guiContainer.getFontRenderer().drawString(dispName, 8, 6, 4210752);
 	}
 	
-	public boolean shouldDisplaySlot(SlotHidable slot) {
-		return slot.getItemHandler() == this.guiContainer.container.getTileEntity().getInventory();
+	public boolean shouldDisplaySlot(IHidable slot) {
+		return slot instanceof SlotHidable && ((SlotHidable)slot).getItemHandler() == this.guiContainer.container.getTileEntity().getInventory();
 	}
 	
 	@Override

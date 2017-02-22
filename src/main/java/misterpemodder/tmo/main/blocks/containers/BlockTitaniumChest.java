@@ -13,6 +13,7 @@ import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
 import misterpemodder.tmo.main.capability.CapabilityOwner;
 import misterpemodder.tmo.main.client.gui.GuiHandler;
+import misterpemodder.tmo.main.config.ConfigValues;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
@@ -189,8 +190,10 @@ public class BlockTitaniumChest extends BlockContainerBase<TileEntityTitaniumChe
 	@Override
 	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
 		TileEntity te = world.getTileEntity(data.getPos());
-		if(te instanceof TileEntityTitaniumChest) {
+		if(te instanceof TileEntityTitaniumChest && ConfigValues.BoolValues.TOP_COMPAT.currentValue) { 
 			TileEntityTitaniumChest chest = (TileEntityTitaniumChest) te;
+			
+			
 			
 			String title = Tmo.proxy.translate("top.info.titaniumChest.owner.title");
 			String empty = Tmo.proxy.translate("top.info.titaniumChest.owner.empty");

@@ -6,7 +6,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
-import net.minecraftforge.items.wrapper.PlayerMainInvWrapper;
 
 public class GuiHandler implements IGuiHandler {
 	
@@ -19,10 +18,10 @@ public class GuiHandler implements IGuiHandler {
 		
 		TITANIUM_CHEST(1) {
 			public Object getServerGuiElement(EntityPlayer player, World world, int x, int y, int z) {
-				return new ContainerTitaniumChest((TileEntityTitaniumChest)world.getTileEntity(new BlockPos(x, y, z)), new PlayerMainInvWrapper(player.inventory));
+				return new ContainerTitaniumChest((TileEntityTitaniumChest)world.getTileEntity(new BlockPos(x, y, z)), player.inventory);
 			}
 			public Object getClientGuiElement(EntityPlayer player, World world, int x, int y, int z) {
-				return new GuiContainerTitaniumChest(new PlayerMainInvWrapper(player.inventory), (TileEntityTitaniumChest)world.getTileEntity(new BlockPos(x, y, z)));
+				return new GuiContainerTitaniumChest(player.inventory, (TileEntityTitaniumChest)world.getTileEntity(new BlockPos(x, y, z)));
 			}
 		},
 		;

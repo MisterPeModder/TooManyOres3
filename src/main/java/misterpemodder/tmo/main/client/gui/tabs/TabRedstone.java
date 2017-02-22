@@ -2,8 +2,9 @@ package misterpemodder.tmo.main.client.gui.tabs;
 
 import java.awt.Dimension;
 import java.awt.Point;
+
 import misterpemodder.tmo.main.client.gui.ContainerBase;
-import misterpemodder.tmo.main.client.gui.SlotHidable;
+import misterpemodder.tmo.main.client.gui.slot.IHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.init.Items;
@@ -31,7 +32,7 @@ public class TabRedstone<C extends ContainerBase<TE>, TE extends TileEntityConta
 	}
 
 	@Override
-	public boolean shouldDisplaySlot(SlotHidable slot) {
+	public boolean shouldDisplaySlot(IHidable slot) {
 		return false;
 	}
 

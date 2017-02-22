@@ -4,7 +4,8 @@ import java.awt.Dimension;
 import java.awt.Point;
 
 import misterpemodder.tmo.main.client.gui.ContainerBase;
-import misterpemodder.tmo.main.client.gui.SlotHidable;
+import misterpemodder.tmo.main.client.gui.slot.IHidable;
+import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.init.Blocks;
@@ -22,8 +23,8 @@ public class TabPlayerInventory<C extends ContainerBase<TE>, TE extends TileEnti
 		guiContainer.getFontRenderer().drawString(guiContainer.container.getPlayerInv().getInventoryPlayer().getDisplayName().getUnformattedText(), 26, 139, 4210752);
 	}
 	
-	public boolean shouldDisplaySlot(SlotHidable slot) {
-		return slot.getItemHandler() == this.guiContainer.container.getPlayerInv();
+	public boolean shouldDisplaySlot(IHidable slot) {
+		return slot instanceof SlotHidable && ((SlotHidable)slot).getItemHandler() == this.guiContainer.container.getPlayerInv();
 	}
 
 	@Override

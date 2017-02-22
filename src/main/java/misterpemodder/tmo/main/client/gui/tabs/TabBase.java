@@ -7,7 +7,7 @@ import org.apache.commons.lang3.tuple.MutablePair;
 
 import misterpemodder.tmo.main.client.gui.ContainerBase;
 import misterpemodder.tmo.main.client.gui.GuiContainerBase;
-import misterpemodder.tmo.main.client.gui.SlotHidable;
+import misterpemodder.tmo.main.client.gui.slot.IHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.item.ItemStack;
@@ -32,7 +32,7 @@ public abstract class TabBase<C extends ContainerBase<TE>, TE extends TileEntity
 	
 	public abstract TabTexture getTabTexture();
 	
-	public abstract boolean shouldDisplaySlot(SlotHidable slot);
+	public abstract boolean shouldDisplaySlot(IHidable slot);
 	
 	public MutablePair<TabBase, TabBase> forceTabConfig() {
 		return this.guiContainer.getSelectedTabs();

@@ -7,7 +7,8 @@ import java.util.Arrays;
 import misterpemodder.tmo.api.block.ILockable;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.client.gui.ContainerBase;
-import misterpemodder.tmo.main.client.gui.SlotHidable;
+import misterpemodder.tmo.main.client.gui.slot.IHidable;
+import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.client.gui.Gui;
@@ -38,10 +39,10 @@ public class TabSecurity<C extends ContainerBase<TE>, TE extends TileEntityConta
 	}
 
 	@Override
-	public boolean shouldDisplaySlot(SlotHidable slot) {
+	public boolean shouldDisplaySlot(IHidable slot) {
 		TileEntity te = guiContainer.container.getTileEntity();
-		if(te instanceof ILockable) {
-			return slot.getItemHandler() == ((ILockable)te).getLockItemHandler();
+		if(te instanceof ILockable && slot instanceof SlotHidable) {
+			return ((SlotHidable)slot).getItemHandler() == ((ILockable)te).getLockItemHandler();
 		}
 		return false;
 	}

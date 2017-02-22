@@ -4,24 +4,30 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.io.IOException;
 import java.util.List;
+
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabPos;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabTexture;
 import misterpemodder.tmo.main.client.gui.tabs.TabMain;
 import misterpemodder.tmo.main.client.gui.tabs.TabPlayerInventory;
+import misterpemodder.tmo.main.client.gui.tabs.TabSecurity;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiLockIconButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentString;
 
 public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends TileEntityContainerBase> extends GuiContainer {
 	
@@ -75,6 +81,12 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	public abstract List<TabBase> registerTabs();
 	
 	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		super.drawScreen(mouseX, mouseY, partialTicks);
+		addButtons();
+	}
+	
+	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 	    //Disabled Tabs
 		GlStateManager.pushMatrix();
@@ -97,6 +109,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	    this.drawTab(selectedTabs.getRight(), true);
 	    selectedTabs.getRight().drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 	    GlStateManager.popMatrix();
+	
 	}
 	
 	protected void drawTab(TabBase tab, boolean enabled) {
@@ -111,6 +124,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 	    selectedTabs.getLeft().drawGuiContainerForegroundLayer(mouseX, mouseY);
 	    selectedTabs.getRight().drawGuiContainerForegroundLayer(mouseX, mouseY);
+	    
 	    for(TabBase tab : tabs) {
 	    	RenderHelper.enableGUIStandardItemLighting();
 	    	ItemStack stack = tab.getItemStack();
@@ -146,6 +160,35 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 			}
 		}
 		super.mouseClicked(mouseX, mouseY, mouseButton);
+	}
+	
+	private void addButtons() {
+		if(this.selectedTabs.left instanceof TabSecurity) {
+			boolean clear = true;
+			for(GuiButton b : this.buttonList) {
+				if(b.id == 12) {
+					clear = false;
+				}
+			}
+			if(clear) {
+				//this.addButton(new GuiButton(10, this.getGuiLeft()+10, this.getGuiTop()+10, "test"));
+				//this.addButton(new GuiButtonExt(11, this.getGuiLeft()+10, this.getGuiTop()+40, "ext"));
+				
+				this.buttonList.clear();
+				this.addButton(new GuiLockIconButton(12, this.getGuiLeft()+26, this.getGuiTop()+16));
+			}
+		} else {
+			this.buttonList.clear();
+		}
+	}
+	
+	@Override
+	protected void actionPerformed(GuiButton button) throws IOException {
+		if(button.id == 12) {
+			GuiLockIconButton b = (GuiLockIconButton)button;
+			b.setLocked(!b.isLocked());
+			this.container.getTileEntity().getWorld().playerEntities.get(0).sendMessage(new TextComponentString(b.isLocked()?"locked":"unlocked"));
+		}
 	}
 	
 	public FontRenderer getFontRenderer() {

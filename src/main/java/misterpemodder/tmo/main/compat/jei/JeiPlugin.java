@@ -9,8 +9,10 @@ import mezz.jei.api.ISubtypeRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.IIngredientRegistry;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
+import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.base.BlockTMO;
+import misterpemodder.tmo.main.client.gui.ContainerTitaniumChest;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.items.base.TMOItem;
 import misterpemodder.tmo.main.utils.TMORefs;
@@ -49,6 +51,7 @@ public class JeiPlugin implements IModPlugin {
 			
 		}
 		
+		registry.getRecipeTransferRegistry().addRecipeTransferHandler(ContainerTitaniumChest.class, VanillaRecipeCategoryUid.CRAFTING, 109, 9, 0, 107);
 	}
 	
 	private void addDescriptions(IModRegistry registry, IIngredientRegistry ingredientsRegistry) {

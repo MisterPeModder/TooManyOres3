@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 public interface IBookletChapter{
 
     IBookletPage[] getAllPages();
-
+    
     String getLocalizedName();
 
     String getLocalizedNameWithFormatting();

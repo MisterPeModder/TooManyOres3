@@ -10,9 +10,6 @@
 
 package de.ellpeck.actuallyadditions.api.booklet;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
 import java.util.List;
 
 public interface IBookletEntry{
@@ -26,9 +23,10 @@ public interface IBookletEntry{
     String getLocalizedNameWithFormatting();
 
     void addChapter(IBookletChapter chapter);
-
-    @SideOnly(Side.CLIENT)
+    
     List<IBookletChapter> getChaptersForDisplay(String searchBarText);
 
     int getSortingPriority();
+    
+    boolean visibleOnFrontPage();
 }

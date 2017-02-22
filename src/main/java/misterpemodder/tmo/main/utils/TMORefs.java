@@ -24,8 +24,10 @@ public class TMORefs {
 	
 	public static final String JEI_DESC_UNLOC_NAME = ".jeidesc";
 	
-	public static boolean ActAddLoaded = false;
+	public static boolean actAddLoaded = false;
 	public static boolean topLoaded = false;
+	public static boolean baublesLoaded = false;
+	public static boolean baublesEnabled = false;
 	public static final String TOP_TAG = "theoneprobe";
 	
 }

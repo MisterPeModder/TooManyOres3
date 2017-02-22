@@ -69,3 +69,10 @@ dependencies {
   runtime "mezz.jei:jei_${mc_version}:${jei_version}"
   deobfCompile "mcjty.theoneprobe:TheOneProbe:${top_version}"
 }
+
+sourceSets {
+    main {
+        java { srcDirs = ["$projectDir/src/main/java"] }
+        resources { srcDirs = ["$projectDir/src/main/resources"] }
+    }
+}

@@ -1,11 +1,11 @@
-package misterpemodder.tmo.main.client.gui;
+package misterpemodder.tmo.main.client.gui.slot;
 
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class SlotHidable extends SlotItemHandler {
+public class SlotHidable extends SlotItemHandler implements IHidable{
 	
-	public boolean enabled;
+	private boolean enabled;
 
 	public SlotHidable(IItemHandler itemHandler, int index, int xPosition, int yPosition, boolean enabled) {
 		super(itemHandler, index, xPosition, yPosition);
@@ -15,6 +15,11 @@ public class SlotHidable extends SlotItemHandler {
 	@Override
 	public boolean canBeHovered() {
 		return enabled;
+	}
+	
+	@Override
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 }

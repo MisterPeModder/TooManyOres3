@@ -26,6 +26,7 @@ import misterpemodder.tmo.main.capability.CapabilityOwner;
 import misterpemodder.tmo.main.commands.CommandTMO;
 import misterpemodder.tmo.main.compat.aa.ActAddCompat;
 import misterpemodder.tmo.main.config.ConfigHandler;
+import misterpemodder.tmo.main.config.ConfigValues;
 import misterpemodder.tmo.main.init.Crafting;
 import misterpemodder.tmo.main.init.ModBlocks;
 import misterpemodder.tmo.main.init.ModItems;
@@ -74,8 +75,10 @@ public class Tmo {
 	@EventHandler
 	public void Init(FMLInitializationEvent event) {
 		TMORefs.LOGGER.info("Init!");
-		TMORefs.ActAddLoaded = Loader.isModLoaded(ActuallyAdditionsAPI.MOD_ID);
+		TMORefs.actAddLoaded = Loader.isModLoaded(ActuallyAdditionsAPI.MOD_ID);
 		TMORefs.topLoaded = Loader.isModLoaded("theoneprobe");
+		TMORefs.baublesLoaded = Loader.isModLoaded("baubles");
+		TMORefs.baublesEnabled = TMORefs.baublesLoaded && ConfigValues.BoolValues.BAUBLES_COMPAT.currentValue;
 		ModItems.registerOreDict();
 		ModBlocks.registerOreDict();
 		Crafting.registerRecipes();

@@ -54,7 +54,7 @@ public class SubCommandOwner extends SubCommandBase{
 		
 		switch(args[0]) {
 			case "get":
-				if(!ownerHandler.hasOwner()) {
+				if(!ownerHandler.hasOwner() && ownerHandler.getOwner(world) != null) {
 					notifyCommandListener(sender, this, "commands.tmo.owner.get.noOwner", new Object[] {pos.getX(), pos.getY(), pos.getZ()});
 				} else {
 					sender.sendMessage(new TextComponentTranslation("commands.tmo.owner.get.onwerName", new Object[] {pos.getX(), pos.getY(), pos.getZ(), ownerHandler.getOwner(world).getDisplayName()}));
