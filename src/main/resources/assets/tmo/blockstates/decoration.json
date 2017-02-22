@@ -12,7 +12,8 @@
         "normal": [{}],
         "inventory": [{}],
 		"variant": {
-			"titanium_plating": {"textures": {"all": "tmo:blocks/titanium_plating"}}
+			"titanium_plating": {"textures": {"all": "tmo:blocks/titanium_plating"}},
+			"copper_decoration": {"textures": {"all": "tmo:blocks/copper_decoration"}}
 		}
     }
 }

@@ -132,6 +132,7 @@ tile.blockStorage.blockGoldAncient.name=Ancient Gold Block
 tile.blockStorage.blockPlatinum.name=Platinum Block
 tile.blockStorage.desc=Can be used as beacon base
 tile.blockDecoration.titaniumPlating.name=Titanium Plating
+tile.blockDecoration.copperDecoration.name=Copper Decoration Block
 tile.blockBrick.name=Bricks
 tile.blockBrick.goldAncient.name=Ancient Gold Bricks
 tile.blockBrick.goldAncientCarved.name=Chiseled Ancient Gold Bricks

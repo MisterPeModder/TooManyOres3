@@ -22,6 +22,7 @@ public class BlockDeco extends BlockMulti<BlockDeco.EnumVariant> {
 	
 	public enum EnumVariant implements IBlockVariant {
 		TITANIUM_PLATING("titanium_plating", "titaniumPlating", 1, MapColor.BLUE, Material.IRON, SoundType.METAL),
+		COPPER_DECO_BLOCK("copper_decoration", "copperDecoration", 1, MapColor.BROWN, Material.IRON, SoundType.METAL)
 		;
 		private final int meta;
 		private final String name;
