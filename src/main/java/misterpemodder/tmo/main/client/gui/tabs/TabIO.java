@@ -20,6 +20,11 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityContainerBa
 	}
 	
 	@Override
+	public TabID getTabID() {
+		return TabID.IO;
+	}
+	
+	@Override
 	public MutablePair<TabBase,TabBase> forceTabConfig() {
 		for(TabBase tab : (List<TabBase>)guiContainer.getRegisteredTabs()) {
 			if(tab instanceof TabMain) {

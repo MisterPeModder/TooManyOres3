@@ -5,7 +5,7 @@ import misterpemodder.tmo.main.client.gui.GuiHandler;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-public class ServerProxy implements CommonProxy {
+public class ServerProxy extends CommonProxy {
 	public void preInit() {}
 	
 	public void init() {

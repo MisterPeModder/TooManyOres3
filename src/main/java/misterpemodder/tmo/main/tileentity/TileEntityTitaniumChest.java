@@ -2,7 +2,6 @@ package misterpemodder.tmo.main.tileentity;
 
 import misterpemodder.tmo.api.block.ILockable;
 import misterpemodder.tmo.api.block.IWorldNameableModifiable;
-import misterpemodder.tmo.api.item.IItemLock;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest;
 import misterpemodder.tmo.main.capability.CapabilityOwner;
@@ -13,7 +12,6 @@ import misterpemodder.tmo.main.network.packet.PacketServerToClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -28,23 +26,31 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityTitaniumChest extends TileEntityContainerBase implements ILockable, ITickable, IWorldNameableModifiable  {
 	
-	private ItemStackHandler inventory = new ItemStackHandler(66);
-	private ItemStackHandler lock = new ItemStackHandler(1);
+	private ItemStackHandler inventory;
+	private ItemStackHandler lock;
 	private OwnerHandlerUUID ownerHandler = new OwnerHandlerUUID();
 	
 	private String customName;
+	private boolean locked = false;
 	public static final int MAX_UPDATE_TIME = 200;
     public int numPlayersUsing;
     
     public int ticksSinceUpdate;
     public float prevLidAngle;
     public float lidAngle;
+    
+    public TileEntityTitaniumChest() {
+    	super();
+    	this.inventory = new TCItemHandler(this, 66);
+    	this.lock = new ItemStackHandlerLockable(this, 1);
+	}
 	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		compound.setTag("inventory", inventory.serializeNBT());
 		compound.setTag("lock", lock.serializeNBT());
 		compound.setTag("owner", ownerHandler.serializeNBT());
+		compound.setBoolean("locked", locked);
 		if (this.hasCustomName()) {
 			compound.setString("customName", customName);
         }
@@ -57,6 +63,7 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
 		this.lock.deserializeNBT(compound.getCompoundTag("lock"));
 		this.ownerHandler.deserializeNBT(compound.getCompoundTag("owner"));
 		
+		this.locked = compound.getBoolean("locked");
 		if(compound.hasKey("customName")) {
 			this.customName = compound.getString("customName");
 		}
@@ -101,6 +108,8 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
 	public ITextComponent getDisplayName() {
 		return new TextComponentString(TextFormatting.getTextWithoutFormattingCodes(Tmo.proxy.translate("tile.blockTitaniumChest.name")));
 	}
+	
+	
 	
 	@Override
 	public boolean canRenderBreaking() {
@@ -191,6 +200,13 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
     public void setCustomName(String name) {
         this.customName = name;
     }
+	
+	@Override
+	public void setLocked(boolean locked) {
+		this.locked = locked;
+		this.markDirty();
+		this.sync();
+	}
     
     @Override
     public String getName() {
@@ -199,8 +215,25 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
     
     @Override
     public boolean isLocked() {
-    	ItemStack lock = this.getLockItemHandler().getStackInSlot(0).copy();
-    	return lock.isEmpty() || !(lock.getItem() instanceof IItemLock)? false : !((IItemLock)lock.getItem()).isBroken(lock);
+    	//ItemStack lock = this.getLockItemHandler().getStackInSlot(0);
+    	//return locked || !(lock.isEmpty() || !(lock.getItem() instanceof IItemLock) || ((IItemLock)lock.getItem()).isBroken(lock));
+    	return this.locked;
+    }
+    
+    private static class TCItemHandler extends ItemStackHandler {
+    	
+    	private TileEntityTitaniumChest te;
+    	
+    	public TCItemHandler(TileEntityTitaniumChest te, int size) {
+    		super(size);
+    		this.te = te;
+		}
+    	
+    	@Override
+    	protected void onContentsChanged(int slot) {
+    		super.onContentsChanged(slot);
+    		te.markDirty();
+    	}
     }
     
 }

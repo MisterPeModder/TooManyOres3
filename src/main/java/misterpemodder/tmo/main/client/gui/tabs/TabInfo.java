@@ -17,6 +17,11 @@ public class TabInfo<C extends ContainerBase<TE>, TE extends TileEntityContainer
 	}
 	
 	@Override
+	public TabID getTabID() {
+		return TabID.INFO;
+	}
+	
+	@Override
 	public String getUnlocalizedName() {
 		return "gui.tab.info.name";
 	}

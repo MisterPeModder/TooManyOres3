@@ -26,6 +26,11 @@ public class TabArmorInventory<C extends ContainerBase<TE>, TE extends TileEntit
 	}
 	
 	@Override
+	public TabID getTabID() {
+		return TabID.ARMOR_INV;
+	}
+	
+	@Override
 	public void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		guiContainer.getFontRenderer().drawString(Tmo.proxy.translate(getUnlocalizedName()), 10, 137, 4210752);

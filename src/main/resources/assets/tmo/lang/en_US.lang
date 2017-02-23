@@ -226,5 +226,11 @@ tile.blockTitaniumChest.jeidesc=This blastproof titanium-plated chest has more t
 #The One Probe Info
 top.info.titaniumChest.owner.title=Owner:
 top.info.titaniumChest.owner.empty=none
-top.info.titaniumChest.lock.unlocked=Unlocked
-top.info.titaniumChest.lock.locked=Locked
+top.info.titaniumChest.hidden=hidden
+top.info.titaniumChest.access=Access
+top.info.titaniumChest.access.granted=granted
+top.info.titaniumChest.access.denied=denied
+top.info.titaniumChest.access.forced=forced
+top.info.titaniumChest.locked=Locked
+top.info.titaniumChest.locked.yes=yes
+top.info.titaniumChest.locked.no=no

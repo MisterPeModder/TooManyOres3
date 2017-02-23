@@ -12,7 +12,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-public class ClientProxy implements CommonProxy {
+public class ClientProxy extends CommonProxy {
 	
 	public void preInit() {
 		ModItems.registerRenders();

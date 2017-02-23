@@ -2,16 +2,27 @@ package misterpemodder.tmo.main.client.gui.tabs;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.tuple.MutablePair;
 
 import misterpemodder.tmo.main.client.gui.ContainerBase;
 import misterpemodder.tmo.main.client.gui.GuiContainerBase;
 import misterpemodder.tmo.main.client.gui.slot.IHidable;
+import misterpemodder.tmo.main.network.PacketDataHandlers;
+import misterpemodder.tmo.main.network.TMOPacketHandler;
+import misterpemodder.tmo.main.network.packet.PacketClientToServer;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class TabBase<C extends ContainerBase<TE>, TE extends TileEntityContainerBase> {
 	
@@ -21,10 +32,14 @@ public abstract class TabBase<C extends ContainerBase<TE>, TE extends TileEntity
 	
 	protected TabPos pos;
 	protected GuiContainerBase<C, TE> guiContainer;
+	protected List<GuiButton> buttons;
 	
 	protected TabBase(TabPos pos) {
 		this.pos = pos;
+		buttons = new ArrayList<GuiButton>();
 	}
+	
+	public abstract TabID getTabID();
 	
 	public abstract String getUnlocalizedName();
 	
@@ -40,9 +55,6 @@ public abstract class TabBase<C extends ContainerBase<TE>, TE extends TileEntity
 	
 	public TabPos getTabPos() {
 		return this.pos;
-	}
-	
-	public void onClick() {
 	}
 	
 	public void setGuiContainer(GuiContainerBase<C, TE> guiContainer) {
@@ -64,6 +76,28 @@ public abstract class TabBase<C extends ContainerBase<TE>, TE extends TileEntity
 		
 		return new Point(px, py);
 	}
+	
+	public void initButtons(int topX, int topY) {}
+	
+	public List<GuiButton> getButtonsList() {
+		return this.buttons;
+	}
+	
+	public <T extends GuiButton> void onButtonClicked(T button) {}
+	
+	@SideOnly(Side.CLIENT)
+	protected static void sendButtonPacket(TabID tabId, int buttonId, WorldClient world, BlockPos pos, NBTTagCompound data) {
+		NBTTagCompound toSend = new NBTTagCompound();
+		
+		toSend.setLong("pos", pos.toLong());
+		toSend.setInteger("world_dim_id", world.provider.getDimension());
+		toSend.setInteger("tab_id", tabId.ordinal());
+		toSend.setInteger("button_id", buttonId);
+		toSend.setTag("info", data);
+		TMOPacketHandler.network.sendToServer(new PacketClientToServer(PacketDataHandlers.BUTTON_CLICK_HANDLER, toSend));
+	}
+	
+	public void updateButtons() {}
 	
 	public void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {}
 	
@@ -90,6 +124,16 @@ public abstract class TabBase<C extends ContainerBase<TE>, TE extends TileEntity
 		TOP_LEFT,
 		BOTTOM_RIGHT,
 		BOTTOM_LEFT
+	}
+	
+	public static enum TabID {
+		ARMOR_INV,
+		INFO,
+		IO,
+		MAIN_TC,
+		PLAYER_INV,
+		REDSTONE,
+		SECURITY,
 	}
 	
 }

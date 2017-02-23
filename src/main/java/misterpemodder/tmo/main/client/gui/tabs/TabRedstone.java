@@ -17,6 +17,11 @@ public class TabRedstone<C extends ContainerBase<TE>, TE extends TileEntityConta
 	}
 	
 	@Override
+	public TabID getTabID() {
+		return TabID.REDSTONE;
+	}
+	
+	@Override
 	public String getUnlocalizedName() {
 		return "gui.tab.redstone.name";
 	}

@@ -3,6 +3,7 @@ package misterpemodder.tmo.main.client.gui;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -15,19 +16,16 @@ import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabPos;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabTexture;
 import misterpemodder.tmo.main.client.gui.tabs.TabMain;
 import misterpemodder.tmo.main.client.gui.tabs.TabPlayerInventory;
-import misterpemodder.tmo.main.client.gui.tabs.TabSecurity;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiLockIconButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TextComponentString;
 
 public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends TileEntityContainerBase> extends GuiContainer {
 	
@@ -37,6 +35,9 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	protected ImmutablePair<TabBase, TabBase> defaultTabs;
 	protected MutablePair<TabBase, TabBase> selectedTabs;
 	protected List<TabBase> tabs;
+	
+	protected List<GuiButton> selectedButtonsLeft;
+	protected List<GuiButton> selectedButtonsRight;
 	
 	public GuiContainerBase(C container) {
 		super(container);
@@ -54,11 +55,22 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		Dimension dr = selectedTabs.right.getTabTexture().dim;
         this.xSize = (Math.max(dl.width, dr.width) + TabBase.WIDTH);
       	this.ySize = dl.height + dr.height;
+      	
+      	this.selectedButtonsLeft = new ArrayList<>();
+      	this.selectedButtonsRight = new ArrayList<>();
 	}
 	
 	private void initTabs() {
 		for(TabBase tab : tabs) {
 			tab.setGuiContainer(this);
+		}
+	}
+	
+	@Override
+	public void initGui() {
+		super.initGui();
+		for(TabBase tab : tabs) {
+			tab.initButtons(this.guiLeft, this.guiTop);
 		}
 	}
 	
@@ -108,6 +120,9 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	    selectedTabs.getLeft().drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 	    this.drawTab(selectedTabs.getRight(), true);
 	    selectedTabs.getRight().drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
+	    
+	    
+	    
 	    GlStateManager.popMatrix();
 	
 	}
@@ -124,6 +139,9 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 	    selectedTabs.getLeft().drawGuiContainerForegroundLayer(mouseX, mouseY);
 	    selectedTabs.getRight().drawGuiContainerForegroundLayer(mouseX, mouseY);
+	    
+	    selectedTabs.getLeft().updateButtons();
+	    selectedTabs.getRight().updateButtons();
 	    
 	    for(TabBase tab : tabs) {
 	    	RenderHelper.enableGUIStandardItemLighting();
@@ -163,32 +181,51 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	}
 	
 	private void addButtons() {
-		if(this.selectedTabs.left instanceof TabSecurity) {
-			boolean clear = true;
-			for(GuiButton b : this.buttonList) {
-				if(b.id == 12) {
-					clear = false;
-				}
-			}
-			if(clear) {
-				//this.addButton(new GuiButton(10, this.getGuiLeft()+10, this.getGuiTop()+10, "test"));
-				//this.addButton(new GuiButtonExt(11, this.getGuiLeft()+10, this.getGuiTop()+40, "ext"));
-				
-				this.buttonList.clear();
-				this.addButton(new GuiLockIconButton(12, this.getGuiLeft()+26, this.getGuiTop()+16));
-			}
-		} else {
-			this.buttonList.clear();
+		try {
+		List<GuiButton> leftButtons = this.selectedTabs.left.getButtonsList();
+		List<GuiButton> rightButtons = this.selectedTabs.right.getButtonsList();
+		
+		
+		if(leftButtons == null || leftButtons.isEmpty()) {
+			selectedButtonsLeft.clear();
+		}
+		else if(!selectedButtonsLeft.containsAll(leftButtons)) {
+			selectedButtonsLeft.clear();
+			selectedButtonsLeft.addAll(leftButtons);
+		}
+		
+		if(rightButtons == null || rightButtons.isEmpty()) {
+			selectedButtonsRight.clear();
+		}
+		else if(!selectedButtonsRight.containsAll(rightButtons)) {
+			selectedButtonsRight.clear();
+			selectedButtonsRight.addAll(rightButtons);
+		}
+		
+		this.buttonList.clear();
+		this.buttonList.addAll(selectedButtonsLeft);
+		this.buttonList.addAll(selectedButtonsRight);
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
+		
+		if(selectedButtonsLeft.contains(button)) {
+			this.selectedTabs.left.onButtonClicked(button);
+		}
+		else if(selectedButtonsRight.contains(button)) {
+			this.selectedTabs.right.onButtonClicked(button);
+		}
+		
+		/*for(GuiButton b : )
 		if(button.id == 12) {
 			GuiLockIconButton b = (GuiLockIconButton)button;
 			b.setLocked(!b.isLocked());
 			this.container.getTileEntity().getWorld().playerEntities.get(0).sendMessage(new TextComponentString(b.isLocked()?"locked":"unlocked"));
-		}
+		}*/
 	}
 	
 	public FontRenderer getFontRenderer() {

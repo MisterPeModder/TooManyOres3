@@ -2,10 +2,13 @@ package misterpemodder.tmo.main.blocks.containers;
 
 import java.util.Random;
 
+import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoAccessor;
 import mcjty.theoneprobe.api.ProbeMode;
+import mcjty.theoneprobe.apiimpl.elements.ElementVertical;
+import mcjty.theoneprobe.config.Config;
 import misterpemodder.tmo.api.item.IItemLock;
 import misterpemodder.tmo.api.owner.IOwnerHandler;
 import misterpemodder.tmo.main.Tmo;
@@ -34,6 +37,7 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.Explosion;
@@ -42,6 +46,7 @@ import net.minecraft.world.IWorldNameable;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.IItemHandler;
 
 public class BlockTitaniumChest extends BlockContainerBase<TileEntityTitaniumChest> implements IProbeInfoAccessor{
 	
@@ -169,12 +174,35 @@ public class BlockTitaniumChest extends BlockContainerBase<TileEntityTitaniumChe
 					
 					if(lock.attemptBreak(stack, new Random()) == EnumActionResult.SUCCESS) {
 						world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F, true);
-						chest.sync();
+						chest.setLocked(false);
 						lock.onLockBroken(world, pos, explosion.getExplosivePlacedBy());
 					}
 				}
 			}
 		}
+	}
+	
+	@Override
+	public boolean hasComparatorInputOverride(IBlockState state) {
+		return true;
+	}
+	
+	@Override
+	public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos) {
+		TileEntityTitaniumChest te = this.getTileEntity(world, pos);
+		if(te == null) return 0;
+        int i = 0;
+        float f = 0.0F;
+        IItemHandler h = te.getInventory();
+        for (int j = 0; j < h.getSlots(); j++) {
+        	ItemStack itemstack = h.getStackInSlot(j);
+            if (!itemstack.isEmpty()) {
+            	f += (float)itemstack.getCount() / (float)Math.min(h.getSlotLimit(j), itemstack.getMaxStackSize());
+                i++;
+            }
+        }
+        f /= (float)h.getSlots();
+        return MathHelper.floor(f * 14.0F) + (i > 0 ? 1 : 0);
 	}
 	
 	@Override
@@ -190,29 +218,42 @@ public class BlockTitaniumChest extends BlockContainerBase<TileEntityTitaniumChe
 	@Override
 	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
 		TileEntity te = world.getTileEntity(data.getPos());
-		if(te instanceof TileEntityTitaniumChest && ConfigValues.BoolValues.TOP_COMPAT.currentValue) { 
+		if(te != null && te instanceof TileEntityTitaniumChest && ConfigValues.BoolValues.TOP_COMPAT.currentValue) { 
 			TileEntityTitaniumChest chest = (TileEntityTitaniumChest) te;
-			
-			
+			IOwnerHandler ownerHandler = chest.getCapability(CapabilityOwner.OWNER_HANDLER_CAPABILITY, null);
 			
 			String title = Tmo.proxy.translate("top.info.titaniumChest.owner.title");
 			String empty = Tmo.proxy.translate("top.info.titaniumChest.owner.empty");
-			String unlocked = Tmo.proxy.translate("top.info.titaniumChest.lock.unlocked");
-			String locked = Tmo.proxy.translate("top.info.titaniumChest.lock.locked");
 			
+			String str = TextFormatting.GREEN + Tmo.proxy.translate("top.info.titaniumChest.access.granted");
+			String str2 = TextFormatting.GREEN+title+" "+TextFormatting.RED+empty;
 			
-			IProbeInfo vertical = null;
-			vertical = probeInfo.vertical(probeInfo.defaultLayoutStyle().borderColor(0xff006699).spacing(0));
+			if(ownerHandler!=null && ownerHandler.hasOwner()) {
+				str2 = TextFormatting.GREEN+title+" "+TextFormatting.YELLOW+ownerHandler.getOwnerName();
+				if(ownerHandler.getOwner(world) != player) {
+					if(chest.isLocked()) {
+						str = TextFormatting.RED+Tmo.proxy.translate("top.info.titaniumChest.access.denied");
+						if(player.isSneaking())
+						probeInfo.vertical(probeInfo.defaultLayoutStyle().borderColor(Config.chestContentsBorderColor).spacing(0)).text(Tmo.proxy.translateFormatted(TextFormatting.GRAY+""+TextFormatting.ITALIC+"<%s>", "top.info.titaniumChest.hidden"));
+					} else {
+						str = TextFormatting.GOLD+Tmo.proxy.translate("top.info.titaniumChest.access.forced");
+					}
+				}
+			}
+			IProbeInfo main = probeInfo.vertical(probeInfo.defaultLayoutStyle().borderColor(0xff040448).spacing(0));
 			
-			IOwnerHandler ownerHandler = chest.getCapability(CapabilityOwner.OWNER_HANDLER_CAPABILITY, null);
-			vertical.text(TextFormatting.GREEN+title+" "+(ownerHandler!=null && ownerHandler.hasOwner()?TextFormatting.YELLOW+ownerHandler.getOwnerName():TextFormatting.RED+empty));
 			ItemStack lock = chest.getLockItemHandler().getStackInSlot(0);
-			String txt = lock.isEmpty() || ((IItemLock)lock.getItem()).isBroken(lock)? TextFormatting.GREEN+unlocked: TextFormatting.RED+locked;
+			String lockedText = TextFormatting.YELLOW+""+TextFormatting.UNDERLINE+Tmo.proxy.translate("top.info.titaniumChest.locked")+":"+TextFormatting.RESET+" "+(chest.isLocked()? TextFormatting.GREEN+Tmo.proxy.translate("top.info.titaniumChest.locked.yes"):TextFormatting.RED+Tmo.proxy.translate("top.info.titaniumChest.locked.no"));
+			ElementVertical textInfo = new ElementVertical(0, 2, ElementAlignment.ALIGN_TOPLEFT);
+			
+			main.text(str2);
+			textInfo.text(lockedText).text(TextFormatting.YELLOW+""+TextFormatting.UNDERLINE+Tmo.proxy.translate("top.info.titaniumChest.access")+":"+TextFormatting.RESET+" "+str);
+			
 			if(lock.isEmpty()) {
-				vertical.horizontal().text(txt);
+				main.horizontal().element(textInfo);
 			}
 			else {
-				vertical.horizontal().item(lock).text(txt);
+				main.horizontal().item(lock, main.defaultItemStyle().height(27)).element(textInfo);
 			}
 		}
 		

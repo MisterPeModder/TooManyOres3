@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 public interface IItemLock {
 	
 	/**
-     * Called when a lockable contained has been exploded.
+     * Called when a lockable container has been exploded.
      * This can be used to decrease durability or for other purposes.
      *
      * @param lockStack

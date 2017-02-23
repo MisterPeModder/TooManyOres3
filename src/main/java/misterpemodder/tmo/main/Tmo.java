@@ -25,6 +25,7 @@ import de.ellpeck.actuallyadditions.api.ActuallyAdditionsAPI;
 import misterpemodder.tmo.main.capability.CapabilityOwner;
 import misterpemodder.tmo.main.commands.CommandTMO;
 import misterpemodder.tmo.main.compat.aa.ActAddCompat;
+import misterpemodder.tmo.main.compat.top.ProbeConfigProviderTitaniumChest;
 import misterpemodder.tmo.main.config.ConfigHandler;
 import misterpemodder.tmo.main.config.ConfigValues;
 import misterpemodder.tmo.main.init.Crafting;
@@ -83,6 +84,7 @@ public class Tmo {
 		ModBlocks.registerOreDict();
 		Crafting.registerRecipes();
 		ActAddCompat.init();
+		ProbeConfigProviderTitaniumChest.init();
 		
 		proxy.init();
 	}

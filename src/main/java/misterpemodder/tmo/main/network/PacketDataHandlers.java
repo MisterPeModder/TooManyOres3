@@ -3,8 +3,13 @@ package misterpemodder.tmo.main.network;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import misterpemodder.tmo.api.block.ILockable;
+import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabID;
+import misterpemodder.tmo.main.client.gui.tabs.TabSecurity;
 import misterpemodder.tmo.main.network.packet.PacketServerToClient;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +29,7 @@ public final class PacketDataHandlers {
 		HANDLERS.add(TCHEST_UPDATE_HANDLER);
 		HANDLERS.add(TE_UPDATE_HANDLER);
 		HANDLERS.add(TE_UPDATE_REQUEST_HANDLER);
+		HANDLERS.add(BUTTON_CLICK_HANDLER);
 	}
 	
 	/**
@@ -44,7 +50,7 @@ public final class PacketDataHandlers {
 			TileEntity te = world.getTileEntity(pos);
 			if(te instanceof TileEntityTitaniumChest) {
 				TileEntityTitaniumChest t = (TileEntityTitaniumChest) te;
-				t.numPlayersUsing = data.getInteger("numPlayersUsing");
+				if(data.hasKey("numPlayersUsing")) t.numPlayersUsing = data.getInteger("numPlayersUsing");
 			}
 		}
 	};
@@ -103,6 +109,47 @@ public final class PacketDataHandlers {
 				TMOPacketHandler.network.sendTo(new PacketServerToClient(PacketDataHandlers.TE_UPDATE_HANDLER, toSend), (EntityPlayerMP)player);
 				
 			}
+		}
+	};
+	
+	/**
+	 * <p> Handler type: client to server
+	 * 
+	 * <p> NBT tags:
+	 * <ul>
+	 * 	<li>pos: BlockPos serialized into long
+	 * 	<li>world_dim_id: integer
+	 * 	<li>tab_id: TabID
+	 * 	<li>button_id: integer
+	 * 	<li>info: NBTTagCompound additional data
+	 * </ul>
+	 */
+	public static final IPacketDataHandler BUTTON_CLICK_HANDLER = new IPacketDataHandler() {
+		
+		@Override
+		public void procData(NBTTagCompound data) {
+			WorldServer world = DimensionManager.getWorld(data.getInteger("world_dim_id"));
+			BlockPos pos = BlockPos.fromLong(data.getLong("pos"));
+			TabID tId = TabID.values()[data.getInteger("tab_id")];
+			int bId = data.getInteger("button_id");
+			NBTTagCompound info = data.getCompoundTag("info");
+			
+			TileEntity te = world.getTileEntity(pos);
+			
+			switch(tId) {
+			case SECURITY:
+				if(bId == TabSecurity.LOCK_BUTTON_ID) {
+					if(te instanceof ILockable && info.hasKey("locked")) {
+						((ILockable)te).setLocked(info.getBoolean("locked"));
+					}
+				}
+			break;
+			
+			default:
+				TMORefs.LOGGER.warn("This tab can not handle button events!");
+			break;
+			}
+			
 		}
 	};
 

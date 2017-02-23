@@ -221,5 +221,11 @@ tile.blockTitaniumChest.jeidesc=Ce coffre résistant aux explosions plaqué tita
 #The One Probe Info
 top.info.titaniumChest.owner.title=Propriétaire:
 top.info.titaniumChest.owner.empty=aucun
-top.info.titaniumChest.lock.unlocked=Déverrouillé
-top.info.titaniumChest.lock.locked=Verrouillé
+top.info.titaniumChest.hidden=caché
+top.info.titaniumChest.access=Accès
+top.info.titaniumChest.access.granted=accepté
+top.info.titaniumChest.access.denied=refusé
+top.info.titaniumChest.access.forced=forcé
+top.info.titaniumChest.locked=Verrouillé
+top.info.titaniumChest.locked.yes=oui
+top.info.titaniumChest.locked.no=non

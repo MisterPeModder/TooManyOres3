@@ -3,8 +3,10 @@ package misterpemodder.tmo.main.client.gui.tabs;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.Arrays;
+import java.util.List;
 
 import misterpemodder.tmo.api.block.ILockable;
+import misterpemodder.tmo.api.item.IItemLock;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.client.gui.ContainerBase;
 import misterpemodder.tmo.main.client.gui.slot.IHidable;
@@ -12,15 +14,53 @@ import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiLockIconButton;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.client.config.GuiUtils;
 
-public class TabSecurity<C extends ContainerBase<TE>, TE extends TileEntityContainerBase> extends TabBase {
+public class TabSecurity<C extends ContainerBase<TE>, TE extends TileEntityContainerBase & ILockable> extends TabBase {
+	
+	public static final int LOCK_BUTTON_ID = 10;
 	
 	public TabSecurity() {
 		super(TabPos.TOP_LEFT);
+	}
+	
+	@Override
+	public TabID getTabID() {
+		return TabID.SECURITY;
+	}
+	
+	@Override
+	public void initButtons(int x, int y) {
+		GuiLockIconButton lb = new GuiLockIconButton(LOCK_BUTTON_ID, x+26, y+16);
+		lb.setLocked(((TE)guiContainer.container.getTileEntity()).isLocked());
+		buttons.add(lb);
+	}
+	
+	public void updateButtons() {
+		for(GuiButton b : (List<GuiButton>)buttons) {
+			if(b.id == LOCK_BUTTON_ID && b instanceof GuiLockIconButton) {
+				ItemStack s = ((TE)guiContainer.container.getTileEntity()).getLockItemHandler().getStackInSlot(0);
+				b.enabled = !(s.isEmpty() || (s.getItem() instanceof IItemLock && ((IItemLock)s.getItem()).isBroken(s)));
+				
+			}
+		}
+	}
+	
+	@Override
+	public void onButtonClicked(GuiButton button) {
+		if(button.id == LOCK_BUTTON_ID && button instanceof GuiLockIconButton) {
+			GuiLockIconButton b = (GuiLockIconButton) button;
+			NBTTagCompound data = new NBTTagCompound();
+			data.setBoolean("locked", !b.isLocked());
+			b.setLocked(!b.isLocked());
+			TabBase.sendButtonPacket(getTabID(), LOCK_BUTTON_ID, guiContainer.mc.world, guiContainer.container.getTileEntity().getPos(), data);
+		}
 	}
 
 	@Override

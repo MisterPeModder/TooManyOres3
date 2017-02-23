@@ -12,6 +12,11 @@ public class TabMainTitaniumChest extends TabMain<ContainerTitaniumChest, TileEn
 	public TabMainTitaniumChest() {
 		super();
 	}
+	
+	@Override
+	public TabID getTabID() {
+		return TabID.MAIN_TC;
+	}
 
 	@Override
 	public TabTexture getTabTexture() {

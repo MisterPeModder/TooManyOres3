@@ -52,6 +52,7 @@ public final class ConfigValues {
 		ACT_ADD_COMPAT_RECONSTRUCTOR(ConfigCategories.COMPAT, "Actually Additions atomic reconstructor recipes", true, "Molecular Shiftulator? Spatial Replacer?"),
 		ACT_ADD_COMPAT_MINING(ConfigCategories.COMPAT, "Actually Additions mining lens", true, "Add TMO ores to the mining lens?"),
 		TOP_COMPAT(ConfigCategories.COMPAT, "The One Probe compat", true, "The One Probe compatibility?"),
+		TOP_COMPAT_HIDE_CONTENT(ConfigCategories.COMPAT, "The One Probe: hide content", true, "Hide locked titanium chest content?"),
 		BAUBLES_COMPAT(ConfigCategories.COMPAT, "baubles inventory", true, "Enable baubles compatibility?"),
 		;
 		
