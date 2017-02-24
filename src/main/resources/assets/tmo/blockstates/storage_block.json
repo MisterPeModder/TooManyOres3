@@ -15,7 +15,7 @@
 			"titanium_block": {"textures": {"all": "tmo:blocks/titanium_block"}},
 			"ancient_gold_block": {"textures": {"all": "tmo:blocks/ancient_gold_block"}},
 			"darkanium_block": {"textures": {"all": "tmo:blocks/darkanium_block"}},
-			"ignum_block": {"textures": {"all": "tmo:blocks/ignum_block"}},
+			"ignum_block": {"model": "tmo:ignum_block"},
 			"ender_matter_block": {"textures": {"all": "tmo:blocks/ender_matter_block"}},
 			"copper_block": {"textures": {"all": "tmo:blocks/copper_block"}},
 			"platinum_block": {"textures": {"all": "tmo:blocks/platinum_block"}}
