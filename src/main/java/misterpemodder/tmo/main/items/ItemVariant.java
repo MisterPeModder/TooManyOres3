@@ -3,8 +3,11 @@ package misterpemodder.tmo.main.items;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import misterpemodder.tmo.main.init.ModItems.TheItems;
 import misterpemodder.tmo.main.utils.ItemStackUtils;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 
 public abstract class ItemVariant {
@@ -12,11 +15,17 @@ public abstract class ItemVariant {
 	private String name;
 	private String unlocalizedName;
 	private String[] oreDictNames;
+	private EnumRarity rarity;
 	
 	private ItemVariant(String name, String unlocalizedName, String... oreDictNames) {
+		this(name, unlocalizedName, null, oreDictNames);
+	}
+	
+	private ItemVariant(String name, String unlocalizedName, @Nullable EnumRarity rarity, String... oreDictNames) {
 		this.name = name;
 		this.unlocalizedName = unlocalizedName;
 		this.oreDictNames = oreDictNames;
+		this.rarity = rarity;
 	}
 	
 	public abstract <T extends ItemVariant> List<T> getVariants();
@@ -38,23 +47,31 @@ public abstract class ItemVariant {
 		return this.oreDictNames;
 	}
 	
+	public EnumRarity getRarity() {
+		return this.rarity == null? EnumRarity.COMMON : rarity;
+	}
+	
 	public static class IngotVariant extends ItemVariant {
 		
 		public static List<IngotVariant> ingotVariants = new ArrayList<>();
 		
-		public static final IngotVariant TITANIUM_INGOT = new IngotVariant("titanium", "titanium", "ingotTitaniumBlue");
-		public static final IngotVariant TITANIUM_INGOT_DARK = new IngotVariant("titanium_dark", "titaniumDark", "ingotTitaniumDark");
+		public static final IngotVariant TITANIUM_INGOT = new IngotVariant("titanium", "titanium", EnumRarity.RARE, "ingotTitaniumBlue");
+		public static final IngotVariant TITANIUM_INGOT_DARK = new IngotVariant("titanium_dark", "titaniumDark", EnumRarity.EPIC, "ingotTitaniumDark");
 		public static final IngotVariant TITANIUM_INGOT_POOR = new IngotVariant("titanium_poor", "titaniumPoor", "ingotTitanium");
 		public static final IngotVariant CARBON_INGOT = new IngotVariant("carbon", "carbon", "ingotCarbon");
 		public static final IngotVariant COPPER_INGOT = new IngotVariant("copper", "copper", "ingotCopper");
-		public static final IngotVariant DARKANIUM_INGOT = new IngotVariant("darkanium", "darkanium", "ingotDarkanium");
+		public static final IngotVariant DARKANIUM_INGOT = new IngotVariant("darkanium", "darkanium", EnumRarity.EPIC, "ingotDarkanium");
 		public static final IngotVariant ENDER_MATTER_INGOT = new IngotVariant("ender_matter", "enderMatter", "ingotEnderMatter");
-		public static final IngotVariant ANCIENT_GOLD_INGOT = new IngotVariant("ancient_gold", "goldAncient", "ingotGoldAncient");
+		public static final IngotVariant ANCIENT_GOLD_INGOT = new IngotVariant("ancient_gold", "goldAncient", EnumRarity.UNCOMMON, "ingotGoldAncient");
 		public static final IngotVariant PLATINUM_INGOT = new IngotVariant("platinum", "platinum", "ingotPlatinum");
 		public static final IngotVariant REDSTONE_INGOT = new IngotVariant("redstone", "redstone", "ingotRedstone");
 		
 		private IngotVariant(String name, String unlocalizedName, String... oreDictNames) {
-			super(name, unlocalizedName, oreDictNames);
+			this(name, unlocalizedName, EnumRarity.COMMON, oreDictNames);
+		}
+		
+		private IngotVariant(String name, String unlocalizedName, EnumRarity rarity, String... oreDictNames) {
+			super(name, unlocalizedName, rarity, oreDictNames);
 			ingotVariants.add(this);
 		}
 
@@ -94,6 +111,11 @@ public abstract class ItemVariant {
 		private PlateVariant(String name, String unlocalizedName, String... oreDictNames) {
 			super(name, unlocalizedName, oreDictNames);
 			plateVariants.add(this);
+		}
+		
+		@Override
+		public EnumRarity getRarity() {
+			return this == PlateVariant.HALLOWED_PLATE? EnumRarity.UNCOMMON : this.getRarity();
 		}
 
 		@Override

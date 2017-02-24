@@ -70,7 +70,8 @@ public class ItemWrench extends ItemBase implements IToolWrench {
 	
 	@Override
 	public boolean isEnabled() {
-		return this.m.isEnabled();
+		//return this.m.isEnabled();
+		return false;
 	}
 	
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {

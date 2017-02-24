@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
@@ -81,6 +82,11 @@ public class ItemTmoArmor extends ItemArmor implements TMOItem{
 	public void registerRender() {
 		ModelResourceLocation location = new ModelResourceLocation(TMORefs.PREFIX + itemRefs.getRegistryName(), "inventory");
 		ModelLoader.setCustomModelResourceLocation(this, 0, location);
+	}
+	
+	@Override
+	public EnumRarity getRarity(ItemStack stack) {
+		return material.rarity == EnumRarity.COMMON? super.getRarity(stack) : material.rarity;
 	}
 
 }

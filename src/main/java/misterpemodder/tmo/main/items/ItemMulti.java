@@ -7,6 +7,7 @@ import misterpemodder.tmo.main.items.base.ItemBase;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -47,6 +48,10 @@ public class ItemMulti<V extends ItemVariant> extends ItemBase {
 		return variants.get(0);
 	}
 	
+	public V getVariant(ItemStack stack) {
+		return this.getVariant(stack.getMetadata());
+	}
+	
 	public List<V> getVariants() {
 		return this.variants;
 	}
@@ -83,5 +88,9 @@ public class ItemMulti<V extends ItemVariant> extends ItemBase {
 			subItems.add(new ItemStack(itemIn, 1, i));
 		}
 	}
+	
+	public EnumRarity getRarity(ItemStack stack) {
+        return this.getVariant(stack).getRarity();
+    }
 
 }

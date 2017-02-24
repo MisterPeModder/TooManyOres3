@@ -19,8 +19,6 @@ public class ItemBlockMulti extends ItemBlockBase {
 		this.variantsMeta = getVariantsMeta(block.getVariants());
 		this.setHasSubtypes(true);
 		this.setMaxDamage(0);
-		
-		
 	}
 	
 	private static <V extends Enum<V> & IBlockVariant> int[] getVariantsMeta(V[] variants) {
