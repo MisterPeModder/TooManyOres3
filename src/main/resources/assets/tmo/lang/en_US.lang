@@ -119,7 +119,7 @@ item.titaniumBucket.message.notEnougthCapacity=Not enougth capacity!
 item.titaniumBucket.message.content=%1$s ~ %2$d/%3$dmb
 item.titaniumBucket.desc.content=Contains: %2$d/%3$dmb of %1$s.
 item.titaniumBucket.desc.emptyContent=Contains: nothing.
-item.titaniumBucket.desc=A reinforced bucket that can hold multiple buckets worth of any fluid.\nRight-click to place fluids.\nShift-right-click to take fluids.
+item.titaniumBucket.desc=Right-click to place fluids.\nShift-right-click to take fluids.
 
 #Blocks
 tile.blockStorage.blockTitanium.name=Titanium Block
