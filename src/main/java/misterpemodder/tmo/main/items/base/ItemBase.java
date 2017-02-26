@@ -1,6 +1,7 @@
 package misterpemodder.tmo.main.items.base;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import misterpemodder.tmo.main.items.EnumItemsNames;
@@ -17,7 +18,6 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import scala.actors.threadpool.Arrays;
 
 public class ItemBase extends Item implements TMOItem {
 	

@@ -1,6 +1,5 @@
 package misterpemodder.tmo.main.events;
 
-import buildcraft.api.tools.IToolWrench;
 import misterpemodder.tmo.api.block.ILockable;
 import misterpemodder.tmo.api.owner.IOwnerHandler;
 import misterpemodder.tmo.main.Tmo;
@@ -51,14 +50,14 @@ public class EventHandler {
 		Block b = world.getBlockState(event.getPos()).getBlock();
 		ItemStack stack = event.getItemStack();
 		BlockPos pos = event.getPos();
-		if (stack.getItem() instanceof IToolWrench) {
+		if (stack.getItem() instanceof ItemWrench) {
 
 			TileEntity tileEntity = world.getTileEntity(pos);
 
 			EntityPlayer player = event.getEntityPlayer();
 			if(player.isSneaking() && tileEntity != null) {
-				if(((IToolWrench) stack.getItem()).canWrench(player, pos)) {
-					((IToolWrench) stack.getItem()).wrenchUsed(player, pos);
+				if(((ItemWrench) stack.getItem()).canWrench(player, pos)) {
+					((ItemWrench) stack.getItem()).wrenchUsed(player, pos);
 					if(stack.getItem() instanceof ItemWrench) {
 						IOwnerHandler ownerHandler = tileEntity.getCapability(CapabilityOwner.OWNER_HANDLER_CAPABILITY, event.getFace());
 						if(((ItemWrench) stack.getItem()).isAdminWrench && ownerHandler != null && !world.isRemote) {
@@ -91,7 +90,7 @@ public class EventHandler {
 				TileEntity tets = world.getTileEntity(pos);
 				if(b.rotateBlock(world, pos, facing)) {
 					world.setTileEntity(pos, tets);
-					((IToolWrench) stack.getItem()).wrenchUsed(player, pos);
+					((ItemWrench) stack.getItem()).wrenchUsed(player, pos);
 					event.setCanceled(true);
 				}
 			}

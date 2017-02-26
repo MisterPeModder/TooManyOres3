@@ -2,7 +2,6 @@ package misterpemodder.tmo.main.blocks.containers;
 
 import java.util.Random;
 
-import buildcraft.api.tools.IToolWrench;
 import misterpemodder.tmo.api.block.ILockable;
 import misterpemodder.tmo.api.block.IWorldNameableModifiable;
 import misterpemodder.tmo.api.owner.IOwnerHandler;
@@ -131,10 +130,10 @@ public abstract class BlockContainerBase<TE extends TileEntityContainerBase> ext
 		else if(world.isRemote) {
 			return true;
 		} 
-		else if (stack.getItem() instanceof IToolWrench && player.isSneaking()) {
+		else if (stack.getItem() instanceof ItemWrench && player.isSneaking()) {
 
-			if (((IToolWrench) stack.getItem()).canWrench(player, pos)) {
-				((IToolWrench) stack.getItem()).wrenchUsed(player, pos);
+			if (((ItemWrench) stack.getItem()).canWrench(player, pos)) {
+				((ItemWrench) stack.getItem()).wrenchUsed(player, pos);
 				if (stack.getItem() instanceof ItemWrench) {
 					if (((ItemWrench) stack.getItem()).isAdminWrench && ServerUtils.isOp(player)) {
 						IOwnerHandler ownerHandler = tileEntity.getCapability(CapabilityOwner.OWNER_HANDLER_CAPABILITY,

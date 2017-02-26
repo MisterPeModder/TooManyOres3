@@ -16,9 +16,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.oredict.OreDictionary;
 
 //TODO Fix it!
+@Optional.Interface(iface = "buildcraft.api.tools.IToolWrench", modid = "buildcraft")
 public class ItemWrench extends ItemBase implements IToolWrench {
 	
 	public TmoToolMaterial m;

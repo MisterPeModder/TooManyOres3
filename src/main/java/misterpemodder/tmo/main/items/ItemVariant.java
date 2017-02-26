@@ -115,7 +115,7 @@ public abstract class ItemVariant {
 		
 		@Override
 		public EnumRarity getRarity() {
-			return this == PlateVariant.HALLOWED_PLATE? EnumRarity.UNCOMMON : this.getRarity();
+			return this == PlateVariant.HALLOWED_PLATE? EnumRarity.UNCOMMON : super.getRarity();
 		}
 
 		@Override

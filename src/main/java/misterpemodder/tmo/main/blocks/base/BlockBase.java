@@ -1,6 +1,7 @@
 package misterpemodder.tmo.main.blocks.base;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
@@ -28,7 +29,6 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import scala.actors.threadpool.Arrays;
 
 public class BlockBase extends Block implements BlockTMO {
 	
