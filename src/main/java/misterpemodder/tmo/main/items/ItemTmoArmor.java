@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import misterpemodder.tmo.main.items.base.TMOItem;
 import misterpemodder.tmo.main.items.materials.TmoArmorMaterial;
+import misterpemodder.tmo.main.utils.ItemStackUtils;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -87,6 +88,11 @@ public class ItemTmoArmor extends ItemArmor implements TMOItem{
 	@Override
 	public EnumRarity getRarity(ItemStack stack) {
 		return material.rarity == EnumRarity.COMMON? super.getRarity(stack) : material.rarity;
+	}
+	
+	@Override
+	public int getRGBDurabilityForDisplay(ItemStack stack) {
+		return ItemStackUtils.blinkColorOnLowDurability(super.getRGBDurabilityForDisplay(stack), stack);
 	}
 
 }

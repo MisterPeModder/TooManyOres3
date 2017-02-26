@@ -3,8 +3,11 @@ package misterpemodder.tmo.main.utils;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.items.ItemMulti;
 import misterpemodder.tmo.main.items.ItemVariant;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public final class ItemStackUtils {
 	
@@ -26,6 +29,15 @@ public final class ItemStackUtils {
 			return newVariantStack((ItemMulti)i, variant, amount);
 		} else {
 			return new ItemStack(i, amount, 0);
+		}
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public static int blinkColorOnLowDurability(int color, ItemStack stack) {
+		if((stack.getItemDamage()*100)/stack.getMaxDamage() > 80) {
+		return Minecraft.getMinecraft().world.getTotalWorldTime() % 20 < 10? color : 0;
+		} else {
+			return color;
 		}
 	}
 	
