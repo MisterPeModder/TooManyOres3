@@ -110,6 +110,8 @@ item.wrenchAdmin.name=Admin Wrench
 item.wrench.OwnerRemoved=Owner has been removed!
 item.wrench.NoPermissions=You don't have the required permissions to use this wrench!
 
+item.hammerTitanium.name=Titanium Forge Hammer
+
 item.titaniumBucket.name=Titanium Bucket
 item.titaniumBucket.empty=Titanium Bucket (empty)
 item.titaniumBucket.filled=Titanium Bucket (%1$dmb of %2$s)
@@ -173,6 +175,7 @@ tile.blockTitaniumChest.name=Titanium Chest
 tile.blockTitaniumChest.locked=This Titanium Chest is locked!
 tile.blockTitaniumChest.lockBroken=You broke the chest's lock!
 tile.blockTitaniumChest.noBreaking=You don't have the permissions to break this chest!
+tile.blockTitaniumAnvil.name=Titanium Anvil
 
 #GUI
 gui.tab.main.name=Main
@@ -181,9 +184,11 @@ gui.tab.redstone.name=Redstone
 gui.tab.security.name=Security
 gui.tab.playerInv.name=Inventory
 gui.tab.playerArmorInv.name=Armor & Crafting
+gui.tab.titaniumAnvil.name=Titanium Anvil: Repair & Name
 gui.tab.io.name=IO
 gui.slot.lock.name=Lock Slot
 gui.slot.lock.desc=Put a lock there to unlock security options.
+gui.slot.hammer.name=Forge Hammer Slot
 
 #Security
 protectedBlock.noBreaking=You don't have the permissions to break this %s!

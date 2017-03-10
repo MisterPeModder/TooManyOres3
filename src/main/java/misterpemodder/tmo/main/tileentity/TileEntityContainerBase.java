@@ -22,6 +22,7 @@ public abstract class TileEntityContainerBase extends TileEntity {
 	public void sync() {
 		NBTTagCompound toSend = new NBTTagCompound();
 		toSend.setLong("pos", this.pos.toLong());
+		if(!this.hasWorld()) return;
 		
 		if(!this.world.isRemote) {
 			NetworkRegistry.TargetPoint target = new TargetPoint(this.world.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 64);

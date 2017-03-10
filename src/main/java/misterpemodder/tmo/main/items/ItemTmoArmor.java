@@ -2,7 +2,7 @@ package misterpemodder.tmo.main.items;
 
 import javax.annotation.Nullable;
 
-import misterpemodder.tmo.main.items.base.TMOItem;
+import misterpemodder.tmo.main.items.base.ITMOItem;
 import misterpemodder.tmo.main.items.materials.TmoArmorMaterial;
 import misterpemodder.tmo.main.utils.ItemStackUtils;
 import misterpemodder.tmo.main.utils.TMORefs;
@@ -23,7 +23,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemTmoArmor extends ItemArmor implements TMOItem{
+public class ItemTmoArmor extends ItemArmor implements ITMOItem{
 
 	protected EnumItemsNames itemRefs;
 	private TmoArmorMaterial material;

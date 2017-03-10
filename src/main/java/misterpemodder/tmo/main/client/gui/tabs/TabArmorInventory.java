@@ -3,9 +3,10 @@ package misterpemodder.tmo.main.client.gui.tabs;
 import java.awt.Dimension;
 import java.awt.Point;
 
+import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
+import mezz.jei.gui.recipes.RecipeClickableArea;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.client.gui.ContainerBase;
-import misterpemodder.tmo.main.client.gui.ContainerTitaniumChest;
 import misterpemodder.tmo.main.client.gui.slot.IHidable;
 import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
 import misterpemodder.tmo.main.init.ModItems.TheItems;
@@ -33,7 +34,7 @@ public class TabArmorInventory<C extends ContainerBase<TE>, TE extends TileEntit
 	@Override
 	public void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
-		guiContainer.getFontRenderer().drawString(Tmo.proxy.translate(getUnlocalizedName()), 10, 137, 4210752);
+		guiContainer.getFontRenderer().drawString(Tmo.proxy.translate(getUnlocalizedName()), 10, guiContainer.getBottomPartPos()-guiContainer.getGuiTop()+5, 4210752);
 	}
 	
 	@Override
@@ -41,20 +42,19 @@ public class TabArmorInventory<C extends ContainerBase<TE>, TE extends TileEntit
 		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 		int i = guiContainer.getGuiLeft();
 	    int j = guiContainer.getGuiTop();
-	    GuiInventory.drawEntityOnScreen(i + 35, j + 78 + ContainerBase.DEFAULT_OFFSET, 30, (float)(i + 35) - mouseX, (float)(j + 78 + ContainerBase.DEFAULT_OFFSET - 50) - mouseY, guiContainer.mc.player);
+	    GuiInventory.drawEntityOnScreen(i + 35, j + 78 + guiContainer.container.BPART_OFFSET, 30, (float)(i + 35) - mouseX, (float)(j + 78 + guiContainer.container.BPART_OFFSET - 50) - mouseY, guiContainer.mc.player);
 	}
 	
 	public boolean shouldDisplaySlot(IHidable slot) {
 		if(slot instanceof SlotItemHandler) {
 			IItemHandler h = ((SlotHidable)slot).getItemHandler();
 			boolean flag1 = h == guiContainer.container.getPlayerOffandInv() || h == guiContainer.container.getPlayerArmorInv();
-			boolean flag2 = guiContainer.container instanceof ContainerTitaniumChest && h == ((ContainerTitaniumChest)guiContainer.container).baublesInv;
+			boolean flag2 = h == guiContainer.container.baublesInv;
 			return flag1 || flag2;
 		}
-		else if(slot instanceof Slot && guiContainer.container instanceof ContainerTitaniumChest){
+		else if(slot instanceof Slot){
 			IInventory i = ((Slot)slot).inventory;
-			ContainerTitaniumChest c = (ContainerTitaniumChest) guiContainer.container;
-			return i == c.craftResult || i == c.craftMatrix;
+			return i == guiContainer.container.craftResult || i == guiContainer.container.craftMatrix;
 		} else {
 			return false;
 		}
@@ -74,5 +74,15 @@ public class TabArmorInventory<C extends ContainerBase<TE>, TE extends TileEntit
 	public TabTexture getTabTexture() {
 		String str = TMORefs.baublesEnabled? "textures/gui/container/armor_inventory_baubles.png" : "textures/gui/container/armor_inventory.png";
 		return new TabTexture(DEFAULT_TAB_LOCATION, new Point(0,56), new Point(32, 56), new ResourceLocationTmo(str), new Dimension(212, 100));
+	}
+	
+	@Override
+	public boolean hasRecipeClickableAreas() {
+		return true;
+	}
+	
+	@Override
+	public RecipeClickableArea[] getRecipeClickableAreas() {
+		return new RecipeClickableArea[]{new RecipeClickableArea(guiContainer.getBottomPartPos()+72, guiContainer.getBottomPartPos()+90, guiContainer.getGuiLeft()+156, guiContainer.getGuiLeft()+172, VanillaRecipeCategoryUid.CRAFTING)};
 	}
 }

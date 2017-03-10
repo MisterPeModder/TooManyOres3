@@ -4,18 +4,20 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
+import mezz.jei.gui.recipes.RecipeClickableArea;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabPos;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabTexture;
 import misterpemodder.tmo.main.client.gui.tabs.TabMain;
 import misterpemodder.tmo.main.client.gui.tabs.TabPlayerInventory;
+import misterpemodder.tmo.main.compat.jei.JeiPlugin;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -32,7 +34,6 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	public static final int TAB_OFFSET = 4;
 	public C container;
 	
-	protected ImmutablePair<TabBase, TabBase> defaultTabs;
 	protected MutablePair<TabBase, TabBase> selectedTabs;
 	protected List<TabBase> tabs;
 	
@@ -49,7 +50,6 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		
 		Pair<TabBase, TabBase> p = getDefaultPair();
         this.selectedTabs = MutablePair.of(p.getLeft(), p.getRight());
-        this.defaultTabs = ImmutablePair.of(p.getLeft(), p.getRight());
         
         Dimension dl = selectedTabs.left.getTabTexture().dim;
 		Dimension dr = selectedTabs.right.getTabTexture().dim;
@@ -74,7 +74,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		}
 	}
 	
-	private Pair<TabBase, TabBase> getDefaultPair() {
+	protected Pair<TabBase, TabBase> getDefaultPair() {
 		MutablePair<TabBase, TabBase> p = new MutablePair<>();
 		for(TabBase tab : tabs) {
 			if(tab instanceof TabMain) {
@@ -95,6 +95,8 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		super.drawScreen(mouseX, mouseY, partialTicks);
+		this.selectedTabs.left.drawScreen(mouseX, mouseY, partialTicks);
+		this.selectedTabs.right.drawScreen(mouseX, mouseY, partialTicks);
 		addButtons();
 	}
 	
@@ -108,12 +110,12 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		//Top Part
 	    TabTexture lt = selectedTabs.getLeft().getTabTexture();
 		this.mc.getTextureManager().bindTexture(lt.screenTexture);
-		this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, lt.dim.width, lt.dim.height);
+		Gui.drawModalRectWithCustomSizedTexture(this.guiLeft, this.guiTop, 0, 0, lt.dim.width, lt.dim.height, lt.textureSize.width, lt.textureSize.height);
 		
 		//Bottom part
 		TabTexture rt = selectedTabs.getRight().getTabTexture();
 	    this.mc.getTextureManager().bindTexture(rt.screenTexture);
-	    Gui.drawModalRectWithCustomSizedTexture(this.guiLeft, getBottomPartPos(), 0, 0, rt.dim.width, rt.dim.height, 256, 128);
+	    Gui.drawModalRectWithCustomSizedTexture(this.guiLeft, getBottomPartPos(), 0, 0, rt.dim.width, rt.dim.height, rt.textureSize.width, rt.textureSize.height);
 		
 	    //Enabled Tabs
 	    this.drawTab(selectedTabs.getLeft(), true);
@@ -121,10 +123,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	    this.drawTab(selectedTabs.getRight(), true);
 	    selectedTabs.getRight().drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 	    
-	    
-	    
 	    GlStateManager.popMatrix();
-	
 	}
 	
 	protected void drawTab(TabBase tab, boolean enabled) {
@@ -143,6 +142,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	    selectedTabs.getLeft().updateButtons();
 	    selectedTabs.getRight().updateButtons();
 	    
+	    boolean flag = true;
 	    for(TabBase tab : tabs) {
 	    	RenderHelper.enableGUIStandardItemLighting();
 	    	ItemStack stack = tab.getItemStack();
@@ -151,13 +151,42 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		    this.itemRender.renderItemOverlays(this.fontRendererObj, stack, tabPos.x + 8, tabPos.y + 6);
 		    RenderHelper.disableStandardItemLighting();
 		    if(isPointInRegion(tab.getPos().x+1, tab.getPos().y, TabBase.WIDTH, TabBase.HEIGHT-1, mouseX, mouseY)) {
+		    	flag = false;
 		    	drawCreativeTabHoveringText(Tmo.proxy.translate(tab.getUnlocalizedName()), mouseX-this.getGuiLeft(), mouseY-this.getGuiTop());
 		    }
 	    }
+	    
+	    if(flag && JeiPlugin.jeiRuntime != null) {
+	    	try {
+	    	List<RecipeClickableArea> list = getRecipeClickableAreas();
+	    	for(RecipeClickableArea r : list) {
+	    		if(r.checkHover(mouseX, mouseY)) {
+	    			drawCreativeTabHoveringText(Tmo.proxy.translate("jei.tooltip.show.recipes"), mouseX-this.getGuiLeft(), mouseY-this.getGuiTop());
+	    		}
+	    	}
+	    } catch(Exception e) {
+			
+		}
+	    }
+	    
+	}
+	
+	private List<RecipeClickableArea> getRecipeClickableAreas() {
+    	List<RecipeClickableArea> l = new ArrayList<>();
+    	if(selectedTabs.getLeft().hasRecipeClickableAreas()) {
+    		l.addAll(Arrays.asList(selectedTabs.getLeft().getRecipeClickableAreas()));
+    	}
+    	if(selectedTabs.getRight().hasRecipeClickableAreas()) {
+    		l.addAll(Arrays.asList(selectedTabs.getRight().getRecipeClickableAreas()));
+    	}
+    	return l;
 	}
 	
 	@Override
 	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+		
+		this.selectedTabs.left.mouseClicked(mouseX, mouseY, mouseButton);
+		this.selectedTabs.right.mouseClicked(mouseX, mouseY, mouseButton);
 		
 		for(TabBase tab : tabs) {
 			Point pos = tab.getPos();
@@ -175,9 +204,33 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 					this.container.hideSlots();
 
 				}
+			} else if(JeiPlugin.jeiRuntime != null) {
+				try{
+		    	List<RecipeClickableArea> list = getRecipeClickableAreas();
+		    	for(RecipeClickableArea r : list) {
+		    		if(r.checkHover(mouseX, mouseY)) {
+		    			JeiPlugin.jeiRuntime.getRecipesGui().showCategories(r.getRecipeCategoryUids());
+		    		}
+		    	}
+				} catch(Exception e) {
+					
+				}
 			}
 		}
 		super.mouseClicked(mouseX, mouseY, mouseButton);
+	}
+	
+	@Override
+	public void onGuiClosed() {
+		this.selectedTabs.left.onGuiClosed();
+		this.selectedTabs.right.onGuiClosed();
+		super.onGuiClosed();
+	}
+	
+	protected void keyTyped(char typedChar, int keyCode) throws IOException {
+		if(!selectedTabs.left.keyTyped(typedChar, keyCode) && !selectedTabs.right.keyTyped(typedChar, keyCode)) {
+			super.keyTyped(typedChar, keyCode);
+		}
 	}
 	
 	private void addButtons() {
@@ -219,13 +272,6 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		else if(selectedButtonsRight.contains(button)) {
 			this.selectedTabs.right.onButtonClicked(button);
 		}
-		
-		/*for(GuiButton b : )
-		if(button.id == 12) {
-			GuiLockIconButton b = (GuiLockIconButton)button;
-			b.setLocked(!b.isLocked());
-			this.container.getTileEntity().getWorld().playerEntities.get(0).sendMessage(new TextComponentString(b.isLocked()?"locked":"unlocked"));
-		}*/
 	}
 	
 	public FontRenderer getFontRenderer() {

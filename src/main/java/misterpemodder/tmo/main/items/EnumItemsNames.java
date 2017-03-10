@@ -43,6 +43,8 @@ public enum EnumItemsNames {
 	WRENCH_COPPER("copper_wrench", "wrenchCopper"),
 	WRENCH_ADMIN("admin_wrench", "wrenchAdmin"),
 	
+	HAMMER_TITANIUM("titanium_hammer", "hammerTitanium"),
+	
 	HELMET_TITANIUM("titanium_helmet", "helmetTitanium"),
 	HELMET_TITANIUM_DARK("dark_titanium_helmet", "helmetTitaniumDark"),
 	HELMET_COPPER("copper_helmet", "helmetCopper"),

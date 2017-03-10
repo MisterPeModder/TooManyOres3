@@ -114,6 +114,8 @@ item.wrenchAdmin.name=Clé pour Administrateur
 item.wrench.OwnerRemoved=Le propriétaire à été enlevé
 item.wrench.NoPermissions=Vous n'avez pas les permissions pour utiliser cette clé!
 
+item.hammerTitanium.name=Marteau de forge en titane
+
 item.titaniumBucket.name=Seau en Titane
 item.titaniumBucket.empty=Seau en Titane (vide)
 item.titaniumBucket.filled=Seau en Titane (%2$s, %1$dmb)
@@ -176,6 +178,7 @@ tile.blockLamp.mode.hint=(cliquez droit avec une torche de redstone pour inverse
 tile.blockTitaniumChest.name=Coffre en Titane
 tile.blockTitaniumChest.locked=Ce Coffre en Titane est Verrouillé!
 tile.blockTitaniumChest.lockBroken=Vous avez cassé le cadenas du coffre!
+tile.blockTitaniumAnvil.name=Enclume en titane
 
 #Catégories interface
 gui.tab.main.name=Principal
@@ -185,8 +188,10 @@ gui.tab.security.name=Sécurité
 gui.tab.playerInv.name=Inventaire
 gui.tab.io.name=Import/Export
 gui.tab.playerArmorInv.name=Armure & fabrication
+gui.tab.titaniumAnvil.name=Enclume en titane: Réparer et renommer
 gui.slot.lock.name=Emplacement du cadenas
 gui.slot.lock.desc=Mettez un cadenas ici pour débloquer les options de sécurité
+gui.slot.hammer.name=Emplacement du marteau de forge
 
 #Sécurité
 protectedBlock.noBreaking=Vous n'avez pas les permissions pour casser ce(tte) %s!

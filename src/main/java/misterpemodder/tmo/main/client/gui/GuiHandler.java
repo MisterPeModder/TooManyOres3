@@ -1,5 +1,6 @@
 package misterpemodder.tmo.main.client.gui;
 
+import misterpemodder.tmo.main.tileentity.TileEntityTitaniumAnvil;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +23,14 @@ public class GuiHandler implements IGuiHandler {
 			}
 			public Object getClientGuiElement(EntityPlayer player, World world, int x, int y, int z) {
 				return new GuiContainerTitaniumChest(player.inventory, (TileEntityTitaniumChest)world.getTileEntity(new BlockPos(x, y, z)));
+			}
+		},
+		TITANIUM_ANVIL(2) {
+			public Object getServerGuiElement(EntityPlayer player, World world, int x, int y, int z) {
+				return new ContainerTitaniumAnvil((TileEntityTitaniumAnvil)world.getTileEntity(new BlockPos(x, y, z)), player.inventory);
+			}
+			public Object getClientGuiElement(EntityPlayer player, World world, int x, int y, int z) {
+				return new GuiContainerTitaniumAnvil(player.inventory, (TileEntityTitaniumAnvil)world.getTileEntity(new BlockPos(x, y, z)));
 			}
 		},
 		;

@@ -1,6 +1,6 @@
 package misterpemodder.tmo.main.items.base;
 
-public interface TMOItem {
+public interface ITMOItem {
 	
 	public String getUnlocalizedName();
 	

@@ -11,9 +11,12 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public class TabInfo<C extends ContainerBase<TE>, TE extends TileEntityContainerBase> extends TabBase {
+	
+	private final boolean isLarge;
 
-	public TabInfo() {
+	public TabInfo(boolean isLarge) {
 		super(TabPos.TOP_RIGHT);
+		this.isLarge = isLarge;
 	}
 	
 	@Override
@@ -33,7 +36,11 @@ public class TabInfo<C extends ContainerBase<TE>, TE extends TileEntityContainer
 
 	@Override
 	public TabTexture getTabTexture() {
-		return new TabTexture(DEFAULT_TAB_LOCATION, new Point(0,28), new Point(32, 28), new ResourceLocationTmo("textures/gui/container/info.png"), new Dimension(212, 132));
+		if(isLarge) {
+			return new TabTexture(DEFAULT_TAB_LOCATION, new Point(0,28), new Point(32, 28), new ResourceLocationTmo("textures/gui/container/titanium_chest/info.png"), new Dimension(212, 132), new Dimension(256, 256));
+		} else {
+			return new TabTexture(DEFAULT_TAB_LOCATION, new Point(0,28), new Point(32, 28), new ResourceLocationTmo("textures/gui/container/info.png"), new Dimension(212, 100));
+		}
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package misterpemodder.tmo.main.tileentity;
+package misterpemodder.tmo.main.capability;
 
 import misterpemodder.tmo.api.block.ILockable;
 import misterpemodder.tmo.api.item.IItemLock;

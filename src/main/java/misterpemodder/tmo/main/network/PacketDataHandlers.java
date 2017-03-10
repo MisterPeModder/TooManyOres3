@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import misterpemodder.tmo.api.block.ILockable;
+import misterpemodder.tmo.main.client.gui.ContainerTitaniumAnvil;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabID;
 import misterpemodder.tmo.main.client.gui.tabs.TabSecurity;
 import misterpemodder.tmo.main.network.packet.PacketServerToClient;
@@ -14,6 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.tileentity.TileEntity;
@@ -30,6 +32,7 @@ public final class PacketDataHandlers {
 		HANDLERS.add(TE_UPDATE_HANDLER);
 		HANDLERS.add(TE_UPDATE_REQUEST_HANDLER);
 		HANDLERS.add(BUTTON_CLICK_HANDLER);
+		HANDLERS.add(ANVIL_ITEM_NAME_HANDLER);
 	}
 	
 	/**
@@ -150,6 +153,37 @@ public final class PacketDataHandlers {
 			break;
 			}
 			
+		}
+	};
+	
+	/**
+	 * <p> Handler type: client to server
+	 * 
+	 * <p> NBT tags:
+	 * <ul>
+	 * 	<li>world_dim_id: Integer
+	 *  <li>player_id: UUID
+	 * 	<li>item_name: String
+	 * </ul>
+	 */
+    public static final IPacketDataHandler ANVIL_ITEM_NAME_HANDLER = new IPacketDataHandler() {
+		
+		@Override
+		public void procData(NBTTagCompound data) {
+			
+			WorldServer world = DimensionManager.getWorld(data.getInteger("world_dim_id"));
+			UUID playerUUID = NBTUtil.getUUIDFromTag(data.getCompoundTag("player_id"));
+			
+			EntityPlayer player = world.getPlayerEntityByUUID(playerUUID);
+			if(player != null && player.openContainer != null  && player.openContainer instanceof ContainerTitaniumAnvil) {
+				ContainerTitaniumAnvil c = ((ContainerTitaniumAnvil)player.openContainer);
+				if(data.hasKey("input_item")) {
+					ItemStack st = c.input.getStackInSlot(0).copy();
+					st.deserializeNBT(data.getCompoundTag("input_item"));
+					c.input.setStackInSlot(0, st);
+				}
+				c.updateItemName(data.getString("item_name"));
+			}
 		}
 	};
 

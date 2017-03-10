@@ -186,6 +186,40 @@ public enum EnumBlocksValues implements IBlockValues{
 			return false;
 		}
 	},
+	TITANIUM_ANVIL() {
+		public SoundType getSoundType(IBlockState state) {
+			return SoundType.ANVIL;
+		}
+		public Material getMaterial(@Nullable IBlockState state) {
+			return Material.ANVIL;
+		}
+		public MapColor getMapColor(@Nullable IBlockState state) {
+			return MapColor.BLUE;
+		}
+		public float getHardness(IBlockState state) {
+			return 10.0F;
+		}
+		@Override
+		public float getResistance(IBlockState state) {
+			return 5.0F;
+		}
+		@Override
+		public int getHarvestLevel(IBlockState state) {
+			return 1;
+		}
+		@Override
+		public int getLightOpacity(IBlockState state) {
+			return 3;
+		}
+		@Override
+		public boolean isFullCube(IBlockState state) {
+			return false;
+		}
+		@Override
+		public boolean isOpaqueCube(IBlockState state) {
+			return false;
+		}
+	},
 	DECORATION() {
 		@Override
 		public float getHardness(IBlockState state) {

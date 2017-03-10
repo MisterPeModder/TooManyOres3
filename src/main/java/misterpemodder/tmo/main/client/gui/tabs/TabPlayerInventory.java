@@ -25,7 +25,7 @@ public class TabPlayerInventory<C extends ContainerBase<TE>, TE extends TileEnti
 	@Override
 	public void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
-		guiContainer.getFontRenderer().drawString(guiContainer.container.getPlayerInv().getInventoryPlayer().getDisplayName().getUnformattedText(), 26, 139, 4210752);
+		guiContainer.getFontRenderer().drawString(guiContainer.container.getPlayerInv().getInventoryPlayer().getDisplayName().getUnformattedText(), 26, guiContainer.getBottomPartPos()-guiContainer.getGuiTop()+7, 4210752);
 	}
 	
 	public boolean shouldDisplaySlot(IHidable slot) {

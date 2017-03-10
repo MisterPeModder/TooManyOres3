@@ -11,9 +11,10 @@ import misterpemodder.tmo.main.items.ItemTitaniumBucket;
 import misterpemodder.tmo.main.items.ItemTmoArmor;
 import misterpemodder.tmo.main.items.ItemVariant;
 import misterpemodder.tmo.main.items.base.ItemBase;
-import misterpemodder.tmo.main.items.base.TMOItem;
+import misterpemodder.tmo.main.items.base.ITMOItem;
 import misterpemodder.tmo.main.items.materials.TmoArmorMaterial;
 import misterpemodder.tmo.main.items.materials.TmoToolMaterial;
+import misterpemodder.tmo.main.items.tools.ItemHammer;
 import misterpemodder.tmo.main.items.tools.ItemTmoAxe;
 import misterpemodder.tmo.main.items.tools.ItemTmoHoe;
 import misterpemodder.tmo.main.items.tools.ItemTmoPickaxe;
@@ -74,6 +75,8 @@ public class ModItems {
 		WRENCH_COPPER(new ItemWrench(EnumItemsNames.WRENCH_COPPER, TmoToolMaterial.COPPER_MATERIAL)),
 		WRENCH_ADMIN(new ItemWrench(EnumItemsNames.WRENCH_ADMIN, TmoToolMaterial.TITANIUM_MATERIAL, true, true)),
 		
+		HAMMER_TITANIUM(new ItemHammer(EnumItemsNames.HAMMER_TITANIUM, TmoToolMaterial.TITANIUM_MATERIAL)),
+		
 		TITANIUM_HELMET(new ItemTmoArmor(EnumItemsNames.HELMET_TITANIUM, TmoArmorMaterial.TITANIUM, EntityEquipmentSlot.HEAD)),
 		TITANIUM_CHESTPLATE(new ItemTmoArmor(EnumItemsNames.CHESTPLATE_TITANIUM, TmoArmorMaterial.TITANIUM, EntityEquipmentSlot.CHEST)),
 		TITANIUM_LEGGINGS(new ItemTmoArmor(EnumItemsNames.LEGGINGS_TITANIUM, TmoArmorMaterial.TITANIUM, EntityEquipmentSlot.LEGS)),
@@ -110,17 +113,17 @@ public class ModItems {
 		HALLOWED_BOOTS(new ItemTmoArmor(EnumItemsNames.BOOTS_HALLOWED, TmoArmorMaterial.HALLOWED, EntityEquipmentSlot.FEET)),
 		;
 		
-		private TMOItem item;
+		private ITMOItem item;
 		
 		public Item getItem() {
 			return (Item) this.item;
 		}
 		
-		public TMOItem getTMOItem() {
+		public ITMOItem getTMOItem() {
 			return this.item;
 		}
 		
-		TheItems(TMOItem item) {
+		TheItems(ITMOItem item) {
 			this.item = item;
 		}
 		

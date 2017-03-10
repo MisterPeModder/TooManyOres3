@@ -8,6 +8,7 @@ import misterpemodder.tmo.main.blocks.BlockStorage;
 import misterpemodder.tmo.main.blocks.BlockTransparent;
 import misterpemodder.tmo.main.blocks.base.BlockBase;
 import misterpemodder.tmo.main.blocks.containers.BlockTileEntity;
+import misterpemodder.tmo.main.blocks.containers.BlockTitaniumAnvil;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
@@ -35,7 +36,7 @@ public class ModBlocks {
 		ANCIENT_GOLD_LAMP(new BlockLamp(EnumBlocksNames.ANCIENT_GOLD_LAMP, EnumBlocksValues.LAMP)),
 		DARKANIUM_LAMP(new BlockLamp(EnumBlocksNames.DARKANIUM_LAMP, EnumBlocksValues.LAMP)),
 		TITANIUM_CHEST(new BlockTitaniumChest()),
-		
+		TITANIUM_ANVIL(new BlockTitaniumAnvil()),
 		;
 		private BlockBase block;
 		

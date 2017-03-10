@@ -2,11 +2,15 @@ package misterpemodder.tmo.main.client.gui.tabs;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import org.apache.commons.lang3.tuple.MutablePair;
 
+import mezz.jei.gui.recipes.RecipeClickableArea;
 import misterpemodder.tmo.main.client.gui.ContainerBase;
 import misterpemodder.tmo.main.client.gui.GuiContainerBase;
 import misterpemodder.tmo.main.client.gui.slot.IHidable;
@@ -79,6 +83,14 @@ public abstract class TabBase<C extends ContainerBase<TE>, TE extends TileEntity
 	
 	public void initButtons(int topX, int topY) {}
 	
+	public void onGuiClosed() {}
+	
+	public void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {}
+	
+	public boolean keyTyped(char typedChar, int keyCode) throws IOException {
+		return false;
+	}
+	
 	public List<GuiButton> getButtonsList() {
 		return this.buttons;
 	}
@@ -99,9 +111,19 @@ public abstract class TabBase<C extends ContainerBase<TE>, TE extends TileEntity
 	
 	public void updateButtons() {}
 	
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {}
+	
 	public void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {}
 	
 	public void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {}
+	
+	public boolean hasRecipeClickableAreas() {
+		return false;
+	}
+	
+	public @Nullable RecipeClickableArea[] getRecipeClickableAreas() {
+		return null;
+	}
 		
 	public static class TabTexture {
 		public final ResourceLocation tabTexture;
@@ -109,13 +131,19 @@ public abstract class TabBase<C extends ContainerBase<TE>, TE extends TileEntity
 		public final Point enabledCoords;
 		public final Point disabledCoords;
 		public final Dimension dim;
+		public final Dimension textureSize;
 		
 		public TabTexture(ResourceLocation tabTexture, Point enabledCoords, Point disabledCoords, ResourceLocation screenTexture, Dimension dim) {
+			this(tabTexture, enabledCoords, disabledCoords, screenTexture, dim, null);
+		}
+		
+		public TabTexture(ResourceLocation tabTexture, Point enabledCoords, Point disabledCoords, ResourceLocation screenTexture, Dimension dim, Dimension textureSize) {
 			this.tabTexture = tabTexture;
 			this.screenTexture = screenTexture;
 			this.enabledCoords = enabledCoords;
 			this.disabledCoords = disabledCoords;
 			this.dim = dim;
+			this.textureSize = textureSize == null? new Dimension(256, 128) : textureSize;
 		}
 	}
 	
@@ -134,6 +162,7 @@ public abstract class TabBase<C extends ContainerBase<TE>, TE extends TileEntity
 		PLAYER_INV,
 		REDSTONE,
 		SECURITY,
+		MAIN_TANVIL,
 	}
 	
 }

@@ -25,9 +25,11 @@ import net.minecraftforge.fml.client.config.GuiUtils;
 public class TabSecurity<C extends ContainerBase<TE>, TE extends TileEntityContainerBase & ILockable> extends TabBase {
 	
 	public static final int LOCK_BUTTON_ID = 10;
+	private final boolean isLarge;
 	
-	public TabSecurity() {
+	public TabSecurity(boolean isLarge) {
 		super(TabPos.TOP_LEFT);
+		this.isLarge = isLarge;
 	}
 	
 	@Override
@@ -75,7 +77,11 @@ public class TabSecurity<C extends ContainerBase<TE>, TE extends TileEntityConta
 
 	@Override
 	public TabTexture getTabTexture() {
-		return new TabTexture(DEFAULT_TAB_LOCATION, new Point(96,0), new Point(64, 0), new ResourceLocationTmo("textures/gui/container/security.png"), new Dimension(212, 132));
+		if(isLarge) {
+			return new TabTexture(DEFAULT_TAB_LOCATION, new Point(96,0), new Point(64, 0), new ResourceLocationTmo("textures/gui/container/titanium_chest/security.png"), new Dimension(212, 132), new Dimension(256, 256));
+		} else {
+			return new TabTexture(DEFAULT_TAB_LOCATION, new Point(96,0), new Point(64, 0), new ResourceLocationTmo("textures/gui/container/security.png"), new Dimension(212, 100));
+		}
 	}
 
 	@Override

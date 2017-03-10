@@ -23,10 +23,10 @@ public class GuiContainerTitaniumChest extends GuiContainerBase<ContainerTitaniu
 	public List<TabBase> registerTabs() {
 		List<TabBase> list = new ArrayList<>();
 		list.add(new TabMainTitaniumChest());
-		list.add(new TabInfo<ContainerTitaniumChest, TileEntityTitaniumChest>());
-		list.add(new TabRedstone<ContainerTitaniumChest, TileEntityTitaniumChest>());
+		list.add(new TabInfo<ContainerTitaniumChest, TileEntityTitaniumChest>(true));
+		list.add(new TabRedstone<ContainerTitaniumChest, TileEntityTitaniumChest>(true));
 		
-		list.add(new TabSecurity<ContainerTitaniumChest, TileEntityTitaniumChest>());
+		list.add(new TabSecurity<ContainerTitaniumChest, TileEntityTitaniumChest>(true));
 		
 		list.add(new TabPlayerInventory<ContainerTitaniumChest, TileEntityTitaniumChest>());
 		//Maybe added back

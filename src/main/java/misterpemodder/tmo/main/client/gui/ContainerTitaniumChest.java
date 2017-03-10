@@ -1,32 +1,21 @@
 package misterpemodder.tmo.main.client.gui;
 
-import baubles.api.BaublesApi;
-import baubles.api.cap.IBaublesItemHandler;
+import java.util.ArrayList;
+import java.util.List;
+
 import invtweaks.api.container.ChestContainer;
 import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
-import misterpemodder.tmo.main.client.gui.slot.SlotHidableInventory;
-import misterpemodder.tmo.main.client.gui.slot.SlotHidableInventory.SlotHidableCrafting;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
-import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryCraftResult;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.items.ItemStackHandler;
 
 @ChestContainer(rowSize = 11)
 public class ContainerTitaniumChest extends ContainerBase<TileEntityTitaniumChest> {
 	
 	private static final int numRows = 6;
-	//private static final int size = 66;
-	
-	public InventoryCrafting craftMatrix;
-    public IInventory craftResult;
-    public IBaublesItemHandler baublesInv;
 	
 	/*
 	 * NEW SLOTS:
@@ -43,7 +32,12 @@ public class ContainerTitaniumChest extends ContainerBase<TileEntityTitaniumChes
 	 */
 
 	public ContainerTitaniumChest(TileEntityTitaniumChest te, InventoryPlayer playerInv) {
-		super(te, playerInv);
+		super(te, playerInv, 132);
+	}
+	
+	@Override
+	protected List<Integer> getDefaultSlotIndexes() {
+		return new ArrayList<Integer>();
 	}
 	
 	@Override
@@ -56,32 +50,6 @@ public class ContainerTitaniumChest extends ContainerBase<TileEntityTitaniumChes
         }
 	}
 	
-	@Override
-	protected void setExtraInvSlots() {
-		craftMatrix = new InventoryCrafting(this, 3, 3);
-		craftResult = new InventoryCraftResult();
-		
-		this.addSlotToContainer(new SlotHidableCrafting(playerMainInv.getInventoryPlayer().player, this.craftMatrix, this.craftResult, 0, 181, DEFAULT_OFFSET+75));
-
-        for (int y = 0; y < 3; ++y) {
-            for (int x = 0; x < 3; ++x) {
-                this.addSlotToContainer(new SlotHidableInventory(this.craftMatrix, x + y * 3, 149 + x * 18, DEFAULT_OFFSET+15 + y * 18));
-            }
-        }
-        
-        if(TMORefs.baublesEnabled) {
-			baublesInv = BaublesApi.getBaublesHandler(playerMainInv.getInventoryPlayer().player);
-			for (int x = 0; x < 2; ++x) {
-				for (int y = 0; y < 4; ++y) {
-	            	if(y == 3 && x == 1) break;
-	                this.addSlotToContainer(new SlotHidable(this.baublesInv, y + x * 4, 83 + x * 19, DEFAULT_OFFSET+15 + y * 18, true));
-	            }
-	        }
-		}
-        
-        this.onCraftMatrixChanged(this.craftMatrix);
-	}
-	
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = (Slot)this.inventorySlots.get(index);
@@ -91,8 +59,11 @@ public class ContainerTitaniumChest extends ContainerBase<TileEntityTitaniumChes
             
             //Titanium chest slots
             if (index >= 42 && index < 107) {
-                if(!this.mergeItemStack(itemstack1, 0, 40, true)) {
+                if(!this.mergeItemStack(itemstack1, 0, 40, false)) {
                     return ItemStack.EMPTY;
+                } else {
+                	//Workaround for comparator output level not updating when removing an item with shift-click
+                	te.getWorld().updateComparatorOutputLevel(te.getPos(), te.getBlockType());
                 }
             }
             //player inv
@@ -131,10 +102,6 @@ public class ContainerTitaniumChest extends ContainerBase<TileEntityTitaniumChes
         return itemstack;
     }
 	
-	public void onCraftMatrixChanged(IInventory inventoryIn) {
-        this.craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, playerMainInv.getInventoryPlayer().player.world));
-    }
-	
 	public void onContainerClosed(EntityPlayer playerIn) {
         super.onContainerClosed(playerIn);
 
@@ -148,10 +115,6 @@ public class ContainerTitaniumChest extends ContainerBase<TileEntityTitaniumChes
         }
 
         this.craftResult.setInventorySlotContents(0, ItemStack.EMPTY);
-    }
-	
-	public boolean canMergeSlot(ItemStack stack, Slot slotIn) {
-        return slotIn.inventory != this.craftResult && super.canMergeSlot(stack, slotIn);
     }
 
 }

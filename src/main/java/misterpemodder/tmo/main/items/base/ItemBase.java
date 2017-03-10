@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ItemBase extends Item implements TMOItem {
+public class ItemBase extends Item implements ITMOItem {
 	
 	protected EnumItemsNames names;
 	

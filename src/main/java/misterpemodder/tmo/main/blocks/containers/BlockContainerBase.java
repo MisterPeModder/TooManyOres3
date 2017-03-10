@@ -27,6 +27,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameRules;
@@ -157,5 +158,28 @@ public abstract class BlockContainerBase<TE extends TileEntityContainerBase> ext
 		}
 		
 		return super.onBlockActivated(world, pos, state, player, hand, facing, hitX, hitY, hitZ);
+	}
+	
+	@Override
+	public boolean hasComparatorInputOverride(IBlockState state) {
+		return true;
+	}
+	
+	@Override
+	public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos) {
+		TE te = this.getTileEntity(world, pos);
+		if(te == null) return 0;
+        int i = 0;
+        float f = 0.0F;
+        IItemHandler h = te.getInventory();
+        for (int j = 0; j < h.getSlots(); j++) {
+        	ItemStack itemstack = h.getStackInSlot(j);
+            if (!itemstack.isEmpty()) {
+            	f += (float)itemstack.getCount() / (float)Math.min(h.getSlotLimit(j), itemstack.getMaxStackSize());
+                i++;
+            }
+        }
+        f /= (float)h.getSlots();
+        return MathHelper.floor(f * 14.0F) + (i > 0 ? 1 : 0);
 	}
 }

@@ -5,6 +5,8 @@ import misterpemodder.tmo.api.block.IWorldNameableModifiable;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest;
 import misterpemodder.tmo.main.capability.CapabilityOwner;
+import misterpemodder.tmo.main.capability.ComparatorSyncedItemHandler;
+import misterpemodder.tmo.main.capability.ItemStackHandlerLockable;
 import misterpemodder.tmo.main.capability.OwnerHandlerUUID;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
 import misterpemodder.tmo.main.network.TMOPacketHandler;
@@ -41,7 +43,7 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
     
     public TileEntityTitaniumChest() {
     	super();
-    	this.inventory = new TCItemHandler(this, 66);
+    	this.inventory = new ComparatorSyncedItemHandler(this, 66);
     	this.lock = new ItemStackHandlerLockable(this, 1);
 	}
 	
@@ -108,8 +110,6 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
 	public ITextComponent getDisplayName() {
 		return new TextComponentString(TextFormatting.getTextWithoutFormattingCodes(Tmo.proxy.translate("tile.blockTitaniumChest.name")));
 	}
-	
-	
 	
 	@Override
 	public boolean canRenderBreaking() {
@@ -215,25 +215,7 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
     
     @Override
     public boolean isLocked() {
-    	//ItemStack lock = this.getLockItemHandler().getStackInSlot(0);
-    	//return locked || !(lock.isEmpty() || !(lock.getItem() instanceof IItemLock) || ((IItemLock)lock.getItem()).isBroken(lock));
     	return this.locked;
-    }
-    
-    private static class TCItemHandler extends ItemStackHandler {
-    	
-    	private TileEntityTitaniumChest te;
-    	
-    	public TCItemHandler(TileEntityTitaniumChest te, int size) {
-    		super(size);
-    		this.te = te;
-		}
-    	
-    	@Override
-    	protected void onContentsChanged(int slot) {
-    		super.onContentsChanged(slot);
-    		te.markDirty();
-    	}
     }
     
 }

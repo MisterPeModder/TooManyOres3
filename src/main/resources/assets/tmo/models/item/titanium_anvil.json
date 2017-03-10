@@ -1,0 +1,8 @@
+{
+    "parent": "block/anvil",
+    "textures": {
+		"particle": "tmo:blocks/titanium_block",
+		"body": "tmo:blocks/titanium_block",
+		"top": "tmo:blocks/titanium_block"
+    }
+}

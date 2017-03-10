@@ -1,7 +1,7 @@
 package misterpemodder.tmo.main.items.tools;
 
 import misterpemodder.tmo.main.items.EnumItemsNames;
-import misterpemodder.tmo.main.items.base.TMOItem;
+import misterpemodder.tmo.main.items.base.ITMOItem;
 import misterpemodder.tmo.main.items.materials.TmoToolMaterial;
 import misterpemodder.tmo.main.utils.ItemStackUtils;
 import misterpemodder.tmo.main.utils.TMORefs;
@@ -10,7 +10,7 @@ import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 
-public class ItemTmoHoe extends ItemHoe implements TMOItem {
+public class ItemTmoHoe extends ItemHoe implements ITMOItem {
 	
 	protected EnumItemsNames itemRefs;
 	private TmoToolMaterial material;
