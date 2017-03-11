@@ -6,12 +6,14 @@ import misterpemodder.tmo.main.blocks.base.BlockBase;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemFlintAndSteel;
@@ -102,7 +104,17 @@ public class BlockExploder extends BlockBase {
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) {
 		if(pos.up().equals(fromPos) || world.isBlockPowered(pos)) {
 			this.explode(world, pos);
+		} else {
+			for(EnumFacing side : EnumFacing.HORIZONTALS) {
+				IBlockState s = world.getBlockState(pos.offset(side));
+		        Block b = s.getBlock();
+		        if((b == Blocks.REDSTONE_BLOCK ? 15 : (b == Blocks.REDSTONE_WIRE ? ((Integer)s.getValue(BlockRedstoneWire.POWER)).intValue() : world.getStrongPower(pos, side)))>0) {
+		        	this.explode(world, pos);
+		        	return;
+		        }
+			}
 		}
+		
 	}
 	
 	@Override
@@ -112,7 +124,7 @@ public class BlockExploder extends BlockBase {
         if(heldItem.getItem() instanceof ItemFlintAndSteel) {
         	heldItem.damageItem(1, player);
         	this.explode(world, pos);
-        	return false;
+        	return true;
         }
 		return super.onBlockActivated(world, pos, state, player, hand, facing, hitX, hitY, hitZ);
 	}
