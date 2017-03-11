@@ -9,7 +9,7 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 
-public final class BlockHalfSlab extends BlockSlab<BlockHalfSlab.EnumVariant> {
+public final class BlockHalfSlab extends BlockAbstractSlab<BlockHalfSlab.EnumVariant> {
 	
 	private BlockFullSlab fullSlab;
 	

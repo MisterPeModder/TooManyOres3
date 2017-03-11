@@ -26,12 +26,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class BlockSlab<V extends Enum<V> & IBlockVariant> extends BlockMulti<V> {
+public abstract class BlockAbstractSlab<V extends Enum<V> & IBlockVariant> extends BlockMulti<V> {
 	
 	protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 	protected static final AxisAlignedBB AABB_TOP_HALF = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 1.0D, 1.0D, 1.0D);
 	
-	public static final PropertyEnum<BlockSlab.EnumBlockHalf> HALF = PropertyEnum.create("half", BlockSlab.EnumBlockHalf.class);
+	public static final PropertyEnum<BlockAbstractSlab.EnumBlockHalf> HALF = PropertyEnum.create("half", BlockAbstractSlab.EnumBlockHalf.class);
 	
 	@Override
 	protected BlockStateContainer createBlockState() {
@@ -59,7 +59,7 @@ public abstract class BlockSlab<V extends Enum<V> & IBlockVariant> extends Block
 		
 	}
 	
-	protected BlockSlab(IBlockNames names, IBlockValues values, String suffix) {
+	protected BlockAbstractSlab(IBlockNames names, IBlockValues values, String suffix) {
 		super(names, values, suffix);
 		this.setDefaultState(this.blockState.getBaseState());
 	}
@@ -94,12 +94,12 @@ public abstract class BlockSlab<V extends Enum<V> & IBlockVariant> extends Block
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return this.isDouble() ? FULL_BLOCK_AABB : (state.getValue(HALF) == BlockSlab.EnumBlockHalf.TOP ? AABB_TOP_HALF : AABB_BOTTOM_HALF);
+        return this.isDouble() ? FULL_BLOCK_AABB : (state.getValue(HALF) == BlockAbstractSlab.EnumBlockHalf.TOP ? AABB_TOP_HALF : AABB_BOTTOM_HALF);
     }
 
     @Override
     public boolean isFullyOpaque(IBlockState state) {
-        return ((BlockSlab)state.getBlock()).isDouble() || state.getValue(HALF) == BlockSlab.EnumBlockHalf.TOP;
+        return ((BlockAbstractSlab)state.getBlock()).isDouble() || state.getValue(HALF) == BlockAbstractSlab.EnumBlockHalf.TOP;
     }
 
     public boolean isOpaqueCube(IBlockState state) {
@@ -121,8 +121,8 @@ public abstract class BlockSlab<V extends Enum<V> & IBlockVariant> extends Block
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
     	if(this.isDouble()) return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer);
 
-        IBlockState iblockstate = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(HALF, BlockSlab.EnumBlockHalf.BOTTOM);
-        return facing != EnumFacing.DOWN && (facing == EnumFacing.UP || (double)hitY <= 0.5D) ? iblockstate : iblockstate.withProperty(HALF, BlockSlab.EnumBlockHalf.TOP);
+        IBlockState iblockstate = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(HALF, BlockAbstractSlab.EnumBlockHalf.BOTTOM);
+        return facing != EnumFacing.DOWN && (facing == EnumFacing.UP || (double)hitY <= 0.5D) ? iblockstate : iblockstate.withProperty(HALF, BlockAbstractSlab.EnumBlockHalf.TOP);
     }
 
     @Override

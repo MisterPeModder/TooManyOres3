@@ -4,7 +4,7 @@ import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 
-public class BlockFullSlab extends BlockSlab<BlockHalfSlab.EnumVariant> {
+public class BlockFullSlab extends BlockAbstractSlab<BlockHalfSlab.EnumVariant> {
 	
 	private BlockHalfSlab halfSlab;
 	
