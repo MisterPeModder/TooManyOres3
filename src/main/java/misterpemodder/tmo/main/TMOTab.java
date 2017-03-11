@@ -21,5 +21,9 @@ public class TMOTab extends CreativeTabs {
 	public boolean hasSearchBar() {
 		return true;
 	}
+	
+	public int getSearchbarWidth() {
+        return 69;
+    }
 
 }
