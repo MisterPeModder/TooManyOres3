@@ -179,6 +179,7 @@ tile.blockTitaniumChest.name=Coffre en Titane
 tile.blockTitaniumChest.locked=Ce Coffre en Titane est Verrouillé!
 tile.blockTitaniumChest.lockBroken=Vous avez cassé le cadenas du coffre!
 tile.blockTitaniumAnvil.name=Enclume en titane
+tile.blockExploder.name=Exploseur
 
 #Catégories interface
 gui.tab.main.name=Principal

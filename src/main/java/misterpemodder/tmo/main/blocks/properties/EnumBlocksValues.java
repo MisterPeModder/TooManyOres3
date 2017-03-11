@@ -16,30 +16,6 @@ import net.minecraft.util.BlockRenderLayer;
 
 public enum EnumBlocksValues implements IBlockValues{
 	
-	//custom ones
-	TEST_BLOCK() {
-		public float getHardness(IBlockState state) {
-			return 5.0F;
-		}
-		public float getResistance(IBlockState state) {
-			return 10.0F;
-		}
-		public SoundType getSoundType(IBlockState state) {
-			return SoundType.METAL;
-		}
-		public MapColor getMapColor(@Nullable IBlockState state) {
-			return MapColor.PINK;
-		}
-		public Material getMaterial(@Nullable IBlockState state) {
-			return Material.IRON;
-		}
-		public boolean getUseDefaultTab() {
-			return false;
-		}
-		public int getHarvestLevel(IBlockState state) {
-			return 4;
-		}
-	},
 	BRICK() {
 		public float getHardness(IBlockState state) {
 			return 2.0F;
@@ -263,12 +239,14 @@ public enum EnumBlocksValues implements IBlockValues{
 		DARKANIUM_BLOCK(5.0F, 10.0F, 3, MapColor.PURPLE),
 		ANCIENT_GOLD_BLOCK(5.0F, 10.0F, 3, MapColor.GOLD),
 		PLATINUM_BLOCK(5.0F, 10.0F, 3, MapColor.IRON),
+		EXPLODER(5.0F, 0.0F, 1, MapColor.IRON, false),
 		;
 		
 		private float hardness;
 		private float resistance;
 		private int harvestLevel;
 		private MapColor color;
+		private boolean isFullCube;
 		
 		public SoundType getSoundType(IBlockState state) {
 			return SoundType.METAL;
@@ -288,12 +266,20 @@ public enum EnumBlocksValues implements IBlockValues{
 		public int getHarvestLevel(IBlockState state) {
 			return this.harvestLevel;
 		}
+		public boolean isFullCube(IBlockState state) {
+			return this.isFullCube;
+		}
 		
 		MetalBlocks(float hardness, float resistance, int harvestLevel, MapColor color) {
+			this(hardness, resistance, harvestLevel, color, true);
+		}
+		
+		MetalBlocks(float hardness, float resistance, int harvestLevel, MapColor color, boolean fullCube) {
 			this.harvestLevel = harvestLevel;
 			this.hardness = hardness;
 			this.resistance = resistance;
 			this.color = color;
+			this.isFullCube = fullCube;
 		}
 	}
 	

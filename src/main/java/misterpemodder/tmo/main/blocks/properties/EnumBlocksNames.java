@@ -20,6 +20,7 @@ public enum EnumBlocksNames implements IBlockNames {
 	KEEPER_BLOCK("item_keeper", "blockItemKeeper"),
 	TITANIUM_CHEST("titanium_chest", "blockTitaniumChest", "chestMetal"),
 	TITANIUM_ANVIL("titanium_anvil", "blockTitaniumAnvil", "anvil"),
+	EXPLODER("exploder", "blockExploder"),
 	;
 	String unlocalizedName;
 	String registryName;

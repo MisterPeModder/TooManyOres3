@@ -2,6 +2,7 @@ package misterpemodder.tmo.main.init;
 
 import misterpemodder.tmo.main.blocks.BlockBrick;
 import misterpemodder.tmo.main.blocks.BlockDeco;
+import misterpemodder.tmo.main.blocks.BlockExploder;
 import misterpemodder.tmo.main.blocks.BlockLamp;
 import misterpemodder.tmo.main.blocks.BlockOre;
 import misterpemodder.tmo.main.blocks.BlockStorage;
@@ -37,6 +38,7 @@ public class ModBlocks {
 		DARKANIUM_LAMP(new BlockLamp(EnumBlocksNames.DARKANIUM_LAMP, EnumBlocksValues.LAMP)),
 		TITANIUM_CHEST(new BlockTitaniumChest()),
 		TITANIUM_ANVIL(new BlockTitaniumAnvil()),
+		EXPLODER(new BlockExploder()),
 		;
 		private BlockBase block;
 		

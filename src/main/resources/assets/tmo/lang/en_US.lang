@@ -176,6 +176,7 @@ tile.blockTitaniumChest.locked=This Titanium Chest is locked!
 tile.blockTitaniumChest.lockBroken=You broke the chest's lock!
 tile.blockTitaniumChest.noBreaking=You don't have the permissions to break this chest!
 tile.blockTitaniumAnvil.name=Titanium Anvil
+tile.blockExploder.name=Exploder
 
 #GUI
 gui.tab.main.name=Main
