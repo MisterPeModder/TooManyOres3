@@ -19,6 +19,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.items.ItemStackHandler;
 
 public class BlockTitaniumAnvil extends BlockTileEntity<TileEntityTitaniumAnvil> {
 	
@@ -90,6 +91,17 @@ public class BlockTitaniumAnvil extends BlockTileEntity<TileEntityTitaniumAnvil>
 			player.openGui(Tmo.instance, GuiHandler.EnumGuiElements.TITANIUM_ANVIL.ID, world, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
+	}
+	
+	@Override
+	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+		super.onBlockHarvested(world, pos, state, player);
+		if(this.getTileEntity(world, pos) != null) {
+			ItemStackHandler hammerItemHandler = this.getTileEntity(world, pos).getInventory();
+			if(!hammerItemHandler.getStackInSlot(0).isEmpty()) {
+				spawnAsEntity(world, pos, hammerItemHandler.getStackInSlot(0));
+			}
+		}
 	}
 	
 
