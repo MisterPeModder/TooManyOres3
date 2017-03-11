@@ -52,6 +52,10 @@ public abstract class BlockMulti<V extends Enum<V> & IBlockVariant> extends Bloc
 		return this.getVariant(this.getMetaFromState(state));
 	}
 	
+	public IBlockState getStateFromVariant(IBlockVariant variant) {
+		return this.getStateFromMeta(variant.getMeta());
+	}
+	
 	@Override
 	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list) {
 		for(IBlockVariant type : variants) {

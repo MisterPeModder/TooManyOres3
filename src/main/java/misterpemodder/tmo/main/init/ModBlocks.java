@@ -6,8 +6,11 @@ import misterpemodder.tmo.main.blocks.BlockExploder;
 import misterpemodder.tmo.main.blocks.BlockLamp;
 import misterpemodder.tmo.main.blocks.BlockOre;
 import misterpemodder.tmo.main.blocks.BlockStorage;
+import misterpemodder.tmo.main.blocks.BlockTMOStairs;
 import misterpemodder.tmo.main.blocks.BlockTransparent;
 import misterpemodder.tmo.main.blocks.base.BlockBase;
+import misterpemodder.tmo.main.blocks.base.BlockMulti;
+import misterpemodder.tmo.main.blocks.base.BlockTMO;
 import misterpemodder.tmo.main.blocks.containers.BlockTileEntity;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumAnvil;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest;
@@ -39,14 +42,25 @@ public class ModBlocks {
 		TITANIUM_CHEST(new BlockTitaniumChest()),
 		TITANIUM_ANVIL(new BlockTitaniumAnvil()),
 		EXPLODER(new BlockExploder()),
+		ANCIENT_GOLD_STAIRS(new BlockTMOStairs((BlockMulti) BRICK.getBlock(), BlockBrick.EnumVariant.ANCIENT_GOLD)),
+		DARKANIUM_STAIRS(new BlockTMOStairs((BlockMulti) BRICK.getBlock(), BlockBrick.EnumVariant.DARKANIUM)),
+		ENDSTONE_STAIRS(new BlockTMOStairs((BlockMulti) BRICK.getBlock(), BlockBrick.EnumVariant.ENDSTONE)),
+		FROZIUM_STAIRS(new BlockTMOStairs((BlockMulti) BRICK.getBlock(), BlockBrick.EnumVariant.FROZIUM)),
+		IGNUM_STAIRS(new BlockTMOStairs((BlockMulti) BRICK.getBlock(), BlockBrick.EnumVariant.IGNUM)),
+		GOLD_STAIRS(new BlockTMOStairs((BlockMulti) BRICK.getBlock(), BlockBrick.EnumVariant.GOLD)),
+		PLATINUM_STAIRS(new BlockTMOStairs((BlockMulti) BRICK.getBlock(), BlockBrick.EnumVariant.PLATINUM)),
 		;
-		private BlockBase block;
+		private BlockTMO block;
 		
-		public BlockBase getBlock() {
+		public Block getBlock() {
+			return (Block)this.block;
+		}
+		
+		public BlockTMO getBlockTMO() {
 			return this.block;
 		}
 		
-		TheBlocks(BlockBase block) {
+		TheBlocks(BlockTMO block) {
 			this.block = block;
 		}
 		
@@ -60,25 +74,26 @@ public class ModBlocks {
 	private static void register(IForgeRegistry<Block> registry) {
 		TMORefs.LOGGER.info("Registering Blocks...");
 		for(TheBlocks b : TheBlocks.values()) {
-			BlockBase block = b.getBlock();
-			registry.register(block);
-			if(block.hasOwnItemBlock()) ModItems.ITEM_BLOCKS.add(block.getItemBlock());
+			BlockTMO block = b.getBlockTMO();
+			registry.register(b.getBlock());
+			if(block instanceof BlockBase && ((BlockBase)block).hasOwnItemBlock() || !(block instanceof BlockBase))
+				ModItems.ITEM_BLOCKS.add(block.getItemBlock());
 			if(block instanceof BlockTileEntity) {
-				GameRegistry.registerTileEntity(((BlockTileEntity<?>)block).getTileEntityClass(), block.getRegistryName().toString());
+				GameRegistry.registerTileEntity(((BlockTileEntity<?>)block).getTileEntityClass(), b.getBlock().getRegistryName().toString());
 			}
 		}
 	}
 	
 	public static void registerRenders() {
 		for(TheBlocks bl : TheBlocks.values()) {
-			BlockBase b = bl.getBlock();
+			BlockTMO b = bl.getBlockTMO();
 			b.registerItemRender();
 		}
 	}
 	
 	public static void registerOreDict() {
 		for (TheBlocks b : TheBlocks.values()) {
-			b.getBlock().registerOreDict();
+			b.getBlockTMO().registerOreDict();
 		}
 	}
 	
