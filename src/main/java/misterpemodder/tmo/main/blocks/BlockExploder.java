@@ -5,6 +5,7 @@ import java.util.Random;
 import misterpemodder.tmo.main.blocks.base.BlockBase;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
+import misterpemodder.tmo.main.config.ConfigValues;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.properties.PropertyBool;
@@ -30,7 +31,6 @@ import net.minecraft.world.World;
 
 public class BlockExploder extends BlockBase {
 	
-	public static final float EXPLOSION_STRENGTH = 11.0F;
 	public static final AxisAlignedBB EXPLODER_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.9375D, 1);
 	
 	public static final PropertyBool ACTIVATED = PropertyBool.create("activated");
@@ -92,7 +92,7 @@ public class BlockExploder extends BlockBase {
     public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
 		if(state.getValue(ACTIVATED) == true) {
 			world.setBlockState(pos, Blocks.AIR.getDefaultState());
-			world.createExplosion(null, pos.getX(), pos.getY()+1, pos.getZ(), EXPLOSION_STRENGTH, true);
+			world.createExplosion(null, pos.getX(), pos.getY()+1, pos.getZ(), ConfigValues.FloatValues.EXPLODER_STRENGTH.currentValue, true);
 		}
     }
 	
@@ -135,7 +135,7 @@ public class BlockExploder extends BlockBase {
 		if(player != null && !player.capabilities.isCreativeMode && player.inventory != null) {
 			if(EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, player.inventory.getCurrentItem()) == 0) {
 				world.setBlockState(pos, Blocks.AIR.getDefaultState());
-				world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), EXPLOSION_STRENGTH, true);
+				world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), ConfigValues.FloatValues.EXPLODER_STRENGTH.currentValue, true);
 			}
 		}
 	}

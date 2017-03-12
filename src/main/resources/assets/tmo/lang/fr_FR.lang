@@ -223,6 +223,87 @@ commands.tmo.owner.set.notPlayer=%s n'est pas un joueur
 commands.tmo.owner.force.usage=/tmo owner force <x> <y> <z> <name> <UUID> OU /tmo owner force <x> <y> <z> <name> <UUIDLeast> <UUIDMost>
 commands.tmo.owner.force.success=Le propriétaire du bloc à été changé pour: [%s]
 
+#Configuration
+tmo.configCategory.oreGen=Géneration de minerais
+tmo.configCategory.armor=Armures
+tmo.configCategory.tools=Outils
+tmo.configCategory.compat=Compatibilité
+tmo.configCategory.misc=Divers
+
+tmo.configValue.bool.gen.titanium=Géneration de Titane
+tmo.configValue.bool.gen.titanium.tooltip=Du minerai de titane devrait-il se génerer dans le monde?
+tmo.configValue.bool.gen.ancientGold=Géneration d'or ancien
+tmo.configValue.bool.gen.ancientGold.tooltip=Du minerai d'or ancien devrait-il se génerer dans le monde?
+tmo.configValue.bool.gen.darkanium=Géneration de sombranium
+tmo.configValue.bool.gen.darkanium.tooltip=Du minerai de sombranium devrait-il se génerer dans le monde?
+tmo.configValue.bool.gen.darkaniumNether=Géneration de sombranium du Nether
+tmo.configValue.bool.gen.darkaniumNether.tooltip=Du minerai de sombranium du Nether devrait-il se génerer dans le monde?
+tmo.configValue.bool.gen.frozium=Géneration de frozium
+tmo.configValue.bool.gen.frozium.tooltip=Du minerai de frozium devrait-il se génerer dans le monde?
+tmo.configValue.bool.gen.ignum=Géneration d'ignum
+tmo.configValue.bool.gen.ignum.tooltip=Du minerai d'ignum devrait-il se génerer dans le monde?
+tmo.configValue.bool.gen.ignumNether=Géneration d'ignum du Nether
+tmo.configValue.bool.gen.ignumNether.tooltip=Du minerai de d'ignum du Nether devrait-il se génerer dans le monde?
+tmo.configValue.bool.gen.platinum=Géneration de platine
+tmo.configValue.bool.gen.platinum.tooltip=Du minerai de platine devrait-il se génerer dans le monde?
+tmo.configValue.bool.gen.platinumNether=Géneration de platine du Nether
+tmo.configValue.bool.gen.platinumNether.tooltip=Du minerai de platine du Nether devrait-il se génerer dans le monde?
+tmo.configValue.bool.gen.enderMatter=Géneration de matière de l'Ender
+tmo.configValue.bool.gen.enderMatter.tooltip=Du minerai de matière de l'Ender devrait-il se génerer dans le monde?
+tmo.configValue.bool.gen.copper=Géneration de cuivre
+tmo.configValue.bool.gen.copper.tooltip=Du minerai de cuivre devrait-il se génerer dans le monde?
+tmo.configValue.bool.gen.carbon=Géneration de carbone
+tmo.configValue.bool.gen.carbon.tooltip=Du minerai de carbone devrait-il se génerer dans le monde?
+
+tmo.configValue.bool.tools.titanium=Outils en titane
+tmo.configValue.bool.tools.titanium.tooltip=Activer les outils en titane?
+tmo.configValue.bool.tools.titaniumDark=Outils en titane noir
+tmo.configValue.bool.tools.titaniumDark.tooltip=Activer les outils en titane noir?
+tmo.configValue.bool.tools.copper=Outils en cuivre
+tmo.configValue.bool.tools.copper.tooltip=Activer les outils en cuivre?
+tmo.configValue.bool.tools.ignum=Outils en ignum
+tmo.configValue.bool.tools.ignum.tooltip=Activer les outils en ignum?
+tmo.configValue.bool.tools.frozium=Outils en frozium
+tmo.configValue.bool.tools.frozium.tooltip=Activer les outils en frozium?
+
+tmo.configValue.bool.armor.titanium=Armure en titane
+tmo.configValue.bool.armor.titanium.tooltip=Activer l'armure en titane?
+tmo.configValue.bool.armor.titaniumDark=Armure en titane noir
+tmo.configValue.bool.armor.titaniumDark.tooltip=Activer l'armure en titane noir?
+tmo.configValue.bool.armor.copper=Armure en cuivre
+tmo.configValue.bool.armor.copper.tooltip=Activer l'armure en cuivre?
+tmo.configValue.bool.armor.ignum=Armure en ignum
+tmo.configValue.bool.armor.ignum.tooltip=Activer l'armure en ignum?
+tmo.configValue.bool.armor.frozium=Armure en frozium
+tmo.configValue.bool.armor.frozium.tooltip=Activer l'armure en frozium?
+tmo.configValue.bool.armor.darkanium=Armure en darkanium
+tmo.configValue.bool.armor.darkanium.tooltip=Activer l'armure en darkanium?
+tmo.configValue.bool.armor.hallowed=Armure sacrée
+tmo.configValue.bool.armor.hallowed.tooltip=Activer l'armure sacreé?
+
+tmo.configValue.bool.compat.AAEmpowerer=Recettes de l'Améliorateur de puissance de Actually Additions
+tmo.configValue.bool.compat.AAEmpowerer.tooltip=Ajouter des recettes à l'améliorateur de puissance?
+tmo.configValue.bool.compat.AAReconstructor=Recettes du Reconstructeur atomique de Actually Additions
+tmo.configValue.bool.compat.AAReconstructor.tooltip=Recombineur Matériel? Faisateur Partialisé?
+tmo.configValue.bool.compat.AAMiningLens=Lentilles de minage de Actually Additions
+tmo.configValue.bool.compat.AAMiningLens.tooltip=Ajouter les minerais de TMO aux lentilles de minage?
+tmo.configValue.bool.compat.top=Compatibilité pour The One Probe
+tmo.configValue.bool.compat.top.tooltip=Activer la compatibilité pour The One Probe?
+tmo.configValue.bool.compat.topHideContent=The One Probe: cacher le contenu
+tmo.configValue.bool.compat.topHideContent.tooltip=Cacher le contenu des coffres en titane verrouillés?
+tmo.configValue.bool.compat.baubles=Inventaire de Baubles
+tmo.configValue.bool.compat.baubles.tooltip=Activer la compatibilité pour Baubles?
+
+tmo.configValue.int.misc.bucketCapacity=Capacité maximale du seau en titane
+tmo.configValue.int.misc.bucketCapacity.tooltip=Trop petit pour vous?
+tmo.configValue.int.misc.basicLockBreakChance=Probalitité de cassure: cadenas en titane
+tmo.configValue.int.misc.basicLockBreakChance.tooltip=Augmenter ou diminuer la probabilité que le cadenas se casse. Plus le pourcentage est grand, plus le cadenas aura de chances de se briser.
+tmo.configValue.int.misc.reinforcedLockBreakChance=Probalitité de cassure: cadenas digital
+tmo.configValue.int.misc.reinforcedLockBreakChance.tooltip=Augmenter ou diminuer la probabilité que le cadenas se casse.
+
+tmo.configValue.float.misc.exploderStrength=Force de l'exploseur
+tmo.configValue.float.misc.exploderStrength.tooltip=Changer la force de l'explosion génerée par l'exploseur
+
 
 #JEI
 item.itemIngot.titanium.jeidesc=Le titane est un materiau avec beacoup d'utilisations possibles.\nPeut-être que l'on peut améliorer nos outils en diamant avec?

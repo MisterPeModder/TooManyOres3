@@ -48,6 +48,7 @@ public class ConfigGuiFactory implements IModGuiFactory {
 			List<IConfigElement> list = new ArrayList<IConfigElement>();
 			
 			for(ConfigCategories c : ConfigCategories.values()) {
+				ConfigHandler.config.setCategoryLanguageKey(c.name, c.langKey);
 		        ConfigHandler.config.setCategoryComment(c.name, c.desc);
 		        list.add(new ConfigElement(ConfigHandler.config.getCategory(c.name)));
 		    }

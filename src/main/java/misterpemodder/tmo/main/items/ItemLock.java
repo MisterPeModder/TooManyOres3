@@ -5,6 +5,7 @@ import java.util.Random;
 
 import misterpemodder.tmo.api.item.IItemLock;
 import misterpemodder.tmo.main.Tmo;
+import misterpemodder.tmo.main.config.ConfigValues;
 import misterpemodder.tmo.main.items.ItemVariant.LockVariant;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.Enchantment;
@@ -58,9 +59,9 @@ public class ItemLock extends ItemMulti<ItemVariant.LockVariant> implements IIte
 		int breakChance;
 		ItemVariant.LockVariant variant = lock.getVariant(lockStack.getMetadata());
 		if(variant == LockVariant.BASIC) {
-			breakChance = 50;
+			breakChance = ConfigValues.IntValues.BASIC_LOCK_BREAK_CHANCE.currentValue;
 		} else {
-			breakChance = 20;
+			breakChance = ConfigValues.IntValues.REINFORCED_LOCK_BREAK_CHANCE.currentValue;
 		}
 		breakChance -= EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, lockStack)*PERCENT_DECREASE_PER_UNBREAKING_LEVEL;
 		EnumActionResult result;

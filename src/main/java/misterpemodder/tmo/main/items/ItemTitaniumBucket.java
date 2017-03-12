@@ -4,6 +4,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import misterpemodder.tmo.main.Tmo;
+import misterpemodder.tmo.main.config.ConfigValues;
 import misterpemodder.tmo.main.items.base.ItemBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
@@ -48,8 +49,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemTitaniumBucket extends ItemBase {
-
-	public static final int CAPACITY = 4 * Fluid.BUCKET_VOLUME;
 	
 	public static final String EMPTY_UNLOC_NAME = ".empty";
 	public static final String FILLED_UNLOC_NAME = ".filled";
@@ -68,9 +67,9 @@ public class ItemTitaniumBucket extends ItemBase {
 		
 		//filled buckets 
         for (Fluid fluid : FluidRegistry.getRegisteredFluids().values()) {
-        	FluidStack fs = new FluidStack(fluid, CAPACITY);
+        	FluidStack fs = new FluidStack(fluid, ConfigValues.IntValues.BUCKET_CAPACITY.currentValue);
             ItemStack stack = new ItemStack(this);
-            IFluidHandlerItem fluidHandler = new FluidHandlerItemStack(stack, CAPACITY);
+            IFluidHandlerItem fluidHandler = new FluidHandlerItemStack(stack, ConfigValues.IntValues.BUCKET_CAPACITY.currentValue);
             if (fluidHandler.fill(fs, true) == fs.amount) {
             	ItemStack filled = fluidHandler.getContainer();
                 subItems.add(filled);
@@ -79,7 +78,7 @@ public class ItemTitaniumBucket extends ItemBase {
     }
 	
 	protected static boolean isEmpty(ItemStack stack) {
-		IFluidHandlerItem fluidHandler = new FluidHandlerItemStack(stack, CAPACITY);
+		IFluidHandlerItem fluidHandler = new FluidHandlerItemStack(stack, ConfigValues.IntValues.BUCKET_CAPACITY.currentValue);
 		return fluidHandler.drain(100, false).amount == 0;
 	}
 	
@@ -111,7 +110,7 @@ public class ItemTitaniumBucket extends ItemBase {
 		if(fluidStack == null || fluidStack.amount == 0) {
 			str = Tmo.proxy.translate("item.titaniumBucket.desc.emptyContent");
 		} else {
-			str = Tmo.proxy.translate("item.titaniumBucket.desc.content", fluidStack.getFluid().getLocalizedName(fluidStack), fluidStack.amount, CAPACITY);
+			str = Tmo.proxy.translate("item.titaniumBucket.desc.content", fluidStack.getFluid().getLocalizedName(fluidStack), fluidStack.amount, ConfigValues.IntValues.BUCKET_CAPACITY.currentValue);
 		}
 		
 		tooltip.add(TextFormatting.GREEN+str);
@@ -131,7 +130,7 @@ public class ItemTitaniumBucket extends ItemBase {
         boolean creative = player.capabilities.isCreativeMode;
         
     	if(player.isSneaking()) {
-    		if(!(fluidStack == null || fluidStack.amount + Fluid.BUCKET_VOLUME <= CAPACITY)) {
+    		if(!(fluidStack == null || fluidStack.amount + Fluid.BUCKET_VOLUME <= ConfigValues.IntValues.BUCKET_CAPACITY.currentValue)) {
     			player.sendStatusMessage(new TextComponentString(TextFormatting.DARK_RED+Tmo.proxy.translate("item.titaniumBucket.message.notEnougthCapacity")), true);
     			return ActionResult.newResult(EnumActionResult.PASS, itemstack);
     		}
@@ -160,7 +159,7 @@ public class ItemTitaniumBucket extends ItemBase {
     				FluidStack newFluidStack = FluidUtil.getFluidContained(filledResult.result);
             		if (newFluidStack.amount > 0) {
             			player.setHeldItem(hand, filledResult.result);
-            			player.sendStatusMessage(new TextComponentString(Tmo.proxy.translate("item.titaniumBucket.message.content", newFluidStack.getFluid().getLocalizedName(newFluidStack), newFluidStack.amount, CAPACITY)), true);
+            			player.sendStatusMessage(new TextComponentString(Tmo.proxy.translate("item.titaniumBucket.message.content", newFluidStack.getFluid().getLocalizedName(newFluidStack), newFluidStack.amount, ConfigValues.IntValues.BUCKET_CAPACITY.currentValue)), true);
             			return ActionResult.newResult(EnumActionResult.SUCCESS, itemstack);
             		}
     			}
@@ -194,7 +193,7 @@ public class ItemTitaniumBucket extends ItemBase {
     					if(newFluidStack == null || newFluidStack.amount == 0) {
     						player.sendStatusMessage(new TextComponentString(Tmo.proxy.translate("item.titaniumBucket.message.empty")), true);
     					} else {
-    						player.sendStatusMessage(new TextComponentString(Tmo.proxy.translate("item.titaniumBucket.message.content", newFluidStack.getFluid().getLocalizedName(newFluidStack), newFluidStack.amount, CAPACITY)), true);
+    						player.sendStatusMessage(new TextComponentString(Tmo.proxy.translate("item.titaniumBucket.message.content", newFluidStack.getFluid().getLocalizedName(newFluidStack), newFluidStack.amount, ConfigValues.IntValues.BUCKET_CAPACITY.currentValue)), true);
     					}
     					return ActionResult.newResult(EnumActionResult.SUCCESS, itemstack);
     				}
@@ -274,7 +273,7 @@ public class ItemTitaniumBucket extends ItemBase {
 	
 	@Override
 	public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
-		return new FluidHandlerItemStack(stack, CAPACITY);
+		return new FluidHandlerItemStack(stack, ConfigValues.IntValues.BUCKET_CAPACITY.currentValue);
 	}
 	
 }

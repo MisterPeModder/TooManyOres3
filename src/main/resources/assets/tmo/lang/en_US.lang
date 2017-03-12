@@ -229,6 +229,87 @@ commands.tmo.owner.set.notPlayer=%s is not a player
 commands.tmo.owner.force.usage=/tmo owner force <x> <y> <z> <name> <UUID> OR /tmo owner force <x> <y> <z> <name> <UUIDLeast> <UUIDMost>
 commands.tmo.owner.force.success=Block owner updated to: [%s]
 
+#Configuration
+tmo.configCategory.oreGen=Ore Generation
+tmo.configCategory.armor=Armor
+tmo.configCategory.tools=Tools
+tmo.configCategory.compat=Compatibility
+tmo.configCategory.misc=Miscellaneous
+
+tmo.configValue.bool.gen.titanium=Titanium Generation
+tmo.configValue.bool.gen.titanium.tooltip=Should titanium ore spawn in the World?
+tmo.configValue.bool.gen.ancientGold=Ancient Gold Generation
+tmo.configValue.bool.gen.ancientGold.tooltip=Should ancient gold ore spawn in the World?
+tmo.configValue.bool.gen.darkanium=Darkanium Generation
+tmo.configValue.bool.gen.darkanium.tooltip=Should darkanium ore spawn in the World?
+tmo.configValue.bool.gen.darkaniumNether=Nether Darkanium Generation
+tmo.configValue.bool.gen.darkaniumNether.tooltip=Should nether darkanium ore spawn in the World?
+tmo.configValue.bool.gen.frozium=Frozium Generation
+tmo.configValue.bool.gen.frozium.tooltip=Should frozium ore spawn in the World?
+tmo.configValue.bool.gen.ignum=Ignum Generation
+tmo.configValue.bool.gen.ignum.tooltip=Should ignum ore spawn in the World?
+tmo.configValue.bool.gen.ignumNether=Nether Ignum Generation
+tmo.configValue.bool.gen.ignumNether.tooltip=Should nether ignum ore spawn in the World?
+tmo.configValue.bool.gen.platinum=Platinum Generation
+tmo.configValue.bool.gen.platinum.tooltip=Should platinum ore spawn in the World?
+tmo.configValue.bool.gen.platinumNether=Nether Platinum Generation
+tmo.configValue.bool.gen.platinumNether.tooltip=Should nether platinum ore spawn in the World?
+tmo.configValue.bool.gen.enderMatter=Ender Matter Generation
+tmo.configValue.bool.gen.enderMatter.tooltip=Should ender matter ore spawn in the World?
+tmo.configValue.bool.gen.copper=Copper Generation
+tmo.configValue.bool.gen.copper.tooltip=Should copper ore spawn in the World?
+tmo.configValue.bool.gen.carbon=Carbon Generation
+tmo.configValue.bool.gen.carbon.tooltip=Should carbon ore spawn in the World?
+
+tmo.configValue.bool.tools.titanium=Titanium Tools
+tmo.configValue.bool.tools.titanium.tooltip=Enable titanium tools?
+tmo.configValue.bool.tools.titaniumDark=Dark Titanium Tools
+tmo.configValue.bool.tools.titaniumDark.tooltip=Enable dark titanium tools?
+tmo.configValue.bool.tools.copper=Copper Tools
+tmo.configValue.bool.tools.copper.tooltip=Enable copper tools?
+tmo.configValue.bool.tools.ignum=Ignum Tools
+tmo.configValue.bool.tools.ignum.tooltip=Enable ignum tools?
+tmo.configValue.bool.tools.frozium=Frozium Tools
+tmo.configValue.bool.tools.frozium.tooltip=Enable frozium tools?
+
+tmo.configValue.bool.armor.titanium=Titanium Armor
+tmo.configValue.bool.armor.titanium.tooltip=Enable titanium armor?
+tmo.configValue.bool.armor.titaniumDark=Dark Titanium Armor
+tmo.configValue.bool.armor.titaniumDark.tooltip=Enable dark titanium armor?
+tmo.configValue.bool.armor.copper=Copper Armor
+tmo.configValue.bool.armor.copper.tooltip=Enable copper armor?
+tmo.configValue.bool.armor.ignum=Ignum Armor
+tmo.configValue.bool.armor.ignum.tooltip=Enable ignum armor?
+tmo.configValue.bool.armor.frozium=Frozium Armor
+tmo.configValue.bool.armor.frozium.tooltip=Enable frozium armor?
+tmo.configValue.bool.armor.darkanium=Darkanium Armor
+tmo.configValue.bool.armor.darkanium.tooltip=Enable darkanium armor?
+tmo.configValue.bool.armor.hallowed=Hallowed Armor
+tmo.configValue.bool.armor.hallowed.tooltip=Enable hallowed armor?
+
+tmo.configValue.bool.compat.AAEmpowerer=Actually Additions empowerer recipes
+tmo.configValue.bool.compat.AAEmpowerer.tooltip=Add custom recipes to the ewmpowerer?
+tmo.configValue.bool.compat.AAReconstructor=Actually Additions atomic reconstructor recipes
+tmo.configValue.bool.compat.AAReconstructor.tooltip=Molecular Shiftulator? Spatial Replacer?
+tmo.configValue.bool.compat.AAMiningLens=Actually Additions mining lens
+tmo.configValue.bool.compat.AAMiningLens.tooltip=Add TMO ores to the mining lens?
+tmo.configValue.bool.compat.top=The One Probe compat
+tmo.configValue.bool.compat.top.tooltip=The One Probe compatibility?
+tmo.configValue.bool.compat.topHideContent=The One Probe: hide content
+tmo.configValue.bool.compat.topHideContent.tooltip=Hide locked titanium chest content?
+tmo.configValue.bool.compat.baubles=Baubles Inventory
+tmo.configValue.bool.compat.baubles.tooltip=Enable baubles compatibility?
+
+tmo.configValue.int.misc.bucketCapacity=Max Titanium Bucket capacity
+tmo.configValue.int.misc.bucketCapacity.tooltip=Too small capacity?
+tmo.configValue.int.misc.basicLockBreakChance=Titanium Lock break chance
+tmo.configValue.int.misc.basicLockBreakChance.tooltip=Increase or decrease titanium lock break chance. A high break percentage means high chance to break.
+tmo.configValue.int.misc.reinforcedLockBreakChance=Smart Lock break chance
+tmo.configValue.int.misc.reinforcedLockBreakChance.tooltip=Increase or decrease smart lock break chance.
+
+tmo.configValue.float.misc.exploderStrength=Exploder strength
+tmo.configValue.float.misc.exploderStrength.tooltip=Change the strength of the explosion the explder makes
+
 #JEI
 item.itemIngot.titanium.jeidesc=Titanium is a very sturdy material that have a lot of uses...\nPerhaps you could upgrade your diamond with this?
 
