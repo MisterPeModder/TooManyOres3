@@ -240,6 +240,7 @@ public enum EnumBlocksValues implements IBlockValues{
 		ANCIENT_GOLD_BLOCK(5.0F, 10.0F, 3, MapColor.GOLD),
 		PLATINUM_BLOCK(5.0F, 10.0F, 3, MapColor.IRON),
 		EXPLODER(5.0F, 0.0F, 1, MapColor.IRON, false),
+		MACHINE(5.0F, 7.0F, 1, MapColor.IRON, false),
 		;
 		
 		private float hardness;

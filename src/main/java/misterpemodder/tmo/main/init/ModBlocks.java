@@ -5,10 +5,12 @@ import misterpemodder.tmo.main.blocks.BlockDeco;
 import misterpemodder.tmo.main.blocks.BlockExploder;
 import misterpemodder.tmo.main.blocks.BlockLamp;
 import misterpemodder.tmo.main.blocks.BlockOre;
+import misterpemodder.tmo.main.blocks.BlockRedstoneStrong;
 import misterpemodder.tmo.main.blocks.BlockStorage;
 import misterpemodder.tmo.main.blocks.BlockTMOStairs;
 import misterpemodder.tmo.main.blocks.BlockTransparent;
 import misterpemodder.tmo.main.blocks.base.BlockBase;
+import misterpemodder.tmo.main.blocks.base.BlockMachine;
 import misterpemodder.tmo.main.blocks.base.BlockMulti;
 import misterpemodder.tmo.main.blocks.base.BlockTMO;
 import misterpemodder.tmo.main.blocks.containers.BlockTileEntity;
@@ -41,6 +43,8 @@ public class ModBlocks {
 		DARKANIUM_LAMP(new BlockLamp(EnumBlocksNames.DARKANIUM_LAMP, EnumBlocksValues.LAMP)),
 		TITANIUM_CHEST(new BlockTitaniumChest()),
 		TITANIUM_ANVIL(new BlockTitaniumAnvil()),
+		MACHINE_CASING(new BlockMachine(EnumBlocksNames.MACHINE_CASING, EnumBlocksValues.MetalBlocks.MACHINE)),
+		STRONG_REDSTONE_BLOCK(new BlockRedstoneStrong()),
 		EXPLODER(new BlockExploder()),
 		ANCIENT_GOLD_STAIRS(new BlockTMOStairs((BlockMulti) BRICK.getBlock(), BlockBrick.EnumVariant.ANCIENT_GOLD)),
 		DARKANIUM_STAIRS(new BlockTMOStairs((BlockMulti) BRICK.getBlock(), BlockBrick.EnumVariant.DARKANIUM)),

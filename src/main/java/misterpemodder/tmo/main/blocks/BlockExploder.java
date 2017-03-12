@@ -2,7 +2,7 @@ package misterpemodder.tmo.main.blocks;
 
 import java.util.Random;
 
-import misterpemodder.tmo.main.blocks.base.BlockBase;
+import misterpemodder.tmo.main.blocks.base.BlockMachine;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
 import misterpemodder.tmo.main.config.ConfigValues;
@@ -19,7 +19,6 @@ import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
@@ -29,7 +28,7 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockExploder extends BlockBase {
+public class BlockExploder extends BlockMachine {
 	
 	public static final AxisAlignedBB EXPLODER_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.9375D, 1);
 	
@@ -52,10 +51,6 @@ public class BlockExploder extends BlockBase {
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(ACTIVATED, meta == 1? true:false);
-	}
-	
-	public BlockRenderLayer getBlockLayer() {
-		return BlockRenderLayer.CUTOUT;
 	}
 	
 	@Override

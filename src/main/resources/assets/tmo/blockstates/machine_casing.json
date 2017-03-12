@@ -2,15 +2,11 @@
     "forge_marker": 1,
     "defaults": {
 		"textures": {},
-		"model": "tmo:exploder",
+		"model": "tmo:machine_casing",
 		"transform": "forge:default-block"
     },
     "variants": {
         "normal": [{}],
-        "inventory": [{}],
-		"activated": {
-			"true": {},
-			"false": {}
-		}
+        "inventory": [{}]
     }
 }

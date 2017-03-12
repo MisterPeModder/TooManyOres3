@@ -183,6 +183,8 @@ tile.blockTitaniumChest.locked=This Titanium Chest is locked!
 tile.blockTitaniumChest.lockBroken=You broke the chest's lock!
 tile.blockTitaniumChest.noBreaking=You don't have the permissions to break this chest!
 tile.blockTitaniumAnvil.name=Titanium Anvil
+tile.machineCasing.name=Machine Casing
+tile.blockRedstoneStrong.name=Strong Redstone Block
 tile.blockExploder.name=Exploder
 
 #GUI
