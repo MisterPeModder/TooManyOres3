@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
+import misterpemodder.tmo.api.IStrongPistonBehavior;
+import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.main.blocks.base.BlockTMO;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
@@ -189,24 +191,17 @@ public class BlockPistonStrongBase extends BlockPistonBase implements BlockTMO {
         }
         else if (pos.getY() >= 0 && (facing != EnumFacing.DOWN || pos.getY() != 0)) {
             if (pos.getY() <= worldIn.getHeight() - 1 && (facing != EnumFacing.UP || pos.getY() != worldIn.getHeight() - 1)) {
-                if (!(block instanceof BlockPistonBase)) {
-                    if (blockStateIn.getBlockHardness(worldIn, pos) == -1.0F) {
-                        return false;
-                    }
-
-                    if (blockStateIn.getMobilityFlag() == EnumPushReaction.BLOCK) {
-                        return false;
-                    }
-
-                    if (blockStateIn.getMobilityFlag() == EnumPushReaction.DESTROY) {
-                        return destroyBlocks;
-                    }
+        
+                if(TooManyOresAPI.STRONG_PISTON_BEHAVIORS.isEmpty()) {
+                	return true;
+                } else {
+                	for(IStrongPistonBehavior behavior : TooManyOresAPI.STRONG_PISTON_BEHAVIORS) {
+                		if(!behavior.canPushBlock(blockStateIn, worldIn, pos, facing, destroyBlocks)) {
+                			return false;
+                		}
+                	}
+                	return true;
                 }
-                else if (((Boolean)blockStateIn.getValue(EXTENDED)).booleanValue()) {
-                    return false;
-                }
-                
-                return true;
             }
             else {
                 return false;

@@ -188,9 +188,14 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 					return stack.getItem() instanceof IItemLock;
 				}
 			};
-			SlotFiltered ls = new SlotFiltered(((ILockable)this.te).getLockItemHandler(), 0, 8, 18, true, lockTest);
-			//ls.setBackgroundName(TMORefs.PREFIX+"empty_lock_slot.png");
-			//ls.setBackgroundLocation(new ResourceLocationTmo("textures/items/empty_lock_slot.png"));
+			final ILockable lockable = (ILockable) this.te;
+			SlotFiltered ls = new SlotFiltered(lockable.getLockItemHandler(), 0, 8, 18, true, lockTest) {
+				@Override
+				public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack) {
+					lockable.setLocked(false);
+					return super.onTake(thePlayer, stack);
+				}
+			};
 			this.addSlotToContainer(ls);
 		}
 	}

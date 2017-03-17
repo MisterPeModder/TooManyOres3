@@ -1,6 +1,8 @@
 package misterpemodder.tmo.api;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import misterpemodder.tmo.api.block.ISlimeBlock;
@@ -30,5 +32,6 @@ public final class TooManyOresAPI {
 	public static ITMOMethodHandler methodHandler;
 	
 	public static final Map<Block, ISlimeBlock> SLIME_BLOCKS = new HashMap<>();
+	public static final List<IStrongPistonBehavior> STRONG_PISTON_BEHAVIORS = new ArrayList<>();
 	
 }

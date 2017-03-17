@@ -1,5 +1,6 @@
 package misterpemodder.tmo.api.handler;
 
+import misterpemodder.tmo.api.IStrongPistonBehavior;
 import misterpemodder.tmo.api.block.ISlimeBlock;
 import net.minecraft.block.Block;
 
@@ -14,5 +15,10 @@ public interface ITMORegistryHandler {
 	 * @param block
 	 */
 	public void registerSlimeBlock(ISlimeBlock slime, Block block);
+	
+	/**
+	 * Registers a strong piston behavior
+	 */
+	public void registerStrongPistonBehavior(IStrongPistonBehavior behavior);
 	
 }

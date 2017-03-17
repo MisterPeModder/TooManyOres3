@@ -9,6 +9,7 @@ import mcjty.theoneprobe.api.IProbeInfoAccessor;
 import mcjty.theoneprobe.api.ProbeMode;
 import mcjty.theoneprobe.apiimpl.elements.ElementVertical;
 import mcjty.theoneprobe.config.Config;
+import misterpemodder.tmo.api.IStrongPistonBehavior;
 import misterpemodder.tmo.api.item.IItemLock;
 import misterpemodder.tmo.api.owner.IOwnerHandler;
 import misterpemodder.tmo.main.Tmo;
@@ -236,6 +237,21 @@ public class BlockTitaniumChest extends BlockContainerBase<TileEntityTitaniumChe
 			else {
 				main.horizontal().item(lock, main.defaultItemStyle().height(27)).element(textInfo);
 			}
+		}
+		
+	}
+	
+	public static class TChestPistonBehavior implements IStrongPistonBehavior {
+
+		@Override
+		public boolean canPushBlock(IBlockState state, World world, BlockPos pos, EnumFacing facing, boolean destroyBlocks) {
+			if(state.getBlock() instanceof BlockTitaniumChest) {
+				TileEntity te = world.getTileEntity(pos);
+				if(te != null && te instanceof TileEntityTitaniumChest) {
+					return !((TileEntityTitaniumChest)te).isLocked();
+				}
+			}
+			return true;
 		}
 		
 	}

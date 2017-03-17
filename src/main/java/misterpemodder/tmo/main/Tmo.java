@@ -23,9 +23,11 @@ package misterpemodder.tmo.main;
 
 import de.ellpeck.actuallyadditions.api.ActuallyAdditionsAPI;
 import misterpemodder.tmo.api.TooManyOresAPI;
+import misterpemodder.tmo.main.apiimpl.DefaultStrongPistonBehavior;
 import misterpemodder.tmo.main.apiimpl.MethodHandler;
 import misterpemodder.tmo.main.apiimpl.RegistryHandler;
 import misterpemodder.tmo.main.apiimpl.SlimeBlock;
+import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest.TChestPistonBehavior;
 import misterpemodder.tmo.main.capability.CapabilityOwner;
 import misterpemodder.tmo.main.commands.CommandTMO;
 import misterpemodder.tmo.main.compat.aa.ActAddCompat;
@@ -73,7 +75,7 @@ public class Tmo {
 		TooManyOresAPI.registryHandler = new RegistryHandler();
 		CapabilityOwner.register();
 		
-		GameRegistry.registerWorldGenerator(new OreGen(), 5141);
+		GameRegistry.registerWorldGenerator(new OreGen(), 42);
 
 		proxy.preInit();
 	}
@@ -82,6 +84,8 @@ public class Tmo {
 	public void Init(FMLInitializationEvent event) {
 		TMORefs.LOGGER.info("Init!");
 		SlimeBlock.registerSlimeBlocksInternal();
+		TooManyOresAPI.registryHandler.registerStrongPistonBehavior(new DefaultStrongPistonBehavior());
+		TooManyOresAPI.registryHandler.registerStrongPistonBehavior(new TChestPistonBehavior());
 		TMORefs.actAddLoaded = Loader.isModLoaded(ActuallyAdditionsAPI.MOD_ID);
 		TMORefs.topLoaded = Loader.isModLoaded("theoneprobe");
 		TMORefs.baublesLoaded = Loader.isModLoaded("baubles");
