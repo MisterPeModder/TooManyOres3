@@ -2,10 +2,12 @@ package misterpemodder.tmo.main.proxy;
 
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.client.gui.GuiHandler;
+import misterpemodder.tmo.main.client.render.TileEntityStrongPistonRenderer;
 import misterpemodder.tmo.main.client.render.TileEntityTitaniumAnvilRenderer;
 import misterpemodder.tmo.main.client.render.TileEntityTitaniumChestRenderer;
 import misterpemodder.tmo.main.init.ModBlocks;
 import misterpemodder.tmo.main.init.ModItems;
+import misterpemodder.tmo.main.tileentity.TileEntityStrongPiston;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumAnvil;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import net.minecraft.client.resources.I18n;
@@ -25,6 +27,7 @@ public class ClientProxy extends CommonProxy {
 		//TESRs
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTitaniumChest.class, new TileEntityTitaniumChestRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTitaniumAnvil.class, new TileEntityTitaniumAnvilRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStrongPiston.class, new TileEntityStrongPistonRenderer());
 		//TileEntityItemStackRenderer.instance = new TileEntityTitaniumChestInvRenderer();
 	}
 	

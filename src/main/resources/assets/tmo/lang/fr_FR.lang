@@ -189,6 +189,11 @@ tile.blockTitaniumAnvil.name=Enclume en titane
 tile.machineCasing.name=Boiter de machine
 tile.blockRedstoneStrong.name=Block de redstone fort
 tile.blockExploder.name=Exploseur
+tile.blockExploder.desc=à manier avec précaution!
+tile.blockPistonBase.name=Piston fort
+tile.blockPistonBase.desc=Peut bouger les TileEntities
+tile.blockPistonBaseSticky.name=Piston collant fort
+tile.blockPistonBaseSticky.desc=Peut bouger les TileEntities
 
 #Catégories interface
 gui.tab.main.name=Principal

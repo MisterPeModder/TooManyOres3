@@ -5,17 +5,19 @@ import misterpemodder.tmo.main.blocks.BlockDeco;
 import misterpemodder.tmo.main.blocks.BlockExploder;
 import misterpemodder.tmo.main.blocks.BlockLamp;
 import misterpemodder.tmo.main.blocks.BlockOre;
+import misterpemodder.tmo.main.blocks.BlockPistonStrongBase;
 import misterpemodder.tmo.main.blocks.BlockRedstoneStrong;
 import misterpemodder.tmo.main.blocks.BlockStorage;
+import misterpemodder.tmo.main.blocks.BlockStrongPistonExtension;
+import misterpemodder.tmo.main.blocks.BlockStrongPistonMoving;
 import misterpemodder.tmo.main.blocks.BlockTMOStairs;
 import misterpemodder.tmo.main.blocks.BlockTransparent;
-import misterpemodder.tmo.main.blocks.base.BlockBase;
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
 import misterpemodder.tmo.main.blocks.base.BlockMulti;
 import misterpemodder.tmo.main.blocks.base.BlockTMO;
-import misterpemodder.tmo.main.blocks.containers.BlockTileEntity;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumAnvil;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest;
+import misterpemodder.tmo.main.blocks.containers.IBlockTileEntity;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
 import misterpemodder.tmo.main.blocks.slab.BlockFullSlab;
@@ -53,6 +55,10 @@ public class ModBlocks {
 		IGNUM_STAIRS(new BlockTMOStairs((BlockMulti) BRICK.getBlock(), BlockBrick.EnumVariant.IGNUM)),
 		GOLD_STAIRS(new BlockTMOStairs((BlockMulti) BRICK.getBlock(), BlockBrick.EnumVariant.GOLD)),
 		PLATINUM_STAIRS(new BlockTMOStairs((BlockMulti) BRICK.getBlock(), BlockBrick.EnumVariant.PLATINUM)),
+		STRONG_PISTON(new BlockPistonStrongBase(EnumBlocksNames.STRONG_PISTON_BASE, false)),
+		STRONG_PISTON_STICKY(new BlockPistonStrongBase(EnumBlocksNames.STRONG_PISTON_BASE_STICKY, true)),
+		STRONG_PISTON_EXTENSION(new BlockStrongPistonExtension()),
+		STRONG_PISTON_MOVING(new BlockStrongPistonMoving()),
 		;
 		private BlockTMO block;
 		
@@ -80,10 +86,10 @@ public class ModBlocks {
 		for(TheBlocks b : TheBlocks.values()) {
 			BlockTMO block = b.getBlockTMO();
 			registry.register(b.getBlock());
-			if(block instanceof BlockBase && ((BlockBase)block).hasOwnItemBlock() || !(block instanceof BlockBase))
+			if(block.hasOwnItemBlock())
 				ModItems.ITEM_BLOCKS.add(block.getItemBlock());
-			if(block instanceof BlockTileEntity) {
-				GameRegistry.registerTileEntity(((BlockTileEntity<?>)block).getTileEntityClass(), b.getBlock().getRegistryName().toString());
+			if(block instanceof IBlockTileEntity) {
+				GameRegistry.registerTileEntity(((IBlockTileEntity<?>)block).getTileEntityClass(), b.getBlock().getRegistryName().toString());
 			}
 		}
 	}
@@ -91,7 +97,8 @@ public class ModBlocks {
 	public static void registerRenders() {
 		for(TheBlocks bl : TheBlocks.values()) {
 			BlockTMO b = bl.getBlockTMO();
-			b.registerItemRender();
+			if(b.hasOwnItemBlock())
+				b.registerItemRender();
 		}
 	}
 	

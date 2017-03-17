@@ -66,7 +66,7 @@ public abstract class BlockContainerBase<TE extends TileEntityContainerBase> ext
 		
 		GameRules rules = world.getGameRules();
 		
-		if(rules.getBoolean("doTileDrops")) {
+		if(te != null && rules.getBoolean("doTileDrops")) {
 			if(!rules.getBoolean("dropInvContents")) {
 				world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), this.toItem(te, state)));
 			} else {

@@ -7,9 +7,7 @@ import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemBlock;
-import net.minecraftforge.client.model.ModelLoader;
 
 public class BlockTMOStairs extends BlockStairs implements BlockTMO {
 	
@@ -29,15 +27,6 @@ public class BlockTMOStairs extends BlockStairs implements BlockTMO {
 		itemBlock.setRegistryName(this.getRegistryName());
 		this.setCreativeTab(TMORefs.TMO_TAB);
 	}
-
-	@Override
-	public void registerItemRender() {
-		ModelResourceLocation location = new ModelResourceLocation(this.getRegistryName(), "inventory");
-		ModelLoader.setCustomModelResourceLocation(this.getItemBlock(), 0, location);
-	}
-
-	@Override
-	public void registerOreDict() {}
 
 	@Override
 	public ItemBlock getItemBlock() {

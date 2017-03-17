@@ -18,6 +18,7 @@ import misterpemodder.tmo.main.capability.CapabilityOwner;
 import misterpemodder.tmo.main.client.gui.GuiHandler;
 import misterpemodder.tmo.main.config.ConfigValues;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
+import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -54,6 +55,11 @@ public class BlockTitaniumChest extends BlockContainerBase<TileEntityTitaniumChe
 	
 	public BlockTitaniumChest() {
 		super(EnumBlocksNames.TITANIUM_CHEST, EnumBlocksValues.TITANIUM_CHEST);
+	}
+	
+	@Override
+	public EnumPushReaction getMobilityFlag(IBlockState state) {
+		return EnumPushReaction.NORMAL;
 	}
 	
 	@Override

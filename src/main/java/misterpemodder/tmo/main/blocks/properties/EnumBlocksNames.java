@@ -23,6 +23,10 @@ public enum EnumBlocksNames implements IBlockNames {
 	MACHINE_CASING("machine_casing", "machineCasing"),
 	EXPLODER("exploder", "blockExploder"),
 	STRONG_REDSTONE_BLOCK("strong_redstone_block", "blockRedstoneStrong"),
+	STRONG_PISTON_BASE("strong_piston", "blockPistonBase"),
+	STRONG_PISTON_BASE_STICKY("sticky_strong_piston", "blockPistonBaseSticky"),
+	STRONG_PISTON_EXTENSION("strong_piston_head", "blockPistonBase"),
+	STRONG_PISTON_MOVING("strong_piston_extension", "blockPistonExtension"),
 	;
 	String unlocalizedName;
 	String registryName;

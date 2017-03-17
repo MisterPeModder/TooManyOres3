@@ -1,5 +1,9 @@
 package misterpemodder.tmo.main.events;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import misterpemodder.tmo.api.block.ILockable;
 import misterpemodder.tmo.api.owner.IOwnerHandler;
 import misterpemodder.tmo.main.Tmo;
@@ -17,8 +21,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.network.NetworkPlayerInfo;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
@@ -36,6 +42,7 @@ import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.AnvilUpdateEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
@@ -201,6 +208,30 @@ public class EventHandler {
 			}
 		}
 		
+	}
+	
+	@SubscribeEvent
+	public static void itemTooltipEvent(ItemTooltipEvent event) {
+		if(I18n.hasKey(event.getItemStack().getUnlocalizedName()+".desc")) {
+			String t = I18n.format(event.getItemStack().getUnlocalizedName()+".desc");
+				
+			//expand new lines
+			List<String> expandedLines = Arrays.asList(t.split("\\\\n"));
+				
+			List<String> toAdd = new ArrayList<>();
+			FontRenderer font = Minecraft.getMinecraft().fontRendererObj;
+			for(String line : expandedLines) {
+				
+				if(font.getStringWidth(line)>200) {
+					toAdd.addAll(font.listFormattedStringToWidth(line, 200));
+				} else {
+					toAdd.add(line);
+				}
+			}
+			
+			for(String str : toAdd)
+				event.getToolTip().add(TextFormatting.GRAY+""+TextFormatting.ITALIC+str);
+		}
 	}
 	
 }

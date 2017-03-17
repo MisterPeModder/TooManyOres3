@@ -22,6 +22,10 @@
 package misterpemodder.tmo.main;
 
 import de.ellpeck.actuallyadditions.api.ActuallyAdditionsAPI;
+import misterpemodder.tmo.api.TooManyOresAPI;
+import misterpemodder.tmo.main.apiimpl.MethodHandler;
+import misterpemodder.tmo.main.apiimpl.RegistryHandler;
+import misterpemodder.tmo.main.apiimpl.SlimeBlock;
 import misterpemodder.tmo.main.capability.CapabilityOwner;
 import misterpemodder.tmo.main.commands.CommandTMO;
 import misterpemodder.tmo.main.compat.aa.ActAddCompat;
@@ -65,7 +69,8 @@ public class Tmo {
 		new ConfigHandler(event.getSuggestedConfigurationFile());
 		TMOPacketHandler.init();
 		PacketDataHandlers.registerHandlers();
-		
+		TooManyOresAPI.methodHandler = new MethodHandler();
+		TooManyOresAPI.registryHandler = new RegistryHandler();
 		CapabilityOwner.register();
 		
 		GameRegistry.registerWorldGenerator(new OreGen(), 5141);
@@ -76,6 +81,7 @@ public class Tmo {
 	@EventHandler
 	public void Init(FMLInitializationEvent event) {
 		TMORefs.LOGGER.info("Init!");
+		SlimeBlock.registerSlimeBlocksInternal();
 		TMORefs.actAddLoaded = Loader.isModLoaded(ActuallyAdditionsAPI.MOD_ID);
 		TMORefs.topLoaded = Loader.isModLoaded("theoneprobe");
 		TMORefs.baublesLoaded = Loader.isModLoaded("baubles");

@@ -1,9 +1,5 @@
 package misterpemodder.tmo.main.blocks.base;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockValues;
 import misterpemodder.tmo.main.utils.TMORefs;
@@ -11,23 +7,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class BlockBase extends Block implements BlockTMO {
@@ -70,12 +56,6 @@ public class BlockBase extends Block implements BlockTMO {
 	
 	public ItemBlockBase getItemBlock() {
 		return this.itemBlock;
-	}
-	
-	@Override
-	public void registerItemRender() {
-		ModelResourceLocation location = new ModelResourceLocation(TMORefs.PREFIX + names.getRegistryName(), "inventory");
-		ModelLoader.setCustomModelResourceLocation(this.getItemBlock(), 0, location);
 	}
 	
 	@Override
@@ -158,31 +138,5 @@ public class BlockBase extends Block implements BlockTMO {
     public int getLightOpacity(IBlockState state) {
     	return ((BlockBase)state.getBlock()).values.getLightOpacity(state);
     }
-	
-	
-    @Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-		if(I18n.hasKey(this.getUnlocalizedName()+".desc")) {
-			String t = I18n.format(this.getUnlocalizedName()+".desc");
-				
-			//expand new lines
-			List<String> expandedLines = Arrays.asList(t.split("\\\\n"));
-				
-			List<String> toAdd = new ArrayList<>();
-			FontRenderer font = Minecraft.getMinecraft().fontRendererObj;
-			for(String line : expandedLines) {
-				
-				if(font.getStringWidth(line)>200) {
-					toAdd.addAll(font.listFormattedStringToWidth(line, 200));
-				} else {
-					toAdd.add(line);
-				}
-			}
-			
-			for(String str : toAdd)
-				tooltip.add(TextFormatting.GRAY+""+TextFormatting.ITALIC+str);
-		}
-	}
 	
 }

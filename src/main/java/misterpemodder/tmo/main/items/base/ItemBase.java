@@ -1,22 +1,10 @@
 package misterpemodder.tmo.main.items.base;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import misterpemodder.tmo.main.items.EnumItemsNames;
 import misterpemodder.tmo.main.utils.TMORefs;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemBase extends Item implements ITMOItem {
@@ -36,31 +24,6 @@ public class ItemBase extends Item implements ITMOItem {
 		}
 		for (String str : oreDictNames) {
 			OreDictionary.registerOre(str, this);
-		}
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-		if(I18n.hasKey(this.getUnlocalizedName(stack)+".desc")) {
-			String t = I18n.format(this.getUnlocalizedName(stack)+".desc");
-				
-			//expand new lines
-			List<String> expandedLines = Arrays.asList(t.split("\\\\n"));
-				
-			List<String> toAdd = new ArrayList<>();
-			FontRenderer font = Minecraft.getMinecraft().fontRendererObj;
-			for(String line : expandedLines) {
-				
-				if(font.getStringWidth(line)>200) {
-					toAdd.addAll(font.listFormattedStringToWidth(line, 200));
-				} else {
-					toAdd.add(line);
-				}
-			}
-			
-			for(String str : toAdd)
-				tooltip.add(TextFormatting.GRAY+""+TextFormatting.ITALIC+str);
 		}
 	}
 	

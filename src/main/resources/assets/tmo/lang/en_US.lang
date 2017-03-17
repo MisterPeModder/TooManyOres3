@@ -186,6 +186,11 @@ tile.blockTitaniumAnvil.name=Titanium Anvil
 tile.machineCasing.name=Machine Casing
 tile.blockRedstoneStrong.name=Strong Redstone Block
 tile.blockExploder.name=Exploder
+tile.blockExploder.desc=Handle with care!
+tile.blockPistonBase.name=Strong Piston
+tile.blockPistonBase.desc=Can move TileEntities
+tile.blockPistonBaseSticky.name=Sticky Strong Piston
+tile.blockPistonBaseSticky.desc=Can move TileEntities
 
 #GUI
 gui.tab.main.name=Main

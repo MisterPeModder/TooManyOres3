@@ -5,6 +5,7 @@ import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
 import misterpemodder.tmo.main.client.gui.GuiHandler;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumAnvil;
+import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -34,6 +35,11 @@ public class BlockTitaniumAnvil extends BlockTileEntity<TileEntityTitaniumAnvil>
 	
 	public BlockTitaniumAnvil() {
 		super(EnumBlocksNames.TITANIUM_ANVIL, EnumBlocksValues.TITANIUM_ANVIL);
+	}
+	
+	@Override
+	public EnumPushReaction getMobilityFlag(IBlockState state) {
+		return EnumPushReaction.NORMAL;
 	}
 	
 	@Override

@@ -1,0 +1,101 @@
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
+    "textures": {
+		"particle": "tmo:blocks/strong_piston_top_inner",
+        "0": "tmo:blocks/strong_piston_top_normal",
+        "1": "tmo:blocks/strong_piston_side",
+        "2": "tmo:blocks/strong_piston_top_inner",
+        "3": "tmo:blocks/strong_piston_extension",
+        "4": "tmo:blocks/strong_piston_top_normal",
+        "5": "tmo:blocks/strong_piston_top_inner",
+        "6": "tmo:blocks/strong_piston_extension"
+    },
+    "elements": [
+        {
+            "name": "Head",
+            "from": [ 0.0, 0.0, 0.0 ], 
+            "to": [ 16.0, 16.0, 4.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "cullface": "north" },
+                "east": { "texture": "#1", "uv": [ 0.0, 0.0, 16.0, 4.0 ], "rotation": 90, "cullface": "east" },
+                "south": { "texture": "#2", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+                "west": { "texture": "#1", "uv": [ 0.0, 0.0, 16.0, 4.0 ], "rotation": 270, "cullface": "west" },
+                "up": { "texture": "#1", "uv": [ 0.0, 0.0, 16.0, 4.0 ], "cullface": "up" },
+                "down": { "texture": "#1", "uv": [ 0.0, 0.0, 16.0, 4.0 ], "rotation": 180, "cullface": "down" }
+            }
+        },
+        {
+            "name": "ExtensionSmall",
+            "from": [ 6.0, 6.0, 4.0 ], 
+            "to": [ 10.0, 10.0, 12.0 ], 
+            "faces": {
+                "east": { "texture": "#3", "uv": [ 6.0, 0.0, 10.0, 8.0 ], "rotation": 90 },
+                "west": { "texture": "#3", "uv": [ 6.0, 0.0, 10.0, 8.0 ], "rotation": 270 },
+                "up": { "texture": "#3", "uv": [ 6.0, 0.0, 10.0, 8.0 ] },
+                "down": { "texture": "#3", "uv": [ 6.0, 0.0, 10.0, 8.0 ], "rotation": 180 }
+            }
+        },
+        {
+            "name": "HeadPlate",
+            "from": [ 3.0, 3.0, -0.4999999925494194 ], 
+            "to": [ 13.0, 13.0, 0.5000000074505806 ], 
+            "faces": {
+                "north": { "texture": "#4", "uv": [ 3.0, 3.0, 13.0, 13.0 ] },
+                "east": { "texture": "#4", "uv": [ 3.0, 3.0, 4.0, 13.0 ] },
+                "west": { "texture": "#4", "uv": [ 12.0, 3.0, 13.0, 13.0 ] },
+                "up": { "texture": "#4", "uv": [ 3.0, 3.0, 13.0, 4.0 ], "rotation": 180 },
+                "down": { "texture": "#4", "uv": [ 3.0, 12.0, 13.0, 13.0 ], "rotation": 180 }
+            }
+        },
+        {
+            "name": "ExtensionBig",
+            "from": [ 5.0, 5.0, 12.0 ], 
+            "to": [ 11.0, 11.0, 20.0 ], 
+            "faces": {
+                "north": { "texture": "#3", "uv": [ 5.0, 8.0, 11.0, 16.0 ] },
+                "east": { "texture": "#3", "uv": [ 5.0, 8.0, 11.0, 16.0 ], "rotation": 90 },
+                "west": { "texture": "#3", "uv": [ 5.0, 8.0, 11.0, 16.0 ], "rotation": 270 },
+                "up": { "texture": "#3", "uv": [ 5.0, 8.0, 11.0, 16.0 ] },
+                "down": { "texture": "#3", "uv": [ 5.0, 8.0, 11.0, 16.0 ], "rotation": 180 }
+            }
+        },
+        {
+            "name": "Joint",
+            "from": [ 5.0, 5.0, 4.0 ], 
+            "to": [ 11.0, 11.0, 5.0 ], 
+            "faces": {
+                "east": { "texture": "#5", "uv": [ 5.0, 5.0, 6.0, 11.0 ] },
+                "south": { "texture": "#5", "uv": [ 5.0, 5.0, 11.0, 11.0 ] },
+                "west": { "texture": "#5", "uv": [ 10.0, 5.0, 11.0, 11.0 ] },
+                "up": { "texture": "#5", "uv": [ 5.0, 5.0, 11.0, 6.0 ] },
+                "down": { "texture": "#5", "uv": [ 5.0, 10.0, 11.0, 11.0 ] }
+            }
+        },
+        {
+            "name": "Screw_W",
+            "from": [ 7.0, 4.500000007450581, 15.0 ], 
+            "to": [ 9.0, 11.50000000745058, 17.0 ], 
+            "faces": {
+                "north": { "texture": "#6", "uv": [ 7.0, 1.0, 9.0, 8.0 ] },
+                "east": { "texture": "#6", "uv": [ 7.0, 1.0, 9.0, 8.0 ] },
+                "south": { "texture": "#6", "uv": [ 7.0, 1.0, 9.0, 8.0 ] },
+                "west": { "texture": "#6", "uv": [ 7.0, 1.0, 9.0, 8.0 ] },
+                "up": { "texture": "#6", "uv": [ 7.0, 11.0, 9.0, 13.0 ] },
+                "down": { "texture": "#6", "uv": [ 7.0, 11.0, 9.0, 13.0 ] }
+            }
+        },
+        {
+            "name": "Screw_H",
+            "from": [ 4.499999992549419, 7.0, 15.0 ], 
+            "to": [ 11.49999999254942, 9.0, 17.0 ], 
+            "faces": {
+                "north": { "texture": "#6", "uv": [ 7.0, 1.0, 9.0, 8.0 ], "rotation": 90 },
+                "east": { "texture": "#6", "uv": [ 7.0, 11.0, 9.0, 13.0 ] },
+                "south": { "texture": "#6", "uv": [ 7.0, 1.0, 9.0, 8.0 ], "rotation": 90 },
+                "west": { "texture": "#6", "uv": [ 7.0, 11.0, 9.0, 13.0 ] },
+                "up": { "texture": "#6", "uv": [ 7.0, 1.0, 9.0, 8.0 ], "rotation": 90 },
+                "down": { "texture": "#6", "uv": [ 7.0, 1.0, 9.0, 8.0 ], "rotation": 90 }
+            }
+        }
+    ]
+}
