@@ -15,6 +15,7 @@ import misterpemodder.tmo.main.blocks.BlockTransparent;
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
 import misterpemodder.tmo.main.blocks.base.BlockMulti;
 import misterpemodder.tmo.main.blocks.base.BlockTMO;
+import misterpemodder.tmo.main.blocks.containers.BlockInjector;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumAnvil;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest;
 import misterpemodder.tmo.main.blocks.containers.IBlockTileEntity;
@@ -59,6 +60,7 @@ public class ModBlocks {
 		STRONG_PISTON_STICKY(new BlockPistonStrongBase(EnumBlocksNames.STRONG_PISTON_BASE_STICKY, true)),
 		STRONG_PISTON_EXTENSION(new BlockStrongPistonExtension()),
 		STRONG_PISTON_MOVING(new BlockStrongPistonMoving()),
+		INJECTOR(new BlockInjector()),
 		;
 		private BlockTMO block;
 		

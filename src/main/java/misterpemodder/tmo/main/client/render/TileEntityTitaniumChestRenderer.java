@@ -30,15 +30,10 @@ public class TileEntityTitaniumChestRenderer extends TileEntitySpecialRenderer<T
         GlStateManager.enableDepth();
         GlStateManager.depthFunc(515);
         GlStateManager.depthMask(true);
-        int i;
         IBlockState state = null;
         if (te.hasWorld()) {
             Block block = te.getBlockType();
-            i = te.getBlockMetadata();
-            state = block.getStateFromMeta(i);
-        }
-        else {
-            i = 0;
+            state = block.getStateFromMeta(te.getBlockMetadata());
         }
         ModelChest model = this.simpleChest;
 

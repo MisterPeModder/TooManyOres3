@@ -7,6 +7,7 @@ import misterpemodder.tmo.main.items.EnumItemsNames;
 import misterpemodder.tmo.main.items.ItemLock;
 import misterpemodder.tmo.main.items.ItemMulti;
 import misterpemodder.tmo.main.items.ItemTitaniumBucket;
+import misterpemodder.tmo.main.items.ItemTitaniumCan;
 import misterpemodder.tmo.main.items.ItemTmoArmor;
 import misterpemodder.tmo.main.items.ItemVariant;
 import misterpemodder.tmo.main.items.base.ITMOItem;
@@ -41,6 +42,7 @@ public class ModItems {
 		PLATE(new ItemMulti<ItemVariant.PlateVariant>(EnumItemsNames.PLATE, ItemVariant.PlateVariant.plateVariants, "_plate")),
 		LOCK(new ItemLock()),
 		TITANIUM_BUCKET(new ItemTitaniumBucket()),
+		TITANIUM_CAN(new ItemTitaniumCan()),
 		
 		PICKAXE_TITANIUM(new ItemTmoPickaxe(EnumItemsNames.PICKAXE_TITANIUM, TmoToolMaterial.TITANIUM_MATERIAL)),
 		PICKAXE_TITANIUM_DARK(new ItemTmoPickaxe(EnumItemsNames.PICKAXE_TITANIUM_DARK, TmoToolMaterial.TITANIUM_DARK_MATERIAL)),

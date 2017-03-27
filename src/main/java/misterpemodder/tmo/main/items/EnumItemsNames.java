@@ -9,6 +9,7 @@ public enum EnumItemsNames {
 	LOCK("lock", "itemLock", "lock"),
 	
 	TITANIUM_BUCKET("titanium_bucket", "titaniumBucket"),
+	TITANIUM_CAN("titanium_can", "titaniumCan"),
 	
 	PICKAXE_TITANIUM("titanium_pickaxe", "pickaxeTitanium"),
 	PICKAXE_TITANIUM_DARK("dark_titanium_pickaxe", "pickaxeTitaniumDark"),

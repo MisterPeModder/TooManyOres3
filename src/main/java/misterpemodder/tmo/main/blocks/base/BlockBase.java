@@ -41,7 +41,7 @@ public class BlockBase extends Block implements BlockTMO {
 		this.setLightLevel(values.getLightLevel(defaultState));
 		this.setLightOpacity(values.getLightOpacity(defaultState));
 		this.slipperiness = (values.getSlipperiness(defaultState));
-		this.setHarvestLevel("shovel", 0);
+		this.setHarvestLevel("pickaxe", 0);
 
 		if(values.getUseDefaultTab() == true) setCreativeTab(TMORefs.TMO_TAB);
 	}
@@ -128,6 +128,11 @@ public class BlockBase extends Block implements BlockTMO {
     @Override
     public boolean isOpaqueCube(IBlockState state) {
     	return this.values != null?this.values.isOpaqueCube(state):true;
+    }
+    
+    @Override
+    public boolean isFullyOpaque(IBlockState state) {
+    	return this.isOpaqueCube(state);
     }
     
     public boolean hasOwnItemBlock() {

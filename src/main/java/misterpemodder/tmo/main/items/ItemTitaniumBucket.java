@@ -1,11 +1,12 @@
 package misterpemodder.tmo.main.items;
 
 import java.util.List;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.config.ConfigValues;
-import misterpemodder.tmo.main.items.base.ItemBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockLiquid;
@@ -48,15 +49,17 @@ import net.minecraftforge.fluids.capability.wrappers.FluidBlockWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemTitaniumBucket extends ItemBase {
-	
-	public static final String EMPTY_UNLOC_NAME = ".empty";
-	public static final String FILLED_UNLOC_NAME = ".filled";
+public class ItemTitaniumBucket extends FluidContainerItem {
 	
 	public ItemTitaniumBucket() {
 		super(EnumItemsNames.TITANIUM_BUCKET);
 		this.setMaxStackSize(1);
 		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseFluidContainer.getInstance());
+	}
+	
+	@Override
+	public int getCapacity() {
+		return ConfigValues.IntValues.BUCKET_CAPACITY.currentValue;
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -67,31 +70,14 @@ public class ItemTitaniumBucket extends ItemBase {
 		
 		//filled buckets 
         for (Fluid fluid : FluidRegistry.getRegisteredFluids().values()) {
-        	FluidStack fs = new FluidStack(fluid, ConfigValues.IntValues.BUCKET_CAPACITY.currentValue);
+        	FluidStack fs = new FluidStack(fluid, getCapacity());
             ItemStack stack = new ItemStack(this);
-            IFluidHandlerItem fluidHandler = new FluidHandlerItemStack(stack, ConfigValues.IntValues.BUCKET_CAPACITY.currentValue);
+            IFluidHandlerItem fluidHandler = new FluidHandlerItemStack(stack, getCapacity());
             if (fluidHandler.fill(fs, true) == fs.amount) {
             	ItemStack filled = fluidHandler.getContainer();
                 subItems.add(filled);
             }
         }
-    }
-	
-	protected static boolean isEmpty(ItemStack stack) {
-		IFluidHandlerItem fluidHandler = new FluidHandlerItemStack(stack, ConfigValues.IntValues.BUCKET_CAPACITY.currentValue);
-		return fluidHandler.drain(100, false).amount == 0;
-	}
-	
-	@Override
-    @Nonnull
-    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-        FluidStack fluidStack = FluidUtil.getFluidContained(stack);
-        String unloc = this.getUnlocalizedNameInefficiently(stack);
-        if (fluidStack == null) {
-        	return Tmo.proxy.translate(unloc + EMPTY_UNLOC_NAME);
-        }
-
-        return Tmo.proxy.translate(unloc + FILLED_UNLOC_NAME, fluidStack.amount, fluidStack.getFluid().getLocalizedName(fluidStack));
     }
 	
 	private static boolean canEditFluid(World world, EntityPlayer player, BlockPos pos, EnumFacing sideHit, ItemStack stack) {
@@ -110,7 +96,7 @@ public class ItemTitaniumBucket extends ItemBase {
 		if(fluidStack == null || fluidStack.amount == 0) {
 			str = Tmo.proxy.translate("item.titaniumBucket.desc.emptyContent");
 		} else {
-			str = Tmo.proxy.translate("item.titaniumBucket.desc.content", fluidStack.getFluid().getLocalizedName(fluidStack), fluidStack.amount, ConfigValues.IntValues.BUCKET_CAPACITY.currentValue);
+			str = Tmo.proxy.translate("item.titaniumBucket.desc.content", fluidStack.getFluid().getLocalizedName(fluidStack), fluidStack.amount, getCapacity());
 		}
 		
 		tooltip.add(TextFormatting.GREEN+str);
@@ -130,7 +116,7 @@ public class ItemTitaniumBucket extends ItemBase {
         boolean creative = player.capabilities.isCreativeMode;
         
     	if(player.isSneaking()) {
-    		if(!(fluidStack == null || fluidStack.amount + Fluid.BUCKET_VOLUME <= ConfigValues.IntValues.BUCKET_CAPACITY.currentValue)) {
+    		if(!(fluidStack == null || fluidStack.amount + Fluid.BUCKET_VOLUME <= getCapacity())) {
     			player.sendStatusMessage(new TextComponentString(TextFormatting.DARK_RED+Tmo.proxy.translate("item.titaniumBucket.message.notEnougthCapacity")), true);
     			return ActionResult.newResult(EnumActionResult.PASS, itemstack);
     		}
@@ -159,7 +145,7 @@ public class ItemTitaniumBucket extends ItemBase {
     				FluidStack newFluidStack = FluidUtil.getFluidContained(filledResult.result);
             		if (newFluidStack.amount > 0) {
             			player.setHeldItem(hand, filledResult.result);
-            			player.sendStatusMessage(new TextComponentString(Tmo.proxy.translate("item.titaniumBucket.message.content", newFluidStack.getFluid().getLocalizedName(newFluidStack), newFluidStack.amount, ConfigValues.IntValues.BUCKET_CAPACITY.currentValue)), true);
+            			player.sendStatusMessage(new TextComponentString(Tmo.proxy.translate("item.titaniumBucket.message.content", newFluidStack.getFluid().getLocalizedName(newFluidStack), newFluidStack.amount, getCapacity())), true);
             			return ActionResult.newResult(EnumActionResult.SUCCESS, itemstack);
             		}
     			}
@@ -193,7 +179,7 @@ public class ItemTitaniumBucket extends ItemBase {
     					if(newFluidStack == null || newFluidStack.amount == 0) {
     						player.sendStatusMessage(new TextComponentString(Tmo.proxy.translate("item.titaniumBucket.message.empty")), true);
     					} else {
-    						player.sendStatusMessage(new TextComponentString(Tmo.proxy.translate("item.titaniumBucket.message.content", newFluidStack.getFluid().getLocalizedName(newFluidStack), newFluidStack.amount, ConfigValues.IntValues.BUCKET_CAPACITY.currentValue)), true);
+    						player.sendStatusMessage(new TextComponentString(Tmo.proxy.translate("item.titaniumBucket.message.content", newFluidStack.getFluid().getLocalizedName(newFluidStack), newFluidStack.amount, getCapacity())), true);
     					}
     					return ActionResult.newResult(EnumActionResult.SUCCESS, itemstack);
     				}
@@ -273,7 +259,7 @@ public class ItemTitaniumBucket extends ItemBase {
 	
 	@Override
 	public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
-		return new FluidHandlerItemStack(stack, ConfigValues.IntValues.BUCKET_CAPACITY.currentValue);
+		return new FluidHandlerItemStack(stack, getCapacity());
 	}
 	
 }

@@ -122,6 +122,9 @@ item.titaniumBucket.message.content=%1$s ~ %2$d/%3$dmb
 item.titaniumBucket.desc.content=Contains: %2$d/%3$dmb of %1$s.
 item.titaniumBucket.desc.emptyContent=Contains: nothing.
 item.titaniumBucket.desc=Right-click to place fluids.\nShift-right-click to take fluids.
+item.titaniumCan.name=Titanium Can
+item.titaniumBucket.empty=Titanium Can (empty)
+item.titaniumBucket.filled=Titanium Can (%1$dmb of %2$s)
 
 #Blocks
 tile.blockStorage.blockTitanium.name=Titanium Block
@@ -191,6 +194,7 @@ tile.blockPistonBase.name=Strong Piston
 tile.blockPistonBase.desc=Can move TileEntities
 tile.blockPistonBaseSticky.name=Sticky Strong Piston
 tile.blockPistonBaseSticky.desc=Can move TileEntities
+tile.blockInjector.name=Fluid Injector
 
 #GUI
 gui.tab.main.name=Main
@@ -204,6 +208,14 @@ gui.tab.io.name=IO
 gui.slot.lock.name=Lock Slot
 gui.slot.lock.desc=Put a lock there to unlock security options.
 gui.slot.hammer.name=Forge Hammer Slot
+gui.tank.empty=Empty
+gui.tank.contents=%d/%dmb
+gui.tank.clear=Clear Tank
+gui.tank.clear.hint=hold shift
+gui.tank.clear.confirm=left-click to clear!
+gui.injecter.mode.injection=Injection mode
+gui.injecter.mode.extraction=Extraction mode
+gui.injecter.mode.desc=click to toggle
 
 #Security
 protectedBlock.noBreaking=You don't have the permissions to break this %s!
@@ -318,11 +330,15 @@ tmo.configValue.float.misc.exploderStrength=Exploder strength
 tmo.configValue.float.misc.exploderStrength.tooltip=Change the strength of the explosion the explder makes
 
 #JEI
+gui.jei.category.injector.normal=Fluid Injector Recipe
+gui.jei.category.injector.mode=Mode
+gui.jei.category.injector.mode.injection=Injection
+gui.jei.category.injector.mode.extraction=Extraction
+
 item.itemIngot.titanium.jeidesc=Titanium is a very sturdy material that have a lot of uses...\nPerhaps you could upgrade your diamond with this?
-
 item.titaniumBucket.jeidesc=A reinforced bucket that can hold multiple buckets worth of any fluid.\nIts capacity may vary depending on the configuration.\nControls:\nRight-click to place fluids.\nShift-right-click to take fluids.
-
 tile.blockTitaniumChest.jeidesc=This blastproof titanium-plated chest has more than twice the capacity of a vanilla double chest.\nBy installing a lock on it, the chest can only be accessed by its owner.\nBut don't worry! if steal some stuff from it, TNT is your way to go! Locks has a chance to break when exploded. 
+
 
 #The One Probe Info
 top.info.titaniumChest.owner.title=Owner:

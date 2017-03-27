@@ -27,6 +27,7 @@ public enum EnumBlocksNames implements IBlockNames {
 	STRONG_PISTON_BASE_STICKY("sticky_strong_piston", "blockPistonBaseSticky"),
 	STRONG_PISTON_EXTENSION("strong_piston_head", "blockPistonBase"),
 	STRONG_PISTON_MOVING("strong_piston_extension", "blockPistonExtension"),
+	INJECTOR("fluid_injector", "blockInjector"),
 	;
 	String unlocalizedName;
 	String registryName;

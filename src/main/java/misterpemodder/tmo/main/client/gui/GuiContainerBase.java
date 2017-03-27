@@ -157,16 +157,12 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	    }
 	    
 	    if(flag && JeiPlugin.jeiRuntime != null) {
-	    	try {
 	    	List<RecipeClickableArea> list = getRecipeClickableAreas();
 	    	for(RecipeClickableArea r : list) {
 	    		if(r.checkHover(mouseX, mouseY)) {
 	    			drawCreativeTabHoveringText(Tmo.proxy.translate("jei.tooltip.show.recipes"), mouseX-this.getGuiLeft(), mouseY-this.getGuiTop());
 	    		}
 	    	}
-	    } catch(Exception e) {
-			
-		}
 	    }
 	    
 	}

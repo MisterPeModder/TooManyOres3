@@ -163,6 +163,7 @@ public abstract class TabBase<C extends ContainerBase<TE>, TE extends TileEntity
 		REDSTONE,
 		SECURITY,
 		MAIN_TANVIL,
+		MAIN_INJECTOR,
 	}
 	
 }

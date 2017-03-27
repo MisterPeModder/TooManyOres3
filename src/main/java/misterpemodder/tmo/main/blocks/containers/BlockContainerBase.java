@@ -10,9 +10,6 @@ import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockValues;
 import misterpemodder.tmo.main.capability.CapabilityOwner;
 import misterpemodder.tmo.main.items.tools.ItemWrench;
-import misterpemodder.tmo.main.network.PacketDataHandlers;
-import misterpemodder.tmo.main.network.TMOPacketHandler;
-import misterpemodder.tmo.main.network.packet.PacketServerToClient;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import misterpemodder.tmo.main.utils.ServerUtils;
 import net.minecraft.block.state.IBlockState;
@@ -32,7 +29,6 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.items.IItemHandler;
 
 public abstract class BlockContainerBase<TE extends TileEntityContainerBase> extends BlockTileEntity<TE> {
@@ -109,7 +105,7 @@ public abstract class BlockContainerBase<TE extends TileEntityContainerBase> ext
             	if(ownerHandler != null)
             		ownerHandler.setOwner((EntityPlayer)placer);
             }
-            if(!worldIn.isRemote) {
+            /*if(!worldIn.isRemote) {
             	TargetPoint target = new TargetPoint(worldIn.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64);
             	NBTTagCompound toSend = new NBTTagCompound();
             	
@@ -117,7 +113,7 @@ public abstract class BlockContainerBase<TE extends TileEntityContainerBase> ext
             	toSend.setTag("tileEntity", tileentity.serializeNBT());
             	
             	TMOPacketHandler.network.sendToAllAround(new PacketServerToClient(PacketDataHandlers.TE_UPDATE_HANDLER, toSend), target); 
-            }
+            }*/
 	}
 	
 	@Override
@@ -181,5 +177,14 @@ public abstract class BlockContainerBase<TE extends TileEntityContainerBase> ext
         }
         f /= (float)h.getSlots();
         return MathHelper.floor(f * 14.0F) + (i > 0 ? 1 : 0);
+	}
+	
+	@Override
+	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+		TE te = this.getTileEntity(worldIn, pos);
+		if(te != null && !worldIn.isRemote) {
+			te.sync();
+		}
+		super.onBlockAdded(worldIn, pos, state);
 	}
 }

@@ -9,6 +9,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.items.ItemStackHandler;
@@ -18,6 +20,12 @@ public abstract class TileEntityContainerBase extends TileEntity {
 	public abstract ItemStackHandler getInventory(); 
 	public abstract void onInvOpen(EntityPlayer player);
 	public abstract void onInvClose(EntityPlayer player);
+	
+	@Override
+	public void markDirty() {
+		super.markDirty();
+		sync();
+	}
 	
 	public void sync() {
 		NBTTagCompound toSend = new NBTTagCompound();
@@ -33,6 +41,11 @@ public abstract class TileEntityContainerBase extends TileEntity {
 			toSend.setTag("player_id", NBTUtil.createUUIDTag(Minecraft.getMinecraft().player.getUniqueID()));
 			TMOPacketHandler.network.sendToServer(new PacketClientToServer(PacketDataHandlers.TE_UPDATE_REQUEST_HANDLER, toSend));
 		}
+	}
+	
+	@Override
+	public ITextComponent getDisplayName() {
+		return new TextComponentString("");
 	}
 	
 }

@@ -19,17 +19,12 @@ public class TileEntityTitaniumAnvilRenderer extends TileEntitySpecialRenderer<T
 	
 	@Override
 	public void renderTileEntityAt(TileEntityTitaniumAnvil te, double x, double y, double z, float partialTicks, int destroyStage) {
-        
-        int i;
+
         IBlockState state = null;
         
         if (te.hasWorld()) {
             Block block = te.getBlockType();
-            i = te.getBlockMetadata();
-            state = block.getStateFromMeta(i);
-        }
-        else {
-            i = 0;
+            state = block.getStateFromMeta(te.getBlockMetadata());
         }
         
         if(!te.getInventory().getStackInSlot(0).isEmpty()) {

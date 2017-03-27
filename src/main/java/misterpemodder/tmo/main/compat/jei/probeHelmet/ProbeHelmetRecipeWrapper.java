@@ -1,10 +1,10 @@
-package misterpemodder.tmo.main.compat.jei;
+package misterpemodder.tmo.main.compat.jei.probeHelmet;
 
 import java.util.Arrays;
 import java.util.List;
 
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.wrapper.ICraftingRecipeWrapper;
+import mezz.jei.api.recipe.IRecipeWrapper;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 
-public class ProbeHelmetRecipeWrapper implements ICraftingRecipeWrapper {
+public class ProbeHelmetRecipeWrapper implements IRecipeWrapper {
 	
 	private final List<ItemStack> inputs;
 	private final ItemStack output;

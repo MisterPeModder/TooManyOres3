@@ -12,12 +12,9 @@ import misterpemodder.tmo.main.capability.CapabilityOwner;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.items.ItemLock;
 import misterpemodder.tmo.main.items.ItemVariant;
-import misterpemodder.tmo.main.items.tools.ItemWrench;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
-import misterpemodder.tmo.main.utils.ServerUtils;
 import misterpemodder.tmo.main.utils.StringUtils;
 import misterpemodder.tmo.main.utils.TMORefs;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -26,13 +23,11 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
@@ -43,70 +38,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber(modid = TMORefs.MOD_ID)
 public class EventHandler {
-	
-	//Cancels the sneak effect
-	@SubscribeEvent(priority=EventPriority.HIGHEST)
-	public static void onClickBlockEvent(PlayerInteractEvent.RightClickBlock event) {
-		World world = event.getWorld();
-		Block b = world.getBlockState(event.getPos()).getBlock();
-		ItemStack stack = event.getItemStack();
-		BlockPos pos = event.getPos();
-		if (stack.getItem() instanceof ItemWrench) {
-
-			TileEntity tileEntity = world.getTileEntity(pos);
-
-			EntityPlayer player = event.getEntityPlayer();
-			if(player.isSneaking() && tileEntity != null) {
-				if(((ItemWrench) stack.getItem()).canWrench(player, pos)) {
-					((ItemWrench) stack.getItem()).wrenchUsed(player, pos);
-					if(stack.getItem() instanceof ItemWrench) {
-						IOwnerHandler ownerHandler = tileEntity.getCapability(CapabilityOwner.OWNER_HANDLER_CAPABILITY, event.getFace());
-						if(((ItemWrench) stack.getItem()).isAdminWrench && ownerHandler != null && !world.isRemote) {
-							if(ServerUtils.isOp(player)) {
-								if (ownerHandler.hasOwner()) {
-									ownerHandler.setOwner(null);
-									player.sendMessage(new TextComponentString(Tmo.proxy.translate("item.wrench.OwnerRemoved")));
-									event.setCanceled(true);
-									return;
-								}
-							} else {
-								player.sendMessage(new TextComponentString(TextFormatting.RED + Tmo.proxy.translate("item.wrench.NoPermissions")));
-								event.setCanceled(true);
-								return;
-							}
-						}
-					}
-					
-					event.setCanceled(true);
-					world.setBlockToAir(pos);
-					// world.spawnEntity(new EntityItem(world, pos.getX(),
-					// pos.getY(), pos.getZ(), ((BlockContainerBase)
-					// b).toItem((TileEntityContainerBase)tileEntity,
-					// world.getBlockState(event.getPos()))));
-					return;
-				}
-			}
-			else if(!player.isSneaking()) {
-				EnumFacing facing = event.getFace();
-				TileEntity tets = world.getTileEntity(pos);
-				if(b.rotateBlock(world, pos, facing)) {
-					world.setTileEntity(pos, tets);
-					((ItemWrench) stack.getItem()).wrenchUsed(player, pos);
-					event.setCanceled(true);
-				}
-			}
-		}
-		
-	}
 		
 	@SubscribeEvent
 	public static void onGameOverlay(RenderGameOverlayEvent.Post event){
@@ -119,15 +57,20 @@ public class EventHandler {
 			if(hitPos.getBlockPos() != null) {
 				IBlockState state = mc.world.getBlockState(hitPos.getBlockPos());
 				EntityPlayerSP p = mc.player;
-				if(state.getBlock() instanceof BlockLamp && p.capabilities.allowEdit) {
-					NetworkPlayerInfo n = Minecraft.getMinecraft().getConnection().getPlayerInfo(p.getGameProfile().getId());
-					if(n != null && n.getGameType() != GameType.SPECTATOR || n.getGameType() != GameType.ADVENTURE) {
-							String txt = state.getValue(BlockLamp.INVERTED)? TextFormatting.RED+Tmo.proxy.translate("tile.blockLamp.mode.inverted") : TextFormatting.GREEN+Tmo.proxy.translate("tile.blockLamp.mode.normal");
-							ScaledResolution res = event.getResolution();
-							int h = res.getScaledHeight()/20;
-							StringUtils.drawCenteredString(mc.fontRendererObj, TextFormatting.BOLD+""+TextFormatting.UNDERLINE+Tmo.proxy.translate("tile.blockLamp.mode.title")+TextFormatting.RESET+" "+TextFormatting.BOLD+""+txt, res.getScaledWidth()/2, res.getScaledHeight()/2 + h);
-							StringUtils.drawCenteredString(mc.fontRendererObj, TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate("tile.blockLamp.mode.hint"), res.getScaledWidth()/2, res.getScaledHeight()/2 + 2*h);
-			        }
+				NetworkPlayerInfo n = Minecraft.getMinecraft().getConnection().getPlayerInfo(p.getGameProfile().getId());
+				if(p.capabilities.allowEdit && n != null && n.getGameType() != GameType.SPECTATOR || n.getGameType() != GameType.ADVENTURE) {
+					ScaledResolution res = event.getResolution();
+					int h = res.getScaledHeight()/20;
+					if(state.getBlock() instanceof BlockLamp) {
+						String txt = state.getValue(BlockLamp.INVERTED)? TextFormatting.RED+Tmo.proxy.translate("tile.blockLamp.mode.inverted") : TextFormatting.GREEN+Tmo.proxy.translate("tile.blockLamp.mode.normal");
+						StringUtils.drawCenteredString(mc.fontRendererObj, TextFormatting.BOLD+""+TextFormatting.UNDERLINE+Tmo.proxy.translate("tile.blockLamp.mode.title")+TextFormatting.RESET+" "+TextFormatting.BOLD+""+txt, res.getScaledWidth()/2, res.getScaledHeight()/2 + h);
+						StringUtils.drawCenteredString(mc.fontRendererObj, TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate("tile.blockLamp.mode.hint"), res.getScaledWidth()/2, res.getScaledHeight()/2 + 2*h);
+					}
+//					} else if(state.getBlock() instanceof BlockInjector) {
+//						TileEntityInjector te = ((BlockInjector)state.getBlock()).getTileEntity(mc.world, hitPos.getBlockPos());
+//						if(te != null)
+//						StringUtils.drawCenteredString(mc.fontRendererObj, "Mode: " + (te.getTransferMode() == TransferMode.INJECTION? "injection" : "extracton"), res.getScaledWidth()/2, res.getScaledHeight()/2 + h);
+//					}
 			    }
 			}
 		}

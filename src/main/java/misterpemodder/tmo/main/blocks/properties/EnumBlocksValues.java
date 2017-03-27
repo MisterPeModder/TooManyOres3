@@ -270,6 +270,14 @@ public enum EnumBlocksValues implements IBlockValues{
 		public boolean isFullCube(IBlockState state) {
 			return this.isFullCube;
 		}
+		@Override
+		public boolean isOpaqueCube(IBlockState state) {
+			return this.isFullCube;
+		}
+		@Override
+		public int getLightOpacity(IBlockState state) {
+			return this.isFullCube? 255 : 3;
+		}
 		
 		MetalBlocks(float hardness, float resistance, int harvestLevel, MapColor color) {
 			this(hardness, resistance, harvestLevel, color, true);

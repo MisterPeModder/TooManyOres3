@@ -1,9 +1,10 @@
 package misterpemodder.tmo.main.client.gui;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import org.apache.commons.lang3.tuple.MutablePair;
+
+import com.google.common.base.Predicate;
 
 import baubles.api.BaublesApi;
 import baubles.api.cap.IBaublesItemHandler;
@@ -136,7 +137,7 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 	    	for (int y = 0; y < 4; ++y) {
 	    		final EntityEquipmentSlot entityequipmentslot = VALID_EQUIPMENT_SLOTS[y];
 	    		Predicate<ItemStack> armorTest = new Predicate<ItemStack>() {
-					public boolean test(ItemStack stack) {
+					public boolean apply(ItemStack stack) {
 						return stack.getItem().isValidArmor(stack, entityequipmentslot, player);
 					}
 				};
@@ -184,7 +185,7 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 	protected void setLockSlot() {
 		if(this.te instanceof ILockable) {
 			Predicate<ItemStack> lockTest = new Predicate<ItemStack>() {
-				public boolean test(ItemStack stack) {
+				public boolean apply(ItemStack stack) {
 					return stack.getItem() instanceof IItemLock;
 				}
 			};
@@ -207,7 +208,7 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 	@Override
 	public void onContainerClosed(EntityPlayer playerIn) {
 		te.onInvClose(playerIn);
-		super.onContainerClosed(playerIn);
+        super.onContainerClosed(playerIn);
 	}
 	
 	public void onCraftMatrixChanged(IInventory inventoryIn) {

@@ -30,7 +30,15 @@ public abstract class TabMain<C extends ContainerBase<TE>, TE extends TileEntity
 		} else {
 			dispName = te.getDisplayName().getUnformattedText();
 		}
-		guiContainer.getFontRenderer().drawString(dispName, 8, 6, 4210752);
+		guiContainer.getFontRenderer().drawString(dispName, getTitleX(), getTitleY(), 4210752);
+	}
+	
+	protected int getTitleX() {
+		return 8;
+	}
+	
+	protected int getTitleY() {
+		return 6;
 	}
 	
 	public boolean shouldDisplaySlot(IHidable slot) {

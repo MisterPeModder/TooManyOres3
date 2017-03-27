@@ -1,6 +1,6 @@
 package misterpemodder.tmo.main.client.gui.slot;
 
-import java.util.function.Predicate;
+import com.google.common.base.Predicate;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
@@ -16,7 +16,7 @@ public class SlotFiltered extends SlotHidable {
 	
 	@Override
 	public boolean isItemValid(ItemStack stack) {
-		return filter.test(stack)? super.isItemValid(stack) : false;
+		return filter.apply(stack)? super.isItemValid(stack) : false;
 	}
 
 }

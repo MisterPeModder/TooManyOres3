@@ -1,5 +1,6 @@
 package misterpemodder.tmo.main.client.gui;
 
+import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumAnvil;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import misterpemodder.tmo.main.utils.TMORefs;
@@ -33,6 +34,14 @@ public class GuiHandler implements IGuiHandler {
 				return new GuiContainerTitaniumAnvil(player.inventory, (TileEntityTitaniumAnvil)world.getTileEntity(new BlockPos(x, y, z)));
 			}
 		},
+		INJECTOR(3) {
+			public Object getServerGuiElement(EntityPlayer player, World world, int x, int y, int z) {
+				return new ContainerInjector((TileEntityInjector)world.getTileEntity(new BlockPos(x, y, z)), player.inventory);
+			}
+			public Object getClientGuiElement(EntityPlayer player, World world, int x, int y, int z) {
+				return new GuiContainerInjector(player.inventory, (TileEntityInjector)world.getTileEntity(new BlockPos(x, y, z)));
+			}
+		}
 		;
 		
 		public final int ID;

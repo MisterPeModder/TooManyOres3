@@ -14,8 +14,6 @@ public abstract class BlockTileEntity<TE extends TileEntity> extends BlockBase i
 	public BlockTileEntity(IBlockNames n, IBlockValues v) {
 		super(n, v);
 	}
-	
-	public abstract Class<TE> getTileEntityClass();
 
 	@Override
 	public boolean hasTileEntity() {

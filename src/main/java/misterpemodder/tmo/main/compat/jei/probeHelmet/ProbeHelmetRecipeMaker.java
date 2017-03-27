@@ -1,16 +1,18 @@
-package misterpemodder.tmo.main.compat.jei;
+package misterpemodder.tmo.main.compat.jei.probeHelmet;
 
 import java.util.ArrayList;
 import java.util.List;
 import mezz.jei.api.ingredients.IIngredientRegistry;
+import misterpemodder.tmo.main.compat.jei.RecipeMaker;
 import misterpemodder.tmo.main.items.ItemTmoArmor;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 
-public final class ProbeHelmetRecipeMaker {
-	
-	public static List<ProbeHelmetRecipeWrapper> getProbeRecipes(IIngredientRegistry ingredientRegistry) {
+public class ProbeHelmetRecipeMaker extends RecipeMaker<ProbeHelmetRecipeWrapper> {
+
+	@Override
+	public List<ProbeHelmetRecipeWrapper> makeRecipe(IIngredientRegistry ingredientRegistry) {
 		List<ProbeHelmetRecipeWrapper> recipes = new ArrayList<>();
 		List<ItemStack> ingredients = ingredientRegistry.getIngredients(ItemStack.class);
 		

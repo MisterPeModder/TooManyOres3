@@ -8,6 +8,7 @@ import java.util.Map;
 import misterpemodder.tmo.api.block.ISlimeBlock;
 import misterpemodder.tmo.api.handler.ITMOMethodHandler;
 import misterpemodder.tmo.api.handler.ITMORegistryHandler;
+import misterpemodder.tmo.api.recipe.IInjectorRecipe;
 import net.minecraft.block.Block;
 
 public final class TooManyOresAPI {
@@ -33,5 +34,6 @@ public final class TooManyOresAPI {
 	
 	public static final Map<Block, ISlimeBlock> SLIME_BLOCKS = new HashMap<>();
 	public static final List<IStrongPistonBehavior> STRONG_PISTON_BEHAVIORS = new ArrayList<>();
+	public static final List<IInjectorRecipe> INJECTOR_RECIPES = new ArrayList<>();
 	
 }

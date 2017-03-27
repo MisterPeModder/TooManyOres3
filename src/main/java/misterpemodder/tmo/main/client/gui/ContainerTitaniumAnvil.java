@@ -3,11 +3,12 @@ package misterpemodder.tmo.main.client.gui;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
 
 import javax.annotation.Nonnull;
 
 import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.base.Predicate;
 
 import misterpemodder.tmo.api.item.IItemForgeHammer;
 import misterpemodder.tmo.main.client.gui.slot.SlotFiltered;
@@ -78,7 +79,7 @@ public class ContainerTitaniumAnvil extends ContainerBase<TileEntityTitaniumAnvi
 		output = new InvWrapper(new InventoryCraftResult());
 		
 		Predicate<ItemStack> HammerFilter = new Predicate<ItemStack>(){
-			public boolean test(ItemStack t) {
+			public boolean apply(ItemStack t) {
 				return t.getItem() instanceof IItemForgeHammer;
 			}
 		};
@@ -95,7 +96,7 @@ public class ContainerTitaniumAnvil extends ContainerBase<TileEntityTitaniumAnvi
 		this.addSlotToContainer(new SlotHidable(input, 1, 94, 53, true));
 		
 		Predicate<ItemStack> t = new Predicate<ItemStack>(){
-			public boolean test(ItemStack t) {
+			public boolean apply(ItemStack t) {
 				return false;
 			}
 		};

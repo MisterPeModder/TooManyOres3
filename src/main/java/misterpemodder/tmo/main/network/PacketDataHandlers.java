@@ -5,16 +5,21 @@ import java.util.List;
 import java.util.UUID;
 
 import misterpemodder.tmo.api.block.ILockable;
+import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
+import misterpemodder.tmo.main.client.gui.ContainerInjector;
 import misterpemodder.tmo.main.client.gui.ContainerTitaniumAnvil;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabID;
+import misterpemodder.tmo.main.client.gui.tabs.TabMainInjector;
 import misterpemodder.tmo.main.client.gui.tabs.TabSecurity;
 import misterpemodder.tmo.main.network.packet.PacketServerToClient;
+import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
@@ -33,6 +38,7 @@ public final class PacketDataHandlers {
 		HANDLERS.add(TE_UPDATE_REQUEST_HANDLER);
 		HANDLERS.add(BUTTON_CLICK_HANDLER);
 		HANDLERS.add(ANVIL_ITEM_NAME_HANDLER);
+		HANDLERS.add(PROGRESS_ARROW_UPDATE_HANDLER);
 	}
 	
 	/**
@@ -148,6 +154,20 @@ public final class PacketDataHandlers {
 				}
 			break;
 			
+			case MAIN_INJECTOR:
+				if(bId == TabMainInjector.TOGGLE_MODE_BUTTON_ID) {
+					if(te instanceof TileEntityInjector && info.hasKey("mode")) {
+						TransferMode m = TransferMode.values()[info.getInteger("mode")];
+						((TileEntityInjector)te).setTransferMode(m);
+					}
+				} 
+				else if(bId == TabMainInjector.CLEAR_TANK_BUTTON_ID) {
+					if(te instanceof TileEntityInjector) {
+						((TileEntityInjector)te).getTank().drain(TileEntityInjector.CAPACITY, true);
+					}
+				}
+			break;
+			
 			default:
 				TMORefs.LOGGER.warn("This tab can not handle button events!");
 			break;
@@ -183,6 +203,26 @@ public final class PacketDataHandlers {
 					c.input.setStackInSlot(0, st);
 				}
 				c.updateItemName(data.getString("item_name"));
+			}
+		}
+	};
+	
+	
+	/**
+	 * <p> Handler type: server to client
+	 * 
+	 * <p> NBT tags:
+	 * <ul>
+	 * 	<li>progress: Integer
+	 * </ul>
+	 */
+    public static final IPacketDataHandler PROGRESS_ARROW_UPDATE_HANDLER = new IPacketDataHandler() {
+		
+		@Override
+		public void procData(NBTTagCompound data) {
+			Container c = Minecraft.getMinecraft().player.openContainer;
+			if(c instanceof ContainerInjector && data.hasKey("progress")) {
+				((ContainerInjector)c).progress = data.getInteger("progress");
 			}
 		}
 	};
