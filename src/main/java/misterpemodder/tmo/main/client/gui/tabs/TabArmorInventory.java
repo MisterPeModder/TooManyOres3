@@ -4,9 +4,9 @@ import java.awt.Dimension;
 import java.awt.Point;
 
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
-import mezz.jei.gui.recipes.RecipeClickableArea;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.client.gui.ContainerBase;
+import misterpemodder.tmo.main.client.gui.RecipeClickableAreaTMO;
 import misterpemodder.tmo.main.client.gui.slot.IHidable;
 import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
 import misterpemodder.tmo.main.init.ModItems.TheItems;
@@ -82,7 +82,7 @@ public class TabArmorInventory<C extends ContainerBase<TE>, TE extends TileEntit
 	}
 	
 	@Override
-	public RecipeClickableArea[] getRecipeClickableAreas() {
-		return new RecipeClickableArea[]{new RecipeClickableArea(guiContainer.getBottomPartPos()+72, guiContainer.getBottomPartPos()+90, guiContainer.getGuiLeft()+156, guiContainer.getGuiLeft()+172, VanillaRecipeCategoryUid.CRAFTING)};
+	public RecipeClickableAreaTMO[] getRecipeClickableAreas() {
+		return new RecipeClickableAreaTMO[]{new RecipeClickableAreaTMO(guiContainer.getBottomPartPos()+72, guiContainer.getBottomPartPos()+90, guiContainer.getGuiLeft()+156, guiContainer.getGuiLeft()+172, VanillaRecipeCategoryUid.CRAFTING)};
 	}
 }

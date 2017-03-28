@@ -10,9 +10,9 @@ import javax.annotation.Nullable;
 
 import org.apache.commons.lang3.tuple.MutablePair;
 
-import mezz.jei.gui.recipes.RecipeClickableArea;
 import misterpemodder.tmo.main.client.gui.ContainerBase;
 import misterpemodder.tmo.main.client.gui.GuiContainerBase;
+import misterpemodder.tmo.main.client.gui.RecipeClickableAreaTMO;
 import misterpemodder.tmo.main.client.gui.slot.IHidable;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
 import misterpemodder.tmo.main.network.TMOPacketHandler;
@@ -121,7 +121,7 @@ public abstract class TabBase<C extends ContainerBase<TE>, TE extends TileEntity
 		return false;
 	}
 	
-	public @Nullable RecipeClickableArea[] getRecipeClickableAreas() {
+	public @Nullable RecipeClickableAreaTMO[] getRecipeClickableAreas() {
 		return null;
 	}
 		

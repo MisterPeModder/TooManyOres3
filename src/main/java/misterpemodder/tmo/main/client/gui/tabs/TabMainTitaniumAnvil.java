@@ -8,10 +8,10 @@ import java.util.Arrays;
 import org.lwjgl.input.Keyboard;
 
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
-import mezz.jei.gui.recipes.RecipeClickableArea;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.client.gui.ContainerTitaniumAnvil;
 import misterpemodder.tmo.main.client.gui.GuiContainerBase;
+import misterpemodder.tmo.main.client.gui.RecipeClickableAreaTMO;
 import misterpemodder.tmo.main.client.gui.slot.IHidable;
 import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
@@ -209,8 +209,8 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
 	}
 	
 	@Override
-	public RecipeClickableArea[] getRecipeClickableAreas() {
-		return new RecipeClickableArea[]{new RecipeClickableArea(guiContainer.getGuiTop()+54, guiContainer.getGuiTop()+69, guiContainer.getGuiLeft()+120, guiContainer.getGuiLeft()+142, VanillaRecipeCategoryUid.ANVIL)};
+	public RecipeClickableAreaTMO[] getRecipeClickableAreas() {
+		return new RecipeClickableAreaTMO[]{new RecipeClickableAreaTMO(guiContainer.getGuiTop()+54, guiContainer.getGuiTop()+69, guiContainer.getGuiLeft()+120, guiContainer.getGuiLeft()+142, VanillaRecipeCategoryUid.ANVIL)};
 	}
 	
 	@Override

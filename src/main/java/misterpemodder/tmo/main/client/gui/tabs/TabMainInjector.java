@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import mezz.jei.gui.recipes.RecipeClickableArea;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.client.gui.ContainerInjector;
+import misterpemodder.tmo.main.client.gui.RecipeClickableAreaTMO;
 import misterpemodder.tmo.main.client.gui.slot.IHidable;
 import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
 import misterpemodder.tmo.main.client.render.RenderTank;
@@ -189,8 +189,8 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 	}
 	
 	@Override
-	public RecipeClickableArea[] getRecipeClickableAreas() {
-		return new RecipeClickableArea[]{new RecipeClickableArea(guiContainer.getGuiTop()+39, guiContainer.getGuiTop()+60, guiContainer.getGuiLeft()+64, guiContainer.getGuiLeft()+92, RecipeCategoryInjector.UID)};
+	public RecipeClickableAreaTMO[] getRecipeClickableAreas() {
+		return new RecipeClickableAreaTMO[]{new RecipeClickableAreaTMO(guiContainer.getGuiTop()+39, guiContainer.getGuiTop()+60, guiContainer.getGuiLeft()+64, guiContainer.getGuiLeft()+92, RecipeCategoryInjector.UID)};
 	}
 	
 	public static class TransferModeButton extends GuiButton {

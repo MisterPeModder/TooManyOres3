@@ -10,7 +10,6 @@ import java.util.List;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
-import mezz.jei.gui.recipes.RecipeClickableArea;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabPos;
@@ -157,8 +156,8 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	    }
 	    
 	    if(flag && JeiPlugin.jeiRuntime != null) {
-	    	List<RecipeClickableArea> list = getRecipeClickableAreas();
-	    	for(RecipeClickableArea r : list) {
+	    	List<RecipeClickableAreaTMO> list = getRecipeClickableAreas();
+	    	for(RecipeClickableAreaTMO r : list) {
 	    		if(r.checkHover(mouseX, mouseY)) {
 	    			drawCreativeTabHoveringText(Tmo.proxy.translate("jei.tooltip.show.recipes"), mouseX-this.getGuiLeft(), mouseY-this.getGuiTop());
 	    		}
@@ -167,8 +166,8 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	    
 	}
 	
-	private List<RecipeClickableArea> getRecipeClickableAreas() {
-    	List<RecipeClickableArea> l = new ArrayList<>();
+	private List<RecipeClickableAreaTMO> getRecipeClickableAreas() {
+    	List<RecipeClickableAreaTMO> l = new ArrayList<>();
     	if(selectedTabs.getLeft().hasRecipeClickableAreas()) {
     		l.addAll(Arrays.asList(selectedTabs.getLeft().getRecipeClickableAreas()));
     	}
@@ -201,16 +200,12 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 
 				}
 			} else if(JeiPlugin.jeiRuntime != null) {
-				try{
-		    	List<RecipeClickableArea> list = getRecipeClickableAreas();
-		    	for(RecipeClickableArea r : list) {
+		    	List<RecipeClickableAreaTMO> list = getRecipeClickableAreas();
+		    	for(RecipeClickableAreaTMO r : list) {
 		    		if(r.checkHover(mouseX, mouseY)) {
 		    			JeiPlugin.jeiRuntime.getRecipesGui().showCategories(r.getRecipeCategoryUids());
 		    		}
 		    	}
-				} catch(Exception e) {
-					
-				}
 			}
 		}
 		super.mouseClicked(mouseX, mouseY, mouseButton);
