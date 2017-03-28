@@ -34,22 +34,18 @@ import misterpemodder.tmo.main.config.ConfigValues;
 import misterpemodder.tmo.main.init.Crafting;
 import misterpemodder.tmo.main.init.MachineRecipes;
 import misterpemodder.tmo.main.init.ModBlocks;
-import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
 import misterpemodder.tmo.main.network.TMOPacketHandler;
 import misterpemodder.tmo.main.proxy.CommonProxy;
 import misterpemodder.tmo.main.utils.TMORefs;
 import misterpemodder.tmo.main.world.OreGen;
-import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
-import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
@@ -112,19 +108,6 @@ public class Tmo {
 	@EventHandler
 	public void serverStating(FMLServerStartingEvent event) {
 		event.registerServerCommand(new CommandTMO());
-	}
-	
-	@EventHandler
-	public static void missingMapingsEvent(FMLMissingMappingsEvent event) {
-		for(MissingMapping m : event.get()) {
-			if(m.name.equals("tmo:injector")) {
-				if(m.type == GameRegistry.Type.ITEM) {
-					m.remap(ItemBlock.getItemFromBlock(TheBlocks.INJECTOR.getBlock()));
-				} else {
-					m.remap(TheBlocks.INJECTOR.getBlock());
-				}
-			}
-		}
 	}
 	
 }

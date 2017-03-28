@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.config.ConfigValues;
+import misterpemodder.tmo.main.items.base.ItemBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockLiquid;
@@ -49,7 +50,10 @@ import net.minecraftforge.fluids.capability.wrappers.FluidBlockWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemTitaniumBucket extends FluidContainerItem {
+public class ItemTitaniumBucket extends ItemBase {
+	
+	public static final String EMPTY_UNLOC_NAME = ".empty";
+	public static final String FILLED_UNLOC_NAME = ".filled";
 	
 	public ItemTitaniumBucket() {
 		super(EnumItemsNames.TITANIUM_BUCKET);
@@ -57,7 +61,7 @@ public class ItemTitaniumBucket extends FluidContainerItem {
 		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseFluidContainer.getInstance());
 	}
 	
-	@Override
+	
 	public int getCapacity() {
 		return ConfigValues.IntValues.BUCKET_CAPACITY.currentValue;
 	}
@@ -86,6 +90,18 @@ public class ItemTitaniumBucket extends FluidContainerItem {
 		}
 		return false;
 	}
+	
+	@Override
+    @Nonnull
+    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+        FluidStack fluidStack = FluidUtil.getFluidContained(stack);
+        String unloc = this.getUnlocalizedNameInefficiently(stack);
+        if (fluidStack == null) {
+        	return Tmo.proxy.translate(unloc + EMPTY_UNLOC_NAME);
+        }
+
+        return Tmo.proxy.translate(unloc + FILLED_UNLOC_NAME, fluidStack.amount, fluidStack.getFluid().getLocalizedName(fluidStack));
+    }
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
