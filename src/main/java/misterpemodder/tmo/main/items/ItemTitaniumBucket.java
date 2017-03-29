@@ -28,6 +28,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
@@ -60,7 +61,6 @@ public class ItemTitaniumBucket extends ItemBase {
 		this.setMaxStackSize(1);
 		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseFluidContainer.getInstance());
 	}
-	
 	
 	public int getCapacity() {
 		return ConfigValues.IntValues.BUCKET_CAPACITY.currentValue;
@@ -132,7 +132,7 @@ public class ItemTitaniumBucket extends ItemBase {
         boolean creative = player.capabilities.isCreativeMode;
         
     	if(player.isSneaking()) {
-    		if(!(fluidStack == null || fluidStack.amount + Fluid.BUCKET_VOLUME <= getCapacity())) {
+    		if(!creative && !(fluidStack == null || fluidStack.amount + Fluid.BUCKET_VOLUME <= getCapacity())) {
     			player.sendStatusMessage(new TextComponentString(TextFormatting.DARK_RED+Tmo.proxy.translate("item.titaniumBucket.message.notEnougthCapacity")), true);
     			return ActionResult.newResult(EnumActionResult.PASS, itemstack);
     		}
@@ -164,6 +164,15 @@ public class ItemTitaniumBucket extends ItemBase {
             			player.sendStatusMessage(new TextComponentString(Tmo.proxy.translate("item.titaniumBucket.message.content", newFluidStack.getFluid().getLocalizedName(newFluidStack), newFluidStack.amount, getCapacity())), true);
             			return ActionResult.newResult(EnumActionResult.SUCCESS, itemstack);
             		}
+    			}
+    			else if(creative) {
+    				Block block = world.getBlockState(offsetPos).getBlock();
+    				if (block instanceof IFluidBlock || block instanceof BlockLiquid) {
+    		            IFluidHandler targetFluidHandler = FluidUtil.getFluidHandler(world, offsetPos, rtr.sideHit);
+    		            if (targetFluidHandler != null)  {
+    		                targetFluidHandler.drain(Integer.MAX_VALUE, true);
+    		            }
+    		        }
     			}
             
     		}
@@ -271,7 +280,34 @@ public class ItemTitaniumBucket extends ItemBase {
         }
     
     }
-	
+    
+    @Override
+    public boolean showDurabilityBar(ItemStack stack) {
+    	IFluidHandlerItem h = FluidUtil.getFluidHandler(stack);
+    	return h != null;
+    }
+    
+    @Override
+    public int getRGBDurabilityForDisplay(ItemStack stack) {
+    	IFluidHandlerItem h = FluidUtil.getFluidHandler(stack);
+    	FluidStack f = h.drain(getCapacity(), false);
+    	if(h != null && f != null && f.amount > 0) {
+    		int c = f.getFluid().getColor(f);
+    		return c != 0xFFFFFFFF? c : MathHelper.hsvToRGB(1 / 3.0F, 1.0F, 1.0F);
+    	}
+    	return 0;
+    }
+    
+    @Override
+    public double getDurabilityForDisplay(ItemStack stack) {
+    	IFluidHandlerItem h = FluidUtil.getFluidHandler(stack);
+    	FluidStack f = h.drain(Integer.MAX_VALUE, false);
+    	if(h != null && f != null && f.amount > 0) {
+    		int cap = getCapacity();
+    		return (float)(cap - f.amount)/cap;
+    	}
+    	return 0;
+    }
 	
 	@Override
 	public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
