@@ -18,6 +18,7 @@ import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.BlockPistonExtension;
 import net.minecraft.block.BlockPistonMoving;
 import net.minecraft.block.BlockSnow;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -49,6 +50,8 @@ public class BlockPistonStrongBase extends BlockPistonBase implements BlockTMO {
 		this.itemBlock = new ItemBlock(this);
 		itemBlock.setRegistryName(this.getRegistryName());
 		this.setCreativeTab(TMORefs.TMO_TAB);
+		this.setSoundType(SoundType.METAL);
+		this.setHarvestLevel("pickaxe", 1);
 		
 		this.isSticky = isSticky;
 		this.shouldBeExtended = ReflectionHelper.findMethod(BlockPistonBase.class, Blocks.PISTON, new String[]{"shouldBeExtended"}, World.class, BlockPos.class, EnumFacing.class);
