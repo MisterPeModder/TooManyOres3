@@ -2,6 +2,7 @@ package misterpemodder.tmo.main.client.gui;
 
 import java.util.List;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.MutablePair;
 
 import com.google.common.base.Predicate;
@@ -74,6 +75,10 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 		setExtraInvSlots();
 		
 		hideSlots();
+	}
+	
+	public ImmutablePair<TabBase, TabBase> getSelectedTabs() {
+		return ImmutablePair.of(selectedTabs.left, selectedTabs.right);
 	}
 
 	public void hideSlots() {

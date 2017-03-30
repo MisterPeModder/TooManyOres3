@@ -102,7 +102,7 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 			if(stack == null || stack.getFluid() == null || stack.amount <= 0) {
 				strs = Arrays.asList(Tmo.proxy.translate("gui.tank.empty"));
 			} else {
-				strs = Arrays.asList(stack.getLocalizedName(), Tmo.proxy.translate("gui.tank.contents", stack.amount, tank.getCapacity()));
+				strs = Arrays.asList(stack.getFluid().getRarity(stack).rarityColor+stack.getLocalizedName(), Tmo.proxy.translate("gui.tank.contents", stack.amount, tank.getCapacity()));
 			}
 	    }
 		else {

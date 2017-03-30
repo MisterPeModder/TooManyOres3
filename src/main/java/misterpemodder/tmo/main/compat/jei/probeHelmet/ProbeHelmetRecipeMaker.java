@@ -2,6 +2,7 @@ package misterpemodder.tmo.main.compat.jei.probeHelmet;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import mezz.jei.api.ingredients.IIngredientRegistry;
 import misterpemodder.tmo.main.compat.jei.RecipeMaker;
 import misterpemodder.tmo.main.items.ItemTmoArmor;

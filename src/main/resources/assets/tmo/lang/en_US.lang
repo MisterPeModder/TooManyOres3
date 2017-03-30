@@ -122,9 +122,6 @@ item.titaniumBucket.message.content=%1$s ~ %2$d/%3$dmb
 item.titaniumBucket.desc.content=Contains: %2$d/%3$dmb of %1$s.
 item.titaniumBucket.desc.emptyContent=Contains: nothing.
 item.titaniumBucket.desc=Right-click to place fluids.\nShift-right-click to take fluids.
-item.titaniumCan.name=Titanium Can
-item.titaniumBucket.empty=Titanium Can (empty)
-item.titaniumBucket.filled=Titanium Can (%1$dmb of %2$s)
 
 #Blocks
 tile.blockStorage.blockTitanium.name=Titanium Block
@@ -195,6 +192,12 @@ tile.blockPistonBase.desc=Can move TileEntities
 tile.blockPistonBaseSticky.name=Sticky Strong Piston
 tile.blockPistonBaseSticky.desc=Can move TileEntities
 tile.blockInjector.name=Fluid Injector
+
+#Fluids
+fluid.liquidIgnum.name=Ignum Fuel
+tile.liquidIgnum.name=Ignum Fuel
+fluid.liquidFrozium.name=Frozium Fuel
+tile.liquidFrozium.name=Frozium Fuel
 
 #GUI
 gui.tab.main.name=Main

@@ -38,9 +38,6 @@ public final class RenderTank {
 		
 		int renderAmount = (int) Math.max(Math.min(height, stack.amount * height / capacity), 1);
 	    int posY = (int) (y + height - renderAmount);
-		
-		int color = stack.getFluid().getColor(stack);
-	    GL11.glColor3ub((byte) (color >> 16 & 0xFF), (byte) (color >> 8 & 0xFF), (byte) (color & 0xFF));
 
 	    GlStateManager.enableBlend();
 	    for (int i = 0; i < width; i += 16) {

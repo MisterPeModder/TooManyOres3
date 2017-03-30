@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.config.ConfigValues;
+import misterpemodder.tmo.main.fluids.FluidTMO;
 import misterpemodder.tmo.main.items.base.ItemBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
@@ -28,7 +29,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
@@ -99,8 +99,7 @@ public class ItemTitaniumBucket extends ItemBase {
         if (fluidStack == null) {
         	return Tmo.proxy.translate(unloc + EMPTY_UNLOC_NAME);
         }
-
-        return Tmo.proxy.translate(unloc + FILLED_UNLOC_NAME, fluidStack.amount, fluidStack.getFluid().getLocalizedName(fluidStack));
+        return Tmo.proxy.translate(unloc + FILLED_UNLOC_NAME, fluidStack.amount, fluidStack.getFluid().getRarity(fluidStack).rarityColor+fluidStack.getLocalizedName()+this.getRarity(stack).rarityColor);
     }
 	
 	@Override
@@ -292,8 +291,9 @@ public class ItemTitaniumBucket extends ItemBase {
     	IFluidHandlerItem h = FluidUtil.getFluidHandler(stack);
     	FluidStack f = h.drain(getCapacity(), false);
     	if(h != null && f != null && f.amount > 0) {
-    		int c = f.getFluid().getColor(f);
-    		return c != 0xFFFFFFFF? c : MathHelper.hsvToRGB(1 / 3.0F, 1.0F, 1.0F);
+    		Fluid fluid = f.getFluid();
+    		int c = fluid.getColor(f);
+    		return fluid instanceof FluidTMO? ((FluidTMO)fluid).getItemColor(): c != 0xFFFFFFFF? c : 0xFF00FF00;
     	}
     	return 0;
     }

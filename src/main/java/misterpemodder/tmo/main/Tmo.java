@@ -34,12 +34,14 @@ import misterpemodder.tmo.main.config.ConfigValues;
 import misterpemodder.tmo.main.init.Crafting;
 import misterpemodder.tmo.main.init.MachineRecipes;
 import misterpemodder.tmo.main.init.ModBlocks;
+import misterpemodder.tmo.main.init.ModFluids;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
 import misterpemodder.tmo.main.network.TMOPacketHandler;
 import misterpemodder.tmo.main.proxy.CommonProxy;
 import misterpemodder.tmo.main.utils.TMORefs;
 import misterpemodder.tmo.main.world.OreGen;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -59,8 +61,10 @@ public class Tmo {
 
 	@SidedProxy(modId = TMORefs.MOD_ID, clientSide = TMORefs.CLIENT_PROXY_CLASS, serverSide = TMORefs.SERVER_PROXY_CLASS)
 	public static CommonProxy proxy;
-
-	// Events
+	
+	static {
+        FluidRegistry.enableUniversalBucket();
+    }
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -69,6 +73,7 @@ public class Tmo {
 		new ConfigHandler(event.getSuggestedConfigurationFile());
 		TMOPacketHandler.init();
 		PacketDataHandlers.registerHandlers();
+		ModFluids.registerFluids();
 		TooManyOresAPI.methodHandler = new MethodHandler();
 		TooManyOresAPI.registryHandler = new RegistryHandler();
 		CapabilityOwner.register();

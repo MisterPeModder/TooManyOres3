@@ -80,7 +80,7 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
         this.nameField.setTextColor(14737632);
         this.nameField.setDisabledTextColour(7368816);
         this.nameField.setEnableBackgroundDrawing(false);
-        this.nameField.setMaxStringLength(31);
+        this.nameField.setMaxStringLength(50);
         this.anvil.removeListener(this);
         this.anvil.addListener(this);
     }

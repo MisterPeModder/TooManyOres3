@@ -17,7 +17,6 @@ public enum EnumBlocksNames implements IBlockNames {
 	DECORATION("decoration", "blockDecoration"),
 	ANCIENT_GOLD_LAMP("ancient_gold_lamp", "blockGoldAncientLamp"),
 	DARKANIUM_LAMP("darkanium_lamp", "blockDarkaniumLamp"),
-	KEEPER_BLOCK("item_keeper", "blockItemKeeper"),
 	TITANIUM_CHEST("titanium_chest", "blockTitaniumChest", "chestMetal"),
 	TITANIUM_ANVIL("titanium_anvil", "blockTitaniumAnvil", "anvil"),
 	MACHINE_CASING("machine_casing", "machineCasing"),
@@ -28,6 +27,9 @@ public enum EnumBlocksNames implements IBlockNames {
 	STRONG_PISTON_EXTENSION("strong_piston_head", "blockPistonBase"),
 	STRONG_PISTON_MOVING("strong_piston_extension", "blockPistonExtension"),
 	INJECTOR("fluid_injector", "blockInjector"),
+	
+	IGNUM_FUEL("liquid_ignum", "liquidIgnum"),
+	FROZIUM_FUEL("liquid_frozium", "liquidFrozium"),
 	;
 	String unlocalizedName;
 	String registryName;

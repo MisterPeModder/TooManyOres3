@@ -7,6 +7,7 @@ import misterpemodder.tmo.main.client.render.TileEntityStrongPistonRenderer;
 import misterpemodder.tmo.main.client.render.TileEntityTitaniumAnvilRenderer;
 import misterpemodder.tmo.main.client.render.TileEntityTitaniumChestRenderer;
 import misterpemodder.tmo.main.init.ModBlocks;
+import misterpemodder.tmo.main.init.ModFluids;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import misterpemodder.tmo.main.tileentity.TileEntityStrongPiston;
@@ -21,6 +22,7 @@ public class ClientProxy extends CommonProxy {
 	public void preInit() {
 		ModItems.registerRenders();
 		ModBlocks.registerRenders();
+		ModFluids.registerFluidBlocksRendering();
 	}
 	
 	public void init() {

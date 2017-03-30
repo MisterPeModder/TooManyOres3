@@ -126,9 +126,6 @@ item.titaniumBucket.message.content=%1$s ~ %2$d/%3$dmb
 item.titaniumBucket.desc.content=Contient: %1$s, %2$d/%3$dmb.
 item.titaniumBucket.desc.emptyContent=Contient: rien.
 item.titaniumBucket.desc=Clic droit pour placer des fluides. \nShift+Clic droit pour prendre des fluides.
-item.titaniumCan.name=Canette en titane
-item.titaniumBucket.empty=Canette en titane (vide)
-item.titaniumBucket.filled=Canette en titane (%2$s, %1$dmb)
 
 #Blocs
 tile.blockStorage.blockTitanium.name=Bloc de Titane
@@ -198,6 +195,10 @@ tile.blockPistonBase.desc=Peut bouger les TileEntities
 tile.blockPistonBaseSticky.name=Piston collant fort
 tile.blockPistonBaseSticky.desc=Peut bouger les TileEntities
 tile.blockInjector.name=Injecteur de fluides
+
+#Fluides
+fluid.liquidIgnum=Essence d'ignum
+fluid.liquidFrozium=Essence de frozium
 
 #Catégories interface
 gui.tab.main.name=Principal

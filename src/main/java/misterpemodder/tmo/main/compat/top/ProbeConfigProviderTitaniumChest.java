@@ -1,5 +1,7 @@
 package misterpemodder.tmo.main.compat.top;
 
+import com.google.common.base.Function;
+
 import mcjty.theoneprobe.api.IProbeConfig;
 import mcjty.theoneprobe.api.IProbeConfig.ConfigMode;
 import mcjty.theoneprobe.api.IProbeConfigProvider;
@@ -17,7 +19,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
-import com.google.common.base.Function;
 
 public class ProbeConfigProviderTitaniumChest implements IProbeConfigProvider {
 	
