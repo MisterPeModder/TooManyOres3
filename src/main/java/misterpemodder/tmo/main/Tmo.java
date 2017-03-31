@@ -28,6 +28,7 @@ import misterpemodder.tmo.main.apiimpl.SlimeBlock;
 import misterpemodder.tmo.main.capability.CapabilityOwner;
 import misterpemodder.tmo.main.commands.CommandTMO;
 import misterpemodder.tmo.main.compat.aa.ActAddCompat;
+import misterpemodder.tmo.main.compat.craftingtweaks.CraftingTweaksCompat;
 import misterpemodder.tmo.main.compat.top.ProbeConfigProviderTitaniumChest;
 import misterpemodder.tmo.main.config.ConfigHandler;
 import misterpemodder.tmo.main.config.ConfigValues;
@@ -99,6 +100,7 @@ public class Tmo {
 		MachineRecipes.registerRecipes();
 		ActAddCompat.init();
 		ProbeConfigProviderTitaniumChest.init();
+		CraftingTweaksCompat.init();
 		
 		proxy.init();
 	}

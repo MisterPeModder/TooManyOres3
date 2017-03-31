@@ -18,7 +18,7 @@ public class ContainerTitaniumChest extends ContainerBase<TileEntityTitaniumChes
 	private static final int numRows = 6;
 	
 	/*
-	 * NEW SLOTS:
+	 * SLOTS:
 	 * 
 	 * Player Inventory 9-35 .. 0 - 26
 	 * Player Hotbar	0-8 ... 27 - 35
@@ -26,8 +26,8 @@ public class ContainerTitaniumChest extends ContainerBase<TileEntityTitaniumChes
 	 * Offhand          0-0 ... 40 - 40
 	 * Lock Slot        0-0 ... 41 - 41
 	 * Titanium Chest 	0-65 .. 42 - 107
-	 * Crafing matrix   0-8 ... 108 - 116
-	 * Crafing result   0-0 ... 117 - 117
+	 * Crafing result   0-0 ... 108 - 108
+	 * Crafing matrix   0-8 ... 109 - 117
 	 * Baubles          0-6 ... 118 - 124 
 	 */
 

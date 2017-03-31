@@ -11,11 +11,13 @@ import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import misterpemodder.tmo.main.Tmo;
+import misterpemodder.tmo.main.client.gui.tabs.TabArmorInventory;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabPos;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabTexture;
 import misterpemodder.tmo.main.client.gui.tabs.TabMain;
 import misterpemodder.tmo.main.client.gui.tabs.TabPlayerInventory;
+import misterpemodder.tmo.main.compat.craftingtweaks.CraftingTweaksCompat;
 import misterpemodder.tmo.main.compat.jei.JeiPlugin;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import net.minecraft.client.Minecraft;
@@ -39,6 +41,9 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	protected List<GuiButton> selectedButtonsLeft;
 	protected List<GuiButton> selectedButtonsRight;
 	
+	private short ctButtonsState = -1;
+	private List<GuiButton> ctButtons = new ArrayList<>();
+	
 	public GuiContainerBase(C container) {
 		super(container);
 		this.container = container;
@@ -57,6 +62,10 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
       	
       	this.selectedButtonsLeft = new ArrayList<>();
       	this.selectedButtonsRight = new ArrayList<>();
+      	
+      	if(CraftingTweaksCompat.isModLoaded && CraftingTweaksCompat.guiTweakButtonClass != null) {
+      		ctButtonsState = 0;
+      	}
 	}
 	
 	private void initTabs() {
@@ -225,10 +234,8 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	}
 	
 	private void addButtons() {
-		try {
 		List<GuiButton> leftButtons = this.selectedTabs.left.getButtonsList();
 		List<GuiButton> rightButtons = this.selectedTabs.right.getButtonsList();
-		
 		
 		if(leftButtons == null || leftButtons.isEmpty()) {
 			selectedButtonsLeft.clear();
@@ -246,12 +253,39 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 			selectedButtonsRight.addAll(rightButtons);
 		}
 		
-		this.buttonList.clear();
-		this.buttonList.addAll(selectedButtonsLeft);
-		this.buttonList.addAll(selectedButtonsRight);
+		
+		
+		if(ctButtonsState == 0 && !buttonList.isEmpty()) {
+			for(GuiButton b : buttonList) {
+				if(CraftingTweaksCompat.guiTweakButtonClass.isAssignableFrom(b.getClass())) {
+					this.ctButtonsState = 1;
+					this.ctButtons.add(b);
+				}
+			}
+		}
+		
+		try {
+		if(ctButtonsState == 1 && !buttonList.isEmpty() && !ctButtons.isEmpty()) {
+			List<GuiButton> blist = new ArrayList<>(buttonList);
+			for(GuiButton b1 : blist) {
+				for(GuiButton b2 : ctButtons) {
+					if(b1 == b2) {
+						buttonList.remove(b1);
+					}
+				}
+			}
+		}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+		this.buttonList.clear();
+		this.buttonList.addAll(selectedButtonsLeft);
+		this.buttonList.addAll(selectedButtonsRight);
+		if(this.selectedTabs.right instanceof TabArmorInventory && !ctButtons.isEmpty()) {
+			buttonList.addAll(ctButtons);
+		}
+		
 	}
 	
 	@Override

@@ -10,10 +10,10 @@
 
 package de.ellpeck.actuallyadditions.api.internal;
 
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-
-import java.util.List;
 
 /**
  * This is a helper interface for IFarmerBehavior.

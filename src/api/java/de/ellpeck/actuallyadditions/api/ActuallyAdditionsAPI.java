@@ -10,6 +10,11 @@
 
 package de.ellpeck.actuallyadditions.api;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import de.ellpeck.actuallyadditions.api.booklet.IBookletChapter;
 import de.ellpeck.actuallyadditions.api.booklet.IBookletEntry;
 import de.ellpeck.actuallyadditions.api.booklet.IBookletPage;
@@ -18,15 +23,19 @@ import de.ellpeck.actuallyadditions.api.internal.IMethodHandler;
 import de.ellpeck.actuallyadditions.api.laser.ILaserRelayConnectionHandler;
 import de.ellpeck.actuallyadditions.api.lens.Lens;
 import de.ellpeck.actuallyadditions.api.lens.LensConversion;
-import de.ellpeck.actuallyadditions.api.recipe.*;
+import de.ellpeck.actuallyadditions.api.recipe.BallOfFurReturn;
+import de.ellpeck.actuallyadditions.api.recipe.CoffeeIngredient;
+import de.ellpeck.actuallyadditions.api.recipe.CompostRecipe;
+import de.ellpeck.actuallyadditions.api.recipe.CrusherRecipe;
+import de.ellpeck.actuallyadditions.api.recipe.EmpowererRecipe;
+import de.ellpeck.actuallyadditions.api.recipe.IColorLensChanger;
+import de.ellpeck.actuallyadditions.api.recipe.LensConversionRecipe;
+import de.ellpeck.actuallyadditions.api.recipe.OilGenRecipe;
+import de.ellpeck.actuallyadditions.api.recipe.TreasureChestLoot;
+import de.ellpeck.actuallyadditions.api.recipe.WeightedOre;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public final class ActuallyAdditionsAPI{
 

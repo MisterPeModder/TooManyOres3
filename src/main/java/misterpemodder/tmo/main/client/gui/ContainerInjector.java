@@ -22,7 +22,7 @@ import net.minecraft.nbt.NBTTagCompound;
 public class ContainerInjector extends ContainerBase<TileEntityInjector> {
 	
 	/*
-	 * SLOT CONFIG:
+	 * SLOT CONFIG:  
 	 * 
 	 * Player Inventory 9-35 .. 0 - 26
 	 * Player Hotbar	0-8 ... 27 - 35
@@ -30,8 +30,8 @@ public class ContainerInjector extends ContainerBase<TileEntityInjector> {
 	 * Offhand          0-0 ... 40 - 40
 	 * Input			0-0 ... 41 - 41
 	 * Output           0-0 ... 42 - 42
-	 * Crafing matrix   0-8 ... 43 - 51
-	 * Crafing result   0-0 ... 52 - 52
+	 * Crafing result   0-0 ... 43 - 43
+	 * Crafing matrix   0-8 ... 44 - 52
 	 * Baubles          0-6 ... 53 - 59
 	 */
 	

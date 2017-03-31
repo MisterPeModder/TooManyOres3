@@ -194,9 +194,9 @@ tile.blockPistonBaseSticky.desc=Can move TileEntities
 tile.blockInjector.name=Fluid Injector
 
 #Fluids
-fluid.liquidIgnum.name=Ignum Fuel
+fluid.liquidIgnum=Ignum Fuel
 tile.liquidIgnum.name=Ignum Fuel
-fluid.liquidFrozium.name=Frozium Fuel
+fluid.liquidFrozium=Frozium Fuel
 tile.liquidFrozium.name=Frozium Fuel
 
 #GUI

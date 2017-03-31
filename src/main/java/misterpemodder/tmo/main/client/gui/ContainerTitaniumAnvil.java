@@ -52,8 +52,8 @@ public class ContainerTitaniumAnvil extends ContainerBase<TileEntityTitaniumAnvi
 	 * Hammer           0-0 ... 41 - 41
 	 * Input            0-1 ... 42 - 43
 	 * Output          	0-0 ... 44 - 44
-	 * Crafing matrix   0-8 ... 45 - 53
-	 * Crafing result   0-0 ... 54 - 54
+	 * Crafing result   0-0 ... 45 - 45
+	 * Crafing matrix   0-8 ... 46 - 54
 	 * Baubles          0-6 ... 55 - 61
 	 */
 
