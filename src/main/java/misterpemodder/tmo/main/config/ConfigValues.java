@@ -7,8 +7,8 @@ public final class ConfigValues {
 	
 	public enum ConfigCategories {
 		ORE_GEN("ore gen", "in world ore generation.", "oreGen"),
-		TOOLS("tools", "too OP for you?", "armor"),
-		ARMOR("armor", "you don't like a special armor set? disable it right there!", "tools"),
+		TOOLS("tools", "too OP for you?", "tools"),
+		ARMOR("armor", "you don't like a special armor set? disable it right there!", "armor"),
 		COMPAT("compatibility", "enable/disables mod compatibility features.", "compat"),
 		MISC("miscellaneous", "random configs.", "misc"),
 		;
