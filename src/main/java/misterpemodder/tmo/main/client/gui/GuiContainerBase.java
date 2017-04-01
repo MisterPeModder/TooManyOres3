@@ -220,6 +220,15 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		super.mouseClicked(mouseX, mouseY, mouseButton);
 	}
 	
+	public void updateScreen() {
+        super.updateScreen();
+        TE te = this.container.te;
+        if(te == null || !te.hasWorld() || te.getWorld().getBlockState(te.getPos()).getBlock() != te.getBlockType()) {
+        	this.onGuiClosed();
+        	this.mc.player.closeScreen();
+        }
+    }
+	
 	@Override
 	public void onGuiClosed() {
 		this.selectedTabs.left.onGuiClosed();
