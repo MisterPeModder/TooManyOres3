@@ -91,29 +91,10 @@ public abstract class BlockContainerBase<TE extends TileEntityContainerBase> ext
             	((IWorldNameableModifiable)tileentity).setCustomName(stack.getDisplayName());
             }
             if(placer instanceof EntityPlayer) {
-            	/*String owner;
-            	if(stack.serializeNBT().hasKey("tag")) {
-            		NBTTagCompound tag = stack.serializeNBT().getCompoundTag("tag");
-            		if(tag.hasKey("BlockEntityTag")) {
-            			NBTTagCompound blockEntityTag = tag.getCompoundTag("BlockEntityTag");
-            			if(blockEntityTag.hasKey("owner")) {
-            				owner = blockEntityTag.getString("owner");
-            			}
-            		}
-            	}*/
             	IOwnerHandler ownerHandler = tileentity.getCapability(CapabilityOwner.OWNER_HANDLER_CAPABILITY, null);
             	if(ownerHandler != null)
             		ownerHandler.setOwner((EntityPlayer)placer);
             }
-            /*if(!worldIn.isRemote) {
-            	TargetPoint target = new TargetPoint(worldIn.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64);
-            	NBTTagCompound toSend = new NBTTagCompound();
-            	
-            	toSend.setLong("pos", pos.toLong());
-            	toSend.setTag("tileEntity", tileentity.serializeNBT());
-            	
-            	TMOPacketHandler.network.sendToAllAround(new PacketServerToClient(PacketDataHandlers.TE_UPDATE_HANDLER, toSend), target); 
-            }*/
 	}
 	
 	@Override
@@ -187,4 +168,5 @@ public abstract class BlockContainerBase<TE extends TileEntityContainerBase> ext
 		}
 		super.onBlockAdded(worldIn, pos, state);
 	}
+	
 }

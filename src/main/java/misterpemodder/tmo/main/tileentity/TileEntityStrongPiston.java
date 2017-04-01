@@ -65,7 +65,7 @@ public class TileEntityStrongPiston extends TileEntityPiston {
     }
 	
 	/**Fallback method to avoid as much as possible errors due to different mappings*/
-	public static Method tryFindMethod(Class<?> clazz, String[] methodNames, Class<?> returnType, Class<?>... methodTypes) {
+	public static Method tryFindMethod(Class clazz, String[] methodNames, Class returnType, Class... methodTypes) {
 		try {
 			return ReflectionHelper.findMethod(clazz, null, methodNames, methodTypes);
 		} catch(UnableToFindMethodException e) {

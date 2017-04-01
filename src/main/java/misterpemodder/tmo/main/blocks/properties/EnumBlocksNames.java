@@ -1,15 +1,17 @@
 package misterpemodder.tmo.main.blocks.properties;
 
+import net.minecraft.item.EnumRarity;
+
 public enum EnumBlocksNames implements IBlockNames {
-	TEST_BLOCK("test_block", "blockTest"),
-	TITANIUM_BLOCK("titanium_block", "blockTitanium", "blockTitanium", "blockTitaniumBlue"),
+	GENERIC("generic_block", "blockGeneric", EnumRarity.EPIC),
+	TITANIUM_BLOCK("titanium_block", "blockTitanium", EnumRarity.RARE, "blockTitaniumBlue"),
 	COPPER_BLOCK("copper_block", "blockCopper", "blockCopper"),
 	FROZIUM_BLOCK("frozium_block", "blockFrozium", "blockFrozium"),
 	IGNUM_BLOCK("ignum_block", "blockIgnum", "blockIgnum"),
 	ENDER_MATTER_BLOCK("ender_matter_block", "blockEnderMatter", "blockEnderMatter"),
-	DARKANIUM_BLOCK("darkanium_block", "blockDarkanium", "blockDarkanium"),
-	ANCIENT_GOLD_BLOCK("ancient_gold_block", "blockGoldAncient", "blockGoldAncient"),
-	PLATINUM("platinum_block", "blockPlatinum", "blockPlatinum"),
+	DARKANIUM_BLOCK("darkanium_block", "blockDarkanium", EnumRarity.EPIC, "blockDarkanium"),
+	ANCIENT_GOLD_BLOCK("ancient_gold_block", "blockGoldAncient", EnumRarity.UNCOMMON, "blockGoldAncient"),
+	PLATINUM("platinum_block", "blockPlatinum", EnumRarity.RARE, "blockPlatinum"),
 	BRICK("brick", "blockBrick", "blockBrick"),
 	ORE("ore", "blockOre"),
 	SLAB("slab", "blockSlab"),
@@ -20,20 +22,21 @@ public enum EnumBlocksNames implements IBlockNames {
 	TITANIUM_CHEST("titanium_chest", "blockTitaniumChest", "chestMetal"),
 	TITANIUM_ANVIL("titanium_anvil", "blockTitaniumAnvil", "anvil"),
 	MACHINE_CASING("machine_casing", "machineCasing"),
-	EXPLODER("exploder", "blockExploder"),
+	EXPLODER("exploder", "blockExploder", EnumRarity.RARE),
 	STRONG_REDSTONE_BLOCK("strong_redstone_block", "blockRedstoneStrong"),
-	STRONG_PISTON_BASE("strong_piston", "blockPistonBase"),
-	STRONG_PISTON_BASE_STICKY("sticky_strong_piston", "blockPistonBaseSticky"),
+	STRONG_PISTON_BASE("strong_piston", "blockPistonBase", EnumRarity.RARE),
+	STRONG_PISTON_BASE_STICKY("sticky_strong_piston", "blockPistonBaseSticky", EnumRarity.RARE),
 	STRONG_PISTON_EXTENSION("strong_piston_head", "blockPistonBase"),
 	STRONG_PISTON_MOVING("strong_piston_extension", "blockPistonExtension"),
-	INJECTOR("fluid_injector", "blockInjector"),
+	INJECTOR("fluid_injector", "blockInjector", EnumRarity.RARE),
 	
-	IGNUM_FUEL("liquid_ignum", "liquidIgnum"),
-	FROZIUM_FUEL("liquid_frozium", "liquidFrozium"),
+	IGNUM_FUEL("liquid_ignum", "liquidIgnum", EnumRarity.UNCOMMON),
+	FROZIUM_FUEL("liquid_frozium", "liquidFrozium", EnumRarity.RARE),
 	;
 	String unlocalizedName;
 	String registryName;
 	String[] oreDictNames;
+	EnumRarity rarity;
 
 	public String getUnlocalizedName() {
 		return unlocalizedName;
@@ -46,14 +49,27 @@ public enum EnumBlocksNames implements IBlockNames {
 	public String[] getOreDictNames() {
 		return oreDictNames;
 	}
+	
+	public EnumRarity getRarity() {
+		return this.rarity;
+	}
 
 	EnumBlocksNames(String registryName, String unlocalizedName) {
-		this(registryName, unlocalizedName, new String[0]);
+		this(registryName, unlocalizedName, EnumRarity.COMMON, new String[0]);
+	}
+	
+	EnumBlocksNames(String registryName, String unlocalizedName, EnumRarity rarity) {
+		this(registryName, unlocalizedName, rarity, new String[0]);
 	}
 	
 	EnumBlocksNames(String registryName, String unlocalizedName, String... oreDictNames) {
+		this(registryName, unlocalizedName, EnumRarity.COMMON, oreDictNames);
+	}
+	
+	EnumBlocksNames(String registryName, String unlocalizedName, EnumRarity rarity, String... oreDictNames) {
 		this.registryName = registryName;
 		this.unlocalizedName = unlocalizedName;
 		this.oreDictNames = oreDictNames;
+		this.rarity = rarity;
 	}
 }

@@ -11,7 +11,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.Fluid;
@@ -24,8 +23,8 @@ public final class ModFluids {
 	
 	public static enum TheFluids {
 		
-		IGNUM_FUEL(new FluidTMO(EnumBlocksNames.IGNUM_FUEL, EnumRarity.UNCOMMON, 1473, 0xFFFF6F3D, 3, 800)),
-		FROZIUM_FUEL(new FluidTMO(EnumBlocksNames.FROZIUM_FUEL, EnumRarity.RARE, 123, 0xFF90FFFF, 0, 800)),
+		IGNUM_FUEL(new FluidTMO(EnumBlocksNames.IGNUM_FUEL, 1473, 0xFFFF6F3D, 3, 800)),
+		FROZIUM_FUEL(new FluidTMO(EnumBlocksNames.FROZIUM_FUEL, 123, 0xFF90FFFF, 0, 800)),
 		;
 		
 		private final FluidTMO declaredFluid;

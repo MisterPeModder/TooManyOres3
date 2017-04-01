@@ -1,6 +1,6 @@
 package misterpemodder.tmo.main.blocks;
 
-import misterpemodder.tmo.main.blocks.base.BlockTMO;
+import misterpemodder.tmo.main.blocks.base.IBlockTMO;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import misterpemodder.tmo.main.utils.TMORefs;
@@ -14,7 +14,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockStrongPistonExtension extends BlockPistonExtension implements BlockTMO {
+public class BlockStrongPistonExtension extends BlockPistonExtension implements IBlockTMO {
 
 	public BlockStrongPistonExtension() {
 		super();

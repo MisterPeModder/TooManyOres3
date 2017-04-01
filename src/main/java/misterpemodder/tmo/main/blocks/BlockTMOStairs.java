@@ -1,7 +1,7 @@
 package misterpemodder.tmo.main.blocks;
 
 import misterpemodder.tmo.main.blocks.base.BlockMulti;
-import misterpemodder.tmo.main.blocks.base.BlockTMO;
+import misterpemodder.tmo.main.blocks.base.IBlockTMO;
 import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.BlockStairs;
@@ -9,7 +9,7 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemBlock;
 
-public class BlockTMOStairs extends BlockStairs implements BlockTMO {
+public class BlockTMOStairs extends BlockStairs implements IBlockTMO {
 	
 	protected ItemBlock itemBlock;
 	protected BlockMulti baseBlock;

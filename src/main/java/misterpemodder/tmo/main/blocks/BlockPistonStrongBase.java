@@ -7,7 +7,8 @@ import com.google.common.collect.Lists;
 
 import misterpemodder.tmo.api.IStrongPistonBehavior;
 import misterpemodder.tmo.api.TooManyOresAPI;
-import misterpemodder.tmo.main.blocks.base.BlockTMO;
+import misterpemodder.tmo.main.blocks.base.IBlockTMO;
+import misterpemodder.tmo.main.blocks.base.ItemBlockBase;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import misterpemodder.tmo.main.tileentity.TileEntityStrongPiston;
@@ -34,10 +35,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
-public class BlockPistonStrongBase extends BlockPistonBase implements BlockTMO {
+public class BlockPistonStrongBase extends BlockPistonBase implements IBlockTMO {
 	
-	protected ItemBlock itemBlock;
+	protected ItemBlockBase itemBlock;
 	protected boolean isSticky;
+	protected IBlockNames names;
 	
 	private Method shouldBeExtended;
 
@@ -46,8 +48,9 @@ public class BlockPistonStrongBase extends BlockPistonBase implements BlockTMO {
 		this.setUnlocalizedName(names.getUnlocalizedName());
 		this.setRegistryName(TMORefs.PREFIX + names.getRegistryName());
 		this.setLightOpacity(0);
+		this.names = names;
 		
-		this.itemBlock = new ItemBlock(this);
+		this.itemBlock = new ItemBlockBase(this);
 		itemBlock.setRegistryName(this.getRegistryName());
 		this.setCreativeTab(TMORefs.TMO_TAB);
 		this.setSoundType(SoundType.METAL);
@@ -287,5 +290,10 @@ public class BlockPistonStrongBase extends BlockPistonBase implements BlockTMO {
             return true;
         }
     }
+	
+	@Override
+	public IBlockNames getNames() {
+		return this.names;
+	}
 
 }

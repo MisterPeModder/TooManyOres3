@@ -2,7 +2,6 @@ package misterpemodder.tmo.main.fluids;
 
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
-import net.minecraft.item.EnumRarity;
 import net.minecraftforge.fluids.Fluid;
 
 public class FluidTMO extends Fluid {
@@ -10,9 +9,9 @@ public class FluidTMO extends Fluid {
 	private final IBlockNames names;
 	private int color = 0xFF000079;
 
-	public FluidTMO(IBlockNames names, EnumRarity rarity, int temperature, int color, int luminosity, int viscosity) {
+	public FluidTMO(IBlockNames names, int temperature, int color, int luminosity, int viscosity) {
 		this(names);
-		this.rarity = rarity;
+		this.rarity = names.getRarity();
 		this.temperature = temperature;
 		this.color = color;
 		this.luminosity = luminosity;

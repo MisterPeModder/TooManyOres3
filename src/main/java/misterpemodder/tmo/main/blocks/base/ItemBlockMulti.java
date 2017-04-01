@@ -4,6 +4,7 @@ import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -45,6 +46,13 @@ public class ItemBlockMulti extends ItemBlockBase {
 		String type = ((BlockMulti)this.getBlock()).getVariant(meta).getUnlocalizedName();
 		String name = Block.getBlockFromItem(stack.getItem()).getUnlocalizedName()+'.'+type;
 		return ((BlockMulti) getBlock()).isValidVariant(meta)? name:TMORefs.DEFAULT_ITEM_NAME;
+	}
+	
+	@Override
+	public EnumRarity getRarity(ItemStack stack) {
+		int meta = stack.getMetadata();
+		EnumRarity r = ((BlockMulti)this.getBlock()).getVariant(meta).getRarity();
+		return r == EnumRarity.COMMON? super.getRarity(stack) : r;
 	}
 	
 }

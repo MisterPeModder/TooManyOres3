@@ -14,7 +14,7 @@ import misterpemodder.tmo.main.blocks.BlockTMOStairs;
 import misterpemodder.tmo.main.blocks.BlockTransparent;
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
 import misterpemodder.tmo.main.blocks.base.BlockMulti;
-import misterpemodder.tmo.main.blocks.base.BlockTMO;
+import misterpemodder.tmo.main.blocks.base.IBlockTMO;
 import misterpemodder.tmo.main.blocks.containers.BlockInjector;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumAnvil;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest;
@@ -62,17 +62,17 @@ public class ModBlocks {
 		STRONG_PISTON_MOVING(new BlockStrongPistonMoving()),
 		INJECTOR(new BlockInjector()),
 		;
-		private BlockTMO block;
+		private IBlockTMO block;
 		
 		public Block getBlock() {
 			return (Block)this.block;
 		}
 		
-		public BlockTMO getBlockTMO() {
+		public IBlockTMO getBlockTMO() {
 			return this.block;
 		}
 		
-		TheBlocks(BlockTMO block) {
+		TheBlocks(IBlockTMO block) {
 			this.block = block;
 		}
 		
@@ -86,7 +86,7 @@ public class ModBlocks {
 	private static void register(IForgeRegistry<Block> registry) {
 		TMORefs.LOGGER.info("Registering Blocks...");
 		for(TheBlocks b : TheBlocks.values()) {
-			BlockTMO block = b.getBlockTMO();
+			IBlockTMO block = b.getBlockTMO();
 			registry.register(b.getBlock());
 			if(block.hasOwnItemBlock())
 				ModItems.ITEM_BLOCKS.add(block.getItemBlock());
@@ -98,7 +98,7 @@ public class ModBlocks {
 	
 	public static void registerRenders() {
 		for(TheBlocks bl : TheBlocks.values()) {
-			BlockTMO b = bl.getBlockTMO();
+			IBlockTMO b = bl.getBlockTMO();
 			if(b.hasOwnItemBlock())
 				b.registerItemRender();
 		}

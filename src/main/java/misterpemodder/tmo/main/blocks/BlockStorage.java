@@ -11,6 +11,7 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -36,40 +37,43 @@ public class BlockStorage extends BlockMulti<EnumVariant> {
 		PLATINUM_BLOCK(6, EnumBlocksNames.PLATINUM, EnumBlocksValues.MetalBlocks.PLATINUM_BLOCK),
 		;
 		private final int meta;
-		private final String name;
-		private final String unlocalizedName;
 		private final IBlockValues values;
 		private final IBlockNames names;
 
 		@Override
 		public String getName() {
-			return this.name;
+			return this.names.getRegistryName();
 		}
 		
 		@Override
 		public String toString() {
-			return this.name;
+			return this.names.getRegistryName();
 		}
+		@Override
 		public int getMeta() {
 			return meta;
 		}
 		public IBlockValues getValues() {
 			return this.values;
 		}
+		@Override
 		public String getUnlocalizedName() {
-			return unlocalizedName;
+			return this.names.getUnlocalizedName();
 		}
 		public int getMiningLevel(IBlockState state) {
 			return values.getHarvestLevel(state);
 		}
+		@Override
 		public MapColor getMapColor() {
 			return getValues().getMapColor(null);
-		};
+		}
+		@Override
+		public EnumRarity getRarity() {
+			return this.names.getRarity();
+		}
 
 		EnumVariant(int id, IBlockNames names, IBlockValues values) {
 			this.meta = id;
-			this.name = names.getRegistryName();
-			this.unlocalizedName = names.getUnlocalizedName();
 			this.values = values;
 			this.names = names;
 		}

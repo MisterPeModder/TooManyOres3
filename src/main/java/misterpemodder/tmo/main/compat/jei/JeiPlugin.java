@@ -15,7 +15,7 @@ import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.blocks.base.BlockTMO;
+import misterpemodder.tmo.main.blocks.base.IBlockTMO;
 import misterpemodder.tmo.main.client.gui.ContainerInjector;
 import misterpemodder.tmo.main.client.gui.ContainerTitaniumAnvil;
 import misterpemodder.tmo.main.client.gui.ContainerTitaniumChest;
@@ -93,7 +93,7 @@ public class JeiPlugin implements IModPlugin {
 		List<ItemStack> ingredients = ingredientsRegistry.getIngredients(ItemStack.class);
 		
 		for(ItemStack ingredient : ingredients) {
-			if(ingredient.getItem() instanceof ITMOItem || Block.getBlockFromItem(ingredient.getItem()) instanceof BlockTMO) {
+			if(ingredient.getItem() instanceof ITMOItem || Block.getBlockFromItem(ingredient.getItem()) instanceof IBlockTMO) {
 				String unlocName = ingredient.getItem().getUnlocalizedNameInefficiently(ingredient) + TMORefs.JEI_DESC_UNLOC_NAME;
 				if(I18n.hasKey(unlocName)) {
 					registry.addDescription(ingredient , Tmo.proxy.translate(unlocName));

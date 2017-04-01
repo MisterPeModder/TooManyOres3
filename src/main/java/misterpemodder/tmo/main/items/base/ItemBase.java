@@ -3,7 +3,9 @@ package misterpemodder.tmo.main.items.base;
 import misterpemodder.tmo.main.items.EnumItemsNames;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -40,5 +42,10 @@ public class ItemBase extends Item implements ITMOItem {
 		setUnlocalizedName(names.getUnlocalizedName());
 		setRegistryName(names.getRegistryName());
 		if(useDefaultTab) attemptSetCreativeTab();
-	}	
+	}
+	
+	@Override
+	public EnumRarity getRarity(ItemStack stack) {
+		return this.names.getRarity();
+	}
 }

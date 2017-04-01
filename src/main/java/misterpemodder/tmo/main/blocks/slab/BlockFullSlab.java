@@ -3,6 +3,7 @@ package misterpemodder.tmo.main.blocks.slab;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.item.EnumRarity;
 
 public class BlockFullSlab extends BlockAbstractSlab<BlockHalfSlab.EnumVariant> {
 	
@@ -32,6 +33,9 @@ public class BlockFullSlab extends BlockAbstractSlab<BlockHalfSlab.EnumVariant> 
 			}
 			public String[] getOreDictNames() {
 				return slab.getNames().getOreDictNames();
+			}
+			public EnumRarity getRarity() {
+				return slab.getNames().getRarity();
 			}
 		};
 	}

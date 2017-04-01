@@ -1,11 +1,13 @@
 package misterpemodder.tmo.main.blocks.base;
 
+import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
+import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.client.model.ModelLoader;
 
-public interface BlockTMO {
+public interface IBlockTMO {
 	
 	default void registerItemRender() {
 		ModelResourceLocation location = new ModelResourceLocation(((Block)this).getRegistryName(), "inventory");
@@ -20,6 +22,10 @@ public interface BlockTMO {
 	
 	default ItemBlock getItemBlock() {
 		return null;
+	}
+	
+	default IBlockNames getNames() {
+		return EnumBlocksNames.GENERIC;
 	}
 	
 }

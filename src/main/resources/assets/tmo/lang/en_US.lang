@@ -124,6 +124,7 @@ item.titaniumBucket.desc.emptyContent=Contains: nothing.
 item.titaniumBucket.desc=Right-click to place fluids.\nShift-right-click to take fluids.
 
 #Blocks
+tile.blockGeneric.name=Unammed Block
 tile.blockStorage.blockTitanium.name=Titanium Block
 tile.blockStorage.blockCopper.name=Copper Block
 tile.blockFrozium.name=Frozium Block

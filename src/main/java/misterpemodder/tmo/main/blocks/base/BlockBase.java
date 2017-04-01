@@ -16,7 +16,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class BlockBase extends Block implements BlockTMO {
+public class BlockBase extends Block implements IBlockTMO {
 	
 	protected IBlockNames names;
 	protected IBlockValues values;
@@ -46,6 +46,7 @@ public class BlockBase extends Block implements BlockTMO {
 		if(values.getUseDefaultTab() == true) setCreativeTab(TMORefs.TMO_TAB);
 	}
 	
+	@Override
 	public IBlockNames getNames() {
 		return this.names;
 	}

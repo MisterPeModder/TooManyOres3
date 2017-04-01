@@ -2,7 +2,7 @@ package misterpemodder.tmo.main.blocks;
 
 import javax.annotation.Nullable;
 
-import misterpemodder.tmo.main.blocks.base.BlockTMO;
+import misterpemodder.tmo.main.blocks.base.IBlockTMO;
 import misterpemodder.tmo.main.blocks.containers.IBlockTileEntity;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.tileentity.TileEntityStrongPiston;
@@ -13,7 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 
-public class BlockStrongPistonMoving extends BlockPistonMoving implements BlockTMO, IBlockTileEntity<TileEntityStrongPiston> {
+public class BlockStrongPistonMoving extends BlockPistonMoving implements IBlockTMO, IBlockTileEntity<TileEntityStrongPiston> {
 	
 	public BlockStrongPistonMoving() {
 		super();
