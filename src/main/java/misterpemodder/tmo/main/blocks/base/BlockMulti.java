@@ -39,8 +39,8 @@ public abstract class BlockMulti<V extends Enum<V> & IBlockVariant> extends Bloc
 		return suffix;
 	}
 
-	public IBlockVariant getVariant(int meta) {
-		for(IBlockVariant variant : this.variants) {
+	public V getVariant(int meta) {
+		for(V variant : this.variants) {
 			if(meta == variant.getMeta()) {
 				return variant;
 			}
@@ -48,7 +48,7 @@ public abstract class BlockMulti<V extends Enum<V> & IBlockVariant> extends Bloc
 		return variants[0];
 	}
 	
-	public IBlockVariant getVariant(IBlockState state) {
+	public V getVariant(IBlockState state) {
 		return this.getVariant(this.getMetaFromState(state));
 	}
 	

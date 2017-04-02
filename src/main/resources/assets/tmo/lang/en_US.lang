@@ -188,6 +188,9 @@ tile.machineCasing.name=Machine Casing
 tile.blockRedstoneStrong.name=Strong Redstone Block
 tile.blockExploder.name=Exploder
 tile.blockExploder.desc=Handle with care!
+tile.blockExploder.normal.name=Exploder
+tile.blockExploder.fiery.name=Fiery Exploder
+tile.blockExploder.supercharged.name=Supercharged Exploder
 tile.blockPistonBase.name=Strong Piston
 tile.blockPistonBase.desc=Can move TileEntities
 tile.blockPistonBaseSticky.name=Sticky Strong Piston
@@ -223,6 +226,15 @@ gui.injecter.mode.desc=click to toggle
 
 #Security
 protectedBlock.noBreaking=You don't have the permissions to break this %s!
+
+#Death Messages
+death.tmo.fluid.frozium.0=%s has been transformed into an ice cube
+death.tmo.fluid.frozium.1=%s wasn't warm enougth.
+death.tmo.fluid.frozium.2=%s should have brought a coat.
+death.tmo.fluid.frozium.3=%s is now the COOLest person ever.
+death.tmo.fluid.ignum.0=%s was consumed by ignum.
+death.tmo.fluid.ignum.1=%s didn't notice that the ignum is very hot.
+death.tmo.fluid.ignum.2=%s thought that fire resistance would protect him from ignum fuel damage.
 
 #Commands
 commands.info.usage=/item_info

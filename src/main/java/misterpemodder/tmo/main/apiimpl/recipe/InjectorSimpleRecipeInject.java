@@ -30,8 +30,8 @@ public class InjectorSimpleRecipeInject extends InjectorSimpleRecipe {
 		if(stack.getItem() == inputStack.getItem() && stack.getMetadata() == inputStack.getMetadata()) {
 			if(stack.getCount() >= inputStack.getCount() && (ignoreNBT || stack.getTagCompound().equals(inputStack.getTagCompound()))) {
 				FluidStack fs = fluidTank.getFluid();
-				if(fs == null && fluidInput == null) {
-					return true;
+				if(fs == null) {
+					return fluidInput == null;
 				}
 				return fs.containsFluid(fluidInput);
 			}

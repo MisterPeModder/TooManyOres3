@@ -22,7 +22,7 @@ public enum EnumBlocksNames implements IBlockNames {
 	TITANIUM_CHEST("titanium_chest", "blockTitaniumChest", "chestMetal"),
 	TITANIUM_ANVIL("titanium_anvil", "blockTitaniumAnvil", "anvil"),
 	MACHINE_CASING("machine_casing", "machineCasing"),
-	EXPLODER("exploder", "blockExploder", EnumRarity.RARE),
+	EXPLODER("exploder", "blockExploder"),
 	STRONG_REDSTONE_BLOCK("strong_redstone_block", "blockRedstoneStrong"),
 	STRONG_PISTON_BASE("strong_piston", "blockPistonBase", EnumRarity.RARE),
 	STRONG_PISTON_BASE_STICKY("sticky_strong_piston", "blockPistonBaseSticky", EnumRarity.RARE),

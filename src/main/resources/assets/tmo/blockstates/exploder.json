@@ -11,6 +11,11 @@
 		"activated": {
 			"true": {},
 			"false": {}
+		},
+		"variant": {
+			"normal": {},
+			"fiery": {"textures": {"3": "tmo:blocks/exploder_fiery"}},
+			"supercharged": {"textures": {"3": "tmo:blocks/exploder_supercharged"}}
 		}
     }
 }

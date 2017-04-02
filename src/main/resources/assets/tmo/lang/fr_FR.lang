@@ -190,6 +190,9 @@ tile.machineCasing.name=Boiter de machine
 tile.blockRedstoneStrong.name=Block de redstone fort
 tile.blockExploder.name=Exploseur
 tile.blockExploder.desc=à manier avec précaution!
+tile.blockExploder.normal.name=Exploseur
+tile.blockExploder.fiery.name=Exploseur de feu
+tile.blockExploder.supercharged.name=Exploder superchargé
 tile.blockPistonBase.name=Piston fort
 tile.blockPistonBase.desc=Peut bouger les TileEntities
 tile.blockPistonBaseSticky.name=Piston collant fort
@@ -223,6 +226,15 @@ gui.injecter.mode.desc=cliquez pour changer
 
 #Sécurité
 protectedBlock.noBreaking=Vous n'avez pas les permissions pour casser ce(tte) %s!
+
+#Messages de mort
+death.tmo.fluid.frozium.0=%s à été transformé en glaçon.
+death.tmo.fluid.frozium.1=%s n'était pas assez chaud.
+death.tmo.fluid.frozium.2=%s aurait dû prendre un manteau.
+death.tmo.fluid.frozium.3=%s est la personne la plus FRAICHE au monde.
+death.tmo.fluid.ignum.0=%s à été consummé par l'ignum
+death.tmo.fluid.ignum.1=%s avait pas remarqué que l'ignum, c'est très chaud.
+death.tmo.fluid.ignum.2=%s croyait que la résistance au feu le protégerait des dommages occasionnés par l'ignum.
 
 #Commandes
 commands.tmo.generic.usage=/tmo <sous-commande|help> ...

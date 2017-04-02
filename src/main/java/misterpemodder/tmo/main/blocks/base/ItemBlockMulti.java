@@ -43,7 +43,7 @@ public class ItemBlockMulti extends ItemBlockBase {
 	@SuppressWarnings("rawtypes")
 	public String getUnlocalizedName(ItemStack stack) {
 		int meta = stack.getMetadata();
-		String type = ((BlockMulti)this.getBlock()).getVariant(meta).getUnlocalizedName();
+		String type = ((IBlockVariant) ((BlockMulti)this.getBlock()).getVariant(meta)).getUnlocalizedName();
 		String name = Block.getBlockFromItem(stack.getItem()).getUnlocalizedName()+'.'+type;
 		return ((BlockMulti) getBlock()).isValidVariant(meta)? name:TMORefs.DEFAULT_ITEM_NAME;
 	}
@@ -51,7 +51,7 @@ public class ItemBlockMulti extends ItemBlockBase {
 	@Override
 	public EnumRarity getRarity(ItemStack stack) {
 		int meta = stack.getMetadata();
-		EnumRarity r = ((BlockMulti)this.getBlock()).getVariant(meta).getRarity();
+		EnumRarity r = ((IBlockVariant) ((BlockMulti)this.getBlock()).getVariant(meta)).getRarity();
 		return r == EnumRarity.COMMON? super.getRarity(stack) : r;
 	}
 	

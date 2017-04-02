@@ -85,6 +85,7 @@ public class BlockBrick extends BlockMulti<EnumVariant> {
 		return state.getValue(VARIANT).getMapColor();
 	}
 	
+	@Override
 	public EnumVariant[] getVariants() {
 		return brickVariants;
 	}
