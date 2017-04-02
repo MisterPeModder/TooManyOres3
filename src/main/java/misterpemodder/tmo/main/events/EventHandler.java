@@ -54,7 +54,7 @@ public class EventHandler {
 			Minecraft mc = Minecraft.getMinecraft();
 			RayTraceResult hitPos = mc.objectMouseOver;
 					
-			if(hitPos.getBlockPos() != null) {
+			if(hitPos != null && hitPos.getBlockPos() != null) {
 				IBlockState state = mc.world.getBlockState(hitPos.getBlockPos());
 				EntityPlayerSP p = mc.player;
 				NetworkPlayerInfo n = Minecraft.getMinecraft().getConnection().getPlayerInfo(p.getGameProfile().getId());
