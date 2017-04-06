@@ -139,7 +139,7 @@ tile.blockStorage.blockDarkanium.name=Darkanium Block
 tile.blockStorage.blockGoldAncient.name=Ancient Gold Block
 tile.blockStorage.blockPlatinum.name=Platinum Block
 tile.blockStorage.desc=Can be used as beacon base
-tile.blockDecoration.titaniumPlating.name=Titanium Plating
+tile.blockDecoration.titaniumPlating.name=Titanium Plating Block
 tile.blockDecoration.copperDecoration.name=Copper Decoration Block
 tile.blockBrick.name=Bricks
 tile.blockBrick.goldAncient.name=Ancient Gold Bricks
@@ -248,15 +248,6 @@ enchantment.hammerXpCostReduction.desc=Reduces the experience cost in titanium a
 enchantment.hammerXpCostReduction.tooltip=Reduction
 
 #Commands
-commands.info.usage=/item_info
-commands.info.success.start=§6[========Info========]
-commands.info.success.reg=§2Registry name:§f %s        
-commands.info.success.unl=§2Unlocalized name:§f %s
-commands.info.success.meta=§2Meta:§f %d
-commands.info.success.metaunl=§2Meta Unlocalized name:§f %s
-commands.info.success.ore=§2OreDict values:§f %s
-commands.info.success.end=§6[====================]
-
 commands.tmo.generic.usage=/tmo <subcommand|help> ...
 commands.tmo.generic.wrongSubcommand=Subcommand %s doesn't exist!
 commands.tmo.help.usage=/tmo help [subcommand]
