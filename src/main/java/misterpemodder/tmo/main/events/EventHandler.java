@@ -1,14 +1,14 @@
 package misterpemodder.tmo.main.events;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import misterpemodder.tmo.api.block.ILockable;
 import misterpemodder.tmo.api.owner.IOwnerHandler;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.BlockLamp;
 import misterpemodder.tmo.main.capability.CapabilityOwner;
+import misterpemodder.tmo.main.enchant.EnchantementBase;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.items.ItemLock;
 import misterpemodder.tmo.main.items.ItemVariant;
@@ -18,12 +18,14 @@ import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.init.Enchantments;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
@@ -66,11 +68,6 @@ public class EventHandler {
 						StringUtils.drawCenteredString(mc.fontRendererObj, TextFormatting.BOLD+""+TextFormatting.UNDERLINE+Tmo.proxy.translate("tile.blockLamp.mode.title")+TextFormatting.RESET+" "+TextFormatting.BOLD+""+txt, res.getScaledWidth()/2, res.getScaledHeight()/2 + h);
 						StringUtils.drawCenteredString(mc.fontRendererObj, TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate("tile.blockLamp.mode.hint"), res.getScaledWidth()/2, res.getScaledHeight()/2 + 2*h);
 					}
-//					} else if(state.getBlock() instanceof BlockInjector) {
-//						TileEntityInjector te = ((BlockInjector)state.getBlock()).getTileEntity(mc.world, hitPos.getBlockPos());
-//						if(te != null)
-//						StringUtils.drawCenteredString(mc.fontRendererObj, "Mode: " + (te.getTransferMode() == TransferMode.INJECTION? "injection" : "extracton"), res.getScaledWidth()/2, res.getScaledHeight()/2 + h);
-//					}
 			    }
 			}
 		}
@@ -155,26 +152,33 @@ public class EventHandler {
 	
 	@SubscribeEvent
 	public static void itemTooltipEvent(ItemTooltipEvent event) {
-		if(I18n.hasKey(event.getItemStack().getUnlocalizedName()+".desc")) {
-			String t = I18n.format(event.getItemStack().getUnlocalizedName()+".desc");
-				
-			//expand new lines
-			List<String> expandedLines = Arrays.asList(t.split("\\\\n"));
-				
-			List<String> toAdd = new ArrayList<>();
-			FontRenderer font = Minecraft.getMinecraft().fontRendererObj;
-			for(String line : expandedLines) {
-				
-				if(font.getStringWidth(line)>200) {
-					toAdd.addAll(font.listFormattedStringToWidth(line, 200));
-				} else {
-					toAdd.add(line);
+		try {
+		if(event.getItemStack().getItem() == Items.ENCHANTED_BOOK) {
+			Map<Enchantment, Integer> enchants = EnchantmentHelper.getEnchantments(event.getItemStack());
+			
+			for(Enchantment e : enchants.keySet()) {
+				if(e instanceof EnchantementBase && ((EnchantementBase)e).hasDescription()) {
+					
+					String eName = TextFormatting.RESET+Tmo.proxy.translate(e.getName())+": ";
+					List<String> toAdd = StringUtils.parseTooltip(eName+TextFormatting.GRAY+""+TextFormatting.ITALIC+((EnchantementBase)e).getDescription());
+					
+					event.getToolTip().addAll(toAdd);
 				}
 			}
+		}
+		else if(I18n.hasKey(event.getItemStack().getUnlocalizedName()+".desc")) {
+			if(GuiScreen.isShiftKeyDown()) {
+				List<String> toAdd = StringUtils.parseTooltip(I18n.format(event.getItemStack().getUnlocalizedName()+".desc"));
 			
-			for(String str : toAdd)
-				event.getToolTip().add(TextFormatting.GRAY+""+TextFormatting.ITALIC+str);
+				for(String str : toAdd)
+					event.getToolTip().add(TextFormatting.GRAY+""+TextFormatting.ITALIC+str);
+			} else {
+				event.getToolTip().add(TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate("item.desc"));
+			}
+		}
+		} catch(Throwable e) {
+			e.printStackTrace();
+			//TODO TRY-CATCH Block
 		}
 	}
-	
 }

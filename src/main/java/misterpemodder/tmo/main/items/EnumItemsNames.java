@@ -47,6 +47,10 @@ public enum EnumItemsNames {
 	WRENCH_ADMIN("admin_wrench", "wrenchAdmin"),
 	
 	HAMMER_TITANIUM("titanium_hammer", "hammerTitanium", EnumRarity.RARE),
+	HAMMER_TITANIUM_DARK("dark_titanium_hammer", "hammerTitaniumDark", EnumRarity.EPIC),
+	HAMMER_COPPER("copper_hammer", "hammerCopper"),
+	HAMMER_FROZIUM("frozium_hammer", "hammerFrozium"),
+	HAMMER_IGNUM("ignum_hammer", "hammerIgnum"),
 	
 	HELMET_TITANIUM("titanium_helmet", "helmetTitanium", EnumRarity.RARE),
 	HELMET_TITANIUM_DARK("dark_titanium_helmet", "helmetTitaniumDark", EnumRarity.EPIC),

@@ -37,7 +37,6 @@ public class DamageSourceFluid extends DamageSource {
 	}
 	
 	public static DamageSource getDamageSourceForFluid(Fluid fluid) {
-		String name = fluid.getName();
 		switch(fluid.getName()) {
 			case "liquidignum":
 				return IGNUM;

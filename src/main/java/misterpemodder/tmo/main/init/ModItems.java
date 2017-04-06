@@ -76,6 +76,10 @@ public class ModItems {
 		WRENCH_ADMIN(new ItemWrench(EnumItemsNames.WRENCH_ADMIN, TmoToolMaterial.TITANIUM_MATERIAL, true, true)),
 		
 		HAMMER_TITANIUM(new ItemHammer(EnumItemsNames.HAMMER_TITANIUM, TmoToolMaterial.TITANIUM_MATERIAL)),
+		HAMMER_TITANIUM_DARK(new ItemHammer(EnumItemsNames.HAMMER_TITANIUM_DARK, TmoToolMaterial.TITANIUM_DARK_MATERIAL)),
+		HAMMER_COPPER(new ItemHammer(EnumItemsNames.HAMMER_COPPER, TmoToolMaterial.COPPER_MATERIAL)),
+		HAMMER_FROZIUM(new ItemHammer(EnumItemsNames.HAMMER_FROZIUM, TmoToolMaterial.FROZIUM_MATERIAL)),
+		HAMMER_IGNUM(new ItemHammer(EnumItemsNames.HAMMER_IGNUM, TmoToolMaterial.IGNUM_MATERIAL)),
 		
 		TITANIUM_HELMET(new ItemTmoArmor(EnumItemsNames.HELMET_TITANIUM, TmoArmorMaterial.TITANIUM, EntityEquipmentSlot.HEAD)),
 		TITANIUM_CHESTPLATE(new ItemTmoArmor(EnumItemsNames.CHESTPLATE_TITANIUM, TmoArmorMaterial.TITANIUM, EntityEquipmentSlot.CHEST)),

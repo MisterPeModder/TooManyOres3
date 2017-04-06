@@ -1,16 +1,23 @@
 package misterpemodder.tmo.main.blocks.containers;
 
+import java.util.Random;
+
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
 import misterpemodder.tmo.main.client.gui.GuiHandler;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumAnvil;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityFallingBlock;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -110,5 +117,59 @@ public class BlockTitaniumAnvil extends BlockTileEntity<TileEntityTitaniumAnvil>
 		}
 	}
 	
+	@Override
+	public int tickRate(World world) {
+        return 2;
+    }
+	
+	@Override
+	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+        world.scheduleUpdate(pos, this, this.tickRate(world));
+    }
+	
+	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
+    }
+	
+	@Override
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+        if (!worldIn.isRemote) {
+            this.checkFallable(worldIn, pos);
+        }
+    }
+	
+	private void checkFallable(World worldIn, BlockPos pos) {
+        if ((worldIn.isAirBlock(pos.down()) || BlockFalling.canFallThrough(worldIn.getBlockState(pos.down()))) && pos.getY() >= 0) {
+        	
+        	TileEntityTitaniumAnvil te = this.getTileEntity(worldIn, pos);
+            if(te != null) {
+            	ItemStackHandler h = te.getInventory();
+            	ItemStack s = h.extractItem(0, 64, false);
+            	worldIn.spawnEntity(new EntityItem(worldIn, pos.getX()+0.5, pos.getY()+1, pos.getZ()+0.5, s));
+            }
+            if (worldIn.isAreaLoaded(pos.add(-32, -32, -32), pos.add(32, 32, 32))) {
+                if (!worldIn.isRemote) {
+                    
+                    EntityFallingBlock entityfallingblock = new EntityFallingBlock(worldIn, (double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, worldIn.getBlockState(pos));
+                    entityfallingblock.setHurtEntities(true);
+                    worldIn.spawnEntity(entityfallingblock);
+                }
+            }
+            else {
+                IBlockState state = worldIn.getBlockState(pos);
+                worldIn.setBlockToAir(pos);
+                BlockPos blockpos;
+                
+                for (blockpos = pos.down(); (worldIn.isAirBlock(blockpos) || BlockFalling.canFallThrough(worldIn.getBlockState(blockpos))) && blockpos.getY() > 0; blockpos = blockpos.down()) {
+                    ;
+                }
+
+                if (blockpos.getY() > 0) {
+                    worldIn.setBlockState(blockpos.up(), state);
+                }
+            }
+        }
+    }
 
 }

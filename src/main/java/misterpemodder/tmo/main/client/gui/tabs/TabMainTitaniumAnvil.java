@@ -14,6 +14,7 @@ import misterpemodder.tmo.main.client.gui.GuiContainerBase;
 import misterpemodder.tmo.main.client.gui.RecipeClickableAreaTMO;
 import misterpemodder.tmo.main.client.gui.slot.IHidable;
 import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
+import misterpemodder.tmo.main.enchant.EnchantementXpCostReduction;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
 import misterpemodder.tmo.main.network.TMOPacketHandler;
 import misterpemodder.tmo.main.network.packet.PacketClientToServer;
@@ -31,7 +32,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiUtils;
+import net.minecraftforge.items.ItemStackHandler;
 
 
 //Contains a lot of vanilla code from GuiRepair, it is VERY messy
@@ -137,13 +140,28 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
 		if(guiContainer.isPointInRegion(45, 26, 16, 16, mouseX, mouseY) && !guiContainer.container.getSlot(41).getHasStack()) {
     		GuiUtils.drawHoveringText(Arrays.asList(Tmo.proxy.translate("gui.slot.hammer.name")), mouseX-guiContainer.getGuiLeft(), mouseY-guiContainer.getGuiTop(), guiContainer.width, guiContainer.height, 200, guiContainer.getFontRenderer());
 	    }
+		else if(guiContainer.isPointInRegion(nameField.xPosition-guiContainer.getGuiLeft(), nameField.yPosition-guiContainer.getGuiTop(), nameField.width, nameField.height, mouseX, mouseY) && !nameField.getText().isEmpty()) {
+			GuiUtils.drawHoveringText(Arrays.asList(TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate("gui.anvil.nameField.clear")), mouseX-guiContainer.getGuiLeft(), mouseY-guiContainer.getGuiTop(), guiContainer.width, guiContainer.height, 200, guiContainer.getFontRenderer());
+		}
 
         int maximumCost = ((ContainerTitaniumAnvil)guiContainer.container).maximumCost;
+        int oldCost = maximumCost;
+        
+    	if(this.anvil.getTileEntity() != null) {
+    		ItemStackHandler h = this.anvil.getTileEntity().getInventory();
+        	ItemStack hammerStack = h.getStackInSlot(0);
+        	maximumCost = EnchantementXpCostReduction.getXPCost(hammerStack, maximumCost);
+    	}
+    	
         if (maximumCost > 0) {
 			int i = 8453920;
         	boolean flag = true;
-        	String str = Tmo.proxy.translate("container.repair.cost", maximumCost);
-
+        	
+        	int deltaCost = oldCost==0? 0 : (int)(maximumCost*100F)/oldCost;
+        	String str = Tmo.proxy.translate("container.repair.cost", maximumCost)+" (-"+(100-deltaCost)+"%)";
+        	if(guiContainer.container.player.capabilities.isCreativeMode) {
+        		str = Tmo.proxy.translate("container.repair.cost", 0) +" (Creative)";
+        	}
         	if (maximumCost >= 55 && !guiContainer.container.player.capabilities.isCreativeMode) {
             	str = Tmo.proxy.translateFormatted("%s (%d)", "container.repair.expensive", maximumCost);
             	i = 16736352;
@@ -200,7 +218,13 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
     }
     
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-        this.nameField.mouseClicked(mouseX, mouseY, mouseButton);
+    	boolean flag = guiContainer.isPointInRegion(nameField.xPosition-guiContainer.getGuiLeft(), nameField.yPosition-guiContainer.getGuiTop(), nameField.width, nameField.height, mouseX, mouseY);
+    	if(flag && mouseButton == 1) {
+    		this.nameField.setText("");
+    		this.renameItem();
+    	} else {
+    		this.nameField.mouseClicked(mouseX, mouseY, mouseButton);
+    	}
     }
 	
 	@Override

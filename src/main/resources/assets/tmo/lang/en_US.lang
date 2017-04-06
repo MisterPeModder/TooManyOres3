@@ -5,6 +5,7 @@ item.tabIcon.name=Tab Icon
 item.hasNBT.desc=Has NBT data!
 tmo.missingNo.name=MISSINGNO. (throw me away pls :3)
 tmo.config.gui.mainTitle=Too Many Ores Config
+item.desc=-hold shift for description-
 
 #Items
 item.itemIngot.titanium.name=Titanium Ingot
@@ -111,6 +112,10 @@ item.wrench.OwnerRemoved=Owner has been removed!
 item.wrench.NoPermissions=You don't have the required permissions to use this wrench!
 
 item.hammerTitanium.name=Titanium Forge Hammer
+item.hammerTitaniumDark.name=Dark Titanium Forge Hammer
+item.hammerCopper.name=Copper Forge Hammer
+item.hammerFrozium.name=Frozium Forge Hammer
+item.hammerIgnum.name=Ignum Forge Hammer
 
 item.titaniumBucket.name=Titanium Bucket
 item.titaniumBucket.empty=Titanium Bucket (empty)
@@ -215,6 +220,7 @@ gui.tab.io.name=IO
 gui.slot.lock.name=Lock Slot
 gui.slot.lock.desc=Put a lock there to unlock security options.
 gui.slot.hammer.name=Forge Hammer Slot
+gui.anvil.nameField.clear=right-click to clear
 gui.tank.empty=Empty
 gui.tank.contents=%d/%dmb
 gui.tank.clear=Clear Tank
@@ -233,8 +239,13 @@ death.tmo.fluid.frozium.1=%s wasn't warm enougth.
 death.tmo.fluid.frozium.2=%s should have brought a coat.
 death.tmo.fluid.frozium.3=%s is now the COOLest person ever.
 death.tmo.fluid.ignum.0=%s was consumed by ignum.
-death.tmo.fluid.ignum.1=%s didn't notice that the ignum is very hot.
+death.tmo.fluid.ignum.1=%s didn't notice that ignum is very hot.
 death.tmo.fluid.ignum.2=%s thought that fire resistance would protect him from ignum fuel damage.
+
+#Enchants
+enchantment.hammerXpCostReduction=Forge Cost Reduction
+enchantment.hammerXpCostReduction.desc=Reduces the experience cost in titanium anvils when applied to forge hammers.\nEach level reduces the cost by %d percent.
+enchantment.hammerXpCostReduction.tooltip=Reduction
 
 #Commands
 commands.info.usage=/item_info

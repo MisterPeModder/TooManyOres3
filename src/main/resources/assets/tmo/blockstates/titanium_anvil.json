@@ -1,12 +1,7 @@
 {
     "forge_marker": 1,
     "defaults": {
-		"textures": {
-			"particle": "tmo:blocks/titanium_block",
-			"body": "tmo:blocks/titanium_block",
-			"top": "tmo:blocks/titanium_block"
-        },
-		"model": "anvil",
+		"model": "tmo:titanium_anvil",
 		"transform": "forge:default-block"
     },
     "variants": {

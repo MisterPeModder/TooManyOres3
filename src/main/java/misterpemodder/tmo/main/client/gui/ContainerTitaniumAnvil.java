@@ -13,6 +13,7 @@ import com.google.common.base.Predicate;
 import misterpemodder.tmo.api.item.IItemForgeHammer;
 import misterpemodder.tmo.main.client.gui.slot.SlotFiltered;
 import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
+import misterpemodder.tmo.main.enchant.EnchantementXpCostReduction;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumAnvil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -52,8 +53,8 @@ public class ContainerTitaniumAnvil extends ContainerBase<TileEntityTitaniumAnvi
 	 * Hammer           0-0 ... 41 - 41
 	 * Input            0-1 ... 42 - 43
 	 * Output          	0-0 ... 44 - 44
-	 * Crafing result   0-0 ... 45 - 45
-	 * Crafing matrix   0-8 ... 46 - 54
+	 * Crafing matrix   0-8 ... 45 - 53
+	 * Crafing result   0-0 ... 54 - 54
 	 * Baubles          0-6 ... 55 - 61
 	 */
 
@@ -90,6 +91,12 @@ public class ContainerTitaniumAnvil extends ContainerBase<TileEntityTitaniumAnvi
 				super.onSlotChanged();
 				ContainerTitaniumAnvil.this.updateRepairOutput();
 			}
+			
+			@Override
+			public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack) {
+				
+				return super.onTake(thePlayer, stack);
+			}
 		});
 		
 		this.addSlotToContainer(new SlotHidable(input, 0, 45, 53, true));
@@ -108,8 +115,15 @@ public class ContainerTitaniumAnvil extends ContainerBase<TileEntityTitaniumAnvi
             }
             
             public ItemStack onTake(EntityPlayer player, ItemStack stack) {
+            	ItemStackHandler h = ContainerTitaniumAnvil.this.getTileEntity().getInventory();
+            	ItemStack hammerStack = h.getStackInSlot(0);
+            	boolean flag = hammerStack.getItem() instanceof IItemForgeHammer;
                 if (!player.capabilities.isCreativeMode) {
-                    player.addExperienceLevel(-ContainerTitaniumAnvil.this.maximumCost);
+                	int cost = ContainerTitaniumAnvil.this.maximumCost;
+                	if(flag) {
+                		cost = EnchantementXpCostReduction.getXPCost(hammerStack, cost);
+                	}
+                    player.addExperienceLevel(-cost);
                 }
                 ContainerTitaniumAnvil.this.input.setStackInSlot(0, ItemStack.EMPTY);
 
@@ -127,9 +141,9 @@ public class ContainerTitaniumAnvil extends ContainerBase<TileEntityTitaniumAnvi
                 else {
                     ContainerTitaniumAnvil.this.input.setStackInSlot(1, ItemStack.EMPTY);
                 }
-                ItemStackHandler h = ContainerTitaniumAnvil.this.getTileEntity().getInventory();
-                if(h.getStackInSlot(0).getItem() instanceof IItemForgeHammer) {
-                	ItemStack stack1 = h.getStackInSlot(0).copy();
+                
+                if(flag) {
+                	ItemStack stack1 = hammerStack.copy();
                 	((IItemForgeHammer)stack1.getItem()).onHammerUsed(player, stack1, 10);
                 	h.setStackInSlot(0, stack1);
                 }

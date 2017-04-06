@@ -1,5 +1,6 @@
 package misterpemodder.tmo.main;
 
+import misterpemodder.tmo.main.init.ModEnchants;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -9,7 +10,8 @@ public class TMOTab extends CreativeTabs {
 
 	public TMOTab(String label) {
 		super(label);
-		setBackgroundImageName("tmo.png");
+		this.setBackgroundImageName("tmo.png");
+		this.setRelevantEnchantmentTypes(ModEnchants.FORGE_HAMMER_ENCHANTEMENT_TYPE);
 	}
 
 	@Override
