@@ -152,7 +152,6 @@ public class EventHandler {
 	
 	@SubscribeEvent
 	public static void itemTooltipEvent(ItemTooltipEvent event) {
-		try {
 		if(event.getItemStack().getItem() == Items.ENCHANTED_BOOK) {
 			Map<Enchantment, Integer> enchants = EnchantmentHelper.getEnchantments(event.getItemStack());
 			
@@ -175,10 +174,6 @@ public class EventHandler {
 			} else {
 				event.getToolTip().add(TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate("item.desc"));
 			}
-		}
-		} catch(Throwable e) {
-			e.printStackTrace();
-			//TODO TRY-CATCH Block
 		}
 	}
 }
