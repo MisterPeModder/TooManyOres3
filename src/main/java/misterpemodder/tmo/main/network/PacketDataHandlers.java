@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import misterpemodder.tmo.api.block.ILockable;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
+import misterpemodder.tmo.main.capability.CapabilityFreezing;
+import misterpemodder.tmo.main.capability.CapabilityFreezing.IFreezing;
 import misterpemodder.tmo.main.client.gui.ContainerInjector;
 import misterpemodder.tmo.main.client.gui.ContainerTitaniumAnvil;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabID;
@@ -17,6 +19,7 @@ import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
@@ -39,6 +42,7 @@ public final class PacketDataHandlers {
 		HANDLERS.add(BUTTON_CLICK_HANDLER);
 		HANDLERS.add(ANVIL_ITEM_NAME_HANDLER);
 		HANDLERS.add(PROGRESS_ARROW_UPDATE_HANDLER);
+		HANDLERS.add(FREEZING_CAPABILITY_UPDATE_HANDLER);
 	}
 	
 	/**
@@ -223,6 +227,37 @@ public final class PacketDataHandlers {
 			Container c = Minecraft.getMinecraft().player.openContainer;
 			if(c instanceof ContainerInjector && data.hasKey("progress")) {
 				((ContainerInjector)c).progress = data.getInteger("progress");
+			}
+		}
+	};
+	
+	/**
+	 * <p> Handler type: server to client
+	 * 
+	 * <p> NBT tags:
+	 * <ul>
+	 * 	<li>freezing_cap:Freezing capability, serialized to NBT
+	 * 	<li>entity_uuid: UUID
+	 * </ul>
+	 */
+    public static final IPacketDataHandler FREEZING_CAPABILITY_UPDATE_HANDLER = new IPacketDataHandler() {
+		
+		@Override
+		public void procData(NBTTagCompound data) {
+			
+			WorldClient world = Minecraft.getMinecraft().world;
+			UUID entityUUID = NBTUtil.getUUIDFromTag(data.getCompoundTag("entity_uuid"));
+			List<EntityLivingBase> l = world.getEntities(EntityLivingBase.class, filter -> filter.getUniqueID().equals(entityUUID));
+			
+			if(l != null && !l.isEmpty()) {
+				EntityLivingBase entity = l.get(0);
+				if(entity instanceof EntityLivingBase && entity.getUniqueID().equals(entityUUID)) {
+					if(entity.hasCapability(CapabilityFreezing.FREEZING_CAPABILITY, null)) {
+						IFreezing freezingCap = entity.getCapability(CapabilityFreezing.FREEZING_CAPABILITY, null);
+						freezingCap.deserializeNBT(data.getCompoundTag("freezing_cap"));
+						freezingCap.updateEntity(entity);
+					}
+				}
 			}
 		}
 	};

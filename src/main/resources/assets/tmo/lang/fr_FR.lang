@@ -247,6 +247,14 @@ enchantment.hammerXpCostReduction=Réduction du coût de forge
 enchantment.hammerXpCostReduction.desc=Réduit le coût en expérience des réparations dans les enclumes en titane lorsqu'il est mit sur les marteaux de forge.\nChaque niveau réduit le coût de %d pourcents.
 enchantment.hammerXpCostReduction.tooltip=Reduction
 
+#Potion
+effect.tmo.freezing=Refroidissement
+effect.tmo.freezing.message=Vous êtes gelé!
+tipped_arrow.effect.tmo.freezing=Flèche de glace
+potion.effect.tmo.freezing=Potion glagla
+splash_potion.effect.tmo.freezing=Potion glagla jetable
+lingering_potion.effect.tmo.freezing=Potion glagla persistante
+
 #Commandes
 commands.tmo.generic.usage=/tmo <sous-commande|help> ...
 commands.tmo.generic.wrongSubcommand=La sous-commande %s n'existe pas!

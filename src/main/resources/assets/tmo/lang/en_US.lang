@@ -247,6 +247,14 @@ enchantment.hammerXpCostReduction=Forge Cost Reduction
 enchantment.hammerXpCostReduction.desc=Reduces the experience cost in titanium anvils when applied to forge hammers.\nEach level reduces the cost by %d percent.
 enchantment.hammerXpCostReduction.tooltip=Reduction
 
+#Potion
+effect.tmo.freezing=Freezing
+effect.tmo.freezing.message=You are frozen!
+tipped_arrow.effect..tmo.freezing=Arrow of Freezing
+potion.effect.tmo.freezing=Potion of Freezing
+splash_potion.effect.tmo.freezing=Splash Potion of Freezing
+lingering_potion.effect.tmo.freezing=Lingering Potion of Freezing
+
 #Commands
 commands.tmo.generic.usage=/tmo <subcommand|help> ...
 commands.tmo.generic.wrongSubcommand=Subcommand %s doesn't exist!

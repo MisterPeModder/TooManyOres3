@@ -1,11 +1,15 @@
 package misterpemodder.tmo.main.utils;
 
 import misterpemodder.tmo.main.init.ModItems;
+import misterpemodder.tmo.main.init.ModPotions.ThePotionTypes;
 import misterpemodder.tmo.main.items.ItemMulti;
 import misterpemodder.tmo.main.items.ItemVariant;
 import net.minecraft.client.Minecraft;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionType;
+import net.minecraft.potion.PotionUtils;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -39,6 +43,30 @@ public final class ItemStackUtils {
 		} else {
 			return color;
 		}
+	}
+	
+	public static ItemStack makePotion(ThePotionTypes type) {
+		return makePotion(type.getPotionType());
+	}
+	
+	public static ItemStack makePotion(PotionType type) {
+		return PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), type);
+	}
+	
+	public static ItemStack makeSplashPotion(ThePotionTypes type) {
+		return makeSplashPotion(type.getPotionType());
+	}
+	
+	public static ItemStack makeSplashPotion(PotionType type) {
+		return PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), type);
+	}
+	
+	public static ItemStack makeLingeringPotion(ThePotionTypes type) {
+		return makeLingeringPotion(type.getPotionType());
+	}
+	
+	public static ItemStack makeLingeringPotion(PotionType type) {
+		return PotionUtils.addPotionToItemStack(new ItemStack(Items.LINGERING_POTION), type);
 	}
 	
 }

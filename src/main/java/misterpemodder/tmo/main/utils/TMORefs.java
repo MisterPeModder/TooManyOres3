@@ -9,6 +9,8 @@ import net.minecraft.creativetab.CreativeTabs;
 public class TMORefs {
 	public static final String MOD_ID = "tmo";
 	public static final String MOD_NAME = "Too Many Ores 3";
+	public static final String LOADING_PLUGIN_NAME = "TMO Loading Plugin";
+	
 	public static final String MOD_VERSION = "1.0.0";
 	public static final String ACCEPTED_MC_VERSIONS = "[1.11.2,)";
 	

@@ -24,7 +24,7 @@ public final class MachineRecipes {
 		
 		TooManyOresAPI.registryHandler.registerInjectorRecipeExtraction(TMORefs.PREFIX+"magma_to_lava", new ItemStack(Blocks.MAGMA), new FluidStack(FluidRegistry.LAVA, 100), new ItemStack(Blocks.NETHERRACK), 40);
 		TooManyOresAPI.registryHandler.registerInjectorRecipeExtraction(TMORefs.PREFIX+"magma_cream_to_lava", new ItemStack(Items.MAGMA_CREAM), new FluidStack(FluidRegistry.LAVA, 25), new ItemStack(Items.SLIME_BALL), 15);
-		TooManyOresAPI.registryHandler.registerInjectorRecipeInjection(TMORefs.MOD_ID+"fiery_exploder", new FluidStack(TheFluids.IGNUM_FUEL.getFluid(),500), new ItemStack(TheBlocks.EXPLODER.getBlock(),1,0), new ItemStack(TheBlocks.EXPLODER.getBlock(),1,1), 45);
+		TooManyOresAPI.registryHandler.registerInjectorRecipeInjection(TMORefs.PREFIX+"fiery_exploder", new FluidStack(TheFluids.IGNUM_FUEL.getFluid(),500), new ItemStack(TheBlocks.EXPLODER.getBlock(),1,0), new ItemStack(TheBlocks.EXPLODER.getBlock(),1,1), 45);
 		
 		if(!new ItemStack(Items.GLASS_BOTTLE).hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
 			TooManyOresAPI.registryHandler.registerInjectorRecipeInjection(TMORefs.PREFIX+"fill_water_bottle", new FluidStack(FluidRegistry.WATER, 250), new ItemStack(Items.GLASS_BOTTLE), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), 20);

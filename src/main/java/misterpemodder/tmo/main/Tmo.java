@@ -25,6 +25,7 @@ import misterpemodder.tmo.main.apiimpl.DefaultStrongPistonBehavior;
 import misterpemodder.tmo.main.apiimpl.MethodHandler;
 import misterpemodder.tmo.main.apiimpl.RegistryHandler;
 import misterpemodder.tmo.main.apiimpl.SlimeBlock;
+import misterpemodder.tmo.main.capability.CapabilityFreezing;
 import misterpemodder.tmo.main.capability.CapabilityOwner;
 import misterpemodder.tmo.main.commands.CommandTMO;
 import misterpemodder.tmo.main.compat.aa.ActAddCompat;
@@ -35,6 +36,7 @@ import misterpemodder.tmo.main.config.ConfigValues;
 import misterpemodder.tmo.main.init.Crafting;
 import misterpemodder.tmo.main.init.MachineRecipes;
 import misterpemodder.tmo.main.init.ModBlocks;
+import misterpemodder.tmo.main.init.ModBrewing;
 import misterpemodder.tmo.main.init.ModFluids;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
@@ -78,6 +80,7 @@ public class Tmo {
 		TooManyOresAPI.methodHandler = new MethodHandler();
 		TooManyOresAPI.registryHandler = new RegistryHandler();
 		CapabilityOwner.register();
+		CapabilityFreezing.register();
 		
 		GameRegistry.registerWorldGenerator(new OreGen(), 42);
 
@@ -97,18 +100,17 @@ public class Tmo {
 		ModItems.registerOreDict();
 		ModBlocks.registerOreDict();
 		Crafting.registerRecipes();
+		ModBrewing.registerBrewingRecipes();
 		MachineRecipes.registerRecipes();
 		ActAddCompat.init();
 		ProbeConfigProviderTitaniumChest.init();
 		CraftingTweaksCompat.init();
-		
 		proxy.init();
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		TMORefs.LOGGER.info("Post-Init!");
-		
 		proxy.postInit();
 	}
 	
