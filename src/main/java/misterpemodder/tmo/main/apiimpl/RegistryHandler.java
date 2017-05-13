@@ -7,15 +7,30 @@ import misterpemodder.tmo.api.IStrongPistonBehavior;
 import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.api.block.ISlimeBlock;
 import misterpemodder.tmo.api.handler.ITMORegistryHandler;
+import misterpemodder.tmo.api.recipe.IDestabilizerRecipe;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe;
+import misterpemodder.tmo.api.recipe.IMachineRecipe;
+import misterpemodder.tmo.main.apiimpl.recipe.DestabilizerSimpleRecipe;
 import misterpemodder.tmo.main.apiimpl.recipe.InjectorSimpleRecipeExtract;
 import misterpemodder.tmo.main.apiimpl.recipe.InjectorSimpleRecipeInject;
+import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
+import net.minecraftforge.fml.common.registry.RegistryBuilder;
 
-public class RegistryHandler implements ITMORegistryHandler {
+public class RegistryHandler<V> implements ITMORegistryHandler {
+	
+	public static IForgeRegistry<IInjectorRecipe> injectorRecipesRegistry;
+	public static IForgeRegistry<IDestabilizerRecipe> crystalDestabilizerRecipesRegistry;
+	
+	static {
+		injectorRecipesRegistry = new RegistryBuilder<IInjectorRecipe>().setType(IInjectorRecipe.class).setName(new ResourceLocationTmo("injector_recipes")).setIDRange(0, Integer.MAX_VALUE-1).create();
+		crystalDestabilizerRecipesRegistry = new RegistryBuilder<IDestabilizerRecipe>().setType(IDestabilizerRecipe.class).setName(new ResourceLocationTmo("crystal_destabilizer_recipes")).setIDRange(0, Integer.MAX_VALUE-1).create();
+	}
 
 	@Override
 	public void registerSlimeBlock(ISlimeBlock slime, Block block) {
@@ -36,61 +51,54 @@ public class RegistryHandler implements ITMORegistryHandler {
 	}
 	
 	@Override
-	public void registerInjectorRecipeInjection(@Nonnull String recipeId, @Nullable FluidStack fluidInput, ItemStack input, ItemStack output, @Nonnull int totalTime) {
-		this.registerInjectorRecipeInjection(recipeId, fluidInput, input, output, totalTime, true);
+	public void registerEnderMatterItem(ItemStack stack, int value) {
+		if(TooManyOresAPI.methodHandler.isEnderMatterItem(stack)) {
+			TMORefs.LOGGER.info("The ender matter item "+stack.toString()+" has already been registered!");
+		} else {
+			TooManyOresAPI.ENDER_MATTER_ITEMS.put(stack, value);
+		}
 	}
 	
-	@Override
-	public void registerInjectorRecipeInjection(@Nonnull String recipeId, @Nullable FluidStack fluidInput, ItemStack input, ItemStack output, @Nonnull int totalTime, boolean ignoreNBT) {
-		
-		if(totalTime <= 0) {
-			TMORefs.LOGGER.info("Injector injection recipe "+recipeId+": totalTime must be above 0!");
+	private <T extends IMachineRecipe<T>> void registerRecipe(T recipe, IForgeRegistry<T> registry) {
+		if(recipe.getTotalTime() <= 0) {
+			TMORefs.LOGGER.info("Injector injection recipe "+recipe.getRegistryName()+": totalTime must be above 0!");
 			return;
 		}
-		
-		for(IInjectorRecipe r : TooManyOresAPI.INJECTOR_RECIPES) {
-			if(recipeId.equals(r.getRecipeId())) {
-				TMORefs.LOGGER.info("The injector injection recipe "+recipeId+" has already been registered!");
-				return;
-			}
-		}
-		
-		try {
-			TooManyOresAPI.INJECTOR_RECIPES.add(new InjectorSimpleRecipeInject(recipeId, fluidInput, input, output, totalTime, ignoreNBT));
-			TMORefs.LOGGER.info("Registered injector injection recipe "+"\""+recipeId+"\"");
-		} catch(Exception e) {
-			TMORefs.LOGGER.info("An error occured when registering "+recipeId+" as an injector recipe!");
-		}
-		
+		registry.register(recipe);
+	}
+	
+	public IForgeRegistry<IInjectorRecipe> getInjectorRecipesRegistry() {
+		return injectorRecipesRegistry;
 	}
 	
 	@Override
-	public void registerInjectorRecipeExtraction(@Nonnull String recipeId, ItemStack input, FluidStack fluidOutput, ItemStack output, @Nonnull int totalTime) {
-		this.registerInjectorRecipeExtraction(recipeId, input, fluidOutput, output, totalTime, true);
+	public void registerInjectorRecipeInjection(ResourceLocation id, @Nullable FluidStack fluidInput, ItemStack input, ItemStack output, @Nonnull int totalTime) {
+		this.registerInjectorRecipeInjection(id, fluidInput, input, output, totalTime, true);
 	}
 	
 	@Override
-	public void registerInjectorRecipeExtraction(@Nonnull String recipeId, ItemStack input, FluidStack fluidOutput, ItemStack output, @Nonnull int totalTime, boolean ignoreNBT) {
-		
-		if(totalTime <= 0) {
-			TMORefs.LOGGER.info("Injector extraction recipe "+recipeId+": totalTime must be above 0!");
-			return;
-		}
-		
-		for(IInjectorRecipe r : TooManyOresAPI.INJECTOR_RECIPES) {
-			if(recipeId.equals(r.getRecipeId())) {
-				TMORefs.LOGGER.info("The injector extraction recipe "+recipeId+" has already been registered!");
-				return;
-			}
-		}
-		
-		try {
-			TooManyOresAPI.INJECTOR_RECIPES.add(new InjectorSimpleRecipeExtract(recipeId, input, fluidOutput, output, totalTime, ignoreNBT));
-			TMORefs.LOGGER.info("Registered injector extraction recipe "+"\""+recipeId+"\"");
-		} catch(Exception e) {
-			TMORefs.LOGGER.info("An error occured when registering "+recipeId+" as an injector recipe!");
-		}
-		
+	public void registerInjectorRecipeInjection(ResourceLocation id, @Nullable FluidStack fluidInput, ItemStack input, ItemStack output, @Nonnull int totalTime, boolean ignoreNBT) {
+		registerRecipe(new InjectorSimpleRecipeInject(id, fluidInput, input, output, totalTime, ignoreNBT), injectorRecipesRegistry);
+	}
+	
+	@Override
+	public void registerInjectorRecipeExtraction(ResourceLocation id, ItemStack input, FluidStack fluidOutput, ItemStack output, @Nonnull int totalTime) {
+		this.registerInjectorRecipeExtraction(id, input, fluidOutput, output, totalTime, true);
+	}
+	
+	@Override
+	public void registerInjectorRecipeExtraction(ResourceLocation id, ItemStack input, FluidStack fluidOutput, ItemStack output, @Nonnull int totalTime, boolean ignoreNBT) {
+		registerRecipe(new InjectorSimpleRecipeExtract(id, input, fluidOutput, output, totalTime, ignoreNBT), injectorRecipesRegistry);
+	}
+	
+	@Override
+	public IForgeRegistry<IDestabilizerRecipe> getCrystalDestabilizerRecipesRegistry() {
+		return crystalDestabilizerRecipesRegistry;
+	}
+	
+	@Override
+	public void registerCrystalDestabilizerRecipe(ResourceLocation id, int enderMatterAmount, ItemStack itemInput, FluidStack fluidOutput, int totalTime) {
+		registerRecipe(new DestabilizerSimpleRecipe(id, enderMatterAmount, itemInput, fluidOutput, totalTime), crystalDestabilizerRecipesRegistry);
 	}
 
 }

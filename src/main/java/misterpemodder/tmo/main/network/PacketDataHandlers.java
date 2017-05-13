@@ -8,13 +8,15 @@ import misterpemodder.tmo.api.block.ILockable;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
 import misterpemodder.tmo.main.capability.CapabilityFreezing;
 import misterpemodder.tmo.main.capability.CapabilityFreezing.IFreezing;
-import misterpemodder.tmo.main.client.gui.ContainerInjector;
+import misterpemodder.tmo.main.client.gui.ContainerMachine;
 import misterpemodder.tmo.main.client.gui.ContainerTitaniumAnvil;
+import misterpemodder.tmo.main.client.gui.GuiTank;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabID;
 import misterpemodder.tmo.main.client.gui.tabs.TabMainInjector;
 import misterpemodder.tmo.main.client.gui.tabs.TabSecurity;
 import misterpemodder.tmo.main.network.packet.PacketServerToClient;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
+import misterpemodder.tmo.main.tileentity.TileEntityMachine;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.Minecraft;
@@ -30,6 +32,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.util.Constants;
 
 public final class PacketDataHandlers {
 	
@@ -160,14 +163,18 @@ public final class PacketDataHandlers {
 			
 			case MAIN_INJECTOR:
 				if(bId == TabMainInjector.TOGGLE_MODE_BUTTON_ID) {
-					if(te instanceof TileEntityInjector && info.hasKey("mode")) {
+					if(te instanceof TileEntityInjector && info.hasKey("mode", Constants.NBT.TAG_INT)) {
 						TransferMode m = TransferMode.values()[info.getInteger("mode")];
 						((TileEntityInjector)te).setTransferMode(m);
 					}
-				} 
-				else if(bId == TabMainInjector.CLEAR_TANK_BUTTON_ID) {
-					if(te instanceof TileEntityInjector) {
-						((TileEntityInjector)te).getTank().drain(TileEntityInjector.CAPACITY, true);
+				}
+			break;
+			
+			case MISC:
+				if(bId == GuiTank.CLEAR_TANK_BUTTON_ID) {
+					if(te instanceof TileEntityMachine && info.hasKey("tank_id", Constants.NBT.TAG_SHORT)) {
+						//((TileEntityInjector)te).getTank().drain(TileEntityInjector.CAPACITY, true);
+						((TileEntityMachine)te).emptyTank(info.getShort("tank_id"));
 					}
 				}
 			break;
@@ -225,8 +232,8 @@ public final class PacketDataHandlers {
 		@Override
 		public void procData(NBTTagCompound data) {
 			Container c = Minecraft.getMinecraft().player.openContainer;
-			if(c instanceof ContainerInjector && data.hasKey("progress")) {
-				((ContainerInjector)c).progress = data.getInteger("progress");
+			if(c instanceof ContainerMachine && data.hasKey("progress")) {
+				((ContainerMachine)c).progress = data.getInteger("progress");
 			}
 		}
 	};
@@ -247,7 +254,8 @@ public final class PacketDataHandlers {
 			
 			WorldClient world = Minecraft.getMinecraft().world;
 			UUID entityUUID = NBTUtil.getUUIDFromTag(data.getCompoundTag("entity_uuid"));
-			List<EntityLivingBase> l = world.getEntities(EntityLivingBase.class, filter -> filter.getUniqueID().equals(entityUUID));
+			//TODO Investigate
+			List<EntityLivingBase> l = world.getEntities(EntityLivingBase.class, entity -> entity != null && entity.getUniqueID().equals(entityUUID));
 			
 			if(l != null && !l.isEmpty()) {
 				EntityLivingBase entity = l.get(0);

@@ -98,7 +98,7 @@ public abstract class TabBase<C extends ContainerBase<TE>, TE extends TileEntity
 	public <T extends GuiButton> void onButtonClicked(T button) {}
 	
 	@SideOnly(Side.CLIENT)
-	protected static void sendButtonPacket(TabID tabId, int buttonId, WorldClient world, BlockPos pos, NBTTagCompound data) {
+	public static void sendButtonPacket(TabID tabId, int buttonId, WorldClient world, BlockPos pos, NBTTagCompound data) {
 		NBTTagCompound toSend = new NBTTagCompound();
 		
 		toSend.setLong("pos", pos.toLong());
@@ -164,6 +164,8 @@ public abstract class TabBase<C extends ContainerBase<TE>, TE extends TileEntity
 		SECURITY,
 		MAIN_TANVIL,
 		MAIN_INJECTOR,
+		MAIN_DESTABILIZER,
+		MISC,
 	}
 	
 }

@@ -4,38 +4,33 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.client.gui.ContainerInjector;
+import misterpemodder.tmo.main.client.gui.GuiTank;
 import misterpemodder.tmo.main.client.gui.RecipeClickableAreaTMO;
 import misterpemodder.tmo.main.client.gui.slot.IHidable;
 import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
-import misterpemodder.tmo.main.client.render.RenderTank;
 import misterpemodder.tmo.main.compat.jei.injector.RecipeCategoryInjector;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.items.IItemHandler;
 
 public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInjector> {
 	
 	public static final int TOGGLE_MODE_BUTTON_ID = 20;
-	public static final int CLEAR_TANK_BUTTON_ID = 21;
+	
+	private GuiTank tank;
 
 	@Override
 	public TabID getTabID() {
@@ -57,15 +52,13 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 		
 		TileEntityInjector te = (TileEntityInjector)guiContainer.container.getTileEntity();
-		FluidTank tank = te.getTank();
-		FluidStack stack = tank.getFluid();
 		
-		RenderTank.renderTankInGui(stack, tank.getCapacity(), guiContainer.getGuiLeft()+11, guiContainer.getGuiTop()+10, 40, 80);
+		if(this.tank != null) {
+			this.tank.drawTank(mouseX, mouseY);
+		}
+		
 		GlStateManager.enableBlend();
-		Minecraft.getMinecraft().getTextureManager().bindTexture(this.getTabTexture().screenTexture);
-		Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+11, guiContainer.getGuiTop()+10, 212, 0, 40, 80, 256, 128);
-		
-		
+		Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocationTmo("textures/gui/container/injector_main.png"));
 		Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+64, guiContainer.getGuiTop()+39, te.getTransferMode() == TransferMode.INJECTION? 58:0, 100, 28, 21, 256, 128);
 		int p = ((ContainerInjector)this.guiContainer.container).progress;
 		if(p > 0) {
@@ -83,33 +76,12 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 	public void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		
-		List<String> strs = null;
-		
-		if(guiContainer.isPointInRegion(40, 10, 11, 11, mouseX, mouseY)) {
-			strs = new ArrayList<>();
-			strs.add(TextFormatting.RED+""+TextFormatting.BOLD+Tmo.proxy.translate("gui.tank.clear"));
-			if(GuiScreen.isShiftKeyDown()) {
-				strs.add(TextFormatting.RED+Tmo.proxy.translate("gui.tank.clear.confirm"));
-			} else {
-				strs.add(TextFormatting.GRAY+""+TextFormatting.ITALIC+"-"+Tmo.proxy.translate("gui.tank.clear.hint")+"-");
-			}
-		}
-		else if(guiContainer.isPointInRegion(11, 10, 40, 80, mouseX, mouseY)) {
-			TileEntityInjector te = (TileEntityInjector)guiContainer.container.getTileEntity();
-			FluidTank tank = te.getTank();
-			FluidStack stack = tank.getFluid();
-			
-			if(stack == null || stack.getFluid() == null || stack.amount <= 0) {
-				strs = Arrays.asList(Tmo.proxy.translate("gui.tank.empty"));
-			} else {
-				strs = Arrays.asList(stack.getFluid().getRarity(stack).rarityColor+stack.getLocalizedName(), Tmo.proxy.translate("gui.tank.contents", stack.amount, tank.getCapacity()));
-			}
-	    }
-		else {
+		List<String> strs = this.tank != null? this.tank.getHoverDesc(mouseX, mouseY) : new ArrayList<String>();
+
+		if(strs.isEmpty()) {
 			for(GuiButton b : (List<GuiButton>)buttons) {
 				if(b.id == TOGGLE_MODE_BUTTON_ID && b instanceof TransferModeButton) {
 					if(b.isMouseOver()) {
-						strs = new ArrayList<>();
 						strs.add(((TransferModeButton)b).mode == TransferMode.INJECTION? TextFormatting.AQUA+Tmo.proxy.translate("gui.injecter.mode.injection") : TextFormatting.GOLD+Tmo.proxy.translate("gui.injecter.mode.extraction"));
 						strs.add(TextFormatting.GRAY+""+ TextFormatting.ITALIC+"-"+Tmo.proxy.translate("gui.injecter.mode.desc")+"-");
 					}
@@ -119,7 +91,7 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 			}
 		}
 		
-		if(strs != null) {
+		if(!strs.isEmpty()) {
 			GuiUtils.drawHoveringText(strs, mouseX-guiContainer.getGuiLeft(), mouseY-guiContainer.getGuiTop(), guiContainer.width, guiContainer.height, 200, guiContainer.getFontRenderer());
 		}
 
@@ -127,18 +99,7 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 	
 	@Override
 	public void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-		if(guiContainer.isPointInRegion(40, 10, 11, 11, mouseX, mouseY) && GuiScreen.isShiftKeyDown() && mouseButton == 0) {
-			
-			TileEntityInjector te = (TileEntityInjector)this.guiContainer.container.getTileEntity();
-			if(te != null && te.getTank().getFluidAmount() > 0) {
-				FluidTank tank = te.getTank();
-				SoundEvent soundevent = tank.getFluid().getFluid().getEmptySound(tank.getFluid());
-				EntityPlayerSP player = Minecraft.getMinecraft().player;
-				player.playSound(soundevent, 1.0F, 1.0F);
-				tank.drain(TileEntityInjector.CAPACITY, true);
-				TabBase.sendButtonPacket(getTabID(), CLEAR_TANK_BUTTON_ID, guiContainer.mc.world, guiContainer.container.getTileEntity().getPos(), new NBTTagCompound());
-			}
-		} else {			
+		if(this.tank == null || !this.tank.mouseClicked(mouseX, mouseY, mouseButton)) {
 			super.mouseClicked(mouseX, mouseY, mouseButton);
 		}
 	}
@@ -146,6 +107,7 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 	@Override
 	public void initButtons(int topX, int topY) {
 		buttons.add(new TransferModeButton(TOGGLE_MODE_BUTTON_ID, topX+68, topY+64, 20, 20, ((TileEntityInjector)guiContainer.container.getTileEntity()).getTransferMode()));
+		this.tank = new GuiTank(0, ((TileEntityInjector)guiContainer.container.getTileEntity()).getTank(), guiContainer, 11, 10);
 	}
 	
 	@Override
@@ -176,11 +138,6 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 			data.setInteger("mode", newMode.ordinal());
 			TabBase.sendButtonPacket(getTabID(), TOGGLE_MODE_BUTTON_ID, guiContainer.mc.world, guiContainer.container.getTileEntity().getPos(), data);
 		}
-	}
-	
-	@Override
-	public boolean keyTyped(char typedChar, int keyCode) throws IOException {
-		return super.keyTyped(typedChar, keyCode);
 	}
 	
 	@Override

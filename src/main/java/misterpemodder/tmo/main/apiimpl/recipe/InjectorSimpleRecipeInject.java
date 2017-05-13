@@ -3,6 +3,7 @@ package misterpemodder.tmo.main.apiimpl.recipe;
 import org.apache.commons.lang3.tuple.Triple;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
@@ -10,7 +11,7 @@ public class InjectorSimpleRecipeInject extends InjectorSimpleRecipe {
 	
 	public final FluidStack fluidInput;
 	
-	public InjectorSimpleRecipeInject(String recipeId, FluidStack fluidInput, ItemStack input, ItemStack output, int totalTime, boolean ignoreNBT) {
+	public InjectorSimpleRecipeInject(ResourceLocation recipeId, FluidStack fluidInput, ItemStack input, ItemStack output, int totalTime, boolean ignoreNBT) {
 		super(recipeId, input, output, totalTime, ignoreNBT);
 		this.fluidInput = fluidInput;
 	}

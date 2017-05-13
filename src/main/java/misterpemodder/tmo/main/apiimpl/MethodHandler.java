@@ -7,6 +7,7 @@ import misterpemodder.tmo.api.block.ISlimeBlock;
 import misterpemodder.tmo.api.handler.ITMOMethodHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
 
 public class MethodHandler implements ITMOMethodHandler{
 
@@ -37,6 +38,26 @@ public class MethodHandler implements ITMOMethodHandler{
 		} else {
 			return null;
 		}
+	}
+	
+	@Override
+	public boolean isEnderMatterItem(ItemStack stack) {
+		for(ItemStack s : TooManyOresAPI.ENDER_MATTER_ITEMS.keySet()) {
+			if(ItemStack.areItemsEqual(s, stack)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public int getEnderMatterValue(ItemStack stack) {
+		for(ItemStack s : TooManyOresAPI.ENDER_MATTER_ITEMS.keySet()) {
+			if(ItemStack.areItemsEqual(s, stack)) {
+				return TooManyOresAPI.ENDER_MATTER_ITEMS.get(s);
+			}
+		}
+		return 0;
 	}
 
 }

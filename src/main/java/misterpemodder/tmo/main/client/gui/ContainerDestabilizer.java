@@ -5,15 +5,16 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 
+import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.main.client.gui.slot.SlotFiltered;
 import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
-import misterpemodder.tmo.main.tileentity.TileEntityInjector;
+import misterpemodder.tmo.main.tileentity.TileEntityDestabilizer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerInjector extends ContainerMachine<TileEntityInjector> {
+public class ContainerDestabilizer extends ContainerMachine<TileEntityDestabilizer>{
 	
 	/*
 	 * SLOT CONFIG:  
@@ -23,13 +24,13 @@ public class ContainerInjector extends ContainerMachine<TileEntityInjector> {
 	 * Player Armor     0-3 ... 36 - 39
 	 * Offhand          0-0 ... 40 - 40
 	 * Input			0-0 ... 41 - 41
-	 * Output           0-0 ... 42 - 42
+	 * Ender            0-0 ... 42 - 42
 	 * Crafing result   0-0 ... 43 - 43
 	 * Crafing matrix   0-8 ... 44 - 52
 	 * Baubles          0-6 ... 53 - 59
 	 */
-
-	public ContainerInjector(TileEntityInjector te, InventoryPlayer playerInv) {
+	
+	public ContainerDestabilizer(TileEntityDestabilizer te, InventoryPlayer playerInv) {
 		super(te, playerInv, 100);
 	}
 	
@@ -39,12 +40,12 @@ public class ContainerInjector extends ContainerMachine<TileEntityInjector> {
 	}
 	
 	@Override
-	protected void setTeSlots(TileEntityInjector te) {
-		this.addSlotToContainer(new SlotHidable(te.getInventory(), 0, 107, 42, true));
+	protected void setTeSlots(TileEntityDestabilizer te) {
+		this.addSlotToContainer(new SlotHidable(te.getInventory(), 0, 78, 42, true));
 		
-		this.addSlotToContainer(new SlotFiltered(te.getOutput(), 0, 155, 42, true, new Predicate<ItemStack>(){
+		this.addSlotToContainer(new SlotFiltered(te.getEnder(), 0, 16, 42, true, new Predicate<ItemStack>(){
 			public boolean apply(ItemStack t) {
-				return false;
+				return TooManyOresAPI.methodHandler.isEnderMatterItem(t);
 			}
 		}));
 	}
@@ -104,5 +105,5 @@ public class ContainerInjector extends ContainerMachine<TileEntityInjector> {
 
         this.craftResult.setInventorySlotContents(0, ItemStack.EMPTY);
 	}
-
+	
 }

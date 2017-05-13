@@ -3,6 +3,7 @@ package misterpemodder.tmo.main.blocks.containers;
 import java.util.Random;
 
 import misterpemodder.tmo.main.Tmo;
+import misterpemodder.tmo.main.blocks.base.BlockTileEntity;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
 import misterpemodder.tmo.main.client.gui.GuiHandler;

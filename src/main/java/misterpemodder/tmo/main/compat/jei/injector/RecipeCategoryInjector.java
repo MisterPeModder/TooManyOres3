@@ -14,6 +14,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeCategory;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
 import misterpemodder.tmo.main.Tmo;
+import misterpemodder.tmo.main.client.gui.GuiTank;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.client.Minecraft;
@@ -42,7 +43,7 @@ public class RecipeCategoryInjector extends BlankRecipeCategory<RecipeWrapperInj
 	public RecipeCategoryInjector(IGuiHelper guiHelper) {
 		this.localizedName = Tmo.proxy.translate("gui.jei.category.injector.normal");
 		this.background = guiHelper.createDrawable(backgroundLocation, X_OFFSET, Y_OFFSET, 165, 85, 256, 128);
-		this.fluidGauge = guiHelper.createDrawable(backgroundLocation, 212, 0, 40, 80, 256, 128);
+		this.fluidGauge = guiHelper.createDrawable(GuiTank.TANK_TEXTURE, 0, 0, 40, 80, 128, 128);
 		this.arrowStaticInjection = guiHelper.createDrawable(backgroundLocation, 58, 100, 28, 21, 256, 128);
 		this.arrowAnimatedInjection = guiHelper.createAnimatedDrawable(guiHelper.createDrawable(backgroundLocation, 87, 100, 28, 21, 256, 128), 20, StartDirection.LEFT, false);
 		this.arrowStaticExtraction = guiHelper.createDrawable(backgroundLocation, 0, 100, 28, 21, 256, 128);

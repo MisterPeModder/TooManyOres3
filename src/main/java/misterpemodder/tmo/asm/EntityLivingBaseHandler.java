@@ -4,6 +4,7 @@ import java.nio.FloatBuffer;
 
 import misterpemodder.tmo.main.capability.CapabilityFreezing;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 
 public class EntityLivingBaseHandler {
 	
@@ -15,7 +16,7 @@ public class EntityLivingBaseHandler {
 	}
 	
 	public static <T extends EntityLivingBase> boolean isMovementBlocked(T entity) {
-		return entity.getHealth() <= 0.0F || EntityLivingBaseHandler.isEntityFrozen(entity);
+		return entity.getHealth() <= 0.0F || EntityLivingBaseHandler.isEntityFrozen(entity) || (entity instanceof EntityPlayer && ((EntityPlayer)entity).isPlayerSleeping());
 	}
 	
 	public static <T extends EntityLivingBase> void setBrightnessColor(T entity, FloatBuffer brightnessBuffer) {

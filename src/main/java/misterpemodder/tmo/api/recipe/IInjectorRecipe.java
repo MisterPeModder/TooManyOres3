@@ -8,17 +8,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public interface IInjectorRecipe {
+public interface IInjectorRecipe extends IMachineRecipe<IInjectorRecipe> {
 
 	public static enum TransferMode {
 		INJECTION, EXTRACTION;
 	}
 	
 	TransferMode getRecipeTransferType();
-	
-	String getRecipeId();
-	
-	int getTotalTime();
 	
 	boolean isValid(@Nonnull FluidTank fluidTank, ItemStack stack);
 	

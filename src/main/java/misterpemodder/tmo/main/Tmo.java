@@ -25,6 +25,7 @@ import misterpemodder.tmo.main.apiimpl.DefaultStrongPistonBehavior;
 import misterpemodder.tmo.main.apiimpl.MethodHandler;
 import misterpemodder.tmo.main.apiimpl.RegistryHandler;
 import misterpemodder.tmo.main.apiimpl.SlimeBlock;
+import misterpemodder.tmo.main.blocks.BlockStorage;
 import misterpemodder.tmo.main.capability.CapabilityFreezing;
 import misterpemodder.tmo.main.capability.CapabilityOwner;
 import misterpemodder.tmo.main.commands.CommandTMO;
@@ -36,14 +37,20 @@ import misterpemodder.tmo.main.config.ConfigValues;
 import misterpemodder.tmo.main.init.Crafting;
 import misterpemodder.tmo.main.init.MachineRecipes;
 import misterpemodder.tmo.main.init.ModBlocks;
+import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import misterpemodder.tmo.main.init.ModBrewing;
 import misterpemodder.tmo.main.init.ModFluids;
 import misterpemodder.tmo.main.init.ModItems;
+import misterpemodder.tmo.main.init.ModItems.TheItems;
+import misterpemodder.tmo.main.items.ItemVariant.IngotVariant;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
 import misterpemodder.tmo.main.network.TMOPacketHandler;
 import misterpemodder.tmo.main.proxy.CommonProxy;
+import misterpemodder.tmo.main.utils.ItemStackUtils;
 import misterpemodder.tmo.main.utils.TMORefs;
 import misterpemodder.tmo.main.world.OreGen;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -77,11 +84,12 @@ public class Tmo {
 		TMOPacketHandler.init();
 		PacketDataHandlers.registerHandlers();
 		ModFluids.registerFluids();
+		
 		TooManyOresAPI.methodHandler = new MethodHandler();
 		TooManyOresAPI.registryHandler = new RegistryHandler();
+		
 		CapabilityOwner.register();
 		CapabilityFreezing.register();
-		
 		GameRegistry.registerWorldGenerator(new OreGen(), 42);
 
 		proxy.preInit();
@@ -91,8 +99,12 @@ public class Tmo {
 	public void Init(FMLInitializationEvent event) {
 		TMORefs.LOGGER.info("Init!");
 		SlimeBlock.registerSlimeBlocksInternal();
+		
 		TooManyOresAPI.registryHandler.registerStrongPistonBehavior(new DefaultStrongPistonBehavior());
-				
+		TooManyOresAPI.registryHandler.registerEnderMatterItem(new ItemStack(Items.ENDER_PEARL), 16);
+		TooManyOresAPI.registryHandler.registerEnderMatterItem(ItemStackUtils.newVariantStack(TheItems.INGOT, IngotVariant.ENDER_MATTER_INGOT), 64);
+		TooManyOresAPI.registryHandler.registerEnderMatterItem(new ItemStack(TheBlocks.STORAGE_BLOCK.getBlock(),1,BlockStorage.EnumVariant.ENDER_MATTER_BLOCK.getMeta()), 576);		
+		
 		TMORefs.actAddLoaded = Loader.isModLoaded(ActuallyAdditionsAPI.MOD_ID);
 		TMORefs.topLoaded = Loader.isModLoaded("theoneprobe");
 		TMORefs.baublesLoaded = Loader.isModLoaded("baubles");

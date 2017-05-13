@@ -1,36 +1,26 @@
 package misterpemodder.tmo.main.tileentity;
 
-import javax.annotation.Nullable;
-
 import org.apache.commons.lang3.tuple.Triple;
 
 import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
-import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.containers.BlockInjector;
+import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
+import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.capability.ComparatorSyncedItemHandler;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityInjector extends TileEntityContainerBase implements ITickable{
-	
-	public static final int CAPACITY = 8000;
-	public static final int TRANSFER_RATE = 50;
-	private int progress;
-	private IInjectorRecipe currentRecipe;
+public class TileEntityInjector extends TileEntityMachine<IInjectorRecipe> {
 	
 	private ItemStackHandler input;
 	private ItemStackHandler output;
@@ -58,25 +48,12 @@ public class TileEntityInjector extends TileEntityContainerBase implements ITick
 		return this.tank;
 	}
 	
-	public int getProgress() {
-		return this.progress;
-	}
-	
-	@Nullable
-	public IInjectorRecipe getCurrentRecipe() {
-		return this.currentRecipe;
-	}
-	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		compound.setTag("inventory", this.input.serializeNBT());
 		compound.setTag("output", this.output.serializeNBT());
 		compound.setTag("tank", this.tank.writeToNBT(new NBTTagCompound()));
 		compound.setInteger("mode", this.mode.ordinal());
-		if(this.currentRecipe != null) {
-			compound.setString("current_recipe", this.currentRecipe.getRecipeId());
-		}
-		compound.setInteger("progress", this.progress);
 		NBTTagCompound tag = super.writeToNBT(compound);
 		return tag;
 	}
@@ -87,27 +64,9 @@ public class TileEntityInjector extends TileEntityContainerBase implements ITick
 		this.output.deserializeNBT(compound.getCompoundTag("output"));
 		this.tank.readFromNBT(compound.getCompoundTag("tank"));
 		this.mode = TransferMode.values()[compound.getInteger("mode")];
-		if(compound.hasKey("current_recipe")) {
-			this.currentRecipe = getRecipeFromId(compound.getString("current_recipe"));
-		}
 		super.readFromNBT(compound);
 	}
-	
-	private IInjectorRecipe getRecipeFromId(String id) {
-		for(IInjectorRecipe r : TooManyOresAPI.INJECTOR_RECIPES) {
-			if(id == r.getRecipeId()) {
-				return r;
-			}
-		}
-		return null;
-	}
 
-	@Override
-	public void onInvOpen(EntityPlayer player) {}
-
-	@Override
-	public void onInvClose(EntityPlayer player) {}
-	
 	public TransferMode getTransferMode() {
 		return this.mode;
 	}
@@ -149,14 +108,14 @@ public class TileEntityInjector extends TileEntityContainerBase implements ITick
 	}
 	
 	@Override
-	public void handleUpdateTag(NBTTagCompound tag) {
-		super.handleUpdateTag(tag);
-		this.sync();
+	protected IForgeRegistry<IInjectorRecipe> getRecipeRegistry() {
+		return TooManyOresAPI.registryHandler.getInjectorRecipesRegistry();
 	}
 	
-	private IInjectorRecipe findRecipe() {
-		ItemStack s = this.input.getStackInSlot(0);
-		for(IInjectorRecipe r : TooManyOresAPI.INJECTOR_RECIPES) {
+	@Override
+	protected IInjectorRecipe findRecipe() {
+		ItemStack s = this.input.getStackInSlot(0).copy();
+		for(IInjectorRecipe r : getRecipeRegistry().getValues()) {
 			if(r.getRecipeTransferType() == this.mode && r.isValid(this.tank, s.copy())) {
 				return r;
 			}
@@ -197,7 +156,13 @@ public class TileEntityInjector extends TileEntityContainerBase implements ITick
 	}
 	
 	@Override
-	public ITextComponent getDisplayName() {
-		return new TextComponentString(TextFormatting.getTextWithoutFormattingCodes(Tmo.proxy.translate("tile.blockInjector.name")));
+	protected IBlockNames getBlockNames() {
+		return EnumBlocksNames.INJECTOR;
 	}
+	
+	@Override
+	public void emptyTank(short tankId) {
+		if(tankId == 0) this.tank.drain(TileEntityInjector.CAPACITY, true);
+	}
+	
 }

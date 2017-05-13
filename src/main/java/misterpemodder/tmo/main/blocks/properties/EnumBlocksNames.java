@@ -29,6 +29,7 @@ public enum EnumBlocksNames implements IBlockNames {
 	STRONG_PISTON_EXTENSION("strong_piston_head", "blockPistonBase"),
 	STRONG_PISTON_MOVING("strong_piston_extension", "blockPistonExtension"),
 	INJECTOR("fluid_injector", "blockInjector", EnumRarity.RARE),
+	CRYSTAL_DESTABILIZER("crystal_destabilizer", "blockCrystalDestabilizer", EnumRarity.RARE),
 	
 	IGNUM_FUEL("liquid_ignum", "liquidIgnum", EnumRarity.UNCOMMON),
 	FROZIUM_FUEL("liquid_frozium", "liquidFrozium", EnumRarity.RARE),

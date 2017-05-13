@@ -5,7 +5,7 @@ import javax.annotation.Nonnull;
 import org.apache.commons.lang3.tuple.Triple;
 
 import misterpemodder.tmo.api.recipe.IInjectorRecipe;
-import misterpemodder.tmo.main.utils.TMORefs;
+import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -14,22 +14,18 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 
-public class InjectorFillDrainRecipe implements IInjectorRecipe {
+public class InjectorFillDrainRecipe extends MachineRecipe<IInjectorRecipe> implements IInjectorRecipe {
 	
 	private final TransferMode mode;
 	
 	public InjectorFillDrainRecipe(TransferMode mode) {
+		super(new ResourceLocationTmo(mode == TransferMode.INJECTION? "fill_item":"drain_item"));
 		this.mode = mode;
 	}
 
 	@Override
 	public TransferMode getRecipeTransferType() {
 		return this.mode;
-	}
-
-	@Override
-	public String getRecipeId() {
-		return TMORefs.PREFIX+(this.mode == TransferMode.INJECTION? "fill_item":"drain_item");
 	}
 
 	@Override

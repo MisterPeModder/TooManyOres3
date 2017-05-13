@@ -1,4 +1,4 @@
-package misterpemodder.tmo.main.blocks.containers;
+package misterpemodder.tmo.main.blocks.base;
 
 import java.util.Random;
 

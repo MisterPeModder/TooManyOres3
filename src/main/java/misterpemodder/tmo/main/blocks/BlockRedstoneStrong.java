@@ -1,6 +1,6 @@
 package misterpemodder.tmo.main.blocks;
 
-import misterpemodder.tmo.main.blocks.base.BlockMachine;
+import misterpemodder.tmo.main.blocks.base.BlockMechanical;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
 import net.minecraft.block.state.IBlockState;
@@ -9,7 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockRedstoneStrong extends BlockMachine {
+public class BlockRedstoneStrong extends BlockMechanical {
 
 	public BlockRedstoneStrong() {
 		super(EnumBlocksNames.STRONG_REDSTONE_BLOCK, EnumBlocksValues.MetalBlocks.MACHINE);

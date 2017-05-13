@@ -13,6 +13,7 @@ import misterpemodder.tmo.api.IStrongPistonBehavior;
 import misterpemodder.tmo.api.item.IItemLock;
 import misterpemodder.tmo.api.owner.IOwnerHandler;
 import misterpemodder.tmo.main.Tmo;
+import misterpemodder.tmo.main.blocks.base.BlockContainerBase;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
 import misterpemodder.tmo.main.capability.CapabilityOwner;

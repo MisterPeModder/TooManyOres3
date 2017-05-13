@@ -15,7 +15,7 @@ public class InjectorRecipeMaker extends RecipeMaker<RecipeWrapperInjector> {
 	public List<RecipeWrapperInjector> makeRecipe(IIngredientRegistry ingredientRegistry) {
 		List<RecipeWrapperInjector> recipes = new ArrayList<>();
 		
-		for(IInjectorRecipe ir : TooManyOresAPI.INJECTOR_RECIPES) {
+		for(IInjectorRecipe ir : TooManyOresAPI.registryHandler.getInjectorRecipesRegistry().getValues()) {
 			if(ir instanceof InjectorSimpleRecipe) {
 				recipes.add(new RecipeWrapperInjector((InjectorSimpleRecipe)ir));
 			}

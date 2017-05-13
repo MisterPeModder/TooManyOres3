@@ -3,7 +3,7 @@ package misterpemodder.tmo.main.blocks;
 import javax.annotation.Nullable;
 
 import misterpemodder.tmo.main.blocks.base.IBlockTMO;
-import misterpemodder.tmo.main.blocks.containers.IBlockTileEntity;
+import misterpemodder.tmo.main.blocks.base.IBlockTileEntity;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.tileentity.TileEntityStrongPiston;
 import misterpemodder.tmo.main.utils.TMORefs;

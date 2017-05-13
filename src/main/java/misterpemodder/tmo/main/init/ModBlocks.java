@@ -12,13 +12,14 @@ import misterpemodder.tmo.main.blocks.BlockStrongPistonExtension;
 import misterpemodder.tmo.main.blocks.BlockStrongPistonMoving;
 import misterpemodder.tmo.main.blocks.BlockTMOStairs;
 import misterpemodder.tmo.main.blocks.BlockTransparent;
-import misterpemodder.tmo.main.blocks.base.BlockMachine;
+import misterpemodder.tmo.main.blocks.base.BlockMechanical;
 import misterpemodder.tmo.main.blocks.base.BlockMulti;
 import misterpemodder.tmo.main.blocks.base.IBlockTMO;
+import misterpemodder.tmo.main.blocks.base.IBlockTileEntity;
+import misterpemodder.tmo.main.blocks.containers.BlockDestabilizer;
 import misterpemodder.tmo.main.blocks.containers.BlockInjector;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumAnvil;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest;
-import misterpemodder.tmo.main.blocks.containers.IBlockTileEntity;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
 import misterpemodder.tmo.main.blocks.slab.BlockFullSlab;
@@ -46,7 +47,7 @@ public class ModBlocks {
 		DARKANIUM_LAMP(new BlockLamp(EnumBlocksNames.DARKANIUM_LAMP, EnumBlocksValues.LAMP)),
 		TITANIUM_CHEST(new BlockTitaniumChest()),
 		TITANIUM_ANVIL(new BlockTitaniumAnvil()),
-		MACHINE_CASING(new BlockMachine(EnumBlocksNames.MACHINE_CASING, EnumBlocksValues.MetalBlocks.MACHINE)),
+		MACHINE_CASING(new BlockMechanical(EnumBlocksNames.MACHINE_CASING, EnumBlocksValues.MetalBlocks.MACHINE)),
 		STRONG_REDSTONE_BLOCK(new BlockRedstoneStrong()),
 		EXPLODER(new BlockExploder()),
 		ANCIENT_GOLD_STAIRS(new BlockTMOStairs((BlockMulti) BRICK.getBlock(), BlockBrick.EnumVariant.ANCIENT_GOLD)),
@@ -61,6 +62,7 @@ public class ModBlocks {
 		STRONG_PISTON_EXTENSION(new BlockStrongPistonExtension()),
 		STRONG_PISTON_MOVING(new BlockStrongPistonMoving()),
 		INJECTOR(new BlockInjector()),
+		CRYSTAL_DESTABILIZER(new BlockDestabilizer())
 		;
 		private IBlockTMO block;
 		

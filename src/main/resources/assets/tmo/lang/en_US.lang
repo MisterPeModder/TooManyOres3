@@ -201,6 +201,7 @@ tile.blockPistonBase.desc=Can move TileEntities
 tile.blockPistonBaseSticky.name=Sticky Strong Piston
 tile.blockPistonBaseSticky.desc=Can move TileEntities
 tile.blockInjector.name=Fluid Injector
+tile.blockCrystalDestabilizer.name=Crystal Destabilizer
 
 #Fluids
 fluid.liquidIgnum=Ignum Fuel
@@ -229,6 +230,7 @@ gui.tank.clear.confirm=left-click to clear!
 gui.injecter.mode.injection=Injection mode
 gui.injecter.mode.extraction=Extraction mode
 gui.injecter.mode.desc=click to toggle
+gui.bar.ender=Ender matter
 
 #Security
 protectedBlock.noBreaking=You don't have the permissions to break this %s!

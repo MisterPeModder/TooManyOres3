@@ -144,8 +144,6 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-	    selectedTabs.getLeft().drawGuiContainerForegroundLayer(mouseX, mouseY);
-	    selectedTabs.getRight().drawGuiContainerForegroundLayer(mouseX, mouseY);
 	    
 	    selectedTabs.getLeft().updateButtons();
 	    selectedTabs.getRight().updateButtons();
@@ -163,6 +161,9 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		    	drawCreativeTabHoveringText(Tmo.proxy.translate(tab.getUnlocalizedName()), mouseX-this.getGuiLeft(), mouseY-this.getGuiTop());
 		    }
 	    }
+	    
+	    selectedTabs.getLeft().drawGuiContainerForegroundLayer(mouseX, mouseY);
+	    selectedTabs.getRight().drawGuiContainerForegroundLayer(mouseX, mouseY);
 	    
 	    if(flag && JeiPlugin.jeiRuntime != null) {
 	    	List<RecipeClickableAreaTMO> list = getRecipeClickableAreas();

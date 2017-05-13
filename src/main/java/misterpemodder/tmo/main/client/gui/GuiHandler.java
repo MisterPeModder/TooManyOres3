@@ -1,5 +1,6 @@
 package misterpemodder.tmo.main.client.gui;
 
+import misterpemodder.tmo.main.tileentity.TileEntityDestabilizer;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumAnvil;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
@@ -41,7 +42,15 @@ public class GuiHandler implements IGuiHandler {
 			public Object getClientGuiElement(EntityPlayer player, World world, int x, int y, int z) {
 				return new GuiContainerInjector(player.inventory, (TileEntityInjector)world.getTileEntity(new BlockPos(x, y, z)));
 			}
-		}
+		},
+		CRYSTAL_DESTABILIZER(4) {
+			public Object getServerGuiElement(EntityPlayer player, World world, int x, int y, int z) {
+				return new ContainerDestabilizer((TileEntityDestabilizer)world.getTileEntity(new BlockPos(x, y, z)), player.inventory);
+			}
+			public Object getClientGuiElement(EntityPlayer player, World world, int x, int y, int z) {
+				return new GuiContainerDestabilizer(player.inventory, (TileEntityDestabilizer)world.getTileEntity(new BlockPos(x, y, z)));
+			}
+		},
 		;
 		
 		public final int ID;

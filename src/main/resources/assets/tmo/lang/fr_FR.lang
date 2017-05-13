@@ -203,6 +203,7 @@ tile.blockPistonBase.desc=Peut bouger les TileEntities
 tile.blockPistonBaseSticky.name=Piston collant fort
 tile.blockPistonBaseSticky.desc=Peut bouger les TileEntities
 tile.blockInjector.name=Injecteur de fluides
+tile.blockCrystalDestabilizer.name=Destabiliseur de cristaux
 
 #Fluides
 fluid.liquidIgnum=Essence d'ignum
@@ -229,6 +230,7 @@ gui.tank.clear.confirm=cliquez-gauche pour vider!
 gui.injecter.mode.injection=Mode injection
 gui.injecter.mode.extraction=Mode extraction
 gui.injecter.mode.desc=cliquez pour changer
+gui.bar.ender=Matière de l'ender
 
 #Sécurité
 protectedBlock.noBreaking=Vous n'avez pas les permissions pour casser ce(tte) %s!
