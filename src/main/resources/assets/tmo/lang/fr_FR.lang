@@ -109,12 +109,6 @@ item.bootsIgnum.name=Bottes en ignum
 item.bootsDarkanium.name=Bottes en sombranium
 item.bootsHallowed.name=Bottes sacrées
 
-item.wrenchCopper.name=Clé en cuivre
-item.wrenchCopper.desc=N'ouvre pas les portes!
-item.wrenchAdmin.name=Clé pour administrateur
-item.wrench.OwnerRemoved=Le propriétaire à été enlevé
-item.wrench.NoPermissions=Vous n'avez pas les permissions pour utiliser cette clé!
-
 item.hammerTitanium.name=Marteau de forge en titane
 item.hammerTitaniumDark.name=Marteau de forge en titane noir
 item.hammerCopper.name=Marteau de forge en cuivre

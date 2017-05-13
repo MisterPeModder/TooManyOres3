@@ -106,11 +106,6 @@ item.bootsIgnum.name=Ignum Boots
 item.bootsDarkanium.name=Darkanium Boots
 item.bootsHallowed.name=Hallowed Boots
 
-item.wrenchCopper.name=Copper Wrench
-item.wrenchAdmin.name=Admin Wrench
-item.wrench.OwnerRemoved=Owner has been removed!
-item.wrench.NoPermissions=You don't have the required permissions to use this wrench!
-
 item.hammerTitanium.name=Titanium Forge Hammer
 item.hammerTitaniumDark.name=Dark Titanium Forge Hammer
 item.hammerCopper.name=Copper Forge Hammer

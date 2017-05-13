@@ -43,9 +43,6 @@ public enum EnumItemsNames {
 	HOE_FROZIUM("frozium_hoe", "hoeFrozium"),
 	HOE_IGNUM("ignum_hoe", "hoeIgnum"),
 	
-	WRENCH_COPPER("copper_wrench", "wrenchCopper"),
-	WRENCH_ADMIN("admin_wrench", "wrenchAdmin"),
-	
 	HAMMER_TITANIUM("titanium_hammer", "hammerTitanium", EnumRarity.RARE),
 	HAMMER_TITANIUM_DARK("dark_titanium_hammer", "hammerTitaniumDark", EnumRarity.EPIC),
 	HAMMER_COPPER("copper_hammer", "hammerCopper"),

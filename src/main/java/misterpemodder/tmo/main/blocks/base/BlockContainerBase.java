@@ -2,6 +2,7 @@ package misterpemodder.tmo.main.blocks.base;
 
 import java.util.Random;
 
+import buildcraft.api.tools.IToolWrench;
 import misterpemodder.tmo.api.block.ILockable;
 import misterpemodder.tmo.api.block.IWorldNameableModifiable;
 import misterpemodder.tmo.api.owner.IOwnerHandler;
@@ -9,9 +10,7 @@ import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockValues;
 import misterpemodder.tmo.main.capability.CapabilityOwner;
-import misterpemodder.tmo.main.items.tools.ItemWrench;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
-import misterpemodder.tmo.main.utils.ServerUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -25,8 +24,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
@@ -108,29 +105,14 @@ public abstract class BlockContainerBase<TE extends TileEntityContainerBase> ext
 		else if(world.isRemote) {
 			return true;
 		} 
-		else if (stack.getItem() instanceof ItemWrench && player.isSneaking()) {
+		else if (stack.getItem() instanceof IToolWrench && player.isSneaking()) {
 
-			if (((ItemWrench) stack.getItem()).canWrench(player, pos)) {
-				((ItemWrench) stack.getItem()).wrenchUsed(player, pos);
-				if (stack.getItem() instanceof ItemWrench) {
-					if (((ItemWrench) stack.getItem()).isAdminWrench && ServerUtils.isOp(player)) {
-						IOwnerHandler ownerHandler = tileEntity.getCapability(CapabilityOwner.OWNER_HANDLER_CAPABILITY,
-								facing);
-
-						if (ownerHandler != null && ownerHandler.hasOwner()) {
-							ownerHandler.setOwner(null);
-							player.sendMessage(new TextComponentString(Tmo.proxy.translate("item.wrench.OwnerRemoved")));
-							return true;
-						}
-					} else {
-						player.sendMessage(new TextComponentString(TextFormatting.RED + Tmo.proxy.translate("item.wrench.NoPermissions")));
-						return false;
-					}
-				}
+			if (((IToolWrench) stack.getItem()).canWrench(player, pos)) {
+				((IToolWrench) stack.getItem()).wrenchUsed(player, pos);
+				world.setBlockToAir(pos);
+				world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), this.toItem(tileEntity, state)));
 			}
-			world.setBlockToAir(pos);
-			world.spawnEntity(
-					new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), this.toItem(tileEntity, state)));
+			
 			return true;
 		}
 		

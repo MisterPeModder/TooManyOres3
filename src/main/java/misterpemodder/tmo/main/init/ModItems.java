@@ -19,7 +19,6 @@ import misterpemodder.tmo.main.items.tools.ItemTmoHoe;
 import misterpemodder.tmo.main.items.tools.ItemTmoPickaxe;
 import misterpemodder.tmo.main.items.tools.ItemTmoShovel;
 import misterpemodder.tmo.main.items.tools.ItemTmoSword;
-import misterpemodder.tmo.main.items.tools.ItemWrench;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -71,9 +70,6 @@ public class ModItems {
 		HOE_COPPER(new ItemTmoHoe(EnumItemsNames.HOE_COPPER, TmoToolMaterial.COPPER_MATERIAL)),
 		HOE_IGNUM(new ItemTmoHoe(EnumItemsNames.HOE_IGNUM, TmoToolMaterial.IGNUM_MATERIAL)),
 		HOE_FROZIUM(new ItemTmoHoe(EnumItemsNames.HOE_FROZIUM, TmoToolMaterial.FROZIUM_MATERIAL)),
-		
-		WRENCH_COPPER(new ItemWrench(EnumItemsNames.WRENCH_COPPER, TmoToolMaterial.COPPER_MATERIAL)),
-		WRENCH_ADMIN(new ItemWrench(EnumItemsNames.WRENCH_ADMIN, TmoToolMaterial.TITANIUM_MATERIAL, true, true)),
 		
 		HAMMER_TITANIUM(new ItemHammer(EnumItemsNames.HAMMER_TITANIUM, TmoToolMaterial.TITANIUM_MATERIAL)),
 		HAMMER_TITANIUM_DARK(new ItemHammer(EnumItemsNames.HAMMER_TITANIUM_DARK, TmoToolMaterial.TITANIUM_DARK_MATERIAL)),
