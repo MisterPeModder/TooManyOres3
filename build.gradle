@@ -22,7 +22,7 @@ compileJava {
 minecraft {
     version = "${mc_version_full}"
     
-    coreMod = "misterpemodder.tmo.main.asm.TmoLoadingPlugin"
+    coreMod = "misterpemodder.tmo.asm.TmoLoadingPlugin"
     
     runDir = "run"
     mappings = "snapshot_20161220"
@@ -69,6 +69,6 @@ sourceSets {
 
 jar {
     manifest {
-        attributes("FMLCorePluginContainsFMLMod": "true", "FMLCorePlugin": "misterpemodder.tmo.main.asm.TmoLoadingPlugin")
+        attributes("FMLCorePluginContainsFMLMod": "true", "FMLCorePlugin": "misterpemodder.tmo.asm.TmoLoadingPlugin")
     }
 }
