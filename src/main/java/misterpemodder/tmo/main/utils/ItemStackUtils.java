@@ -4,6 +4,7 @@ import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.init.ModPotions.ThePotionTypes;
 import misterpemodder.tmo.main.items.ItemMulti;
 import misterpemodder.tmo.main.items.ItemVariant;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -67,6 +68,23 @@ public final class ItemStackUtils {
 	
 	public static ItemStack makeLingeringPotion(PotionType type) {
 		return PotionUtils.addPotionToItemStack(new ItemStack(Items.LINGERING_POTION), type);
+	}
+	
+	public static ItemStack getModItemStack(String modId, String registryName) {
+		return getModItemStack(modId, registryName, 1, 0);
+	}
+	
+	public static ItemStack getModItemStack(String modId, String registryName, int amount) {
+		return getModItemStack(modId, registryName, amount, 0);
+	}
+	
+	public static ItemStack getModItemStack(String modId, String registryName, int amount, int meta) {
+		String name = modId+":"+registryName;
+		Item item = null;
+		if((item = Item.getByNameOrId(name)) == null) {
+			item = Item.getItemFromBlock(Block.getBlockFromName(name));
+		}
+		return item == null? ItemStack.EMPTY : new ItemStack(item, amount, meta);
 	}
 	
 }

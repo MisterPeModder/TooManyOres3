@@ -3,23 +3,24 @@ package misterpemodder.tmo.main.apiimpl.recipe;
 import org.apache.commons.lang3.tuple.Pair;
 
 import misterpemodder.tmo.api.recipe.IDestabilizerRecipe;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class DestabilizerSimpleRecipe extends MachineRecipe<IDestabilizerRecipe> implements IDestabilizerRecipe {
+public class DestabilizerToolRecipe extends MachineRecipe<IDestabilizerRecipe> implements IDestabilizerRecipe{
 
 	private final int enderMatterAmount;
-	private final ItemStack itemInput;
+	private final ToolMaterial material;
 	private final FluidStack fluidStack;
 	private final int totalTime;
 
-	public DestabilizerSimpleRecipe(ResourceLocation recipeId, int enderMatterAmount, ItemStack itemInput, FluidStack fluidStack, int totalTime) {
+	public DestabilizerToolRecipe(ResourceLocation recipeId, int enderMatterAmount, ToolMaterial material, FluidStack fluidStack, int totalTime) {
 		super(recipeId);
 		this.enderMatterAmount = enderMatterAmount;
 		this.totalTime = totalTime;
-		this.itemInput = itemInput;
+		this.material = material;
 		this.fluidStack = fluidStack;
 	}
 
@@ -32,23 +33,15 @@ public class DestabilizerSimpleRecipe extends MachineRecipe<IDestabilizerRecipe>
 	public int getEnderMaterNeeded() {
 		return this.enderMatterAmount;
 	}
-	
-	public ItemStack getItemInput() {
-		return this.itemInput.copy();
-	}
-	
-	public FluidStack getFluidOuput() {
-		return this.fluidStack.copy();
-	}
 
 	@Override
 	public boolean isValid(ItemStack input) {
-		return ItemStack.areItemsEqual(input, this.itemInput) && input.getCount() >= this.itemInput.getCount();
+		return input.getItem().getIsRepairable(input, material.getRepairItemStack());
 	}
 
 	@Override
 	public Pair<ItemStack, FluidStack> onFinish(ItemStack itemStackIn, FluidTank tank) {
-		itemStackIn.shrink(this.itemInput.getCount());
+		itemStackIn.shrink(1);
 		return Pair.of(itemStackIn, this.fluidStack.copy());
 	}
 

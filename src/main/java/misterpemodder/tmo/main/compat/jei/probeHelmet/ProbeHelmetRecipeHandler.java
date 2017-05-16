@@ -1,4 +1,4 @@
-package misterpemodder.tmo.main.compat.jei.probeHelmet;
+package misterpemodder.tmo.main.compat.jei.probehelmet;
 
 import mezz.jei.api.recipe.IRecipeHandler;
 import mezz.jei.api.recipe.IRecipeWrapper;

@@ -357,6 +357,10 @@ gui.jei.category.injector.normal=Fluid Injector Recipe
 gui.jei.category.injector.mode=Mode
 gui.jei.category.injector.mode.injection=Injection
 gui.jei.category.injector.mode.extraction=Extraction
+gui.jei.category.enderMatter=Ender Matter Item
+gui.jei.category.enderMatter.value=Ender Matter value
+gui.jei.category.destabilizer=Crystal Destabilizer Recipe
+gui.jei.category.destabilizer.cost=Ender Matter cost
 
 item.itemIngot.titanium.jeidesc=Titanium is a very sturdy material that have a lot of uses...\nPerhaps you could upgrade your diamond with this?
 item.titaniumBucket.jeidesc=A reinforced bucket that can hold multiple buckets worth of any fluid.\nIts capacity may vary depending on the configuration.\nControls:\nRight-click to place fluids.\nShift-right-click to take fluids.

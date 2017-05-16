@@ -8,7 +8,8 @@ import misterpemodder.tmo.main.blocks.base.BlockMachine;
 import misterpemodder.tmo.main.blocks.containers.BlockInjector;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
-import misterpemodder.tmo.main.capability.ComparatorSyncedItemHandler;
+import misterpemodder.tmo.main.capability.SyncedFluidTank;
+import misterpemodder.tmo.main.capability.SyncedItemHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -34,8 +35,8 @@ public class TileEntityDestabilizer extends TileEntityMachine<IDestabilizerRecip
 	
 	public TileEntityDestabilizer() {
 		super();
-		this.input = new ComparatorSyncedItemHandler(this,1);
-		this.ender = new ComparatorSyncedItemHandler(this, 1) {
+		this.input = new SyncedItemHandler(this,1);
+		this.ender = new SyncedItemHandler(this, 1) {
 			@Override
 			public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
 				if(!TooManyOresAPI.methodHandler.isEnderMatterItem(stack)) {
@@ -45,7 +46,7 @@ public class TileEntityDestabilizer extends TileEntityMachine<IDestabilizerRecip
 			}
 			
 		};
-		this.tank = new FluidTank(CAPACITY);
+		this.tank = new SyncedFluidTank(CAPACITY);
 	}
 	
 	public ItemStackHandler getEnder() {
@@ -148,6 +149,7 @@ public class TileEntityDestabilizer extends TileEntityMachine<IDestabilizerRecip
 							this.enderMatterAmount -= currentRecipe.getEnderMaterNeeded();
 							currentRecipe = null;
 							progress = 0;
+							sync();
 						}
 					}
 					else {
@@ -161,10 +163,10 @@ public class TileEntityDestabilizer extends TileEntityMachine<IDestabilizerRecip
 			
 			ItemStack enderStack = this.ender.getStackInSlot(0).copy();
 			if(TooManyOresAPI.methodHandler.isEnderMatterItem(enderStack) && this.enderMatterAmount < MAX_ENDER_MATTER) {
-				int value = TooManyOresAPI.methodHandler.getEnderMatterValue(enderStack);
-				if(value != 0 && this.enderMatterAmount + value <= MAX_ENDER_MATTER) {
-					this.enderMatterAmount += value;
-					enderStack.shrink(1);
+				Pair<Integer, Integer> p = TooManyOresAPI.methodHandler.getEnderMatterValue(enderStack);
+				if(p.getLeft() != 0 && this.enderMatterAmount + p.getLeft() <= MAX_ENDER_MATTER) {
+					this.enderMatterAmount += p.getLeft();
+					enderStack.shrink(p.getRight());
 					this.ender.setStackInSlot(0, enderStack);
 				}
 			}

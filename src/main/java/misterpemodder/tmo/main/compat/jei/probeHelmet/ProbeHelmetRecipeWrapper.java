@@ -1,4 +1,4 @@
-package misterpemodder.tmo.main.compat.jei.probeHelmet;
+package misterpemodder.tmo.main.compat.jei.probehelmet;
 
 import java.util.Arrays;
 import java.util.List;

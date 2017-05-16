@@ -5,7 +5,7 @@ import misterpemodder.tmo.api.block.IWorldNameableModifiable;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest;
 import misterpemodder.tmo.main.capability.CapabilityOwner;
-import misterpemodder.tmo.main.capability.ComparatorSyncedItemHandler;
+import misterpemodder.tmo.main.capability.SyncedItemHandler;
 import misterpemodder.tmo.main.capability.ItemStackHandlerLockable;
 import misterpemodder.tmo.main.capability.OwnerHandlerUUID;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
@@ -43,7 +43,7 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
     
     public TileEntityTitaniumChest() {
     	super();
-    	this.inventory = new ComparatorSyncedItemHandler(this, 66);
+    	this.inventory = new SyncedItemHandler(this, 66);
     	this.lock = new ItemStackHandlerLockable(this, 1);
 	}
 	

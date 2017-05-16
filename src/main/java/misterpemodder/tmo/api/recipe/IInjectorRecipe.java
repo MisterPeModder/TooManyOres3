@@ -18,6 +18,6 @@ public interface IInjectorRecipe extends IMachineRecipe<IInjectorRecipe> {
 	
 	boolean isValid(@Nonnull FluidTank fluidTank, ItemStack stack);
 	
-	Triple<FluidStack, ItemStack,ItemStack> onFinish(@Nonnull FluidTank fluidTankIn, ItemStack itemStackIn, ItemStack itemStackOut);
+	Triple<FluidStack, ItemStack, ItemStack> onFinish(@Nonnull FluidTank fluidTankIn, ItemStack itemStackIn, ItemStack itemStackOut);
 	
 }

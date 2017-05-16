@@ -2,6 +2,8 @@ package misterpemodder.tmo.main.apiimpl;
 
 import javax.annotation.Nullable;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.api.block.ISlimeBlock;
 import misterpemodder.tmo.api.handler.ITMOMethodHandler;
@@ -51,13 +53,13 @@ public class MethodHandler implements ITMOMethodHandler{
 	}
 	
 	@Override
-	public int getEnderMatterValue(ItemStack stack) {
+	public Pair<Integer, Integer> getEnderMatterValue(ItemStack stack) {
 		for(ItemStack s : TooManyOresAPI.ENDER_MATTER_ITEMS.keySet()) {
-			if(ItemStack.areItemsEqual(s, stack)) {
-				return TooManyOresAPI.ENDER_MATTER_ITEMS.get(s);
+			if(ItemStack.areItemsEqual(s, stack) && stack.getCount() >= s.getCount()) {
+				return Pair.of(TooManyOresAPI.ENDER_MATTER_ITEMS.get(s), s.getCount());
 			}
 		}
-		return 0;
+		return Pair.of(0, 0);
 	}
 
 }

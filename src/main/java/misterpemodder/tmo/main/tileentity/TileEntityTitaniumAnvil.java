@@ -2,7 +2,7 @@ package misterpemodder.tmo.main.tileentity;
 
 import misterpemodder.tmo.api.item.IItemForgeHammer;
 import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.capability.ComparatorSyncedItemHandler;
+import misterpemodder.tmo.main.capability.SyncedItemHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,7 +20,7 @@ public class TileEntityTitaniumAnvil extends TileEntityContainerBase {
 	
 	public TileEntityTitaniumAnvil() {
 		super();
-		this.hammerItemHandler = new ComparatorSyncedItemHandler(this, 1) {
+		this.hammerItemHandler = new SyncedItemHandler(this, 1) {
 			@Override
 			public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
 				if(!(stack.getItem() instanceof IItemForgeHammer)) {

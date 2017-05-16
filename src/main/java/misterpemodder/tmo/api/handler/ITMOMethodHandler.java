@@ -2,6 +2,8 @@ package misterpemodder.tmo.api.handler;
 
 import javax.annotation.Nullable;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import misterpemodder.tmo.api.block.ISlimeBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -55,8 +57,9 @@ public interface ITMOMethodHandler {
 	public boolean isEnderMatterItem(ItemStack stack);
 	
 	/**
-	 * returns the ender matter value of this stack.
+	 * returns a Pair holding in the left side the ender matter value corresponding
+	 * to the amount of items in the right side.
 	 */
-	public int getEnderMatterValue(ItemStack stack);
+	public Pair<Integer, Integer> getEnderMatterValue(ItemStack stack);
 	
 }

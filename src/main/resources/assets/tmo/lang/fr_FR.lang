@@ -357,6 +357,10 @@ gui.jei.category.injector.normal=Injecteur de fluides
 gui.jei.category.injector.mode=Mode
 gui.jei.category.injector.mode.injection=Injection
 gui.jei.category.injector.mode.extraction=Extraction
+gui.jei.category.enderMatter=Matière de l'Ender
+gui.jei.category.enderMatter.value=Matière de l'Ender
+gui.jei.category.destabilizer=Destabiliseur de crystaux
+gui.jei.category.destabilizer.cost=Coût en matière de l'Ender
 
 item.itemIngot.titanium.jeidesc=Le titane est un materiau avec beacoup d'utilisations possibles.\nPeut-être que l'on peut améliorer nos outils en diamant avec?
 item.titaniumBucket.jeidesc=Un seau capable de contenir l'équivalent de plusieurs seaux de n'importe quel liquide\nSa capacité peut varier selon la configuration\nContrôles:\nClic droit pour placer des fluides. \nShift+Clic droit pour prendre des fluides.

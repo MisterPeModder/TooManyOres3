@@ -253,17 +253,18 @@ public final class PacketDataHandlers {
 		public void procData(NBTTagCompound data) {
 			
 			WorldClient world = Minecraft.getMinecraft().world;
-			UUID entityUUID = NBTUtil.getUUIDFromTag(data.getCompoundTag("entity_uuid"));
-			//TODO Investigate
-			List<EntityLivingBase> l = world.getEntities(EntityLivingBase.class, entity -> entity != null && entity.getUniqueID().equals(entityUUID));
-			
-			if(l != null && !l.isEmpty()) {
-				EntityLivingBase entity = l.get(0);
-				if(entity instanceof EntityLivingBase && entity.getUniqueID().equals(entityUUID)) {
-					if(entity.hasCapability(CapabilityFreezing.FREEZING_CAPABILITY, null)) {
-						IFreezing freezingCap = entity.getCapability(CapabilityFreezing.FREEZING_CAPABILITY, null);
-						freezingCap.deserializeNBT(data.getCompoundTag("freezing_cap"));
-						freezingCap.updateEntity(entity);
+			if(world != null && data.hasKey("entity_uuid", Constants.NBT.TAG_COMPOUND)) {
+				UUID entityUUID = NBTUtil.getUUIDFromTag(data.getCompoundTag("entity_uuid"));
+				List<EntityLivingBase> l = world.getEntities(EntityLivingBase.class, entity -> entity != null && entity.getUniqueID().equals(entityUUID));
+				
+				if(l != null && !l.isEmpty()) {
+					EntityLivingBase entity = l.get(0);
+					if(entity instanceof EntityLivingBase && entity.getUniqueID().equals(entityUUID)) {
+						if(entity.hasCapability(CapabilityFreezing.FREEZING_CAPABILITY, null)) {
+							IFreezing freezingCap = entity.getCapability(CapabilityFreezing.FREEZING_CAPABILITY, null);
+							freezingCap.deserializeNBT(data.getCompoundTag("freezing_cap"));
+							freezingCap.updateEntity(entity);
+						}
 					}
 				}
 			}

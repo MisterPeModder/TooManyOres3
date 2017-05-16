@@ -62,15 +62,16 @@ public class ContainerDestabilizer extends ContainerMachine<TileEntityDestabiliz
                 if(!this.mergeItemStack(itemstack1, 0, 40, false)) {
                     return ItemStack.EMPTY;
                 } else {
-                	//Workaround for comparator output level not updating when removing an item with shift-click
                 	te.getWorld().updateComparatorOutputLevel(te.getPos(), te.getBlockType());
                 }
             }
             //player inv
             else if(index < 41) {
-            	if (!this.mergeItemStack(itemstack1, 41, 42, false)) {
-                	return ItemStack.EMPTY;
-            	}
+				if ((TooManyOresAPI.methodHandler.isEnderMatterItem(itemstack)
+						&& !this.mergeItemStack(itemstack1, 42, 43, false))
+						|| !this.mergeItemStack(itemstack1, 41, 42, false)) {
+					return ItemStack.EMPTY;
+				}
             }
 
             if (itemstack1.isEmpty()) {

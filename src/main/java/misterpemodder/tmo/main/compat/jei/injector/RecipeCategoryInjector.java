@@ -29,7 +29,7 @@ public class RecipeCategoryInjector extends BlankRecipeCategory<RecipeWrapperInj
 	
 	public static final int X_OFFSET = 8;
 	public static final int Y_OFFSET = 7;
-	private final ResourceLocation backgroundLocation = new ResourceLocationTmo("textures/gui/container/injector_main.png");
+	public static final ResourceLocation LOCATION = new ResourceLocationTmo("textures/gui/container/injector_main.png");
 	
 	private final IDrawable background;
 	private final IDrawable fluidGauge;
@@ -42,13 +42,12 @@ public class RecipeCategoryInjector extends BlankRecipeCategory<RecipeWrapperInj
 	
 	public RecipeCategoryInjector(IGuiHelper guiHelper) {
 		this.localizedName = Tmo.proxy.translate("gui.jei.category.injector.normal");
-		this.background = guiHelper.createDrawable(backgroundLocation, X_OFFSET, Y_OFFSET, 165, 85, 256, 128);
+		this.background = guiHelper.createDrawable(LOCATION, X_OFFSET, Y_OFFSET, 165, 85, 256, 128);
 		this.fluidGauge = guiHelper.createDrawable(GuiTank.TANK_TEXTURE, 0, 0, 40, 80, 128, 128);
-		this.arrowStaticInjection = guiHelper.createDrawable(backgroundLocation, 58, 100, 28, 21, 256, 128);
-		this.arrowAnimatedInjection = guiHelper.createAnimatedDrawable(guiHelper.createDrawable(backgroundLocation, 87, 100, 28, 21, 256, 128), 20, StartDirection.LEFT, false);
-		this.arrowStaticExtraction = guiHelper.createDrawable(backgroundLocation, 0, 100, 28, 21, 256, 128);
-		this.arrowAnimatedExtraction = guiHelper.createAnimatedDrawable(guiHelper.createDrawable(backgroundLocation, 29, 100, 28, 21, 256, 128), 20, StartDirection.RIGHT, false);
-
+		this.arrowStaticInjection = guiHelper.createDrawable(LOCATION, 58, 100, 28, 21, 256, 128);
+		this.arrowAnimatedInjection = guiHelper.createAnimatedDrawable(guiHelper.createDrawable(LOCATION, 87, 100, 28, 21, 256, 128), 20, StartDirection.LEFT, false);
+		this.arrowStaticExtraction = guiHelper.createDrawable(LOCATION, 0, 100, 28, 21, 256, 128);
+		this.arrowAnimatedExtraction = guiHelper.createAnimatedDrawable(guiHelper.createDrawable(LOCATION, 29, 100, 28, 21, 256, 128), 20, StartDirection.RIGHT, false);
 	}
 
 	@Override
@@ -70,7 +69,7 @@ public class RecipeCategoryInjector extends BlankRecipeCategory<RecipeWrapperInj
 	public void drawExtras(Minecraft minecraft) {
 		if(currentRecipe != null) {
 			
-			if(currentRecipe.recipe.getRecipeTransferType() == TransferMode.INJECTION) {
+			if(currentRecipe.transferMode == TransferMode.INJECTION) {
 				arrowStaticInjection.draw(minecraft, 64-X_OFFSET, 39-Y_OFFSET);
 				arrowAnimatedInjection.draw(minecraft, 64-X_OFFSET, 39-Y_OFFSET);
 			} else {
@@ -103,7 +102,7 @@ public class RecipeCategoryInjector extends BlankRecipeCategory<RecipeWrapperInj
 		
 		List<List<FluidStack>> fluidIOs;
 		
-		if(recipeWrapper.recipe.getRecipeTransferType() == TransferMode.INJECTION) {
+		if(recipeWrapper.transferMode == TransferMode.INJECTION) {
 			fluidIOs = ingredients.getInputs(FluidStack.class);
 		} else {
 			fluidIOs = ingredients.getOutputs(FluidStack.class);
