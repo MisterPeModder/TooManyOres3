@@ -11,6 +11,7 @@ item.desc=-maintenez shift pour la description-
 item.itemIngot.titanium.name=Lingot de titane
 item.itemIngot.titaniumDark.name=Lingot de titane noir
 item.itemIngot.titaniumPoor.name=Lingot de titane
+item.itemIngot.titanite.name=Lingot de titanite
 item.itemIngot.copper.name=Lingot de cuivre
 item.itemIngot.darkanium.name=Lingot de sombranium
 item.itemIngot.darkanium.desc=Ca vibre...

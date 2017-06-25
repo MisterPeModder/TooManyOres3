@@ -11,6 +11,7 @@ item.desc=-hold shift for description-
 item.itemIngot.titanium.name=Titanium Ingot
 item.itemIngot.titaniumDark.name=Dark Titanium Ingot
 item.itemIngot.titaniumPoor.name=Titanium Ingot
+item.itemIngot.titanite.name=Titanite Ingot
 item.itemIngot.copper.name=Copper Ingot
 item.itemIngot.darkanium.name=Darkanium Ingot
 item.itemIngot.darkanium.desc=It vibes with dark energy...

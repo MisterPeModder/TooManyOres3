@@ -58,6 +58,7 @@ public abstract class ItemVariant {
 		public static final IngotVariant TITANIUM_INGOT = new IngotVariant("titanium", "titanium", EnumRarity.RARE, "ingotTitaniumBlue");
 		public static final IngotVariant TITANIUM_INGOT_DARK = new IngotVariant("titanium_dark", "titaniumDark", EnumRarity.EPIC, "ingotTitaniumDark");
 		public static final IngotVariant TITANIUM_INGOT_POOR = new IngotVariant("titanium_poor", "titaniumPoor", "ingotTitanium");
+		public static final IngotVariant TITANITE_INGOT = new IngotVariant("titanite", "titanite", "ingotTitanite");
 		public static final IngotVariant CARBON_INGOT = new IngotVariant("carbon", "carbon", "ingotCarbon");
 		public static final IngotVariant COPPER_INGOT = new IngotVariant("copper", "copper", "ingotCopper");
 		public static final IngotVariant DARKANIUM_INGOT = new IngotVariant("darkanium", "darkanium", EnumRarity.EPIC, "ingotDarkanium");
