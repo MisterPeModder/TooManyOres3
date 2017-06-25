@@ -1,6 +1,7 @@
 package misterpemodder.tmo.main.compat.craftingtweaks;
 
 import misterpemodder.tmo.main.inventory.ContainerBase;
+import misterpemodder.tmo.main.inventory.ContainerDestabilizer;
 import misterpemodder.tmo.main.inventory.ContainerInjector;
 import misterpemodder.tmo.main.inventory.ContainerTitaniumAnvil;
 import misterpemodder.tmo.main.inventory.ContainerTitaniumChest;
@@ -29,6 +30,7 @@ public final class CraftingTweaksCompat {
 			registerContainer(ContainerTitaniumAnvil.class, 46);
 			registerContainer(ContainerTitaniumChest.class, 109);
 			registerContainer(ContainerInjector.class, 44);
+			registerContainer(ContainerDestabilizer.class, 44);
 			
 		} else {
 			TMORefs.LOGGER.info("CraftingTweaks not found: integration not loading");
