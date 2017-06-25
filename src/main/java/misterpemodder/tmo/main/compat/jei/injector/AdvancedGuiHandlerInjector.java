@@ -15,6 +15,9 @@ public class AdvancedGuiHandlerInjector extends BlankAdvancedGuiHandler<GuiConta
 		if(!guiContainer.isPointInRegion(40, 10, 11, 11, mouseX, mouseY) && guiContainer.isPointInRegion(11, 10, 40, 80, mouseX, mouseY)) {
 			return guiContainer.container.getTileEntity().getTank().getFluid();
 		}
+		if(guiContainer.getSlotUnderMouse() != null) {
+			return guiContainer.getSlotUnderMouse().getStack();
+		}
 		return null;
 	}
 

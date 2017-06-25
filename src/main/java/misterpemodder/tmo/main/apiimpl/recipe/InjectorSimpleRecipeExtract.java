@@ -34,7 +34,7 @@ public class InjectorSimpleRecipeExtract extends InjectorSimpleRecipe {
 				if(fs == null || fs.amount <= 0) {
 					return true;
 				}
-				return fs.containsFluid(fluidOutput);
+				return fs.isFluidEqual(fluidOutput) && fluidTank.getCapacity() - fs.amount >= fluidOutput.amount;
 			}
 		}
 		return false;
