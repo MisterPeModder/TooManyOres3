@@ -7,6 +7,17 @@
     },
     "variants": {
         "normal": [{}],
-        "inventory": [{}]
+        "inventory": [{}],
+		"variant": {
+			"standard": {},
+			"basic": {"textures": {
+				"0": "tmo:blocks/basic_machine_casing_side",
+				"1": "tmo:blocks/basic_machine_casing_bottom_1"
+			}},
+			"improved": {"textures": {
+				"0": "tmo:blocks/improved_machine_casing_side",
+				"1": "tmo:blocks/improved_machine_casing_bottom_1"
+			}}
+		}
     }
 }
