@@ -40,7 +40,6 @@ import misterpemodder.tmo.main.init.ModBlocks;
 import misterpemodder.tmo.main.init.ModBrewing;
 import misterpemodder.tmo.main.init.ModFluids;
 import misterpemodder.tmo.main.init.ModItems;
-import misterpemodder.tmo.main.network.PacketDataHandlers;
 import misterpemodder.tmo.main.network.TMOPacketHandler;
 import misterpemodder.tmo.main.proxy.CommonProxy;
 import misterpemodder.tmo.main.utils.TMORefs;
@@ -76,7 +75,6 @@ public class Tmo {
 
 		new ConfigHandler(event.getSuggestedConfigurationFile());
 		TMOPacketHandler.init();
-		PacketDataHandlers.registerHandlers();
 		ModFluids.registerFluids();
 		
 		TooManyOresAPI.methodHandler = new MethodHandler();

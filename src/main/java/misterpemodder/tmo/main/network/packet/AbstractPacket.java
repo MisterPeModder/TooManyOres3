@@ -1,5 +1,7 @@
 package misterpemodder.tmo.main.network.packet;
 
+import java.util.Arrays;
+
 import io.netty.buffer.ByteBuf;
 import misterpemodder.tmo.main.network.IPacketDataHandler;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
@@ -28,8 +30,8 @@ public abstract class AbstractPacket implements IMessage {
 			int handlerID = buffer.readInt();
 			NBTTagCompound c = buffer.readCompoundTag();
 
-			if(c.hasKey("data") && handlerID < PacketDataHandlers.HANDLERS.size() && handlerID >= 0) {
-				this.dataHandler = PacketDataHandlers.HANDLERS.get(handlerID);
+			if(c.hasKey("data") && handlerID < PacketDataHandlers.values().length && handlerID >= 0) {
+				this.dataHandler = PacketDataHandlers.values()[handlerID];
 				this.data = c.getCompoundTag("data");
 			}
 			
@@ -43,7 +45,7 @@ public abstract class AbstractPacket implements IMessage {
 	public void toBytes(ByteBuf buf) {
 		PacketBuffer buffer = new PacketBuffer(buf);
 		
-		buffer.writeInt(PacketDataHandlers.HANDLERS.indexOf(dataHandler));
+		buffer.writeInt(Arrays.asList(PacketDataHandlers.values()).indexOf(dataHandler));
 		
 		NBTTagCompound c = new NBTTagCompound();
 		c.setTag("data", data);

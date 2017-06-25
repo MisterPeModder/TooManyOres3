@@ -1,6 +1,5 @@
 package misterpemodder.tmo.main.network;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -10,14 +9,14 @@ import misterpemodder.tmo.api.block.ILockable;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
 import misterpemodder.tmo.main.capability.CapabilityFreezing;
 import misterpemodder.tmo.main.capability.CapabilityFreezing.IFreezing;
+import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabID;
+import misterpemodder.tmo.main.client.gui.tabs.TabMainInjector;
+import misterpemodder.tmo.main.client.gui.tabs.TabSecurity;
+import misterpemodder.tmo.main.inventory.ContainerBase;
+import misterpemodder.tmo.main.inventory.ContainerElementTank;
 import misterpemodder.tmo.main.inventory.ContainerMachine;
 import misterpemodder.tmo.main.inventory.ContainerTitaniumAnvil;
 import misterpemodder.tmo.main.inventory.ISyncedContainerElement;
-import misterpemodder.tmo.main.inventory.ContainerBase;
-import misterpemodder.tmo.main.inventory.ContainerElementTank;
-import misterpemodder.tmo.main.client.gui.tabs.TabMainInjector;
-import misterpemodder.tmo.main.client.gui.tabs.TabSecurity;
-import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabID;
 import misterpemodder.tmo.main.network.packet.PacketServerToClient;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import misterpemodder.tmo.main.tileentity.TileEntityMachine;
@@ -38,20 +37,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.util.Constants;
 
-public final class PacketDataHandlers {
-	
-	public static final List<IPacketDataHandler> HANDLERS = new ArrayList<>();
-	
-	public static void registerHandlers() {
-		HANDLERS.add(TCHEST_UPDATE_HANDLER);
-		HANDLERS.add(TE_UPDATE_HANDLER);
-		HANDLERS.add(TE_UPDATE_REQUEST_HANDLER);
-		HANDLERS.add(BUTTON_CLICK_HANDLER);
-		HANDLERS.add(ANVIL_ITEM_NAME_HANDLER);
-		HANDLERS.add(PROGRESS_ARROW_UPDATE_HANDLER);
-		HANDLERS.add(FREEZING_CAPABILITY_UPDATE_HANDLER);
-		HANDLERS.add(SYNCED_CONTAINER_ELEMENTS_HANDLER);
-	}
+public enum PacketDataHandlers implements IPacketDataHandler {
 	
 	/**
 	 * <p> Handler type: server to client
@@ -62,7 +48,7 @@ public final class PacketDataHandlers {
 	 * 	<li>numPlayersUsing: integer
 	 * </ul>
 	 */
-	public static final IPacketDataHandler TCHEST_UPDATE_HANDLER = new IPacketDataHandler() {
+	TCHEST_UPDATE_HANDLER {
 		
 		@Override
 		public void procData(NBTTagCompound data) {
@@ -74,7 +60,7 @@ public final class PacketDataHandlers {
 				if(data.hasKey("numPlayersUsing")) t.numPlayersUsing = data.getInteger("numPlayersUsing");
 			}
 		}
-	};
+	},
 	
 	/**
 	 * <p> Handler type: server to client
@@ -85,7 +71,7 @@ public final class PacketDataHandlers {
 	 * 	<li>tileEntity: TileEntity
 	 * </ul>
 	 */
-    public static final IPacketDataHandler TE_UPDATE_HANDLER = new IPacketDataHandler() {
+    TE_UPDATE_HANDLER {
 		
 		@Override
 		public void procData(NBTTagCompound data) {
@@ -97,7 +83,7 @@ public final class PacketDataHandlers {
 				te.deserializeNBT(data.getCompoundTag("tileEntity"));
 			}
 		}
-	};
+	},
 	
 
 	/**
@@ -110,7 +96,7 @@ public final class PacketDataHandlers {
 	 * 	<li>player_id: UUID
 	 * </ul>
 	 */
-	public static final IPacketDataHandler TE_UPDATE_REQUEST_HANDLER = new IPacketDataHandler() {
+	TE_UPDATE_REQUEST_HANDLER {
 		
 		@Override
 		public void procData(NBTTagCompound data) {
@@ -131,7 +117,7 @@ public final class PacketDataHandlers {
 				
 			}
 		}
-	};
+	},
 	
 	/**
 	 * <p> Handler type: client to server
@@ -145,7 +131,7 @@ public final class PacketDataHandlers {
 	 * 	<li>info: NBTTagCompound additional data
 	 * </ul>
 	 */
-	public static final IPacketDataHandler BUTTON_CLICK_HANDLER = new IPacketDataHandler() {
+	BUTTON_CLICK_HANDLER {
 		
 		@Override
 		public void procData(NBTTagCompound data) {
@@ -190,7 +176,7 @@ public final class PacketDataHandlers {
 			}
 			
 		}
-	};
+	},
 	
 	/**
 	 * <p> Handler type: client to server
@@ -202,7 +188,7 @@ public final class PacketDataHandlers {
 	 * 	<li>item_name: String
 	 * </ul>
 	 */
-    public static final IPacketDataHandler ANVIL_ITEM_NAME_HANDLER = new IPacketDataHandler() {
+    ANVIL_ITEM_NAME_HANDLER {
 		
 		@Override
 		public void procData(NBTTagCompound data) {
@@ -221,7 +207,7 @@ public final class PacketDataHandlers {
 				c.updateItemName(data.getString("item_name"));
 			}
 		}
-	};
+	},
 	
 	
 	/**
@@ -232,7 +218,7 @@ public final class PacketDataHandlers {
 	 * 	<li>progress: Integer
 	 * </ul>
 	 */
-    public static final IPacketDataHandler PROGRESS_ARROW_UPDATE_HANDLER = new IPacketDataHandler() {
+    PROGRESS_ARROW_UPDATE_HANDLER {
 		
 		@Override
 		public void procData(NBTTagCompound data) {
@@ -241,7 +227,7 @@ public final class PacketDataHandlers {
 				((ContainerMachine)c).progress = data.getInteger("progress");
 			}
 		}
-	};
+	},
 	
 	/**
 	 * <p> Handler type: server to client
@@ -252,7 +238,7 @@ public final class PacketDataHandlers {
 	 * 	<li>entity_uuid: UUID
 	 * </ul>
 	 */
-    public static final IPacketDataHandler FREEZING_CAPABILITY_UPDATE_HANDLER = new IPacketDataHandler() {
+    FREEZING_CAPABILITY_UPDATE_HANDLER {
 		
 		@Override
 		public void procData(NBTTagCompound data) {
@@ -274,7 +260,7 @@ public final class PacketDataHandlers {
 				}
 			}
 		}
-	};
+	},
 	
 	/**
 	 * <p> Handler type: server to client
@@ -285,7 +271,7 @@ public final class PacketDataHandlers {
 	 * 	<li>element_data: NBTTagCompound
 	 * </ul>
 	 */
-    public static final IPacketDataHandler SYNCED_CONTAINER_ELEMENTS_HANDLER = new IPacketDataHandler() {
+     SYNCED_CONTAINER_ELEMENTS_HANDLER {
 		
 		@Override
 		public void procData(NBTTagCompound data) {
@@ -304,6 +290,7 @@ public final class PacketDataHandlers {
 			}
 			
 		}
-	};
+	},
+    ;
 
 }
