@@ -149,6 +149,9 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	    selectedTabs.getLeft().updateButtons();
 	    selectedTabs.getRight().updateButtons();
 	    
+	    selectedTabs.getLeft().drawGuiContainerForegroundLayer(mouseX, mouseY);
+	    selectedTabs.getRight().drawGuiContainerForegroundLayer(mouseX, mouseY);
+	    
 	    boolean flag = true;
 	    for(TabBase tab : tabs) {
 	    	RenderHelper.enableGUIStandardItemLighting();
@@ -163,8 +166,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		    }
 	    }
 	    
-	    selectedTabs.getLeft().drawGuiContainerForegroundLayer(mouseX, mouseY);
-	    selectedTabs.getRight().drawGuiContainerForegroundLayer(mouseX, mouseY);
+	    
 	    
 	    if(flag && JeiPlugin.jeiRuntime != null) {
 	    	List<RecipeClickableAreaTMO> list = getRecipeClickableAreas();
