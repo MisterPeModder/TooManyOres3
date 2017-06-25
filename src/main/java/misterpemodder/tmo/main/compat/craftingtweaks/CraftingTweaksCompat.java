@@ -1,9 +1,9 @@
 package misterpemodder.tmo.main.compat.craftingtweaks;
 
-import misterpemodder.tmo.main.client.gui.ContainerBase;
-import misterpemodder.tmo.main.client.gui.ContainerInjector;
-import misterpemodder.tmo.main.client.gui.ContainerTitaniumAnvil;
-import misterpemodder.tmo.main.client.gui.ContainerTitaniumChest;
+import misterpemodder.tmo.main.inventory.ContainerBase;
+import misterpemodder.tmo.main.inventory.ContainerInjector;
+import misterpemodder.tmo.main.inventory.ContainerTitaniumAnvil;
+import misterpemodder.tmo.main.inventory.ContainerTitaniumChest;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.Loader;

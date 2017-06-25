@@ -10,6 +10,7 @@ import misterpemodder.tmo.main.client.gui.tabs.TabMainTitaniumChest;
 import misterpemodder.tmo.main.client.gui.tabs.TabPlayerInventory;
 import misterpemodder.tmo.main.client.gui.tabs.TabRedstone;
 import misterpemodder.tmo.main.client.gui.tabs.TabSecurity;
+import misterpemodder.tmo.main.inventory.ContainerTitaniumChest;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import net.minecraft.entity.player.InventoryPlayer;
 

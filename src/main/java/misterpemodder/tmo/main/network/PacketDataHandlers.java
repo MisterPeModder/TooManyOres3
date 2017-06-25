@@ -4,16 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.google.common.collect.ImmutableList;
+
 import misterpemodder.tmo.api.block.ILockable;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
 import misterpemodder.tmo.main.capability.CapabilityFreezing;
 import misterpemodder.tmo.main.capability.CapabilityFreezing.IFreezing;
-import misterpemodder.tmo.main.client.gui.ContainerMachine;
-import misterpemodder.tmo.main.client.gui.ContainerTitaniumAnvil;
-import misterpemodder.tmo.main.client.gui.GuiTank;
-import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabID;
+import misterpemodder.tmo.main.inventory.ContainerMachine;
+import misterpemodder.tmo.main.inventory.ContainerTitaniumAnvil;
+import misterpemodder.tmo.main.inventory.ISyncedContainerElement;
+import misterpemodder.tmo.main.inventory.ContainerBase;
+import misterpemodder.tmo.main.inventory.ContainerElementTank;
 import misterpemodder.tmo.main.client.gui.tabs.TabMainInjector;
 import misterpemodder.tmo.main.client.gui.tabs.TabSecurity;
+import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabID;
 import misterpemodder.tmo.main.network.packet.PacketServerToClient;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import misterpemodder.tmo.main.tileentity.TileEntityMachine;
@@ -46,6 +50,7 @@ public final class PacketDataHandlers {
 		HANDLERS.add(ANVIL_ITEM_NAME_HANDLER);
 		HANDLERS.add(PROGRESS_ARROW_UPDATE_HANDLER);
 		HANDLERS.add(FREEZING_CAPABILITY_UPDATE_HANDLER);
+		HANDLERS.add(SYNCED_CONTAINER_ELEMENTS_HANDLER);
 	}
 	
 	/**
@@ -171,7 +176,7 @@ public final class PacketDataHandlers {
 			break;
 			
 			case MISC:
-				if(bId == GuiTank.CLEAR_TANK_BUTTON_ID) {
+				if(bId == ContainerElementTank.CLEAR_TANK_BUTTON_ID) {
 					if(te instanceof TileEntityMachine && info.hasKey("tank_id", Constants.NBT.TAG_SHORT)) {
 						//((TileEntityInjector)te).getTank().drain(TileEntityInjector.CAPACITY, true);
 						((TileEntityMachine)te).emptyTank(info.getShort("tank_id"));
@@ -268,6 +273,36 @@ public final class PacketDataHandlers {
 					}
 				}
 			}
+		}
+	};
+	
+	/**
+	 * <p> Handler type: server to client
+	 * 
+	 * <p> NBT tags:
+	 * <ul>
+	 * 	<li>element_id: integer
+	 * 	<li>element_data: NBTTagCompound
+	 * </ul>
+	 */
+    public static final IPacketDataHandler SYNCED_CONTAINER_ELEMENTS_HANDLER = new IPacketDataHandler() {
+		
+		@Override
+		public void procData(NBTTagCompound data) {
+			Container c = Minecraft.getMinecraft().player.openContainer;
+			
+			if(c instanceof ContainerBase) {
+				if(data.hasKey("element_id", Constants.NBT.TAG_INT)) {
+					ImmutableList<ISyncedContainerElement> elements = ((ContainerBase) c).containerElements;
+					int id = data.getInteger("element_id");
+					if(id >= 0 && id < elements.size()) {
+						ISyncedContainerElement element = elements.get(id);
+						NBTTagCompound edata = data.hasKey("element_data")? data.getCompoundTag("element_data"):new NBTTagCompound();
+						element.procData(edata);
+					}
+				}
+			}
+			
 		}
 	};
 

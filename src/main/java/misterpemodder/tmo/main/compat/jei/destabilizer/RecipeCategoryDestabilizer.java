@@ -12,7 +12,7 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeCategory;
 import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.client.gui.GuiTank;
+import misterpemodder.tmo.main.inventory.ContainerElementTank;
 import misterpemodder.tmo.main.tileentity.TileEntityDestabilizer;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.client.Minecraft;
@@ -40,7 +40,7 @@ public class RecipeCategoryDestabilizer extends BlankRecipeCategory<RecipeWrappe
 		this.localizedName = Tmo.proxy.translate("gui.jei.category.destabilizer");
 		
 		this.tank = helper.createDrawable(LOCATION, 160, 8, 42, 82, 256, 128);
-		this.fluidGauge = helper.createDrawable(GuiTank.TANK_TEXTURE, 0, 0, 40, 80, 128, 128);
+		this.fluidGauge = helper.createDrawable(ContainerElementTank.TANK_TEXTURE, 0, 0, 40, 80, 128, 128);
 		this.background_left = helper.createDrawable(LOCATION, X_OFFSET, Y_OFFSET, 141, 88, 256, 128);
 		this.background = helper.createBlankDrawable(182, 88);
 		this.arrowStatic = helper.createDrawable(LOCATION, 0, 100, 28, 21, 256, 128);

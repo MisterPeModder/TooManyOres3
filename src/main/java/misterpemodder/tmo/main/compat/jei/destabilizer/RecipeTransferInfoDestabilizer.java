@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import mezz.jei.api.recipe.transfer.IRecipeTransferInfo;
-import misterpemodder.tmo.main.client.gui.ContainerDestabilizer;
+import misterpemodder.tmo.main.inventory.ContainerDestabilizer;
 import net.minecraft.inventory.Slot;
 
 public class RecipeTransferInfoDestabilizer implements IRecipeTransferInfo<ContainerDestabilizer> {

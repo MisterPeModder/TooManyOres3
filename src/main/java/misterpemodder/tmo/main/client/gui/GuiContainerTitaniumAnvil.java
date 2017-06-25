@@ -8,6 +8,7 @@ import misterpemodder.tmo.main.client.gui.tabs.TabBase;
 import misterpemodder.tmo.main.client.gui.tabs.TabInfo;
 import misterpemodder.tmo.main.client.gui.tabs.TabMainTitaniumAnvil;
 import misterpemodder.tmo.main.client.gui.tabs.TabPlayerInventory;
+import misterpemodder.tmo.main.inventory.ContainerTitaniumAnvil;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumAnvil;
 import net.minecraft.entity.player.InventoryPlayer;
 

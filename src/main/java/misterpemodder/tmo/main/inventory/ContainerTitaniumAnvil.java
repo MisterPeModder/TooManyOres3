@@ -1,4 +1,4 @@
-package misterpemodder.tmo.main.client.gui;
+package misterpemodder.tmo.main.inventory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,9 +11,9 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Predicate;
 
 import misterpemodder.tmo.api.item.IItemForgeHammer;
-import misterpemodder.tmo.main.client.gui.slot.SlotFiltered;
-import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
 import misterpemodder.tmo.main.enchant.EnchantementXpCostReduction;
+import misterpemodder.tmo.main.inventory.slot.SlotFiltered;
+import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumAnvil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;

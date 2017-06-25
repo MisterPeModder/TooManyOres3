@@ -1,4 +1,4 @@
-package misterpemodder.tmo.main.client.gui;
+package misterpemodder.tmo.main.inventory;
 
 import misterpemodder.tmo.main.network.PacketDataHandlers;
 import misterpemodder.tmo.main.network.TMOPacketHandler;

@@ -1,25 +1,32 @@
-package misterpemodder.tmo.main.client.gui;
+package misterpemodder.tmo.main.inventory;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.MutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
 
 import baubles.api.BaublesApi;
 import baubles.api.cap.IBaublesItemHandler;
 import misterpemodder.tmo.api.block.ILockable;
 import misterpemodder.tmo.api.item.IItemLock;
-import misterpemodder.tmo.main.client.gui.slot.IHidable;
-import misterpemodder.tmo.main.client.gui.slot.SlotFiltered;
-import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
-import misterpemodder.tmo.main.client.gui.slot.SlotHidableInventory;
-import misterpemodder.tmo.main.client.gui.slot.SlotHidableInventory.SlotHidableCrafting;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase;
+import misterpemodder.tmo.main.inventory.slot.IHidable;
+import misterpemodder.tmo.main.inventory.slot.SlotFiltered;
+import misterpemodder.tmo.main.inventory.slot.SlotHidable;
+import misterpemodder.tmo.main.inventory.slot.SlotHidableInventory;
+import misterpemodder.tmo.main.inventory.slot.SlotHidableInventory.SlotHidableCrafting;
+import misterpemodder.tmo.main.network.PacketDataHandlers;
+import misterpemodder.tmo.main.network.TMOPacketHandler;
+import misterpemodder.tmo.main.network.packet.PacketServerToClient;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -30,6 +37,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.PlayerArmorInvWrapper;
 import net.minecraftforge.items.wrapper.PlayerMainInvWrapper;
@@ -51,6 +59,8 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
     
 	protected MutablePair<TabBase, TabBase> selectedTabs = new MutablePair<>();
 	public EntityPlayer player;
+	
+	public final ImmutableList<ISyncedContainerElement> containerElements;
 	
 	public ContainerBase(TE te, InventoryPlayer playerInv, int bPartOffset) {
 		this(te, playerInv, bPartOffset, true);
@@ -75,10 +85,18 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 		setExtraInvSlots();
 		
 		hideSlots();
+		
+		ImmutableList.Builder<ISyncedContainerElement> builder = new ImmutableList.Builder<>();
+		builder.addAll((Iterable<ISyncedContainerElement>)getContainerElements());
+		this.containerElements = builder.build();
 	}
 	
 	public ImmutablePair<TabBase, TabBase> getSelectedTabs() {
 		return ImmutablePair.of(selectedTabs.left, selectedTabs.right);
+	}
+	
+	public void setSelectedTabs(Pair<TabBase, TabBase> tabs) {
+		 this.selectedTabs = MutablePair.of(tabs.getLeft(), tabs.getRight());
 	}
 
 	public void hideSlots() {
@@ -123,6 +141,10 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 	protected abstract void setTeSlots(TE te);
 	
 	protected abstract List<Integer> getDefaultSlotIndexes();
+	
+	protected Iterable<ISyncedContainerElement> getContainerElements() {
+		return Collections.EMPTY_LIST;
+	}
 	
 	protected void setPlayerInvSlots(boolean hasArmorTab) {
 		//Main Inventory
@@ -224,5 +246,24 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 	public boolean canMergeSlot(ItemStack stack, Slot slotIn) {
         return craftResult != null && slotIn.inventory != this.craftResult && super.canMergeSlot(stack, slotIn);
     }
+	
+	@Override
+	public void detectAndSendChanges() {
+		super.detectAndSendChanges();
+		
+		if(player != null && player.isServerWorld() && te != null) {
+			for(int i=0,s=containerElements.size(); i<s; i++) {
+				ISyncedContainerElement ce = containerElements.get(i);
+				if(ce.shouldSendDataToClient()) {
+					NBTTagCompound toSend = new NBTTagCompound();
+					toSend.setTag("element_data", ce.writeData(new NBTTagCompound()));
+					toSend.setInteger("element_id", i);
+					TMOPacketHandler.network.sendTo(new PacketServerToClient(PacketDataHandlers.SYNCED_CONTAINER_ELEMENTS_HANDLER, toSend), (EntityPlayerMP)player);
+				}
+				
+			}
+		}
+		
+	}
 	
 }

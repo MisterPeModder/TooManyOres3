@@ -5,11 +5,11 @@ import java.awt.Point;
 
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.client.gui.ContainerBase;
 import misterpemodder.tmo.main.client.gui.RecipeClickableAreaTMO;
-import misterpemodder.tmo.main.client.gui.slot.IHidable;
-import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
 import misterpemodder.tmo.main.init.ModItems.TheItems;
+import misterpemodder.tmo.main.inventory.ContainerBase;
+import misterpemodder.tmo.main.inventory.slot.IHidable;
+import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import misterpemodder.tmo.main.utils.TMORefs;

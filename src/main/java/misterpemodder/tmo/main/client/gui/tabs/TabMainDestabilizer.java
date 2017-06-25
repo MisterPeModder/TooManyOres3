@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.client.gui.ContainerDestabilizer;
-import misterpemodder.tmo.main.client.gui.ContainerMachine;
-import misterpemodder.tmo.main.client.gui.GuiTank;
 import misterpemodder.tmo.main.client.gui.RecipeClickableAreaTMO;
-import misterpemodder.tmo.main.client.gui.slot.IHidable;
-import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
 import misterpemodder.tmo.main.compat.jei.destabilizer.RecipeCategoryDestabilizer;
 import misterpemodder.tmo.main.compat.jei.endermatter.RecipeCategoryEnderMatter;
+import misterpemodder.tmo.main.inventory.ContainerDestabilizer;
+import misterpemodder.tmo.main.inventory.ContainerMachine;
+import misterpemodder.tmo.main.inventory.ContainerElementTank;
+import misterpemodder.tmo.main.inventory.slot.IHidable;
+import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityDestabilizer;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.client.Minecraft;
@@ -24,8 +24,6 @@ import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.items.IItemHandler;
 
 public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEntityDestabilizer>{
-	
-	private GuiTank tank;
 
 	@Override
 	public TabID getTabID() {
@@ -41,8 +39,8 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 	public void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 		
-		if(this.tank != null) {
-			this.tank.drawTank(mouseX, mouseY);
+		if(geElementTank() != null) {
+			geElementTank().drawTank(mouseX, mouseY, guiContainer);
 		}
 		
 		GlStateManager.enableBlend();
@@ -68,7 +66,7 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 	public void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		
-		List<String> strs = this.tank != null? this.tank.getHoverDesc(mouseX, mouseY) : new ArrayList<String>();
+		List<String> strs = this.geElementTank() != null? this.geElementTank().getHoverDesc(mouseX, mouseY, guiContainer) : new ArrayList<String>();
 		
 		if(strs.isEmpty() && guiContainer.isPointInRegion(12, 83, 138, 6, mouseX, mouseY)) {
 			TileEntityDestabilizer te = (TileEntityDestabilizer) guiContainer.container.getTileEntity();
@@ -85,14 +83,9 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 	
 	@Override
 	public void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-		if(this.tank == null || !this.tank.mouseClicked(mouseX, mouseY, mouseButton)) {
+		if(geElementTank() == null || !this.geElementTank().mouseClicked(mouseX, mouseY, mouseButton, guiContainer)) {
 			super.mouseClicked(mouseX, mouseY, mouseButton);
 		}
-	}
-	
-	@Override
-	public void initButtons(int topX, int topY) {
-		this.tank = new GuiTank(0, ((TileEntityDestabilizer)guiContainer.container.getTileEntity()).getTank(), guiContainer, 161, 9);
 	}
 	
 	@Override
@@ -113,9 +106,13 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 	@Override
 	public RecipeClickableAreaTMO[] getRecipeClickableAreas() {
 		return new RecipeClickableAreaTMO[]{
-				new RecipeClickableAreaTMO(guiContainer.getGuiTop()+64, guiContainer.getGuiTop()+81, guiContainer.getGuiLeft()+15, guiContainer.getGuiLeft()+32, RecipeCategoryEnderMatter.UID),
-				new RecipeClickableAreaTMO(guiContainer.getGuiTop()+39, guiContainer.getGuiTop()+60, guiContainer.getGuiLeft()+115, guiContainer.getGuiLeft()+143, RecipeCategoryDestabilizer.UID),
-			};
+			new RecipeClickableAreaTMO(guiContainer.getGuiTop()+64, guiContainer.getGuiTop()+81, guiContainer.getGuiLeft()+15, guiContainer.getGuiLeft()+32, RecipeCategoryEnderMatter.UID),
+			new RecipeClickableAreaTMO(guiContainer.getGuiTop()+39, guiContainer.getGuiTop()+60, guiContainer.getGuiLeft()+115, guiContainer.getGuiLeft()+143, RecipeCategoryDestabilizer.UID),
+		};
+	}
+	
+	private ContainerElementTank geElementTank() {
+		return ((ContainerDestabilizer)guiContainer.container).tank;
 	}
 
 }

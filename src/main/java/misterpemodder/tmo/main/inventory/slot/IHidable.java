@@ -1,4 +1,4 @@
-package misterpemodder.tmo.main.client.gui.slot;
+package misterpemodder.tmo.main.inventory.slot;
 
 public interface IHidable {
 	

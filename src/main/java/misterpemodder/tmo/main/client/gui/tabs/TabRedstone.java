@@ -3,8 +3,8 @@ package misterpemodder.tmo.main.client.gui.tabs;
 import java.awt.Dimension;
 import java.awt.Point;
 
-import misterpemodder.tmo.main.client.gui.ContainerBase;
-import misterpemodder.tmo.main.client.gui.slot.IHidable;
+import misterpemodder.tmo.main.inventory.ContainerBase;
+import misterpemodder.tmo.main.inventory.slot.IHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.init.Items;

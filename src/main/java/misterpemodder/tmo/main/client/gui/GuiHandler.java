@@ -1,5 +1,9 @@
 package misterpemodder.tmo.main.client.gui;
 
+import misterpemodder.tmo.main.inventory.ContainerDestabilizer;
+import misterpemodder.tmo.main.inventory.ContainerInjector;
+import misterpemodder.tmo.main.inventory.ContainerTitaniumAnvil;
+import misterpemodder.tmo.main.inventory.ContainerTitaniumChest;
 import misterpemodder.tmo.main.tileentity.TileEntityDestabilizer;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumAnvil;

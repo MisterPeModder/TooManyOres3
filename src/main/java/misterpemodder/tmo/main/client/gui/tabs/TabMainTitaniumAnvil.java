@@ -9,12 +9,12 @@ import org.lwjgl.input.Keyboard;
 
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.client.gui.ContainerTitaniumAnvil;
 import misterpemodder.tmo.main.client.gui.GuiContainerBase;
 import misterpemodder.tmo.main.client.gui.RecipeClickableAreaTMO;
-import misterpemodder.tmo.main.client.gui.slot.IHidable;
-import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
 import misterpemodder.tmo.main.enchant.EnchantementXpCostReduction;
+import misterpemodder.tmo.main.inventory.ContainerTitaniumAnvil;
+import misterpemodder.tmo.main.inventory.slot.IHidable;
+import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
 import misterpemodder.tmo.main.network.TMOPacketHandler;
 import misterpemodder.tmo.main.network.packet.PacketClientToServer;

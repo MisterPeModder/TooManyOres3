@@ -1,8 +1,8 @@
 package misterpemodder.tmo.main.client.gui.tabs;
 
-import misterpemodder.tmo.main.client.gui.ContainerBase;
-import misterpemodder.tmo.main.client.gui.slot.IHidable;
-import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
+import misterpemodder.tmo.main.inventory.ContainerBase;
+import misterpemodder.tmo.main.inventory.slot.IHidable;
+import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IWorldNameable;

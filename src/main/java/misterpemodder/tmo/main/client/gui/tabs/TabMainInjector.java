@@ -8,12 +8,12 @@ import java.util.List;
 
 import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
 import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.client.gui.ContainerInjector;
-import misterpemodder.tmo.main.client.gui.GuiTank;
 import misterpemodder.tmo.main.client.gui.RecipeClickableAreaTMO;
-import misterpemodder.tmo.main.client.gui.slot.IHidable;
-import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
 import misterpemodder.tmo.main.compat.jei.injector.RecipeCategoryInjector;
+import misterpemodder.tmo.main.inventory.ContainerElementTank;
+import misterpemodder.tmo.main.inventory.ContainerInjector;
+import misterpemodder.tmo.main.inventory.slot.IHidable;
+import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.client.Minecraft;
@@ -29,8 +29,6 @@ import net.minecraftforge.items.IItemHandler;
 public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInjector> {
 	
 	public static final int TOGGLE_MODE_BUTTON_ID = 20;
-	
-	private GuiTank tank;
 
 	@Override
 	public TabID getTabID() {
@@ -53,8 +51,9 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 		
 		TileEntityInjector te = (TileEntityInjector)guiContainer.container.getTileEntity();
 		
-		if(this.tank != null) {
-			this.tank.drawTank(mouseX, mouseY);
+		if(geElementTank() != null) {
+			
+			geElementTank().drawTank(mouseX, mouseY, guiContainer);
 		}
 		
 		GlStateManager.enableBlend();
@@ -76,7 +75,7 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 	public void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		
-		List<String> strs = this.tank != null? this.tank.getHoverDesc(mouseX, mouseY) : new ArrayList<String>();
+		List<String> strs = geElementTank() != null? geElementTank().getHoverDesc(mouseX, mouseY, guiContainer) : new ArrayList<String>();
 
 		if(strs.isEmpty()) {
 			for(GuiButton b : (List<GuiButton>)buttons) {
@@ -99,7 +98,7 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 	
 	@Override
 	public void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-		if(this.tank == null || !this.tank.mouseClicked(mouseX, mouseY, mouseButton)) {
+		if(geElementTank() == null || !geElementTank().mouseClicked(mouseX, mouseY, mouseButton, guiContainer)) {
 			super.mouseClicked(mouseX, mouseY, mouseButton);
 		}
 	}
@@ -107,7 +106,6 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 	@Override
 	public void initButtons(int topX, int topY) {
 		buttons.add(new TransferModeButton(TOGGLE_MODE_BUTTON_ID, topX+68, topY+64, 20, 20, ((TileEntityInjector)guiContainer.container.getTileEntity()).getTransferMode()));
-		this.tank = new GuiTank(0, ((TileEntityInjector)guiContainer.container.getTileEntity()).getTank(), guiContainer, 11, 10);
 	}
 	
 	@Override
@@ -178,6 +176,10 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 			return i;
 		}
 		
+	}
+	
+	private ContainerElementTank geElementTank() {
+		return ((ContainerInjector)guiContainer.container).tank;
 	}
 
 }

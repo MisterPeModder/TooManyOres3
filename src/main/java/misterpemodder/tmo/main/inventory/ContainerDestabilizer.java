@@ -1,4 +1,4 @@
-package misterpemodder.tmo.main.client.gui;
+package misterpemodder.tmo.main.inventory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.List;
 import com.google.common.base.Predicate;
 
 import misterpemodder.tmo.api.TooManyOresAPI;
-import misterpemodder.tmo.main.client.gui.slot.SlotFiltered;
-import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
+import misterpemodder.tmo.main.inventory.slot.SlotFiltered;
+import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityDestabilizer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -30,6 +30,8 @@ public class ContainerDestabilizer extends ContainerMachine<TileEntityDestabiliz
 	 * Baubles          0-6 ... 53 - 59
 	 */
 	
+	public ContainerElementTank tank;
+	
 	public ContainerDestabilizer(TileEntityDestabilizer te, InventoryPlayer playerInv) {
 		super(te, playerInv, 100);
 	}
@@ -48,6 +50,12 @@ public class ContainerDestabilizer extends ContainerMachine<TileEntityDestabiliz
 				return TooManyOresAPI.methodHandler.isEnderMatterItem(t);
 			}
 		}));
+	}
+	
+	@Override
+	protected Iterable<ISyncedContainerElement> getContainerElements() {
+		this.tank = new ContainerElementTank(0, this, 161, 9, ((TileEntityDestabilizer)te).getTank());
+		return Arrays.asList(this.tank);
 	}
 	
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {

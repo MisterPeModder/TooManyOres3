@@ -13,12 +13,13 @@ import org.apache.commons.lang3.tuple.Pair;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.client.gui.tabs.TabArmorInventory;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase;
-import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabPos;
-import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabTexture;
 import misterpemodder.tmo.main.client.gui.tabs.TabMain;
 import misterpemodder.tmo.main.client.gui.tabs.TabPlayerInventory;
+import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabPos;
+import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabTexture;
 import misterpemodder.tmo.main.compat.craftingtweaks.CraftingTweaksCompat;
 import misterpemodder.tmo.main.compat.jei.JeiPlugin;
+import misterpemodder.tmo.main.inventory.ContainerBase;
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -205,7 +206,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 						selectedTabs.setRight(tab);
 					}
 					selectedTabs = tab.forceTabConfig();
-					this.container.selectedTabs = selectedTabs;
+					this.container.setSelectedTabs(selectedTabs);
 					this.container.hideSlots();
 
 				}
@@ -223,7 +224,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	
 	public void updateScreen() {
         super.updateScreen();
-        TE te = this.container.te;
+        TE te = this.container.getTileEntity();
         if(te == null || !te.hasWorld() || te.getWorld().getBlockState(te.getPos()).getBlock() != te.getBlockType()) {
         	this.onGuiClosed();
         	this.mc.player.closeScreen();

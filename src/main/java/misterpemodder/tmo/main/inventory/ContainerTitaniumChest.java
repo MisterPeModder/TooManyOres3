@@ -1,10 +1,10 @@
-package misterpemodder.tmo.main.client.gui;
+package misterpemodder.tmo.main.inventory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import invtweaks.api.container.ChestContainer;
-import misterpemodder.tmo.main.client.gui.slot.SlotHidable;
+import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
