@@ -1,5 +1,7 @@
 package misterpemodder.tmo.main.init;
 
+import misterpemodder.tmo.main.blocks.BlockDeco;
+import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import misterpemodder.tmo.main.items.ItemTmoArmor;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -11,17 +13,48 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public final class Crafting {
 
 	public static void registerRecipes() {
-		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.TheItems.PICKAXE_TITANIUM.getItem(), "III", " S ", " S ", 'I', "ingotTitanium", 'S', "stickWood"));
+		
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.TheItems.PICKAXE_TITANIUM.getItem(), "III", " S ", " S ", 'I', "ingotTitaniumBlue", 'S', "stickWood"));
+		
+		addStorageRecipe("ingotTitaniumBlue", "blockTitaniumBlue");
+		addStorageRecipe("ingotTitaniumDark", "blockTitaniumDark");
+		addStorageRecipe("ingotTitanium", "blockTitanium");
+		addStorageRecipe("ingotTitanite", "blockTitanite");
+		addStorageRecipe("ingotCopper", "blockCopper");
+		addStorageRecipe("gemFrozium", "blockFrozium");
+		addStorageRecipe("gemIgnum", "blockIgnum");
+		addStorageRecipe("ingotEnderMatter", "blockEnderMatter");
+		addStorageRecipe("ingotDarkanium", "blockDarkanium");
+		addStorageRecipe("ingotGoldAncient", "blockGoldAncient");
+		addStorageRecipe("ingotPlatinum", "blockPlatinum");
+		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TheBlocks.DECORATION.getBlock(), 16, BlockDeco.EnumVariant.TITANIUM_PLATING.getMeta()), "TT ", "TT ", "   ", 'T', "plateTitanium"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TheBlocks.DECORATION.getBlock(), 16, BlockDeco.EnumVariant.COPPER_DECO_BLOCK.getMeta()), "CC ", "CC ", "   ", 'C', "ingotCopper"));
 		
 		if(TMORefs.topLoaded) {
 			RecipeSorter.register(TMORefs.PREFIX+"proberecipe", Crafting.ProbeRecipe.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
 			GameRegistry.addRecipe(new ProbeRecipe());
+		}
+	}
+	
+	private static void addStorageRecipe(String ressourceOreDict, String storageBlockOreDict) {
+		
+		NonNullList<ItemStack> ressources = OreDictionary.getOres(ressourceOreDict);
+		NonNullList<ItemStack> blocks = OreDictionary.getOres(storageBlockOreDict);
+		
+		if(!ressources.isEmpty() && !blocks.isEmpty()) {
+			GameRegistry.addRecipe(new ShapedOreRecipe(blocks.get(0), "III", "III", "III", 'I', ressourceOreDict));
+			ItemStack ressource = ressources.get(0).copy();
+			ressource.setCount(9);
+			GameRegistry.addRecipe(new ShapelessOreRecipe(ressource, storageBlockOreDict));
 		}
 	}
 	
