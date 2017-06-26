@@ -129,6 +129,9 @@ item.titaniumBucket.desc=Clic droit pour placer des fluides. \nShift+Clic droit 
 
 #Blocs
 tile.blockStorage.blockTitanium.name=Bloc de titane
+tile.blockStorage.blockTitaniumDark.name=Bloc de titane noir
+tile.blockStorage.blockTitaniumPoor.name=Bloc de titane
+tile.blockStorage.blockTitanite.name=Bloc de titanite
 tile.blockStorage.blockCopper.name=Block de cuivre
 tile.blockFrozium.name=Bloc de frozium
 tile.blockStorage.blockIgnum.name=Bloc d'Ignum

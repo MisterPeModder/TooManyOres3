@@ -5,6 +5,9 @@ import net.minecraft.item.EnumRarity;
 public enum EnumBlocksNames implements IBlockNames {
 	GENERIC("generic_block", "blockGeneric", EnumRarity.EPIC),
 	TITANIUM_BLOCK("titanium_block", "blockTitanium", EnumRarity.RARE, "blockTitaniumBlue"),
+	DARK_TITANIUM_BLOCK("dark_titanium_block", "blockTitaniumDark", EnumRarity.EPIC, "blockTitaniumDark"),
+	POOR_TITANIUM_BLOCK("poor_titanium_block", "blockTitaniumPoor", "blockTitanium"),
+	TITANITE_BLOCK("titanite_block", "blockTitanite", "blockTitanite"),
 	COPPER_BLOCK("copper_block", "blockCopper", "blockCopper"),
 	FROZIUM_BLOCK("frozium_block", "blockFrozium", "blockFrozium"),
 	IGNUM_BLOCK("ignum_block", "blockIgnum", "blockIgnum"),

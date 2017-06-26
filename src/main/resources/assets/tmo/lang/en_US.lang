@@ -127,6 +127,9 @@ item.titaniumBucket.desc=Right-click to place fluids.\nShift-right-click to take
 #Blocks
 tile.blockGeneric.name=Unammed Block
 tile.blockStorage.blockTitanium.name=Titanium Block
+tile.blockStorage.blockTitaniumDark.name=Dark Titanium Block
+tile.blockStorage.blockTitaniumPoor.name=Titanium Block
+tile.blockStorage.blockTitanite.name=Titanite Block
 tile.blockStorage.blockCopper.name=Copper Block
 tile.blockFrozium.name=Frozium Block
 tile.blockStorage.blockIgnum.name=Ignum Block

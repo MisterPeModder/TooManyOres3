@@ -29,12 +29,15 @@ public class BlockStorage extends BlockMulti<EnumVariant> {
 	
 	public enum EnumVariant implements IBlockVariant {
 		TITANIUM_BLOCK(0, EnumBlocksNames.TITANIUM_BLOCK, EnumBlocksValues.MetalBlocks.TITANIUM_BLOCK),
-		COPPER_BLOCK(1, EnumBlocksNames.COPPER_BLOCK, EnumBlocksValues.MetalBlocks.COPPER_BLOCK),
-		IGNUM_BLOCK(2, EnumBlocksNames.IGNUM_BLOCK, EnumBlocksValues.MetalBlocks.IGNUM_BLOCK),
-		ENDER_MATTER_BLOCK(3, EnumBlocksNames.ENDER_MATTER_BLOCK, EnumBlocksValues.MetalBlocks.ENDER_MATTER_BLOCK),
-		DARKANIUM_BLOCK(4, EnumBlocksNames.DARKANIUM_BLOCK, EnumBlocksValues.MetalBlocks.DARKANIUM_BLOCK),
-		ANCIENT_GOLD_BLOCK(5, EnumBlocksNames.ANCIENT_GOLD_BLOCK, EnumBlocksValues.MetalBlocks.ANCIENT_GOLD_BLOCK),
-		PLATINUM_BLOCK(6, EnumBlocksNames.PLATINUM, EnumBlocksValues.MetalBlocks.PLATINUM_BLOCK),
+		DARK_TITANIUM_BLOCK(1, EnumBlocksNames.DARK_TITANIUM_BLOCK, EnumBlocksValues.MetalBlocks.TITANIUM_BLOCK),
+		POOR_TITANIUM_BLOCK(2, EnumBlocksNames.POOR_TITANIUM_BLOCK, EnumBlocksValues.MetalBlocks.TITANIUM_BLOCK),
+		TITANITE_BLOCK(3, EnumBlocksNames.TITANITE_BLOCK, EnumBlocksValues.MetalBlocks.TITANIUM_BLOCK),
+		COPPER_BLOCK(4, EnumBlocksNames.COPPER_BLOCK, EnumBlocksValues.MetalBlocks.COPPER_BLOCK),
+		IGNUM_BLOCK(5, EnumBlocksNames.IGNUM_BLOCK, EnumBlocksValues.MetalBlocks.IGNUM_BLOCK),
+		ENDER_MATTER_BLOCK(6, EnumBlocksNames.ENDER_MATTER_BLOCK, EnumBlocksValues.MetalBlocks.ENDER_MATTER_BLOCK),
+		DARKANIUM_BLOCK(7, EnumBlocksNames.DARKANIUM_BLOCK, EnumBlocksValues.MetalBlocks.DARKANIUM_BLOCK),
+		ANCIENT_GOLD_BLOCK(8, EnumBlocksNames.ANCIENT_GOLD_BLOCK, EnumBlocksValues.MetalBlocks.ANCIENT_GOLD_BLOCK),
+		PLATINUM_BLOCK(9, EnumBlocksNames.PLATINUM, EnumBlocksValues.MetalBlocks.PLATINUM_BLOCK),
 		;
 		private final int meta;
 		private final IBlockValues values;

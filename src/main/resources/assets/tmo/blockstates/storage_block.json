@@ -13,6 +13,9 @@
         "inventory": [{}],
 		"variant": {
 			"titanium_block": {"textures": {"all": "tmo:blocks/titanium_block"}},
+			"dark_titanium_block": {"textures": {"all": "tmo:blocks/dark_titanium_block"}},
+			"poor_titanium_block": {"textures": {"all": "tmo:blocks/poor_titanium_block"}},
+			"titanite_block": {"textures": {"all": "tmo:blocks/titanite_block"}},
 			"ancient_gold_block": {"textures": {"all": "tmo:blocks/ancient_gold_block"}},
 			"darkanium_block": {"textures": {"all": "tmo:blocks/darkanium_block"}},
 			"ignum_block": {"model": "tmo:ignum_block"},
