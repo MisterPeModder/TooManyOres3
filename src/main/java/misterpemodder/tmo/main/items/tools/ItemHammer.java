@@ -14,6 +14,7 @@ import misterpemodder.tmo.main.init.ModEnchants.TheEnchants;
 import misterpemodder.tmo.main.items.EnumItemsNames;
 import misterpemodder.tmo.main.items.base.ItemBase;
 import misterpemodder.tmo.main.items.materials.TmoToolMaterial;
+import misterpemodder.tmo.main.utils.ItemStackUtils;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -129,5 +130,10 @@ public class ItemHammer extends ItemBase implements IItemForgeHammer {
     		tooltip.add(TextFormatting.AQUA+Tmo.proxy.translate("enchantment.hammerXpCostReduction.tooltip")+": "+TextFormatting.GREEN+r+(e>0? " +"+e+"%":"%"));
 		}
     }
+	
+	@Override
+	public int getRGBDurabilityForDisplay(ItemStack stack) {
+		return ItemStackUtils.blinkColorOnLowDurability(super.getRGBDurabilityForDisplay(stack), stack);
+	}
 
 }
