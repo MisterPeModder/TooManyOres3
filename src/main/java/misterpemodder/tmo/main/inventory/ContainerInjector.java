@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 
+import misterpemodder.tmo.main.inventory.elements.ContainerElementTank;
 import misterpemodder.tmo.main.inventory.slot.SlotFiltered;
 import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
@@ -52,9 +53,10 @@ public class ContainerInjector extends ContainerMachine<TileEntityInjector> {
 	}
 	
 	@Override
-	protected Iterable<ISyncedContainerElement> getContainerElements() {
+	protected List<ISyncedContainerElement> addContainerElements(List<ISyncedContainerElement> elements) {		
 		this.tank = new ContainerElementTank(0, this, 11, 10, ((TileEntityInjector)te).getTank());
-		return Arrays.asList(this.tank);
+		elements.add(this.tank);
+		return super.addContainerElements(elements);
 	}
 	
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {

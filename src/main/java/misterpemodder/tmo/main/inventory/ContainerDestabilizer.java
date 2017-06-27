@@ -6,6 +6,7 @@ import java.util.List;
 import com.google.common.base.Predicate;
 
 import misterpemodder.tmo.api.TooManyOresAPI;
+import misterpemodder.tmo.main.inventory.elements.ContainerElementTank;
 import misterpemodder.tmo.main.inventory.slot.SlotFiltered;
 import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityDestabilizer;
@@ -53,9 +54,10 @@ public class ContainerDestabilizer extends ContainerMachine<TileEntityDestabiliz
 	}
 	
 	@Override
-	protected Iterable<ISyncedContainerElement> getContainerElements() {
+	protected List<ISyncedContainerElement> addContainerElements(List<ISyncedContainerElement> elements) {
 		this.tank = new ContainerElementTank(0, this, 161, 9, ((TileEntityDestabilizer)te).getTank());
-		return Arrays.asList(this.tank);
+		elements.add(this.tank);
+		return super.addContainerElements(elements);
 	}
 	
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {

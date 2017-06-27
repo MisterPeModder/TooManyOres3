@@ -12,7 +12,8 @@ import misterpemodder.tmo.main.compat.jei.destabilizer.RecipeCategoryDestabilize
 import misterpemodder.tmo.main.compat.jei.endermatter.RecipeCategoryEnderMatter;
 import misterpemodder.tmo.main.inventory.ContainerDestabilizer;
 import misterpemodder.tmo.main.inventory.ContainerMachine;
-import misterpemodder.tmo.main.inventory.ContainerElementTank;
+import misterpemodder.tmo.main.inventory.elements.ContainerElementArrow;
+import misterpemodder.tmo.main.inventory.elements.ContainerElementTank;
 import misterpemodder.tmo.main.inventory.slot.IHidable;
 import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityDestabilizer;
@@ -43,16 +44,30 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 			geElementTank().drawTank(mouseX, mouseY, guiContainer);
 		}
 		
-		GlStateManager.enableBlend();
-		Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocationTmo("textures/gui/container/destabilizer_main.png"));
-		Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+115, guiContainer.getGuiTop()+39, 0, 100, 28, 21, 256, 128);
-		int p = ((ContainerMachine)this.guiContainer.container).progress;
-		if(p > 0) {
-			Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+115, guiContainer.getGuiTop()+39, 29, 100, p, 21, 256, 128);
+		ContainerElementArrow arrow = ((ContainerMachine)guiContainer.container).arrow;
+		
+		if(arrow != null) {
+			arrow.drawArrow(guiContainer.getGuiLeft()+115, guiContainer.getGuiTop()+39, false);
 		}
 		
-		TileEntityDestabilizer te = (TileEntityDestabilizer) guiContainer.container.getTileEntity();
+		/*GlStateManager.enableBlend();
+		Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocationTmo("textures/gui/container/misc.png"));
+		Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+115, guiContainer.getGuiTop()+39, 58, 107, 28, 21, 128, 128);
+		int p = ((ContainerMachine)this.guiContainer.container).progress;
+		int t = 0;
+		if(p > 0) {
+			t = (int) (Minecraft.getMinecraft().world.getTotalWorldTime() % 4);
+			Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+115, guiContainer.getGuiTop()+39, 87, 107, p, 21, 128, 128);
+		}
 		
+		Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+118, guiContainer.getGuiTop()+42, t*15 + t, 91, 15, 5, 128, 128);
+		Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+118, guiContainer.getGuiTop()+52, t*15 + t, 101, 15, 5, 128, 128);
+		*/
+		
+		TileEntityDestabilizer te = (TileEntityDestabilizer) guiContainer.container.getTileEntity();
+		GlStateManager.enableBlend();
+		
+		Minecraft.getMinecraft().getTextureManager().bindTexture(this.getTabTexture().screenTexture);
 		if(te != null && te.getEnderMatterAmount() > 0) {
 			int e = (te.getEnderMatterAmount()*138)/TileEntityDestabilizer.MAX_ENDER_MATTER;
 			Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+12, guiContainer.getGuiTop()+83, 73, 101, e <= 0? 1:e, 6, 256, 128);

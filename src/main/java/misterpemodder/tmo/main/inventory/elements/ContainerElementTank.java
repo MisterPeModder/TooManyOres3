@@ -1,4 +1,4 @@
-package misterpemodder.tmo.main.inventory;
+package misterpemodder.tmo.main.inventory.elements;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +9,8 @@ import misterpemodder.tmo.main.client.gui.GuiContainerBase;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabID;
 import misterpemodder.tmo.main.client.render.RenderTank;
+import misterpemodder.tmo.main.inventory.ContainerBase;
+import misterpemodder.tmo.main.inventory.ISyncedContainerElement;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.client.Minecraft;

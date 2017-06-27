@@ -1,6 +1,6 @@
 package misterpemodder.tmo.main.inventory;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -62,6 +62,8 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 	
 	public final ImmutableList<ISyncedContainerElement> containerElements;
 	
+	private boolean elementsInitiated = false;
+	
 	public ContainerBase(TE te, InventoryPlayer playerInv, int bPartOffset) {
 		this(te, playerInv, bPartOffset, true);
 	}
@@ -87,7 +89,7 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 		hideSlots();
 		
 		ImmutableList.Builder<ISyncedContainerElement> builder = new ImmutableList.Builder<>();
-		builder.addAll((Iterable<ISyncedContainerElement>)getContainerElements());
+		builder.addAll(addContainerElements(new ArrayList<>()));
 		this.containerElements = builder.build();
 	}
 	
@@ -142,8 +144,8 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 	
 	protected abstract List<Integer> getDefaultSlotIndexes();
 	
-	protected Iterable<ISyncedContainerElement> getContainerElements() {
-		return Collections.EMPTY_LIST;
+	protected List<ISyncedContainerElement> addContainerElements(List<ISyncedContainerElement> elements) {
+		return elements;
 	}
 	
 	protected void setPlayerInvSlots(boolean hasArmorTab) {
@@ -254,7 +256,8 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 		if(player != null && player.isServerWorld() && te != null) {
 			for(int i=0,s=containerElements.size(); i<s; i++) {
 				ISyncedContainerElement ce = containerElements.get(i);
-				if(ce.shouldSendDataToClient()) {
+				if(ce.shouldSendDataToClient() || !elementsInitiated) {
+					elementsInitiated = false;
 					NBTTagCompound toSend = new NBTTagCompound();
 					toSend.setTag("element_data", ce.writeData(new NBTTagCompound()));
 					toSend.setInteger("element_id", i);

@@ -4,9 +4,6 @@ import java.util.List;
 
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
-import mezz.jei.api.gui.IDrawableAnimated;
-import mezz.jei.api.gui.IDrawableAnimated.StartDirection;
-import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -14,10 +11,9 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeCategory;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
 import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.inventory.ContainerElementTank;
+import misterpemodder.tmo.main.inventory.elements.ContainerElementTank;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
@@ -34,20 +30,10 @@ public class RecipeCategoryInjector extends BlankRecipeCategory<RecipeWrapperInj
 	private final IDrawable background;
 	private final IDrawable fluidGauge;
 	
-	private IDrawableStatic arrowStaticInjection;
-	private IDrawableAnimated arrowAnimatedInjection;
-	private IDrawableStatic arrowStaticExtraction;
-	private IDrawableAnimated arrowAnimatedExtraction;
-	private RecipeWrapperInjector currentRecipe;
-	
 	public RecipeCategoryInjector(IGuiHelper guiHelper) {
 		this.localizedName = Tmo.proxy.translate("gui.jei.category.injector.normal");
 		this.background = guiHelper.createDrawable(LOCATION, X_OFFSET, Y_OFFSET, 165, 85, 256, 128);
 		this.fluidGauge = guiHelper.createDrawable(ContainerElementTank.TANK_TEXTURE, 0, 0, 40, 80, 128, 128);
-		this.arrowStaticInjection = guiHelper.createDrawable(LOCATION, 58, 100, 28, 21, 256, 128);
-		this.arrowAnimatedInjection = guiHelper.createAnimatedDrawable(guiHelper.createDrawable(LOCATION, 87, 100, 28, 21, 256, 128), 20, StartDirection.LEFT, false);
-		this.arrowStaticExtraction = guiHelper.createDrawable(LOCATION, 0, 100, 28, 21, 256, 128);
-		this.arrowAnimatedExtraction = guiHelper.createAnimatedDrawable(guiHelper.createDrawable(LOCATION, 29, 100, 28, 21, 256, 128), 20, StartDirection.RIGHT, false);
 	}
 
 	@Override
@@ -64,27 +50,9 @@ public class RecipeCategoryInjector extends BlankRecipeCategory<RecipeWrapperInj
 	public IDrawable getBackground() {
 		return this.background;
 	}
-	
-	@Override
-	public void drawExtras(Minecraft minecraft) {
-		if(currentRecipe != null) {
-			
-			if(currentRecipe.transferMode == TransferMode.INJECTION) {
-				arrowStaticInjection.draw(minecraft, 64-X_OFFSET, 39-Y_OFFSET);
-				arrowAnimatedInjection.draw(minecraft, 64-X_OFFSET, 39-Y_OFFSET);
-			} else {
-				arrowStaticExtraction.draw(minecraft, 64-X_OFFSET, 39-Y_OFFSET);
-				arrowAnimatedExtraction.draw(minecraft, 64-X_OFFSET, 39-Y_OFFSET);
-			}
-
-		}
-	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, RecipeWrapperInjector recipeWrapper, IIngredients ingredients) {
-		
-		this.currentRecipe = recipeWrapper;
-		
+	public void setRecipe(IRecipeLayout recipeLayout, RecipeWrapperInjector recipeWrapper, IIngredients ingredients) {	
 		recipeLayout.setRecipeTransferButton(157-X_OFFSET, 74-Y_OFFSET);
 		
 		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();

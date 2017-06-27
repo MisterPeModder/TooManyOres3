@@ -4,15 +4,14 @@ import java.util.List;
 
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
-import mezz.jei.api.gui.IDrawableAnimated;
-import mezz.jei.api.gui.IDrawableAnimated.StartDirection;
 import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeCategory;
 import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.inventory.ContainerElementTank;
+import misterpemodder.tmo.main.compat.jei.DrawableArrow;
+import misterpemodder.tmo.main.inventory.elements.ContainerElementTank;
 import misterpemodder.tmo.main.tileentity.TileEntityDestabilizer;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.client.Minecraft;
@@ -33,8 +32,7 @@ public class RecipeCategoryDestabilizer extends BlankRecipeCategory<RecipeWrappe
 	private final IDrawable background_left;
 	private final IDrawable tank;
 	private final IDrawable fluidGauge;
-	private final IDrawable arrowStatic;
-	private final IDrawableAnimated arrowAnimated;
+	private final DrawableArrow arrow;
 	
 	public RecipeCategoryDestabilizer(IGuiHelper helper) {
 		this.localizedName = Tmo.proxy.translate("gui.jei.category.destabilizer");
@@ -43,8 +41,7 @@ public class RecipeCategoryDestabilizer extends BlankRecipeCategory<RecipeWrappe
 		this.fluidGauge = helper.createDrawable(ContainerElementTank.TANK_TEXTURE, 0, 0, 40, 80, 128, 128);
 		this.background_left = helper.createDrawable(LOCATION, X_OFFSET, Y_OFFSET, 141, 88, 256, 128);
 		this.background = helper.createBlankDrawable(182, 88);
-		this.arrowStatic = helper.createDrawable(LOCATION, 0, 100, 28, 21, 256, 128);
-		this.arrowAnimated = helper.createAnimatedDrawable(helper.createDrawable(LOCATION, 29, 100, 28, 21, 256, 128), 20, StartDirection.LEFT, false);
+		this.arrow = new DrawableArrow();
 	}
 	
 	@Override
@@ -66,8 +63,7 @@ public class RecipeCategoryDestabilizer extends BlankRecipeCategory<RecipeWrappe
 	public void drawExtras(Minecraft minecraft) {
 		this.background_left.draw(minecraft, 0, 0);
 		this.tank.draw(minecraft, 154-X_OFFSET, 8-Y_OFFSET);
-		this.arrowStatic.draw(minecraft, 115-X_OFFSET, 39-Y_OFFSET);
-		this.arrowAnimated.draw(minecraft, 115-X_OFFSET, 39-Y_OFFSET);
+		this.arrow.draw(minecraft, 115-X_OFFSET, 39-Y_OFFSET);
 	}
 
 	@Override

@@ -1,23 +1,29 @@
 package misterpemodder.tmo.main.inventory;
 
-import misterpemodder.tmo.main.network.PacketDataHandlers;
-import misterpemodder.tmo.main.network.TMOPacketHandler;
-import misterpemodder.tmo.main.network.packet.PacketServerToClient;
+import java.util.List;
+
+import misterpemodder.tmo.main.inventory.elements.ContainerElementArrow;
 import misterpemodder.tmo.main.tileentity.TileEntityMachine;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IContainerListener;
-import net.minecraft.nbt.NBTTagCompound;
 
 public abstract class ContainerMachine<TE extends TileEntityMachine> extends ContainerBase<TE> {
 
 	public int progress;
+	
+	public ContainerElementArrow arrow;
 	
 	public ContainerMachine(TE te, InventoryPlayer playerInv, int bPartOffset) {
 		super(te, playerInv, bPartOffset);
 	}
 	
 	@Override
+	protected List<ISyncedContainerElement> addContainerElements(List<ISyncedContainerElement> elements) {
+		this.arrow = new ContainerElementArrow(te);
+		elements.add(this.arrow);
+		return super.addContainerElements(elements);
+	}
+	
+	/*@Override
 	public void addListener(IContainerListener listener) {
 		super.addListener(listener);
 		TE te = this.getTileEntity();
@@ -46,6 +52,6 @@ public abstract class ContainerMachine<TE extends TileEntityMachine> extends Con
         }
 
         this.progress = teProgress;
-	}
+	}*/
 	
 }

@@ -10,8 +10,10 @@ import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.client.gui.RecipeClickableAreaTMO;
 import misterpemodder.tmo.main.compat.jei.injector.RecipeCategoryInjector;
-import misterpemodder.tmo.main.inventory.ContainerElementTank;
 import misterpemodder.tmo.main.inventory.ContainerInjector;
+import misterpemodder.tmo.main.inventory.ContainerMachine;
+import misterpemodder.tmo.main.inventory.elements.ContainerElementArrow;
+import misterpemodder.tmo.main.inventory.elements.ContainerElementTank;
 import misterpemodder.tmo.main.inventory.slot.IHidable;
 import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
@@ -56,19 +58,39 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 			geElementTank().drawTank(mouseX, mouseY, guiContainer);
 		}
 		
-		GlStateManager.enableBlend();
-		Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocationTmo("textures/gui/container/injector_main.png"));
-		Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+64, guiContainer.getGuiTop()+39, te.getTransferMode() == TransferMode.INJECTION? 58:0, 100, 28, 21, 256, 128);
+		ContainerElementArrow arrow = ((ContainerMachine)guiContainer.container).arrow;
+		
+		if(arrow != null) {
+			arrow.drawArrow(guiContainer.getGuiLeft()+64, guiContainer.getGuiTop()+39, te.getTransferMode() == TransferMode.EXTRACTION);
+		}
+		
+		/*GlStateManager.enableBlend();
+		Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocationTmo("textures/gui/container/misc.png"));
+		Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+64, guiContainer.getGuiTop()+39, te.getTransferMode() == TransferMode.INJECTION? 58:0, 107, 28, 21, 128, 128);
 		int p = ((ContainerInjector)this.guiContainer.container).progress;
 		if(p > 0) {
 			if(te.getTransferMode() == TransferMode.EXTRACTION) {
-				Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+64+(28-p), guiContainer.getGuiTop()+39, 57-p, 100, p, 21, 256, 128);
+				Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+64+(28-p), guiContainer.getGuiTop()+39, 57-p, 107, p, 21, 128, 128);
 			} else {
-				Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+64, guiContainer.getGuiTop()+39, 87, 100, p, 21, 256, 128);
+				Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+64, guiContainer.getGuiTop()+39, 87, 107, p, 21, 128, 128);
 			}
 		}
 		
-		GlStateManager.disableBlend();
+		int t = (int) (Minecraft.getMinecraft().world.getTotalWorldTime() % 3);
+		t = t<1? 0 : t<2? 1 : t<3? 2 : 3;
+		
+		int x = 3;
+		if(te.getTransferMode() == TransferMode.EXTRACTION) {
+			x = te.getTransferMode() == TransferMode.EXTRACTION? 10 : 3;
+			t = 3-t;
+		}
+		if(p <= 0) {
+			t = 0;
+		}
+		Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+64+x, guiContainer.getGuiTop()+42, t*15 + t, 91, 15, 5, 128, 128);
+		Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+64+x, guiContainer.getGuiTop()+52, t*15 + t, 101, 15, 5, 128, 128);
+		
+		GlStateManager.disableBlend();*/
 	}
 	
 	@Override
