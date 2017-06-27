@@ -5,6 +5,7 @@ import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 
 public interface IBlockTMO {
@@ -26,6 +27,10 @@ public interface IBlockTMO {
 	
 	default IBlockNames getNames() {
 		return EnumBlocksNames.GENERIC;
+	}
+	
+	default boolean hasEffect(ItemStack stack) {
+		return false;
 	}
 	
 }

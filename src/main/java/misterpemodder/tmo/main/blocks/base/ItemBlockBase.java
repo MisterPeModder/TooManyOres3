@@ -26,4 +26,9 @@ public class ItemBlockBase extends ItemBlock {
 		return block.getNames().getRarity();
 	}
 	
+	@Override
+	public boolean hasEffect(ItemStack stack) {
+		return super.hasEffect(stack) || block.hasEffect(stack);
+	}
+	
 }

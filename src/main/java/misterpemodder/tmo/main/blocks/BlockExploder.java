@@ -236,5 +236,10 @@ public class BlockExploder extends BlockMulti<EnumExploderVariant> {
             world.spawnParticle(EnumParticleTypes.LAVA, d0 + d3, d1 + d3, d2 + d3, rand.nextGaussian() * 0.005D, rand.nextGaussian() * 0.0005D, rand.nextGaussian() * 0.005D, new int[0]);
 		}
     }
+	
+	@Override
+	public boolean hasEffect(ItemStack stack) {
+		return stack.getMetadata() == EnumExploderVariant.SUPERCHARGED.getMeta();
+	}
 
 }
