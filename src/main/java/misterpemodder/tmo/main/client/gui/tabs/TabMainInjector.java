@@ -63,34 +63,6 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 		if(arrow != null) {
 			arrow.drawArrow(guiContainer.getGuiLeft()+64, guiContainer.getGuiTop()+39, te.getTransferMode() == TransferMode.EXTRACTION);
 		}
-		
-		/*GlStateManager.enableBlend();
-		Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocationTmo("textures/gui/container/misc.png"));
-		Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+64, guiContainer.getGuiTop()+39, te.getTransferMode() == TransferMode.INJECTION? 58:0, 107, 28, 21, 128, 128);
-		int p = ((ContainerInjector)this.guiContainer.container).progress;
-		if(p > 0) {
-			if(te.getTransferMode() == TransferMode.EXTRACTION) {
-				Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+64+(28-p), guiContainer.getGuiTop()+39, 57-p, 107, p, 21, 128, 128);
-			} else {
-				Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+64, guiContainer.getGuiTop()+39, 87, 107, p, 21, 128, 128);
-			}
-		}
-		
-		int t = (int) (Minecraft.getMinecraft().world.getTotalWorldTime() % 3);
-		t = t<1? 0 : t<2? 1 : t<3? 2 : 3;
-		
-		int x = 3;
-		if(te.getTransferMode() == TransferMode.EXTRACTION) {
-			x = te.getTransferMode() == TransferMode.EXTRACTION? 10 : 3;
-			t = 3-t;
-		}
-		if(p <= 0) {
-			t = 0;
-		}
-		Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+64+x, guiContainer.getGuiTop()+42, t*15 + t, 91, 15, 5, 128, 128);
-		Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+64+x, guiContainer.getGuiTop()+52, t*15 + t, 101, 15, 5, 128, 128);
-		
-		GlStateManager.disableBlend();*/
 	}
 	
 	@Override

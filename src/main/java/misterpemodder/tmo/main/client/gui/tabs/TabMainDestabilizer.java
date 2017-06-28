@@ -50,20 +50,6 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 			arrow.drawArrow(guiContainer.getGuiLeft()+115, guiContainer.getGuiTop()+39, false);
 		}
 		
-		/*GlStateManager.enableBlend();
-		Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocationTmo("textures/gui/container/misc.png"));
-		Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+115, guiContainer.getGuiTop()+39, 58, 107, 28, 21, 128, 128);
-		int p = ((ContainerMachine)this.guiContainer.container).progress;
-		int t = 0;
-		if(p > 0) {
-			t = (int) (Minecraft.getMinecraft().world.getTotalWorldTime() % 4);
-			Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+115, guiContainer.getGuiTop()+39, 87, 107, p, 21, 128, 128);
-		}
-		
-		Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+118, guiContainer.getGuiTop()+42, t*15 + t, 91, 15, 5, 128, 128);
-		Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+118, guiContainer.getGuiTop()+52, t*15 + t, 101, 15, 5, 128, 128);
-		*/
-		
 		TileEntityDestabilizer te = (TileEntityDestabilizer) guiContainer.container.getTileEntity();
 		GlStateManager.enableBlend();
 		
