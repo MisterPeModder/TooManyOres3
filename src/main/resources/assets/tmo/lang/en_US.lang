@@ -262,7 +262,7 @@ death.tmo.fluid.frozium.2=%s should have brought a coat.
 death.tmo.fluid.frozium.3=%s is now the COOLest person ever.
 death.tmo.fluid.ignum.0=%s was consumed by ignum.
 death.tmo.fluid.ignum.1=%s didn't notice that ignum is very hot.
-death.tmo.fluid.ignum.2=%s thought that fire resistance would protect him from ignum fuel damage.
+death.tmo.fluid.ignum.2=%s thought that fire resistance would protect him/her from ignum fuel damage.
 
 #Enchants
 enchantment.hammerXpCostReduction=Forge Cost Reduction
