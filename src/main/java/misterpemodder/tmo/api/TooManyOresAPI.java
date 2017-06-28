@@ -8,6 +8,7 @@ import java.util.Map;
 import misterpemodder.tmo.api.block.ISlimeBlock;
 import misterpemodder.tmo.api.handler.ITMOMethodHandler;
 import misterpemodder.tmo.api.handler.ITMORegistryHandler;
+import misterpemodder.tmo.api.io.IIOType;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
@@ -35,5 +36,6 @@ public final class TooManyOresAPI {
 	public static final Map<Block, ISlimeBlock> SLIME_BLOCKS = new HashMap<>();
 	public static final List<IStrongPistonBehavior> STRONG_PISTON_BEHAVIORS = new ArrayList<>();
 	public static final Map<ItemStack, Integer> ENDER_MATTER_ITEMS = new HashMap<>();
+	public static final List<IIOType> IO_TYPES = new ArrayList<>();
 	
 }

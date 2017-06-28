@@ -26,7 +26,7 @@ public class GuiContainerInjector extends GuiContainerBase<ContainerInjector, Ti
 		list.add(new TabInfo<ContainerInjector, TileEntityInjector>(false));
 		list.add(new TabPlayerInventory<ContainerInjector, TileEntityInjector>());
 		list.add(new TabArmorInventory<ContainerInjector, TileEntityInjector>());
-		list.add(new TabIO<>());
+		list.add(new TabIO<>(container.getTileEntity().getIoConfigHandler()));
 		return list;
 	}
 	

@@ -80,6 +80,8 @@ public class Tmo {
 		TooManyOresAPI.methodHandler = new MethodHandler();
 		TooManyOresAPI.registryHandler = new RegistryHandler();
 		
+		RegistryHandler.registerDefaultIOTypes();
+		
 		CapabilityOwner.register();
 		CapabilityFreezing.register();
 		GameRegistry.registerWorldGenerator(new OreGen(), 42);

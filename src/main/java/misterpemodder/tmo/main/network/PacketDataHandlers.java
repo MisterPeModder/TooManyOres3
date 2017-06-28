@@ -13,7 +13,6 @@ import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabID;
 import misterpemodder.tmo.main.client.gui.tabs.TabMainInjector;
 import misterpemodder.tmo.main.client.gui.tabs.TabSecurity;
 import misterpemodder.tmo.main.inventory.ContainerBase;
-import misterpemodder.tmo.main.inventory.ContainerMachine;
 import misterpemodder.tmo.main.inventory.ContainerTitaniumAnvil;
 import misterpemodder.tmo.main.inventory.ISyncedContainerElement;
 import misterpemodder.tmo.main.inventory.elements.ContainerElementTank;
@@ -30,9 +29,11 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.util.Constants;
@@ -209,26 +210,6 @@ public enum PacketDataHandlers implements IPacketDataHandler {
 		}
 	},
 	
-	
-	/**
-	 * <p> Handler type: server to client
-	 * 
-	 * <p> NBT tags:
-	 * <ul>
-	 * 	<li>progress: Integer
-	 * </ul>
-	 */
-    PROGRESS_ARROW_UPDATE_HANDLER {
-		
-		@Override
-		public void procData(NBTTagCompound data) {
-			Container c = Minecraft.getMinecraft().player.openContainer;
-			if(c instanceof ContainerMachine && data.hasKey("progress")) {
-				((ContainerMachine)c).progress = data.getInteger("progress");
-			}
-		}
-	},
-	
 	/**
 	 * <p> Handler type: server to client
 	 * 
@@ -291,6 +272,53 @@ public enum PacketDataHandlers implements IPacketDataHandler {
 			
 		}
 	},
+     
+    /**
+ 	* <p> Handler type: both sides
+ 	* 
+ 	* <p> NBT tags:
+ 	* <ul>
+	* 	<li>pos: BlockPos serialized into long
+	* 	<li>to_server: boolean true is this packet is sent to the server
+	* 	<li>world_dim_id: integer (only if to_server == true)
+	* 	<li>config: NBTTagList serialized IOConfigHandlerMachine
+ 	* </ul>
+ 	*/
+    IO_CONFIG_SYNC_HANDLER {
+ 		
+		@Override
+		public void procData(NBTTagCompound data) {
+			
+			boolean toServer = false;
+			if(data.hasKey("to_server")) {
+				toServer = data.getBoolean("to_server");
+			}
+			
+			World world;
+			int dimId = 0;
+			if(toServer) {
+				dimId = data.getInteger("world_dim_id");
+				world = DimensionManager.getWorld(dimId);
+			} else {
+				world = Minecraft.getMinecraft().world;
+			}
+			
+			BlockPos pos = BlockPos.fromLong(data.getLong("pos"));
+			TileEntity te = world.getTileEntity(pos);
+			
+			NBTTagList configData = (NBTTagList) data.getTag("config");
+			
+			if(te != null && te instanceof TileEntityMachine) {
+				((TileEntityMachine) te).getIoConfigHandler().deserializeNBT(configData);
+				if(toServer) {
+					data.removeTag("to_server");
+					data.removeTag("world_dim_id");
+					TMOPacketHandler.network.sendToDimension(new PacketServerToClient(IO_CONFIG_SYNC_HANDLER, data), dimId);
+				}
+			}
+ 			
+ 		}
+ 	},
     ;
 
 }

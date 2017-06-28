@@ -3,11 +3,13 @@ package misterpemodder.tmo.main.tileentity;
 import org.apache.commons.lang3.tuple.Pair;
 
 import misterpemodder.tmo.api.TooManyOresAPI;
+import misterpemodder.tmo.api.io.EnumIOType;
 import misterpemodder.tmo.api.recipe.IDestabilizerRecipe;
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
 import misterpemodder.tmo.main.blocks.containers.BlockInjector;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
+import misterpemodder.tmo.main.capability.IOConfigHandlerMachine;
 import misterpemodder.tmo.main.capability.SyncedFluidTank;
 import misterpemodder.tmo.main.capability.SyncedItemHandler;
 import net.minecraft.block.state.IBlockState;
@@ -33,6 +35,8 @@ public class TileEntityDestabilizer extends TileEntityMachine<IDestabilizerRecip
 	
 	public static final int MAX_ENDER_MATTER = 1000;
 	
+	private final IOConfigHandlerMachine ioConfigHandler;
+	
 	public TileEntityDestabilizer() {
 		super();
 		this.input = new SyncedItemHandler(this,1);
@@ -47,6 +51,12 @@ public class TileEntityDestabilizer extends TileEntityMachine<IDestabilizerRecip
 			
 		};
 		this.tank = new SyncedFluidTank(CAPACITY);
+		this.ioConfigHandler = new IOConfigHandlerMachine(this, EnumIOType.ITEM, EnumIOType.FLUID, EnumIOType.ENDER_MATTER);
+	}
+	
+	@Override
+	public IOConfigHandlerMachine getIoConfigHandler() {
+		return this.ioConfigHandler;
 	}
 	
 	public ItemStackHandler getEnder() {

@@ -26,7 +26,7 @@ public class GuiContainerDestabilizer extends GuiContainerBase<ContainerDestabil
 		list.add(new TabInfo<ContainerDestabilizer, TileEntityDestabilizer>(false));
 		list.add(new TabPlayerInventory<ContainerDestabilizer, TileEntityDestabilizer>());
 		list.add(new TabArmorInventory<ContainerDestabilizer, TileEntityDestabilizer>());
-		list.add(new TabIO<>());
+		list.add(new TabIO<>(container.getTileEntity().getIoConfigHandler()));
 		return list;
 	}
 	

@@ -3,11 +3,13 @@ package misterpemodder.tmo.main.tileentity;
 import org.apache.commons.lang3.tuple.Triple;
 
 import misterpemodder.tmo.api.TooManyOresAPI;
+import misterpemodder.tmo.api.io.EnumIOType;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
 import misterpemodder.tmo.main.blocks.containers.BlockInjector;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
+import misterpemodder.tmo.main.capability.IOConfigHandlerMachine;
 import misterpemodder.tmo.main.capability.SyncedFluidTank;
 import misterpemodder.tmo.main.capability.SyncedItemHandler;
 import net.minecraft.item.ItemStack;
@@ -28,12 +30,20 @@ public class TileEntityInjector extends TileEntityMachine<IInjectorRecipe> {
 	private FluidTank tank;
 	private TransferMode mode;
 	
+	private final IOConfigHandlerMachine ioConfigHandler;
+	
 	public TileEntityInjector() {
 		super();
 		this.input = new SyncedItemHandler(this,1);
 		this.output = new SyncedItemHandler(this, 1);
 		this.tank = new SyncedFluidTank(CAPACITY);
 		this.mode = TransferMode.INJECTION;
+		this.ioConfigHandler = new IOConfigHandlerMachine(this, EnumIOType.ITEM, EnumIOType.FLUID);
+	}
+	
+	@Override
+	public IOConfigHandlerMachine getIoConfigHandler() {
+		return this.ioConfigHandler;
 	}
 
 	@Override

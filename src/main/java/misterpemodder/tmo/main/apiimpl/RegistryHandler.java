@@ -7,6 +7,8 @@ import misterpemodder.tmo.api.IStrongPistonBehavior;
 import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.api.block.ISlimeBlock;
 import misterpemodder.tmo.api.handler.ITMORegistryHandler;
+import misterpemodder.tmo.api.io.EnumIOType;
+import misterpemodder.tmo.api.io.IIOType;
 import misterpemodder.tmo.api.recipe.IDestabilizerRecipe;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe;
 import misterpemodder.tmo.api.recipe.IMachineRecipe;
@@ -56,6 +58,23 @@ public class RegistryHandler<V> implements ITMORegistryHandler {
 			TMORefs.LOGGER.info("The ender matter item "+stack.toString()+" has already been registered!");
 		} else {
 			TooManyOresAPI.ENDER_MATTER_ITEMS.put(stack, value);
+		}
+	}
+	
+	@Override
+	public IIOType registerIOType(IIOType type) {
+		for(IIOType t : TooManyOresAPI.IO_TYPES) {
+			if(t.getID().equals(type.getID())) {
+				return t;
+			}
+		}
+		TooManyOresAPI.IO_TYPES.add(type);
+		return type;
+	}
+	
+	public static void registerDefaultIOTypes() {
+		for(IIOType t : EnumIOType.values()) {
+			TooManyOresAPI.registryHandler.registerIOType(t);
 		}
 	}
 	
