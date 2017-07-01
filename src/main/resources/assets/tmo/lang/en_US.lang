@@ -128,8 +128,8 @@ item.titaniumBucket.name=Titanium Bucket
 item.titaniumBucket.empty=Titanium Bucket (empty)
 item.titaniumBucket.filled=Titanium Bucket (%1$dmb of %2$s)
 item.titaniumBucket.message.empty=Bucket is empty!
-item.titaniumBucket.message.notEnougthLiquid=Not enougth liquid!
-item.titaniumBucket.message.notEnougthCapacity=Not enougth capacity!
+item.titaniumBucket.message.notenoughLiquid=Not enough liquid!
+item.titaniumBucket.message.notenoughCapacity=Not enough capacity!
 item.titaniumBucket.message.content=%1$s ~ %2$d/%3$dmb
 item.titaniumBucket.desc.content=Contains: %2$d/%3$dmb of %1$s.
 item.titaniumBucket.desc.emptyContent=Contains: nothing.
@@ -258,7 +258,7 @@ protectedBlock.noBreaking=You don't have the permissions to break this %s!
 
 #Death Messages
 death.tmo.fluid.frozium.0=%s has been transformed into an ice cube
-death.tmo.fluid.frozium.1=%s wasn't warm enougth.
+death.tmo.fluid.frozium.1=%s wasn't warm enough.
 death.tmo.fluid.frozium.2=%s should have brought a coat.
 death.tmo.fluid.frozium.3=%s is now the COOLest person ever.
 death.tmo.fluid.ignum.0=%s was consumed by ignum.
