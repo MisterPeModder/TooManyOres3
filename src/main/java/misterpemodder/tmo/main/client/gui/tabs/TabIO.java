@@ -90,25 +90,32 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine<?>>
 	@Override
 	public void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		FontRenderer fontrenderer = guiContainer.mc.fontRendererObj;
-		for(Object button: this.buttons) {
-			if(((GuiButton)button).id == RESET_BUTTON_ID) {
-				if(((GuiButton)button).isMouseOver()) {
+		boolean ioInfoDrawn = false;
+		int y_offset = guiContainer.getBottomPartPos()-guiContainer.getGuiTop();
+		for(GuiButton button: this.buttons) {
+			if(button.id == RESET_BUTTON_ID) {
+				if(button.isMouseOver()) {
 					String key = "gui.tab.io.reset.desc.";
 					List<String> text = Arrays.asList(TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate(key+"1"), TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate(key+"2"));
 					int textWidth = Math.max(fontrenderer.getStringWidth(text.get(0)), fontrenderer.getStringWidth(text.get(1)));
 					GuiUtils.drawHoveringText(text, mouseX-guiContainer.getGuiLeft(), mouseY-guiContainer.getGuiTop(), guiContainer.width, guiContainer.height, textWidth, guiContainer.getFontRenderer());
 				}
 			}
-			EnumBlockSide side = getButtonSide(((GuiButton)button).id);
+			EnumBlockSide side = getButtonSide(button.id);
 			if(side != null) {
-				if(((GuiButton)button).isMouseOver()) {
-					int y_offset = guiContainer.getBottomPartPos()-guiContainer.getGuiTop();
+				if(button.enabled && button.isMouseOver()) {
 					guiContainer.drawString(fontrenderer, side.getLocalizedName(), 9, y_offset+9, 0xFFFFFF);
 					
 					IIOType<?> type = getSelectedIOType();
 					guiContainer.drawString(fontrenderer, configHandler.getIOStateConfig(side, type).getLocalizedNameColored(), 9, y_offset+60, 0xFFFFFF);
+					ioInfoDrawn = true;
 				}
 			}
+		}
+		
+		if(!ioInfoDrawn) {
+			guiContainer.drawString(fontrenderer, "---", 9, y_offset+9, 0xFFFFFF);
+			guiContainer.drawString(fontrenderer, TextFormatting.GRAY+"n/a", 9, y_offset+60, 0xFFFFFF);
 		}
 	}
 	
@@ -139,12 +146,23 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine<?>>
 		this.buttons.add(new GuiButtonToggle(AUTO_PUSH_BUTTON_ID, x+119, y+16, false));
 		this.buttons.add(new GuiButtonToggle(AUTO_PULL_BUTTON_ID, x+119, y+36, false, true));
 		
-		this.buttons.add(new GuiButton(IO_UP_BUTTON_ID, x+71, y+9, 20, 20, ""));
-		this.buttons.add(new GuiButton(IO_DOWN_BUTTON_ID, x+71, y+49, 20, 20, ""));
-		this.buttons.add(new GuiButton(IO_FRONT_BUTTON_ID, x+71, y+29, 20, 20, ""));
-		this.buttons.add(new GuiButton(IO_BACK_BUTTON_ID, x+91, y+49, 20, 20, ""));
-		this.buttons.add(new GuiButton(IO_LEFT_BUTTON_ID, x+51, y+29, 20, 20, ""));
-		this.buttons.add(new GuiButton(IO_RIGHT_BUTTON_ID, x+91, y+29, 20, 20, ""));
+		this.buttons.add(newIOButton(IO_UP_BUTTON_ID, x+71, y+9, 20, 20));
+		this.buttons.add(newIOButton(IO_DOWN_BUTTON_ID, x+71, y+49, 20, 20));
+		this.buttons.add(newIOButton(IO_FRONT_BUTTON_ID, x+71, y+29, 20, 20));
+		this.buttons.add(newIOButton(IO_BACK_BUTTON_ID, x+91, y+49, 20, 20));
+		this.buttons.add(newIOButton(IO_LEFT_BUTTON_ID, x+51, y+29, 20, 20));
+		this.buttons.add(newIOButton(IO_RIGHT_BUTTON_ID, x+91, y+29, 20, 20));
+	}
+	
+	private GuiButton newIOButton(int buttonId, int x, int y, int width, int height) {
+		GuiButton button = new GuiButton(buttonId, x, y, width, height, "");
+		EnumBlockSide side = getButtonSide(button.id);
+		
+		if(side != null && ((TileEntityMachine<?>)guiContainer.container.getTileEntity()).isSideDisabled(side)) {
+			button.enabled = false;
+		}
+		
+		return button;
 	}
 	
 	@Override
@@ -152,6 +170,13 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine<?>>
 		for(GuiButton b : (List<GuiButton>)buttons) {
 			if(b.id == INPUT_TYPE_BUTTON_ID) {
 				b.displayString	= getTypeButtonText();
+			}
+			if(b.id == RESET_BUTTON_ID) {
+				if(GuiScreen.isShiftKeyDown()) {
+					b.displayString = TextFormatting.DARK_RED+Tmo.proxy.translate("gui.tab.io.reset.all");
+				} else {
+					b.displayString = TextFormatting.RED+Tmo.proxy.translate("gui.tab.io.reset");
+				}
 			}
 		}
 	}

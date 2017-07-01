@@ -82,6 +82,13 @@ public class IOConfigHandlerMachine implements IIOConfigHandler, INBTSerializabl
 				
 				EnumBlockSide side = EnumBlockSide.forName(c.getString("side"));
 				if(side != null) {
+					
+					if(te != null) {
+						if(te.isSideDisabled(side)) {
+							continue;
+						}
+					}
+					
 					SideConfig cfg = sideConfigs.get(side);
 					cfg.deserializeNBT((NBTTagList)c.getTag("config"));
 					
@@ -109,28 +116,33 @@ public class IOConfigHandlerMachine implements IIOConfigHandler, INBTSerializabl
 
 	@Override
 	public boolean isSideInput(EnumFacing side, IIOType<?> type) {
+		if(te.isSideDisabled(side)) return false;
 		return sideConfigs.get(getMachineSide(side)).isSideInput(type);
 	}
 
 	@Override
 	public boolean isSideOutput(EnumFacing side, IIOType<?> type) {
+		if(te.isSideDisabled(side)) return false;
 		return sideConfigs.get(getMachineSide(side)).isSideOutput(type);
 	}
 	
 	public IOState getIOStateConfig(EnumFacing side, IIOType<?> type) {
+		if(te.isSideDisabled(side)) return IOState.DISABLED;
 		return sideConfigs.get(getMachineSide(side)).getIOStateConfig(type);
 	}
 	
 	public IOState getIOStateConfig(EnumBlockSide side, IIOType<?> type) {
+		if(te.isSideDisabled(side)) return IOState.DISABLED;
 		return sideConfigs.get(side).getIOStateConfig(type);
 	}
 	
 	public void setIOStateConfig(EnumFacing side, IIOType<?> type, IOState state) {
+		if(te.isSideDisabled(side)) return;
 		sideConfigs.get(getMachineSide(side)).setIOStateConfig(type, state);
 	}
 	
 	public void setIOStateConfig(EnumBlockSide side, IIOType<?> type, IOState state) {
-
+		if(te.isSideDisabled(side)) return;
 		sideConfigs.get(side).setIOStateConfig(type, state);
 		te.updateHandlerContainers(type, side.toFacing(getMachineFacing()), this);
 		

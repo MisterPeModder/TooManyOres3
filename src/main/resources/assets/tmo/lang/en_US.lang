@@ -232,6 +232,7 @@ gui.tab.playerArmorInv.name=Armor & Crafting
 gui.tab.titaniumAnvil.name=Titanium Anvil: Repair & Name
 gui.tab.io.name=IO
 gui.tab.io.reset=Reset
+gui.tab.io.reset.all=Reset All
 gui.tab.io.reset.desc.1=Left click to reset config for the selected IO type.
 gui.tab.io.reset.desc.2=Shift-left click to reset config for the ALL IO types.
 gui.tab.io.state.all=all

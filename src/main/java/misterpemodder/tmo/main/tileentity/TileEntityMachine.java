@@ -16,6 +16,7 @@ import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.api.capability.io.IIOType;
 import misterpemodder.tmo.api.recipe.IMachineRecipe;
 import misterpemodder.tmo.main.Tmo;
+import misterpemodder.tmo.main.blocks.base.BlockMachine;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.capability.HandlerContainer;
 import misterpemodder.tmo.main.capability.IMachineElementHandler;
@@ -24,6 +25,7 @@ import misterpemodder.tmo.main.capability.io.CapabilityIOConfig;
 import misterpemodder.tmo.main.capability.io.IOConfigHandlerMachine;
 import misterpemodder.tmo.main.capability.io.IOState;
 import misterpemodder.tmo.main.capability.item.HandlerContainerItem;
+import misterpemodder.tmo.main.utils.EnumBlockSide;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -47,6 +49,9 @@ public abstract class TileEntityMachine<V extends IMachineRecipe<V>> extends Til
 	private ImmutableListMultimap<IIOType<?>, Pair<IOState, IMachineElementHandler<?>>> elementsForIoStates;
 	private ImmutableListMultimap<IIOType<?>, IOState> ioTypeToIoStates;
 	private ListMultimap<EnumFacing, Pair<Capability<?>, HandlerContainer<?>>> handlerContainers = ArrayListMultimap.create();
+	
+	protected boolean autoPush;
+	protected boolean autoPull;
 	
 	public int getProgress() {
 		return this.progress;
@@ -122,6 +127,30 @@ public abstract class TileEntityMachine<V extends IMachineRecipe<V>> extends Til
 	
 	public void emptyTank(short tankId) {
 		
+	}
+	
+	public EnumBlockSide[] getDisabledSides() {
+		return new EnumBlockSide[]{EnumBlockSide.FRONT};
+	}
+	
+	public final boolean isSideDisabled(EnumBlockSide side) {
+		EnumBlockSide[] disabledSides = this.getDisabledSides();
+		if(disabledSides != null && disabledSides.length > 0) {
+			for(EnumBlockSide d : disabledSides) {
+				if(side == d) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public final boolean isSideDisabled(EnumFacing side) {
+		EnumFacing facing = null;
+		if(this.hasWorld()) {
+			facing = this.getWorld().getBlockState(this.getPos()).getValue(BlockMachine.FACING);
+		}
+		return isSideDisabled(EnumBlockSide.fromFacing(facing == null? EnumFacing.NORTH : facing, side));
 	}
 	
 	public ListMultimap<IIOType<?>, Pair<IOState, IMachineElementHandler<?>>> getElementsForIOType() {

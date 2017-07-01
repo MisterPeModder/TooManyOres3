@@ -83,6 +83,13 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		}
 	}
 	
+	@Override
+	public void setWorldAndResolution(Minecraft mc, int width, int height) {
+		this.selectedTabs.left.getButtonsList().clear();
+		this.selectedTabs.right.getButtonsList().clear();
+		super.setWorldAndResolution(mc, width, height);
+    }
+	
 	protected Pair<TabBase<C, TE>, TabBase<C, TE>> getDefaultPair() {
 		MutablePair<TabBase<C, TE>, TabBase<C, TE>> p = new MutablePair<>();
 		for(TabBase<C, TE> tab : tabs) {

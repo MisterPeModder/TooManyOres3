@@ -14,6 +14,7 @@ import misterpemodder.tmo.main.capability.io.IOConfigHandlerMachine;
 import misterpemodder.tmo.main.capability.io.IOState;
 import misterpemodder.tmo.main.capability.item.CombinerItemStackHandlerMachine;
 import misterpemodder.tmo.main.capability.item.MachineItemStackHandler;
+import misterpemodder.tmo.main.utils.EnumBlockSide;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -123,7 +124,7 @@ public class TileEntityInjector extends TileEntityMachine<IInjectorRecipe> {
 	
 	@Override
 	public void update() {
-		if(!this.world.isRemote) {
+		if(this.hasWorld() && !this.world.isRemote) {
 			ItemStack stack = this.input.getStackInSlot(0).copy();
 			if(currentRecipe == null) {
 				currentRecipe = findRecipe();
@@ -151,7 +152,6 @@ public class TileEntityInjector extends TileEntityMachine<IInjectorRecipe> {
 				}
 			}
 		}
-		
 	}
 	
 	@Override
@@ -162,6 +162,10 @@ public class TileEntityInjector extends TileEntityMachine<IInjectorRecipe> {
 	@Override
 	public void emptyTank(short tankId) {
 		if(tankId == 0) this.tank.drain(TileEntityInjector.CAPACITY, true);
+	}
+	
+	public EnumBlockSide[] getDisabledSides() {
+		return new EnumBlockSide[]{EnumBlockSide.FRONT, EnumBlockSide.UP};
 	}
 	
 }
