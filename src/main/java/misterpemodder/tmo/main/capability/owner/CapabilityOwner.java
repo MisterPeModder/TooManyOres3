@@ -1,7 +1,7 @@
-package misterpemodder.tmo.main.capability;
+package misterpemodder.tmo.main.capability.owner;
 
-import misterpemodder.tmo.api.owner.DefaultOwner;
-import misterpemodder.tmo.api.owner.IOwnerHandler;
+import misterpemodder.tmo.api.capability.owner.DefaultOwner;
+import misterpemodder.tmo.api.capability.owner.IOwnerHandler;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;

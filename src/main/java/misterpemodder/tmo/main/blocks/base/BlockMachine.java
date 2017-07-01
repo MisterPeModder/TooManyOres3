@@ -19,7 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public abstract class BlockMachine<TE extends TileEntityMachine> extends BlockContainerBase<TE> {
+public abstract class BlockMachine<TE extends TileEntityMachine<?>> extends BlockContainerBase<TE> {
 	
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", Arrays.asList(EnumFacing.HORIZONTALS));
 

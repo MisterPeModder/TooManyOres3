@@ -97,9 +97,10 @@ public abstract class BlockAbstractSlab<V extends Enum<V> & IBlockVariant> exten
         return this.isDouble() ? FULL_BLOCK_AABB : (state.getValue(HALF) == BlockAbstractSlab.EnumBlockHalf.TOP ? AABB_TOP_HALF : AABB_BOTTOM_HALF);
     }
 
-    @Override
+	@Override
+	@SuppressWarnings("unchecked")
     public boolean isFullyOpaque(IBlockState state) {
-        return ((BlockAbstractSlab)state.getBlock()).isDouble() || state.getValue(HALF) == BlockAbstractSlab.EnumBlockHalf.TOP;
+        return ((BlockAbstractSlab<V>)state.getBlock()).isDouble() || state.getValue(HALF) == BlockAbstractSlab.EnumBlockHalf.TOP;
     }
 
     public boolean isOpaqueCube(IBlockState state) {

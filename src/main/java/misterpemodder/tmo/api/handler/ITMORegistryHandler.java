@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 
 import misterpemodder.tmo.api.IStrongPistonBehavior;
 import misterpemodder.tmo.api.block.ISlimeBlock;
-import misterpemodder.tmo.api.io.IIOType;
+import misterpemodder.tmo.api.capability.io.IIOType;
 import misterpemodder.tmo.api.recipe.IDestabilizerRecipe;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe;
 import net.minecraft.block.Block;
@@ -46,7 +46,7 @@ public interface ITMORegistryHandler {
 	 * @return the registered IOType, 
 	 * if an IOType with the same id exists, it will return this one instead. 
 	 */
-	public IIOType registerIOType(IIOType type);
+	public <T> IIOType<T> registerIOType(IIOType<T> type);
 		
 	/**
 	 * Used to get the instance of the injector recipe registry.

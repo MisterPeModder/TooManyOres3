@@ -1,4 +1,4 @@
-package misterpemodder.tmo.api.io;
+package misterpemodder.tmo.api.capability.io;
 
 import javax.annotation.Nullable;
 
@@ -9,32 +9,32 @@ public interface IIOConfigHandler {
 	/**
 	 * Returns an array of all the io types that this handler can support.
 	 */
-	IIOType[] getValidIOTypes();
+	IIOType<?>[] getValidIOTypes();
 	
 	/**
 	 * Checks if the specified side can support this io type.
 	 * @return false is the side is disabled
 	 */
-	boolean hasIOType(EnumFacing side, IIOType type);
+	boolean hasIOType(EnumFacing side, IIOType<?> type);
 	
 	/**
 	 * Returns an array container all the io type that the specified side can support.
 	 * @return the array, returns null if {@code hasIOType(side, type) == false} for all IO types.
 	 */
 	@Nullable
-	IIOType[] getIOTypes(EnumFacing side);
+	IIOType<?>[] getIOTypes(EnumFacing side);
 	
 	/**
 	 * Checks if the specified side is an input for this io type.
 	 * @return false if {@code hasIOType(side, type) == false}.
 	 */
-	boolean isSideInput(EnumFacing side, IIOType type);
+	boolean isSideInput(EnumFacing side, IIOType<?> type);
 	
 	/**
 	 * Checks if the specified side is an output for this io type.
 	 * @return false if {@code hasIOType(side, type) == false}.
 	 */
-	boolean isSideOutput(EnumFacing side, IIOType type);
+	boolean isSideOutput(EnumFacing side, IIOType<?> type);
 	
 	/**
 	 * Changes the config on the specified side for this io type.
@@ -43,7 +43,7 @@ public interface IIOConfigHandler {
 	 * @param isInput
 	 * @param isOutput
 	 */
-	void setIOTypeConfig(EnumFacing side, IIOType type, boolean isInput, boolean isOutput);
+	void setIOTypeConfig(EnumFacing side, IIOType<?> type, boolean isInput, boolean isOutput);
 	
 	
 }

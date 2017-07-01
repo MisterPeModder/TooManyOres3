@@ -1,4 +1,4 @@
-package misterpemodder.tmo.api.owner;
+package misterpemodder.tmo.api.capability.owner;
 
 import javax.annotation.Nullable;
 

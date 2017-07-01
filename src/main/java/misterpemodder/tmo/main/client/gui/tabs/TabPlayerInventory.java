@@ -11,7 +11,7 @@ import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
-public class TabPlayerInventory<C extends ContainerBase<TE>, TE extends TileEntityContainerBase> extends TabBase{
+public class TabPlayerInventory<C extends ContainerBase<TE>, TE extends TileEntityContainerBase> extends TabBase<C, TE>{
 
 	public TabPlayerInventory() {
 		super(TabPos.BOTTOM_RIGHT);

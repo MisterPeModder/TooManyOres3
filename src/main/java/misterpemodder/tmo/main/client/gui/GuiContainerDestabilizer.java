@@ -13,15 +13,15 @@ import misterpemodder.tmo.main.inventory.ContainerDestabilizer;
 import misterpemodder.tmo.main.tileentity.TileEntityDestabilizer;
 import net.minecraft.entity.player.InventoryPlayer;
 
-public class GuiContainerDestabilizer extends GuiContainerBase<ContainerDestabilizer, TileEntityDestabilizer>{
+public class GuiContainerDestabilizer extends GuiContainerBase<ContainerDestabilizer, TileEntityDestabilizer> {
 
 	public GuiContainerDestabilizer(InventoryPlayer playerInv, TileEntityDestabilizer te) {
 		super(new ContainerDestabilizer(te, playerInv));
 	}
 
 	@Override
-	public List<TabBase> registerTabs() {
-		List<TabBase> list = new ArrayList<>();
+	public List<TabBase<ContainerDestabilizer, TileEntityDestabilizer>> registerTabs() {
+		List<TabBase<ContainerDestabilizer, TileEntityDestabilizer>> list = new ArrayList<>();
 		list.add(new TabMainDestabilizer());
 		list.add(new TabInfo<ContainerDestabilizer, TileEntityDestabilizer>(false));
 		list.add(new TabPlayerInventory<ContainerDestabilizer, TileEntityDestabilizer>());

@@ -45,7 +45,7 @@ public class ContainerInjector extends ContainerMachine<TileEntityInjector> {
 	protected void setTeSlots(TileEntityInjector te) {
 		this.addSlotToContainer(new SlotHidable(te.getInventory(), 0, 107, 42, true));
 		
-		this.addSlotToContainer(new SlotFiltered(te.getOutput(), 0, 155, 42, true, new Predicate<ItemStack>(){
+		this.addSlotToContainer(new SlotFiltered(te.output, 0, 155, 42, true, new Predicate<ItemStack>(){
 			public boolean apply(ItemStack t) {
 				return false;
 			}

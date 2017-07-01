@@ -41,13 +41,14 @@ public enum EnumBlockSide {
 		else if(facing == side.getOpposite()) {
 			return BACK;
 		}
-		else if(facing == side.rotateY()) {
+		else if(facing == side.rotateYCCW()) {
 			return LEFT;
 		}
 		return RIGHT;
 	}
 	
 	public EnumFacing toFacing(EnumFacing facing) {
+		
 		switch(this) {
 			case UP:
 				return EnumFacing.UP;
@@ -58,9 +59,9 @@ public enum EnumBlockSide {
 			case BACK:
 				return facing.getOpposite();
 			case LEFT:
-				return facing.rotateYCCW();
-			default:
 				return facing.rotateY();
+			default:
+				return facing.rotateYCCW();
 		}
 	}
 	

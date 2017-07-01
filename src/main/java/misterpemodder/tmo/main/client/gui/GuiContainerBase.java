@@ -13,10 +13,10 @@ import org.apache.commons.lang3.tuple.Pair;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.client.gui.tabs.TabArmorInventory;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase;
-import misterpemodder.tmo.main.client.gui.tabs.TabMain;
-import misterpemodder.tmo.main.client.gui.tabs.TabPlayerInventory;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabPos;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabTexture;
+import misterpemodder.tmo.main.client.gui.tabs.TabMain;
+import misterpemodder.tmo.main.client.gui.tabs.TabPlayerInventory;
 import misterpemodder.tmo.main.compat.craftingtweaks.CraftingTweaksCompat;
 import misterpemodder.tmo.main.compat.jei.JeiPlugin;
 import misterpemodder.tmo.main.inventory.ContainerBase;
@@ -36,8 +36,8 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	public static final int TAB_OFFSET = 4;
 	public C container;
 	
-	protected MutablePair<TabBase, TabBase> selectedTabs;
-	protected List<TabBase> tabs;
+	protected MutablePair<TabBase<C, TE>, TabBase<C, TE>> selectedTabs;
+	protected List<TabBase<C, TE>> tabs;
 	
 	protected List<GuiButton> selectedButtonsLeft;
 	protected List<GuiButton> selectedButtonsRight;
@@ -53,7 +53,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		if(tabs.size() < 2) throw new IllegalArgumentException("There must be at least 2 tabs!");
 		initTabs();
 		
-		Pair<TabBase, TabBase> p = getDefaultPair();
+		Pair<TabBase<C, TE>, TabBase<C, TE>> p = getDefaultPair();
         this.selectedTabs = MutablePair.of(p.getLeft(), p.getRight());
         
         Dimension dl = selectedTabs.left.getTabTexture().dim;
@@ -70,7 +70,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	}
 	
 	private void initTabs() {
-		for(TabBase tab : tabs) {
+		for(TabBase<C, TE> tab : tabs) {
 			tab.setGuiContainer(this);
 		}
 	}
@@ -78,14 +78,14 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	@Override
 	public void initGui() {
 		super.initGui();
-		for(TabBase tab : tabs) {
+		for(TabBase<C, TE> tab : tabs) {
 			tab.initButtons(this.guiLeft, this.guiTop);
 		}
 	}
 	
-	protected Pair<TabBase, TabBase> getDefaultPair() {
-		MutablePair<TabBase, TabBase> p = new MutablePair<>();
-		for(TabBase tab : tabs) {
+	protected Pair<TabBase<C, TE>, TabBase<C, TE>> getDefaultPair() {
+		MutablePair<TabBase<C, TE>, TabBase<C, TE>> p = new MutablePair<>();
+		for(TabBase<C, TE> tab : tabs) {
 			if(tab instanceof TabMain) {
 				p.setLeft(tab);
 			} else if(tab instanceof TabPlayerInventory) {
@@ -99,7 +99,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		return p;
 	}
 	
-	public abstract List<TabBase> registerTabs();
+	public abstract List<TabBase<C, TE>> registerTabs();
 	
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
@@ -135,7 +135,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	    GlStateManager.popMatrix();
 	}
 	
-	protected void drawTab(TabBase tab, boolean enabled) {
+	protected void drawTab(TabBase<C, TE> tab, boolean enabled) {
 		TabTexture texture = tab.getTabTexture();
 		Point uv = enabled? texture.enabledCoords : texture.disabledCoords;
 		Point coords = tab.getPos();
@@ -153,7 +153,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	    selectedTabs.getRight().drawGuiContainerForegroundLayer(mouseX, mouseY);
 	    
 	    boolean flag = true;
-	    for(TabBase tab : tabs) {
+	    for(TabBase<C, TE> tab : tabs) {
 	    	RenderHelper.enableGUIStandardItemLighting();
 	    	ItemStack stack = tab.getItemStack();
 	    	Point tabPos = tab.getPos();
@@ -196,7 +196,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		this.selectedTabs.left.mouseClicked(mouseX, mouseY, mouseButton);
 		this.selectedTabs.right.mouseClicked(mouseX, mouseY, mouseButton);
 		
-		for(TabBase tab : tabs) {
+		for(TabBase<C, TE> tab : tabs) {
 			Point pos = tab.getPos();
 			if(isPointInRegion(pos.x+1, pos.y, TabBase.WIDTH, TabBase.HEIGHT-1, mouseX, mouseY)) {
 				if(selectedTabs.getLeft() != tab && selectedTabs.getRight() != tab) {
@@ -208,7 +208,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 						selectedTabs.setRight(tab);
 					}
 					selectedTabs = tab.forceTabConfig();
-					this.container.setSelectedTabs(selectedTabs);
+					setContainerTabs();
 					this.container.hideSlots();
 
 				}
@@ -222,6 +222,11 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 			}
 		}
 		super.mouseClicked(mouseX, mouseY, mouseButton);
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void setContainerTabs() {
+		this.container.setSelectedTabs((Pair)selectedTabs);
 	}
 	
 	public void updateScreen() {
@@ -321,7 +326,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	}
 	
 	protected void drawDisabledTabs() {
-		for(TabBase tab : tabs) {
+		for(TabBase<C, TE> tab : tabs) {
 			if(tab != selectedTabs.getLeft() && tab != selectedTabs.getRight()) {
 				this.drawTab(tab, false);
 			}
@@ -333,11 +338,11 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		return super.isPointInRegion(rectX, rectY, rectWidth, rectHeight, pointX, pointY);
 	}
 	
-	public MutablePair<TabBase, TabBase> getSelectedTabs() {
+	public MutablePair<TabBase<C, TE>, TabBase<C, TE>> getSelectedTabs() {
 		return this.selectedTabs;
 	}
 
-	public List<TabBase> getRegisteredTabs() {
+	public List<TabBase<C, TE>> getRegisteredTabs() {
 		return this.tabs;
 	}
 	

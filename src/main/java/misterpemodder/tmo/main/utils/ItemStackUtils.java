@@ -28,10 +28,11 @@ public final class ItemStackUtils {
 		return ItemStackUtils.newVariantStack(item, variant, 1);
 	}
 	
-	public static ItemStack newVariantStack(ModItems.TheItems item, ItemVariant variant, int amount) {
+	@SuppressWarnings("unchecked")
+	public static <V extends ItemVariant> ItemStack newVariantStack(ModItems.TheItems item, V variant, int amount) {
 		Item i = item.getItem();
-		if(i instanceof ItemMulti && ((ItemMulti)i).getVariants().get(0).getClass().equals(variant.getClass())) {
-			return newVariantStack((ItemMulti)i, variant, amount);
+		if(i instanceof ItemMulti && ((ItemMulti<V>)i).getVariants().get(0).getClass().equals(variant.getClass())) {
+			return newVariantStack((ItemMulti<V>)i, variant, amount);
 		} else {
 			return new ItemStack(i, amount, 0);
 		}

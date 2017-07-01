@@ -37,14 +37,14 @@ public class ContainerElementTank extends Gui implements ISyncedContainerElement
 	
 	private FluidTank tank;
 	private FluidStack lastFluid;
-	private ContainerBase container;
+	private ContainerBase<?> container;
 
 	private final int x;
 	private final int y;
 
 	public final short id;
 
-	public ContainerElementTank(int id, ContainerBase container, int x, int y, FluidTank tank) {
+	public ContainerElementTank(int id, ContainerBase<?> container, int x, int y, FluidTank tank) {
 		this.id = (short) id;
 		this.container = container;
 		this.tank = tank;
@@ -52,7 +52,7 @@ public class ContainerElementTank extends Gui implements ISyncedContainerElement
 		this.y = y;
 	}
 
-	public void drawTank(int mouseX, int mouseY, GuiContainerBase c) {
+	public void drawTank(int mouseX, int mouseY, GuiContainerBase<?,?> c) {
 		RenderTank.renderTankInGui(tank.getFluid(), tank.getCapacity(), c.getGuiLeft() + x, c.getGuiTop() + y, WIDTH, HEIGHT);
 		GlStateManager.enableBlend();
 		Minecraft.getMinecraft().getTextureManager().bindTexture(TANK_TEXTURE);
@@ -62,7 +62,7 @@ public class ContainerElementTank extends Gui implements ISyncedContainerElement
 		GlStateManager.disableBlend();
 	}
 
-	public List<String> getHoverDesc(int mouseX, int mouseY, GuiContainerBase c) {
+	public List<String> getHoverDesc(int mouseX, int mouseY, GuiContainerBase<?,?> c) {
 		List<String> strs = new ArrayList<>();
 		if (isButtonHovered(mouseX, mouseY, c)) {
 			strs.add(TextFormatting.RED + "" + TextFormatting.BOLD + Tmo.proxy.translate("gui.tank.clear"));
@@ -83,7 +83,7 @@ public class ContainerElementTank extends Gui implements ISyncedContainerElement
 		return strs;
 	}
 
-	public boolean mouseClicked(int mouseX, int mouseY, int mouseButton, GuiContainerBase c) {
+	public boolean mouseClicked(int mouseX, int mouseY, int mouseButton, GuiContainerBase<?,?> c) {
 		if (isButtonHovered(mouseX, mouseY, c) && GuiScreen.isShiftKeyDown() && mouseButton == 0) {
 
 			if (this.tank.getFluidAmount() > 0) {
@@ -101,7 +101,7 @@ public class ContainerElementTank extends Gui implements ISyncedContainerElement
 		return false;
 	}
 
-	private boolean isButtonHovered(int mouseX, int mouseY, GuiContainerBase c) {
+	private boolean isButtonHovered(int mouseX, int mouseY, GuiContainerBase<?,?> c) {
 		return c.isPointInRegion(x + 29, y, 11, 11, mouseX, mouseY);
 	}
 

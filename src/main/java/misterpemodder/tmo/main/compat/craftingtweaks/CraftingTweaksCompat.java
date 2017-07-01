@@ -37,7 +37,7 @@ public final class CraftingTweaksCompat {
 		}
 	}
 	
-	private static void registerContainer(Class<? extends ContainerBase> clazz, int gridSlotNumber) {
+	private static void registerContainer(Class<? extends ContainerBase<?>> clazz, int gridSlotNumber) {
 		NBTTagCompound tagCompound = new NBTTagCompound();
 		tagCompound.setString("ContainerClass", clazz.getName());
 

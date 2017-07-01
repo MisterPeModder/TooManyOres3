@@ -5,9 +5,11 @@ import javax.annotation.Nullable;
 import org.apache.commons.lang3.tuple.Pair;
 
 import misterpemodder.tmo.api.block.ISlimeBlock;
+import misterpemodder.tmo.api.capability.io.IIOType;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.capabilities.Capability;
 
 /**
  * Provides a bunch of random helper methods.
@@ -61,5 +63,11 @@ public interface ITMOMethodHandler {
 	 * to the amount of items in the right side.
 	 */
 	public Pair<Integer, Integer> getEnderMatterValue(ItemStack stack);
+	
+	/**
+	 * Used to get the IIOType corresponding to the specified capability
+	 */
+	@Nullable
+	public <T> IIOType<T> getIOTypeForCapability(Capability<T> cap);
 	
 }

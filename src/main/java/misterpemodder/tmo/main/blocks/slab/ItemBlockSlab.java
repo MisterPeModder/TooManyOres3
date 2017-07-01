@@ -84,6 +84,7 @@ public class ItemBlockSlab extends ItemBlockMulti {
         return false;
     }
 	
+	@SuppressWarnings("unchecked")
 	protected <T extends Comparable<T>> IBlockState makeState(IProperty<T> property, Comparable<?> comparable) {
         return this.halfSlab.getFullSlab().getDefaultState().withProperty(property, (T)comparable);
     }

@@ -20,7 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class TabArmorInventory<C extends ContainerBase<TE>, TE extends TileEntityContainerBase> extends TabBase{
+public class TabArmorInventory<C extends ContainerBase<TE>, TE extends TileEntityContainerBase> extends TabBase<C, TE> {
 	
 	public TabArmorInventory() {
 		super(TabPos.BOTTOM_RIGHT);

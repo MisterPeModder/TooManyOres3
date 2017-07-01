@@ -1,17 +1,23 @@
 package misterpemodder.tmo.main.apiimpl;
 
+import java.util.HashMap;
+
 import javax.annotation.Nullable;
 
 import org.apache.commons.lang3.tuple.Pair;
 
 import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.api.block.ISlimeBlock;
+import misterpemodder.tmo.api.capability.io.IIOType;
 import misterpemodder.tmo.api.handler.ITMOMethodHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.capabilities.Capability;
 
-public class MethodHandler implements ITMOMethodHandler{
+public class MethodHandler implements ITMOMethodHandler {
+	
+	private static HashMap<Capability<?>, IIOType<?>> ioTypeForCap = new HashMap<>();
 
 	@Override
 	public boolean isSlimeBlock(IBlockState state) {
@@ -60,6 +66,24 @@ public class MethodHandler implements ITMOMethodHandler{
 			}
 		}
 		return Pair.of(0, 0);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public <T> IIOType<T> getIOTypeForCapability(Capability<T> cap) {
+		if(ioTypeForCap.containsKey(cap)) {
+			return (IIOType<T>) ioTypeForCap.get(cap);
+		}
+		else {
+			for(IIOType<?> type : TooManyOresAPI.IO_TYPES) {
+				if(type.getCapabilityInstance().equals(cap)) {
+					ioTypeForCap.put(cap, type);
+					return (IIOType<T>) type;
+				}
+			}
+			ioTypeForCap.put(cap, null);
+		}
+		return null;
 	}
 
 }

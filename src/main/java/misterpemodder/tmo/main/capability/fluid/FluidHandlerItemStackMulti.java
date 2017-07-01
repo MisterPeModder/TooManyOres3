@@ -1,4 +1,4 @@
-package misterpemodder.tmo.main.capability;
+package misterpemodder.tmo.main.capability.fluid;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;

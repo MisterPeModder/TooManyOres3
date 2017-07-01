@@ -11,7 +11,6 @@ import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.client.gui.RecipeClickableAreaTMO;
 import misterpemodder.tmo.main.compat.jei.injector.RecipeCategoryInjector;
 import misterpemodder.tmo.main.inventory.ContainerInjector;
-import misterpemodder.tmo.main.inventory.ContainerMachine;
 import misterpemodder.tmo.main.inventory.elements.ContainerElementArrow;
 import misterpemodder.tmo.main.inventory.elements.ContainerElementTank;
 import misterpemodder.tmo.main.inventory.slot.IHidable;
@@ -58,7 +57,7 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 			geElementTank().drawTank(mouseX, mouseY, guiContainer);
 		}
 		
-		ContainerElementArrow arrow = ((ContainerMachine)guiContainer.container).arrow;
+		ContainerElementArrow arrow = guiContainer.container.arrow;
 		
 		if(arrow != null) {
 			arrow.drawArrow(guiContainer.getGuiLeft()+64, guiContainer.getGuiTop()+39, te.getTransferMode() == TransferMode.EXTRACTION);
@@ -69,7 +68,7 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 	public void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		
-		List<String> strs = geElementTank() != null? geElementTank().getHoverDesc(mouseX, mouseY, guiContainer) : new ArrayList<String>();
+		List<String> strs = geElementTank() != null? geElementTank().getHoverDesc(mouseX, mouseY, guiContainer) : new ArrayList<>();
 
 		if(strs.isEmpty()) {
 			for(GuiButton b : (List<GuiButton>)buttons) {
@@ -116,7 +115,7 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 		if(slot instanceof SlotHidable && guiContainer.container.getTileEntity() instanceof TileEntityInjector) {
 			TileEntityInjector te = (TileEntityInjector)guiContainer.container.getTileEntity();
 			IItemHandler h = ((SlotHidable)slot).getItemHandler();
-			return h == te.getInventory() || h == te.getOutput();
+			return h == te.getInventory() || h == te.output;
 		}
 		return false;
 	}

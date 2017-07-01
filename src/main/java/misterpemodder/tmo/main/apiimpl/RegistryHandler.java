@@ -6,9 +6,8 @@ import javax.annotation.Nullable;
 import misterpemodder.tmo.api.IStrongPistonBehavior;
 import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.api.block.ISlimeBlock;
+import misterpemodder.tmo.api.capability.io.IIOType;
 import misterpemodder.tmo.api.handler.ITMORegistryHandler;
-import misterpemodder.tmo.api.io.EnumIOType;
-import misterpemodder.tmo.api.io.IIOType;
 import misterpemodder.tmo.api.recipe.IDestabilizerRecipe;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe;
 import misterpemodder.tmo.api.recipe.IMachineRecipe;
@@ -24,7 +23,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.fml.common.registry.RegistryBuilder;
 
-public class RegistryHandler<V> implements ITMORegistryHandler {
+public class RegistryHandler implements ITMORegistryHandler {
 	
 	public static IForgeRegistry<IInjectorRecipe> injectorRecipesRegistry;
 	public static IForgeRegistry<IDestabilizerRecipe> crystalDestabilizerRecipesRegistry;
@@ -62,20 +61,15 @@ public class RegistryHandler<V> implements ITMORegistryHandler {
 	}
 	
 	@Override
-	public IIOType registerIOType(IIOType type) {
-		for(IIOType t : TooManyOresAPI.IO_TYPES) {
-			if(t.getID().equals(type.getID())) {
-				return t;
+	@SuppressWarnings("unchecked")
+	public <T> IIOType<T> registerIOType(IIOType<T> type) {
+		for(IIOType<?> t : TooManyOresAPI.IO_TYPES) {
+			if(t.getID().equals(type.getID()) && t.getCapabilityInstance().equals(type.getCapabilityInstance())) {
+				return (IIOType<T>) t;
 			}
 		}
 		TooManyOresAPI.IO_TYPES.add(type);
 		return type;
-	}
-	
-	public static void registerDefaultIOTypes() {
-		for(IIOType t : EnumIOType.values()) {
-			TooManyOresAPI.registryHandler.registerIOType(t);
-		}
 	}
 	
 	private <T extends IMachineRecipe<T>> void registerRecipe(T recipe, IForgeRegistry<T> registry) {

@@ -11,7 +11,6 @@ import misterpemodder.tmo.main.client.gui.RecipeClickableAreaTMO;
 import misterpemodder.tmo.main.compat.jei.destabilizer.RecipeCategoryDestabilizer;
 import misterpemodder.tmo.main.compat.jei.endermatter.RecipeCategoryEnderMatter;
 import misterpemodder.tmo.main.inventory.ContainerDestabilizer;
-import misterpemodder.tmo.main.inventory.ContainerMachine;
 import misterpemodder.tmo.main.inventory.elements.ContainerElementArrow;
 import misterpemodder.tmo.main.inventory.elements.ContainerElementTank;
 import misterpemodder.tmo.main.inventory.slot.IHidable;
@@ -24,7 +23,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.items.IItemHandler;
 
-public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEntityDestabilizer>{
+public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEntityDestabilizer> {
 
 	@Override
 	public TabID getTabID() {
@@ -44,7 +43,7 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 			geElementTank().drawTank(mouseX, mouseY, guiContainer);
 		}
 		
-		ContainerElementArrow arrow = ((ContainerMachine)guiContainer.container).arrow;
+		ContainerElementArrow arrow = guiContainer.container.arrow;
 		
 		if(arrow != null) {
 			arrow.drawArrow(guiContainer.getGuiLeft()+115, guiContainer.getGuiTop()+39, false);
@@ -67,7 +66,7 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 	public void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		
-		List<String> strs = this.geElementTank() != null? this.geElementTank().getHoverDesc(mouseX, mouseY, guiContainer) : new ArrayList<String>();
+		List<String> strs = this.geElementTank() != null? this.geElementTank().getHoverDesc(mouseX, mouseY, guiContainer) : new ArrayList<>();
 		
 		if(strs.isEmpty() && guiContainer.isPointInRegion(12, 83, 138, 6, mouseX, mouseY)) {
 			TileEntityDestabilizer te = (TileEntityDestabilizer) guiContainer.container.getTileEntity();

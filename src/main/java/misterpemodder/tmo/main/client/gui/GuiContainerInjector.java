@@ -20,8 +20,8 @@ public class GuiContainerInjector extends GuiContainerBase<ContainerInjector, Ti
 	}
 
 	@Override
-	public List<TabBase> registerTabs() {
-		List<TabBase> list = new ArrayList<>();
+	public List<TabBase<ContainerInjector, TileEntityInjector>> registerTabs() {
+		List<TabBase<ContainerInjector, TileEntityInjector>> list = new ArrayList<>();
 		list.add(new TabMainInjector());
 		list.add(new TabInfo<ContainerInjector, TileEntityInjector>(false));
 		list.add(new TabPlayerInventory<ContainerInjector, TileEntityInjector>());

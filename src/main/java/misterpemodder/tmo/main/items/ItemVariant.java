@@ -77,6 +77,7 @@ public abstract class ItemVariant {
 		}
 
 		@Override
+		@SuppressWarnings("unchecked")
 		public List<IngotVariant> getVariants() {
 			return ingotVariants;
 		}
@@ -95,6 +96,7 @@ public abstract class ItemVariant {
 		}
 
 		@Override
+		@SuppressWarnings("unchecked")
 		public List<GemVariant> getVariants() {
 			return gemVariants;
 		}
@@ -120,6 +122,7 @@ public abstract class ItemVariant {
 		}
 
 		@Override
+		@SuppressWarnings("unchecked")
 		public List<PlateVariant> getVariants() {
 			return plateVariants;
 		}
@@ -154,6 +157,7 @@ public abstract class ItemVariant {
 		}
 
 		@Override
+		@SuppressWarnings("unchecked")
 		public List<LockVariant> getVariants() {
 			return lockVariants;
 		}

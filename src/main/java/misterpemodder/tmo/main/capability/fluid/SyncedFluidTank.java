@@ -1,4 +1,4 @@
-package misterpemodder.tmo.main.capability;
+package misterpemodder.tmo.main.capability.fluid;
 
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import net.minecraftforge.fluids.Fluid;

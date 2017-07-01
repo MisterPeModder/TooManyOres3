@@ -35,9 +35,9 @@ public class ModItems {
 	
 	public enum TheItems  {
 		TAB_ICON(new ItemBase(EnumItemsNames.TAB_ICON, false)),
-		INGOT(new ItemMulti<ItemVariant.IngotVariant>(EnumItemsNames.INGOT, ItemVariant.IngotVariant.ingotVariants, "_ingot")),
-		GEM(new ItemMulti<ItemVariant.GemVariant>(EnumItemsNames.GEM, ItemVariant.GemVariant.gemVariants, "_gem")),
-		PLATE(new ItemMulti<ItemVariant.PlateVariant>(EnumItemsNames.PLATE, ItemVariant.PlateVariant.plateVariants, "_plate")),
+		INGOT(new ItemMulti<>(EnumItemsNames.INGOT, ItemVariant.IngotVariant.ingotVariants, "_ingot")),
+		GEM(new ItemMulti<>(EnumItemsNames.GEM, ItemVariant.GemVariant.gemVariants, "_gem")),
+		PLATE(new ItemMulti<>(EnumItemsNames.PLATE, ItemVariant.PlateVariant.plateVariants, "_plate")),
 		LOCK(new ItemLock()),
 		TITANIUM_BUCKET(new ItemTitaniumBucket()),
 		

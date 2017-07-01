@@ -13,6 +13,7 @@ import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.IIngredientBlacklist;
 import mezz.jei.api.ingredients.IIngredientRegistry;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
+import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import misterpemodder.tmo.main.Tmo;
@@ -50,7 +51,7 @@ import net.minecraftforge.oredict.OreDictionary;
 public class JeiPlugin implements IModPlugin {
 	
 	public static IJeiRuntime jeiRuntime;
-	private List<RecipeMaker> recipeMakers = new ArrayList<>();
+	private List<RecipeMaker<? extends IRecipeWrapper>> recipeMakers = new ArrayList<>();
 
 	@Override
 	public void registerItemSubtypes(ISubtypeRegistry subtypeRegistry) {}
@@ -131,7 +132,7 @@ public class JeiPlugin implements IModPlugin {
 	
 	private void makeRecipes(IModRegistry registry) {
 		IIngredientRegistry ingredientRegistry = registry.getIngredientRegistry();
-		for(RecipeMaker r : recipeMakers) {
+		for(RecipeMaker<? extends IRecipeWrapper> r : recipeMakers) {
 			registry.addRecipes(r.makeRecipe(ingredientRegistry));
 		}
 	}

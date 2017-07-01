@@ -4,10 +4,10 @@ import misterpemodder.tmo.api.block.ILockable;
 import misterpemodder.tmo.api.block.IWorldNameableModifiable;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest;
-import misterpemodder.tmo.main.capability.CapabilityOwner;
-import misterpemodder.tmo.main.capability.SyncedItemHandler;
-import misterpemodder.tmo.main.capability.ItemStackHandlerLockable;
-import misterpemodder.tmo.main.capability.OwnerHandlerUUID;
+import misterpemodder.tmo.main.capability.item.ItemStackHandlerLockable;
+import misterpemodder.tmo.main.capability.item.SyncedItemHandler;
+import misterpemodder.tmo.main.capability.owner.CapabilityOwner;
+import misterpemodder.tmo.main.capability.owner.OwnerHandlerUUID;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
 import misterpemodder.tmo.main.network.TMOPacketHandler;
 import misterpemodder.tmo.main.network.packet.PacketServerToClient;
@@ -25,6 +25,8 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+
+import static net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 
 public class TileEntityTitaniumChest extends TileEntityContainerBase implements ILockable, ITickable, IWorldNameableModifiable  {
 	
@@ -101,7 +103,7 @@ public class TileEntityTitaniumChest extends TileEntityContainerBase implements 
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 		if(this.hasCapability(capability, facing)) {
-			return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY? (T)inventory : (T)ownerHandler;
+			return capability == ITEM_HANDLER_CAPABILITY? ITEM_HANDLER_CAPABILITY.cast(inventory) : CapabilityOwner.OWNER_HANDLER_CAPABILITY.cast(ownerHandler);
 		}
 		return super.getCapability(capability, facing);
 	}

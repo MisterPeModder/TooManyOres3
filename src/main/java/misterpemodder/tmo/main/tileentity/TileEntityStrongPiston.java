@@ -65,7 +65,7 @@ public class TileEntityStrongPiston extends TileEntityPiston {
     }
 	
 	/**Fallback method to avoid as much as possible errors due to different mappings*/
-	public static Method tryFindMethod(Class clazz, String[] methodNames, Class returnType, Class... methodTypes) {
+	public static Method tryFindMethod(Class<?> clazz, String[] methodNames, Class<?> returnType, Class<?>... methodTypes) {
 		try {
 			return ReflectionHelper.findMethod(clazz, null, methodNames, methodTypes);
 		} catch(UnableToFindMethodException e) {
@@ -97,6 +97,7 @@ public class TileEntityStrongPiston extends TileEntityPiston {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
         if(compound.hasKey("contained_tile_entity")) {
@@ -156,6 +157,7 @@ public class TileEntityStrongPiston extends TileEntityPiston {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	protected ThreadLocal<EnumFacing> getMovingEntity() {
 		try {
 			return (ThreadLocal<EnumFacing>)moving_entity.get((TileEntityPiston) this);
@@ -297,7 +299,7 @@ public class TileEntityStrongPiston extends TileEntityPiston {
 
                         double d1 = 0.0D;
 
-                        for (int j = 0; j < ((List)list).size(); ++j) {
+                        for (int j = 0; j < list.size(); ++j) {
                             AxisAlignedBB axisalignedbb1 = this.getMovementArea(this.moveByPositionAndProgress((AxisAlignedBB)list.get(j)), enumfacing, d0);
                             AxisAlignedBB axisalignedbb2 = entity.getEntityBoundingBox();
 

@@ -1,6 +1,6 @@
 package misterpemodder.tmo.main.capability;
 
-import misterpemodder.tmo.api.owner.IOwnerHandler;
+import misterpemodder.tmo.api.capability.owner.IOwnerHandler;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
 import misterpemodder.tmo.main.network.TMOPacketHandler;
 import misterpemodder.tmo.main.network.packet.PacketServerToClient;

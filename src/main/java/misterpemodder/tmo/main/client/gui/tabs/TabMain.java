@@ -7,7 +7,7 @@ import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IWorldNameable;
 
-public abstract class TabMain<C extends ContainerBase<TE>, TE extends TileEntityContainerBase> extends TabBase {
+public abstract class TabMain<C extends ContainerBase<TE>, TE extends TileEntityContainerBase> extends TabBase<C, TE> {
 	
 	protected TabMain() {
 		super(TabPos.TOP_RIGHT);

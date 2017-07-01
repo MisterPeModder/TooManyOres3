@@ -5,13 +5,13 @@ import java.util.Map;
 import java.util.Random;
 
 import misterpemodder.tmo.api.block.ILockable;
-import misterpemodder.tmo.api.owner.IOwnerHandler;
+import misterpemodder.tmo.api.capability.owner.IOwnerHandler;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.BlockLamp;
 import misterpemodder.tmo.main.capability.CapabilityFreezing;
 import misterpemodder.tmo.main.capability.CapabilityFreezing.Freezing;
 import misterpemodder.tmo.main.capability.CapabilityFreezing.IFreezing;
-import misterpemodder.tmo.main.capability.CapabilityOwner;
+import misterpemodder.tmo.main.capability.owner.CapabilityOwner;
 import misterpemodder.tmo.main.enchant.EnchantementBase;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.init.ModPotions.ThePotions;
@@ -212,7 +212,7 @@ public class EventHandler {
 				
 				@Override
 				public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-					return capability == CapabilityFreezing.FREEZING_CAPABILITY? (T)freezingCap : null;
+					return capability == CapabilityFreezing.FREEZING_CAPABILITY? CapabilityFreezing.FREEZING_CAPABILITY.cast(freezingCap) : null;
 				}
 
 				@Override

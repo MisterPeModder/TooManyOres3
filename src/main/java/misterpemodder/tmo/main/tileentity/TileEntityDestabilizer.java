@@ -1,46 +1,49 @@
 package misterpemodder.tmo.main.tileentity;
 
+import java.util.Arrays;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import misterpemodder.tmo.api.TooManyOresAPI;
-import misterpemodder.tmo.api.io.EnumIOType;
 import misterpemodder.tmo.api.recipe.IDestabilizerRecipe;
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
 import misterpemodder.tmo.main.blocks.containers.BlockInjector;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
-import misterpemodder.tmo.main.capability.IOConfigHandlerMachine;
-import misterpemodder.tmo.main.capability.SyncedFluidTank;
-import misterpemodder.tmo.main.capability.SyncedItemHandler;
+import misterpemodder.tmo.main.capability.fluid.MachineFluidTank;
+import misterpemodder.tmo.main.capability.io.IOConfigHandlerMachine;
+import misterpemodder.tmo.main.capability.io.IOState;
+import misterpemodder.tmo.main.capability.item.CombinerItemStackHandlerMachine;
+import misterpemodder.tmo.main.capability.item.MachineItemStackHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityDestabilizer extends TileEntityMachine<IDestabilizerRecipe> {
 	
-	private ItemStackHandler ender;
-	private ItemStackHandler input;
-	private FluidTank tank;
+	private MachineItemStackHandler ender;
+	private MachineItemStackHandler input;
+	private MachineFluidTank tank;
 	private int enderMatterAmount;
 	
 	public static final int MAX_ENDER_MATTER = 1000;
 	
 	private final IOConfigHandlerMachine ioConfigHandler;
 	
+	
 	public TileEntityDestabilizer() {
 		super();
-		this.input = new SyncedItemHandler(this,1);
-		this.ender = new SyncedItemHandler(this, 1) {
+		this.ioConfigHandler = new IOConfigHandlerMachine(this, Arrays.asList(IOState.ENDER_MATTER), TooManyOresAPI.itemIoType, TooManyOresAPI.fluidIoType);
+		this.input = new MachineItemStackHandler(this, 1, true, false);
+		this.ender = new MachineItemStackHandler(this, 1, true, false) {
 			@Override
 			public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
 				if(!TooManyOresAPI.methodHandler.isEnderMatterItem(stack)) {
@@ -50,8 +53,21 @@ public class TileEntityDestabilizer extends TileEntityMachine<IDestabilizerRecip
 			}
 			
 		};
-		this.tank = new SyncedFluidTank(CAPACITY);
-		this.ioConfigHandler = new IOConfigHandlerMachine(this, EnumIOType.ITEM, EnumIOType.FLUID, EnumIOType.ENDER_MATTER);
+		this.tank = new MachineFluidTank(this, CAPACITY, false, true);
+	}
+	
+	@Override
+	protected IOStatesBuilder getIOStatesBuilder() {
+		
+		IOStatesBuilder builder = new IOStatesBuilder();
+		
+		builder.addPair(TooManyOresAPI.itemIoType, Pair.of(IOState.INPUT, this.input));
+		builder.addPair(TooManyOresAPI.itemIoType, Pair.of(IOState.ENDER_MATTER, this.ender));
+		builder.addPair(TooManyOresAPI.itemIoType, Pair.of(IOState.ALL, new CombinerItemStackHandlerMachine(this.input, this.ender)));
+		
+		builder.addPair(TooManyOresAPI.fluidIoType, Pair.of(IOState.OUTPUT, this.tank));
+		
+		return builder;
 	}
 	
 	@Override
@@ -101,29 +117,6 @@ public class TileEntityDestabilizer extends TileEntityMachine<IDestabilizerRecip
 			return !(side == facing);
 		}
 		return false;
-	}
-	
-	@Override
-	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-		if(isValidSide(facing)) {
-			if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-				return true;
-			}
-		}
-		return super.hasCapability(capability, facing);
-	}
-	
-	@Override
-	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		if(hasCapability(capability, facing)) {
-			if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-				return (T) (facing == EnumFacing.UP? this.input : this.ender);
-			}
-			else if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-				return (T) this.tank;
-			}
-		}
-		return super.getCapability(capability, facing);
 	}
 	
 	@Override
@@ -210,5 +203,4 @@ public class TileEntityDestabilizer extends TileEntityMachine<IDestabilizerRecip
 	public void emptyTank(short tankId) {
 		if(tankId == 0) this.tank.drain(TileEntityDestabilizer.CAPACITY, true);
 	}
-	
 }

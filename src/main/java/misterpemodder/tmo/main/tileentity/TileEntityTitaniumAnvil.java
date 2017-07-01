@@ -2,7 +2,7 @@ package misterpemodder.tmo.main.tileentity;
 
 import misterpemodder.tmo.api.item.IItemForgeHammer;
 import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.capability.SyncedItemHandler;
+import misterpemodder.tmo.main.capability.item.SyncedItemHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -62,7 +62,7 @@ public class TileEntityTitaniumAnvil extends TileEntityContainerBase {
 	
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY? (T)hammerItemHandler : super.getCapability(capability, facing);
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(hammerItemHandler) : super.getCapability(capability, facing);
 	}
 	
 	@Override

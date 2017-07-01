@@ -57,7 +57,7 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
     public IInventory craftResult;
     public IBaublesItemHandler baublesInv;
     
-	protected MutablePair<TabBase, TabBase> selectedTabs = new MutablePair<>();
+	protected MutablePair<TabBase<?, ?>, TabBase<?, ?>> selectedTabs = new MutablePair<>();
 	public EntityPlayer player;
 	
 	public final ImmutableList<ISyncedContainerElement> containerElements;
@@ -93,11 +93,11 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 		this.containerElements = builder.build();
 	}
 	
-	public ImmutablePair<TabBase, TabBase> getSelectedTabs() {
+	public ImmutablePair<TabBase<?, ?>, TabBase<?, ?>> getSelectedTabs() {
 		return ImmutablePair.of(selectedTabs.left, selectedTabs.right);
 	}
 	
-	public void setSelectedTabs(Pair<TabBase, TabBase> tabs) {
+	public void setSelectedTabs(Pair<TabBase<? extends ContainerBase<TE>, TE>, TabBase<? extends ContainerBase<TE>, TE>> tabs) {
 		 this.selectedTabs = MutablePair.of(tabs.getLeft(), tabs.getRight());
 	}
 
@@ -253,11 +253,10 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 		
-		if(player != null && player.isServerWorld() && te != null) {
+		if(player != null && player instanceof EntityPlayerMP && te != null) {
 			for(int i=0,s=containerElements.size(); i<s; i++) {
 				ISyncedContainerElement ce = containerElements.get(i);
 				if(ce.shouldSendDataToClient() || !elementsInitiated) {
-					elementsInitiated = false;
 					NBTTagCompound toSend = new NBTTagCompound();
 					toSend.setTag("element_data", ce.writeData(new NBTTagCompound()));
 					toSend.setInteger("element_id", i);
@@ -265,6 +264,7 @@ public abstract class ContainerBase<TE extends TileEntityContainerBase> extends 
 				}
 				
 			}
+			elementsInitiated = true;
 		}
 		
 	}

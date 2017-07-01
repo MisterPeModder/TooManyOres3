@@ -10,7 +10,7 @@ import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-public class TabRedstone<C extends ContainerBase<TE>, TE extends TileEntityContainerBase> extends TabBase {
+public class TabRedstone<C extends ContainerBase<TE>, TE extends TileEntityContainerBase> extends TabBase<C, TE> {
 
 	private final boolean isLarge;
 	

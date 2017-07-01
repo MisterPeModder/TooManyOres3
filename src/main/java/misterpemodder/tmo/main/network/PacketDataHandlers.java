@@ -165,8 +165,7 @@ public enum PacketDataHandlers implements IPacketDataHandler {
 			case MISC:
 				if(bId == ContainerElementTank.CLEAR_TANK_BUTTON_ID) {
 					if(te instanceof TileEntityMachine && info.hasKey("tank_id", Constants.NBT.TAG_SHORT)) {
-						//((TileEntityInjector)te).getTank().drain(TileEntityInjector.CAPACITY, true);
-						((TileEntityMachine)te).emptyTank(info.getShort("tank_id"));
+						((TileEntityMachine<?>)te).emptyTank(info.getShort("tank_id"));
 					}
 				}
 			break;
@@ -260,7 +259,7 @@ public enum PacketDataHandlers implements IPacketDataHandler {
 			
 			if(c instanceof ContainerBase) {
 				if(data.hasKey("element_id", Constants.NBT.TAG_INT)) {
-					ImmutableList<ISyncedContainerElement> elements = ((ContainerBase) c).containerElements;
+					ImmutableList<ISyncedContainerElement> elements = ((ContainerBase<?>) c).containerElements;
 					int id = data.getInteger("element_id");
 					if(id >= 0 && id < elements.size()) {
 						ISyncedContainerElement element = elements.get(id);
@@ -309,7 +308,7 @@ public enum PacketDataHandlers implements IPacketDataHandler {
 			NBTTagList configData = (NBTTagList) data.getTag("config");
 			
 			if(te != null && te instanceof TileEntityMachine) {
-				((TileEntityMachine) te).getIoConfigHandler().deserializeNBT(configData);
+				((TileEntityMachine<?>) te).getIoConfigHandler().deserializeNBT(configData);
 				if(toServer) {
 					data.removeTag("to_server");
 					data.removeTag("world_dim_id");

@@ -19,8 +19,8 @@ public class GuiContainerTitaniumAnvil extends GuiContainerBase<ContainerTitaniu
 	}
 
 	@Override
-	public List<TabBase> registerTabs() {
-		List<TabBase> list = new ArrayList<>();
+	public List<TabBase<ContainerTitaniumAnvil, TileEntityTitaniumAnvil>> registerTabs() {
+		List<TabBase<ContainerTitaniumAnvil, TileEntityTitaniumAnvil>> list = new ArrayList<>();
 		list.add(new TabMainTitaniumAnvil());
 		list.add(new TabInfo<ContainerTitaniumAnvil, TileEntityTitaniumAnvil>(false));
 		list.add(new TabPlayerInventory<ContainerTitaniumAnvil, TileEntityTitaniumAnvil>());

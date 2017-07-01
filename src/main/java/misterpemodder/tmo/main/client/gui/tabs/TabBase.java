@@ -40,7 +40,7 @@ public abstract class TabBase<C extends ContainerBase<TE>, TE extends TileEntity
 	
 	protected TabBase(TabPos pos) {
 		this.pos = pos;
-		buttons = new ArrayList<GuiButton>();
+		buttons = new ArrayList<>();
 	}
 	
 	public abstract TabID getTabID();
@@ -53,7 +53,7 @@ public abstract class TabBase<C extends ContainerBase<TE>, TE extends TileEntity
 	
 	public abstract boolean shouldDisplaySlot(IHidable slot);
 	
-	public MutablePair<TabBase, TabBase> forceTabConfig() {
+	public MutablePair<TabBase<C, TE>, TabBase<C, TE>> forceTabConfig() {
 		return this.guiContainer.getSelectedTabs();
 	}
 	
@@ -71,7 +71,7 @@ public abstract class TabBase<C extends ContainerBase<TE>, TE extends TileEntity
 		int px = tp == TabPos.TOP_RIGHT || tp == TabPos.BOTTOM_RIGHT? texture.dim.width-GuiContainerBase.TAB_OFFSET : GuiContainerBase.TAB_OFFSET-TabBase.WIDTH;
 		int py = tp == TabPos.BOTTOM_LEFT || tp == TabPos.BOTTOM_RIGHT? guiContainer.getBottomPartPos()-this.guiContainer.getGuiTop() : 0;
 		
-		for(TabBase t : guiContainer.getRegisteredTabs()) {
+		for(TabBase<C, TE> t : guiContainer.getRegisteredTabs()) {
 			if(t == this) break;
 			if(t.getTabPos() == this.getTabPos()) {
 				py += HEIGHT + 1;

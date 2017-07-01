@@ -22,7 +22,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.client.config.GuiUtils;
 
-public class TabSecurity<C extends ContainerBase<TE>, TE extends TileEntityContainerBase & ILockable> extends TabBase {
+public class TabSecurity<C extends ContainerBase<TE>, TE extends TileEntityContainerBase & ILockable> extends TabBase<C, TE> {
 	
 	public static final int LOCK_BUTTON_ID = 10;
 	private final boolean isLarge;

@@ -12,10 +12,10 @@ import net.minecraft.item.ItemBlock;
 public class BlockTMOStairs extends BlockStairs implements IBlockTMO {
 	
 	protected ItemBlock itemBlock;
-	protected BlockMulti baseBlock;
+	protected BlockMulti<?> baseBlock;
 	protected IBlockVariant variant;
 
-	public BlockTMOStairs(BlockMulti baseBlock, IBlockVariant variant) {
+	public BlockTMOStairs(BlockMulti<?> baseBlock, IBlockVariant variant) {
 		super(baseBlock.getStateFromVariant(variant));
 		this.variant = variant;
 		this.baseBlock = baseBlock;

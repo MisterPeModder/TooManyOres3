@@ -1,44 +1,58 @@
 package misterpemodder.tmo.main.tileentity;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 
 import misterpemodder.tmo.api.TooManyOresAPI;
-import misterpemodder.tmo.api.io.EnumIOType;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
 import misterpemodder.tmo.main.blocks.containers.BlockInjector;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
-import misterpemodder.tmo.main.capability.IOConfigHandlerMachine;
-import misterpemodder.tmo.main.capability.SyncedFluidTank;
-import misterpemodder.tmo.main.capability.SyncedItemHandler;
+import misterpemodder.tmo.main.capability.fluid.MachineFluidTank;
+import misterpemodder.tmo.main.capability.io.IOConfigHandlerMachine;
+import misterpemodder.tmo.main.capability.io.IOState;
+import misterpemodder.tmo.main.capability.item.CombinerItemStackHandlerMachine;
+import misterpemodder.tmo.main.capability.item.MachineItemStackHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityInjector extends TileEntityMachine<IInjectorRecipe> {
 	
-	private ItemStackHandler input;
-	private ItemStackHandler output;
-	private FluidTank tank;
+	public MachineItemStackHandler input;
+	public MachineItemStackHandler output;
+	public MachineFluidTank tank;
 	private TransferMode mode;
 	
 	private final IOConfigHandlerMachine ioConfigHandler;
 	
 	public TileEntityInjector() {
 		super();
-		this.input = new SyncedItemHandler(this,1);
-		this.output = new SyncedItemHandler(this, 1);
-		this.tank = new SyncedFluidTank(CAPACITY);
+		this.ioConfigHandler = new IOConfigHandlerMachine(this, null, TooManyOresAPI.itemIoType, TooManyOresAPI.fluidIoType);
+		this.input = new MachineItemStackHandler(this, 1, true, false);
+		this.output = new MachineItemStackHandler(this, 1, false, true);
+		
+		this.tank = new MachineFluidTank(this, CAPACITY);
 		this.mode = TransferMode.INJECTION;
-		this.ioConfigHandler = new IOConfigHandlerMachine(this, EnumIOType.ITEM, EnumIOType.FLUID);
+	}
+	
+	@Override
+	protected IOStatesBuilder getIOStatesBuilder() {
+		
+		IOStatesBuilder builder = new IOStatesBuilder();
+		
+		builder.addPair(TooManyOresAPI.itemIoType, Pair.of(IOState.INPUT, this.input));
+		builder.addPair(TooManyOresAPI.itemIoType, Pair.of(IOState.OUTPUT, this.output));
+		builder.addPair(TooManyOresAPI.itemIoType, Pair.of(IOState.ALL, new CombinerItemStackHandlerMachine(this.input, this.output)));
+		
+		builder.addPair(TooManyOresAPI.fluidIoType, Pair.of(IOState.ALL, this.tank));
+		
+		return builder;
 	}
 	
 	@Override
@@ -49,10 +63,6 @@ public class TileEntityInjector extends TileEntityMachine<IInjectorRecipe> {
 	@Override
 	public ItemStackHandler getInventory() {
 		return this.input;
-	}
-	
-	public ItemStackHandler getOutput() {
-		return this.output;
 	}
 	
 	public FluidTank getTank() {
@@ -96,29 +106,6 @@ public class TileEntityInjector extends TileEntityMachine<IInjectorRecipe> {
 	}
 	
 	@Override
-	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-		if(isValidSide(facing)) {
-			if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-				return true;
-			}
-		}
-		return super.hasCapability(capability, facing);
-	}
-	
-	@Override
-	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		if(hasCapability(capability, facing)) {
-			if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-				return (T) (facing == EnumFacing.DOWN? this.output : this.input);
-			}
-			else if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-				return (T) this.tank;
-			}
-		}
-		return super.getCapability(capability, facing);
-	}
-	
-	@Override
 	protected IForgeRegistry<IInjectorRecipe> getRecipeRegistry() {
 		return TooManyOresAPI.registryHandler.getInjectorRecipesRegistry();
 	}
@@ -146,7 +133,7 @@ public class TileEntityInjector extends TileEntityMachine<IInjectorRecipe> {
 				if(currentRecipe.getRecipeTransferType() == this.mode && currentRecipe.isValid(new FluidTank(tank.getFluid(), tank.getCapacity()), stack.copy())) {
 					if(progress >= currentRecipe.getTotalTime()) {
 						Triple<FluidStack, ItemStack,ItemStack> p = currentRecipe.onFinish(new FluidTank(tank.getFluid() == null? null : tank.getFluid().copy(), tank.getCapacity()), stack, this.output.getStackInSlot(0).copy());
-						ItemStack testStack = output.insertItem(0, p.getRight(), true);
+						ItemStack testStack = this.output.insertItem(0, p.getRight(), true);
 						if(testStack == ItemStack.EMPTY) {
 							this.tank.setFluid(p.getLeft());
 							this.input.setStackInSlot(0, p.getMiddle());

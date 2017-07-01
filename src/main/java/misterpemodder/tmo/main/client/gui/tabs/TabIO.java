@@ -9,28 +9,26 @@ import javax.annotation.Nullable;
 
 import org.apache.commons.lang3.tuple.MutablePair;
 
-import misterpemodder.tmo.api.io.IIOConfigHandler;
-import misterpemodder.tmo.api.io.IIOType;
+import misterpemodder.tmo.api.capability.io.IIOType;
 import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.blocks.base.BlockMachine;
+import misterpemodder.tmo.main.capability.io.IOConfigHandlerMachine;
+import misterpemodder.tmo.main.capability.io.IOState;
 import misterpemodder.tmo.main.client.gui.GuiButtonToggle;
 import misterpemodder.tmo.main.inventory.ContainerBase;
 import misterpemodder.tmo.main.inventory.slot.IHidable;
-import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
+import misterpemodder.tmo.main.tileentity.TileEntityMachine;
 import misterpemodder.tmo.main.utils.EnumBlockSide;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiUtils;
 
-public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityContainerBase> extends TabBase {
+public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine<?>> extends TabBase<C, TE> {
 	
 	public static final int INPUT_TYPE_BUTTON_ID = 30;
 	public static final int INPUT_CHANGE_LEFT_BUTTON_ID = 31;
@@ -46,10 +44,10 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityContainerBa
 	public static final int IO_LEFT_BUTTON_ID = 40;
 	public static final int IO_RIGHT_BUTTON_ID = 41;
 	
-	private final IIOConfigHandler configHandler;
+	private final IOConfigHandlerMachine configHandler;
 	private static int ioIndex = 0;
 
-	public TabIO(IIOConfigHandler configHandler) {
+	public TabIO(IOConfigHandlerMachine configHandler) {
 		super(TabPos.BOTTOM_LEFT);
 		this.configHandler = configHandler;
 	}
@@ -60,10 +58,10 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityContainerBa
 	}
 	
 	@Override
-	public MutablePair<TabBase,TabBase> forceTabConfig() {
-		for(TabBase tab : (List<TabBase>)guiContainer.getRegisteredTabs()) {
+	public MutablePair<TabBase<C, TE>, TabBase<C, TE>> forceTabConfig() {
+		for(TabBase<C, TE> tab : guiContainer.getRegisteredTabs()) {
 			if(tab instanceof TabMain) {
-				return MutablePair.of(tab, (TabBase) this);
+				return MutablePair.of(tab, this);
 			}
 		}
 		return super.forceTabConfig();
@@ -107,21 +105,14 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityContainerBa
 					int y_offset = guiContainer.getBottomPartPos()-guiContainer.getGuiTop();
 					guiContainer.drawString(fontrenderer, side.getLocalizedName(), 9, y_offset+9, 0xFFFFFF);
 					
-					IIOType type = getSelectedIOType();
-					EnumFacing facing = side.toFacing(getMachineFacing());
-					boolean isInput = configHandler.isSideInput(facing, type);
-					boolean isOutput = configHandler.isSideOutput(facing, type);
-					
-					int state = isInput == isOutput? (isInput? 3 : 0) : (isInput? 1 : 2);
-					TextFormatting color = state == 0? TextFormatting.GRAY : state == 1? TextFormatting.AQUA : state == 2? TextFormatting.GOLD : TextFormatting.GREEN;
-					
-					guiContainer.drawString(fontrenderer, color + Tmo.proxy.translate("gui.tab.io.state."+state), 9, y_offset+60, 0xFFFFFF);
+					IIOType<?> type = getSelectedIOType();
+					guiContainer.drawString(fontrenderer, configHandler.getIOStateConfig(side, type).getLocalizedNameColored(), 9, y_offset+60, 0xFFFFFF);
 				}
 			}
 		}
 	}
 	
-	private IIOType getSelectedIOType() {
+	private IIOType<?> getSelectedIOType() {
 		if(ioIndex < 0 || ioIndex >= configHandler.getValidIOTypes().length) {
 			ioIndex = 0;
 		}
@@ -190,16 +181,6 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityContainerBa
 		}
 	}
 	
-	private EnumFacing getMachineFacing() {
-		TileEntityContainerBase te = guiContainer.container.getTileEntity();
-		IBlockState state = te.getWorld().getBlockState(te.getPos());
-		if(state.getValue(BlockMachine.FACING) != null) {
-			return state.getValue(BlockMachine.FACING);
-		} else {
-			return EnumFacing.NORTH;
-		}
-	}
-	
 	@Nullable
 	private EnumBlockSide getButtonSide(int buttonID) {
 		EnumBlockSide side = null;
@@ -228,29 +209,34 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityContainerBa
 	
 	private void changeIOConfig(int buttonID) {
 		EnumBlockSide side = getButtonSide(buttonID);
-		if(side == null) return;
-		EnumFacing facing = side.toFacing(getMachineFacing());
-		IIOType type = getSelectedIOType();
-		boolean isInput = configHandler.isSideInput(facing, type);
-		boolean isOutput = configHandler.isSideOutput(facing, type);
+		if(side == null || guiContainer.container.getTileEntity() == null) return;
+		IIOType<?> type = getSelectedIOType();
+		boolean shift = GuiScreen.isShiftKeyDown();
 		
-		if(GuiScreen.isShiftKeyDown()) {
-			isInput = true;
-			isOutput = true;
+		List<IOState> states = ((TileEntityMachine<?>)guiContainer.container.getTileEntity()).getIOStatesForIOType().get(type);
+		IOState state = configHandler.getIOStateConfig(side, type);
+		IOState nextState = IOState.DISABLED;
+			
+		if(!shift && !states.isEmpty()) {
+			if(states.contains(state)) {
+				int i = states.indexOf(state)+1;
+				nextState = i >= states.size()? IOState.DISABLED : states.get(i);
+			} else if(state == IOState.DISABLED) {
+				nextState = states.get(0);
+			}
 		}
-		
-		configHandler.setIOTypeConfig(facing , type, (isInput == isOutput?(isInput? false : true):(isInput? false : true)), (isInput == isOutput? false : true));
+		configHandler.setIOStateConfig(side, type, nextState);
 	}
 	
 	private void resetConfig(boolean resetAllTypes) {
-		for(EnumFacing facing : EnumFacing.values()) {
+		for(EnumBlockSide side : EnumBlockSide.values()) {
 			if(resetAllTypes) {
-				for(IIOType type : configHandler.getValidIOTypes()) {
-					configHandler.setIOTypeConfig(facing , type, false, false);
+				for(IIOType<?> type : configHandler.getValidIOTypes()) {
+					configHandler.setIOStateConfig(side , type, IOState.DISABLED);
 				}
 			}
 			else {
-				configHandler.setIOTypeConfig(facing , getSelectedIOType(), false, false);
+				configHandler.setIOStateConfig(side , getSelectedIOType(), IOState.DISABLED);
 			}
 		}
 	}

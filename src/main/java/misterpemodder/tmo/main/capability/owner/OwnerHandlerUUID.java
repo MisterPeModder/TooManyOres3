@@ -1,4 +1,4 @@
-package misterpemodder.tmo.main.capability;
+package misterpemodder.tmo.main.capability.owner;
 
 import java.util.UUID;
 
@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 import com.mojang.authlib.GameProfile;
 
-import misterpemodder.tmo.api.owner.IOwnerHandler;
+import misterpemodder.tmo.api.capability.owner.IOwnerHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;

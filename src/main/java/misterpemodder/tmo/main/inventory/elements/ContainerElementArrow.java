@@ -15,13 +15,13 @@ public class ContainerElementArrow implements ISyncedContainerElement {
 	
 	private int lastProgress;
 	private boolean hasRecipe;
-	private TileEntityMachine te;
+	private TileEntityMachine<?> te;
 	
 	public static final ResourceLocation TEXTURE = new ResourceLocationTmo("textures/gui/container/misc.png");
 	public static final int WIDTH = 28;
 	public static final int HEIGHT = 21;
 	
-	public ContainerElementArrow(TileEntityMachine te) {
+	public ContainerElementArrow(TileEntityMachine<?> te) {
 		this.te = te;
 		this.lastProgress = te.getProgress();
 		this.hasRecipe = te.getCurrentRecipe() != null;

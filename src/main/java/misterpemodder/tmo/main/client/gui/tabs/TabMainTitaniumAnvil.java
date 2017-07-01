@@ -48,7 +48,7 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
 	}
     
     @Override
-    public void setGuiContainer(GuiContainerBase guiContainer) {
+    public void setGuiContainer(GuiContainerBase<ContainerTitaniumAnvil, TileEntityTitaniumAnvil> guiContainer) {
     	super.setGuiContainer(guiContainer);
     	this.anvil = (ContainerTitaniumAnvil)this.guiContainer.container;
     }

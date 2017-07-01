@@ -51,7 +51,7 @@ public class ItemBlockMulti extends ItemBlockBase {
 	@Override
 	public EnumRarity getRarity(ItemStack stack) {
 		int meta = stack.getMetadata();
-		EnumRarity r = ((IBlockVariant) ((BlockMulti)this.getBlock()).getVariant(meta)).getRarity();
+		EnumRarity r = ((IBlockVariant) ((BlockMulti<?>)this.getBlock()).getVariant(meta)).getRarity();
 		return r == EnumRarity.COMMON? super.getRarity(stack) : r;
 	}
 	

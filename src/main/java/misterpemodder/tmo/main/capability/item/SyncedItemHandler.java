@@ -1,11 +1,11 @@
-package misterpemodder.tmo.main.capability;
+package misterpemodder.tmo.main.capability.item;
 
 import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class SyncedItemHandler extends ItemStackHandler {
 	
-	private TileEntityContainerBase te;
+	protected TileEntityContainerBase te;
 	
 	public SyncedItemHandler(TileEntityContainerBase te, int size) {
 		super(size);

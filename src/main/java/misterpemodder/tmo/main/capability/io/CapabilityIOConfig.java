@@ -1,7 +1,7 @@
-package misterpemodder.tmo.main.capability;
+package misterpemodder.tmo.main.capability.io;
 
-import misterpemodder.tmo.api.io.DefaultIOConfigHandler;
-import misterpemodder.tmo.api.io.IIOConfigHandler;
+import misterpemodder.tmo.api.capability.io.DefaultIOConfigHandler;
+import misterpemodder.tmo.api.capability.io.IIOConfigHandler;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -24,5 +24,5 @@ public class CapabilityIOConfig {
 			public void readNBT(Capability<IIOConfigHandler> capability, IIOConfigHandler instance, EnumFacing side, NBTBase nbt) {}
 		}, DefaultIOConfigHandler.class);
 	 }
-
+	 
 }

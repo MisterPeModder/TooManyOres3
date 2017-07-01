@@ -37,7 +37,7 @@ public class ContainerTitaniumChest extends ContainerBase<TileEntityTitaniumChes
 	
 	@Override
 	protected List<Integer> getDefaultSlotIndexes() {
-		return new ArrayList<Integer>();
+		return new ArrayList<>();
 	}
 	
 	@Override

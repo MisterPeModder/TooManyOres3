@@ -26,8 +26,9 @@ import misterpemodder.tmo.main.apiimpl.EnderMatterItems;
 import misterpemodder.tmo.main.apiimpl.MethodHandler;
 import misterpemodder.tmo.main.apiimpl.RegistryHandler;
 import misterpemodder.tmo.main.apiimpl.SlimeBlock;
+import misterpemodder.tmo.main.apiimpl.io.IOType;
 import misterpemodder.tmo.main.capability.CapabilityFreezing;
-import misterpemodder.tmo.main.capability.CapabilityOwner;
+import misterpemodder.tmo.main.capability.owner.CapabilityOwner;
 import misterpemodder.tmo.main.commands.CommandTMO;
 import misterpemodder.tmo.main.compat.aa.ActAddCompat;
 import misterpemodder.tmo.main.compat.craftingtweaks.CraftingTweaksCompat;
@@ -80,7 +81,7 @@ public class Tmo {
 		TooManyOresAPI.methodHandler = new MethodHandler();
 		TooManyOresAPI.registryHandler = new RegistryHandler();
 		
-		RegistryHandler.registerDefaultIOTypes();
+		IOType.registerDefaultIOTypes();
 		
 		CapabilityOwner.register();
 		CapabilityFreezing.register();
