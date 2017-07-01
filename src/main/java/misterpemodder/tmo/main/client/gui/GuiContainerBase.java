@@ -217,6 +217,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		    	for(RecipeClickableAreaTMO r : list) {
 		    		if(r.checkHover(mouseX, mouseY)) {
 		    			JeiPlugin.jeiRuntime.getRecipesGui().showCategories(r.getRecipeCategoryUids());
+		    			this.onGuiClosed();
 		    		}
 		    	}
 			}
@@ -242,6 +243,9 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	public void onGuiClosed() {
 		this.selectedTabs.left.onGuiClosed();
 		this.selectedTabs.right.onGuiClosed();
+		
+		this.selectedTabs.left.getButtonsList().clear();
+		this.selectedTabs.right.getButtonsList().clear();
 		super.onGuiClosed();
 	}
 	
