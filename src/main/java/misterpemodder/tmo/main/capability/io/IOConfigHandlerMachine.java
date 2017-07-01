@@ -156,7 +156,10 @@ public class IOConfigHandlerMachine implements IIOConfigHandler, INBTSerializabl
 	}
 	
 	private EnumFacing getMachineFacing() {
-		EnumFacing facing = te.getWorld().getBlockState(this.te.getPos()).getValue(BlockMachine.FACING);
+		EnumFacing facing = null;
+		if(te.hasWorld()) {
+			facing = te.getWorld().getBlockState(this.te.getPos()).getValue(BlockMachine.FACING);
+		}
 		return facing == null? EnumFacing.NORTH : facing;
 	}
 	
