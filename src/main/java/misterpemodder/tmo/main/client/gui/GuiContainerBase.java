@@ -85,8 +85,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	
 	@Override
 	public void setWorldAndResolution(Minecraft mc, int width, int height) {
-		this.selectedTabs.left.getButtonsList().clear();
-		this.selectedTabs.right.getButtonsList().clear();
+		tabs.forEach(t -> t.getButtonsList().clear());
 		super.setWorldAndResolution(mc, width, height);
     }
 	
@@ -147,7 +146,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		Point uv = enabled? texture.enabledCoords : texture.disabledCoords;
 		Point coords = tab.getPos();
 		this.mc.getTextureManager().bindTexture(tab.getTabTexture().tabTexture);
-		Gui.drawModalRectWithCustomSizedTexture(this.getGuiLeft()+coords.x , this.getGuiTop()+coords.y, (float) uv.x, (float) uv.y, TabBase.WIDTH, TabBase.HEIGHT, 128F, 128F);
+		Gui.drawModalRectWithCustomSizedTexture(this.getGuiLeft()+coords.x , this.getGuiTop()+coords.y, uv.x, uv.y, TabBase.WIDTH, TabBase.HEIGHT, 128F, 128F);
 	}
 	
 	@Override
@@ -251,8 +250,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		this.selectedTabs.left.onGuiClosed();
 		this.selectedTabs.right.onGuiClosed();
 		
-		this.selectedTabs.left.getButtonsList().clear();
-		this.selectedTabs.right.getButtonsList().clear();
+		tabs.forEach(t -> t.getButtonsList().clear());
 		super.onGuiClosed();
 	}
 	
