@@ -52,9 +52,9 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 		
 		TileEntityInjector te = getTileEntity();
 		
-		if(geElementTank() != null) {
+		if(getElementTank() != null) {
 			
-			geElementTank().drawTank(mouseX, mouseY, guiContainer);
+			getElementTank().drawTank(mouseX, mouseY, guiContainer);
 		}
 		
 		ContainerElementArrow arrow = guiContainer.container.arrow;
@@ -68,7 +68,7 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 	public void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		
-		List<String> strs = geElementTank() != null? geElementTank().getHoverDesc(mouseX, mouseY, guiContainer) : new ArrayList<>();
+		List<String> strs = getElementTank() != null? getElementTank().getHoverDesc(mouseX, mouseY, guiContainer) : new ArrayList<>();
 
 		if(strs.isEmpty()) {
 			for(GuiButton b : buttons) {
@@ -91,7 +91,7 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 	
 	@Override
 	public void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-		if(geElementTank() == null || !geElementTank().mouseClicked(mouseX, mouseY, mouseButton, guiContainer)) {
+		if(getElementTank() == null || !getElementTank().mouseClicked(mouseX, mouseY, mouseButton, guiContainer)) {
 			super.mouseClicked(mouseX, mouseY, mouseButton);
 		}
 	}
@@ -171,7 +171,7 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 		
 	}
 	
-	private ContainerElementTank geElementTank() {
+	private ContainerElementTank getElementTank() {
 		return guiContainer.container.tank;
 	}
 
