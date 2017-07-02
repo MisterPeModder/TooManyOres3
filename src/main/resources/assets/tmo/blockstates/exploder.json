@@ -14,8 +14,8 @@
 		},
 		"variant": {
 			"normal": {},
-			"fiery": {"textures": {"3": "tmo:blocks/exploder_fiery"}},
-			"supercharged": {"textures": {"3": "tmo:blocks/exploder_supercharged"}}
+			"fiery": {"textures": {"2": "tmo:blocks/exploder_fiery"}},
+			"supercharged": {"textures": {"2": "tmo:blocks/exploder_supercharged"}}
 		}
     }
 }
