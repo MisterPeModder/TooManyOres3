@@ -14,6 +14,7 @@ import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.capability.io.IOConfigHandlerMachine;
 import misterpemodder.tmo.main.capability.io.IOState;
 import misterpemodder.tmo.main.client.gui.GuiButtonToggle;
+import misterpemodder.tmo.main.client.gui.GuiContainerBase;
 import misterpemodder.tmo.main.inventory.ContainerBase;
 import misterpemodder.tmo.main.inventory.slot.IHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityMachine;
@@ -27,7 +28,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.fml.client.config.GuiUtils;
 
 public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine<?>> extends TabBase<C, TE> {
 	
@@ -103,7 +103,7 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine<?>>
 					String key = "gui.tab.io.reset.desc.";
 					List<String> text = Arrays.asList(TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate(key+"1"), TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate(key+"2"));
 					int textWidth = Math.max(fontrenderer.getStringWidth(text.get(0)), fontrenderer.getStringWidth(text.get(1)));
-					GuiUtils.drawHoveringText(text, mouseX-guiContainer.getGuiLeft(), mouseY-guiContainer.getGuiTop(), guiContainer.width, guiContainer.height, Math.min(textWidth, 250), guiContainer.getFontRenderer());
+					GuiContainerBase.addHoveringText(text, Math.min(textWidth, 250));
 				}
 			}
 			EnumBlockSide side = getButtonSide(button.id);

@@ -30,10 +30,13 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.client.config.GuiUtils;
 
 public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends TileEntityContainerBase> extends GuiContainer {
 	
 	public static final int TAB_OFFSET = 4;
+	private static List<String> hoveringText;
+	private static int hoveringTextMaxWidth;
 	public C container;
 	
 	protected MutablePair<TabBase<C, TE>, TabBase<C, TE>> selectedTabs;
@@ -44,6 +47,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	
 	private short ctButtonsState = -1;
 	private List<GuiButton> ctButtons = new ArrayList<>();
+	
 	
 	public GuiContainerBase(C container) {
 		super(container);
@@ -168,7 +172,7 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		    RenderHelper.disableStandardItemLighting();
 		    if(isPointInRegion(tab.getPos().x+1, tab.getPos().y, TabBase.WIDTH, TabBase.HEIGHT-1, mouseX, mouseY)) {
 		    	flag = false;
-		    	drawCreativeTabHoveringText(Tmo.proxy.translate(tab.getUnlocalizedName()), mouseX-this.getGuiLeft(), mouseY-this.getGuiTop());
+		    	addHoveringText(Tmo.proxy.translate(tab.getUnlocalizedName()));
 		    }
 	    }
 	    
@@ -178,9 +182,14 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 	    	List<RecipeClickableAreaTMO> list = getRecipeClickableAreas();
 	    	for(RecipeClickableAreaTMO r : list) {
 	    		if(r.checkHover(mouseX, mouseY)) {
-	    			drawCreativeTabHoveringText(Tmo.proxy.translate("jei.tooltip.show.recipes"), mouseX-this.getGuiLeft(), mouseY-this.getGuiTop());
+	    			addHoveringText(Tmo.proxy.translate("jei.tooltip.show.recipes"));
 	    		}
 	    	}
+	    }
+	    
+	    if(hoveringText != null && !hoveringText.isEmpty()) {
+	    	GuiUtils.drawHoveringText(hoveringText, mouseX-this.getGuiLeft(), mouseY-this.getGuiTop(), this.width, this.height, hoveringTextMaxWidth, fontRendererObj);
+	    	hoveringText = null;
 	    }
 	    
 	}
@@ -323,6 +332,17 @@ public abstract class GuiContainerBase<C extends ContainerBase<TE>, TE extends T
 		}
 		else if(selectedButtonsRight.contains(button)) {
 			this.selectedTabs.right.onButtonClicked(button);
+		}
+	}
+	
+	public static void addHoveringText(String str) {
+		addHoveringText(Arrays.asList(str), -1);
+	}
+	
+	public static void addHoveringText(List<String> strs, int maxWidth) {
+		if(strs != null && !strs.isEmpty()) {
+			hoveringText = strs;
+			hoveringTextMaxWidth = maxWidth;
 		}
 	}
 	

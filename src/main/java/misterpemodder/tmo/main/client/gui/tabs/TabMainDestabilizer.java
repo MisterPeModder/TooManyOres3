@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import misterpemodder.tmo.main.Tmo;
+import misterpemodder.tmo.main.client.gui.GuiContainerBase;
 import misterpemodder.tmo.main.client.gui.RecipeClickableAreaTMO;
 import misterpemodder.tmo.main.compat.jei.destabilizer.RecipeCategoryDestabilizer;
 import misterpemodder.tmo.main.compat.jei.endermatter.RecipeCategoryEnderMatter;
@@ -20,7 +21,6 @@ import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.items.IItemHandler;
 
 public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEntityDestabilizer> {
@@ -76,7 +76,7 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 		}
 		
 		if(!strs.isEmpty()) {
-			GuiUtils.drawHoveringText(strs, mouseX-guiContainer.getGuiLeft(), mouseY-guiContainer.getGuiTop(), guiContainer.width, guiContainer.height, 200, guiContainer.getFontRenderer());
+			GuiContainerBase.addHoveringText(strs, 250);
 		}
 
 	}

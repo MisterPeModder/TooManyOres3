@@ -33,7 +33,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.items.ItemStackHandler;
 
 
@@ -138,10 +137,10 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
 		
 		guiContainer.getFontRenderer().drawString(Tmo.proxy.translate("gui.tab.titaniumAnvil.name"), 8, 6, 4210752);
 		if(guiContainer.isPointInRegion(45, 26, 16, 16, mouseX, mouseY) && !guiContainer.container.getSlot(41).getHasStack()) {
-    		GuiUtils.drawHoveringText(Arrays.asList(Tmo.proxy.translate("gui.slot.hammer.name")), mouseX-guiContainer.getGuiLeft(), mouseY-guiContainer.getGuiTop(), guiContainer.width, guiContainer.height, 200, guiContainer.getFontRenderer());
+			GuiContainerBase.addHoveringText(Arrays.asList(Tmo.proxy.translate("gui.slot.hammer.name")), 250);
 	    }
 		else if(guiContainer.isPointInRegion(nameField.xPosition-guiContainer.getGuiLeft(), nameField.yPosition-guiContainer.getGuiTop(), nameField.width, nameField.height, mouseX, mouseY) && !nameField.getText().isEmpty()) {
-			GuiUtils.drawHoveringText(Arrays.asList(TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate("gui.anvil.nameField.clear")), mouseX-guiContainer.getGuiLeft(), mouseY-guiContainer.getGuiTop(), guiContainer.width, guiContainer.height, 200, guiContainer.getFontRenderer());
+			GuiContainerBase.addHoveringText(Arrays.asList(TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate("gui.anvil.nameField.clear")), 250);
 		}
 
         int maximumCost = guiContainer.container.maximumCost;

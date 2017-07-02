@@ -7,6 +7,7 @@ import java.util.Arrays;
 import misterpemodder.tmo.api.block.ILockable;
 import misterpemodder.tmo.api.item.IItemLock;
 import misterpemodder.tmo.main.Tmo;
+import misterpemodder.tmo.main.client.gui.GuiContainerBase;
 import misterpemodder.tmo.main.inventory.ContainerBase;
 import misterpemodder.tmo.main.inventory.slot.IHidable;
 import misterpemodder.tmo.main.inventory.slot.SlotHidable;
@@ -19,7 +20,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fml.client.config.GuiUtils;
 
 public class TabSecurity<C extends ContainerBase<TE>, TE extends TileEntityContainerBase & ILockable> extends TabBase<C, TE> {
 	
@@ -106,7 +106,7 @@ public class TabSecurity<C extends ContainerBase<TE>, TE extends TileEntityConta
 	public void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		if(guiContainer.isPointInRegion(8, 18, 16, 16, mouseX, mouseY)) {
-    		GuiUtils.drawHoveringText(Arrays.asList(Tmo.proxy.translate("gui.slot.lock.name"), Tmo.proxy.translate("gui.slot.lock.desc")), mouseX-guiContainer.getGuiLeft(), mouseY-guiContainer.getGuiTop(), guiContainer.width, guiContainer.height, 200, guiContainer.getFontRenderer());
+			GuiContainerBase.addHoveringText(Arrays.asList(Tmo.proxy.translate("gui.slot.lock.name"), Tmo.proxy.translate("gui.slot.lock.desc")), 250);
 	    }
 	}
 	
