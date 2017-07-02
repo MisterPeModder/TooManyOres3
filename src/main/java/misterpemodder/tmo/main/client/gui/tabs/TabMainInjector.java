@@ -50,7 +50,7 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 	public void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 		
-		TileEntityInjector te = (TileEntityInjector)guiContainer.container.getTileEntity();
+		TileEntityInjector te = getTileEntity();
 		
 		if(geElementTank() != null) {
 			
@@ -71,14 +71,14 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 		List<String> strs = geElementTank() != null? geElementTank().getHoverDesc(mouseX, mouseY, guiContainer) : new ArrayList<>();
 
 		if(strs.isEmpty()) {
-			for(GuiButton b : (List<GuiButton>)buttons) {
+			for(GuiButton b : buttons) {
 				if(b.id == TOGGLE_MODE_BUTTON_ID && b instanceof TransferModeButton) {
 					if(b.isMouseOver()) {
 						strs.add(((TransferModeButton)b).mode == TransferMode.INJECTION? TextFormatting.AQUA+Tmo.proxy.translate("gui.injecter.mode.injection") : TextFormatting.GOLD+Tmo.proxy.translate("gui.injecter.mode.extraction"));
 						strs.add(TextFormatting.GRAY+""+ TextFormatting.ITALIC+"-"+Tmo.proxy.translate("gui.injecter.mode.desc")+"-");
 					}
 						
-					((TransferModeButton)b).mode = ((TileEntityInjector)guiContainer.container.getTileEntity()).getTransferMode();
+					((TransferModeButton)b).mode = getTileEntity().getTransferMode();
 				}
 			}
 		}
@@ -98,22 +98,22 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 	
 	@Override
 	public void initButtons(int topX, int topY) {
-		buttons.add(new TransferModeButton(TOGGLE_MODE_BUTTON_ID, topX+68, topY+64, 20, 20, ((TileEntityInjector)guiContainer.container.getTileEntity()).getTransferMode()));
+		buttons.add(new TransferModeButton(TOGGLE_MODE_BUTTON_ID, topX+68, topY+64, 20, 20, getTileEntity().getTransferMode()));
 	}
 	
 	@Override
 	public void updateButtons() {
-		for(GuiButton b : (List<GuiButton>)buttons) {
+		for(GuiButton b : buttons) {
 			if(b.id == TOGGLE_MODE_BUTTON_ID && b instanceof TransferModeButton) {
-				((TransferModeButton)b).mode = ((TileEntityInjector)guiContainer.container.getTileEntity()).getTransferMode();
+				((TransferModeButton)b).mode = getTileEntity().getTransferMode();
 			}
 		}
 	}
 	
 	@Override
 	public boolean shouldDisplaySlot(IHidable slot) {
-		if(slot instanceof SlotHidable && guiContainer.container.getTileEntity() instanceof TileEntityInjector) {
-			TileEntityInjector te = (TileEntityInjector)guiContainer.container.getTileEntity();
+		if(slot instanceof SlotHidable) {
+			TileEntityInjector te = getTileEntity();
 			IItemHandler h = ((SlotHidable)slot).getItemHandler();
 			return h == te.getInventory() || h == te.output;
 		}
@@ -127,7 +127,7 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 			NBTTagCompound data = new NBTTagCompound();
 			TransferMode newMode = b.mode == TransferMode.INJECTION? TransferMode.EXTRACTION : TransferMode.INJECTION;
 			data.setInteger("mode", newMode.ordinal());
-			TabBase.sendButtonPacket(getTabID(), TOGGLE_MODE_BUTTON_ID, guiContainer.mc.world, guiContainer.container.getTileEntity().getPos(), data);
+			TabBase.sendButtonPacket(getTabID(), TOGGLE_MODE_BUTTON_ID, guiContainer.mc.world, getTileEntity().getPos(), data);
 		}
 	}
 	
@@ -172,7 +172,7 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 	}
 	
 	private ContainerElementTank geElementTank() {
-		return ((ContainerInjector)guiContainer.container).tank;
+		return guiContainer.container.tank;
 	}
 
 }

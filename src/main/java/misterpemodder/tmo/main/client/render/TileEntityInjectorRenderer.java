@@ -48,7 +48,7 @@ public class TileEntityInjectorRenderer extends TileEntitySpecialRenderer<TileEn
             	j = (int) facing.getHorizontalAngle();
             }
                 
-            GlStateManager.rotate((float)j, 0.0F, 1.0F, 0.0F);
+            GlStateManager.rotate(j, 0.0F, 1.0F, 0.0F);
             GlStateManager.translate(-0.5F, -0.5F, -0.5F);
         	
             GlStateManager.disableLighting();

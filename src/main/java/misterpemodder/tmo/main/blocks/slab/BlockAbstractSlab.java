@@ -70,10 +70,10 @@ public abstract class BlockAbstractSlab<V extends Enum<V> & IBlockVariant> exten
 	
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		if(isDouble()) return getDefaultState().withProperty(getPropertyVariant(), (V) getVariant(meta));
+		if(isDouble()) return getDefaultState().withProperty(getPropertyVariant(), getVariant(meta));
 		int isTop = meta%2;
 		IBlockState s = getDefaultState().withProperty(HALF, isTop == 1? EnumBlockHalf.TOP:EnumBlockHalf.BOTTOM);
-	    return s.withProperty(getPropertyVariant(), (V) getVariant((meta-isTop)/2));
+	    return s.withProperty(getPropertyVariant(), getVariant((meta-isTop)/2));
 	}
 	
 	@Override
@@ -123,7 +123,7 @@ public abstract class BlockAbstractSlab<V extends Enum<V> & IBlockVariant> exten
     	if(this.isDouble()) return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer);
 
         IBlockState iblockstate = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(HALF, BlockAbstractSlab.EnumBlockHalf.BOTTOM);
-        return facing != EnumFacing.DOWN && (facing == EnumFacing.UP || (double)hitY <= 0.5D) ? iblockstate : iblockstate.withProperty(HALF, BlockAbstractSlab.EnumBlockHalf.TOP);
+        return facing != EnumFacing.DOWN && (facing == EnumFacing.UP || hitY <= 0.5D) ? iblockstate : iblockstate.withProperty(HALF, BlockAbstractSlab.EnumBlockHalf.TOP);
     }
 
     @Override

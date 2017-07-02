@@ -152,7 +152,7 @@ public class BlockTitaniumAnvil extends BlockTileEntity<TileEntityTitaniumAnvil>
             if (worldIn.isAreaLoaded(pos.add(-32, -32, -32), pos.add(32, 32, 32))) {
                 if (!worldIn.isRemote) {
                     
-                    EntityFallingBlock entityfallingblock = new EntityFallingBlock(worldIn, (double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, worldIn.getBlockState(pos));
+                    EntityFallingBlock entityfallingblock = new EntityFallingBlock(worldIn, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, worldIn.getBlockState(pos));
                     entityfallingblock.setHurtEntities(true);
                     worldIn.spawnEntity(entityfallingblock);
                 }

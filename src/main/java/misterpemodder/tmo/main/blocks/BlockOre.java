@@ -80,7 +80,7 @@ public class BlockOre extends BlockMulti<EnumVariant> {
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(VARIANT, (EnumVariant) getVariant(meta));
+		return getDefaultState().withProperty(VARIANT, getVariant(meta));
 	}
 
 	@Override

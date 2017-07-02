@@ -54,14 +54,14 @@ public class ContainerInjector extends ContainerMachine<TileEntityInjector> {
 	
 	@Override
 	protected List<ISyncedContainerElement> addContainerElements(List<ISyncedContainerElement> elements) {		
-		this.tank = new ContainerElementTank(0, this, 11, 10, ((TileEntityInjector)te).getTank());
+		this.tank = new ContainerElementTank(0, this, 11, 10, te.getTank());
 		elements.add(this.tank);
 		return super.addContainerElements(elements);
 	}
 	
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = (Slot)this.inventorySlots.get(index);
+        Slot slot = this.inventorySlots.get(index);
         if (slot != null && slot.getHasStack()) {
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();

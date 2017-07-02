@@ -27,8 +27,10 @@ import misterpemodder.tmo.main.capability.io.IOState;
 import misterpemodder.tmo.main.capability.item.HandlerContainerItem;
 import misterpemodder.tmo.main.utils.EnumBlockSide;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.ResourceLocation;
@@ -36,9 +38,12 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 public abstract class TileEntityMachine<V extends IMachineRecipe<V>> extends TileEntityContainerBase implements ITickable{
 	
@@ -50,8 +55,8 @@ public abstract class TileEntityMachine<V extends IMachineRecipe<V>> extends Til
 	private ImmutableListMultimap<IIOType<?>, IOState> ioTypeToIoStates;
 	private ListMultimap<EnumFacing, Pair<Capability<?>, HandlerContainer<?>>> handlerContainers = ArrayListMultimap.create();
 	
-	protected boolean autoPush;
-	protected boolean autoPull;
+	public boolean autoPush;
+	public boolean autoPull;
 	
 	public int getProgress() {
 		return this.progress;
@@ -85,6 +90,8 @@ public abstract class TileEntityMachine<V extends IMachineRecipe<V>> extends Til
 		if(this.currentRecipe != null) {
 			compound.setString("current_recipe", this.currentRecipe.getRegistryName().toString());
 		}
+		compound.setBoolean("auto_push", autoPush);
+		compound.setBoolean("auto_pull", autoPull);
 		compound.setInteger("progress", this.progress);
 		compound.setTag("io_config", getIoConfigHandler().serializeNBT());
 		NBTTagCompound tag = super.writeToNBT(compound);
@@ -98,6 +105,12 @@ public abstract class TileEntityMachine<V extends IMachineRecipe<V>> extends Til
 		}
 		if(compound.hasKey("io_config")) {
 			getIoConfigHandler().deserializeNBT((NBTTagList)compound.getTag("io_config"));			
+		}
+		if(compound.hasKey("auto_push")) {
+			autoPush = compound.getBoolean("auto_push");
+		}
+		if(compound.hasKey("auto_pull")) {
+			autoPull = compound.getBoolean("auto_pull");
 		}
 		this.progress = compound.getInteger("progress");
 		super.readFromNBT(compound);
@@ -127,6 +140,122 @@ public abstract class TileEntityMachine<V extends IMachineRecipe<V>> extends Til
 	
 	public void emptyTank(short tankId) {
 		
+	}
+	
+	@Override
+	public void update() {
+		if(this.hasWorld() && !this.world.isRemote && (autoPull || autoPush)) {
+			IOConfigHandlerMachine h = this.getIoConfigHandler();
+			if(h != null) {
+				for(EnumFacing facing : EnumFacing.values()) {
+					if(!isSideDisabled(facing)) {
+						TileEntity te = this.world.getTileEntity(this.pos.offset(facing));
+						if(te != null) {
+							IIOType<?>[] types = h.getIOTypes(facing);
+							if(types != null && types.length > 0) {
+								for(IIOType<?> type : types) {
+									IOState state = h.getIOStateConfig(facing, type);
+									if(state != IOState.DISABLED) {
+										Capability<?> cap = type.getCapabilityInstance();
+										if(this.hasCapability(cap, facing) && te.hasCapability(cap, facing.getOpposite())) {
+											handleAutoPushPull(cap, facing, te);
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	private void handleAutoPushPull(Capability<?> cap, EnumFacing facing, TileEntity otherTileEntity) {
+		Object handler = this.getCapability(cap, facing);
+		Object otherHandler = otherTileEntity.getCapability(cap, facing.getOpposite());
+		
+		boolean b1 = autoPush;
+		boolean b2 = autoPull;
+		
+		if(handler == null || otherHandler == null) return;
+		
+		if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+			IItemHandler h = (IItemHandler) handler;
+			IItemHandler oh = (IItemHandler) otherHandler;
+			
+			int s = h.getSlots();
+			int os = oh.getSlots();
+			
+			if(s > 0 && os > 0) {
+				while(b1 || b2) {
+					IItemHandler h1;
+					IItemHandler h2;
+					int s1;
+					int s2;
+					
+					if(b1) {
+						h1 = h;
+						h2 = oh;
+						s1 = s;
+						s2 = os;
+						b1 = false;
+					} else {
+						h1 = oh;
+						h2 = h;
+						s1 = os;
+						s2 = s;
+						b2 = false;
+					}
+					
+					int itemCount = 0;
+					for(int i=0;i<s1;i++) {
+						ItemStack stack = h1.extractItem(i, h1.getSlotLimit(i), true);
+						if(stack.isEmpty()) continue;
+						if(itemCount >= 2) break;
+						for(int j=0;j<s2;j++) {
+							ItemStack otherStack = h2.insertItem(j, stack, true);
+							int toInsert = stack.getCount() - otherStack.getCount();
+							if(toInsert <= 0) continue;
+							itemCount += toInsert;
+							if(h2.insertItem(j, h1.extractItem(i, Math.min(toInsert, 2), false), false).getCount() > 0) {
+								stack = h1.extractItem(i, h1.getSlotLimit(i), true);
+							}
+							if(itemCount >= 2) break;
+						}
+					}
+					
+				}
+			}
+			
+		}
+		else if(cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+			IFluidHandler h = (IFluidHandler) handler;
+			IFluidHandler oh = (IFluidHandler) otherHandler;
+			
+			while(b1 || b2) {
+				IFluidHandler h1;
+				IFluidHandler h2;
+				
+				if(b1) {
+					h1 = h;
+					h2 = oh;
+					b1 = false;
+				} else {
+					h1 = oh;
+					h2 = h;
+					b2 = false;
+				}
+				
+				FluidStack fs1 = h1.drain(100, false);
+				
+				if(fs1 != null) {
+					int toFill = h2.fill(fs1, false);
+					if(toFill > 0) {
+						h2.fill(h1.drain(toFill, true), true);
+					}
+				}
+			}
+		}
 	}
 	
 	public EnumBlockSide[] getDisabledSides() {

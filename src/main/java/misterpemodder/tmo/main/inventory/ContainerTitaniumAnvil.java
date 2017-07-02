@@ -155,7 +155,7 @@ public class ContainerTitaniumAnvil extends ContainerBase<TileEntityTitaniumAnvi
 	
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = (Slot)this.inventorySlots.get(index);
+        Slot slot = this.inventorySlots.get(index);
         if (slot != null && slot.getHasStack()) {
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
@@ -305,8 +305,8 @@ public class ContainerTitaniumAnvil extends ContainerBase<TileEntityTitaniumAnvi
 
                     for (Enchantment enchantment1 : map1.keySet()) {
                         if (enchantment1 != null) {
-                            int i2 = map.containsKey(enchantment1) ? ((Integer)map.get(enchantment1)).intValue() : 0;
-                            int j2 = ((Integer)map1.get(enchantment1)).intValue();
+                            int i2 = map.containsKey(enchantment1) ? map.get(enchantment1).intValue() : 0;
+                            int j2 = map1.get(enchantment1).intValue();
                             j2 = i2 == j2 ? j2 + 1 : Math.max(j2, i2);
                             boolean flag1 = enchantment1.canApply(itemstack);
 

@@ -54,7 +54,7 @@ public class BlockStrongPistonStructureHelper {
 			return false;
 		} else {
 			for (int i = 0; i < this.toMove.size(); ++i) {
-				BlockPos blockpos = (BlockPos) this.toMove.get(i);
+				BlockPos blockpos = this.toMove.get(i);
 				if (isValidSlimeBlock(this.world.getBlockState(blockpos)) && !this.addBranchingBlocks(blockpos)) {
 					return false;
 				}
@@ -113,7 +113,7 @@ public class BlockStrongPistonStructureHelper {
 						this.reorderListAtCollision(i1, k);
 
 						for (int l = 0; l <= k + i1; ++l) {
-							BlockPos blockpos2 = (BlockPos) this.toMove.get(l);
+							BlockPos blockpos2 = this.toMove.get(l);
 
 							if (isValidSlimeBlock(this.world.getBlockState(blockpos2)) && !this.addBranchingBlocks(blockpos2)) {
 								return false;

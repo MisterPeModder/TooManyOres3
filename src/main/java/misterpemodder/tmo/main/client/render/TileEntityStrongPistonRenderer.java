@@ -50,7 +50,7 @@ public class TileEntityStrongPistonRenderer extends TileEntitySpecialRenderer<Ti
             }
 
             vertexbuffer.begin(7, DefaultVertexFormats.BLOCK);
-            vertexbuffer.setTranslation(x - (double)blockpos.getX() + (double)te.getOffsetX(partialTicks), y - (double)blockpos.getY() + (double)te.getOffsetY(partialTicks), z - (double)blockpos.getZ() + (double)te.getOffsetZ(partialTicks));
+            vertexbuffer.setTranslation(x - blockpos.getX() + te.getOffsetX(partialTicks), y - blockpos.getY() + te.getOffsetY(partialTicks), z - blockpos.getZ() + te.getOffsetZ(partialTicks));
             World world = this.getWorld();
 
             if (block instanceof BlockStrongPistonExtension && te.getProgress(partialTicks) <= 0.25F) {
@@ -62,7 +62,7 @@ public class TileEntityStrongPistonRenderer extends TileEntitySpecialRenderer<Ti
                 IBlockState iblockstate1 = TheBlocks.STRONG_PISTON_EXTENSION.getBlock().getDefaultState().withProperty(BlockPistonExtension.TYPE, blockpistonextension$enumpistontype).withProperty(BlockPistonExtension.FACING, iblockstate.getValue(BlockPistonBase.FACING));
                 iblockstate1 = iblockstate1.withProperty(BlockPistonExtension.SHORT, Boolean.valueOf(te.getProgress(partialTicks) >= 0.5F));
                 this.renderStateModel(blockpos, iblockstate1, vertexbuffer, world, true);
-                vertexbuffer.setTranslation(x - (double)blockpos.getX(), y - (double)blockpos.getY(), z - (double)blockpos.getZ());
+                vertexbuffer.setTranslation(x - blockpos.getX(), y - blockpos.getY(), z - blockpos.getZ());
                 iblockstate = iblockstate.withProperty(BlockPistonBase.EXTENDED, Boolean.valueOf(true));
                 this.renderStateModel(blockpos, iblockstate, vertexbuffer, world, true);
             }

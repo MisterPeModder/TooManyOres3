@@ -137,6 +137,7 @@ public class TileEntityDestabilizer extends TileEntityMachine<IDestabilizerRecip
 	
 	@Override
 	public void update() {
+		super.update();
 		if(this.hasWorld() && !this.world.isRemote) {
 			ItemStack stack = this.input.getStackInSlot(0).copy();
 			if(currentRecipe == null) {

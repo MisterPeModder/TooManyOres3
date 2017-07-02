@@ -10,7 +10,6 @@ import net.minecraft.block.BlockPistonExtension;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -31,7 +30,7 @@ public class BlockStrongPistonExtension extends BlockPistonExtension implements 
 	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
 		super.onBlockHarvested(worldIn, pos, state, player);
         if (player.capabilities.isCreativeMode) {
-            BlockPos blockpos = pos.offset(((EnumFacing)state.getValue(FACING)).getOpposite());
+            BlockPos blockpos = pos.offset(state.getValue(FACING).getOpposite());
             Block block = worldIn.getBlockState(blockpos).getBlock();
 
             if (block instanceof BlockPistonBase) {
@@ -46,7 +45,7 @@ public class BlockStrongPistonExtension extends BlockPistonExtension implements 
         pos = pos.offset(state.getValue(FACING).getOpposite());
         IBlockState iblockstate = worldIn.getBlockState(pos);
 
-        if ((iblockstate.getBlock() instanceof BlockPistonBase) && ((Boolean)iblockstate.getValue(BlockPistonBase.EXTENDED)).booleanValue()) {
+        if ((iblockstate.getBlock() instanceof BlockPistonBase) && iblockstate.getValue(BlockPistonBase.EXTENDED).booleanValue()) {
             iblockstate.getBlock().dropBlockAsItem(worldIn, pos, iblockstate, 0);
             worldIn.setBlockToAir(pos);
         }

@@ -49,7 +49,7 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 			arrow.drawArrow(guiContainer.getGuiLeft()+115, guiContainer.getGuiTop()+39, false);
 		}
 		
-		TileEntityDestabilizer te = (TileEntityDestabilizer) guiContainer.container.getTileEntity();
+		TileEntityDestabilizer te = getTileEntity();
 		GlStateManager.enableBlend();
 		
 		Minecraft.getMinecraft().getTextureManager().bindTexture(this.getTabTexture().screenTexture);
@@ -69,7 +69,7 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 		List<String> strs = this.geElementTank() != null? this.geElementTank().getHoverDesc(mouseX, mouseY, guiContainer) : new ArrayList<>();
 		
 		if(strs.isEmpty() && guiContainer.isPointInRegion(12, 83, 138, 6, mouseX, mouseY)) {
-			TileEntityDestabilizer te = (TileEntityDestabilizer) guiContainer.container.getTileEntity();
+			TileEntityDestabilizer te = getTileEntity();
 			if(te != null) {
 				strs.add(Tmo.proxy.translate("gui.bar.ender")+": "+te.getEnderMatterAmount());
 			}
@@ -90,8 +90,8 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 	
 	@Override
 	public boolean shouldDisplaySlot(IHidable slot) {
-		if(slot instanceof SlotHidable && guiContainer.container.getTileEntity() instanceof TileEntityDestabilizer) {
-			TileEntityDestabilizer te = (TileEntityDestabilizer)guiContainer.container.getTileEntity();
+		if(slot instanceof SlotHidable) {
+			TileEntityDestabilizer te = getTileEntity();
 			IItemHandler h = ((SlotHidable)slot).getItemHandler();
 			return h == te.getInventory() || h == te.getEnder();
 		}
@@ -112,7 +112,7 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 	}
 	
 	private ContainerElementTank geElementTank() {
-		return ((ContainerDestabilizer)guiContainer.container).tank;
+		return guiContainer.container.tank;
 	}
 
 }

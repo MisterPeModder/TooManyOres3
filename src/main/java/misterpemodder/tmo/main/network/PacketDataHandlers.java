@@ -10,6 +10,7 @@ import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
 import misterpemodder.tmo.main.capability.CapabilityFreezing;
 import misterpemodder.tmo.main.capability.CapabilityFreezing.IFreezing;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabID;
+import misterpemodder.tmo.main.client.gui.tabs.TabIO;
 import misterpemodder.tmo.main.client.gui.tabs.TabMainInjector;
 import misterpemodder.tmo.main.client.gui.tabs.TabSecurity;
 import misterpemodder.tmo.main.inventory.ContainerBase;
@@ -162,6 +163,20 @@ public enum PacketDataHandlers implements IPacketDataHandler {
 				}
 			break;
 			
+			case IO:
+				if(te instanceof TileEntityMachine && info.hasKey("autoPushPull")) {
+					boolean autoPushPull = info.getBoolean("autoPushPull");
+					if(bId == TabIO.AUTO_PUSH_BUTTON_ID) {
+						((TileEntityMachine<?>)te).autoPush = autoPushPull;
+					}
+					else if(bId == TabIO.AUTO_PULL_BUTTON_ID) {
+						((TileEntityMachine<?>)te).autoPull = autoPushPull;
+					}
+					((TileEntityMachine<?>)te).sync();
+				}
+				
+			break;
+			
 			case MISC:
 				if(bId == ContainerElementTank.CLEAR_TANK_BUTTON_ID) {
 					if(te instanceof TileEntityMachine && info.hasKey("tank_id", Constants.NBT.TAG_SHORT)) {
@@ -230,7 +245,7 @@ public enum PacketDataHandlers implements IPacketDataHandler {
 				
 				if(l != null && !l.isEmpty()) {
 					EntityLivingBase entity = l.get(0);
-					if(entity instanceof EntityLivingBase && entity.getUniqueID().equals(entityUUID)) {
+					if(entity.getUniqueID().equals(entityUUID)) {
 						if(entity.hasCapability(CapabilityFreezing.FREEZING_CAPABILITY, null)) {
 							IFreezing freezingCap = entity.getCapability(CapabilityFreezing.FREEZING_CAPABILITY, null);
 							freezingCap.deserializeNBT(data.getCompoundTag("freezing_cap"));

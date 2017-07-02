@@ -15,7 +15,7 @@ public abstract class TabMain<C extends ContainerBase<TE>, TE extends TileEntity
 	
 	@Override
 	public ItemStack getItemStack() {
-		return new ItemStack(guiContainer.container.getTileEntity().getBlockType());
+		return new ItemStack(getTileEntity().getBlockType());
 	}
 
 	@Override

@@ -3,7 +3,6 @@ package misterpemodder.tmo.main.client.gui.tabs;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.Arrays;
-import java.util.List;
 
 import misterpemodder.tmo.api.block.ILockable;
 import misterpemodder.tmo.api.item.IItemLock;
@@ -40,14 +39,14 @@ public class TabSecurity<C extends ContainerBase<TE>, TE extends TileEntityConta
 	@Override
 	public void initButtons(int x, int y) {
 		GuiLockIconButton lb = new GuiLockIconButton(LOCK_BUTTON_ID, x+26, y+16);
-		lb.setLocked(((TE)guiContainer.container.getTileEntity()).isLocked());
+		lb.setLocked(getTileEntity().isLocked());
 		buttons.add(lb);
 	}
 	
 	public void updateButtons() {
-		for(GuiButton b : (List<GuiButton>)buttons) {
+		for(GuiButton b : buttons) {
 			if(b.id == LOCK_BUTTON_ID && b instanceof GuiLockIconButton) {
-				ItemStack s = ((TE)guiContainer.container.getTileEntity()).getLockItemHandler().getStackInSlot(0);
+				ItemStack s = guiContainer.container.getTileEntity().getLockItemHandler().getStackInSlot(0);
 				b.enabled = !(s.isEmpty() || (s.getItem() instanceof IItemLock && ((IItemLock)s.getItem()).isBroken(s)));
 				
 			}
@@ -97,11 +96,9 @@ public class TabSecurity<C extends ContainerBase<TE>, TE extends TileEntityConta
 	public void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 		
-		if(guiContainer.container.getTileEntity() instanceof ILockable) {
-			if(((ILockable)guiContainer.container.getTileEntity()).getLockItemHandler().getStackInSlot(0).isEmpty()) {
-				guiContainer.getMinecraft().getTextureManager().bindTexture(new ResourceLocationTmo("textures/items/empty_lock_slot.png"));
-				Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+8, guiContainer.getGuiTop()+18, 0, 0, 16, 16, 16, 16);
-			}
+		if(getTileEntity().getLockItemHandler().getStackInSlot(0).isEmpty()) {
+			guiContainer.getMinecraft().getTextureManager().bindTexture(new ResourceLocationTmo("textures/items/empty_lock_slot.png"));
+			Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+8, guiContainer.getGuiTop()+18, 0, 0, 16, 16, 16, 16);
 		}
 	}
 	

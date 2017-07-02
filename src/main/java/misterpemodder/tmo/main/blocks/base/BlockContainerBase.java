@@ -138,7 +138,7 @@ public abstract class BlockContainerBase<TE extends TileEntityContainerBase> ext
                 i++;
             }
         }
-        f /= (float)h.getSlots();
+        f /= h.getSlots();
         return MathHelper.floor(f * 14.0F) + (i > 0 ? 1 : 0);
 	}
 	

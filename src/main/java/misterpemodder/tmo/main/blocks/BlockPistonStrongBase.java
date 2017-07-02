@@ -101,15 +101,15 @@ public class BlockPistonStrongBase extends BlockPistonBase implements IBlockTMO 
     }
 	
 	protected void checkForMove(World worldIn, BlockPos pos, IBlockState state) {
-        EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
+        EnumFacing enumfacing = state.getValue(FACING);
         boolean flag = this.shouldBeExtended(worldIn, pos, enumfacing);
 
-        if (flag && !((Boolean)state.getValue(EXTENDED)).booleanValue()) {
+        if (flag && !state.getValue(EXTENDED).booleanValue()) {
             if ((new BlockStrongPistonStructureHelper(worldIn, pos, enumfacing, true)).canMove()) {
                 worldIn.addBlockEvent(pos, this, 0, enumfacing.getIndex());
             }
         }
-        else if (!flag && ((Boolean)state.getValue(EXTENDED)).booleanValue()) {
+        else if (!flag && state.getValue(EXTENDED).booleanValue()) {
             worldIn.addBlockEvent(pos, this, 1, enumfacing.getIndex());
         }
     }
@@ -118,7 +118,7 @@ public class BlockPistonStrongBase extends BlockPistonBase implements IBlockTMO 
 	@Override
 	public boolean eventReceived(IBlockState state, World worldIn, BlockPos pos, int id, int param) {
 		
-        EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
+        EnumFacing enumfacing = state.getValue(FACING);
 
         if (!worldIn.isRemote) {
             boolean flag = shouldBeExtended(worldIn, pos, enumfacing);
@@ -233,7 +233,7 @@ public class BlockPistonStrongBase extends BlockPistonBase implements IBlockTMO 
             List<IBlockState> list1 = Lists.<IBlockState>newArrayList();
 
             for (int i = 0; i < list.size(); ++i) {
-                BlockPos blockpos = (BlockPos)list.get(i);
+                BlockPos blockpos = list.get(i);
                 list1.add(worldIn.getBlockState(blockpos).getActualState(worldIn, blockpos));
             }
 
@@ -243,7 +243,7 @@ public class BlockPistonStrongBase extends BlockPistonBase implements IBlockTMO 
             EnumFacing enumfacing = extending ? direction : direction.getOpposite();
 
             for (int j = list2.size() - 1; j >= 0; --j) {
-                BlockPos blockpos1 = (BlockPos)list2.get(j);
+                BlockPos blockpos1 = list2.get(j);
                 IBlockState iblockstate = worldIn.getBlockState(blockpos1);
                 float chance = iblockstate.getBlock() instanceof BlockSnow ? -1.0f : 1.0f;
                 iblockstate.getBlock().dropBlockAsItemWithChance(worldIn, blockpos1, iblockstate, chance, 0);
@@ -253,14 +253,14 @@ public class BlockPistonStrongBase extends BlockPistonBase implements IBlockTMO 
             }
 
             for (int l = list.size() - 1; l >= 0; --l) {
-                BlockPos blockpos3 = (BlockPos)list.get(l);
+                BlockPos blockpos3 = list.get(l);
                 TileEntity te = worldIn.getTileEntity(blockpos3);
                 IBlockState iblockstate2 = worldIn.getBlockState(blockpos3);
                 worldIn.removeTileEntity(blockpos3);
                 worldIn.setBlockState(blockpos3, Blocks.AIR.getDefaultState(), 2);
                 blockpos3 = blockpos3.offset(enumfacing);
                 worldIn.setBlockState(blockpos3, TheBlocks.STRONG_PISTON_MOVING.getBlock().getDefaultState().withProperty(FACING, direction), 4);
-                worldIn.setTileEntity(blockpos3, BlockStrongPistonMoving.createTilePiston((IBlockState)list1.get(l), te, direction, extending, false));
+                worldIn.setTileEntity(blockpos3, BlockStrongPistonMoving.createTilePiston(list1.get(l), te, direction, extending, false));
                 --k;
                 aiblockstate[k] = iblockstate2;
             }
@@ -276,11 +276,11 @@ public class BlockPistonStrongBase extends BlockPistonBase implements IBlockTMO 
             }
 
             for (int i1 = list2.size() - 1; i1 >= 0; --i1) {
-                worldIn.notifyNeighborsOfStateChange((BlockPos)list2.get(i1), aiblockstate[k++].getBlock(), false);
+                worldIn.notifyNeighborsOfStateChange(list2.get(i1), aiblockstate[k++].getBlock(), false);
             }
 
             for (int j1 = list.size() - 1; j1 >= 0; --j1) {
-                worldIn.notifyNeighborsOfStateChange((BlockPos)list.get(j1), aiblockstate[k++].getBlock(), false);
+                worldIn.notifyNeighborsOfStateChange(list.get(j1), aiblockstate[k++].getBlock(), false);
             }
 
             if (extending){

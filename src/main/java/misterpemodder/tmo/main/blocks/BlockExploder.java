@@ -126,7 +126,7 @@ public class BlockExploder extends BlockMulti<EnumExploderVariant> {
 			BlockPos p = new BlockPos(pos);
 			world.setBlockState(pos, world.getBlockState(pos).withProperty(ACTIVATED, true));
 			if(world.isRemote) {
-				world.playSound((double)p.getX(), (double)p.getY(), (double)p.getZ(), SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.5F, false);
+				world.playSound(p.getX(), p.getY(), p.getZ(), SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.5F, false);
 			} else {
 				world.playSound((EntityPlayer)null, p.getX(), p.getY(), p.getZ(), SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.5F);
 			}
@@ -170,7 +170,7 @@ public class BlockExploder extends BlockMulti<EnumExploderVariant> {
 			for(EnumFacing side : EnumFacing.HORIZONTALS) {
 				IBlockState s = world.getBlockState(pos.offset(side));
 		        Block b = s.getBlock();
-		        if((b == Blocks.REDSTONE_BLOCK ? 15 : (b == Blocks.REDSTONE_WIRE ? ((Integer)s.getValue(BlockRedstoneWire.POWER)).intValue() : world.getStrongPower(pos, side)))>0) {
+		        if((b == Blocks.REDSTONE_BLOCK ? 15 : (b == Blocks.REDSTONE_WIRE ? s.getValue(BlockRedstoneWire.POWER).intValue() : world.getStrongPower(pos, side)))>0) {
 		        	return true;
 		        }
 			}
@@ -229,10 +229,10 @@ public class BlockExploder extends BlockMulti<EnumExploderVariant> {
 	@SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
 		if(state.getValue(VARIANT)==EnumExploderVariant.FIERY && rand.nextInt(5) == 0) {
-            double d0 = (double)pos.getX() + 0.55D - (double)(rand.nextFloat() * 0.1F);
-            double d1 = (double)pos.getY() + 1.05D - (double)(rand.nextFloat() * 0.1F);
-            double d2 = (double)pos.getZ() + 0.55D - (double)(rand.nextFloat() * 0.1F);
-            double d3 = (double)(0.4F - (rand.nextFloat() + rand.nextFloat()) * 0.4F);
+            double d0 = pos.getX() + 0.55D - rand.nextFloat() * 0.1F;
+            double d1 = pos.getY() + 1.05D - rand.nextFloat() * 0.1F;
+            double d2 = pos.getZ() + 0.55D - rand.nextFloat() * 0.1F;
+            double d3 = 0.4F - (rand.nextFloat() + rand.nextFloat()) * 0.4F;
             world.spawnParticle(EnumParticleTypes.LAVA, d0 + d3, d1 + d3, d2 + d3, rand.nextGaussian() * 0.005D, rand.nextGaussian() * 0.0005D, rand.nextGaussian() * 0.005D, new int[0]);
 		}
     }

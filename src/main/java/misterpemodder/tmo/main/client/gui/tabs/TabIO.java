@@ -25,6 +25,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiUtils;
 
@@ -92,18 +93,23 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine<?>>
 		FontRenderer fontrenderer = guiContainer.mc.fontRendererObj;
 		boolean ioInfoDrawn = false;
 		int y_offset = guiContainer.getBottomPartPos()-guiContainer.getGuiTop();
+		
+		guiContainer.drawString(fontrenderer, Tmo.proxy.translate("gui.tab.io.autoPush"), 129, y_offset+16, 0xFFFFFF);
+		guiContainer.drawString(fontrenderer, Tmo.proxy.translate("gui.tab.io.autoPull"), 129, y_offset+36, 0xFFFFFF);
+		
 		for(GuiButton button: this.buttons) {
 			if(button.id == RESET_BUTTON_ID) {
 				if(button.isMouseOver()) {
 					String key = "gui.tab.io.reset.desc.";
 					List<String> text = Arrays.asList(TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate(key+"1"), TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate(key+"2"));
 					int textWidth = Math.max(fontrenderer.getStringWidth(text.get(0)), fontrenderer.getStringWidth(text.get(1)));
-					GuiUtils.drawHoveringText(text, mouseX-guiContainer.getGuiLeft(), mouseY-guiContainer.getGuiTop(), guiContainer.width, guiContainer.height, textWidth, guiContainer.getFontRenderer());
+					GuiUtils.drawHoveringText(text, mouseX-guiContainer.getGuiLeft(), mouseY-guiContainer.getGuiTop(), guiContainer.width, guiContainer.height, Math.min(textWidth, 250), guiContainer.getFontRenderer());
 				}
 			}
 			EnumBlockSide side = getButtonSide(button.id);
 			if(side != null) {
 				if(button.enabled && button.isMouseOver()) {
+					
 					guiContainer.drawString(fontrenderer, side.getLocalizedName(), 9, y_offset+9, 0xFFFFFF);
 					
 					IIOType<?> type = getSelectedIOType();
@@ -143,8 +149,8 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine<?>>
 		this.buttons.add(new GuiButton(INPUT_CHANGE_RIGHT_BUTTON_ID, x+95, y+75, 20, 20, ">"));
 		this.buttons.add(new GuiButton(RESET_BUTTON_ID, x+119, y+75, 88, 20, TextFormatting.RED+Tmo.proxy.translate("gui.tab.io.reset")));
 		
-		this.buttons.add(new GuiButtonToggle(AUTO_PUSH_BUTTON_ID, x+119, y+16, false));
-		this.buttons.add(new GuiButtonToggle(AUTO_PULL_BUTTON_ID, x+119, y+36, false, true));
+		this.buttons.add(new GuiButtonToggle(AUTO_PUSH_BUTTON_ID, x+119, y+16, getTileEntity().autoPush));
+		this.buttons.add(new GuiButtonToggle(AUTO_PULL_BUTTON_ID, x+119, y+36, getTileEntity().autoPull));
 		
 		this.buttons.add(newIOButton(IO_UP_BUTTON_ID, x+71, y+9, 20, 20));
 		this.buttons.add(newIOButton(IO_DOWN_BUTTON_ID, x+71, y+49, 20, 20));
@@ -158,7 +164,7 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine<?>>
 		GuiButton button = new GuiButton(buttonId, x, y, width, height, "");
 		EnumBlockSide side = getButtonSide(button.id);
 		
-		if(side != null && ((TileEntityMachine<?>)guiContainer.container.getTileEntity()).isSideDisabled(side)) {
+		if(side != null && getTileEntity().isSideDisabled(side)) {
 			button.enabled = false;
 		}
 		
@@ -167,16 +173,22 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine<?>>
 	
 	@Override
 	public void updateButtons() {
-		for(GuiButton b : (List<GuiButton>)buttons) {
+		for(GuiButton b : buttons) {
 			if(b.id == INPUT_TYPE_BUTTON_ID) {
 				b.displayString	= getTypeButtonText();
 			}
-			if(b.id == RESET_BUTTON_ID) {
+			else if(b.id == RESET_BUTTON_ID) {
 				if(GuiScreen.isShiftKeyDown()) {
 					b.displayString = TextFormatting.DARK_RED+Tmo.proxy.translate("gui.tab.io.reset.all");
 				} else {
 					b.displayString = TextFormatting.RED+Tmo.proxy.translate("gui.tab.io.reset");
 				}
+			}
+			else if(b.id == AUTO_PUSH_BUTTON_ID) {
+				((GuiButtonToggle)b).toggled = getTileEntity().autoPush;
+			}
+			else if(b.id == AUTO_PULL_BUTTON_ID) {
+				((GuiButtonToggle)b).toggled = getTileEntity().autoPull;
 			}
 		}
 	}
@@ -194,8 +206,10 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine<?>>
 			case AUTO_PUSH_BUTTON_ID:
 			case AUTO_PULL_BUTTON_ID:
 				if(button instanceof GuiButtonToggle) {
-					GuiButtonToggle b = (GuiButtonToggle)button;
-					b.toggled = !b.toggled;
+					NBTTagCompound data = new NBTTagCompound();
+					boolean newMode = !((GuiButtonToggle) button).toggled;
+					data.setBoolean("autoPushPull", newMode);
+					TabBase.sendButtonPacket(getTabID(), button.id, guiContainer.mc.world, getTileEntity().getPos(), data);
 				}
 			break;
 			case RESET_BUTTON_ID:
@@ -234,11 +248,11 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine<?>>
 	
 	private void changeIOConfig(int buttonID) {
 		EnumBlockSide side = getButtonSide(buttonID);
-		if(side == null || guiContainer.container.getTileEntity() == null) return;
+		if(side == null || getTileEntity() == null) return;
 		IIOType<?> type = getSelectedIOType();
 		boolean shift = GuiScreen.isShiftKeyDown();
 		
-		List<IOState> states = ((TileEntityMachine<?>)guiContainer.container.getTileEntity()).getIOStatesForIOType().get(type);
+		List<IOState> states = getTileEntity().getIOStatesForIOType().get(type);
 		IOState state = configHandler.getIOStateConfig(side, type);
 		IOState nextState = IOState.DISABLED;
 			

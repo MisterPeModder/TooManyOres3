@@ -124,6 +124,10 @@ public abstract class TabBase<C extends ContainerBase<TE>, TE extends TileEntity
 	public @Nullable RecipeClickableAreaTMO[] getRecipeClickableAreas() {
 		return null;
 	}
+	
+	protected final TE getTileEntity() {
+		return this.guiContainer.container.getTileEntity();
+	}
 		
 	public static class TabTexture {
 		public final ResourceLocation tabTexture;

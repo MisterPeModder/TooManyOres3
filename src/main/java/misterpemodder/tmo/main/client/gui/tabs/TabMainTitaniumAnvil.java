@@ -50,7 +50,7 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
     @Override
     public void setGuiContainer(GuiContainerBase<ContainerTitaniumAnvil, TileEntityTitaniumAnvil> guiContainer) {
     	super.setGuiContainer(guiContainer);
-    	this.anvil = (ContainerTitaniumAnvil)this.guiContainer.container;
+    	this.anvil = this.guiContainer.container;
     }
 	
 	@Override
@@ -97,7 +97,7 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
 	@Override
 	public boolean shouldDisplaySlot(IHidable slot) {
 		if(slot instanceof SlotHidable) {
-			ContainerTitaniumAnvil c = (ContainerTitaniumAnvil) guiContainer.container;
+			ContainerTitaniumAnvil c = guiContainer.container;
 			return ((SlotHidable)slot).getItemHandler() == c.input || ((SlotHidable)slot).getItemHandler() == c.output || super.shouldDisplaySlot(slot);
 		}
 		return false;
@@ -112,8 +112,8 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
 		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 		
 		boolean flag = true;
-		ContainerTitaniumAnvil c = (ContainerTitaniumAnvil)guiContainer.container;
-		if(((TileEntityTitaniumAnvil)c.getTileEntity()).getInventory().getStackInSlot(0).isEmpty()) {
+		ContainerTitaniumAnvil c = guiContainer.container;
+		if(getTileEntity().getInventory().getStackInSlot(0).isEmpty()) {
 			flag = false;
 			guiContainer.getMinecraft().getTextureManager().bindTexture(new ResourceLocationTmo("textures/items/empty_hammer_slot.png"));
 			Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+45, guiContainer.getGuiTop()+26, 0, 0, 16, 16, 16, 16);
@@ -144,7 +144,7 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
 			GuiUtils.drawHoveringText(Arrays.asList(TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate("gui.anvil.nameField.clear")), mouseX-guiContainer.getGuiLeft(), mouseY-guiContainer.getGuiTop(), guiContainer.width, guiContainer.height, 200, guiContainer.getFontRenderer());
 		}
 
-        int maximumCost = ((ContainerTitaniumAnvil)guiContainer.container).maximumCost;
+        int maximumCost = guiContainer.container.maximumCost;
         int oldCost = maximumCost;
         
     	if(this.anvil.getTileEntity() != null) {

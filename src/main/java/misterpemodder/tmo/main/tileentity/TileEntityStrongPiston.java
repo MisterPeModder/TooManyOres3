@@ -124,7 +124,7 @@ public class TileEntityStrongPiston extends TileEntityPiston {
 	protected float getLastProgress() {
 		float f = 0.0F;
 		try {
-			f = (Float)lastProgressField.get((TileEntityPiston) this);
+			f = (Float)lastProgressField.get(this);
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			TMORefs.LOGGER.error("Something when wrong!", e);
 		}
@@ -133,7 +133,7 @@ public class TileEntityStrongPiston extends TileEntityPiston {
 	
 	protected void setLastProgress(float lastProgress) {
 		try {
-			lastProgressField.set((TileEntityPiston) this, lastProgress);
+			lastProgressField.set(this, lastProgress);
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			TMORefs.LOGGER.error("Something when wrong!", e);
 		}
@@ -142,7 +142,7 @@ public class TileEntityStrongPiston extends TileEntityPiston {
 	protected float getProgress() {
 		float f = 0.0F;
 		try {
-			f = (Float)progressField.get((TileEntityPiston) this);
+			f = (Float)progressField.get(this);
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			TMORefs.LOGGER.error("Something when wrong!", e);
 		}
@@ -151,7 +151,7 @@ public class TileEntityStrongPiston extends TileEntityPiston {
 	
 	protected void setProgress(float progress) {
 		try {
-			progressField.set((TileEntityPiston) this, progress);
+			progressField.set(this, progress);
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			TMORefs.LOGGER.error("Something when wrong!", e);
 		}
@@ -160,7 +160,7 @@ public class TileEntityStrongPiston extends TileEntityPiston {
 	@SuppressWarnings("unchecked")
 	protected ThreadLocal<EnumFacing> getMovingEntity() {
 		try {
-			return (ThreadLocal<EnumFacing>)moving_entity.get((TileEntityPiston) this);
+			return (ThreadLocal<EnumFacing>)moving_entity.get(this);
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			TMORefs.LOGGER.error("Something when wrong!", e);
 		}
@@ -178,7 +178,7 @@ public class TileEntityStrongPiston extends TileEntityPiston {
 	
 	protected AxisAlignedBB getMovementArea(AxisAlignedBB boundingBox, EnumFacing facing, double d) {
 		try {
-			return (AxisAlignedBB) getMovementAreaMethod.invoke((TileEntityPiston)this, boundingBox, facing, d);
+			return (AxisAlignedBB) getMovementAreaMethod.invoke(this, boundingBox, facing, d);
 		} catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
 			TMORefs.LOGGER.error("Something when wrong!", e);
 		}
@@ -187,7 +187,7 @@ public class TileEntityStrongPiston extends TileEntityPiston {
 	
 	protected double getMovement(AxisAlignedBB boundingBox1, EnumFacing facing, AxisAlignedBB boundingBox2) {
 		try {
-			return (double) getMovementMethod.invoke((TileEntityPiston)this, boundingBox1, facing, boundingBox2);
+			return (double) getMovementMethod.invoke(this, boundingBox1, facing, boundingBox2);
 		} catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
 			TMORefs.LOGGER.error("Something when wrong!", e);
 		}
@@ -196,7 +196,7 @@ public class TileEntityStrongPiston extends TileEntityPiston {
 	
 	protected void fixEntityWithinPistonBase(Entity entity, EnumFacing facing, double d) {
 		try {
-			fixEntityWithinPistonBaseMethod.invoke((TileEntityPiston)this, entity, facing, d);
+			fixEntityWithinPistonBaseMethod.invoke(this, entity, facing, d);
 		} catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
 			TMORefs.LOGGER.error("Something when wrong!", e);
 		}
@@ -267,7 +267,7 @@ public class TileEntityStrongPiston extends TileEntityPiston {
 	
 	private void moveCollidedEntities(float f) {
         EnumFacing enumfacing = this.isExtending() ? this.getFacing() : this.getFacing().getOpposite();
-        double d0 = (double)(f - this.getProgress());
+        double d0 = f - this.getProgress();
         List<AxisAlignedBB> list = Lists.<AxisAlignedBB>newArrayList();
         this.getCollisionRelatedBlockState().addCollisionBoxToList(this.world, BlockPos.ORIGIN, new AxisAlignedBB(BlockPos.ORIGIN), list, (Entity)null, true);
 
@@ -280,27 +280,27 @@ public class TileEntityStrongPiston extends TileEntityPiston {
             	ISlimeBlock slimeBlock = TooManyOresAPI.methodHandler.getSlimeBlock(pState);
 
                 for (int i = 0; i < list1.size(); ++i) {
-                    Entity entity = (Entity)list1.get(i);
+                    Entity entity = list1.get(i);
 
                     if (entity.getPushReaction() != EnumPushReaction.IGNORE) {
                         if (slimeBlock != null && slimeBlock.canLaunchEntity(pState, entity))  {
                         	double power = slimeBlock.getLaunchingPowerMultiplier(pState, entity);
                             switch (enumfacing.getAxis()) {
                                 case X:
-                                    entity.motionX = (double)enumfacing.getFrontOffsetX() * power;
+                                    entity.motionX = enumfacing.getFrontOffsetX() * power;
                                     break;
                                 case Y:
-                                    entity.motionY = (double)enumfacing.getFrontOffsetY() * power;
+                                    entity.motionY = enumfacing.getFrontOffsetY() * power;
                                     break;
                                 case Z:
-                                    entity.motionZ = (double)enumfacing.getFrontOffsetZ() * power;
+                                    entity.motionZ = enumfacing.getFrontOffsetZ() * power;
                             }
                         }
 
                         double d1 = 0.0D;
 
                         for (int j = 0; j < list.size(); ++j) {
-                            AxisAlignedBB axisalignedbb1 = this.getMovementArea(this.moveByPositionAndProgress((AxisAlignedBB)list.get(j)), enumfacing, d0);
+                            AxisAlignedBB axisalignedbb1 = this.getMovementArea(this.moveByPositionAndProgress(list.get(j)), enumfacing, d0);
                             AxisAlignedBB axisalignedbb2 = entity.getEntityBoundingBox();
 
                             if (axisalignedbb1.intersectsWith(axisalignedbb2)) {
@@ -316,7 +316,7 @@ public class TileEntityStrongPiston extends TileEntityPiston {
                             d1 = Math.min(d1, d0) + 0.01D;
                             ThreadLocal<EnumFacing> movingEntity = getMovingEntity();
                             movingEntity.set(enumfacing);
-                            entity.move(MoverType.PISTON, d1 * (double)enumfacing.getFrontOffsetX(), d1 * (double)enumfacing.getFrontOffsetY(), d1 * (double)enumfacing.getFrontOffsetZ());
+                            entity.move(MoverType.PISTON, d1 * enumfacing.getFrontOffsetX(), d1 * enumfacing.getFrontOffsetY(), d1 * enumfacing.getFrontOffsetZ());
                             movingEntity.set((EnumFacing)null);
 
                             if (!this.isExtending() && this.shouldPistonHeadBeRendered()) {
