@@ -25,6 +25,8 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityDestabilizer extends TileEntityMachine<IDestabilizerRecipe> {
@@ -38,6 +40,8 @@ public class TileEntityDestabilizer extends TileEntityMachine<IDestabilizerRecip
 	
 	private final IOConfigHandlerMachine ioConfigHandler;
 	
+	@SideOnly(Side.CLIENT)
+	private boolean hadEnderMatter;
 	
 	public TileEntityDestabilizer() {
 		super();
@@ -138,60 +142,67 @@ public class TileEntityDestabilizer extends TileEntityMachine<IDestabilizerRecip
 	@Override
 	public void update() {
 		super.update();
-		if(this.hasWorld() && !this.world.isRemote) {
-			ItemStack stack = this.input.getStackInSlot(0).copy();
-			if(currentRecipe == null) {
-				currentRecipe = findRecipe();
-			}
-			if(currentRecipe != null) {
-				if(currentRecipe.isValid(stack.copy()) && this.enderMatterAmount >= currentRecipe.getEnderMaterNeeded()) {
-					if(progress >= currentRecipe.getTotalTime()) {
-						Pair<ItemStack, FluidStack> p = currentRecipe.onFinish(stack, new FluidTank(tank.getFluid() == null? null : tank.getFluid().copy(), tank.getCapacity()));
-						if(this.tank.fill(p.getRight(), false) == p.getRight().amount) {				
-							this.tank.fill(p.getRight(), true);
-							this.input.setStackInSlot(0, p.getLeft());
-							this.enderMatterAmount -= currentRecipe.getEnderMaterNeeded();
+		if(this.hasWorld()) {
+			if(!this.world.isRemote) {
+				if(this.hasWorld() && !this.world.isRemote) {
+					ItemStack stack = this.input.getStackInSlot(0).copy();
+					if(currentRecipe == null) {
+						currentRecipe = findRecipe();
+					}
+					if(currentRecipe != null) {
+						if(currentRecipe.isValid(stack.copy()) && this.enderMatterAmount >= currentRecipe.getEnderMaterNeeded()) {
+							if(progress >= currentRecipe.getTotalTime()) {
+								Pair<ItemStack, FluidStack> p = currentRecipe.onFinish(stack, new FluidTank(tank.getFluid() == null? null : tank.getFluid().copy(), tank.getCapacity()));
+								if(this.tank.fill(p.getRight(), false) == p.getRight().amount) {				
+									this.tank.fill(p.getRight(), true);
+									this.input.setStackInSlot(0, p.getLeft());
+									this.enderMatterAmount -= currentRecipe.getEnderMaterNeeded();
+									currentRecipe = null;
+									progress = 0;
+									sync();
+								}
+							}
+							else {
+								progress++;
+							}
+						} else {
 							currentRecipe = null;
 							progress = 0;
-							sync();
 						}
 					}
-					else {
-						progress++;
+					
+					ItemStack enderStack = this.ender.getStackInSlot(0).copy();
+					if(TooManyOresAPI.methodHandler.isEnderMatterItem(enderStack) && this.enderMatterAmount < MAX_ENDER_MATTER) {
+						Pair<Integer, Integer> p = TooManyOresAPI.methodHandler.getEnderMatterValue(enderStack);
+						if(p.getLeft() != 0 && this.enderMatterAmount + p.getLeft() <= MAX_ENDER_MATTER) {
+							this.enderMatterAmount += p.getLeft();
+							enderStack.shrink(p.getRight());
+							this.ender.setStackInSlot(0, enderStack);
+						}
 					}
-				} else {
-					currentRecipe = null;
-					progress = 0;
-				}
-			}
-			
-			ItemStack enderStack = this.ender.getStackInSlot(0).copy();
-			if(TooManyOresAPI.methodHandler.isEnderMatterItem(enderStack) && this.enderMatterAmount < MAX_ENDER_MATTER) {
-				Pair<Integer, Integer> p = TooManyOresAPI.methodHandler.getEnderMatterValue(enderStack);
-				if(p.getLeft() != 0 && this.enderMatterAmount + p.getLeft() <= MAX_ENDER_MATTER) {
-					this.enderMatterAmount += p.getLeft();
-					enderStack.shrink(p.getRight());
-					this.ender.setStackInSlot(0, enderStack);
-				}
-			}
-			
-			if(this.tank.getFluid() != null) {
-				IBlockState state = world.getBlockState(this.pos);
-				for(EnumFacing side : EnumFacing.VALUES) {
-					if(side != state.getValue(BlockMachine.FACING)) {
-						TileEntity te = world.getTileEntity(pos.offset(side));
-						if(te != null && te.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite())) {
-							IFluidHandler h = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite());
-							
-							int amount = h.fill(this.tank.drain(TileEntityDestabilizer.CAPACITY, false), false);
-							h.fill(this.tank.drain(amount, true), true);
-							
-							if(this.tank.getFluidAmount() == 0) break;
+					
+					if(this.tank.getFluid() != null) {
+						IBlockState state = world.getBlockState(this.pos);
+						for(EnumFacing side : EnumFacing.VALUES) {
+							if(side != state.getValue(BlockMachine.FACING)) {
+								TileEntity te = world.getTileEntity(pos.offset(side));
+								if(te != null && te.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite())) {
+									IFluidHandler h = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite());
+									
+									int amount = h.fill(this.tank.drain(TileEntityDestabilizer.CAPACITY, false), false);
+									h.fill(this.tank.drain(amount, true), true);
+									
+									if(this.tank.getFluidAmount() == 0) break;
+								}
+							}
 						}
 					}
 				}
+			} else if(enderMatterAmount > 0 ^ hadEnderMatter) {
+				IBlockState state = world.getBlockState(pos);
+				this.world.notifyBlockUpdate(pos, state, state.getActualState(world, pos), 3);
+				hadEnderMatter = enderMatterAmount > 0;
 			}
-			
 		}
 	}
 	

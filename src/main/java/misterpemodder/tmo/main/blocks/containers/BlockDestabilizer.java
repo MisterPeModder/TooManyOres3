@@ -7,9 +7,12 @@ import misterpemodder.tmo.main.tileentity.TileEntityDestabilizer;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 
 public class BlockDestabilizer extends BlockMachine<TileEntityDestabilizer> {
 	
@@ -26,13 +29,13 @@ public class BlockDestabilizer extends BlockMachine<TileEntityDestabilizer> {
 	
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
-		TileEntityDestabilizer te = this.getTileEntity(world, pos);
-		
-		if(te == null) {
-			return super.getActualState(state, world, pos);
+		TileEntity tileentity = world instanceof ChunkCache ? ((ChunkCache)world).getTileEntity(pos, Chunk.EnumCreateEntityType.CHECK) : world.getTileEntity(pos);
+		 
+		if(tileentity != null && tileentity instanceof TileEntityDestabilizer) {
+			return state.withProperty(EMPTY, ((TileEntityDestabilizer)tileentity).getEnderMatterAmount() <= 0);
 		}
 		else {
-			return state.withProperty(EMPTY, te.getEnderMatterAmount() <= 0);
+			return super.getActualState(state, world, pos);
 		}
 	}
 
