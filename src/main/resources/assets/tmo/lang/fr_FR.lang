@@ -215,7 +215,13 @@ tile.blockPistonBase.desc=Peut bouger les TileEntities
 tile.blockPistonBaseSticky.name=Piston collant fort
 tile.blockPistonBaseSticky.desc=Peut bouger les TileEntities
 tile.blockInjector.name=Injecteur de fluides
+tile.blockInjector.basic.name=Injecteur de fluides basique
+tile.blockInjector.standard.name=Injecteur de fluides
+tile.blockInjector.improved.name=Injecteur de fluides amélioré
 tile.blockCrystalDestabilizer.name=Destabiliseur de cristaux
+tile.blockCrystalDestabilizer.basic.name=Destabiliseur de cristaux basique
+tile.blockCrystalDestabilizer.standard.name=Destabiliseur de cristaux
+tile.blockCrystalDestabilizer.improved.name=Destabiliseur de cristaux amélioré
 
 #Fluides
 fluid.liquidIgnum=Essence d'ignum

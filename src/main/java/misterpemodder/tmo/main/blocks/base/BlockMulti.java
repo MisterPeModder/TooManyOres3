@@ -1,5 +1,6 @@
 package misterpemodder.tmo.main.blocks.base;
 
+import misterpemodder.tmo.main.blocks.itemblock.ItemBlockMulti;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockValues;
 import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
@@ -31,7 +32,7 @@ public abstract class BlockMulti<V extends Enum<V> & IBlockVariant> extends Bloc
 		itemBlock.setRegistryName(this.getRegistryName());
 	}
 	
-	protected abstract V[] getVariants();
+	public abstract V[] getVariants();
 	
 	
 	
@@ -69,7 +70,7 @@ public abstract class BlockMulti<V extends Enum<V> & IBlockVariant> extends Bloc
 		return new ItemStack(Item.getItemFromBlock(this), 1, this.getMetaFromState(world.getBlockState(pos)));
 	}
 	
-	protected boolean isValidVariant(int meta) {
+	public boolean isValidVariant(int meta) {
 		boolean valid = false;
 		for(IBlockVariant type : variants) {
 			if(type.getMeta() == meta) {

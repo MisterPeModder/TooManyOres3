@@ -1,5 +1,6 @@
-package misterpemodder.tmo.main.blocks.base;
+package misterpemodder.tmo.main.blocks.itemblock;
 
+import misterpemodder.tmo.main.blocks.base.IBlockTMO;
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;

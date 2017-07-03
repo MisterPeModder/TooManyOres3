@@ -21,7 +21,7 @@ public class BlockDestabilizer extends BlockMachine<TileEntityDestabilizer> {
 	
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, FACING, EMPTY);
+		return new BlockStateContainer(this, FACING, CASING, EMPTY);
 	}
 	
 	@Override

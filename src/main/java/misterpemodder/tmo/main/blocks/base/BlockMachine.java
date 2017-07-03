@@ -3,28 +3,52 @@ package misterpemodder.tmo.main.blocks.base;
 import java.util.Arrays;
 
 import misterpemodder.tmo.main.Tmo;
+import misterpemodder.tmo.main.blocks.BlockMachineCasing.EnumMachineCasingVariant;
+import misterpemodder.tmo.main.blocks.itemblock.ItemBlockMachine;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.client.gui.GuiHandler.EnumGuiElements;
 import misterpemodder.tmo.main.tileentity.TileEntityMachine;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 
 public abstract class BlockMachine<TE extends TileEntityMachine<?>> extends BlockContainerBase<TE> {
 	
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", Arrays.asList(EnumFacing.HORIZONTALS));
-
+	public static final PropertyEnum<EnumMachineCasingVariant> CASING = PropertyEnum.create("casing", EnumMachineCasingVariant.class);
+	
+	private final boolean canChangeCasings;
+	
 	public BlockMachine(IBlockNames n) {
+		this(n, true);
+	}
+	
+	public BlockMachine(IBlockNames n, boolean canChangeCasings) {
 		super(n, EnumBlocksValues.MetalBlocks.MACHINE);
+		
+		this.canChangeCasings = canChangeCasings;
+		if(canChangeCasings) {
+			this.itemBlock = new ItemBlockMachine(this);
+			itemBlock.setRegistryName(this.getRegistryName());
+		}
 	}
 	
 	@Override
@@ -34,22 +58,33 @@ public abstract class BlockMachine<TE extends TileEntityMachine<?>> extends Bloc
 	
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, FACING);
+		return new BlockStateContainer(this, FACING, CASING);
 	}
 	
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return state.getValue(FACING).getHorizontalIndex();
+		if(canChangeCasings) {
+			return state.getValue(FACING).getHorizontalIndex()*4 + state.getValue(CASING).getMeta();			
+		}
+		return state.getValue(FACING).getHorizontalIndex();	
 	}
 	
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
+		if(canChangeCasings) {
+			int cMeta = meta % 4;
+			return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal((meta - cMeta)/4)).withProperty(CASING, EnumMachineCasingVariant.fromMeta(cMeta));
+		}
 		return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
 	}
 	
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+		if(canChangeCasings) {
+			return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(CASING, EnumMachineCasingVariant.fromMeta(meta));
+		} else {
+			return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+		}
     }
 	
 	@Override
@@ -73,6 +108,39 @@ public abstract class BlockMachine<TE extends TileEntityMachine<?>> extends Bloc
 			player.openGui(Tmo.instance, getGuiElements().ID, world, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
+	}
+	
+	@Override
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list) {
+		if(canChangeCasings) {
+			for(EnumMachineCasingVariant v : EnumMachineCasingVariant.values()) {
+				list.add(new ItemStack(itemIn, 1, v.getMeta()));
+			}
+		} else {
+			super.getSubBlocks(itemIn, tab, list);
+		}
+	}
+	
+	@Override
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+		return new ItemStack(Item.getItemFromBlock(this), 1, state.getValue(CASING).getMeta());
+	}
+	
+	@Override
+	public int damageDropped(IBlockState state) {
+	    return state.getValue(CASING).getMeta();
+	}
+	
+	@Override
+	public void registerItemRender() {
+		if(canChangeCasings) {
+			for(EnumMachineCasingVariant v : EnumMachineCasingVariant.values()) {
+				ModelResourceLocation location = new ModelResourceLocation(TMORefs.PREFIX +v.getName()+'_'+this.names.getRegistryName(), v.getName());
+				ModelLoader.setCustomModelResourceLocation(this.getItemBlock(),  v.getMeta(), location);
+			}
+		} else {
+			super.registerItemRender();
+		}
 	}
 
 }

@@ -12,6 +12,21 @@
             "south": {"y": 180},
             "west": {"y": 270},
             "east": {"y": 90}
-        }
+        },
+		"casing": {
+			"standard": {},
+			"basic": {"textures": {
+					"0": "tmo:blocks/basic_machine_casing_side",
+					"1": "tmo:blocks/basic_machine_casing_bottom_1",
+					"2": "tmo:blocks/basic_machine_casing_bottom"
+				}
+			},
+			"improved": {"textures": {
+					"0": "tmo:blocks/improved_machine_casing_side",
+					"1": "tmo:blocks/improved_machine_casing_bottom_1",
+					"2": "tmo:blocks/improved_machine_casing_bottom"
+				}
+			}
+		}
     }
 }

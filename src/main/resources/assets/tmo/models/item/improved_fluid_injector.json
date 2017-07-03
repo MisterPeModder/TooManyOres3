@@ -1,0 +1,8 @@
+{
+	"parent": "tmo:block/injector",
+	"textures": {
+		"0": "tmo:blocks/improved_machine_casing_side",
+		"1": "tmo:blocks/improved_machine_casing_bottom_1",
+		"2": "tmo:blocks/improved_machine_casing_bottom"
+	}
+}

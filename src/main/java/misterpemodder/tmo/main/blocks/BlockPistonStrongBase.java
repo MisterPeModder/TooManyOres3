@@ -8,7 +8,7 @@ import com.google.common.collect.Lists;
 import misterpemodder.tmo.api.IStrongPistonBehavior;
 import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.main.blocks.base.IBlockTMO;
-import misterpemodder.tmo.main.blocks.base.ItemBlockBase;
+import misterpemodder.tmo.main.blocks.itemblock.ItemBlockBase;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import misterpemodder.tmo.main.tileentity.TileEntityStrongPiston;

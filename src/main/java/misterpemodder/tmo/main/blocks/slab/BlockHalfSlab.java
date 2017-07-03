@@ -1,5 +1,6 @@
 package misterpemodder.tmo.main.blocks.slab;
 
+import misterpemodder.tmo.main.blocks.itemblock.ItemBlockSlab;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
 import misterpemodder.tmo.main.blocks.properties.IBlockVariant;

@@ -214,7 +214,13 @@ tile.blockPistonBase.desc=Can move TileEntities
 tile.blockPistonBaseSticky.name=Sticky Strong Piston
 tile.blockPistonBaseSticky.desc=Can move TileEntities
 tile.blockInjector.name=Fluid Injector
+tile.blockInjector.basic.name=Basic Fluid Injector
+tile.blockInjector.standard.name=Fluid Injector
+tile.blockInjector.improved.name=Improved Fluid Injector
 tile.blockCrystalDestabilizer.name=Crystal Destabilizer
+tile.blockCrystalDestabilizer.basic.name=Basic Crystal Destabilizer
+tile.blockCrystalDestabilizer.standard.name=Crystal Destabilizer
+tile.blockCrystalDestabilizer.improved.name=Improved Crystal Destabilizer
 
 #Fluids
 fluid.liquidIgnum=Ignum Fuel

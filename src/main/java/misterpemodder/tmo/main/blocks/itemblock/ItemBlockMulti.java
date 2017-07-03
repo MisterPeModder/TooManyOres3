@@ -1,5 +1,6 @@
-package misterpemodder.tmo.main.blocks.base;
+package misterpemodder.tmo.main.blocks.itemblock;
 
+import misterpemodder.tmo.main.blocks.base.BlockMulti;
 import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.Block;

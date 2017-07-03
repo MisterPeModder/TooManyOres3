@@ -19,45 +19,50 @@ public class BlockMachineCasing extends BlockMulti<EnumMachineCasingVariant> {
 	
 	public enum EnumMachineCasingVariant implements IBlockVariant {
 		
-		STANDARD(0, "standard", "standard", EnumRarity.RARE),
-		BASIC(1, "basic", "basic", EnumRarity.COMMON),
-		IMPROVED(2, "improved", "improved", EnumRarity.EPIC),
+		STANDARD("standard", EnumRarity.RARE),
+		BASIC("basic", EnumRarity.COMMON),
+		IMPROVED("improved", EnumRarity.EPIC),
 		;
 		
-		private final int meta;
 		private final String name;
-		private final String unlocalizedName;
 		private final EnumRarity rarity;
 
 		@Override
 		public String getName() {
 			return this.name;
 		}
+		
 		@Override
 		public String toString() {
 			return this.name;
 		}
+		
 		@Override
 		public int getMeta() {
-			return this.meta;
+			return this.ordinal();
 		}
+		
+		public static EnumMachineCasingVariant fromMeta(int meta) {
+			return values()[Math.min(values().length-1, meta)];
+		}
+		
 		@Override
 		public String getUnlocalizedName() {
-			return unlocalizedName;
+			return this.name;
 		}
+		
 		@Override
 		public MapColor getMapColor() {
 			return EnumBlocksValues.MetalBlocks.MACHINE.getMapColor(null);
 		}
+		
 		@Override
 		public EnumRarity getRarity() {
 			return this.rarity;
 		}
 
-		EnumMachineCasingVariant(int id, String name, String unlocalizedName, EnumRarity rarity) {
-			this.meta = id;
+		EnumMachineCasingVariant(String name, EnumRarity rarity) {
 			this.name = name;
-			this.unlocalizedName = unlocalizedName;
 			this.rarity = rarity;
 		}
 		
@@ -72,7 +77,7 @@ public class BlockMachineCasing extends BlockMulti<EnumMachineCasingVariant> {
 	}
 
 	@Override
-	protected EnumMachineCasingVariant[] getVariants() {
+	public EnumMachineCasingVariant[] getVariants() {
 		return casingVariants;
 	}
 	

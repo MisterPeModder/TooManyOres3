@@ -1,6 +1,7 @@
-package misterpemodder.tmo.main.blocks.slab;
+package misterpemodder.tmo.main.blocks.itemblock;
 
-import misterpemodder.tmo.main.blocks.base.ItemBlockMulti;
+import misterpemodder.tmo.main.blocks.slab.BlockAbstractSlab;
+import misterpemodder.tmo.main.blocks.slab.BlockHalfSlab;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.IProperty;

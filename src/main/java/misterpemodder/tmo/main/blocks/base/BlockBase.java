@@ -1,5 +1,6 @@
 package misterpemodder.tmo.main.blocks.base;
 
+import misterpemodder.tmo.main.blocks.itemblock.ItemBlockBase;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockValues;
 import misterpemodder.tmo.main.utils.TMORefs;

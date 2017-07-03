@@ -92,7 +92,7 @@ public class BlockDeco extends BlockMulti<BlockDeco.EnumVariant> {
 	}
 
 	@Override
-	protected BlockDeco.EnumVariant[] getVariants() {
+	public BlockDeco.EnumVariant[] getVariants() {
 		return blockVariants;
 	}
 
