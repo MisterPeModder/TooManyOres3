@@ -1,18 +1,23 @@
 package misterpemodder.tmo.main.blocks.base;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import com.google.common.collect.ImmutableList;
 
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.BlockMachineCasing.EnumMachineCasingVariant;
 import misterpemodder.tmo.main.blocks.itemblock.ItemBlockMachine;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
+import misterpemodder.tmo.main.blocks.properties.PropertyIOPortState;
 import misterpemodder.tmo.main.client.gui.GuiHandler.EnumGuiElements;
 import misterpemodder.tmo.main.tileentity.TileEntityMachine;
 import misterpemodder.tmo.main.utils.TMORefs;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -20,20 +25,25 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.client.model.ModelLoader;
 
 public abstract class BlockMachine<TE extends TileEntityMachine<?>> extends BlockContainerBase<TE> {
 	
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", Arrays.asList(EnumFacing.HORIZONTALS));
 	public static final PropertyEnum<EnumMachineCasingVariant> CASING = PropertyEnum.create("casing", EnumMachineCasingVariant.class);
+	
+	public ImmutableList<PropertyIOPortState> ioPortProperties;
 	
 	private final boolean canChangeCasings;
 	
@@ -51,14 +61,38 @@ public abstract class BlockMachine<TE extends TileEntityMachine<?>> extends Bloc
 		}
 	}
 	
+	
 	@Override
 	public BlockRenderLayer getBlockLayer() {
 		return BlockRenderLayer.CUTOUT;
 	}
 	
+	protected List<PropertyIOPortState> getIOPortProperties() {
+		return PropertyIOPortState.getAllWithout(PropertyIOPortState.FRONT);
+	}
+	
 	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, FACING, CASING);
+	protected List<IProperty<?>> getProperties() {
+		ArrayList<IProperty<?>> list = new ArrayList<>();
+		list.addAll(super.getProperties());
+		list.add(FACING);
+		list.add(CASING);
+		this.ioPortProperties = ImmutableList.copyOf(getIOPortProperties());
+		list.addAll(ioPortProperties);
+		return list;
+	}
+	
+	@Override
+	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
+		TileEntity tileentity = world instanceof ChunkCache ? ((ChunkCache)world).getTileEntity(pos, Chunk.EnumCreateEntityType.CHECK) : world.getTileEntity(pos);
+		 
+		if(!ioPortProperties.isEmpty() && tileentity != null && tileentity instanceof TileEntityMachine<?>) {
+			for(PropertyIOPortState property : ioPortProperties) {
+				state = state.withProperty(property, property.getValue((TileEntityMachine<?>) tileentity));
+			}
+			return state;
+		}
+		return state;
 	}
 	
 	@Override

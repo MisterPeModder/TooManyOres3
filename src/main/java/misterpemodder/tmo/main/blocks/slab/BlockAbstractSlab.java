@@ -1,5 +1,7 @@
 package misterpemodder.tmo.main.blocks.slab;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import misterpemodder.tmo.main.blocks.base.BlockMulti;
@@ -9,7 +11,6 @@ import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,10 +34,15 @@ public abstract class BlockAbstractSlab<V extends Enum<V> & IBlockVariant> exten
 	
 	public static final PropertyEnum<BlockAbstractSlab.EnumBlockHalf> HALF = PropertyEnum.create("half", BlockAbstractSlab.EnumBlockHalf.class);
 	
+	
 	@Override
-	protected BlockStateContainer createBlockState() {
-		if(isDouble()) return new BlockStateContainer(this, getPropertyVariant());
-		return new BlockStateContainer(this, getPropertyVariant(), HALF);
+	protected List<IProperty<?>> getProperties() {
+		ArrayList<IProperty<?>> list = new ArrayList<>();
+		list.addAll(super.getProperties());
+		if(!isDouble()) {			
+			list.add(HALF);
+		}
+		return list;
 	}
 	
 	public static enum EnumBlockHalf implements IStringSerializable {
@@ -65,8 +71,6 @@ public abstract class BlockAbstractSlab<V extends Enum<V> & IBlockVariant> exten
 	}
 	
 	public abstract boolean isDouble();
-	
-	public abstract IProperty<V> getPropertyVariant();
 	
 	@Override
 	public IBlockState getStateFromMeta(int meta) {

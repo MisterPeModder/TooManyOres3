@@ -17,13 +17,11 @@
 			"standard": {},
 			"basic": {"textures": {
 					"0": "tmo:blocks/basic_machine_casing_side",
-					"1": "tmo:blocks/basic_machine_casing_bottom_1",
 					"2": "tmo:blocks/basic_machine_casing_bottom"
 				}
 			},
 			"improved": {"textures": {
 					"0": "tmo:blocks/improved_machine_casing_side",
-					"1": "tmo:blocks/improved_machine_casing_bottom_1",
 					"2": "tmo:blocks/improved_machine_casing_bottom"
 				}
 			}
@@ -34,6 +32,99 @@
 					"4": "tmo:blocks/destabilizer_front_full"
 				}
 			}
+		},
+		"up_ioport": {
+			"open": {
+				"submodel": {
+					"up_ioport": {
+						"model": "tmo:ioport_open_noback",
+						"x": 270
+					}
+				}
+			},
+			"closed": {
+				"submodel": {
+					"up_ioport": {
+						"model": "tmo:ioport_closed_noback",
+						"x": 270
+					}
+				}
+			},
+			"disabled": {}
+		},
+		"down_ioport": {
+			"open": {
+				"textures": {
+					"1": "tmo:blocks/ioport_down_open"
+				}
+			},
+			"closed": {
+				"textures": {
+					"1": "tmo:blocks/ioport_down_closed"
+				}
+			},
+			"disabled": {
+				"textures": {
+					"1": "tmo:blocks/ioport_down_closed"
+				}
+			}
+		},
+		"back_ioport": {
+			"open": {
+				"submodel": {
+					"back_ioport": {
+						"model": "tmo:ioport_open_noback",
+						"y": 180
+					}
+				}
+			},
+			"closed": {
+				"submodel": {
+					"back_ioport": {
+						"model": "tmo:ioport_closed_noback",
+						"y": 180
+					}
+				}
+			},
+			"disabled": {}
+		},
+		"left_ioport": {
+			"open": {
+				"submodel": {
+					"left_ioport": {
+						"model": "tmo:ioport_open_noback",
+						"y": 90
+					}
+				}
+			},
+			"closed": {
+				"submodel": {
+					"left_ioport": {
+						"model": "tmo:ioport_closed_noback",
+						"y": 90
+					}
+				}
+			},
+			"disabled": {}
+		},
+		"right_ioport": {
+			"open": {
+				"submodel": {
+					"right_ioport": {
+						"model": "tmo:ioport_open_noback",
+						"y": 270
+					}
+				}
+			},
+			"closed": {
+				"submodel": {
+					"right_ioport": {
+						"model": "tmo:ioport_closed_noback",
+						"y": 270
+					}
+				}
+			},
+			"disabled": {}
 		}
     }
 }

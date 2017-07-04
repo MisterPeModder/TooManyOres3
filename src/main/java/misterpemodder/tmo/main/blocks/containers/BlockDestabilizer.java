@@ -1,11 +1,14 @@
 package misterpemodder.tmo.main.blocks.containers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.client.gui.GuiHandler.EnumGuiElements;
 import misterpemodder.tmo.main.tileentity.TileEntityDestabilizer;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -23,8 +26,11 @@ public class BlockDestabilizer extends BlockMachine<TileEntityDestabilizer> {
 	}
 	
 	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, FACING, CASING, EMPTY);
+	protected List<IProperty<?>> getProperties() {
+		ArrayList<IProperty<?>> list = new ArrayList<>();
+		list.addAll(super.getProperties());
+		list.add(EMPTY);
+		return list;
 	}
 	
 	@Override
@@ -32,7 +38,7 @@ public class BlockDestabilizer extends BlockMachine<TileEntityDestabilizer> {
 		TileEntity tileentity = world instanceof ChunkCache ? ((ChunkCache)world).getTileEntity(pos, Chunk.EnumCreateEntityType.CHECK) : world.getTileEntity(pos);
 		 
 		if(tileentity != null && tileentity instanceof TileEntityDestabilizer) {
-			return state.withProperty(EMPTY, ((TileEntityDestabilizer)tileentity).getEnderMatterAmount() <= 0);
+			return super.getActualState(state, world, pos).withProperty(EMPTY, ((TileEntityDestabilizer)tileentity).getEnderMatterAmount() <= 0);
 		}
 		else {
 			return super.getActualState(state, world, pos);

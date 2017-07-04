@@ -2,17 +2,11 @@ package misterpemodder.tmo.main.blocks.slab;
 
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.item.EnumRarity;
 
 public class BlockFullSlab extends BlockAbstractSlab<BlockHalfSlab.EnumVariant> {
 	
 	private BlockHalfSlab halfSlab;
-	
-	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, getPropertyVariant());
-	}
 	
 	@Override
 	public PropertyEnum<BlockHalfSlab.EnumVariant> getPropertyVariant() {

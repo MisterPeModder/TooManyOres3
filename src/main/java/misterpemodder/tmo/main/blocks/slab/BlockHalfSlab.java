@@ -6,7 +6,6 @@ import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
 import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 
 public final class BlockHalfSlab extends BlockAbstractSlab<BlockHalfSlab.EnumVariant> {
@@ -14,11 +13,6 @@ public final class BlockHalfSlab extends BlockAbstractSlab<BlockHalfSlab.EnumVar
 	private BlockFullSlab fullSlab;
 	
 	public static final PropertyEnum<BlockHalfSlab.EnumVariant> VARIANT = PropertyEnum.create("variant", BlockHalfSlab.EnumVariant.class);
-	
-	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, VARIANT, HALF);
-	}
 	
 	@Override
 	public PropertyEnum<BlockHalfSlab.EnumVariant> getPropertyVariant() {

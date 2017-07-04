@@ -1,5 +1,7 @@
 package misterpemodder.tmo.main.blocks.containers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import mcjty.theoneprobe.api.ElementAlignment;
@@ -21,8 +23,8 @@ import misterpemodder.tmo.main.client.gui.GuiHandler;
 import misterpemodder.tmo.main.config.ConfigValues;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import net.minecraft.block.material.EnumPushReaction;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -65,8 +67,11 @@ public class BlockTitaniumChest extends BlockContainerBase<TileEntityTitaniumChe
 	}
 	
 	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, FACING);
+	protected List<IProperty<?>> getProperties() {
+		ArrayList<IProperty<?>> list = new ArrayList<>();
+		list.addAll(super.getProperties());
+		list.add(FACING);
+		return list;
 	}
 	
 	@Override

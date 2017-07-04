@@ -8,8 +8,8 @@ import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockValues;
 import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
 import net.minecraft.block.material.MapColor;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -23,8 +23,8 @@ public class BlockStorage extends BlockMulti<EnumVariant> {
 	public static EnumVariant[] blockVariants = EnumVariant.values();
 	
 	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, VARIANT);
+	public IProperty<EnumVariant> getPropertyVariant() {
+		return VARIANT;
 	}
 	
 	public enum EnumVariant implements IBlockVariant {

@@ -1,5 +1,7 @@
 package misterpemodder.tmo.main.blocks.containers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import misterpemodder.tmo.main.Tmo;
@@ -11,8 +13,8 @@ import misterpemodder.tmo.main.tileentity.TileEntityTitaniumAnvil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.EnumPushReaction;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityFallingBlock;
@@ -36,9 +38,13 @@ public class BlockTitaniumAnvil extends BlockTileEntity<TileEntityTitaniumAnvil>
 	private static final AxisAlignedBB X_AXIS_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.125D, 1.0D, 1.0D, 0.875D);
 	private static final AxisAlignedBB Z_AXIS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.0D, 0.875D, 1.0D, 1.0D);
 
+	
 	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, FACING);
+	protected List<IProperty<?>> getProperties() {
+		ArrayList<IProperty<?>> list = new ArrayList<>();
+		list.addAll(super.getProperties());
+		list.add(FACING);
+		return list;
 	}
 	
 	public BlockTitaniumAnvil() {

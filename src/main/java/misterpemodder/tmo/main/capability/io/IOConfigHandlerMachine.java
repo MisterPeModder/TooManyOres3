@@ -16,10 +16,13 @@ import misterpemodder.tmo.main.network.packet.PacketClientToServer;
 import misterpemodder.tmo.main.network.packet.PacketServerToClient;
 import misterpemodder.tmo.main.tileentity.TileEntityMachine;
 import misterpemodder.tmo.main.utils.EnumBlockSide;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
 
 public class IOConfigHandlerMachine implements IIOConfigHandler, INBTSerializable<NBTTagList> {
@@ -113,6 +116,11 @@ public class IOConfigHandlerMachine implements IIOConfigHandler, INBTSerializabl
 	public IIOType<?>[] getIOTypes(EnumFacing side) {
 		return sideConfigs.get(getMachineSide(side)).getIOTypes();
 	}
+	
+	public IIOType<?>[] getIOTypes(EnumBlockSide side) {
+		return sideConfigs.get(side).getIOTypes();
+	}
+
 
 	@Override
 	public boolean isSideInput(EnumFacing side, IIOType<?> type) {
@@ -150,12 +158,19 @@ public class IOConfigHandlerMachine implements IIOConfigHandler, INBTSerializabl
 		toSend.setLong("pos", te.getPos().toLong());
 		toSend.setTag("config", this.serializeNBT());
 		
-		int dimId = te.getWorld().provider.getDimension();
+		World world = te.getWorld();
 		
-		if(te.getWorld().isRemote) {
+		int dimId = world.provider.getDimension();
+		
+		if(world.isRemote) {
 			toSend.setBoolean("to_server", true);
 			toSend.setInteger("world_dim_id", dimId);
 			TMOPacketHandler.network.sendToServer(new PacketClientToServer(PacketDataHandlers.IO_CONFIG_SYNC_HANDLER, toSend));
+		
+			BlockPos pos = te.getPos();
+			IBlockState blockState = world.getBlockState(pos);
+			world.notifyBlockUpdate(pos, blockState, blockState.getActualState(world, pos), 3);
+		
 		} else {
 			TMOPacketHandler.network.sendToDimension(new PacketServerToClient(PacketDataHandlers.IO_CONFIG_SYNC_HANDLER, toSend), dimId);
 		}

@@ -1,5 +1,7 @@
 package misterpemodder.tmo.main.blocks;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import mcjty.theoneprobe.api.IProbeHitData;
@@ -12,8 +14,8 @@ import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockValues;
 import misterpemodder.tmo.main.config.ConfigValues;
 import net.minecraft.block.Block;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,8 +37,12 @@ public class BlockLamp extends BlockBase implements IProbeInfoAccessor{
 	public static final PropertyBool INVERTED = PropertyBool.create("inverted");
 	
 	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, ACTIVATED, INVERTED);
+	protected List<IProperty<?>> getProperties() {
+		ArrayList<IProperty<?>> list = new ArrayList<>();
+		list.addAll(super.getProperties());
+		list.add(ACTIVATED);
+		list.add(INVERTED);
+		return list;
 	}
 	
 	@Override

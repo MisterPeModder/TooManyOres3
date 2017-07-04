@@ -1,5 +1,9 @@
 package misterpemodder.tmo.main.blocks.base;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
 import misterpemodder.tmo.main.blocks.itemblock.ItemBlockBase;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockValues;
@@ -7,6 +11,8 @@ import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.BlockRenderLayer;
@@ -144,6 +150,21 @@ public class BlockBase extends Block implements IBlockTMO {
     @Override
     public int getLightOpacity(IBlockState state) {
     	return ((BlockBase)state.getBlock()).values.getLightOpacity(state);
+    }
+    
+    protected List<IProperty<?>> getProperties() {
+    	return Lists.newArrayList();
+    }
+    
+    @Override
+    protected final BlockStateContainer createBlockState() {
+    	List<IProperty<?>> list = getProperties();
+    	if(!list.isEmpty()) {
+    		return new BlockStateContainer(this, list.toArray(new IProperty<?>[list.size()]));
+    	} else {
+    		return super.createBlockState();
+    	}
+    	
     }
 	
 }

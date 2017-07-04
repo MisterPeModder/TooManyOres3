@@ -1,26 +1,26 @@
 package misterpemodder.tmo.main.blocks;
 
-import misterpemodder.tmo.main.blocks.BlockBrick.EnumVariant;
+import misterpemodder.tmo.main.blocks.BlockBrick.EnumBrickVariant;
 import misterpemodder.tmo.main.blocks.base.BlockMulti;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
 import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
 import net.minecraft.block.material.MapColor;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 
-public class BlockBrick extends BlockMulti<EnumVariant> {
+public class BlockBrick extends BlockMulti<EnumBrickVariant> {
 	
-	public static final PropertyEnum<EnumVariant> VARIANT = PropertyEnum.create("variant", EnumVariant.class);
-	public static EnumVariant[] brickVariants = EnumVariant.values();
+	public static final PropertyEnum<EnumBrickVariant> VARIANT = PropertyEnum.create("variant", EnumBrickVariant.class);
+	public static EnumBrickVariant[] brickVariants = EnumBrickVariant.values();
 	
 	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, VARIANT);
+	public IProperty<EnumBrickVariant> getPropertyVariant() {
+		return VARIANT;
 	}
 	
-	public enum EnumVariant implements IBlockVariant {
+	public enum EnumBrickVariant implements IBlockVariant {
 		ANCIENT_GOLD(0, "ancient_gold", "goldAncient", MapColor.GOLD),
 		ANCIENT_GOLD_CARVED(1, "ancient_gold_carved", "goldAncientCarved", MapColor.GOLD),
 		DARKANIUM(2, "darkanium", "darkanium", MapColor.PURPLE),
@@ -55,7 +55,7 @@ public class BlockBrick extends BlockMulti<EnumVariant> {
 			return this.mapColor;
 		}
 
-		EnumVariant(int id, String name, String unlocalizedName, MapColor color) {
+		EnumBrickVariant(int id, String name, String unlocalizedName, MapColor color) {
 			this.meta = id;
 			this.name = name;
 			this.unlocalizedName = unlocalizedName;
@@ -66,7 +66,7 @@ public class BlockBrick extends BlockMulti<EnumVariant> {
 	
 	public BlockBrick() {
 		super(EnumBlocksNames.BRICK, EnumBlocksValues.BRICK, "_brick");
-		this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumVariant.ANCIENT_GOLD));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumBrickVariant.ANCIENT_GOLD));
 	}
 	
 		
@@ -86,7 +86,7 @@ public class BlockBrick extends BlockMulti<EnumVariant> {
 	}
 	
 	@Override
-	public EnumVariant[] getVariants() {
+	public EnumBrickVariant[] getVariants() {
 		return brickVariants;
 	}
 	

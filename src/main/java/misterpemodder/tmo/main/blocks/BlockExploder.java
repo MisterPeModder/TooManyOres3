@@ -1,5 +1,7 @@
 package misterpemodder.tmo.main.blocks;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import misterpemodder.tmo.main.blocks.BlockExploder.EnumExploderVariant;
@@ -11,9 +13,9 @@ import misterpemodder.tmo.main.config.ConfigValues;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.material.MapColor;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -99,10 +101,18 @@ public class BlockExploder extends BlockMulti<EnumExploderVariant> {
 	public BlockRenderLayer getBlockLayer() {
 		return BlockRenderLayer.CUTOUT;
 	}
-
+	
 	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, ACTIVATED, VARIANT);
+	public IProperty<EnumExploderVariant> getPropertyVariant() {
+		return VARIANT;
+	}
+	
+	@Override
+	protected List<IProperty<?>> getProperties() {
+		ArrayList<IProperty<?>> list = new ArrayList<>();
+		list.addAll(super.getProperties());
+		list.add(ACTIVATED);
+		return list;
 	}
 	
 	@Override

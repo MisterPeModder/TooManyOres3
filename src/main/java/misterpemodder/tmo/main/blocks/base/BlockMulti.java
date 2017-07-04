@@ -1,10 +1,14 @@
 package misterpemodder.tmo.main.blocks.base;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import misterpemodder.tmo.main.blocks.itemblock.ItemBlockMulti;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockValues;
 import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
 import misterpemodder.tmo.main.utils.TMORefs;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -34,7 +38,15 @@ public abstract class BlockMulti<V extends Enum<V> & IBlockVariant> extends Bloc
 	
 	public abstract V[] getVariants();
 	
+	public abstract IProperty<V> getPropertyVariant();
 	
+	@Override
+	protected List<IProperty<?>> getProperties() {
+		ArrayList<IProperty<?>> list = new ArrayList<>();
+		list.addAll(super.getProperties());
+		list.add(getPropertyVariant());
+		return list;
+	}
 	
 	public String getSuffix() {
 		return suffix;

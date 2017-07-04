@@ -4,6 +4,7 @@ import java.util.List;
 
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
+import misterpemodder.tmo.main.blocks.properties.PropertyIOPortState;
 import misterpemodder.tmo.main.client.gui.GuiHandler.EnumGuiElements;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import net.minecraft.block.state.IBlockState;
@@ -25,6 +26,11 @@ public class BlockInjector extends BlockMachine<TileEntityInjector> {
 
 	public BlockInjector() {
 		super(EnumBlocksNames.INJECTOR);
+	}
+	
+	@Override
+	protected List<PropertyIOPortState> getIOPortProperties() {
+		return PropertyIOPortState.getAllWithout(PropertyIOPortState.FRONT, PropertyIOPortState.UP);
 	}
 
 	@Override
