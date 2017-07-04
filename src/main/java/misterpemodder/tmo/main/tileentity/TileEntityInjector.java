@@ -133,7 +133,7 @@ public class TileEntityInjector extends TileEntityMachine<IInjectorRecipe> {
 			if(currentRecipe != null) {
 				
 				if(currentRecipe.getRecipeTransferType() == this.mode && currentRecipe.isValid(new FluidTank(tank.getFluid(), tank.getCapacity()), stack.copy())) {
-					if(progress >= currentRecipe.getTotalTime()) {
+					if(progress >= this.getChangedCraftingTime(currentRecipe)) {
 						Triple<FluidStack, ItemStack,ItemStack> p = currentRecipe.onFinish(new FluidTank(tank.getFluid() == null? null : tank.getFluid().copy(), tank.getCapacity()), stack, this.output.getStackInSlot(0).copy());
 						ItemStack testStack = this.output.insertItem(0, p.getRight(), true);
 						if(testStack == ItemStack.EMPTY) {

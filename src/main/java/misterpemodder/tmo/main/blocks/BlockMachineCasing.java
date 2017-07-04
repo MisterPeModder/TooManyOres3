@@ -19,13 +19,15 @@ public class BlockMachineCasing extends BlockMulti<EnumMachineCasingVariant> {
 	
 	public enum EnumMachineCasingVariant implements IBlockVariant {
 		
-		STANDARD("standard", EnumRarity.RARE),
-		BASIC("basic", EnumRarity.COMMON),
-		IMPROVED("improved", EnumRarity.EPIC),
+		STANDARD("standard", EnumRarity.RARE, 1.0F),
+		BASIC("basic", EnumRarity.COMMON, 1.5F),
+		IMPROVED("improved", EnumRarity.EPIC, 0.75F),
 		;
 		
 		private final String name;
 		private final EnumRarity rarity;
+		
+		public final float speedModifier;
 
 		@Override
 		public String getName() {
@@ -61,9 +63,10 @@ public class BlockMachineCasing extends BlockMulti<EnumMachineCasingVariant> {
 			return this.rarity;
 		}
 
-		EnumMachineCasingVariant(String name, EnumRarity rarity) {
+		EnumMachineCasingVariant(String name, EnumRarity rarity, float speedModifier) {
 			this.name = name;
 			this.rarity = rarity;
+			this.speedModifier = speedModifier;
 		}
 		
 	}

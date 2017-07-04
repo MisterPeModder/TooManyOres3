@@ -16,6 +16,7 @@ import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.api.capability.io.IIOType;
 import misterpemodder.tmo.api.recipe.IMachineRecipe;
 import misterpemodder.tmo.main.Tmo;
+import misterpemodder.tmo.main.blocks.BlockMachineCasing.EnumMachineCasingVariant;
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.capability.HandlerContainer;
@@ -76,6 +77,16 @@ public abstract class TileEntityMachine<V extends IMachineRecipe<V>> extends Til
 	
 	@Nonnull
 	protected abstract IOStatesBuilder getIOStatesBuilder();
+	
+	public final int getChangedCraftingTime(IMachineRecipe<?> recipe) {
+		if(this.hasWorld()) {
+			EnumMachineCasingVariant casing = this.world.getBlockState(this.pos).getValue(BlockMachine.CASING);
+			if(casing != null) {
+				return (int) (recipe.getTotalTime() * casing.speedModifier);
+			}
+		}
+		return recipe.getTotalTime();
+	}
 	
 	@Nullable
 	@SuppressWarnings("unchecked")

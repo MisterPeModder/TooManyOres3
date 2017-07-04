@@ -62,7 +62,7 @@ public class ContainerElementArrow implements ISyncedContainerElement {
         int teProgress = 0;
         boolean recipe = false;
         if(te.getCurrentRecipe() != null) {
-        	teProgress = (te.getProgress()*28)/te.getCurrentRecipe().getTotalTime();
+        	teProgress = (te.getProgress()*28)/te.getChangedCraftingTime(te.getCurrentRecipe());
         	recipe = true;
         }
         boolean b = this.lastProgress != teProgress || this.hasRecipe != recipe;

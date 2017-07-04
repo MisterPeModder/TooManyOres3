@@ -151,7 +151,7 @@ public class TileEntityDestabilizer extends TileEntityMachine<IDestabilizerRecip
 					}
 					if(currentRecipe != null) {
 						if(currentRecipe.isValid(stack.copy()) && this.enderMatterAmount >= currentRecipe.getEnderMaterNeeded()) {
-							if(progress >= currentRecipe.getTotalTime()) {
+							if(progress >= this.getChangedCraftingTime(currentRecipe)) {
 								Pair<ItemStack, FluidStack> p = currentRecipe.onFinish(stack, new FluidTank(tank.getFluid() == null? null : tank.getFluid().copy(), tank.getCapacity()));
 								if(this.tank.fill(p.getRight(), false) == p.getRight().amount) {				
 									this.tank.fill(p.getRight(), true);
