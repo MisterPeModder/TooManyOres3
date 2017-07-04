@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "tmo:items/basic_to_standard_casing_upgrade"
+    }
+}

@@ -26,6 +26,7 @@ import misterpemodder.tmo.main.capability.io.IOConfigHandlerMachine;
 import misterpemodder.tmo.main.capability.io.IOState;
 import misterpemodder.tmo.main.capability.item.HandlerContainerItem;
 import misterpemodder.tmo.main.utils.EnumBlockSide;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -34,9 +35,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -140,6 +143,16 @@ public abstract class TileEntityMachine<V extends IMachineRecipe<V>> extends Til
 	
 	public void emptyTank(short tankId) {
 		
+	}
+	
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+		if(oldState.getBlock() == newState.getBlock() && newState.getBlock() instanceof BlockMachine) {
+			boolean flag1 = oldState.getValue(BlockMachine.CASING) == newState.getValue(BlockMachine.CASING);
+			boolean flag2 = oldState.getValue(BlockMachine.FACING) == newState.getValue(BlockMachine.FACING);
+			return flag1 && flag2;
+		}
+		return true;
 	}
 	
 	@Override

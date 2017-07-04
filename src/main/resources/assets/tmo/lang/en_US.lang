@@ -222,6 +222,9 @@ tile.blockCrystalDestabilizer.basic.name=Basic Crystal Destabilizer
 tile.blockCrystalDestabilizer.standard.name=Crystal Destabilizer
 tile.blockCrystalDestabilizer.improved.name=Improved Crystal Destabilizer
 
+item.casingUpgrade.basicToStandard.name=Basic to Standard casing upgrade
+item.casingUpgrade.standardToImproved.name=Standard to Improved casing upgrade
+
 #Fluids
 fluid.liquidIgnum=Ignum Fuel
 tile.liquidIgnum.name=Ignum Fuel

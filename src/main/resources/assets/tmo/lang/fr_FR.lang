@@ -47,6 +47,9 @@ item.itemLock.reinforced.desc=Une version plus résistante du cadenas avec plus 
 item.itemLock.broken.title=Cassé
 item.itemLock.broken.desc=Réparez le avec %d %s dans une enclume
 
+item.casingUpgrade.basicToStandard.name=Amélioration de machine basique
+item.casingUpgrade.standardToImproved.name=Amélioration de machine standard
+
 
 #Outils
 item.pickaxeTitanium.name=Pioche en titane

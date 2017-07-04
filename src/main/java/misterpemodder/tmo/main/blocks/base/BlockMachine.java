@@ -45,7 +45,7 @@ public abstract class BlockMachine<TE extends TileEntityMachine<?>> extends Bloc
 	
 	public ImmutableList<PropertyIOPortState> ioPortProperties;
 	
-	private final boolean canChangeCasings;
+	public final boolean canChangeCasings;
 	
 	public BlockMachine(IBlockNames n) {
 		this(n, true);

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import misterpemodder.tmo.main.blocks.BlockMachineCasing.EnumMachineCasingVariant;
 import misterpemodder.tmo.main.init.ModItems.TheItems;
 import misterpemodder.tmo.main.utils.ItemStackUtils;
 import net.minecraft.item.EnumRarity;
@@ -178,6 +179,30 @@ public abstract class ItemVariant {
 			return this.isBroken;
 		}
 		
+	}
+	
+	public static class CasingUpgradeVariant extends ItemVariant {
+		
+		public static List<CasingUpgradeVariant> casingUpgradeVariants = new ArrayList<>();
+		
+		public static final CasingUpgradeVariant BASIC_TO_STANDARD = new CasingUpgradeVariant("basic_to_standard", "basicToStandard", EnumMachineCasingVariant.BASIC, EnumMachineCasingVariant.STANDARD);
+		public static final CasingUpgradeVariant STANDARD_TO_IMPROVED = new CasingUpgradeVariant("standard_to_improved", "standardToImproved", EnumMachineCasingVariant.STANDARD, EnumMachineCasingVariant.IMPROVED);
+		
+		public final EnumMachineCasingVariant from;
+		public final EnumMachineCasingVariant to;
+		
+		private CasingUpgradeVariant(String name, String unlocalizedName, EnumMachineCasingVariant from, EnumMachineCasingVariant to) {
+			super(name, unlocalizedName);
+			casingUpgradeVariants.add(this);
+			this.from = from;
+			this.to = to;
+		}
+
+		@Override
+		@SuppressWarnings("unchecked")
+		public List<CasingUpgradeVariant> getVariants() {
+			return casingUpgradeVariants;
+		}
 	}
 	
 }
