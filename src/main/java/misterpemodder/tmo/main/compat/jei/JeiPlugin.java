@@ -22,6 +22,9 @@ import misterpemodder.tmo.main.compat.jei.destabilizer.RecipeCategoryDestabilize
 import misterpemodder.tmo.main.compat.jei.destabilizer.RecipeHandlerDestabilizer;
 import misterpemodder.tmo.main.compat.jei.destabilizer.RecipeMakerDestabilizer;
 import misterpemodder.tmo.main.compat.jei.destabilizer.RecipeTransferInfoDestabilizer;
+import misterpemodder.tmo.main.compat.jei.dust.RecipeCategoryDustCrushing;
+import misterpemodder.tmo.main.compat.jei.dust.RecipeHandlerDustCrushing;
+import misterpemodder.tmo.main.compat.jei.dust.RecipeMakerDustCrushing;
 import misterpemodder.tmo.main.compat.jei.endermatter.RecipeCategoryEnderMatter;
 import misterpemodder.tmo.main.compat.jei.endermatter.RecipeHandlerEnderMatter;
 import misterpemodder.tmo.main.compat.jei.endermatter.RecipeMakerEnderMatter;
@@ -44,6 +47,7 @@ import misterpemodder.tmo.main.utils.ItemStackUtils;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -60,9 +64,9 @@ public class JeiPlugin implements IModPlugin {
 	public void registerIngredients(IModIngredientRegistration registry) {}
 
 	@Override
-	public void register(IModRegistry registry) {
+	public void register(IModRegistry modRegistry) {
 		//Hiding the 'tmo tab item'
-		IIngredientBlacklist blacklist = registry.getJeiHelpers().getIngredientBlacklist();
+		IIngredientBlacklist blacklist = modRegistry.getJeiHelpers().getIngredientBlacklist();
 		blacklist.addIngredientToBlacklist(new ItemStack(ModItems.TheItems.TAB_ICON.getItem()));
 		
 		for(ModItems.TheItems item : ModItems.TheItems.values()) {
@@ -71,31 +75,37 @@ public class JeiPlugin implements IModPlugin {
 			}
 		}
 		
-		this.addDescriptions(registry, registry.getIngredientRegistry());
+		this.addDescriptions(modRegistry, modRegistry.getIngredientRegistry());
 		
 		if(TMORefs.topLoaded) {
-			registry.addRecipeHandlers(new ProbeHelmetRecipeHandler());
+			modRegistry.addRecipeHandlers(new ProbeHelmetRecipeHandler());
 			this.addRecipeMaker(new ProbeHelmetRecipeMaker());
 		}
 		
 		this.addRecipeMaker(new RecipeMakerInjector());	
 		this.addRecipeMaker(new RecipeMakerEnderMatter());
 		this.addRecipeMaker(new RecipeMakerDestabilizer());
-		this.makeRecipes(registry);
+		this.addRecipeMaker(new RecipeMakerDustCrushing());
+		this.makeRecipes(modRegistry);
 		
-		IGuiHelper guiHelper = registry.getJeiHelpers().getGuiHelper();
-		registry.addRecipeCategories(new RecipeCategoryInjector(guiHelper), new RecipeCategoryEnderMatter(guiHelper), new RecipeCategoryDestabilizer(guiHelper));
-		registry.addRecipeHandlers(new RecipeHandlerInjector(), new RecipeHandlerEnderMatter(), new RecipeHandlerDestabilizer());
+		DrawableItemStack.renderer = modRegistry.getIngredientRegistry().getIngredientRenderer(ItemStack.class);
 		
-		registry.addRecipeCategoryCraftingItem(new ItemStack(TheBlocks.INJECTOR.getBlock()), RecipeCategoryInjector.UID);
-		registry.addRecipeCategoryCraftingItem(new ItemStack(TheBlocks.CRYSTAL_DESTABILIZER.getBlock()), RecipeCategoryEnderMatter.UID, RecipeCategoryDestabilizer.UID);
-		registry.addRecipeCategoryCraftingItem(new ItemStack(TheBlocks.TITANIUM_ANVIL.getBlock()), VanillaRecipeCategoryUid.ANVIL);
+		IGuiHelper guiHelper = modRegistry.getJeiHelpers().getGuiHelper();
 		
-		registry.addAnvilRecipe(ItemStackUtils.newVariantStack(TheItems.LOCK, LockVariant.BASIC_BROKEN), Arrays.asList(LockVariant.BASIC_BROKEN.getRepairItem()), Arrays.asList(LockVariant.BASIC_BROKEN.getOtherVariant()));
-		registry.addAnvilRecipe(ItemStackUtils.newVariantStack(TheItems.LOCK, LockVariant.REINFORCED_BROKEN), Arrays.asList(LockVariant.REINFORCED_BROKEN.getRepairItem()), Arrays.asList(LockVariant.REINFORCED_BROKEN.getOtherVariant()));
-		registry.addAdvancedGuiHandlers(new AdvancedGuiHandlerInjector());
+		modRegistry.addRecipeCategories(new RecipeCategoryInjector(guiHelper), new RecipeCategoryEnderMatter(guiHelper), new RecipeCategoryDestabilizer(guiHelper), new RecipeCategoryDustCrushing(guiHelper));
+		modRegistry.addRecipeHandlers(new RecipeHandlerInjector(), new RecipeHandlerEnderMatter(), new RecipeHandlerDestabilizer(), new RecipeHandlerDustCrushing());
 		
-		IRecipeTransferRegistry tr = registry.getRecipeTransferRegistry();
+		modRegistry.addRecipeCategoryCraftingItem(new ItemStack(TheBlocks.INJECTOR.getBlock()), RecipeCategoryInjector.UID);
+		modRegistry.addRecipeCategoryCraftingItem(new ItemStack(TheBlocks.CRYSTAL_DESTABILIZER.getBlock()), RecipeCategoryEnderMatter.UID, RecipeCategoryDestabilizer.UID);
+		modRegistry.addRecipeCategoryCraftingItem(new ItemStack(TheBlocks.TITANIUM_ANVIL.getBlock()), VanillaRecipeCategoryUid.ANVIL);
+		
+		modRegistry.addRecipeCategoryCraftingItem(new ItemStack(Blocks.CRAFTING_TABLE), RecipeCategoryDustCrushing.UID);
+		
+		modRegistry.addAnvilRecipe(ItemStackUtils.newVariantStack(TheItems.LOCK, LockVariant.BASIC_BROKEN), Arrays.asList(LockVariant.BASIC_BROKEN.getRepairItem()), Arrays.asList(LockVariant.BASIC_BROKEN.getOtherVariant()));
+		modRegistry.addAnvilRecipe(ItemStackUtils.newVariantStack(TheItems.LOCK, LockVariant.REINFORCED_BROKEN), Arrays.asList(LockVariant.REINFORCED_BROKEN.getRepairItem()), Arrays.asList(LockVariant.REINFORCED_BROKEN.getOtherVariant()));
+		modRegistry.addAdvancedGuiHandlers(new AdvancedGuiHandlerInjector());
+		
+		IRecipeTransferRegistry tr = modRegistry.getRecipeTransferRegistry();
 		
 		tr.addRecipeTransferHandler(ContainerTitaniumChest.class, VanillaRecipeCategoryUid.CRAFTING, 109, 9, 0, 107);
 		tr.addRecipeTransferHandler(ContainerTitaniumAnvil.class, VanillaRecipeCategoryUid.CRAFTING, 46, 9, 0, 40);

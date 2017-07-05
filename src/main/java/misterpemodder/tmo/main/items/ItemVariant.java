@@ -205,4 +205,51 @@ public abstract class ItemVariant {
 		}
 	}
 	
+	public static class DustVariant extends ItemVariant {
+		
+		public static List<DustVariant> dustVariants = new ArrayList<>();
+		
+		public static final DustVariant TITANIUM = new DustVariant("titanium", "titanium", "dustTitaniumBlueClean");
+		public static final DustVariant TITANIUM_DIRTY = new DustVariant("titanium", "titaniumDirty", "dustTitaniumBlueDirty", EnumRarity.RARE, true);
+		public static final DustVariant TITANIUM_POOR = new DustVariant("titanium_poor", "titaniumPoor", "dustTitanium");
+		public static final DustVariant TITANIUM_POOR_DIRTY = new DustVariant("titanium_poor", "titaniumPoorDirty", "dustTitaniumDirty", EnumRarity.COMMON, true);
+		public static final DustVariant TITANITE = new DustVariant("titanite", "titanite", "dustTitanite");
+		public static final DustVariant COPPER = new DustVariant("copper", "copper", "dustCopper");
+		public static final DustVariant COPPER_DIRTY = new DustVariant("copper", "copperDirty", "dustCopperDirty", EnumRarity.COMMON, true);
+		public static final DustVariant ANCIENT_GOLD = new DustVariant("ancient_gold", "goldAncient", "dustGoldAncientClean", EnumRarity.UNCOMMON);
+		public static final DustVariant ANCIENT_GOLD_DIRTY = new DustVariant("ancient_gold", "goldAncientDirty", "dustGoldAncientDirty", EnumRarity.UNCOMMON, true);
+		public static final DustVariant PLATINUM = new DustVariant("platinum", "platinum", "dustPlatinum");
+		public static final DustVariant PLATINUM_DIRTY = new DustVariant("platinum", "platinumDirty", "dustPlatinumDirty", EnumRarity.COMMON, true);
+		public static final DustVariant FROZIUM = new DustVariant("frozium", "frozium", "dustFrozium");
+		public static final DustVariant IGNUM = new DustVariant("ignum", "ignum", "dustIgnum");
+		
+		public boolean isDirty;
+		
+		private DustVariant(String name, String unlocalizedName, String oreDictName) {
+			this(name, unlocalizedName, oreDictName, EnumRarity.COMMON, false);
+		}
+		
+		private DustVariant(String name, String unlocalizedName, String oreDictName, EnumRarity rarity) {
+			this(name, unlocalizedName, oreDictName, rarity, false);
+		}
+		
+		private DustVariant(String name, String unlocalizedName, String oreDictName, EnumRarity rarity, boolean isDirty) {
+			super(name, unlocalizedName, rarity, oreDictName);
+			dustVariants.add(this);
+			this.isDirty = isDirty;
+		}
+
+		@Override
+		@SuppressWarnings("unchecked")
+		public List<DustVariant> getVariants() {
+			return dustVariants;
+		}
+		
+		@Override
+		public EnumRarity getRarity() {
+			return super.getRarity();
+		}
+		
+	}
+	
 }

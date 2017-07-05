@@ -47,6 +47,23 @@ item.itemLock.reinforced.desc=A more advanced version of the lock that has less 
 item.itemLock.broken.title=Broken
 item.itemLock.broken.desc=Repair with %dx %ss in an anvil.
 
+item.casingUpgrade.basicToStandard.name=Basic to Standard casing upgrade
+item.casingUpgrade.standardToImproved.name=Standard to Improved casing upgrade
+
+item.dust.titanium.name=Titanium Dust
+item.dust.titaniumDirty.name=Dirty Titanium Dust
+item.dust.titaniumPoor.name=Titanium Dust
+item.dust.titaniumPoorDirty.name=Dirty Titanium Dust
+item.dust.titanite.name=Titanite Dust
+item.dust.copper.name=Copper Dust
+item.dust.copperDirty.name=Dirty Copper Dust
+item.dust.goldAncient.name=Ancient Gold Dust
+item.dust.goldAncientDirty.name=Dirty Ancient Gold Dust
+item.dust.platinum.name=Platinum Dust
+item.dust.platinumDirty.name=Dirty Platinum Dust
+item.dust.frozium.name=Crushed Frozium
+item.dust.ignum.name=Crushed Ignum
+
 #Tools
 item.pickaxeTitanium.name=Titanium Pickaxe
 item.pickaxeTitaniumDark.name=Dark Titanium Pickaxe
@@ -222,9 +239,6 @@ tile.blockCrystalDestabilizer.basic.name=Basic Crystal Destabilizer
 tile.blockCrystalDestabilizer.standard.name=Crystal Destabilizer
 tile.blockCrystalDestabilizer.improved.name=Improved Crystal Destabilizer
 
-item.casingUpgrade.basicToStandard.name=Basic to Standard casing upgrade
-item.casingUpgrade.standardToImproved.name=Standard to Improved casing upgrade
-
 #Fluids
 fluid.liquidIgnum=Ignum Fuel
 tile.liquidIgnum.name=Ignum Fuel
@@ -399,6 +413,7 @@ gui.jei.category.enderMatter=Ender Matter Item
 gui.jei.category.enderMatter.value=Ender Matter value
 gui.jei.category.destabilizer=Crystal Destabilizer Recipe
 gui.jei.category.destabilizer.cost=Ender Matter cost
+gui.jei.category.crafting.crushing=Hammer Ore crushing
 
 item.itemIngot.titanium.jeidesc=Titanium is a very sturdy material that have a lot of uses...\nPerhaps you could upgrade your diamond with this?
 item.titaniumBucket.jeidesc=A reinforced bucket that can hold multiple buckets worth of any fluid.\nIts capacity may vary depending on the configuration.\nControls:\nRight-click to place fluids.\nShift-right-click to take fluids.

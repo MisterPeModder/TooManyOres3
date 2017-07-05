@@ -18,8 +18,8 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemMulti<V extends ItemVariant> extends ItemBase {
 	
-	private List<V> variants;
-	private String suffix;
+	protected List<V> variants;
+	protected String suffix;
 
 	public ItemMulti(EnumItemsNames names, List<V> variants, String suffix) {
 		super(names);

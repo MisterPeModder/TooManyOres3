@@ -10,6 +10,7 @@ public enum EnumItemsNames {
 	PLATE("plate", "itemPlate", "plate"),
 	LOCK("lock", "itemLock", "lock"),
 	CASING_UPGRADE("casing_upgrade", "casingUpgrade"),
+	DUST("dust", "dust"),
 	
 	TITANIUM_BUCKET("titanium_bucket", "titaniumBucket"),
 	TITANIUM_CAN("titanium_can", "titaniumCan"),

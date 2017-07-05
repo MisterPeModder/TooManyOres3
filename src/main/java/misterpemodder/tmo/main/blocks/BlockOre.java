@@ -24,23 +24,24 @@ public class BlockOre extends BlockMulti<EnumVariant> {
 	}
 	
 	public enum EnumVariant implements IBlockVariant {
-		TITANIUM_ORE(0, "titanium", "titanium", 2),
-		ANCIENT_GOLD_ORE(1, "ancient_gold", "goldAncient", 3),
-		DARKANIUM_ORE(2, "darkanium", "darkanium", 3),
-		DARKANIUM_ORE_NETHER(3, "nether_darkanium", "darkaniumNether", 3),
-		FROZIUM_ORE(4, "frozium", "frozium", 1),
-		IGNUM_ORE(5, "ignum", "ignum", 1),
-		IGNUM_ORE_NETHER(6, "nether_ignum", "ignumNether", 1),
-		PLATINUM_ORE(7, "platinum", "platinum", 3),
-		PLATINUM_ORE_NETHER(8, "nether_platinum", "platinumNether", 3),
-		ENDER_MATTER_ORE(9, "ender_matter", "enderMatter", 2),
-		COPPER_ORE(10, "copper", "copper", 1),
-		CARBON_ORE(11, "carbon", "carbon", 1),
+		TITANIUM_ORE(0, "titanium", "titanium", "oreTitaniumBlue", 2),
+		ANCIENT_GOLD_ORE(1, "ancient_gold", "goldAncient", "oreGoldAncient", 3),
+		DARKANIUM_ORE(2, "darkanium", "darkanium", "oreDarkanium", 3),
+		DARKANIUM_ORE_NETHER(3, "nether_darkanium", "darkaniumNether", "oreDarkanium",3),
+		FROZIUM_ORE(4, "frozium", "frozium", "oreFrozium", 1),
+		IGNUM_ORE(5, "ignum", "ignum", "oreIgnum", 1),
+		IGNUM_ORE_NETHER(6, "nether_ignum", "ignumNether", "oreIgnum", 1),
+		PLATINUM_ORE(7, "platinum", "platinum", "orePlatinum", 3),
+		PLATINUM_ORE_NETHER(8, "nether_platinum", "platinumNether", "orePlatinum", 3),
+		ENDER_MATTER_ORE(9, "ender_matter", "enderMatter", "oreEnderMatter", 2),
+		COPPER_ORE(10, "copper", "copper", "oreCopper", 1),
+		CARBON_ORE(11, "carbon", "carbon", "oreCarbon", 1),
 		;
 		private final int meta;
 		private final String name;
 		private final String unlocalizedName;
 		private final int miningLevel;
+		private final String oreDictName;
 
 		@Override
 		public String getName() {
@@ -62,12 +63,16 @@ public class BlockOre extends BlockMulti<EnumVariant> {
 		}
 		public MapColor getMapColor() {
 			return MapColor.STONE;
-		};
+		}
+		public String getOreDictName() {
+			return oreDictName;
+		}
 
-		EnumVariant(int id, String name, String unlocalizedName, int miningLevel) {
+		EnumVariant(int id, String name, String unlocalizedName, String oreDictName, int miningLevel) {
 			this.meta = id;
 			this.name = name;
 			this.unlocalizedName = unlocalizedName;
+			this.oreDictName = oreDictName;
 			this.miningLevel = miningLevel;
 		}
 		
@@ -96,10 +101,8 @@ public class BlockOre extends BlockMulti<EnumVariant> {
 	
 	@Override
 	public void registerOreDict() {
-		for(IBlockVariant v : oreVariants) {
-			String uname = v.getUnlocalizedName();
-			String name = "ore"+String.valueOf(uname.charAt(0)).toUpperCase() + uname.substring(1);
-			OreDictionary.registerOre(name, new ItemStack(this, 1, v.getMeta()));
+		for(EnumVariant v : oreVariants) {
+			OreDictionary.registerOre(v.getOreDictName(), new ItemStack(this, 1, v.getMeta()));
 		}
 	}
 

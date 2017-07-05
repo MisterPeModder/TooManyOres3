@@ -50,6 +50,20 @@ item.itemLock.broken.desc=Réparez le avec %d %s dans une enclume
 item.casingUpgrade.basicToStandard.name=Amélioration de machine basique
 item.casingUpgrade.standardToImproved.name=Amélioration de machine standard
 
+item.dust.titanium.name=Poudre de titane
+item.dust.titaniumDirty.name=Poudre de titane sale
+item.dust.titaniumPoor.name=Poudre de titane
+item.dust.titaniumPoorDirty.name=Poudre de titane sale
+item.dust.titanite.name=Poudre de titanite
+item.dust.copper.name=Poudre de cuivre
+item.dust.copperDirty.name=Poudre de cuivre sale
+item.dust.goldAncientDirty.name=Poudre d'or ancien sale
+item.dust.goldAncient.name=Poudre d'or ancien
+item.dust.platinum.name=Poudre de platine
+item.dust.platinumDirty.name=Poudre de platine sale
+item.dust.frozium.name=Frozium concassé
+item.dust.ignum.name=Ignum concassé
+
 
 #Outils
 item.pickaxeTitanium.name=Pioche en titane
@@ -398,6 +412,7 @@ gui.jei.category.enderMatter=Matière de l'Ender
 gui.jei.category.enderMatter.value=Matière de l'Ender
 gui.jei.category.destabilizer=Destabiliseur de crystaux
 gui.jei.category.destabilizer.cost=Coût en matière de l'Ender
+gui.jei.category.crafting.crushing=Broyage de minerais
 
 item.itemIngot.titanium.jeidesc=Le titane est un materiau avec beacoup d'utilisations possibles.\nPeut-être que l'on peut améliorer nos outils en diamant avec?
 item.titaniumBucket.jeidesc=Un seau capable de contenir l'équivalent de plusieurs seaux de n'importe quel liquide\nSa capacité peut varier selon la configuration\nContrôles:\nClic droit pour placer des fluides. \nShift+Clic droit pour prendre des fluides.

@@ -5,6 +5,7 @@ import java.util.List;
 
 import misterpemodder.tmo.main.items.EnumItemsNames;
 import misterpemodder.tmo.main.items.ItemCasingUpgrade;
+import misterpemodder.tmo.main.items.ItemDust;
 import misterpemodder.tmo.main.items.ItemLock;
 import misterpemodder.tmo.main.items.ItemMulti;
 import misterpemodder.tmo.main.items.ItemTitaniumBucket;
@@ -42,6 +43,7 @@ public class ModItems {
 		LOCK(new ItemLock()),
 		TITANIUM_BUCKET(new ItemTitaniumBucket()),
 		CASING_UPGRADE(new ItemCasingUpgrade()),
+		DUST(new ItemDust()),
 		
 		PICKAXE_TITANIUM(new ItemTmoPickaxe(EnumItemsNames.PICKAXE_TITANIUM, TmoToolMaterial.TITANIUM_MATERIAL)),
 		PICKAXE_TITANIUM_DARK(new ItemTmoPickaxe(EnumItemsNames.PICKAXE_TITANIUM_DARK, TmoToolMaterial.TITANIUM_DARK_MATERIAL)),

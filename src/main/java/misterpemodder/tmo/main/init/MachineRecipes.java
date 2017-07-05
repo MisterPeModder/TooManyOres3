@@ -3,6 +3,8 @@ package misterpemodder.tmo.main.init;
 
 import static misterpemodder.tmo.api.TooManyOresAPI.registryHandler;
 
+import java.util.Locale;
+
 import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
 import misterpemodder.tmo.main.apiimpl.recipe.DestabilizerToolRecipe;
 import misterpemodder.tmo.main.apiimpl.recipe.InjectorFillDrainRecipe;
@@ -10,6 +12,7 @@ import misterpemodder.tmo.main.blocks.BlockStorage;
 import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import misterpemodder.tmo.main.init.ModFluids.TheFluids;
 import misterpemodder.tmo.main.init.ModItems.TheItems;
+import misterpemodder.tmo.main.items.ItemVariant.DustVariant;
 import misterpemodder.tmo.main.items.ItemVariant.GemVariant;
 import misterpemodder.tmo.main.items.materials.TmoToolMaterial;
 import misterpemodder.tmo.main.utils.ItemStackUtils;
@@ -47,6 +50,20 @@ public final class MachineRecipes {
 		registryHandler.registerCrystalDestabilizerRecipe(new ResourceLocationTmo("ignum_fuel_block"), 100, new ItemStack(TheBlocks.STORAGE_BLOCK.getBlock(), 1, BlockStorage.EnumVariant.IGNUM_BLOCK.getMeta()), new FluidStack(TheFluids.IGNUM_FUEL.getFluid(), 2250), 360);
 		registryHandler.registerCrystalDestabilizerRecipe(new ResourceLocationTmo("frozium_fuel_block"), 100, new ItemStack(TheBlocks.FROZIUM_BLOCK.getBlock()), new FluidStack(TheFluids.FROZIUM_FUEL.getFluid(), 2250), 360);
 		
+		registryHandler.registerCrystalDestabilizerRecipe(new ResourceLocationTmo("ignum_fuel_dust"), 9, ItemStackUtils.newVariantStack(TheItems.DUST, DustVariant.IGNUM), new FluidStack(TheFluids.IGNUM_FUEL.getFluid(), 250), 35);
+		registryHandler.registerCrystalDestabilizerRecipe(new ResourceLocationTmo("frozium_fuel_dust"), 9, ItemStackUtils.newVariantStack(TheItems.DUST, DustVariant.FROZIUM), new FluidStack(TheFluids.FROZIUM_FUEL.getFluid(), 250), 35);
+
+		registerDustWashingRecipe(DustVariant.TITANIUM, DustVariant.TITANIUM_DIRTY);
+		registerDustWashingRecipe(DustVariant.TITANIUM_POOR, DustVariant.TITANIUM_POOR_DIRTY);
+		registerDustWashingRecipe(DustVariant.COPPER, DustVariant.COPPER_DIRTY);
+		registerDustWashingRecipe(DustVariant.ANCIENT_GOLD, DustVariant.ANCIENT_GOLD_DIRTY);
+		registerDustWashingRecipe(DustVariant.PLATINUM, DustVariant.PLATINUM_DIRTY);
+		
+	}
+	
+	private static void registerDustWashingRecipe(DustVariant cleanDust, DustVariant dirtyDust) {
+		String loc = dirtyDust.getUnlocalizedName().toLowerCase(Locale.ROOT) + "_to_" + cleanDust.getUnlocalizedName().toLowerCase(Locale.ROOT) + "dust_washing";
+		registryHandler.registerInjectorRecipeInjection(new ResourceLocationTmo(loc), new FluidStack(FluidRegistry.WATER, 500), ItemStackUtils.newVariantStack(TheItems.DUST, dirtyDust), ItemStackUtils.newVariantStack(TheItems.DUST, cleanDust), 50);
 	}
 	
 }
