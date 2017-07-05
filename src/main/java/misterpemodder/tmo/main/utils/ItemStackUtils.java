@@ -1,5 +1,8 @@
 package misterpemodder.tmo.main.utils;
 
+import misterpemodder.tmo.main.blocks.base.BlockMulti;
+import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
+import misterpemodder.tmo.main.init.ModBlocks;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.init.ModPotions.ThePotionTypes;
 import misterpemodder.tmo.main.items.ItemMulti;
@@ -35,6 +38,28 @@ public final class ItemStackUtils {
 			return newVariantStack((ItemMulti<V>)i, variant, amount);
 		} else {
 			return new ItemStack(i, amount, 0);
+		}
+	}
+	
+	public static <V extends Enum<V> & IBlockVariant> ItemStack newVariantStack(BlockMulti<V> block, V variant) {
+		return newVariantStack(block, variant, 1);
+	}
+	
+	public static <V extends Enum<V> & IBlockVariant> ItemStack newVariantStack(BlockMulti<V> block, V variant, int amount) {
+		return new ItemStack(block, amount, variant.getMeta());
+	}
+	
+	public static <V extends Enum<V> & IBlockVariant> ItemStack newVariantStack(ModBlocks.TheBlocks block, V variant) {
+		return newVariantStack(block, variant, 1);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <V extends Enum<V> & IBlockVariant> ItemStack newVariantStack(ModBlocks.TheBlocks block, V variant, int amount) {
+		Block b = block.getBlock();
+		if(b instanceof BlockMulti && ((BlockMulti<V>)b).getVariants()[0].getClass().equals(variant.getClass())) {
+			return newVariantStack((BlockMulti<V>)b, variant, amount);
+		} else {
+			return new ItemStack(b, amount, 0);
 		}
 	}
 	

@@ -17,6 +17,7 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import misterpemodder.tmo.main.Tmo;
+import misterpemodder.tmo.main.blocks.BlockMachineCasing.EnumMachineCasingVariant;
 import misterpemodder.tmo.main.blocks.base.IBlockTMO;
 import misterpemodder.tmo.main.compat.jei.destabilizer.RecipeCategoryDestabilizer;
 import misterpemodder.tmo.main.compat.jei.destabilizer.RecipeHandlerDestabilizer;
@@ -95,8 +96,9 @@ public class JeiPlugin implements IModPlugin {
 		modRegistry.addRecipeCategories(new RecipeCategoryInjector(guiHelper), new RecipeCategoryEnderMatter(guiHelper), new RecipeCategoryDestabilizer(guiHelper), new RecipeCategoryDustCrushing(guiHelper));
 		modRegistry.addRecipeHandlers(new RecipeHandlerInjector(), new RecipeHandlerEnderMatter(), new RecipeHandlerDestabilizer(), new RecipeHandlerDustCrushing());
 		
-		modRegistry.addRecipeCategoryCraftingItem(new ItemStack(TheBlocks.INJECTOR.getBlock()), RecipeCategoryInjector.UID);
-		modRegistry.addRecipeCategoryCraftingItem(new ItemStack(TheBlocks.CRYSTAL_DESTABILIZER.getBlock()), RecipeCategoryEnderMatter.UID, RecipeCategoryDestabilizer.UID);
+		addRecipeCategoryMachine(modRegistry, TheBlocks.INJECTOR, RecipeCategoryInjector.UID);
+		addRecipeCategoryMachine(modRegistry, TheBlocks.CRYSTAL_DESTABILIZER, RecipeCategoryEnderMatter.UID, RecipeCategoryDestabilizer.UID);
+		
 		modRegistry.addRecipeCategoryCraftingItem(new ItemStack(TheBlocks.TITANIUM_ANVIL.getBlock()), VanillaRecipeCategoryUid.ANVIL);
 		
 		modRegistry.addRecipeCategoryCraftingItem(new ItemStack(Blocks.CRAFTING_TABLE), RecipeCategoryDustCrushing.UID);
@@ -144,6 +146,12 @@ public class JeiPlugin implements IModPlugin {
 		IIngredientRegistry ingredientRegistry = registry.getIngredientRegistry();
 		for(RecipeMaker<? extends IRecipeWrapper> r : recipeMakers) {
 			registry.addRecipes(r.makeRecipe(ingredientRegistry));
+		}
+	}
+	
+	private void addRecipeCategoryMachine(IModRegistry registry, TheBlocks block, String... recipeCategoryUids) {
+		for(EnumMachineCasingVariant v : EnumMachineCasingVariant.values()) {
+			registry.addRecipeCategoryCraftingItem(ItemStackUtils.newVariantStack(block, v), recipeCategoryUids);
 		}
 	}
 	
