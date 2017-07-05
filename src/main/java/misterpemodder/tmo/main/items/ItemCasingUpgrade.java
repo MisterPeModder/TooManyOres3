@@ -2,10 +2,12 @@ package misterpemodder.tmo.main.items;
 
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
 import misterpemodder.tmo.main.items.ItemVariant.CasingUpgradeVariant;
+import misterpemodder.tmo.main.tileentity.TileEntityMachine;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -30,6 +32,12 @@ public class ItemCasingUpgrade extends ItemMulti<CasingUpgradeVariant> {
 				if(state.getValue(BlockMachine.CASING) == variant.from) {
 					world.setBlockState(pos, state.withProperty(BlockMachine.CASING, variant.to), 3);
 					if(!player.isCreative()) stack.shrink(1);
+					
+					TileEntity te = world.getTileEntity(pos);
+					if(te != null && te instanceof TileEntityMachine) {
+						((TileEntityMachine<?>)te).setProgress(0);
+					}
+					
 					return EnumActionResult.SUCCESS;
 				}
 			}

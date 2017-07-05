@@ -66,6 +66,10 @@ public abstract class TileEntityMachine<V extends IMachineRecipe<V>> extends Til
 		return this.progress;
 	}
 	
+	public void setProgress(int progress) {
+		this.progress = progress;
+	}
+	
 	@Nullable
 	public V getCurrentRecipe() {
 		return this.currentRecipe;
