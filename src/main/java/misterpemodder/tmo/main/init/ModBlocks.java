@@ -8,6 +8,7 @@ import misterpemodder.tmo.main.blocks.BlockMachineCasing;
 import misterpemodder.tmo.main.blocks.BlockOre;
 import misterpemodder.tmo.main.blocks.BlockPistonStrongBase;
 import misterpemodder.tmo.main.blocks.BlockRedstoneStrong;
+import misterpemodder.tmo.main.blocks.BlockSpecialRedstoneWire;
 import misterpemodder.tmo.main.blocks.BlockStorage;
 import misterpemodder.tmo.main.blocks.BlockStrongPistonExtension;
 import misterpemodder.tmo.main.blocks.BlockStrongPistonMoving;
@@ -62,7 +63,9 @@ public class ModBlocks {
 		STRONG_PISTON_EXTENSION(new BlockStrongPistonExtension()),
 		STRONG_PISTON_MOVING(new BlockStrongPistonMoving()),
 		INJECTOR(new BlockInjector()),
-		CRYSTAL_DESTABILIZER(new BlockDestabilizer())
+		CRYSTAL_DESTABILIZER(new BlockDestabilizer()),
+		TITANIUM_REDSTONE(new BlockSpecialRedstoneWire(EnumBlocksNames.TITANIUM_REDSTONE)),
+		COPPER_REDSTONE(new BlockSpecialRedstoneWire(EnumBlocksNames.COPPER_REDSTONE)),
 		;
 		private IBlockTMO block;
 		

@@ -1,6 +1,7 @@
 package misterpemodder.tmo.main.proxy;
 
 import misterpemodder.tmo.main.Tmo;
+import misterpemodder.tmo.main.blocks.BlockSpecialRedstoneWire;
 import misterpemodder.tmo.main.client.gui.GuiHandler;
 import misterpemodder.tmo.main.client.render.TileEntityInjectorRenderer;
 import misterpemodder.tmo.main.client.render.TileEntityStrongPistonRenderer;
@@ -37,7 +38,9 @@ public class ClientProxy extends CommonProxy {
 	}
 	
 	@Override
-	public void postInit() {}
+	public void postInit() {
+		BlockSpecialRedstoneWire.registerColorHandler();
+	}
 	
 	@Override
 	public String translate(String translateKey, Object... params) {

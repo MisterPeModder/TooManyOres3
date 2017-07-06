@@ -13,6 +13,7 @@ import misterpemodder.tmo.main.items.ItemVariant.GemVariant;
 import misterpemodder.tmo.main.items.ItemVariant.IngotVariant;
 import misterpemodder.tmo.main.utils.ItemStackUtils;
 import misterpemodder.tmo.main.utils.TMORefs;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -62,6 +63,8 @@ public final class Crafting {
 		addDustSmeltingRecipe(DustVariant.FROZIUM, TheItems.GEM, GemVariant.FROZIUM_GEM);
 		addDustSmeltingRecipe(DustVariant.IGNUM, TheItems.GEM, GemVariant.IGNUM_GEM);
 		
+		GameRegistry.addShapedRecipe(new ItemStack(TheBlocks.TITANIUM_REDSTONE.getBlock(), 8), "RRR", "RTR", "RRR", 'R', new ItemStack(Items.REDSTONE), 'T', ItemStackUtils.newVariantStack(TheItems.DUST, DustVariant.TITANIUM));
+		GameRegistry.addShapedRecipe(new ItemStack(TheBlocks.COPPER_REDSTONE.getBlock(), 8), "RRR", "RCR", "RRR", 'R', new ItemStack(Items.REDSTONE), 'C', ItemStackUtils.newVariantStack(TheItems.DUST, DustVariant.COPPER));
 	}
 	
 	private static void addStorageRecipe(String ressourceOreDict, String storageBlockOreDict) {

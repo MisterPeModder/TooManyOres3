@@ -186,7 +186,7 @@ public class EventHandler {
 				}
 			}
 		}
-		else if(I18n.hasKey(event.getItemStack().getUnlocalizedName()+".desc")) {
+		else if(I18n.hasKey(event.getItemStack().getUnlocalizedName()+".desc") && event.getItemStack().getItem().getRegistryName().getResourceDomain().equals(TMORefs.MOD_ID)) {
 			if(GuiScreen.isShiftKeyDown()) {
 				List<String> toAdd = StringUtils.parseTooltip(I18n.format(event.getItemStack().getUnlocalizedName()+".desc"));
 			

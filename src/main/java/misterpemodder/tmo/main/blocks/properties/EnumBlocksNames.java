@@ -36,6 +36,9 @@ public enum EnumBlocksNames implements IBlockNames {
 	
 	IGNUM_FUEL("liquid_ignum", "liquidIgnum", EnumRarity.UNCOMMON),
 	FROZIUM_FUEL("liquid_frozium", "liquidFrozium", EnumRarity.RARE),
+	
+	TITANIUM_REDSTONE("titanium_redstone", "redstoneTitanium", EnumRarity.RARE),
+	COPPER_REDSTONE("copper_redstone", "redstoneCopper", EnumRarity.UNCOMMON),
 	;
 	String unlocalizedName;
 	String registryName;
