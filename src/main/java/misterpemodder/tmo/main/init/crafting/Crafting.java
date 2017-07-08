@@ -63,8 +63,10 @@ public final class Crafting {
 		addDustSmeltingRecipe(DustVariant.FROZIUM, TheItems.GEM, GemVariant.FROZIUM_GEM);
 		addDustSmeltingRecipe(DustVariant.IGNUM, TheItems.GEM, GemVariant.IGNUM_GEM);
 		
-		GameRegistry.addShapedRecipe(new ItemStack(TheBlocks.TITANIUM_REDSTONE.getBlock(), 8), "RRR", "RTR", "RRR", 'R', new ItemStack(Items.REDSTONE), 'T', ItemStackUtils.newVariantStack(TheItems.DUST, DustVariant.TITANIUM));
-		GameRegistry.addShapedRecipe(new ItemStack(TheBlocks.COPPER_REDSTONE.getBlock(), 8), "RRR", "RCR", "RRR", 'R', new ItemStack(Items.REDSTONE), 'C', ItemStackUtils.newVariantStack(TheItems.DUST, DustVariant.COPPER));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TheBlocks.TITANIUM_REDSTONE.getBlock(), 8), "RRR", "RTR", "RRR", 'R', new ItemStack(Items.REDSTONE), 'T', "dustTitaniumBlueClean"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TheBlocks.COPPER_REDSTONE.getBlock(), 8), "RRR", "RCR", "RRR", 'R', new ItemStack(Items.REDSTONE), 'C', "dustCopper"));
+
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TheBlocks.STRONG_REDSTONE_BLOCK.getBlock()), "IRI", "RBR", "IRI", 'I', "ingotIron", 'R', new ItemStack(TheBlocks.COPPER_REDSTONE.getBlock()), 'B', "blockRedstone"));
 	}
 	
 	private static void addStorageRecipe(String ressourceOreDict, String storageBlockOreDict) {
