@@ -1,4 +1,4 @@
-package misterpemodder.tmo.main.blocks;
+package misterpemodder.tmo.main.blocks.redstone;
 
 import misterpemodder.tmo.main.blocks.base.IBlockTMO;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;

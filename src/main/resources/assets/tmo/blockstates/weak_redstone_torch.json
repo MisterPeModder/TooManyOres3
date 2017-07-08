@@ -1,0 +1,21 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+		"model": "lit_redstone_torch_wall",
+		"transform": "forge:default-block",
+		"textures": {
+			"torch": "tmo:blocks/weak_redstone_torch_on"
+		}
+	},
+    "variants": {
+        "normal": [{}],
+        "inventory": [{}],
+        "facing": {
+			"up": {"model": "lit_redstone_torch"},
+            "north": {"y": 270},
+            "south": {"y": 90},
+            "west": {"y": 180},
+            "east": {}
+        }
+    }
+}

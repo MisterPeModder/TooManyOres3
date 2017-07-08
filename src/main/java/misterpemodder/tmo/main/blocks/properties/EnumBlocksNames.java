@@ -39,6 +39,8 @@ public enum EnumBlocksNames implements IBlockNames {
 	
 	TITANIUM_REDSTONE("titanium_redstone", "redstoneTitanium", EnumRarity.RARE),
 	COPPER_REDSTONE("copper_redstone", "redstoneCopper", EnumRarity.UNCOMMON),
+	WEAK_REDSTONE_TORCH("weak_redstone_torch", "redstoneTorchWeak", EnumRarity.RARE),
+	WEAK_REDSTONE_TORCH_UNLIT("weak_redstone_torch_unlit", "redstoneTorchWeak", EnumRarity.RARE),
 	;
 	String unlocalizedName;
 	String registryName;

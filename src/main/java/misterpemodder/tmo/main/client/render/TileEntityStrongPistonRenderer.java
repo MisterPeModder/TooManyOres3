@@ -1,6 +1,6 @@
 package misterpemodder.tmo.main.client.render;
 
-import misterpemodder.tmo.main.blocks.BlockStrongPistonExtension;
+import misterpemodder.tmo.main.blocks.redstone.BlockStrongPistonExtension;
 import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import misterpemodder.tmo.main.tileentity.TileEntityStrongPiston;
 import net.minecraft.block.Block;

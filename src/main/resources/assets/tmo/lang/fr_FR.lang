@@ -243,6 +243,8 @@ tile.redstoneTitanium.name=Redstone enrichie au titane
 tile.redstoneTitanium.desc=Cette poudre est moins conductrice que la redstone normale.\nQuand elle est placée au sol elle ne transmet que du courant faible.
 tile.redstoneCopper.name=Redstone enrichie au cuivre
 tile.redstoneCopper.desc=Cette poudre est plus conductrice que la redstone normale.\nQuand elle est placée au sol se connecte à tous les blocs solides adjacents en les alimentant avec un courant fort.
+tile.redstoneTorchWeak.name=Torche de redstone faible
+tile.redstoneTorchWeak.desc=Cette torche ne transmet pas de courant faible au bloc au dessus et ne brûle pas. 
 
 #Fluides
 fluid.liquidIgnum=Essence d'ignum

@@ -242,6 +242,8 @@ tile.redstoneTitanium.name=Titanium-Enriched Redstone
 tile.redstoneTitanium.desc=This dust is less conductive than regular redstone.\nWhen placed on ground, it will only transmit weak power.
 tile.redstoneCopper.name=Copper-Enriched Redstone
 tile.redstoneCopper.desc=This dust is more conductive than regular redstone.\nWhen placed on ground, it will connect to all adjacent solid blocks and power them with strong power.
+tile.redstoneTorchWeak.name=Weak Redstone Torch
+tile.redstoneTorchWeak.desc=This torch does not transmit strong power to the blocks above and does not burn out.
 
 #Fluids
 fluid.liquidIgnum=Ignum Fuel

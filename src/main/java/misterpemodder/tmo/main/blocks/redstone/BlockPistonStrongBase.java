@@ -1,4 +1,4 @@
-package misterpemodder.tmo.main.blocks;
+package misterpemodder.tmo.main.blocks.redstone;
 
 import java.lang.reflect.Method;
 import java.util.List;

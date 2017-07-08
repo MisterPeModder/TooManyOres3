@@ -70,7 +70,7 @@ public class ClassPatcherBlockRedstoneWire extends ClassPatcher {
 						newInstructions.add(new VarInsnNode(ALOAD, 1));
 						newInstructions.add(new VarInsnNode(ALOAD, 2));
 						newInstructions.add(new VarInsnNode(ALOAD, 3));
-						newInstructions.add(new MethodInsnNode(INVOKESTATIC, "misterpemodder/tmo/main/blocks/BlockSpecialRedstoneWire", "canConnectTo", "(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/util/EnumFacing;Lnet/minecraft/world/IBlockAccess;Lnet/minecraft/util/math/BlockPos;)Z", false));
+						newInstructions.add(new MethodInsnNode(INVOKESTATIC, "misterpemodder/tmo/main/blocks/redstone/BlockSpecialRedstoneWire", "canConnectTo", "(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/util/EnumFacing;Lnet/minecraft/world/IBlockAccess;Lnet/minecraft/util/math/BlockPos;)Z", false));
 					
 						method.instructions.insert(targetNode, newInstructions);
 						
@@ -154,7 +154,7 @@ public class ClassPatcherBlockRedstoneWire extends ClassPatcher {
 					@Override
 					public void makePatch(MethodNode method, AbstractInsnNode targetNode, int nodeIndex) {
 						method.instructions.remove(targetNode.getPrevious());
-						method.instructions.insert(targetNode, new FieldInsnNode(GETSTATIC, "misterpemodder/tmo/main/blocks/BlockSpecialRedstoneWire", "canWireProvidePower", "Z"));
+						method.instructions.insert(targetNode, new FieldInsnNode(GETSTATIC, "misterpemodder/tmo/main/blocks/redstone/BlockSpecialRedstoneWire", "canWireProvidePower", "Z"));
 						method.instructions.remove(targetNode);
 					}
 					
@@ -184,7 +184,7 @@ public class ClassPatcherBlockRedstoneWire extends ClassPatcher {
 					@Override
 					public void makePatch(MethodNode method, AbstractInsnNode targetNode, int nodeIndex) {
 						method.instructions.remove(targetNode.getPrevious().getPrevious());
-						method.instructions.insert(targetNode, new FieldInsnNode(PUTSTATIC, "misterpemodder/tmo/main/blocks/BlockSpecialRedstoneWire", "canWireProvidePower", "Z"));
+						method.instructions.insert(targetNode, new FieldInsnNode(PUTSTATIC, "misterpemodder/tmo/main/blocks/redstone/BlockSpecialRedstoneWire", "canWireProvidePower", "Z"));
 						method.instructions.remove(targetNode);
 					}
 					

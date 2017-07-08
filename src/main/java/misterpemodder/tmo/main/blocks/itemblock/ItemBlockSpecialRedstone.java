@@ -1,6 +1,6 @@
 package misterpemodder.tmo.main.blocks.itemblock;
 
-import misterpemodder.tmo.main.blocks.BlockSpecialRedstoneWire;
+import misterpemodder.tmo.main.blocks.redstone.BlockSpecialRedstoneWire;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;

@@ -11,7 +11,7 @@ import com.google.common.collect.Lists;
 
 import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.api.block.ISlimeBlock;
-import misterpemodder.tmo.main.blocks.BlockStrongPistonMoving;
+import misterpemodder.tmo.main.blocks.redstone.BlockStrongPistonMoving;
 import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.BlockPistonBase;

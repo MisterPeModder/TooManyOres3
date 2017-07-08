@@ -6,12 +6,7 @@ import misterpemodder.tmo.main.blocks.BlockExploder;
 import misterpemodder.tmo.main.blocks.BlockLamp;
 import misterpemodder.tmo.main.blocks.BlockMachineCasing;
 import misterpemodder.tmo.main.blocks.BlockOre;
-import misterpemodder.tmo.main.blocks.BlockPistonStrongBase;
-import misterpemodder.tmo.main.blocks.BlockRedstoneStrong;
-import misterpemodder.tmo.main.blocks.BlockSpecialRedstoneWire;
 import misterpemodder.tmo.main.blocks.BlockStorage;
-import misterpemodder.tmo.main.blocks.BlockStrongPistonExtension;
-import misterpemodder.tmo.main.blocks.BlockStrongPistonMoving;
 import misterpemodder.tmo.main.blocks.BlockTMOStairs;
 import misterpemodder.tmo.main.blocks.BlockTransparent;
 import misterpemodder.tmo.main.blocks.base.BlockMulti;
@@ -23,6 +18,12 @@ import misterpemodder.tmo.main.blocks.containers.BlockTitaniumAnvil;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
+import misterpemodder.tmo.main.blocks.redstone.BlockPistonStrongBase;
+import misterpemodder.tmo.main.blocks.redstone.BlockRedstoneStrong;
+import misterpemodder.tmo.main.blocks.redstone.BlockSpecialRedstoneTorch;
+import misterpemodder.tmo.main.blocks.redstone.BlockSpecialRedstoneWire;
+import misterpemodder.tmo.main.blocks.redstone.BlockStrongPistonExtension;
+import misterpemodder.tmo.main.blocks.redstone.BlockStrongPistonMoving;
 import misterpemodder.tmo.main.blocks.slab.BlockFullSlab;
 import misterpemodder.tmo.main.blocks.slab.BlockHalfSlab;
 import misterpemodder.tmo.main.utils.TMORefs;
@@ -66,6 +67,8 @@ public class ModBlocks {
 		CRYSTAL_DESTABILIZER(new BlockDestabilizer()),
 		TITANIUM_REDSTONE(new BlockSpecialRedstoneWire(EnumBlocksNames.TITANIUM_REDSTONE)),
 		COPPER_REDSTONE(new BlockSpecialRedstoneWire(EnumBlocksNames.COPPER_REDSTONE)),
+		WEAK_REDSTONE_TORCH(new BlockSpecialRedstoneTorch(true, EnumBlocksNames.WEAK_REDSTONE_TORCH)),
+		WEAK_REDSTONE_TORCH_UNLIT(new BlockSpecialRedstoneTorch(false, EnumBlocksNames.WEAK_REDSTONE_TORCH_UNLIT)),
 		;
 		private IBlockTMO block;
 		

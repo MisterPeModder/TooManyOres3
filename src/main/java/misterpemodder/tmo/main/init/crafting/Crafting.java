@@ -67,6 +67,8 @@ public final class Crafting {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TheBlocks.COPPER_REDSTONE.getBlock(), 8), "RRR", "RCR", "RRR", 'R', new ItemStack(Items.REDSTONE), 'C', "dustCopper"));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TheBlocks.STRONG_REDSTONE_BLOCK.getBlock()), "IRI", "RBR", "IRI", 'I', "ingotIron", 'R', new ItemStack(TheBlocks.COPPER_REDSTONE.getBlock()), 'B', "blockRedstone"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TheBlocks.WEAK_REDSTONE_TORCH.getBlock()), " R ", " S ", "   ", 'R', new ItemStack(TheBlocks.TITANIUM_REDSTONE.getBlock()), 'S', "stickWood"));
+
 	}
 	
 	private static void addStorageRecipe(String ressourceOreDict, String storageBlockOreDict) {

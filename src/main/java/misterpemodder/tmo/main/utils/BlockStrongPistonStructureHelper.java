@@ -6,7 +6,7 @@ import com.google.common.collect.Lists;
 
 import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.api.block.ISlimeBlock;
-import misterpemodder.tmo.main.blocks.BlockPistonStrongBase;
+import misterpemodder.tmo.main.blocks.redstone.BlockPistonStrongBase;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;

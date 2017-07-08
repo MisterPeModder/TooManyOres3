@@ -66,9 +66,10 @@ public class JeiPlugin implements IModPlugin {
 
 	@Override
 	public void register(IModRegistry modRegistry) {
-		//Hiding the 'tmo tab item'
+		
 		IIngredientBlacklist blacklist = modRegistry.getJeiHelpers().getIngredientBlacklist();
-		blacklist.addIngredientToBlacklist(new ItemStack(ModItems.TheItems.TAB_ICON.getItem()));
+		blacklist.addIngredientToBlacklist(new ItemStack(TheItems.TAB_ICON.getItem()));
+		blacklist.addIngredientToBlacklist(new ItemStack(TheBlocks.WEAK_REDSTONE_TORCH_UNLIT.getBlock()));
 		
 		for(ModItems.TheItems item : ModItems.TheItems.values()) {
 			if(!item.getTMOItem().isEnabled()) {
