@@ -13,6 +13,7 @@ import misterpemodder.tmo.main.blocks.base.BlockBase;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockValues;
 import misterpemodder.tmo.main.config.ConfigValues;
+import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -21,6 +22,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -74,9 +76,10 @@ public class BlockLamp extends BlockBase implements IProbeInfoAccessor{
     
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		ItemStack heldItem = player.getHeldItem(hand);
-		if(heldItem == null) return false;
-        if(heldItem.getItem() == ItemBlock.getItemFromBlock(Blocks.REDSTONE_TORCH) && player.capabilities.allowEdit) {
+		ItemStack heldStack = player.getHeldItem(hand);
+		if(heldStack == null) return false;
+		Item item = heldStack.getItem();
+        if((item == ItemBlock.getItemFromBlock(Blocks.REDSTONE_TORCH) || item == ItemBlock.getItemFromBlock(TheBlocks.WEAK_REDSTONE_TORCH.getBlock())) && player.capabilities.allowEdit) {
         	if(!world.isRemote) {
         		float f = state.getValue(ACTIVATED) == true ? 0.55F : 0.5F;
         		world.setBlockState(pos, state.cycleProperty(INVERTED), 2);
