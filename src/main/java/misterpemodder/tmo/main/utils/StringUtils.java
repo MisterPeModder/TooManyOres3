@@ -22,7 +22,7 @@ public class StringUtils {
 		FontRenderer font = Minecraft.getMinecraft().fontRendererObj;
 		for(String l : expandedLines) {
 			if(font.getStringWidth(l)>200) {
-				list.addAll(font.listFormattedStringToWidth(l, 200));
+				list.addAll(font.listFormattedStringToWidth(l, 250));
 			} else {
 				list.add(l);
 			}
