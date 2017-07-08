@@ -1,7 +1,11 @@
 package misterpemodder.tmo.main.blocks;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.EnumSet;
 import java.util.Random;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import misterpemodder.tmo.main.blocks.base.IBlockTMO;
@@ -10,6 +14,7 @@ import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import misterpemodder.tmo.main.utils.TMORefs;
+import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -17,10 +22,12 @@ import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -28,6 +35,19 @@ public class BlockSpecialRedstoneWire extends BlockRedstoneWire implements IBloc
 	
 	private final ItemBlockSpecialRedstone itemBlock;
 	private final EnumBlocksNames names;
+	
+	public static boolean canWireProvidePower = true;
+	
+	private static Method isPowerSourceAt;
+	
+	static {
+		try {
+			isPowerSourceAt = ReflectionHelper.findMethod(BlockRedstoneWire.class, "isPowerSourceAt", "func_176339_d", IBlockAccess.class, BlockPos.class, EnumFacing.class);
+			isPowerSourceAt.setAccessible(true);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public BlockSpecialRedstoneWire(EnumBlocksNames names) {
 		
@@ -59,12 +79,80 @@ public class BlockSpecialRedstoneWire extends BlockRedstoneWire implements IBloc
         return this.getItemBlock();
     }
 	
+	public boolean alwaysConnect() {
+		return this == TheBlocks.COPPER_REDSTONE.getBlock();
+    }
+	
+	public static boolean canConnectTo(IBlockState blockState, @Nullable EnumFacing side, IBlockAccess world, BlockPos pos) {
+		if(blockState.getBlock() instanceof BlockRedstoneWire) {
+			return true;
+		}
+		else if(side != null) {
+			IBlockState state = world.getBlockState(pos.offset(side.getOpposite()));
+			if(state.getBlock() instanceof BlockSpecialRedstoneWire) {
+				return ((BlockSpecialRedstoneWire)state.getBlock()).canWireConnectTo(blockState, side, world, pos);
+			}
+		}
+		return false;
+	}
+	
+	protected boolean canWireConnectTo(IBlockState blockState, @Nonnull EnumFacing side, IBlockAccess world, BlockPos pos) {
+		if(this == TheBlocks.COPPER_REDSTONE.getBlock()) {
+			return blockState.isNormalCube() || (blockState.getBlock() instanceof BlockPistonBase && blockState.getValue(BlockPistonBase.FACING) != side.getOpposite());
+		}
+		return false;
+	}
+	
+	@Override
+	public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+        return this == TheBlocks.TITANIUM_REDSTONE.getBlock()? 0 : super.getStrongPower(blockState, blockAccess, pos, side);
+    }
+	
+	protected boolean isPowerSourceAt(IBlockAccess world, BlockPos pos, EnumFacing side) {
+		try {
+			Object b = isPowerSourceAt.invoke(this, world, pos, side);
+			if(b instanceof Boolean) {
+				return ((Boolean) b).booleanValue();
+			}
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {}
+		return false;
+	}
+	
+	@Override
+    public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+		if (!BlockSpecialRedstoneWire.canWireProvidePower) {
+			return 0;
+		} else {
+			int i = blockState.getValue(POWER).intValue();
+
+			if (i == 0) {
+				return 0;
+			} else if (side == EnumFacing.UP) {
+				return i;
+			} else {
+
+				EnumSet<EnumFacing> enumset = EnumSet.<EnumFacing> noneOf(EnumFacing.class);
+				for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
+					if (isPowerSourceAt(blockAccess, pos, side)) {
+						enumset.add(enumfacing);
+					}
+				}
+
+				if (side.getAxis().isHorizontal() && enumset.isEmpty()) {
+					return i;
+				} else if (this == TheBlocks.COPPER_REDSTONE.getBlock() || (enumset.contains(side) && !enumset.contains(side.rotateYCCW()) && !enumset.contains(side.rotateY()))) {
+					return i;
+				} else {
+					return 0;
+				}
+			}
+		}
+	}
+	
 	@SideOnly(Side.CLIENT)
 	public static void registerColorHandler() {
-		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(new IBlockColor()
-        {
-            public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex)
-            {
+		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(new IBlockColor() {
+            public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) {
                 return BlockSpecialRedstoneWire.getWireColorMultiplier(state.getValue(BlockRedstoneWire.POWER).intValue(), (BlockSpecialRedstoneWire)state.getBlock());
             }
         }, TheBlocks.TITANIUM_REDSTONE.getBlock(), TheBlocks.COPPER_REDSTONE.getBlock());
@@ -89,12 +177,10 @@ public class BlockSpecialRedstoneWire extends BlockRedstoneWire implements IBloc
 			 
 		}
 		
-        int i = MathHelper.clamp((int)(r * 255.0F), 0, 255); //XX----
-        int j = MathHelper.clamp((int)(g * 255.0F), 0, 255); //--XX--
-        int k = MathHelper.clamp((int)(b * 255.0F), 0, 255); //----XX
+        int i = MathHelper.clamp((int)(r * 255.0F), 0, 255);
+        int j = MathHelper.clamp((int)(g * 255.0F), 0, 255);
+        int k = MathHelper.clamp((int)(b * 255.0F), 0, 255);
         
-        //-16777216 -> HEX: 1000000 (alpha channel)
-        //TODO Change colors
         return -16777216 | i << 16 | j << 8 | k;
 	}
 

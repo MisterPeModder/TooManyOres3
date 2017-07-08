@@ -19,6 +19,7 @@ public class TmoClassTransformer implements IClassTransformer {
 		
 		builder.add(new ClassPatcherRenderLivingBase());
 		builder.add(new ClassPatcherEntityLivingBase());
+		builder.add(new ClassPatcherBlockRedstoneWire());
 		
 		CLASS_PATCHERS = builder.build();
 	}

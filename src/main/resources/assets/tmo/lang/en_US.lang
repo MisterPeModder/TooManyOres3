@@ -239,9 +239,9 @@ tile.blockCrystalDestabilizer.basic.name=Basic Crystal Destabilizer
 tile.blockCrystalDestabilizer.standard.name=Crystal Destabilizer
 tile.blockCrystalDestabilizer.improved.name=Improved Crystal Destabilizer
 tile.redstoneTitanium.name=Titanium-Enriched Redstone
-tile.redstoneTitanium.desc=This dust is less conductive than regular redstone, when placed on ground, it will only transmit weak power.
+tile.redstoneTitanium.desc=This dust is less conductive than regular redstone.\nWhen placed on ground, it will only transmit weak power.
 tile.redstoneCopper.name=Copper-Enriched Redstone
-tile.redstoneCopper.desc=This dust is more conductive than regular redstone, when placed on ground, it will connect to all solid blocks and power them with strong power.
+tile.redstoneCopper.desc=This dust is more conductive than regular redstone.\nWhen placed on ground, it will connect to all adjacent solid blocks and power them with strong power.
 
 #Fluids
 fluid.liquidIgnum=Ignum Fuel

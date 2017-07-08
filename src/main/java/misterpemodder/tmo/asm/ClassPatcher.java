@@ -53,30 +53,40 @@ public abstract class ClassPatcher {
 	        ClassReader classReader = new ClassReader(basicClass);
 	        classReader.accept(classNode, ClassReader.SKIP_FRAMES);
 			
-			for(BiPredicate<Boolean, MethodNode> mPredicate : methodPatchers.keySet()) {
-				for(MethodNode mn : classNode.methods) {
+	        for(MethodNode mn : classNode.methods) {
+	        	for(BiPredicate<Boolean, MethodNode> mPredicate : methodPatchers.keySet()) {
 	        		if(mn != null && mPredicate.test(TmoLoadingPlugin.runtimeDeobfuscation, mn)) {
 	        			
 	        			List<Pair<BiPredicate<Boolean, AbstractInsnNode>, IPatch>> list = methodPatchers.get(mPredicate);
 	        			if(list != null && !list.isEmpty()) {
-	        				for(int i=0; i<mn.instructions.size(); i++) {
-	                			AbstractInsnNode node = mn.instructions.get(i);
-	                			for(Pair<BiPredicate<Boolean, AbstractInsnNode>, IPatch> pair : list) {
+	        				int s = 0;
+	        				for(Pair<BiPredicate<Boolean, AbstractInsnNode>, IPatch> pair : list) {
+	                			for(int i=s; i<mn.instructions.size(); i++) {
+	                				AbstractInsnNode node = mn.instructions.get(i);
 	                				if(pair.getLeft().test(TmoLoadingPlugin.runtimeDeobfuscation, node)) {
 	                					pair.getRight().makePatch(mn, node, i);
+	                					
+	                					if(!pair.getRight().alwaysPatch()) {
+	                						s = i;
+		                					break;
+	                					}
 	                				}
 	                			}
 	        				}
 	        			}
-	        			break;
 	        		}
 	        	}
 			}
 	        
-	        TmoClassTransformer.LOGGER.info(className+" patching complete!");
-	        ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
-	        classNode.accept(writer);
-	        return writer.toByteArray();
+			try {
+				TmoClassTransformer.LOGGER.info(className+" patching complete!");
+		        ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+		        classNode.accept(writer);
+		        return writer.toByteArray();
+			} catch(Throwable t) {
+				t.printStackTrace();
+			}
+	        
 		}
 		
 		return basicClass;
@@ -95,6 +105,10 @@ public abstract class ClassPatcher {
 		public BiPredicate<Boolean, AbstractInsnNode> getNodePredicate();
 		
 		public void makePatch(MethodNode method, AbstractInsnNode targetNode, int nodeIndex);
+		
+		public default boolean alwaysPatch() {
+			return false;
+		}
 		
 	}
 	

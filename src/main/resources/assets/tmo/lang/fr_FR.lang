@@ -239,6 +239,10 @@ tile.blockCrystalDestabilizer.name=Destabiliseur de cristaux
 tile.blockCrystalDestabilizer.basic.name=Destabiliseur de cristaux basique
 tile.blockCrystalDestabilizer.standard.name=Destabiliseur de cristaux
 tile.blockCrystalDestabilizer.improved.name=Destabiliseur de cristaux amélioré
+tile.redstoneTitanium.name=Redstone enrichie au titane
+tile.redstoneTitanium.desc=Cette poudre est moins conductrice que la redstone normale.\nQuand elle est placée au sol elle ne transmet que du courant faible.
+tile.redstoneCopper.name=Redstone enrichie au cuivre
+tile.redstoneCopper.desc=Cette poudre est plus conductrice que la redstone normale.\nQuand elle est placée au sol se connecte à tous les blocs solides adjacents en les alimentant avec un courant fort.
 
 #Fluides
 fluid.liquidIgnum=Essence d'ignum
