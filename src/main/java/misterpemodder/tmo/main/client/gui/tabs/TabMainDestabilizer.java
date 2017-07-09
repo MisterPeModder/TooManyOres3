@@ -18,9 +18,6 @@ import misterpemodder.tmo.main.inventory.slot.IHidable;
 import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityDestabilizer;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraftforge.items.IItemHandler;
 
 public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEntityDestabilizer> {
@@ -50,15 +47,10 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 		}
 		
 		TileEntityDestabilizer te = getTileEntity();
-		GlStateManager.enableBlend();
-		
-		Minecraft.getMinecraft().getTextureManager().bindTexture(this.getTabTexture().screenTexture);
 		if(te != null && te.getEnderMatterAmount() > 0) {
 			int e = (te.getEnderMatterAmount()*138)/TileEntityDestabilizer.MAX_ENDER_MATTER;
-			Gui.drawModalRectWithCustomSizedTexture(guiContainer.getGuiLeft()+12, guiContainer.getGuiTop()+83, 73, 101, e <= 0? 1:e, 6, 256, 128);
+			guiContainer.container.enderMatterBar.drawBar(guiContainer.getGuiLeft()+11, guiContainer.getGuiTop()+82, e <= 0? 2:e+1);
 		}
-		
-		GlStateManager.disableBlend();
 		
 	}
 	

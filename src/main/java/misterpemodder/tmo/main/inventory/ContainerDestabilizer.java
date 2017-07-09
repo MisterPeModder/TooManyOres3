@@ -6,6 +6,7 @@ import java.util.List;
 import com.google.common.base.Predicate;
 
 import misterpemodder.tmo.api.TooManyOresAPI;
+import misterpemodder.tmo.main.inventory.elements.ContainerElementEnderMatterBar;
 import misterpemodder.tmo.main.inventory.elements.ContainerElementTank;
 import misterpemodder.tmo.main.inventory.slot.SlotFiltered;
 import misterpemodder.tmo.main.inventory.slot.SlotHidable;
@@ -32,6 +33,7 @@ public class ContainerDestabilizer extends ContainerMachine<TileEntityDestabiliz
 	 */
 	
 	public ContainerElementTank tank;
+	public ContainerElementEnderMatterBar enderMatterBar;
 	
 	public ContainerDestabilizer(TileEntityDestabilizer te, InventoryPlayer playerInv) {
 		super(te, playerInv, 100);
@@ -57,6 +59,8 @@ public class ContainerDestabilizer extends ContainerMachine<TileEntityDestabiliz
 	protected List<ISyncedContainerElement> addContainerElements(List<ISyncedContainerElement> elements) {
 		this.tank = new ContainerElementTank(0, this, 161, 9, te.getTank());
 		elements.add(this.tank);
+		this.enderMatterBar = new ContainerElementEnderMatterBar();
+		elements.add(this.enderMatterBar);
 		return super.addContainerElements(elements);
 	}
 	

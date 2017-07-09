@@ -7,10 +7,12 @@ import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.gui.ITickTimer;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeCategory;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.compat.jei.DrawableArrow;
+import misterpemodder.tmo.main.inventory.elements.ContainerElementEnderMatterBar;
 import misterpemodder.tmo.main.inventory.elements.ContainerElementTank;
 import misterpemodder.tmo.main.tileentity.TileEntityDestabilizer;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
@@ -34,6 +36,10 @@ public class RecipeCategoryDestabilizer extends BlankRecipeCategory<RecipeWrappe
 	private final IDrawable fluidGauge;
 	private final DrawableArrow arrow;
 	
+	private final ContainerElementEnderMatterBar bar;
+	
+	private final ITickTimer timer;
+	
 	public RecipeCategoryDestabilizer(IGuiHelper helper) {
 		this.localizedName = Tmo.proxy.translate("gui.jei.category.destabilizer");
 		
@@ -42,6 +48,8 @@ public class RecipeCategoryDestabilizer extends BlankRecipeCategory<RecipeWrappe
 		this.background_left = helper.createDrawable(LOCATION, X_OFFSET, Y_OFFSET, 141, 88, 256, 128);
 		this.background = helper.createBlankDrawable(182, 88);
 		this.arrow = new DrawableArrow();
+		this.bar = new ContainerElementEnderMatterBar(0, false, true, true);
+		this.timer = helper.createTickTimer(100, 100, false);
 	}
 	
 	@Override
@@ -64,6 +72,8 @@ public class RecipeCategoryDestabilizer extends BlankRecipeCategory<RecipeWrappe
 		this.background_left.draw(minecraft, 0, 0);
 		this.tank.draw(minecraft, 154-X_OFFSET, 8-Y_OFFSET);
 		this.arrow.draw(minecraft, 115-X_OFFSET, 39-Y_OFFSET);
+		this.bar.setFillPercent(this.timer.getValue(), false);
+		this.bar.draw(minecraft, 11-X_OFFSET, 82-Y_OFFSET);
 	}
 
 	@Override

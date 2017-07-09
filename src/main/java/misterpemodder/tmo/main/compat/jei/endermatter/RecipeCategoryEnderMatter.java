@@ -6,11 +6,13 @@ import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiIngredientGroup;
 import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.gui.ITickTimer;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeCategory;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.compat.jei.DrawableItemStack;
 import misterpemodder.tmo.main.init.ModItems.TheItems;
+import misterpemodder.tmo.main.inventory.elements.ContainerElementEnderMatterBar;
 import misterpemodder.tmo.main.items.ItemVariant.IngotVariant;
 import misterpemodder.tmo.main.utils.ItemStackUtils;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
@@ -29,8 +31,10 @@ public class RecipeCategoryEnderMatter extends BlankRecipeCategory<RecipeWrapper
 
 	private final IDrawable background;
 	private final IDrawable slot;
-	private final IDrawable bar;
 	private final IDrawable enderMatterIngotIcon;
+	private final ContainerElementEnderMatterBar bar;
+	
+	//private final ITickTimer timer;
 	
 	@Override
 	public String getUid() {
@@ -41,7 +45,7 @@ public class RecipeCategoryEnderMatter extends BlankRecipeCategory<RecipeWrapper
 		this.localizedName = Tmo.proxy.translate("gui.jei.category.enderMatter");
 		this.background = helper.createBlankDrawable(148, 45);
 		this.slot = helper.createDrawable(LOCATION, 11, 35, 26, 26, 256, 128);
-		this.bar = helper.createDrawable(LOCATION, 11, 82, 140, 8, 256, 128);
+		this.bar = new ContainerElementEnderMatterBar(0, false, true, false);
 		this.enderMatterIngotIcon = new DrawableItemStack(ItemStackUtils.newVariantStack(TheItems.INGOT, IngotVariant.ENDER_MATTER_INGOT));
 	}
 
