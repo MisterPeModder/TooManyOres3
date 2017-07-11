@@ -33,7 +33,7 @@ public class GuiButtonToggle extends GuiButton {
             GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
             GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             
-            Gui.drawModalRectWithCustomSizedTexture(xPosition, yPosition, 40+i*width+(toggled? 3*width:0), 11, width, height, 128, 128);
+            Gui.drawModalRectWithCustomSizedTexture(xPosition, yPosition, 80+i*width+(toggled? 3*width:0), 11, width, height, 128, 128);
             this.mouseDragged(mc, mouseX, mouseY);
         }
     }

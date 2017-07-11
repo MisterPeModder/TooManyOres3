@@ -7,6 +7,7 @@ import misterpemodder.tmo.main.tileentity.TileEntityMachine;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
 
 public class MachineItemStackHandler extends SyncedItemHandler implements IMachineElementHandler<IItemHandler> {
 	
@@ -14,18 +15,18 @@ public class MachineItemStackHandler extends SyncedItemHandler implements IMachi
 	private final boolean canInsert;
 	private final boolean canExtract;
 	
-	public MachineItemStackHandler(TileEntityMachine<?> te, int size) {
+	public MachineItemStackHandler(TileEntityMachine te, int size) {
 		this(te, size, true, true);
 	}
 
-	public MachineItemStackHandler(TileEntityMachine<?> te, int size, boolean canInsert, boolean canExtract) {
+	public MachineItemStackHandler(TileEntityMachine te, int size, boolean canInsert, boolean canExtract) {
 		super(te, size);
 		this.configHandler = te.getIoConfigHandler();
 		this.canExtract = canExtract;
 		this.canInsert = canInsert;
 	}
 	
-	public IItemHandler getSideHandler(EnumFacing side) {
+	public IItemHandlerModifiable getSideHandler(EnumFacing side) {
 		return new SideHandler(side);
 	}
 	
@@ -39,7 +40,7 @@ public class MachineItemStackHandler extends SyncedItemHandler implements IMachi
 		return super.extractItem(slot, amount, simulate);
 	}
 	
-	public final class SideHandler implements IItemHandler {
+	public final class SideHandler implements IItemHandlerModifiable {
 		
 		private final EnumFacing side;
 
@@ -90,6 +91,11 @@ public class MachineItemStackHandler extends SyncedItemHandler implements IMachi
 		@Override
 		public int getSlotLimit(int slot) {
 			return MachineItemStackHandler.this.getSlotLimit(slot);
+		}
+
+		@Override
+		public void setStackInSlot(int slot, ItemStack stack) {
+			MachineItemStackHandler.this.setStackInSlot(slot, stack);
 		}
 		
 	}

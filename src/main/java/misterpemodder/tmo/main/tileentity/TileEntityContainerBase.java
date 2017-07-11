@@ -13,11 +13,11 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.IItemHandler;
 
 public abstract class TileEntityContainerBase extends TileEntity {
 	
-	public abstract ItemStackHandler getInventory(); 
+	public abstract IItemHandler getInventory(); 
 	public abstract void onInvOpen(EntityPlayer player);
 	public abstract void onInvClose(EntityPlayer player);
 	

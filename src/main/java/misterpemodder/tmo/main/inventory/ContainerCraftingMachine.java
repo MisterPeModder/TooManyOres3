@@ -3,16 +3,16 @@ package misterpemodder.tmo.main.inventory;
 import java.util.List;
 
 import misterpemodder.tmo.main.inventory.elements.ContainerElementArrow;
-import misterpemodder.tmo.main.tileentity.TileEntityMachine;
+import misterpemodder.tmo.main.tileentity.TileEntityCraftingMachine;
 import net.minecraft.entity.player.InventoryPlayer;
 
-public abstract class ContainerMachine<TE extends TileEntityMachine<?>> extends ContainerBase<TE> {
+public abstract class ContainerCraftingMachine<TE extends TileEntityCraftingMachine<?>> extends ContainerBase<TE> {
 
 	public int progress;
 	
 	public ContainerElementArrow arrow;
 	
-	public ContainerMachine(TE te, InventoryPlayer playerInv, int bPartOffset) {
+	public ContainerCraftingMachine(TE te, InventoryPlayer playerInv, int bPartOffset) {
 		super(te, playerInv, bPartOffset);
 	}
 	

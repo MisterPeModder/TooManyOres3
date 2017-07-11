@@ -14,13 +14,12 @@ import com.google.common.collect.ListMultimap;
 
 import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.api.capability.io.IIOType;
-import misterpemodder.tmo.api.recipe.IMachineRecipe;
 import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.blocks.BlockMachineCasing.EnumMachineCasingVariant;
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.capability.HandlerContainer;
 import misterpemodder.tmo.main.capability.IMachineElementHandler;
+import misterpemodder.tmo.main.capability.energy.HandlerContainerEnergy;
 import misterpemodder.tmo.main.capability.fluid.HandlerContainerFluid;
 import misterpemodder.tmo.main.capability.io.CapabilityIOConfig;
 import misterpemodder.tmo.main.capability.io.IOConfigHandlerMachine;
@@ -35,25 +34,23 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-public abstract class TileEntityMachine<V extends IMachineRecipe<V>> extends TileEntityContainerBase implements ITickable{
+public abstract class TileEntityMachine extends TileEntityContainerBase implements ITickable{
 	
 	public static final int CAPACITY = 8000;
-	protected int progress;
-	protected V currentRecipe;
 	
 	private ImmutableListMultimap<IIOType<?>, Pair<IOState, IMachineElementHandler<?>>> elementsForIoStates;
 	private ImmutableListMultimap<IIOType<?>, IOState> ioTypeToIoStates;
@@ -62,35 +59,10 @@ public abstract class TileEntityMachine<V extends IMachineRecipe<V>> extends Til
 	public boolean autoPush;
 	public boolean autoPull;
 	
-	public int getProgress() {
-		return this.progress;
-	}
-	
-	public void setProgress(int progress) {
-		this.progress = progress;
-	}
-	
-	@Nullable
-	public V getCurrentRecipe() {
-		return this.currentRecipe;
-	}
-	
-	protected abstract IForgeRegistry<V> getRecipeRegistry();
-	
 	public abstract IOConfigHandlerMachine getIoConfigHandler();
 	
 	@Nonnull
 	protected abstract IOStatesBuilder getIOStatesBuilder();
-	
-	public final int getChangedCraftingTime(IMachineRecipe<?> recipe) {
-		if(this.hasWorld()) {
-			EnumMachineCasingVariant casing = this.world.getBlockState(this.pos).getValue(BlockMachine.CASING);
-			if(casing != null) {
-				return (int) (recipe.getTotalTime() * casing.speedModifier);
-			}
-		}
-		return recipe.getTotalTime();
-	}
 	
 	@Nullable
 	@SuppressWarnings("unchecked")
@@ -99,18 +71,16 @@ public abstract class TileEntityMachine<V extends IMachineRecipe<V>> extends Til
 			return (HandlerContainer<T>) new HandlerContainerItem();
 		} else if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
 			return (HandlerContainer<T>) new HandlerContainerFluid();
+		} else if(capability == CapabilityEnergy.ENERGY) {
+		return (HandlerContainer<T>) new HandlerContainerEnergy();
 		}
 		return null;
 	}
 	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-		if(this.currentRecipe != null) {
-			compound.setString("current_recipe", this.currentRecipe.getRegistryName().toString());
-		}
 		compound.setBoolean("auto_push", autoPush);
 		compound.setBoolean("auto_pull", autoPull);
-		compound.setInteger("progress", this.progress);
 		compound.setTag("io_config", getIoConfigHandler().serializeNBT());
 		NBTTagCompound tag = super.writeToNBT(compound);
 		return tag;
@@ -118,9 +88,6 @@ public abstract class TileEntityMachine<V extends IMachineRecipe<V>> extends Til
 	
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
-		if(compound.hasKey("current_recipe")) {
-			this.currentRecipe = getRecipeRegistry().getValue(new ResourceLocation(compound.getString("current_recipe")));
-		}
 		if(compound.hasKey("io_config")) {
 			getIoConfigHandler().deserializeNBT((NBTTagList)compound.getTag("io_config"));			
 		}
@@ -130,7 +97,6 @@ public abstract class TileEntityMachine<V extends IMachineRecipe<V>> extends Til
 		if(compound.hasKey("auto_pull")) {
 			autoPull = compound.getBoolean("auto_pull");
 		}
-		this.progress = compound.getInteger("progress");
 		super.readFromNBT(compound);
 	}
 	
@@ -145,9 +111,6 @@ public abstract class TileEntityMachine<V extends IMachineRecipe<V>> extends Til
 		super.handleUpdateTag(tag);
 		this.sync();
 	}
-	
-	@Nullable
-	protected abstract V findRecipe();
 	
 	protected abstract IBlockNames getBlockNames();
 	
@@ -280,6 +243,34 @@ public abstract class TileEntityMachine<V extends IMachineRecipe<V>> extends Til
 					int toFill = h2.fill(fs1, false);
 					if(toFill > 0) {
 						h2.fill(h1.drain(toFill, true), true);
+					}
+				}
+			}
+		}
+		else if(cap == CapabilityEnergy.ENERGY) {
+			IEnergyStorage h = (IEnergyStorage) handler;
+			IEnergyStorage oh = (IEnergyStorage) otherHandler;
+			
+			while(b1 || b2) {
+				IEnergyStorage h1;
+				IEnergyStorage h2;
+				
+				if(b1) {
+					h1 = h;
+					h2 = oh;
+					b1 = false;
+				} else {
+					h1 = oh;
+					h2 = h;
+					b2 = false;
+				}
+				int c = h1.getMaxEnergyStored();
+				int e1 = h1.extractEnergy(c, true);
+				
+				if(e1 > 0) {
+					int toExtract = h2.receiveEnergy(e1, true);
+					if(toExtract > 0) {
+						h2.receiveEnergy(h1.extractEnergy(toExtract, false), false);
 					}
 				}
 			}

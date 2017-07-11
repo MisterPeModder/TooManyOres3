@@ -16,6 +16,11 @@ public abstract class HandlerContainer<T> {
 		this.containedHandler = handler;
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("%s{%s}", this.getClass().getName(), this.containedHandler.toString());
+	}
+	
 	public abstract void setEmptyHandler();
 	
 }

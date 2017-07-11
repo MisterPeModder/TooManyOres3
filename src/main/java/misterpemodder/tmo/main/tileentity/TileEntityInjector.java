@@ -18,12 +18,14 @@ import misterpemodder.tmo.main.utils.EnumBlockSide;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityInjector extends TileEntityMachine<IInjectorRecipe> {
+public class TileEntityInjector extends TileEntityCraftingMachine<IInjectorRecipe> {
 	
 	public MachineItemStackHandler input;
 	public MachineItemStackHandler output;
@@ -167,6 +169,22 @@ public class TileEntityInjector extends TileEntityMachine<IInjectorRecipe> {
 	
 	public EnumBlockSide[] getDisabledSides() {
 		return new EnumBlockSide[]{EnumBlockSide.FRONT, EnumBlockSide.UP};
+	}
+	
+	@Override
+	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+		if(facing == null && capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+			return true;
+		}
+		return super.hasCapability(capability, facing);
+	}
+	
+	@Override
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+		if(facing == null && capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+			return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(this.tank);
+		}
+		return super.getCapability(capability, facing);
 	}
 	
 }

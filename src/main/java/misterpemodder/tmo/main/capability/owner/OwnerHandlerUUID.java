@@ -86,5 +86,10 @@ public class OwnerHandlerUUID implements IOwnerHandler, INBTSerializable<NBTTagC
 		this.playerId = null;
 		this.playerName = null;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s: [owner: %s, uuid:%s]", this.getClass().getName(), this.playerName, this.playerId);
+	}
 
 }

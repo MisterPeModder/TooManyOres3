@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import misterpemodder.tmo.main.Tmo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 public class StringUtils {
 	
@@ -29,6 +33,17 @@ public class StringUtils {
 		}
 		
 		return list;
+	}
+	
+	public static String getTemperatureString(FluidStack stack, boolean addDesc) {
+		if(stack != null) {
+			int temp = stack.getFluid().getTemperature(stack);
+			
+			String desc = addDesc? TextFormatting.GRAY+Tmo.proxy.translate("gui.temperature.desc")+": ": "";
+			
+			return desc+(temp <= FluidRegistry.WATER.getTemperature()? TextFormatting.AQUA : TextFormatting.GOLD)+""+temp+"°K";
+		}
+		return "";
 	}
 	
 }

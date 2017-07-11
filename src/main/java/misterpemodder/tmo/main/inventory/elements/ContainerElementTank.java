@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.client.gui.GuiContainerBase;
 import misterpemodder.tmo.main.client.gui.tabs.TabBase;
@@ -13,6 +15,7 @@ import misterpemodder.tmo.main.inventory.ContainerBase;
 import misterpemodder.tmo.main.inventory.ISyncedContainerElement;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
+import misterpemodder.tmo.main.utils.StringUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
@@ -41,28 +44,40 @@ public class ContainerElementTank extends Gui implements ISyncedContainerElement
 
 	private final int x;
 	private final int y;
+	private final boolean invertedTank;
+	private final boolean isButtonLeft;
 
 	public final short id;
-
+	
 	public ContainerElementTank(int id, ContainerBase<?> container, int x, int y, FluidTank tank) {
+		this(id, container, x, y, tank, false, false);
+	}
+
+	public ContainerElementTank(int id, ContainerBase<?> container, int x, int y, FluidTank tank, boolean invertedTank, boolean isButtonLeft) {
 		this.id = (short) id;
 		this.container = container;
 		this.tank = tank;
 		this.x = x;
 		this.y = y;
+		this.invertedTank = invertedTank;
+		this.isButtonLeft = isButtonLeft;
 	}
 
 	public void drawTank(int mouseX, int mouseY, GuiContainerBase<?,?> c) {
 		RenderTank.renderTankInGui(tank.getFluid(), tank.getCapacity(), c.getGuiLeft() + x, c.getGuiTop() + y, WIDTH, HEIGHT);
 		GlStateManager.enableBlend();
 		Minecraft.getMinecraft().getTextureManager().bindTexture(TANK_TEXTURE);
-		Gui.drawModalRectWithCustomSizedTexture(c.getGuiLeft() + x, c.getGuiTop() + y, 0, 0, WIDTH, HEIGHT, 128, 128);
+		Gui.drawModalRectWithCustomSizedTexture(c.getGuiLeft() + x, c.getGuiTop() + y, invertedTank? WIDTH : 0, 0, WIDTH, HEIGHT, 128, 128);
 
-		Gui.drawModalRectWithCustomSizedTexture(c.getGuiLeft() + x + 29, c.getGuiTop() + y, 40 + (isButtonHovered(mouseX, mouseY, c) ? 11 : 0), 0, 11, 11, 128, 128);
+		Gui.drawModalRectWithCustomSizedTexture(c.getGuiLeft() + x + (isButtonLeft? 0 : 29), c.getGuiTop() + y, 80 + (isButtonHovered(mouseX, mouseY, c) ? 11 : 0), 0, 11, 11, 128, 128);
 		GlStateManager.disableBlend();
 	}
-
+	
 	public List<String> getHoverDesc(int mouseX, int mouseY, GuiContainerBase<?,?> c) {
+		return this.getHoverDesc(mouseX, mouseY, c, false);
+	}
+
+	public List<String> getHoverDesc(int mouseX, int mouseY, GuiContainerBase<?,?> c, boolean showTemperature) {
 		List<String> strs = new ArrayList<>();
 		if (isButtonHovered(mouseX, mouseY, c)) {
 			strs.add(TextFormatting.RED + "" + TextFormatting.BOLD + Tmo.proxy.translate("gui.tank.clear"));
@@ -71,13 +86,13 @@ public class ContainerElementTank extends Gui implements ISyncedContainerElement
 			} else {
 				strs.add(TextFormatting.GRAY + "" + TextFormatting.ITALIC + "-" + Tmo.proxy.translate("gui.tank.clear.hint") + "-");
 			}
-		} else if (c.isPointInRegion(x, y, WIDTH, HEIGHT, mouseX, mouseY)) {
+		} else if (isTankHovered(mouseX, mouseY, c)) {
 			FluidStack stack = tank.getFluid();
 
 			if (stack == null || stack.getFluid() == null || stack.amount <= 0) {
 				strs = Arrays.asList(Tmo.proxy.translate("gui.tank.empty"));
 			} else {
-				strs = Arrays.asList(stack.getFluid().getRarity(stack).rarityColor + stack.getLocalizedName(), Tmo.proxy.translate("gui.tank.contents", stack.amount, tank.getCapacity()));
+				strs = Arrays.asList(stack.getFluid().getRarity(stack).rarityColor + stack.getLocalizedName(), Tmo.proxy.translate("gui.tank.contents", stack.amount, tank.getCapacity()), StringUtils.getTemperatureString(stack, true));
 			}
 		}
 		return strs;
@@ -102,7 +117,11 @@ public class ContainerElementTank extends Gui implements ISyncedContainerElement
 	}
 
 	private boolean isButtonHovered(int mouseX, int mouseY, GuiContainerBase<?,?> c) {
-		return c.isPointInRegion(x + 29, y, 11, 11, mouseX, mouseY);
+		return c.isPointInRegion(x + (isButtonLeft? 0 : 29), y, 11, 11, mouseX, mouseY);
+	}
+	
+	public boolean isTankHovered(int mouseX, int mouseY, GuiContainerBase<?,?> c) {
+		return c.isPointInRegion(x, y, WIDTH, HEIGHT, mouseX, mouseY);
 	}
 
 	@Override
@@ -110,6 +129,8 @@ public class ContainerElementTank extends Gui implements ISyncedContainerElement
 		boolean b = false;
 		if(tank.getFluid() != null) {
 			b = !tank.getFluid().isFluidStackIdentical(lastFluid);
+		} else if(lastFluid != null){
+			b = true;
 		}
 		lastFluid = tank.getFluid() == null? null : tank.getFluid().copy();
 		return b;
@@ -125,6 +146,14 @@ public class ContainerElementTank extends Gui implements ISyncedContainerElement
 	@SideOnly(Side.CLIENT)
 	public void procData(NBTTagCompound data) {
 		tank.readFromNBT(data);
+	}
+	
+	@Nullable
+	public FluidStack getFluid() {
+		if(tank.getFluidAmount() > 0) {
+			return tank.getFluid().copy();
+		}
+		return null;
 	}
 
 }

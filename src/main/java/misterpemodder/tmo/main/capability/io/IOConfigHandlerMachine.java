@@ -31,9 +31,9 @@ public class IOConfigHandlerMachine implements IIOConfigHandler, INBTSerializabl
 	private final ImmutableList<IOState> states;
 	private final ImmutableMap<EnumBlockSide, SideConfig> sideConfigs;
 	
-	private final TileEntityMachine<?> te;
+	private final TileEntityMachine te;
 	
-	public IOConfigHandlerMachine(TileEntityMachine<?> te, @Nullable List<IOState> extraIOStates, IIOType<?>... types) {
+	public IOConfigHandlerMachine(TileEntityMachine te, @Nullable List<IOState> extraIOStates, IIOType<?>... types) {
 		this.te = te;
 		this.ioTypes = types;
 		

@@ -61,7 +61,7 @@ public class PropertyIOPortState extends PropertyEnum<PropertyIOPortState.IOPort
 		return list;
 	}
 	
-	public IOPortState getValue(@Nonnull TileEntityMachine<?> te) {
+	public IOPortState getValue(@Nonnull TileEntityMachine te) {
 		
 		if(!te.isSideDisabled(this.side)) {
 			IOConfigHandlerMachine handler = te.getIoConfigHandler();

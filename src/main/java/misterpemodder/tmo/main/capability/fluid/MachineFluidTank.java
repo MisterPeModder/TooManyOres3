@@ -15,11 +15,11 @@ public class MachineFluidTank extends SyncedFluidTank implements IMachineElement
 	private final boolean canFill;
 	private final boolean canDrain;
 	
-	public MachineFluidTank(TileEntityMachine<?> te, int capacity) {
+	public MachineFluidTank(TileEntityMachine te, int capacity) {
 		this(te, capacity, true, true);
 	}
 
-	public MachineFluidTank(TileEntityMachine<?> te, int capacity, boolean canFill, boolean canDrain) {
+	public MachineFluidTank(TileEntityMachine te, int capacity, boolean canFill, boolean canDrain) {
 		super(capacity);
 		this.configHandler = te.getIoConfigHandler();
 		this.canFill = canFill;

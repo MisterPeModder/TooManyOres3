@@ -26,5 +26,10 @@ public class SyncedFluidTank extends FluidTank {
 			((TileEntityContainerBase)this.tile).sync();
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s: [%s, %d/%d Mb]", this.getClass().getName(), this.getFluid() != null? this.getFluid() : "empty", this.getFluidAmount(), this.getCapacity());
+	}
 
 }

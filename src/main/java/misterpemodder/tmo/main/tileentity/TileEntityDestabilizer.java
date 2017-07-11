@@ -7,7 +7,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.api.recipe.IDestabilizerRecipe;
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
-import misterpemodder.tmo.main.blocks.containers.BlockInjector;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.capability.fluid.MachineFluidTank;
@@ -20,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -29,7 +29,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityDestabilizer extends TileEntityMachine<IDestabilizerRecipe> {
+public class TileEntityDestabilizer extends TileEntityCraftingMachine<IDestabilizerRecipe> {
 	
 	private MachineItemStackHandler ender;
 	private MachineItemStackHandler input;
@@ -67,7 +67,7 @@ public class TileEntityDestabilizer extends TileEntityMachine<IDestabilizerRecip
 		
 		builder.addPair(TooManyOresAPI.itemIoType, Pair.of(IOState.INPUT, this.input));
 		builder.addPair(TooManyOresAPI.itemIoType, Pair.of(IOState.ENDER_MATTER, this.ender));
-		builder.addPair(TooManyOresAPI.itemIoType, Pair.of(IOState.ALL, new CombinerItemStackHandlerMachine(this.input, this.ender)));
+		builder.addPair(TooManyOresAPI.itemIoType, Pair.of(IOState.ALL, new CombinerItemStackHandlerMachine(this.ender, this.input)));
 		
 		builder.addPair(TooManyOresAPI.fluidIoType, Pair.of(IOState.OUTPUT, this.tank));
 		
@@ -115,14 +115,6 @@ public class TileEntityDestabilizer extends TileEntityMachine<IDestabilizerRecip
 		super.readFromNBT(compound);
 	}
 	
-	protected boolean isValidSide(EnumFacing side) {
-		EnumFacing facing;
-		if(this.hasWorld() && (facing = this.world.getBlockState(this.pos).getValue(BlockInjector.FACING)) != null) {
-			return !(side == facing);
-		}
-		return false;
-	}
-	
 	@Override
 	protected IForgeRegistry<IDestabilizerRecipe> getRecipeRegistry() {
 		return TooManyOresAPI.registryHandler.getCrystalDestabilizerRecipesRegistry();
@@ -144,56 +136,54 @@ public class TileEntityDestabilizer extends TileEntityMachine<IDestabilizerRecip
 		super.update();
 		if(this.hasWorld()) {
 			if(!this.world.isRemote) {
-				if(this.hasWorld() && !this.world.isRemote) {
-					ItemStack stack = this.input.getStackInSlot(0).copy();
-					if(currentRecipe == null) {
-						currentRecipe = findRecipe();
-					}
-					if(currentRecipe != null) {
-						if(currentRecipe.isValid(stack.copy()) && this.enderMatterAmount >= currentRecipe.getEnderMaterNeeded()) {
-							if(progress >= this.getChangedCraftingTime(currentRecipe)) {
-								Pair<ItemStack, FluidStack> p = currentRecipe.onFinish(stack, new FluidTank(tank.getFluid() == null? null : tank.getFluid().copy(), tank.getCapacity()));
-								if(this.tank.fill(p.getRight(), false) == p.getRight().amount) {				
-									this.tank.fill(p.getRight(), true);
-									this.input.setStackInSlot(0, p.getLeft());
-									this.enderMatterAmount -= currentRecipe.getEnderMaterNeeded();
-									currentRecipe = null;
-									progress = 0;
-									sync();
-								}
+				ItemStack stack = this.input.getStackInSlot(0).copy();
+				if(currentRecipe == null) {
+					currentRecipe = findRecipe();
+				}
+				if(currentRecipe != null) {
+					if(currentRecipe.isValid(stack.copy()) && this.enderMatterAmount >= currentRecipe.getEnderMaterNeeded()) {
+						if(progress >= this.getChangedCraftingTime(currentRecipe)) {
+							Pair<ItemStack, FluidStack> p = currentRecipe.onFinish(stack, new FluidTank(tank.getFluid() == null? null : tank.getFluid().copy(), tank.getCapacity()));
+							if(this.tank.fill(p.getRight(), false) == p.getRight().amount) {				
+								this.tank.fill(p.getRight(), true);
+								this.input.setStackInSlot(0, p.getLeft());
+								this.enderMatterAmount -= currentRecipe.getEnderMaterNeeded();
+								currentRecipe = null;
+								progress = 0;
+								sync();
 							}
-							else {
-								progress++;
-							}
-						} else {
-							currentRecipe = null;
-							progress = 0;
 						}
-					}
-					
-					ItemStack enderStack = this.ender.getStackInSlot(0).copy();
-					if(TooManyOresAPI.methodHandler.isEnderMatterItem(enderStack) && this.enderMatterAmount < MAX_ENDER_MATTER) {
-						Pair<Integer, Integer> p = TooManyOresAPI.methodHandler.getEnderMatterValue(enderStack);
-						if(p.getLeft() != 0 && this.enderMatterAmount + p.getLeft() <= MAX_ENDER_MATTER) {
-							this.enderMatterAmount += p.getLeft();
-							enderStack.shrink(p.getRight());
-							this.ender.setStackInSlot(0, enderStack);
+						else {
+							progress++;
 						}
+					} else {
+						currentRecipe = null;
+						progress = 0;
 					}
+				}
 					
-					if(this.tank.getFluid() != null) {
-						IBlockState state = world.getBlockState(this.pos);
-						for(EnumFacing side : EnumFacing.VALUES) {
-							if(side != state.getValue(BlockMachine.FACING)) {
-								TileEntity te = world.getTileEntity(pos.offset(side));
-								if(te != null && te.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite())) {
-									IFluidHandler h = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite());
+				ItemStack enderStack = this.ender.getStackInSlot(0).copy();
+				if(TooManyOresAPI.methodHandler.isEnderMatterItem(enderStack) && this.enderMatterAmount < MAX_ENDER_MATTER) {
+					Pair<Integer, Integer> p = TooManyOresAPI.methodHandler.getEnderMatterValue(enderStack);
+					if(p.getLeft() != 0 && this.enderMatterAmount + p.getLeft() <= MAX_ENDER_MATTER) {
+						this.enderMatterAmount += p.getLeft();
+						enderStack.shrink(p.getRight());
+						this.ender.setStackInSlot(0, enderStack);
+					}
+				}
+					
+				if(this.tank.getFluid() != null) {
+					IBlockState state = world.getBlockState(this.pos);
+					for(EnumFacing side : EnumFacing.VALUES) {
+						if(side != state.getValue(BlockMachine.FACING)) {
+							TileEntity te = world.getTileEntity(pos.offset(side));
+							if(te != null && te.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite())) {
+								IFluidHandler h = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite());
 									
-									int amount = h.fill(this.tank.drain(TileEntityDestabilizer.CAPACITY, false), false);
-									h.fill(this.tank.drain(amount, true), true);
+								int amount = h.fill(this.tank.drain(TileEntityDestabilizer.CAPACITY, false), false);
+								h.fill(this.tank.drain(amount, true), true);
 									
-									if(this.tank.getFluidAmount() == 0) break;
-								}
+								if(this.tank.getFluidAmount() == 0) break;
 							}
 						}
 					}
@@ -215,4 +205,21 @@ public class TileEntityDestabilizer extends TileEntityMachine<IDestabilizerRecip
 	public void emptyTank(short tankId) {
 		if(tankId == 0) this.tank.drain(TileEntityDestabilizer.CAPACITY, true);
 	}
+	
+	@Override
+	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+		if(facing == null && capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+			return true;
+		}
+		return super.hasCapability(capability, facing);
+	}
+	
+	@Override
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+		if(facing == null && capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+			return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(this.tank);
+		}
+		return super.getCapability(capability, facing);
+	}
+	
 }

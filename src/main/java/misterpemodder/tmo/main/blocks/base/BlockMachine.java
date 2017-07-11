@@ -38,7 +38,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.client.model.ModelLoader;
 
-public abstract class BlockMachine<TE extends TileEntityMachine<?>> extends BlockContainerBase<TE> {
+public abstract class BlockMachine<TE extends TileEntityMachine> extends BlockContainerBase<TE> {
 	
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", Arrays.asList(EnumFacing.HORIZONTALS));
 	public static final PropertyEnum<EnumMachineCasingVariant> CASING = PropertyEnum.create("casing", EnumMachineCasingVariant.class);
@@ -86,9 +86,9 @@ public abstract class BlockMachine<TE extends TileEntityMachine<?>> extends Bloc
 	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
 		TileEntity tileentity = world instanceof ChunkCache ? ((ChunkCache)world).getTileEntity(pos, Chunk.EnumCreateEntityType.CHECK) : world.getTileEntity(pos);
 		 
-		if(!ioPortProperties.isEmpty() && tileentity != null && tileentity instanceof TileEntityMachine<?>) {
+		if(!ioPortProperties.isEmpty() && tileentity != null && tileentity instanceof TileEntityMachine) {
 			for(PropertyIOPortState property : ioPortProperties) {
-				state = state.withProperty(property, property.getValue((TileEntityMachine<?>) tileentity));
+				state = state.withProperty(property, property.getValue((TileEntityMachine) tileentity));
 			}
 			return state;
 		}

@@ -16,7 +16,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerDestabilizer extends ContainerMachine<TileEntityDestabilizer>{
+public class ContainerDestabilizer extends ContainerCraftingMachine<TileEntityDestabilizer>{
 	
 	/*
 	 * SLOT CONFIG:  

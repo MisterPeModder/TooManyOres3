@@ -2,10 +2,12 @@ package misterpemodder.tmo.main.client.gui;
 
 import misterpemodder.tmo.main.inventory.ContainerDestabilizer;
 import misterpemodder.tmo.main.inventory.ContainerInjector;
+import misterpemodder.tmo.main.inventory.ContainerThermoelectricGenerator;
 import misterpemodder.tmo.main.inventory.ContainerTitaniumAnvil;
 import misterpemodder.tmo.main.inventory.ContainerTitaniumChest;
 import misterpemodder.tmo.main.tileentity.TileEntityDestabilizer;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
+import misterpemodder.tmo.main.tileentity.TileEntityThemoelectricGenerator;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumAnvil;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import misterpemodder.tmo.main.utils.TMORefs;
@@ -53,6 +55,14 @@ public class GuiHandler implements IGuiHandler {
 			}
 			public Object getClientGuiElement(EntityPlayer player, World world, int x, int y, int z) {
 				return new GuiContainerDestabilizer(player.inventory, (TileEntityDestabilizer)world.getTileEntity(new BlockPos(x, y, z)));
+			}
+		},
+		THERMOELECTRIC_GENERATOR(5) {
+			public Object getServerGuiElement(EntityPlayer player, World world, int x, int y, int z) {
+				return new ContainerThermoelectricGenerator((TileEntityThemoelectricGenerator)world.getTileEntity(new BlockPos(x, y, z)), player.inventory);
+			}
+			public Object getClientGuiElement(EntityPlayer player, World world, int x, int y, int z) {
+				return new GuiContainerThermoelectricGenerator(player.inventory, (TileEntityThemoelectricGenerator)world.getTileEntity(new BlockPos(x, y, z)));
 			}
 		},
 		;

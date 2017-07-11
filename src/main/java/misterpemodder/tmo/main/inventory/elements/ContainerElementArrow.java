@@ -1,7 +1,7 @@
 package misterpemodder.tmo.main.inventory.elements;
 
 import misterpemodder.tmo.main.inventory.ISyncedContainerElement;
-import misterpemodder.tmo.main.tileentity.TileEntityMachine;
+import misterpemodder.tmo.main.tileentity.TileEntityCraftingMachine;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -15,13 +15,13 @@ public class ContainerElementArrow implements ISyncedContainerElement {
 	
 	private int lastProgress;
 	private boolean hasRecipe;
-	private TileEntityMachine<?> te;
+	private TileEntityCraftingMachine<?> te;
 	
 	public static final ResourceLocation TEXTURE = new ResourceLocationTmo("textures/gui/container/misc.png");
 	public static final int WIDTH = 28;
 	public static final int HEIGHT = 21;
 	
-	public ContainerElementArrow(TileEntityMachine<?> te) {
+	public ContainerElementArrow(TileEntityCraftingMachine<?> te) {
 		this.te = te;
 		this.lastProgress = te.getProgress();
 		this.hasRecipe = te.getCurrentRecipe() != null;

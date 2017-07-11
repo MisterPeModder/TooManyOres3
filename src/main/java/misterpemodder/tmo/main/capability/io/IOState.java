@@ -16,6 +16,8 @@ public enum IOState implements Comparable<IOState> {
 	INPUT(TextFormatting.AQUA, "input", true),
 	OUTPUT(TextFormatting.GOLD, "output", false),
 	ENDER_MATTER(TextFormatting.LIGHT_PURPLE, "enderMatter", true),
+	LEFT_TANK(TextFormatting.RED, "leftTank", true),
+	RIGHT_TANK(TextFormatting.BLUE, "rightTank", true),
 	;
 	
 	private final TextFormatting color;

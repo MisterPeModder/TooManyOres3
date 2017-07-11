@@ -50,6 +50,8 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 		if(te != null && te.getEnderMatterAmount() > 0) {
 			int e = (te.getEnderMatterAmount()*138)/TileEntityDestabilizer.MAX_ENDER_MATTER;
 			guiContainer.container.enderMatterBar.drawBar(guiContainer.getGuiLeft()+11, guiContainer.getGuiTop()+82, e <= 0? 2:e+1);
+		} else {
+			guiContainer.container.enderMatterBar.drawBar(guiContainer.getGuiLeft()+11, guiContainer.getGuiTop()+82, 0);
 		}
 		
 	}

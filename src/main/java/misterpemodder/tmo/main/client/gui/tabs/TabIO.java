@@ -29,7 +29,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
 
-public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine<?>> extends TabBase<C, TE> {
+public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine> extends TabBase<C, TE> {
 	
 	public static final int INPUT_TYPE_BUTTON_ID = 30;
 	public static final int INPUT_CHANGE_LEFT_BUTTON_ID = 31;

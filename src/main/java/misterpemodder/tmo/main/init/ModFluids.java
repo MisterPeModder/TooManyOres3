@@ -23,7 +23,7 @@ public final class ModFluids {
 	
 	public static enum TheFluids {
 		
-		IGNUM_FUEL(new FluidTMO(EnumBlocksNames.IGNUM_FUEL, 1473, 0xFFFF6F3D, 3, 800)),
+		IGNUM_FUEL(new FluidTMO(EnumBlocksNames.IGNUM_FUEL, 2473, 0xFFFF6F3D, 3, 800)),
 		FROZIUM_FUEL(new FluidTMO(EnumBlocksNames.FROZIUM_FUEL, 123, 0xFF90FFFF, 0, 800)),
 		;
 		

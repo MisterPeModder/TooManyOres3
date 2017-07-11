@@ -12,6 +12,7 @@ import misterpemodder.tmo.main.capability.CapabilityFreezing;
 import misterpemodder.tmo.main.capability.CapabilityFreezing.Freezing;
 import misterpemodder.tmo.main.capability.CapabilityFreezing.IFreezing;
 import misterpemodder.tmo.main.capability.owner.CapabilityOwner;
+import misterpemodder.tmo.main.client.gui.GuiContainerThermoelectricGenerator;
 import misterpemodder.tmo.main.enchant.EnchantementBase;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.init.ModPotions.ThePotions;
@@ -63,6 +64,10 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -194,6 +199,17 @@ public class EventHandler {
 					event.getToolTip().add(TextFormatting.GRAY+""+TextFormatting.ITALIC+str);
 			} else {
 				event.getToolTip().add(TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate("item.desc"));
+			}
+		}
+		
+		GuiScreen screen = Minecraft.getMinecraft().currentScreen;
+		if(screen != null && screen instanceof GuiContainerThermoelectricGenerator) {
+			if(event.getItemStack().hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
+				IFluidHandlerItem h = event.getItemStack().getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+				FluidStack fs = h.drain(Fluid.BUCKET_VOLUME, false);
+				if(fs != null) {
+					event.getToolTip().add(StringUtils.getTemperatureString(fs, true));
+				}
 			}
 		}
 	}

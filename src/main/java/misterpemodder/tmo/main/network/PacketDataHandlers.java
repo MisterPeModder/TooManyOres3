@@ -167,12 +167,12 @@ public enum PacketDataHandlers implements IPacketDataHandler {
 				if(te instanceof TileEntityMachine && info.hasKey("autoPushPull")) {
 					boolean autoPushPull = info.getBoolean("autoPushPull");
 					if(bId == TabIO.AUTO_PUSH_BUTTON_ID) {
-						((TileEntityMachine<?>)te).autoPush = autoPushPull;
+						((TileEntityMachine)te).autoPush = autoPushPull;
 					}
 					else if(bId == TabIO.AUTO_PULL_BUTTON_ID) {
-						((TileEntityMachine<?>)te).autoPull = autoPushPull;
+						((TileEntityMachine)te).autoPull = autoPushPull;
 					}
-					((TileEntityMachine<?>)te).sync();
+					((TileEntityMachine)te).sync();
 				}
 				
 			break;
@@ -180,7 +180,7 @@ public enum PacketDataHandlers implements IPacketDataHandler {
 			case MISC:
 				if(bId == ContainerElementTank.CLEAR_TANK_BUTTON_ID) {
 					if(te instanceof TileEntityMachine && info.hasKey("tank_id", Constants.NBT.TAG_SHORT)) {
-						((TileEntityMachine<?>)te).emptyTank(info.getShort("tank_id"));
+						((TileEntityMachine)te).emptyTank(info.getShort("tank_id"));
 					}
 				}
 			break;
@@ -323,7 +323,7 @@ public enum PacketDataHandlers implements IPacketDataHandler {
 			NBTTagList configData = (NBTTagList) data.getTag("config");
 			
 			if(te != null && te instanceof TileEntityMachine) {
-				((TileEntityMachine<?>) te).getIoConfigHandler().deserializeNBT(configData);
+				((TileEntityMachine) te).getIoConfigHandler().deserializeNBT(configData);
 				if(toServer) {
 					data.removeTag("to_server");
 					data.removeTag("world_dim_id");

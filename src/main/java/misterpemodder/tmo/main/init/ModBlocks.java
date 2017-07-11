@@ -14,6 +14,7 @@ import misterpemodder.tmo.main.blocks.base.IBlockTMO;
 import misterpemodder.tmo.main.blocks.base.IBlockTileEntity;
 import misterpemodder.tmo.main.blocks.containers.BlockDestabilizer;
 import misterpemodder.tmo.main.blocks.containers.BlockInjector;
+import misterpemodder.tmo.main.blocks.containers.BlockThermoelectricGenerator;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumAnvil;
 import misterpemodder.tmo.main.blocks.containers.BlockTitaniumChest;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
@@ -65,6 +66,7 @@ public class ModBlocks {
 		STRONG_PISTON_MOVING(new BlockStrongPistonMoving()),
 		INJECTOR(new BlockInjector()),
 		CRYSTAL_DESTABILIZER(new BlockDestabilizer()),
+		THERMOELECTRIC_GENERATOR(new BlockThermoelectricGenerator()),
 		TITANIUM_REDSTONE(new BlockSpecialRedstoneWire(EnumBlocksNames.TITANIUM_REDSTONE)),
 		COPPER_REDSTONE(new BlockSpecialRedstoneWire(EnumBlocksNames.COPPER_REDSTONE)),
 		WEAK_REDSTONE_TORCH(new BlockSpecialRedstoneTorch(true, EnumBlocksNames.WEAK_REDSTONE_TORCH)),

@@ -20,16 +20,16 @@ public abstract class ContainerElementBar implements ISyncedContainerElement, ID
 	public static final int BAR_WIDTH = 140;
 	public static final int BAR_HEIGHT = 8;
 	
-	private int barFillAmount = 0;
-	private boolean drawBackground = true;
-	private boolean drawForeground = true;
+	protected int barFillAmount = 0;
+	protected boolean drawBackground = true;
+	protected boolean drawForeground = true;
 	
 	//for use inside TMO Tabs
 	protected ContainerElementBar() {}
 	
 	//for use as a JEI IDrawable
 	protected ContainerElementBar(int fillPercent, boolean shouldDrawMinimum, boolean drawBackground, boolean drawForeground) {
-		int i = (int) ((MathHelper.clamp(fillPercent, 0, 100)/100f) * (BAR_WIDTH - 2));
+		int i = (int) ((MathHelper.clamp(fillPercent, 0, 100)/100f) * (getBarSize()-2));
 		this.barFillAmount = shouldDrawMinimum && i == 0? 1 : i; 
 		
 		this.drawBackground = drawBackground;
@@ -37,7 +37,7 @@ public abstract class ContainerElementBar implements ISyncedContainerElement, ID
 	}
 	
 	public void setFillPercent(int fillPercent, boolean shouldDrawMinimum) {
-		int i = (int) ((MathHelper.clamp(fillPercent, 0, 100)/100f) * (BAR_WIDTH - 2));
+		int i = (int) ((MathHelper.clamp(fillPercent, 0, 100)/100f) * (getBarSize()-2));
 		this.barFillAmount = shouldDrawMinimum && i == 0? 1 : i; 
 	}
 	
@@ -89,6 +89,10 @@ public abstract class ContainerElementBar implements ISyncedContainerElement, ID
 	@Override
 	public NBTTagCompound writeData(NBTTagCompound data) {
 		return new NBTTagCompound();
+	}
+	
+	protected int getBarSize() {
+		return BAR_WIDTH;
 	}
 
 }

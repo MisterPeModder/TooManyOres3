@@ -3,35 +3,35 @@ package misterpemodder.tmo.main.capability.item;
 import com.google.common.collect.ImmutableList;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
 
-public class CombinedItemStackHandler implements IItemHandler {
+public class CombinedItemStackHandler implements IItemHandlerModifiable {
 	
-	protected final ImmutableList<IItemHandler> handlers;
+	protected final ImmutableList<IItemHandlerModifiable> handlers;
 	
-	public CombinedItemStackHandler(IItemHandler first, IItemHandler... handlers) {
-		ImmutableList.Builder<IItemHandler> builder = new ImmutableList.Builder<>();
+	public CombinedItemStackHandler(IItemHandlerModifiable first, IItemHandlerModifiable... handlers) {
+		ImmutableList.Builder<IItemHandlerModifiable> builder = new ImmutableList.Builder<>();
 		builder.add(first);
 		builder.add(handlers);
 		this.handlers = builder.build();
 	}
 	
-	public ImmutableList<IItemHandler> getItemHandlers() {
+	public ImmutableList<IItemHandlerModifiable> getItemHandlers() {
 		return this.handlers;
 	}
 	
 	@Override
 	public int getSlots() {
 		int s = 0;
-		for(IItemHandler h : handlers) {
+		for(IItemHandlerModifiable h : handlers) {
 			s += h.getSlots();
 		}
 		return s;
 	}
 	
-	public IItemHandler getHandlerForSlot(int slot) {
+	public IItemHandlerModifiable getHandlerForSlot(int slot) {
 		int totalSlots = 0;
-		for(IItemHandler h : handlers) {
+		for(IItemHandlerModifiable h : handlers) {
 			totalSlots += h.getSlots();
 			if(slot < totalSlots) {
 				return h;
@@ -69,6 +69,11 @@ public class CombinedItemStackHandler implements IItemHandler {
 	@Override
 	public int getSlotLimit(int slot) {
 		return getHandlerForSlot(slot).getSlotLimit(getSlotForHandler(slot));
+	}
+
+	@Override
+	public void setStackInSlot(int slot, ItemStack stack) {
+		getHandlerForSlot(slot).setStackInSlot(getSlotForHandler(slot), stack);
 	}
 
 }

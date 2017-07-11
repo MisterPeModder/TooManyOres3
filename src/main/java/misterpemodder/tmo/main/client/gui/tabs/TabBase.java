@@ -169,6 +169,7 @@ public abstract class TabBase<C extends ContainerBase<TE>, TE extends TileEntity
 		MAIN_TANVIL,
 		MAIN_INJECTOR,
 		MAIN_DESTABILIZER,
+		MAIN_THERMOELECTRIC_GENERATOR,
 		MISC,
 	}
 	

@@ -1,87 +1,3 @@
-
-#Divers
-itemGroup.TMO=Too Many Ores III
-item.tabIcon.name=Icône
-item.hasNBT.desc=contient des données NBT!
-tmo.missingNo.name=MISSINGNO. (jette-moi loin... §4TRES LOIN§f ok?)
-tmo.config.gui.mainTitle=Confguration de "Beacoup Trop de Minerais" (a.k.a Too Many Ores)
-item.desc=-maintenez shift pour la description-
-tmo.ioType.item=Objets
-tmo.ioType.fluid=Fluides
-tmo.ioType.energy=Energie
-tmo.ioType.redstone=Redstone
-tmo.ioType.enderMatter=Matière de l'Ender
-tmo.blockSide.up=haut
-tmo.blockSide.down=bas
-tmo.blockSide.front=devant
-tmo.blockSide.back=derrière
-tmo.blockSide.left=gauche
-tmo.blockSide.right=droite
-
-#Objets
-item.itemIngot.titanium.name=Lingot de titane
-item.itemIngot.titaniumDark.name=Lingot de titane noir
-item.itemIngot.titaniumPoor.name=Lingot de titane
-item.itemIngot.titanite.name=Lingot de titanite
-item.itemIngot.copper.name=Lingot de cuivre
-item.itemIngot.darkanium.name=Lingot de sombranium
-item.itemIngot.darkanium.desc=Ca vibre...
-item.itemIngot.enderMatter.name=Lingot de matière de l'Ender
-item.itemIngot.goldAncient.name=Lingot d'or ancien
-item.itemIngot.platinum.name=Lingot de platine
-item.itemIngot.redstone.name=Lingot de redstone
-item.itemIngot.carbon.name=Lingot de carbone
-
-item.itemGem.frozium.name=Gème de frozium
-item.itemGem.ignum.name=Gème d'ignum
-
-item.itemPlate.titanium.name=Plaque de titane
-item.itemPlate.iron.name=Plaque de fer
-item.itemPlate.redstone.name=Bloc de redstone compressé
-item.itemPlate.hallowed.name=Plaque sacrée
-
-item.itemLock.basic.name=Cadenas de sécurité en titane
-item.itemLock.basic.desc=Protège vos machines des voleurs. Peut être enchanté avec Solidité
-item.itemLock.reinforced.name=Cadenas de sécurité digital
-item.itemLock.reinforced.desc=Une version plus résistante du cadenas avec plus d'options de sécurité.\nPeut être enchanté avec Solidité
-item.itemLock.broken.title=Cassé
-item.itemLock.broken.desc=Réparez le avec %d %s dans une enclume
-
-item.casingUpgrade.basicToStandard.name=Amélioration de machine basique
-item.casingUpgrade.standardToImproved.name=Amélioration de machine standard
-
-item.dust.titanium.name=Poudre de titane
-item.dust.titaniumDirty.name=Poudre de titane sale
-item.dust.titaniumPoor.name=Poudre de titane
-item.dust.titaniumPoorDirty.name=Poudre de titane sale
-item.dust.titanite.name=Poudre de titanite
-item.dust.copper.name=Poudre de cuivre
-item.dust.copperDirty.name=Poudre de cuivre sale
-item.dust.goldAncientDirty.name=Poudre d'or ancien sale
-item.dust.goldAncient.name=Poudre d'or ancien
-item.dust.platinum.name=Poudre de platine
-item.dust.platinumDirty.name=Poudre de platine sale
-item.dust.frozium.name=Frozium concassé
-item.dust.ignum.name=Ignum concassé
-
-
-#Outils
-item.pickaxeTitanium.name=Pioche en titane
-item.pickaxeTitaniumDark.name=Pioche en titane noir
-item.pickaxeCopper.name=Pioche en cuivre
-item.pickaxeFrozium.name=Pioche en frozium
-item.pickaxeIgnum.name=Pioche en ignum
-
-item.axeTitanium.name=Hache en titane
-item.axeTitaniumDark.name=Hache en titane noir
-item.axeCopper.name=Hache en cuivre
-item.axeFrozium.name=Hache en frozium
-item.axeIgnum.name=Hache en ignum
-
-item.shovelTitanium.name=Pelle en titane
-item.shovelTitaniumDark.name=Pelle en titane noir
-item.shovelCopper.name=Pelle en cuivre
-item.shovelFrozium.name=Pelle en frozium
 item.shovelIgnum.name=Pelle en ignum
 
 item.swordTitanium.name=Épée en titane
@@ -239,9 +155,13 @@ tile.blockCrystalDestabilizer.name=Destabiliseur de cristaux
 tile.blockCrystalDestabilizer.basic.name=Destabiliseur de cristaux basique
 tile.blockCrystalDestabilizer.standard.name=Destabiliseur de cristaux
 tile.blockCrystalDestabilizer.improved.name=Destabiliseur de cristaux amélioré
-tile.redstoneTitanium.name=Redstone enrichie au titane
+tile.blockThermoelectricGenerator.name=Générateur Thermo-électrique
+tile.blockThermoelectricGenerator.basic.name=Générateur Thermo-électrique basique
+tile.blockThermoelectricGenerator.standard.name=Générateur Thermo-électrique
+tile.blockThermoelectricGenerator.improved.name=Générateur Thermo-électrique amélioré
+tile.redstoneTitanium.name=Redstone enrichie en titane
 tile.redstoneTitanium.desc=Cette poudre est moins conductrice que la redstone normale.\nQuand elle est placée au sol elle ne transmet que du courant faible.
-tile.redstoneCopper.name=Redstone enrichie au cuivre
+tile.redstoneCopper.name=Redstone enrichie en cuivre
 tile.redstoneCopper.desc=Cette poudre est plus conductrice que la redstone normale.\nQuand elle est placée au sol se connecte à tous les blocs solides adjacents en les alimentant avec un courant fort.
 tile.redstoneTorchWeak.name=Torche de redstone faible
 tile.redstoneTorchWeak.desc=Cette torche ne transmet pas de courant faible au bloc au dessus et ne brûle pas. 
@@ -261,10 +181,13 @@ gui.tab.io.reset=Effacer
 gui.tab.io.reset.all=Tout effacer
 gui.tab.io.reset.desc.1=Cliquez-gauche pour effacer la configuration pour le type sélectionné.
 gui.tab.io.reset.desc.2=Shift-cliquez-gauche pour effacer la configuration pour TOUS les types.
-gui.tab.io.state.0=désactivé
-gui.tab.io.state.1=entrée
-gui.tab.io.state.2=sortie
-gui.tab.io.state.3=entrée & sortie
+gui.tab.io.state.all=tout
+gui.tab.io.state.disabled=desactivé
+gui.tab.io.state.input=entrée
+gui.tab.io.state.output=sortie
+gui.tab.io.state.enderMatter=matière de l'ender
+gui.tab.io.state.leftTank=réservor gauche
+gui.tab.io.state.rightTank=réservoir droit
 gui.tab.io.autoPush=Sortie Auto
 gui.tab.io.autoPull=Entrée Auto
 gui.tab.playerArmorInv.name=Armure & fabrication
@@ -281,7 +204,16 @@ gui.tank.clear.confirm=cliquez-gauche pour vider!
 gui.injecter.mode.injection=Mode injection
 gui.injecter.mode.extraction=Mode extraction
 gui.injecter.mode.desc=cliquez pour changer
+gui.thermoElectricGenerator.slot.charging=Emplacement pour objets à charger
+gui.thermoElectricGenerator.slot.leftTank=Emplacement de seau pour le reservoir gauche
+gui.thermoElectricGenerator.slot.rightTank=Emplacement de seau pour le reservoir droit
+gui.thermoElectricGenerator.text.power.desc.1=Génération d'énergie
+gui.thermoElectricGenerator.text.power.desc.2=bonus d'énergie
+gui.thermoElectricGenerator.text.fluid.desc.1=Consommation de fluide
+gui.thermoElectricGenerator.text.fluid.desc.2=malus
+gui.thermoElectricGenerator.text.temperature.desc=Difference de temperature
 gui.bar.ender=Matière de l'ender
+gui.temperature.desc=Temperature
 
 #Sécurité
 protectedBlock.noBreaking=Vous n'avez pas les permissions pour casser ce(tte) %s!
