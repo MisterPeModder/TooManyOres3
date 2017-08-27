@@ -92,7 +92,7 @@ public class TabMainThermoelectricGenerator extends TabMain<ContainerThermoelect
 			diff = Math.abs(leftStack.getFluid().getTemperature(leftStack) - rightStack.getFluid().getTemperature(rightStack));
 			if(te.isMachineWorking())p = TileEntityThemoelectricGenerator.calcultatePower(leftStack, rightStack, casing);
 		}
-		guiContainer.drawString(guiContainer.getFontRenderer(),(diff <= 0? TextFormatting.GRAY : TextFormatting.WHITE) + "" +  diff+" °K", 156, 16, 0xFFFFFF);
+		guiContainer.drawString(guiContainer.getFontRenderer(),(diff <= 0? TextFormatting.GRAY : TextFormatting.WHITE) + "" +  diff+" Â°K", 156, 16, 0xFFFFFF);
 		guiContainer.drawString(guiContainer.getFontRenderer(),(p <= 0? TextFormatting.GRAY : TextFormatting.WHITE) + "" +  p+" RF/t", 156, 33, 0xFFFFFF);
 		guiContainer.drawString(guiContainer.getFontRenderer(),(c <= 0? TextFormatting.GRAY : TextFormatting.WHITE) + "" + c+" Mb/t", 156, 50, 0xFFFFFF);
 		

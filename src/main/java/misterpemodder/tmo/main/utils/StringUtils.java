@@ -41,7 +41,7 @@ public class StringUtils {
 			
 			String desc = addDesc? TextFormatting.GRAY+Tmo.proxy.translate("gui.temperature.desc")+": ": "";
 			
-			return desc+(temp <= FluidRegistry.WATER.getTemperature()? TextFormatting.AQUA : TextFormatting.GOLD)+""+temp+"°K";
+			return desc+(temp <= FluidRegistry.WATER.getTemperature()? TextFormatting.AQUA : TextFormatting.GOLD)+""+temp+"Â°K";
 		}
 		return "";
 	}
