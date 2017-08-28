@@ -3,7 +3,6 @@ package misterpemodder.tmo.main.items.tools;
 import misterpemodder.tmo.main.items.EnumItemsNames;
 import misterpemodder.tmo.main.items.materials.TmoToolMaterial;
 import misterpemodder.tmo.main.utils.ItemStackUtils;
-import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
@@ -19,7 +18,6 @@ public class ItemTmoShovel extends ItemSpade implements IItemTMOTool {
 		this.material = material;
 		setUnlocalizedName(itemRefs.getUnlocalizedName());
 		setRegistryName(itemRefs.getRegistryName());
-		if(isEnabled()) setCreativeTab(TMORefs.TMO_TAB);
 	}
 	
 	@Override

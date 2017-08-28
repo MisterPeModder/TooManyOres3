@@ -15,7 +15,7 @@ import misterpemodder.tmo.main.inventory.ContainerBase;
 import misterpemodder.tmo.main.inventory.ISyncedContainerElement;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
-import misterpemodder.tmo.main.utils.StringUtils;
+import misterpemodder.tmo.main.utils.TemperatureUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
@@ -92,7 +92,7 @@ public class ContainerElementTank extends Gui implements ISyncedContainerElement
 			if (stack == null || stack.getFluid() == null || stack.amount <= 0) {
 				strs = Arrays.asList(Tmo.proxy.translate("gui.tank.empty"));
 			} else {
-				strs = Arrays.asList(stack.getFluid().getRarity(stack).rarityColor + stack.getLocalizedName(), Tmo.proxy.translate("gui.tank.contents", stack.amount, tank.getCapacity()), StringUtils.getTemperatureString(stack, true));
+				strs = Arrays.asList(stack.getFluid().getRarity(stack).rarityColor + stack.getLocalizedName(), Tmo.proxy.translate("gui.tank.contents", stack.amount, tank.getCapacity()), TemperatureUtils.getFluidTemperatureString(stack, true));
 			}
 		}
 		return strs;

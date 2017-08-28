@@ -103,6 +103,7 @@ public class Tmo {
 		TooManyOresAPI.registryHandler.registerStrongPistonBehavior(new DefaultStrongPistonBehavior());
 		EnderMatterItems.register();
 		
+		ModItems.registerCreativeTabItems();
 		ModItems.registerOreDict();
 		ModBlocks.registerOreDict();
 		Crafting.registerRecipes();

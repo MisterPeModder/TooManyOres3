@@ -14,7 +14,7 @@ public class TmoToolMaterial {
 	
 	public static final TmoToolMaterial TITANIUM_MATERIAL = new TmoToolMaterial(EnumHelper.addToolMaterial("titanium", 4, 2755, 11, 5, 16), ItemStackUtils.newVariantStack(TheItems.INGOT, IngotVariant.TITANIUM_INGOT), 20, BoolValues.TITANIUM_TOOLS);
 	public static final TmoToolMaterial TITANIUM_DARK_MATERIAL = new TmoToolMaterial(EnumHelper.addToolMaterial("titanium_dark", 4, 2855, 12, 6, 17), ItemStackUtils.newVariantStack(TheItems.INGOT, IngotVariant.TITANIUM_INGOT_DARK), 21, BoolValues.TITANIUM_DARK_TOOLS);
-	public static final TmoToolMaterial COPPER_MATERIAL = new TmoToolMaterial(EnumHelper.addToolMaterial("copper", 2, 163, 5, 1, 8), ItemStackUtils.newVariantStack(TheItems.INGOT, IngotVariant.COPPER_INGOT), 5, BoolValues.COPPER);
+	public static final TmoToolMaterial COPPER_MATERIAL = new TmoToolMaterial(EnumHelper.addToolMaterial("copper", 2, 163, 5, 1, 8), ItemStackUtils.newVariantStack(TheItems.INGOT, IngotVariant.COPPER_INGOT), 5, BoolValues.COPPER_TOOLS);
 	public static final TmoToolMaterial FROZIUM_MATERIAL = new TmoToolMaterial(EnumHelper.addToolMaterial("frozium", 3, 310, 7, 2, 14), ItemStackUtils.newVariantStack(TheItems.GEM, GemVariant.FROZIUM_GEM), 12, BoolValues.FROZIUM_TOOLS);
 	public static final TmoToolMaterial IGNUM_MATERIAL = new TmoToolMaterial(EnumHelper.addToolMaterial("ignum", 3, 310, 7, 2, 14), ItemStackUtils.newVariantStack(TheItems.GEM, GemVariant.IGNUM_GEM), 12, BoolValues.IGNUM_TOOLS);
 

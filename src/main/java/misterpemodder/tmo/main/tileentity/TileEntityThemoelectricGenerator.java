@@ -262,14 +262,16 @@ public class TileEntityThemoelectricGenerator extends TileEntityMachine {
 			EnumMachineCasingVariant casing = this.world.getBlockState(this.pos).getValue(BlockMachine.CASING);
 			
 			int p = calcultatePower(leftStack, rightStack, casing);
-			p -= energy.receiveEnergy(p, false);
-			this.energyBuffer = p;
-			
-			int d = getFluidConsumption(casing);
-			leftTank.drain(d, true);
-			rightTank.drain(d, true);
+			if (p > 0) {
+				p -= energy.receiveEnergy(p, false);
+				this.energyBuffer = p;
+
+				int d = getFluidConsumption(casing);
+				leftTank.drain(d, true);
+				rightTank.drain(d, true);
 				
-			return leftTank.getFluidAmount() > 0 && rightTank.getFluidAmount()> 0;
+				return leftTank.getFluidAmount() > 0 && rightTank.getFluidAmount()> 0;
+			}
 		}
 		return false;
 	}
@@ -286,7 +288,7 @@ public class TileEntityThemoelectricGenerator extends TileEntityMachine {
 			//frozium + ignum => 70 RF/t 
 			//lava + water => 37 RF/t
 			int basePower = delta < 0 ? 0 : (int) Math.round(7.0D*Math.pow(Math.log(0.01D*delta),2));
-			return casing == EnumMachineCasingVariant.IMPROVED? (int) Math.round(basePower*getPowerBonus(casing)) : basePower;
+			return (Math.round(basePower * getPowerBonus(casing)));
 		}
 		return 0;
 	}

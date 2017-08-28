@@ -3,7 +3,6 @@ package misterpemodder.tmo.main.items.tools;
 import misterpemodder.tmo.main.items.EnumItemsNames;
 import misterpemodder.tmo.main.items.materials.TmoToolMaterial;
 import misterpemodder.tmo.main.utils.ItemStackUtils;
-import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
@@ -14,13 +13,11 @@ public class ItemTmoAxe extends ItemAxe implements IItemTMOTool {
 	private TmoToolMaterial material;
 	
 	public ItemTmoAxe(EnumItemsNames itemRefs, TmoToolMaterial material, float damage, float speed) {
-		//TODO Adjust Axes speed
 		super(material.material, damage, speed);
 		this.material = material;
 		this.itemRefs = itemRefs;
 		setUnlocalizedName(itemRefs.getUnlocalizedName());
 		setRegistryName(itemRefs.getRegistryName());
-		if(isEnabled()) setCreativeTab(TMORefs.TMO_TAB);
 	}
 	
 	@Override

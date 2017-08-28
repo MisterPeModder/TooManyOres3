@@ -5,11 +5,12 @@ import net.minecraftforge.fluids.Fluid;
 
 public final class ConfigValues {
 	
-	public enum ConfigCategories {
+	public static enum ConfigCategories {
 		ORE_GEN("ore gen", "in world ore generation.", "oreGen"),
 		TOOLS("tools", "too OP for you?", "tools"),
 		ARMOR("armor", "you don't like a special armor set? disable it right there!", "armor"),
 		COMPAT("compatibility", "enable/disables mod compatibility features.", "compat"),
+		CLIENT("client", "client-only settings.", "client"),
 		MISC("miscellaneous", "random configs.", "misc"),
 		;
 		
@@ -24,7 +25,7 @@ public final class ConfigValues {
 		}
 	}
 	
-	public enum BoolValues {
+	public static enum BoolValues {
 		TITANIUM_GEN(ConfigCategories.ORE_GEN, "titanium gen", true, "Should titanium ore spawn in the World?", "gen.titanium"),
 		ANCIENT_GOLD_GEN(ConfigCategories.ORE_GEN, "ancient gold gen", true, "Should ancient gold ore spawn in the World?", "gen.ancientGold"),
 		DARKANIUM_GEN(ConfigCategories.ORE_GEN, "darkanium gen", true, "Should darkanium ore spawn in the World?", "gen.darkanium"),
@@ -74,15 +75,13 @@ public final class ConfigValues {
 			this.desc = desc;
 			this.langKey = "tmo.configValue.bool."+langKey;
 		}
-		
-		
-		
 	}
 	
-	public enum IntValues {
+	public static enum IntValues {
 		BUCKET_CAPACITY(ConfigCategories.MISC, "Max bucket capacity", 4*Fluid.BUCKET_VOLUME, 0, 16*Fluid.BUCKET_VOLUME, "Too small capacity?", "misc.bucketCapacity"),
 		BASIC_LOCK_BREAK_CHANCE(ConfigCategories.MISC, "Titanium Lock break chance", 50, 20, 200, "Increase or decrease titanium lock break chance. A high break percentage means high chance to break.", "misc.basicLockBreakChance"),
 		REINFORCED_LOCK_BREAK_CHANCE(ConfigCategories.MISC, "Smart Lock break chance", 20, 20, 200, "Increase or decrease smart lock break chance.", "misc.reinforcedLockBreakChance"),
+		TEMPERATURE_UNIT(ConfigCategories.CLIENT, "Temperature unit", 0, 0, 2, "0 for Kelvin, 1 for Celsius and 2 for Farenheit", "misc.temperatureUnit"),
 		;
 		public int currentValue;
 		public final String categoryName;
@@ -140,7 +139,6 @@ public final class ConfigValues {
 		for(FloatValues value : FloatValues.values()) {
 			value.currentValue = config.getFloat(value.name, value.categoryName, value.defaultValue, value.minValue, value.maxValue, value.desc, value.langKey);
 		}
-		
 	}
 	
 }

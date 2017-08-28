@@ -35,7 +35,6 @@ public class ItemTmoArmor extends ItemArmor implements ITMOItem{
 		this.itemRefs = itemRefs;
 		setUnlocalizedName(itemRefs.getUnlocalizedName());
 		setRegistryName(itemRefs.getRegistryName());
-		if(isEnabled()) setCreativeTab(TMORefs.TMO_TAB);
 		
 		if(slot == EntityEquipmentSlot.HEAD) {
 			this.addPropertyOverride(new ResourceLocation("probe"), new IItemPropertyGetter() {

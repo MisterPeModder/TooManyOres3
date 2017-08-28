@@ -6,7 +6,6 @@ import misterpemodder.tmo.main.init.ModPotions.ThePotions;
 import misterpemodder.tmo.main.items.EnumItemsNames;
 import misterpemodder.tmo.main.items.materials.TmoToolMaterial;
 import misterpemodder.tmo.main.utils.ItemStackUtils;
-import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,7 +25,6 @@ public class ItemTmoSword extends ItemSword implements IItemTMOTool {
 		this.material = material;
 		setUnlocalizedName(itemRefs.getUnlocalizedName());
 		setRegistryName(itemRefs.getRegistryName());
-		if(isEnabled()) setCreativeTab(TMORefs.TMO_TAB);
 	}
 	
 	@Override

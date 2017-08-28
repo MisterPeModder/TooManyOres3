@@ -22,6 +22,7 @@ import misterpemodder.tmo.main.items.tools.ItemTmoPickaxe;
 import misterpemodder.tmo.main.items.tools.ItemTmoShovel;
 import misterpemodder.tmo.main.items.tools.ItemTmoSword;
 import misterpemodder.tmo.main.utils.TMORefs;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -36,7 +37,7 @@ public class ModItems {
 	static  List<ItemBlock> ITEM_BLOCKS = new ArrayList<>();
 	
 	public enum TheItems  {
-		TAB_ICON(new ItemBase(EnumItemsNames.TAB_ICON, false)),
+		TAB_ICON(new ItemBase(EnumItemsNames.TAB_ICON), null),
 		INGOT(new ItemMulti<>(EnumItemsNames.INGOT, ItemVariant.IngotVariant.ingotVariants, "_ingot")),
 		GEM(new ItemMulti<>(EnumItemsNames.GEM, ItemVariant.GemVariant.gemVariants, "_gem")),
 		PLATE(new ItemMulti<>(EnumItemsNames.PLATE, ItemVariant.PlateVariant.plateVariants, "_plate")),
@@ -118,6 +119,7 @@ public class ModItems {
 		;
 		
 		private ITMOItem item;
+		private final CreativeTabs tab;
 		
 		public Item getItem() {
 			return (Item) this.item;
@@ -127,8 +129,17 @@ public class ModItems {
 			return this.item;
 		}
 		
+		public CreativeTabs getCreativeTab() {
+			return this.tab;
+		}
+		
 		TheItems(ITMOItem item) {
+			this(item, TMORefs.TMO_TAB);
+		}
+		
+		TheItems(ITMOItem item, CreativeTabs tab) {
 			this.item = item;
+			this.tab = tab;
 		}
 		
 	}
@@ -162,6 +173,13 @@ public class ModItems {
 	public static void registerRenders() {
 		for(TheItems i : TheItems.values()) {
 			i.getTMOItem().registerRender();
+		}
+	}
+	
+	public static void registerCreativeTabItems() {
+		for(TheItems i : TheItems.values()) {
+			if(i.getTMOItem().isEnabled() && i.tab != null)
+				i.getItem().setCreativeTab(i.tab);
 		}
 	}
 	

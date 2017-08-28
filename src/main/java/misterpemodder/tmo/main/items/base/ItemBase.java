@@ -29,19 +29,10 @@ public class ItemBase extends Item implements ITMOItem {
 		}
 	}
 	
-	protected void attemptSetCreativeTab() {
-		if(isEnabled()) setCreativeTab(TMORefs.TMO_TAB);
-	}
-	
 	public ItemBase(EnumItemsNames names) {
-		this(names, true);
-	}
-	
-	public ItemBase(EnumItemsNames names, boolean useDefaultTab) {
 		this.names = names;
 		setUnlocalizedName(names.getUnlocalizedName());
 		setRegistryName(names.getRegistryName());
-		if(useDefaultTab) attemptSetCreativeTab();
 	}
 	
 	@Override

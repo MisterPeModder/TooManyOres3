@@ -15,7 +15,6 @@ import misterpemodder.tmo.main.items.EnumItemsNames;
 import misterpemodder.tmo.main.items.base.ItemBase;
 import misterpemodder.tmo.main.items.materials.TmoToolMaterial;
 import misterpemodder.tmo.main.utils.ItemStackUtils;
-import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -52,7 +51,6 @@ public class ItemHammer extends ItemBase implements IItemForgeHammer {
 		this.maxStackSize = 1;
 		this.setMaxDamage((int)Math.floor(toolMaterial.material.getMaxUses()/1.5));
 		this.attackDamage = 4.0F + toolMaterial.material.getDamageVsEntity();
-		if(this.isEnabled()) this.setCreativeTab(TMORefs.TMO_TAB);
 	}
 
 	@Override
@@ -134,6 +132,11 @@ public class ItemHammer extends ItemBase implements IItemForgeHammer {
 	@Override
 	public int getRGBDurabilityForDisplay(ItemStack stack) {
 		return ItemStackUtils.blinkColorOnLowDurability(super.getRGBDurabilityForDisplay(stack), stack);
+	}
+	
+	@Override
+	public boolean isEnabled() {
+		return this.toolMaterial.isEnabled();
 	}
 
 }
