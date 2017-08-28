@@ -17,6 +17,8 @@ import misterpemodder.tmo.main.inventory.slot.IHidable;
 import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityThemoelectricGenerator;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
+import misterpemodder.tmo.main.utils.TemperatureUtils;
+import misterpemodder.tmo.main.utils.TemperatureUtils.TemperatureUnit;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.text.TextFormatting;
@@ -87,12 +89,13 @@ public class TabMainThermoelectricGenerator extends TabMain<ContainerThermoelect
 		int diff = 0;
 		int p = 0;
 		int c = te.isMachineWorking()? TileEntityThemoelectricGenerator.getFluidConsumption(casing) : 0;
+		TemperatureUnit unit = TemperatureUtils.getTemperatureUnit();
 		
 		if(leftStack != null && rightStack != null) {
-			diff = Math.abs(leftStack.getFluid().getTemperature(leftStack) - rightStack.getFluid().getTemperature(rightStack));
+			diff = (int) Math.abs(unit.fromKelvin(leftStack.getFluid().getTemperature(leftStack)) - unit.fromKelvin(rightStack.getFluid().getTemperature(rightStack)));
 			if(te.isMachineWorking())p = TileEntityThemoelectricGenerator.calcultatePower(leftStack, rightStack, casing);
 		}
-		guiContainer.drawString(guiContainer.getFontRenderer(),(diff <= 0? TextFormatting.GRAY : TextFormatting.WHITE) + "" +  diff+" °K", 156, 16, 0xFFFFFF);
+		guiContainer.drawString(guiContainer.getFontRenderer(),(diff <= 0? TextFormatting.GRAY : TextFormatting.WHITE) + "" +  diff+ " " + unit.symbol, 156, 16, 0xFFFFFF);
 		guiContainer.drawString(guiContainer.getFontRenderer(),(p <= 0? TextFormatting.GRAY : TextFormatting.WHITE) + "" +  p+" RF/t", 156, 33, 0xFFFFFF);
 		guiContainer.drawString(guiContainer.getFontRenderer(),(c <= 0? TextFormatting.GRAY : TextFormatting.WHITE) + "" + c+" Mb/t", 156, 50, 0xFFFFFF);
 		
