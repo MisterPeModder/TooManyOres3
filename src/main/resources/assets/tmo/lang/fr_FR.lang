@@ -264,6 +264,7 @@ tmo.configCategory.oreGen=Géneration de minerais
 tmo.configCategory.armor=Armures
 tmo.configCategory.tools=Outils
 tmo.configCategory.compat=Compatibilité
+tmo.configCategory.client=Client
 tmo.configCategory.misc=Divers
 
 tmo.configValue.bool.gen.titanium=Géneration de titane
@@ -336,6 +337,8 @@ tmo.configValue.int.misc.basicLockBreakChance=Probalitité de cassure: cadenas e
 tmo.configValue.int.misc.basicLockBreakChance.tooltip=Augmenter ou diminuer la probabilité que le cadenas se casse. Plus le pourcentage est grand, plus le cadenas aura de chances de se briser.
 tmo.configValue.int.misc.reinforcedLockBreakChance=Probalitité de cassure: cadenas digital
 tmo.configValue.int.misc.reinforcedLockBreakChance.tooltip=Augmenter ou diminuer la probabilité que le cadenas se casse.
+tmo.configValue.int.misc.temperatureUnit=Unité de température
+tmo.configValue.int.misc.temperatureUnit.tooltip=0 pour Kelvins, 1 pour Celsius et 2 pour Farenheit.
 
 tmo.configValue.float.misc.exploderStrength=Force de l'exploseur
 tmo.configValue.float.misc.exploderStrength.tooltip=Changer la force de l'explosion génerée par l'exploseur

@@ -24,6 +24,7 @@ import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import misterpemodder.tmo.main.utils.StringUtils;
 import misterpemodder.tmo.main.utils.TMORefs;
+import misterpemodder.tmo.main.utils.TemperatureUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -208,7 +209,7 @@ public class EventHandler {
 				IFluidHandlerItem h = event.getItemStack().getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 				FluidStack fs = h.drain(Fluid.BUCKET_VOLUME, false);
 				if(fs != null) {
-					event.getToolTip().add(StringUtils.getTemperatureString(fs, true));
+					event.getToolTip().add(TemperatureUtils.getFluidTemperatureString(fs, true));
 				}
 			}
 		}

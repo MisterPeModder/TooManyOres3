@@ -347,6 +347,7 @@ tmo.configCategory.oreGen=Ore Generation
 tmo.configCategory.armor=Armor
 tmo.configCategory.tools=Tools
 tmo.configCategory.compat=Compatibility
+tmo.configCategory.client=Client
 tmo.configCategory.misc=Miscellaneous
 
 tmo.configValue.bool.gen.titanium=Titanium Generation
@@ -419,6 +420,8 @@ tmo.configValue.int.misc.basicLockBreakChance=Titanium Lock break chance
 tmo.configValue.int.misc.basicLockBreakChance.tooltip=Increase or decrease titanium lock break chance. A high break percentage means high chance to break.
 tmo.configValue.int.misc.reinforcedLockBreakChance=Smart Lock break chance
 tmo.configValue.int.misc.reinforcedLockBreakChance.tooltip=Increase or decrease smart lock break chance.
+tmo.configValue.int.misc.temperatureUnit=Temperature unit
+tmo.configValue.int.misc.temperatureUnit.tooltip=0 for Kelvin, 1 for Celsius and 2 for Farenheit
 
 tmo.configValue.float.misc.exploderStrength=Exploder strength
 tmo.configValue.float.misc.exploderStrength.tooltip=Change the strength of the explosion the explder makes
