@@ -15,6 +15,8 @@ import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.VarInsnNode;
 
+import misterpemodder.hc.asm.ClassPatcher;
+
 public class ClassPatcherEntityLivingBase extends ClassPatcher {
 
 	@Override

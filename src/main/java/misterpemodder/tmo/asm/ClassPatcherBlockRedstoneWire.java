@@ -29,6 +29,8 @@ import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.TypeInsnNode;
 import org.objectweb.asm.tree.VarInsnNode;
 
+import misterpemodder.hc.asm.ClassPatcher;
+
 public class ClassPatcherBlockRedstoneWire extends ClassPatcher {
 
 

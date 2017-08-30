@@ -13,7 +13,6 @@ import misterpemodder.tmo.main.capability.CapabilityFreezing.Freezing;
 import misterpemodder.tmo.main.capability.CapabilityFreezing.IFreezing;
 import misterpemodder.tmo.main.capability.owner.CapabilityOwner;
 import misterpemodder.tmo.main.client.gui.GuiContainerThermoelectricGenerator;
-import misterpemodder.tmo.main.config.ConfigValues.BoolValues;
 import misterpemodder.tmo.main.enchant.EnchantementBase;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.init.ModPotions.ThePotions;

@@ -10,8 +10,7 @@
   "url": "",
   "updateUrl": "",
   "authorList": [ "MisterPeModder" ],
-  "dependencies": [
-     "mod_MinecraftForge"
-  ]
+  "dependencies": [ "hc" ],
+  "requiredMods": [ "hc" ]
 }
 ]
