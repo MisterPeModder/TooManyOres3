@@ -57,7 +57,14 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-@Mod(modid = TMORefs.MOD_ID, name = TMORefs.MOD_NAME, version = TMORefs.MOD_VERSION, dependencies = "required-before:hc@[1.0.0,)", acceptedMinecraftVersions = TMORefs.ACCEPTED_MC_VERSIONS, guiFactory="misterpemodder.tmo.main.config.ConfigGuiFactory")
+@Mod(
+		modid = TMORefs.MOD_ID,
+		name = TMORefs.MOD_NAME,
+		version = TMORefs.MOD_VERSION,
+		dependencies = "required-after:hc@[1.0.2,)",
+		acceptedMinecraftVersions = TMORefs.ACCEPTED_MC_VERSIONS,
+		guiFactory = "misterpemodder.tmo.main.config.ConfigGuiFactory"
+	)
 public class Tmo {
 
 	@Instance(TMORefs.MOD_ID)
