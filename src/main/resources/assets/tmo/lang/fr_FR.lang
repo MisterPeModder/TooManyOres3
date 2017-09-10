@@ -1,3 +1,58 @@
+#Divers
+itemGroup.TMO=Too Many Ores III
+item.tabIcon.name=Icône
+item.hasNBT.desc=contient des données NBT!
+tmo.missingNo.name=MISSINGNO. (jette-moi loin... §4TRES LOIN§f ok?)
+tmo.config.gui.mainTitle=Confguration de "Beacoup Trop de Minerais" (a.k.a Too Many Ores)
+item.desc=-maintenez shift pour la description-
+
+#Objets
+item.itemIngot.titanium.name=Lingot de titane
+item.itemIngot.titaniumDark.name=Lingot de titane noir
+item.itemIngot.titaniumPoor.name=Lingot de titane
+item.itemIngot.titanite.name=Lingot de titanite
+item.itemIngot.copper.name=Lingot de cuivre
+item.itemIngot.darkanium.name=Lingot de sombranium
+item.itemIngot.darkanium.desc=Ca vibre...
+item.itemIngot.enderMatter.name=Lingot de matière de l'Ender
+item.itemIngot.goldAncient.name=Lingot d'or ancien
+item.itemIngot.platinum.name=Lingot de platine
+item.itemIngot.redstone.name=Lingot de redstone
+item.itemIngot.carbon.name=Lingot de carbone
+
+item.itemGem.frozium.name=Gème de frozium
+item.itemGem.ignum.name=Gème d'ignum
+
+item.itemPlate.titanium.name=Plaque de titane
+item.itemPlate.iron.name=Plaque de fer
+item.itemPlate.redstone.name=Bloc de redstone compressé
+item.itemPlate.hallowed.name=Plaque sacrée
+
+item.itemLock.basic.name=Cadenas de sécurité en titane
+item.itemLock.basic.desc=Protège vos machines des voleurs. Peut être enchanté avec Solidité
+item.itemLock.reinforced.name=Cadenas de sécurité digital
+item.itemLock.reinforced.desc=Une version plus résistante du cadenas avec plus d'options de sécurité.\nPeut être enchanté avec Solidité
+item.itemLock.broken.title=Cassé
+item.itemLock.broken.desc=Réparez le avec %d %s dans une enclume
+
+
+#Outils
+item.pickaxeTitanium.name=Pioche en titane
+item.pickaxeTitaniumDark.name=Pioche en titane noir
+item.pickaxeCopper.name=Pioche en cuivre
+item.pickaxeFrozium.name=Pioche en frozium
+item.pickaxeIgnum.name=Pioche en ignum
+
+item.axeTitanium.name=Hache en titane
+item.axeTitaniumDark.name=Hache en titane noir
+item.axeCopper.name=Hache en cuivre
+item.axeFrozium.name=Hache en frozium
+item.axeIgnum.name=Hache en ignum
+
+item.shovelTitanium.name=Pelle en titane
+item.shovelTitaniumDark.name=Pelle en titane noir
+item.shovelCopper.name=Pelle en cuivre
+item.shovelFrozium.name=Pelle en frozium
 item.shovelIgnum.name=Pelle en ignum
 
 item.swordTitanium.name=Épée en titane
