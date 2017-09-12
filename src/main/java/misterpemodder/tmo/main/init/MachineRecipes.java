@@ -5,6 +5,7 @@ import static misterpemodder.tmo.api.TooManyOresAPI.registryHandler;
 
 import java.util.Locale;
 
+import misterpemodder.hc.main.utils.ItemStackUtils;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
 import misterpemodder.tmo.main.apiimpl.recipe.DestabilizerToolRecipe;
 import misterpemodder.tmo.main.apiimpl.recipe.InjectorFillDrainRecipe;
@@ -12,10 +13,9 @@ import misterpemodder.tmo.main.blocks.BlockStorage;
 import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import misterpemodder.tmo.main.init.ModFluids.TheFluids;
 import misterpemodder.tmo.main.init.ModItems.TheItems;
-import misterpemodder.tmo.main.items.ItemVariant.DustVariant;
-import misterpemodder.tmo.main.items.ItemVariant.GemVariant;
+import misterpemodder.tmo.main.items.TMOItemVariants.DustVariant;
+import misterpemodder.tmo.main.items.TMOItemVariants.GemVariant;
 import misterpemodder.tmo.main.items.materials.TmoToolMaterial;
-import misterpemodder.tmo.main.utils.ItemStackUtils;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

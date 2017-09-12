@@ -1,7 +1,7 @@
 package misterpemodder.tmo.main.init;
 
+import misterpemodder.hc.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
-import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.fluids.BlockFluidTMO;
 import misterpemodder.tmo.main.fluids.FluidTMO;
 import misterpemodder.tmo.main.utils.TMORefs;

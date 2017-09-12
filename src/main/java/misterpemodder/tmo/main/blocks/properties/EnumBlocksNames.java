@@ -1,5 +1,6 @@
 package misterpemodder.tmo.main.blocks.properties;
 
+import misterpemodder.hc.main.blocks.properties.IBlockNames;
 import net.minecraft.item.EnumRarity;
 
 public enum EnumBlocksNames implements IBlockNames {

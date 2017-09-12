@@ -1,6 +1,6 @@
 package misterpemodder.tmo.main.blocks.slab;
 
-import misterpemodder.tmo.main.blocks.properties.IBlockNames;
+import misterpemodder.hc.main.blocks.properties.IBlockNames;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.item.EnumRarity;
 

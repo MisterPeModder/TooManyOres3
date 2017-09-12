@@ -13,12 +13,15 @@ import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.IIngredientBlacklist;
 import mezz.jei.api.ingredients.IIngredientRegistry;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
+import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
-import misterpemodder.tmo.main.Tmo;
+import misterpemodder.hc.main.blocks.IHexianBlock;
+import misterpemodder.hc.main.items.IHexianItem;
+import misterpemodder.hc.main.utils.ItemStackUtils;
+import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.main.blocks.BlockMachineCasing.EnumMachineCasingVariant;
-import misterpemodder.tmo.main.blocks.base.IBlockTMO;
 import misterpemodder.tmo.main.compat.jei.destabilizer.RecipeCategoryDestabilizer;
 import misterpemodder.tmo.main.compat.jei.destabilizer.RecipeHandlerDestabilizer;
 import misterpemodder.tmo.main.compat.jei.destabilizer.RecipeMakerDestabilizer;
@@ -42,9 +45,7 @@ import misterpemodder.tmo.main.inventory.ContainerDestabilizer;
 import misterpemodder.tmo.main.inventory.ContainerInjector;
 import misterpemodder.tmo.main.inventory.ContainerTitaniumAnvil;
 import misterpemodder.tmo.main.inventory.ContainerTitaniumChest;
-import misterpemodder.tmo.main.items.ItemVariant.LockVariant;
-import misterpemodder.tmo.main.items.base.ITMOItem;
-import misterpemodder.tmo.main.utils.ItemStackUtils;
+import misterpemodder.tmo.main.items.TMOItemVariants.LockVariant;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
@@ -53,9 +54,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 @JEIPlugin
+//TODO Remove use of deprecated methods
 public class JeiPlugin implements IModPlugin {
 	
-	public static IJeiRuntime jeiRuntime;
+	
 	private List<RecipeMaker<? extends IRecipeWrapper>> recipeMakers = new ArrayList<>();
 
 	@Override
@@ -72,7 +74,7 @@ public class JeiPlugin implements IModPlugin {
 		blacklist.addIngredientToBlacklist(new ItemStack(TheBlocks.WEAK_REDSTONE_TORCH_UNLIT.getBlock()));
 		
 		for(ModItems.TheItems item : ModItems.TheItems.values()) {
-			if(!item.getTMOItem().isEnabled()) {
+			if(!item.getHexianItem().isEnabled()) {
 				blacklist.addIngredientToBlacklist(new ItemStack(item.getItem(), 1 , OreDictionary.WILDCARD_VALUE));
 			}
 		}
@@ -125,19 +127,17 @@ public class JeiPlugin implements IModPlugin {
 		List<ItemStack> ingredients = ingredientsRegistry.getIngredients(ItemStack.class);
 		
 		for(ItemStack ingredient : ingredients) {
-			if(ingredient.getItem() instanceof ITMOItem || Block.getBlockFromItem(ingredient.getItem()) instanceof IBlockTMO) {
+			if(ingredient.getItem() instanceof IHexianItem || Block.getBlockFromItem(ingredient.getItem()) instanceof IHexianBlock) {
 				String unlocName = ingredient.getItem().getUnlocalizedNameInefficiently(ingredient) + TMORefs.JEI_DESC_UNLOC_NAME;
 				if(I18n.hasKey(unlocName)) {
-					registry.addDescription(ingredient , Tmo.proxy.translate(unlocName));
+					registry.addDescription(ingredient , StringUtils.translate(unlocName));
 				}
 			}
 		}
 	}
 
 	@Override
-	public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
-		JeiPlugin.jeiRuntime = jeiRuntime;
-	}
+	public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {}
 	
 	private void addRecipeMaker(RecipeMaker<?> maker) {
 		this.recipeMakers.add(maker);
@@ -155,5 +155,8 @@ public class JeiPlugin implements IModPlugin {
 			registry.addRecipeCategoryCraftingItem(ItemStackUtils.newVariantStack(block, v), recipeCategoryUids);
 		}
 	}
+
+	@Override
+	public void registerCategories(IRecipeCategoryRegistration registry) {}
 	
 }

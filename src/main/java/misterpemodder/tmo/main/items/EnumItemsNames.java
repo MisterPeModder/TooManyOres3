@@ -1,8 +1,9 @@
 package misterpemodder.tmo.main.items;
 
+import misterpemodder.hc.main.items.IItemNames;
 import net.minecraft.item.EnumRarity;
 
-public enum EnumItemsNames {
+public enum EnumItemsNames implements IItemNames {
 	
 	TAB_ICON("tab_icon", "tabIcon"),
 	INGOT("ingot", "itemIngot"), 
@@ -88,18 +89,22 @@ public enum EnumItemsNames {
 	String[] oreDictNames;
 	EnumRarity rarity;
 
+	@Override
 	public String getUnlocalizedName() {
 		return unlocalizedName;
 	}
 
+	@Override
 	public String getRegistryName() {
 		return registryName;
 	}
 	
+	@Override
 	public String[] getOreDictNames() {
 		return oreDictNames;
 	}
 	
+	@Override
 	public EnumRarity getRarity() {
 		return rarity;
 	}

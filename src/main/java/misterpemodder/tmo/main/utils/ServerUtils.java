@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.fml.server.FMLServerHandler;
 
+@Deprecated
 public final class ServerUtils {
 	
 	public static MinecraftServer getServer() {

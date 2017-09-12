@@ -1,10 +1,10 @@
 package misterpemodder.tmo.main.blocks;
 
+import misterpemodder.hc.main.blocks.properties.IBlockVariant;
 import misterpemodder.tmo.main.blocks.BlockMachineCasing.EnumMachineCasingVariant;
-import misterpemodder.tmo.main.blocks.base.BlockMulti;
+import misterpemodder.tmo.main.blocks.base.BlockMultiTMO;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
-import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -12,7 +12,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.util.BlockRenderLayer;
 
-public class BlockMachineCasing extends BlockMulti<EnumMachineCasingVariant> {
+public class BlockMachineCasing extends BlockMultiTMO<EnumMachineCasingVariant> {
 	
 	public static final PropertyEnum<EnumMachineCasingVariant> VARIANT = PropertyEnum.create("variant", EnumMachineCasingVariant.class);
 	public static EnumMachineCasingVariant[] casingVariants = EnumMachineCasingVariant.values();

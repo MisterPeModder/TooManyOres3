@@ -1,9 +1,9 @@
 package misterpemodder.tmo.main.blocks.slab;
 
+import misterpemodder.hc.main.blocks.properties.IBlockVariant;
 import misterpemodder.tmo.main.blocks.itemblock.ItemBlockSlab;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
-import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.IBlockState;

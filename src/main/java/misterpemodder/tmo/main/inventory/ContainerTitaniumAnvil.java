@@ -10,10 +10,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
 
+import misterpemodder.hc.main.inventory.slot.SlotFiltered;
+import misterpemodder.hc.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.api.item.IItemForgeHammer;
 import misterpemodder.tmo.main.enchant.EnchantementXpCostReduction;
-import misterpemodder.tmo.main.inventory.slot.SlotFiltered;
-import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumAnvil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -34,7 +34,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-public class ContainerTitaniumAnvil extends ContainerBase<TileEntityTitaniumAnvil> {
+public class ContainerTitaniumAnvil extends ContainerBaseTMO<TileEntityTitaniumAnvil> {
 	
 	public InvWrapper input;
     public InvWrapper output;

@@ -8,16 +8,16 @@ import java.util.Arrays;
 import org.lwjgl.input.Keyboard;
 
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
-import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.client.gui.GuiContainerBase;
-import misterpemodder.tmo.main.client.gui.RecipeClickableAreaTMO;
+import misterpemodder.hc.main.client.gui.GuiContainerBase;
+import misterpemodder.hc.main.client.gui.RecipeClickableAreaHC;
+import misterpemodder.hc.main.client.gui.tabs.TabMain;
+import misterpemodder.hc.main.inventory.slot.IHidableSlot;
+import misterpemodder.hc.main.inventory.slot.SlotHidable;
+import misterpemodder.hc.main.network.packet.PacketHandler;
+import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.main.enchant.EnchantementXpCostReduction;
 import misterpemodder.tmo.main.inventory.ContainerTitaniumAnvil;
-import misterpemodder.tmo.main.inventory.slot.IHidable;
-import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
-import misterpemodder.tmo.main.network.TMOPacketHandler;
-import misterpemodder.tmo.main.network.packet.PacketClientToServer;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumAnvil;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.client.Minecraft;
@@ -39,6 +39,7 @@ import net.minecraftforge.items.ItemStackHandler;
 //Contains a lot of vanilla code from GuiRepair, it is VERY messy
 public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEntityTitaniumAnvil> implements IContainerListener {
 	
+	public static final String ID = "tmo.main.tAnvil";
 	private ContainerTitaniumAnvil anvil;
     private GuiTextField nameField;
     
@@ -53,8 +54,8 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
     }
 	
 	@Override
-	public TabID getTabID() {
-		return TabID.MAIN_TANVIL;
+	public String getTabID() {
+		return ID;
 	}
 
 	@Override
@@ -94,7 +95,7 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
     }
 	
 	@Override
-	public boolean shouldDisplaySlot(IHidable slot) {
+	public boolean shouldDisplaySlot(IHidableSlot slot) {
 		if(slot instanceof SlotHidable) {
 			ContainerTitaniumAnvil c = guiContainer.container;
 			return ((SlotHidable)slot).getItemHandler() == c.input || ((SlotHidable)slot).getItemHandler() == c.output || super.shouldDisplaySlot(slot);
@@ -135,12 +136,12 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
         GlStateManager.disableBlend();
         this.nameField.drawTextBox();
 		
-		guiContainer.getFontRenderer().drawString(Tmo.proxy.translate("gui.tab.titaniumAnvil.name"), 8, 6, 4210752);
+		guiContainer.getFontRenderer().drawString(StringUtils.translate("gui.tab.titaniumAnvil.name"), 8, 6, 4210752);
 		if(guiContainer.isPointInRegion(45, 26, 16, 16, mouseX, mouseY) && !guiContainer.container.getSlot(41).getHasStack()) {
-			GuiContainerBase.addHoveringText(Arrays.asList(Tmo.proxy.translate("gui.slot.hammer.name")), 250);
+			GuiContainerBase.addHoveringText(Arrays.asList(StringUtils.translate("gui.slot.hammer.name")), 250);
 	    }
 		else if(guiContainer.isPointInRegion(nameField.xPosition-guiContainer.getGuiLeft(), nameField.yPosition-guiContainer.getGuiTop(), nameField.width, nameField.height, mouseX, mouseY) && !nameField.getText().isEmpty()) {
-			GuiContainerBase.addHoveringText(Arrays.asList(TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate("gui.anvil.nameField.clear")), 250);
+			GuiContainerBase.addHoveringText(Arrays.asList(TextFormatting.GRAY+""+TextFormatting.ITALIC+StringUtils.translate("gui.anvil.nameField.clear")), 250);
 		}
 
         int maximumCost = guiContainer.container.maximumCost;
@@ -157,12 +158,12 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
         	boolean flag = true;
         	
         	int deltaCost = oldCost==0? 0 : (int)(maximumCost*100F)/oldCost;
-        	String str = Tmo.proxy.translate("container.repair.cost", maximumCost)+" (-"+(100-deltaCost)+"%)";
+        	String str = StringUtils.translate("container.repair.cost", maximumCost)+" (-"+(100-deltaCost)+"%)";
         	if(guiContainer.container.player.capabilities.isCreativeMode) {
-        		str = Tmo.proxy.translate("container.repair.cost", 0) +" (Creative)";
+        		str = StringUtils.translate("container.repair.cost", 0) +" (Creative)";
         	}
         	if (maximumCost >= 55 && !guiContainer.container.player.capabilities.isCreativeMode) {
-            	str = Tmo.proxy.translateFormatted("%s (%d)", "container.repair.expensive", maximumCost);
+            	str = StringUtils.translateFormatted("%s (%d)", "container.repair.expensive", maximumCost);
             	i = 16736352;
         	}
         	else if (!guiContainer.container.getSlot(44).getHasStack()) {
@@ -213,7 +214,7 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
         toSend.setInteger("world_dim_id", Minecraft.getMinecraft().world.provider.getDimension());
 		toSend.setTag("player_id", NBTUtil.createUUIDTag(Minecraft.getMinecraft().player.getUniqueID()));
 		toSend.setTag("input_item", this.anvil.input.getStackInSlot(0).serializeNBT());
-		TMOPacketHandler.network.sendToServer(new PacketClientToServer(PacketDataHandlers.ANVIL_ITEM_NAME_HANDLER, toSend));
+		PacketHandler.sendToServer(PacketDataHandlers.ANVIL_ITEM_NAME_HANDLER, toSend);
     }
     
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
@@ -232,8 +233,8 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
 	}
 	
 	@Override
-	public RecipeClickableAreaTMO[] getRecipeClickableAreas() {
-		return new RecipeClickableAreaTMO[]{new RecipeClickableAreaTMO(guiContainer.getGuiTop()+54, guiContainer.getGuiTop()+69, guiContainer.getGuiLeft()+120, guiContainer.getGuiLeft()+142, VanillaRecipeCategoryUid.ANVIL)};
+	public RecipeClickableAreaHC[] getRecipeClickableAreas() {
+		return new RecipeClickableAreaHC[]{new RecipeClickableAreaHC(guiContainer.getGuiTop()+54, guiContainer.getGuiTop()+69, guiContainer.getGuiLeft()+120, guiContainer.getGuiLeft()+142, VanillaRecipeCategoryUid.ANVIL)};
 	}
 	
 	@Override

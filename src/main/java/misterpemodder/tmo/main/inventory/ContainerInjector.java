@@ -5,9 +5,10 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 
+import misterpemodder.hc.main.inventory.elements.ISyncedContainerElement;
+import misterpemodder.hc.main.inventory.slot.SlotFiltered;
+import misterpemodder.hc.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.inventory.elements.ContainerElementTank;
-import misterpemodder.tmo.main.inventory.slot.SlotFiltered;
-import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

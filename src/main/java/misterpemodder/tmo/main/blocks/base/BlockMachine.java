@@ -6,11 +6,12 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 
+import misterpemodder.hc.main.blocks.BlockContainerBase;
+import misterpemodder.hc.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.BlockMachineCasing.EnumMachineCasingVariant;
 import misterpemodder.tmo.main.blocks.itemblock.ItemBlockMachine;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
-import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.blocks.properties.PropertyIOPortState;
 import misterpemodder.tmo.main.client.gui.GuiHandler.EnumGuiElements;
 import misterpemodder.tmo.main.tileentity.TileEntityMachine;
@@ -52,7 +53,7 @@ public abstract class BlockMachine<TE extends TileEntityMachine> extends BlockCo
 	}
 	
 	public BlockMachine(IBlockNames n, boolean canChangeCasings) {
-		super(n, EnumBlocksValues.MetalBlocks.MACHINE);
+		super(n, EnumBlocksValues.MetalBlocks.MACHINE, TMORefs.TMO_TAB);
 		
 		this.canChangeCasings = canChangeCasings;
 		if(canChangeCasings) {

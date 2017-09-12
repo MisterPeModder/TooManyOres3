@@ -28,7 +28,7 @@ public class RegistryHandler implements ITMORegistryHandler {
 	public static IForgeRegistry<IInjectorRecipe> injectorRecipesRegistry;
 	public static IForgeRegistry<IDestabilizerRecipe> crystalDestabilizerRecipesRegistry;
 	
-	static {
+	public static void createRegistries() {
 		injectorRecipesRegistry = new RegistryBuilder<IInjectorRecipe>().setType(IInjectorRecipe.class).setName(new ResourceLocationTmo("injector_recipes")).setIDRange(0, Integer.MAX_VALUE-1).create();
 		crystalDestabilizerRecipesRegistry = new RegistryBuilder<IDestabilizerRecipe>().setType(IDestabilizerRecipe.class).setName(new ResourceLocationTmo("crystal_destabilizer_recipes")).setIDRange(0, Integer.MAX_VALUE-1).create();
 	}

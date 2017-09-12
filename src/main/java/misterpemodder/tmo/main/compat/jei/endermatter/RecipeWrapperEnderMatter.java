@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
-import misterpemodder.tmo.main.Tmo;
+import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.main.inventory.elements.ContainerElementEnderMatterBar;
 import misterpemodder.tmo.main.tileentity.TileEntityDestabilizer;
 import net.minecraft.client.Minecraft;
@@ -35,7 +35,7 @@ public class RecipeWrapperEnderMatter extends BlankRecipeWrapper {
 		int p = (value*140)/TileEntityDestabilizer.MAX_ENDER_MATTER;
 		BAR.drawBar(11-RecipeCategoryEnderMatter.X_OFFSET, 66-RecipeCategoryEnderMatter.Y_OFFSET, p<=0? 2:p);
 	
-		String str = Tmo.proxy.translate("gui.jei.category.enderMatter.value")+": ";
+		String str = StringUtils.translate("gui.jei.category.enderMatter.value")+": ";
 		FontRenderer fr = minecraft.fontRendererObj;
 		
 		int x = 40-RecipeCategoryEnderMatter.X_OFFSET;

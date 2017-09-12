@@ -1,9 +1,8 @@
 package misterpemodder.tmo.main.capability;
 
-import misterpemodder.tmo.api.capability.owner.IOwnerHandler;
+import misterpemodder.hc.api.capability.owner.IOwnerHandler;
+import misterpemodder.hc.main.network.packet.PacketHandler;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
-import misterpemodder.tmo.main.network.TMOPacketHandler;
-import misterpemodder.tmo.main.network.packet.PacketServerToClient;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTBase;
@@ -76,12 +75,14 @@ public class CapabilityFreezing {
 				}
 				updateEntity(entity);
 			}
-			if(entity.getEntityWorld() != null && !entity.getEntityWorld().isRemote) {
-				NBTTagCompound toSend = new NBTTagCompound();
-				NetworkRegistry.TargetPoint target = new TargetPoint(entity.getEntityWorld().provider.getDimension(), entity.posX, entity.posY, entity.posZ, 128);
-				toSend.setTag("entity_uuid", NBTUtil.createUUIDTag(entity.getUniqueID()));
-				toSend.setTag("freezing_cap", this.serializeNBT());
-				TMOPacketHandler.network.sendToAllAround(new PacketServerToClient(PacketDataHandlers.FREEZING_CAPABILITY_UPDATE_HANDLER, toSend), target);
+			if(freezing != wasFreezing) {
+				if(entity.getEntityWorld() != null && !entity.getEntityWorld().isRemote) {
+					NBTTagCompound toSend = new NBTTagCompound();
+					NetworkRegistry.TargetPoint target = new TargetPoint(entity.getEntityWorld().provider.getDimension(), entity.posX, entity.posY, entity.posZ, 128);
+					toSend.setTag("entity_uuid", NBTUtil.createUUIDTag(entity.getUniqueID()));
+					toSend.setTag("freezing_cap", this.serializeNBT());
+					PacketHandler.sendToAllAround(PacketDataHandlers.FREEZING_CAPABILITY_UPDATE_HANDLER, toSend, target);
+				}
 			}
 		}
 

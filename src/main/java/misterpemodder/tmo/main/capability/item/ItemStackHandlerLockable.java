@@ -1,7 +1,7 @@
 package misterpemodder.tmo.main.capability.item;
 
-import misterpemodder.tmo.api.block.ILockable;
-import misterpemodder.tmo.api.item.IItemLock;
+import misterpemodder.hc.api.block.ILockable;
+import misterpemodder.hc.api.item.IItemLock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 

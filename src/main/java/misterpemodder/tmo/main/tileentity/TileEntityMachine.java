@@ -12,11 +12,12 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.ListMultimap;
 
+import misterpemodder.hc.main.blocks.properties.IBlockNames;
+import misterpemodder.hc.main.tileentity.TileEntityContainerBase;
+import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.api.capability.io.IIOType;
-import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
-import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.capability.HandlerContainer;
 import misterpemodder.tmo.main.capability.IMachineElementHandler;
 import misterpemodder.tmo.main.capability.energy.HandlerContainerEnergy;
@@ -116,7 +117,7 @@ public abstract class TileEntityMachine extends TileEntityContainerBase implemen
 	
 	@Override
 	public ITextComponent getDisplayName() {
-		return new TextComponentString(TextFormatting.getTextWithoutFormattingCodes(Tmo.proxy.translate("tile."+getBlockNames().getUnlocalizedName()+".name")));
+		return new TextComponentString(TextFormatting.getTextWithoutFormattingCodes(StringUtils.translate("tile."+getBlockNames().getUnlocalizedName()+".name")));
 	}
 	
 	public void emptyTank(short tankId) {

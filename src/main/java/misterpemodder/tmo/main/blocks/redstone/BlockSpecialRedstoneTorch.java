@@ -2,9 +2,9 @@ package misterpemodder.tmo.main.blocks.redstone;
 
 import java.util.Random;
 
-import misterpemodder.tmo.main.blocks.base.IBlockTMO;
+import misterpemodder.hc.main.blocks.IHexianBlock;
+import misterpemodder.hc.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
-import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.Block;
@@ -21,7 +21,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockSpecialRedstoneTorch extends BlockRedstoneTorch implements IBlockTMO {
+public class BlockSpecialRedstoneTorch extends BlockRedstoneTorch implements IHexianBlock {
 	
 	private final ItemBlock itemBlock;
 	private final EnumBlocksNames names;

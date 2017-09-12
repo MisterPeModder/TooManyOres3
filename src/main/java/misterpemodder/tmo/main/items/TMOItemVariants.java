@@ -3,54 +3,14 @@ package misterpemodder.tmo.main.items;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nullable;
-
+import misterpemodder.hc.main.items.properties.ItemVariant;
+import misterpemodder.hc.main.utils.ItemStackUtils;
 import misterpemodder.tmo.main.blocks.BlockMachineCasing.EnumMachineCasingVariant;
 import misterpemodder.tmo.main.init.ModItems.TheItems;
-import misterpemodder.tmo.main.utils.ItemStackUtils;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 
-public abstract class ItemVariant {
-
-	private String name;
-	private String unlocalizedName;
-	private String[] oreDictNames;
-	private EnumRarity rarity;
-	
-	private ItemVariant(String name, String unlocalizedName, String... oreDictNames) {
-		this(name, unlocalizedName, null, oreDictNames);
-	}
-	
-	private ItemVariant(String name, String unlocalizedName, @Nullable EnumRarity rarity, String... oreDictNames) {
-		this.name = name;
-		this.unlocalizedName = unlocalizedName;
-		this.oreDictNames = oreDictNames;
-		this.rarity = rarity;
-	}
-	
-	public abstract <T extends ItemVariant> List<T> getVariants();
-	
-	public String getName() {
-		return this.name;
-	}
-	
-	public String getUnlocalizedName() {
-		return this.unlocalizedName;
-	}
-	
-	public int getMeta() {
-		int meta = this.getVariants().indexOf(this);
-		return meta < 0? 0 : meta;
-	}
-
-	public String[] getOreDictNames() {
-		return this.oreDictNames;
-	}
-	
-	public EnumRarity getRarity() {
-		return this.rarity == null? EnumRarity.COMMON : rarity;
-	}
+public final class TMOItemVariants {
 	
 	public static class IngotVariant extends ItemVariant {
 		

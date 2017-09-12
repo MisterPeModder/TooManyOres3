@@ -2,6 +2,7 @@ package misterpemodder.tmo.main.blocks.properties;
 
 import javax.annotation.Nullable;
 
+import misterpemodder.hc.main.blocks.properties.IBlockValues;
 import misterpemodder.tmo.main.blocks.BlockBrick;
 import misterpemodder.tmo.main.blocks.BlockDeco;
 import misterpemodder.tmo.main.blocks.BlockLamp;

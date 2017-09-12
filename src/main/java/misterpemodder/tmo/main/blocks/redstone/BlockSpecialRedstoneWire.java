@@ -8,10 +8,10 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import misterpemodder.tmo.main.blocks.base.IBlockTMO;
+import misterpemodder.hc.main.blocks.IHexianBlock;
+import misterpemodder.hc.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.blocks.itemblock.ItemBlockSpecialRedstone;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
-import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.BlockPistonBase;
@@ -31,7 +31,7 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockSpecialRedstoneWire extends BlockRedstoneWire implements IBlockTMO {
+public class BlockSpecialRedstoneWire extends BlockRedstoneWire implements IHexianBlock {
 	
 	private final ItemBlockSpecialRedstone itemBlock;
 	private final EnumBlocksNames names;

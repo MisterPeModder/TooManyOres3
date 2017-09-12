@@ -3,12 +3,12 @@ package misterpemodder.tmo.main.tileentity;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 
+import misterpemodder.hc.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
 import misterpemodder.tmo.main.blocks.containers.BlockInjector;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
-import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.capability.fluid.MachineFluidTank;
 import misterpemodder.tmo.main.capability.io.IOConfigHandlerMachine;
 import misterpemodder.tmo.main.capability.io.IOState;

@@ -6,11 +6,12 @@ import javax.annotation.Nonnull;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import misterpemodder.hc.main.blocks.properties.IBlockNames;
+import misterpemodder.hc.main.capabilty.SyncedItemHandler;
 import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.main.blocks.BlockMachineCasing.EnumMachineCasingVariant;
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
-import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.capability.energy.MachineEnergyStorage;
 import misterpemodder.tmo.main.capability.fluid.CombinedFluidHandlerMachine;
 import misterpemodder.tmo.main.capability.fluid.MachineFluidTank;
@@ -18,7 +19,6 @@ import misterpemodder.tmo.main.capability.io.IOConfigHandlerMachine;
 import misterpemodder.tmo.main.capability.io.IOState;
 import misterpemodder.tmo.main.capability.item.CombinerItemStackHandlerMachine;
 import misterpemodder.tmo.main.capability.item.MachineItemStackHandler;
-import misterpemodder.tmo.main.capability.item.SyncedItemHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

@@ -3,9 +3,10 @@ package misterpemodder.tmo.main.inventory;
 import java.util.Arrays;
 import java.util.List;
 
+import misterpemodder.hc.main.inventory.elements.ContainerElementVerticalEnergyBar;
+import misterpemodder.hc.main.inventory.elements.ISyncedContainerElement;
+import misterpemodder.hc.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.inventory.elements.ContainerElementTank;
-import misterpemodder.tmo.main.inventory.elements.ContainerElementVerticalEnergyBar;
-import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityThemoelectricGenerator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -15,7 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 
-public class ContainerThermoelectricGenerator extends ContainerBase<TileEntityThemoelectricGenerator> {
+public class ContainerThermoelectricGenerator extends ContainerBaseTMO<TileEntityThemoelectricGenerator> {
 	
 	/*
 	 * SLOT CONFIG:  

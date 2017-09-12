@@ -1,6 +1,6 @@
 package misterpemodder.tmo.main.blocks.redstone;
 
-import misterpemodder.tmo.main.blocks.base.IBlockTMO;
+import misterpemodder.hc.main.blocks.IHexianBlock;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import misterpemodder.tmo.main.utils.TMORefs;
@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockStrongPistonExtension extends BlockPistonExtension implements IBlockTMO {
+public class BlockStrongPistonExtension extends BlockPistonExtension implements IHexianBlock {
 
 	public BlockStrongPistonExtension() {
 		super();

@@ -6,16 +6,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import misterpemodder.hc.main.client.gui.GuiContainerBase;
+import misterpemodder.hc.main.client.gui.RecipeClickableAreaHC;
+import misterpemodder.hc.main.client.gui.tabs.TabBase;
+import misterpemodder.hc.main.client.gui.tabs.TabMain;
+import misterpemodder.hc.main.inventory.slot.IHidableSlot;
+import misterpemodder.hc.main.inventory.slot.SlotHidable;
+import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
-import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.client.gui.GuiContainerBase;
-import misterpemodder.tmo.main.client.gui.RecipeClickableAreaTMO;
 import misterpemodder.tmo.main.compat.jei.injector.RecipeCategoryInjector;
 import misterpemodder.tmo.main.inventory.ContainerInjector;
 import misterpemodder.tmo.main.inventory.elements.ContainerElementArrow;
 import misterpemodder.tmo.main.inventory.elements.ContainerElementTank;
-import misterpemodder.tmo.main.inventory.slot.IHidable;
-import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.client.Minecraft;
@@ -30,10 +32,11 @@ import net.minecraftforge.items.IItemHandler;
 public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInjector> {
 	
 	public static final int TOGGLE_MODE_BUTTON_ID = 20;
+	public static final String ID = "tmo.main.injector";
 
 	@Override
-	public TabID getTabID() {
-		return TabID.MAIN_INJECTOR;
+	public String getTabID() {
+		return ID;
 	}
 
 	@Override
@@ -74,8 +77,8 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 			for(GuiButton b : buttons) {
 				if(b.id == TOGGLE_MODE_BUTTON_ID && b instanceof TransferModeButton) {
 					if(b.isMouseOver()) {
-						strs.add(((TransferModeButton)b).mode == TransferMode.INJECTION? TextFormatting.AQUA+Tmo.proxy.translate("gui.injecter.mode.injection") : TextFormatting.GOLD+Tmo.proxy.translate("gui.injecter.mode.extraction"));
-						strs.add(TextFormatting.GRAY+""+ TextFormatting.ITALIC+"-"+Tmo.proxy.translate("gui.injecter.mode.desc")+"-");
+						strs.add(((TransferModeButton)b).mode == TransferMode.INJECTION? TextFormatting.AQUA+StringUtils.translate("gui.injecter.mode.injection") : TextFormatting.GOLD+StringUtils.translate("gui.injecter.mode.extraction"));
+						strs.add(TextFormatting.GRAY+""+ TextFormatting.ITALIC+"-"+StringUtils.translate("gui.injecter.mode.desc")+"-");
 					}
 						
 					((TransferModeButton)b).mode = getTileEntity().getTransferMode();
@@ -111,7 +114,7 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 	}
 	
 	@Override
-	public boolean shouldDisplaySlot(IHidable slot) {
+	public boolean shouldDisplaySlot(IHidableSlot slot) {
 		if(slot instanceof SlotHidable) {
 			TileEntityInjector te = getTileEntity();
 			IItemHandler h = ((SlotHidable)slot).getItemHandler();
@@ -137,8 +140,8 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 	}
 	
 	@Override
-	public RecipeClickableAreaTMO[] getRecipeClickableAreas() {
-		return new RecipeClickableAreaTMO[]{new RecipeClickableAreaTMO(guiContainer.getGuiTop()+39, guiContainer.getGuiTop()+60, guiContainer.getGuiLeft()+64, guiContainer.getGuiLeft()+92, RecipeCategoryInjector.UID)};
+	public RecipeClickableAreaHC[] getRecipeClickableAreas() {
+		return new RecipeClickableAreaHC[]{new RecipeClickableAreaHC(guiContainer.getGuiTop()+39, guiContainer.getGuiTop()+60, guiContainer.getGuiLeft()+64, guiContainer.getGuiLeft()+92, RecipeCategoryInjector.UID)};
 	}
 	
 	public static class TransferModeButton extends GuiButton {

@@ -2,7 +2,7 @@ package misterpemodder.tmo.main.inventory.elements;
 
 import java.awt.Point;
 
-public class ContainerElementEnderMatterBar extends ContainerElementBar {
+public class ContainerElementEnderMatterBar extends ContainerElementBarTMO {
 	
 	private static final Point BACKGROUND_UV = new Point(0, 0);
 	private static final Point FOREGROUND_UV = new Point(0, 8);

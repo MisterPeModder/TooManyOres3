@@ -1,6 +1,6 @@
 package misterpemodder.tmo.main.potion;
 
-import misterpemodder.tmo.main.Tmo;
+import misterpemodder.hc.main.utils.StringUtils;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +27,7 @@ public class PotionFreezing extends PotionBase{
         if (entityLivingBaseIn instanceof EntityPlayer) {
         	entityLivingBaseIn.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 20, 255, false, false));
         	entityLivingBaseIn.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 20, 255, false, false));
-        	((EntityPlayer) entityLivingBaseIn).sendStatusMessage(new TextComponentString(TextFormatting.AQUA+""+TextFormatting.BOLD+Tmo.proxy.translate("effect.tmo.freezing.message")), true);
+        	((EntityPlayer) entityLivingBaseIn).sendStatusMessage(new TextComponentString(TextFormatting.AQUA+""+TextFormatting.BOLD+StringUtils.translate("effect.tmo.freezing.message")), true);
         }
     }
 

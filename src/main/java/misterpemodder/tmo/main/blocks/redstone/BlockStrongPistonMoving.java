@@ -2,8 +2,8 @@ package misterpemodder.tmo.main.blocks.redstone;
 
 import javax.annotation.Nullable;
 
-import misterpemodder.tmo.main.blocks.base.IBlockTMO;
-import misterpemodder.tmo.main.blocks.base.IBlockTileEntity;
+import misterpemodder.hc.main.blocks.IHexianBlock;
+import misterpemodder.hc.main.blocks.IBlockTileEntity;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.tileentity.TileEntityStrongPiston;
 import misterpemodder.tmo.main.utils.TMORefs;
@@ -13,7 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 
-public class BlockStrongPistonMoving extends BlockPistonMoving implements IBlockTMO, IBlockTileEntity<TileEntityStrongPiston> {
+public class BlockStrongPistonMoving extends BlockPistonMoving implements IHexianBlock, IBlockTileEntity<TileEntityStrongPiston> {
 	
 	public BlockStrongPistonMoving() {
 		super();

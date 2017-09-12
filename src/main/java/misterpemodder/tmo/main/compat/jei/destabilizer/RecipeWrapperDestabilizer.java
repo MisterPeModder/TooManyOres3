@@ -7,8 +7,8 @@ import java.util.List;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
+import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.api.TooManyOresAPI;
-import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.tileentity.TileEntityDestabilizer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -53,7 +53,7 @@ public class RecipeWrapperDestabilizer extends BlankRecipeWrapper {
 		int p = (enderCost*140)/TileEntityDestabilizer.MAX_ENDER_MATTER;
 		Gui.drawModalRectWithCustomSizedTexture(11-RecipeCategoryDestabilizer.X_OFFSET, 82-RecipeCategoryDestabilizer.Y_OFFSET, 72, 100, p<=0? 2:p, 8, 256, 128);
 	
-		String str = Tmo.proxy.translate("gui.jei.category.destabilizer.cost")+": ";
+		String str = StringUtils.translate("gui.jei.category.destabilizer.cost")+": ";
 		FontRenderer fr = minecraft.fontRendererObj;
 		
 		int x = 11-RecipeCategoryDestabilizer.X_OFFSET;

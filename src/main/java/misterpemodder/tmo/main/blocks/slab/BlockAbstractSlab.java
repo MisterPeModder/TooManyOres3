@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import misterpemodder.tmo.main.blocks.base.BlockMulti;
-import misterpemodder.tmo.main.blocks.properties.IBlockNames;
-import misterpemodder.tmo.main.blocks.properties.IBlockValues;
-import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
+import misterpemodder.hc.main.blocks.properties.IBlockNames;
+import misterpemodder.hc.main.blocks.properties.IBlockValues;
+import misterpemodder.hc.main.blocks.properties.IBlockVariant;
+import misterpemodder.tmo.main.blocks.base.BlockMultiTMO;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -27,7 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class BlockAbstractSlab<V extends Enum<V> & IBlockVariant> extends BlockMulti<V> {
+public abstract class BlockAbstractSlab<V extends Enum<V> & IBlockVariant> extends BlockMultiTMO<V> {
 	
 	protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 	protected static final AxisAlignedBB AABB_TOP_HALF = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 1.0D, 1.0D, 1.0D);

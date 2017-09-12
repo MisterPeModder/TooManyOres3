@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import misterpemodder.hc.main.blocks.BlockTileEntity;
 import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.blocks.base.BlockTileEntity;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
 import misterpemodder.tmo.main.client.gui.GuiHandler;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumAnvil;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.EnumPushReaction;
@@ -48,7 +49,7 @@ public class BlockTitaniumAnvil extends BlockTileEntity<TileEntityTitaniumAnvil>
 	}
 	
 	public BlockTitaniumAnvil() {
-		super(EnumBlocksNames.TITANIUM_ANVIL, EnumBlocksValues.TITANIUM_ANVIL);
+		super(EnumBlocksNames.TITANIUM_ANVIL, EnumBlocksValues.TITANIUM_ANVIL, TMORefs.TMO_TAB);
 	}
 	
 	@Override

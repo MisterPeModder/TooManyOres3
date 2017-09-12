@@ -3,7 +3,7 @@ package misterpemodder.tmo.main.commands;
 import java.util.Collections;
 import java.util.List;
 
-import misterpemodder.tmo.main.Tmo;
+import misterpemodder.hc.main.utils.StringUtils;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.NumberInvalidException;
@@ -46,7 +46,7 @@ public class SubCommandHelp extends SubCommandBase {
         	}
 
         	int l = Math.min((k + 1) * 7, list.size());
-        	sender.sendMessage(new TextComponentString(TextFormatting.DARK_PURPLE+""+Tmo.proxy.translate("commands.tmo.help.header", new Object[] {Integer.valueOf(k + 1), Integer.valueOf(j + 1)})));
+        	sender.sendMessage(new TextComponentString(TextFormatting.DARK_PURPLE+""+StringUtils.translate("commands.tmo.help.header", new Object[] {Integer.valueOf(k + 1), Integer.valueOf(j + 1)})));
 
         	for (int i1 = k * 7; i1 < l; ++i1) {
             	TextComponentTranslation textcomponenttranslation = new TextComponentTranslation(list.get(i1).getUsage(sender));
@@ -54,13 +54,13 @@ public class SubCommandHelp extends SubCommandBase {
             	
             	style.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tmo " + list.get(i1).getName() + " "));
             	style.setColor(TextFormatting.DARK_AQUA);
-            	style.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString(TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate("commands.tmo.help.hover"))));
+            	style.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString(TextFormatting.GRAY+""+TextFormatting.ITALIC+StringUtils.translate("commands.tmo.help.hover"))));
             	
             	sender.sendMessage(textcomponenttranslation);
         	}
 
         	if (k == 0) {
-            	sender.sendMessage(new TextComponentString(TextFormatting.LIGHT_PURPLE+""+Tmo.proxy.translate("commands.tmo.help.hint")));
+            	sender.sendMessage(new TextComponentString(TextFormatting.LIGHT_PURPLE+""+StringUtils.translate("commands.tmo.help.hint")));
         	}
 		} else {
 			if(getSubCommand(args) != null) {

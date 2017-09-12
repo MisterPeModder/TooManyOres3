@@ -3,11 +3,11 @@ package misterpemodder.tmo.main.apiimpl;
 import static misterpemodder.tmo.api.TooManyOresAPI.registryHandler;
 
 import de.ellpeck.actuallyadditions.api.ActuallyAdditionsAPI;
+import misterpemodder.hc.main.utils.ItemStackUtils;
 import misterpemodder.tmo.main.blocks.BlockStorage;
 import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import misterpemodder.tmo.main.init.ModItems.TheItems;
-import misterpemodder.tmo.main.items.ItemVariant.IngotVariant;
-import misterpemodder.tmo.main.utils.ItemStackUtils;
+import misterpemodder.tmo.main.items.TMOItemVariants.IngotVariant;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

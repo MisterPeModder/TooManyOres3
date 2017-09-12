@@ -9,14 +9,16 @@ import javax.annotation.Nullable;
 
 import org.apache.commons.lang3.tuple.MutablePair;
 
+import misterpemodder.hc.main.client.gui.GuiContainerBase;
+import misterpemodder.hc.main.client.gui.tabs.TabBase;
+import misterpemodder.hc.main.client.gui.tabs.TabMain;
+import misterpemodder.hc.main.inventory.ContainerBase;
+import misterpemodder.hc.main.inventory.slot.IHidableSlot;
+import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.api.capability.io.IIOType;
-import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.capability.io.IOConfigHandlerMachine;
 import misterpemodder.tmo.main.capability.io.IOState;
 import misterpemodder.tmo.main.client.gui.GuiButtonToggle;
-import misterpemodder.tmo.main.client.gui.GuiContainerBase;
-import misterpemodder.tmo.main.inventory.ContainerBase;
-import misterpemodder.tmo.main.inventory.slot.IHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityMachine;
 import misterpemodder.tmo.main.utils.EnumBlockSide;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
@@ -54,8 +56,8 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine> ex
 	}
 	
 	@Override
-	public TabID getTabID() {
-		return TabID.IO;
+	public String getTabID() {
+		return TabBase.IO_TAB_ID;
 	}
 	
 	@Override
@@ -84,7 +86,7 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine> ex
 	}
 	
 	@Override
-	public boolean shouldDisplaySlot(IHidable slot) {
+	public boolean shouldDisplaySlot(IHidableSlot slot) {
 		return false;
 	}
 	
@@ -94,14 +96,14 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine> ex
 		boolean ioInfoDrawn = false;
 		int y_offset = guiContainer.getBottomPartPos()-guiContainer.getGuiTop();
 		
-		guiContainer.drawString(fontrenderer, Tmo.proxy.translate("gui.tab.io.autoPush"), 129, y_offset+16, 0xFFFFFF);
-		guiContainer.drawString(fontrenderer, Tmo.proxy.translate("gui.tab.io.autoPull"), 129, y_offset+36, 0xFFFFFF);
+		guiContainer.drawString(fontrenderer, StringUtils.translate("gui.tab.io.autoPush"), 129, y_offset+16, 0xFFFFFF);
+		guiContainer.drawString(fontrenderer, StringUtils.translate("gui.tab.io.autoPull"), 129, y_offset+36, 0xFFFFFF);
 		
 		for(GuiButton button: this.buttons) {
 			if(button.id == RESET_BUTTON_ID) {
 				if(button.isMouseOver()) {
 					String key = "gui.tab.io.reset.desc.";
-					List<String> text = Arrays.asList(TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate(key+"1"), TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate(key+"2"));
+					List<String> text = Arrays.asList(TextFormatting.GRAY+""+TextFormatting.ITALIC+StringUtils.translate(key+"1"), TextFormatting.GRAY+""+TextFormatting.ITALIC+StringUtils.translate(key+"2"));
 					int textWidth = Math.max(fontrenderer.getStringWidth(text.get(0)), fontrenderer.getStringWidth(text.get(1)));
 					GuiContainerBase.addHoveringText(text, Math.min(textWidth, 250));
 				}
@@ -133,7 +135,7 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine> ex
 	}
 	
 	private String getTypeButtonText() {
-		return Tmo.proxy.translate(getSelectedIOType().getUnlocalizedName());
+		return StringUtils.translate(getSelectedIOType().getUnlocalizedName());
 	}
 	
 	@Override
@@ -147,7 +149,7 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine> ex
 		});
 		this.buttons.add(new GuiButton(INPUT_CHANGE_LEFT_BUTTON_ID, x+5, y+75, 20, 20, "<"));
 		this.buttons.add(new GuiButton(INPUT_CHANGE_RIGHT_BUTTON_ID, x+95, y+75, 20, 20, ">"));
-		this.buttons.add(new GuiButton(RESET_BUTTON_ID, x+119, y+75, 88, 20, TextFormatting.RED+Tmo.proxy.translate("gui.tab.io.reset")));
+		this.buttons.add(new GuiButton(RESET_BUTTON_ID, x+119, y+75, 88, 20, TextFormatting.RED+StringUtils.translate("gui.tab.io.reset")));
 		
 		this.buttons.add(new GuiButtonToggle(AUTO_PUSH_BUTTON_ID, x+119, y+16, getTileEntity().autoPush));
 		this.buttons.add(new GuiButtonToggle(AUTO_PULL_BUTTON_ID, x+119, y+36, getTileEntity().autoPull));
@@ -179,9 +181,9 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine> ex
 			}
 			else if(b.id == RESET_BUTTON_ID) {
 				if(GuiScreen.isShiftKeyDown()) {
-					b.displayString = TextFormatting.DARK_RED+Tmo.proxy.translate("gui.tab.io.reset.all");
+					b.displayString = TextFormatting.DARK_RED+StringUtils.translate("gui.tab.io.reset.all");
 				} else {
-					b.displayString = TextFormatting.RED+Tmo.proxy.translate("gui.tab.io.reset");
+					b.displayString = TextFormatting.RED+StringUtils.translate("gui.tab.io.reset");
 				}
 			}
 			else if(b.id == AUTO_PUSH_BUTTON_ID) {

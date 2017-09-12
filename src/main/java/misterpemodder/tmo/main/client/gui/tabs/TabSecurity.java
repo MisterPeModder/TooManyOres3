@@ -4,14 +4,15 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.util.Arrays;
 
-import misterpemodder.tmo.api.block.ILockable;
-import misterpemodder.tmo.api.item.IItemLock;
-import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.client.gui.GuiContainerBase;
-import misterpemodder.tmo.main.inventory.ContainerBase;
-import misterpemodder.tmo.main.inventory.slot.IHidable;
-import misterpemodder.tmo.main.inventory.slot.SlotHidable;
-import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
+import misterpemodder.hc.api.block.ILockable;
+import misterpemodder.hc.api.item.IItemLock;
+import misterpemodder.hc.main.client.gui.GuiContainerBase;
+import misterpemodder.hc.main.client.gui.tabs.TabBase;
+import misterpemodder.hc.main.inventory.ContainerBase;
+import misterpemodder.hc.main.inventory.slot.IHidableSlot;
+import misterpemodder.hc.main.inventory.slot.SlotHidable;
+import misterpemodder.hc.main.tileentity.TileEntityContainerBase;
+import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
@@ -32,8 +33,8 @@ public class TabSecurity<C extends ContainerBase<TE>, TE extends TileEntityConta
 	}
 	
 	@Override
-	public TabID getTabID() {
-		return TabID.SECURITY;
+	public String getTabID() {
+		return TabBase.SECURITY_TAB_ID;
 	}
 	
 	@Override
@@ -84,7 +85,7 @@ public class TabSecurity<C extends ContainerBase<TE>, TE extends TileEntityConta
 	}
 
 	@Override
-	public boolean shouldDisplaySlot(IHidable slot) {
+	public boolean shouldDisplaySlot(IHidableSlot slot) {
 		TileEntity te = guiContainer.container.getTileEntity();
 		if(te instanceof ILockable && slot instanceof SlotHidable) {
 			return ((SlotHidable)slot).getItemHandler() == ((ILockable)te).getLockItemHandler();
@@ -106,7 +107,7 @@ public class TabSecurity<C extends ContainerBase<TE>, TE extends TileEntityConta
 	public void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		if(guiContainer.isPointInRegion(8, 18, 16, 16, mouseX, mouseY)) {
-			GuiContainerBase.addHoveringText(Arrays.asList(Tmo.proxy.translate("gui.slot.lock.name"), Tmo.proxy.translate("gui.slot.lock.desc")), 250);
+			GuiContainerBase.addHoveringText(Arrays.asList(StringUtils.translate("gui.slot.lock.name"), StringUtils.translate("gui.slot.lock.desc")), 250);
 	    }
 	}
 	

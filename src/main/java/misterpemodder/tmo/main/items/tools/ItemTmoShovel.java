@@ -1,8 +1,8 @@
 package misterpemodder.tmo.main.items.tools;
 
+import misterpemodder.hc.main.utils.ItemStackUtils;
 import misterpemodder.tmo.main.items.EnumItemsNames;
 import misterpemodder.tmo.main.items.materials.TmoToolMaterial;
-import misterpemodder.tmo.main.utils.ItemStackUtils;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;

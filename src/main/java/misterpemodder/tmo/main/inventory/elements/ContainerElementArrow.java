@@ -1,6 +1,6 @@
 package misterpemodder.tmo.main.inventory.elements;
 
-import misterpemodder.tmo.main.inventory.ISyncedContainerElement;
+import misterpemodder.hc.main.inventory.elements.ISyncedContainerElement;
 import misterpemodder.tmo.main.tileentity.TileEntityCraftingMachine;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.client.Minecraft;

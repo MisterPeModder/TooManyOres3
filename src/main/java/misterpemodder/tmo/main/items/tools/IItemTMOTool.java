@@ -1,9 +1,9 @@
 package misterpemodder.tmo.main.items.tools;
 
+import misterpemodder.hc.main.items.IHexianItem;
+import misterpemodder.hc.main.utils.ItemStackUtils;
 import misterpemodder.tmo.main.items.EnumItemsNames;
-import misterpemodder.tmo.main.items.base.ITMOItem;
 import misterpemodder.tmo.main.items.materials.TmoToolMaterial;
-import misterpemodder.tmo.main.utils.ItemStackUtils;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
@@ -11,7 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 
-public interface IItemTMOTool extends ITMOItem {
+public interface IItemTMOTool extends IHexianItem {
 	
 	public EnumItemsNames getNames();
 	public TmoToolMaterial getMaterial();

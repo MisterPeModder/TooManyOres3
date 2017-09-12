@@ -9,8 +9,7 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.ITickTimer;
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.BlankRecipeCategory;
-import misterpemodder.tmo.main.Tmo;
+import misterpemodder.hc.main.compat.jei.AbstractRecipeCategory;
 import misterpemodder.tmo.main.compat.jei.DrawableArrow;
 import misterpemodder.tmo.main.inventory.elements.ContainerElementEnderMatterBar;
 import misterpemodder.tmo.main.inventory.elements.ContainerElementTank;
@@ -21,9 +20,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 
-public class RecipeCategoryDestabilizer extends BlankRecipeCategory<RecipeWrapperDestabilizer> {
+public class RecipeCategoryDestabilizer extends AbstractRecipeCategory<RecipeWrapperDestabilizer> {
 	
-	private final String localizedName;
 	public static final String UID = "tmo.destabilizer";
 
 	public static final int X_OFFSET = 11;
@@ -41,7 +39,7 @@ public class RecipeCategoryDestabilizer extends BlankRecipeCategory<RecipeWrappe
 	private final ITickTimer timer;
 	
 	public RecipeCategoryDestabilizer(IGuiHelper helper) {
-		this.localizedName = Tmo.proxy.translate("gui.jei.category.destabilizer");
+		super(UID, "gui.jei.category.destabilizer");
 		
 		this.tank = helper.createDrawable(LOCATION, 160, 8, 42, 82, 256, 128);
 		this.fluidGauge = helper.createDrawable(ContainerElementTank.TANK_TEXTURE, 0, 0, 40, 80, 128, 128);
@@ -50,16 +48,6 @@ public class RecipeCategoryDestabilizer extends BlankRecipeCategory<RecipeWrappe
 		this.arrow = new DrawableArrow();
 		this.bar = new ContainerElementEnderMatterBar(0, false, true, true);
 		this.timer = helper.createTickTimer(100, 100, false);
-	}
-	
-	@Override
-	public String getUid() {
-		return UID;
-	}
-
-	@Override
-	public String getTitle() {
-		return this.localizedName;
 	}
 
 	@Override

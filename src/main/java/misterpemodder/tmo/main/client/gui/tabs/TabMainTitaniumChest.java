@@ -3,19 +3,22 @@ package misterpemodder.tmo.main.client.gui.tabs;
 import java.awt.Dimension;
 import java.awt.Point;
 
+import misterpemodder.hc.main.client.gui.tabs.TabMain;
 import misterpemodder.tmo.main.inventory.ContainerTitaniumChest;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 
 public class TabMainTitaniumChest extends TabMain<ContainerTitaniumChest, TileEntityTitaniumChest> {
 	
+	public static final String ID = "tmo.main.tChest";
+	
 	public TabMainTitaniumChest() {
 		super();
 	}
 	
 	@Override
-	public TabID getTabID() {
-		return TabID.MAIN_TC;
+	public String getTabID() {
+		return ID;
 	}
 
 	@Override

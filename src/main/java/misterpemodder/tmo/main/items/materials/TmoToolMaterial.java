@@ -1,11 +1,11 @@
 package misterpemodder.tmo.main.items.materials;
 
+import misterpemodder.hc.main.utils.ItemStackUtils;
 import misterpemodder.tmo.main.config.ConfigValues;
 import misterpemodder.tmo.main.config.ConfigValues.BoolValues;
 import misterpemodder.tmo.main.init.ModItems.TheItems;
-import misterpemodder.tmo.main.items.ItemVariant.GemVariant;
-import misterpemodder.tmo.main.items.ItemVariant.IngotVariant;
-import misterpemodder.tmo.main.utils.ItemStackUtils;
+import misterpemodder.tmo.main.items.TMOItemVariants.GemVariant;
+import misterpemodder.tmo.main.items.TMOItemVariants.IngotVariant;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;

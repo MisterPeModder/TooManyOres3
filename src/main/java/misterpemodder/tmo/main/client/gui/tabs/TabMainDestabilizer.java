@@ -6,25 +6,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.client.gui.GuiContainerBase;
-import misterpemodder.tmo.main.client.gui.RecipeClickableAreaTMO;
+import misterpemodder.hc.main.client.gui.GuiContainerBase;
+import misterpemodder.hc.main.client.gui.RecipeClickableAreaHC;
+import misterpemodder.hc.main.client.gui.tabs.TabMain;
+import misterpemodder.hc.main.inventory.slot.IHidableSlot;
+import misterpemodder.hc.main.inventory.slot.SlotHidable;
+import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.main.compat.jei.destabilizer.RecipeCategoryDestabilizer;
 import misterpemodder.tmo.main.compat.jei.endermatter.RecipeCategoryEnderMatter;
 import misterpemodder.tmo.main.inventory.ContainerDestabilizer;
 import misterpemodder.tmo.main.inventory.elements.ContainerElementArrow;
 import misterpemodder.tmo.main.inventory.elements.ContainerElementTank;
-import misterpemodder.tmo.main.inventory.slot.IHidable;
-import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityDestabilizer;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraftforge.items.IItemHandler;
 
 public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEntityDestabilizer> {
 
+	public static final String ID = "tmo.main.destabilizer";
+	
 	@Override
-	public TabID getTabID() {
-		return TabID.MAIN_DESTABILIZER;
+	public String getTabID() {
+		return ID;
 	}
 
 	@Override
@@ -65,7 +68,7 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 		if(strs.isEmpty() && guiContainer.isPointInRegion(12, 83, 138, 6, mouseX, mouseY)) {
 			TileEntityDestabilizer te = getTileEntity();
 			if(te != null) {
-				strs.add(Tmo.proxy.translate("gui.bar.ender")+": "+te.getEnderMatterAmount());
+				strs.add(StringUtils.translate("gui.bar.ender")+": "+te.getEnderMatterAmount());
 			}
 		}
 		
@@ -83,7 +86,7 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 	}
 	
 	@Override
-	public boolean shouldDisplaySlot(IHidable slot) {
+	public boolean shouldDisplaySlot(IHidableSlot slot) {
 		if(slot instanceof SlotHidable) {
 			TileEntityDestabilizer te = getTileEntity();
 			IItemHandler h = ((SlotHidable)slot).getItemHandler();
@@ -98,10 +101,10 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 	}
 	
 	@Override
-	public RecipeClickableAreaTMO[] getRecipeClickableAreas() {
-		return new RecipeClickableAreaTMO[]{
-			new RecipeClickableAreaTMO(guiContainer.getGuiTop()+64, guiContainer.getGuiTop()+81, guiContainer.getGuiLeft()+15, guiContainer.getGuiLeft()+32, RecipeCategoryEnderMatter.UID),
-			new RecipeClickableAreaTMO(guiContainer.getGuiTop()+39, guiContainer.getGuiTop()+60, guiContainer.getGuiLeft()+115, guiContainer.getGuiLeft()+143, RecipeCategoryDestabilizer.UID),
+	public RecipeClickableAreaHC[] getRecipeClickableAreas() {
+		return new RecipeClickableAreaHC[]{
+			new RecipeClickableAreaHC(guiContainer.getGuiTop()+64, guiContainer.getGuiTop()+81, guiContainer.getGuiLeft()+15, guiContainer.getGuiLeft()+32, RecipeCategoryEnderMatter.UID),
+			new RecipeClickableAreaHC(guiContainer.getGuiTop()+39, guiContainer.getGuiTop()+60, guiContainer.getGuiLeft()+115, guiContainer.getGuiLeft()+143, RecipeCategoryDestabilizer.UID),
 		};
 	}
 	

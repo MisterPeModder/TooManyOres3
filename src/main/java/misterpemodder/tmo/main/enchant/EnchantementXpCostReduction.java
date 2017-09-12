@@ -2,10 +2,12 @@ package misterpemodder.tmo.main.enchant;
 
 import java.util.Map;
 
+import misterpemodder.hc.main.enchant.EnchantementBase;
+import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.api.item.IItemForgeHammer;
-import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.init.ModEnchants;
 import misterpemodder.tmo.main.init.ModEnchants.TheEnchants;
+import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -18,7 +20,7 @@ public class EnchantementXpCostReduction extends EnchantementBase {
 	public static final int REDUCTION_PER_LEVEL = 5;
 
 	public EnchantementXpCostReduction() {
-		super("hammer_xp_cost_reduction", "hammerXpCostReduction", Rarity.COMMON, ModEnchants.FORGE_HAMMER_ENCHANTEMENT_TYPE, EntityEquipmentSlot.values());
+		super(new ResourceLocationTmo("hammer_xp_cost_reduction"), "hammerXpCostReduction", Rarity.COMMON, ModEnchants.FORGE_HAMMER_ENCHANTEMENT_TYPE, EntityEquipmentSlot.values());
 	}
 	
 	@Override
@@ -40,7 +42,7 @@ public class EnchantementXpCostReduction extends EnchantementBase {
     @Override
     @SideOnly(Side.CLIENT)
     public String getDescription() {
-    	return Tmo.proxy.translate("enchantment.hammerXpCostReduction.desc", String.valueOf(REDUCTION_PER_LEVEL));
+    	return StringUtils.translate("enchantment.hammerXpCostReduction.desc", String.valueOf(REDUCTION_PER_LEVEL));
     }
     
     public static int getXPCost(ItemStack stack, int maximumCost) {

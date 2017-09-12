@@ -1,12 +1,12 @@
 package misterpemodder.tmo.main.blocks;
 
+import misterpemodder.hc.main.blocks.properties.IBlockNames;
+import misterpemodder.hc.main.blocks.properties.IBlockValues;
+import misterpemodder.hc.main.blocks.properties.IBlockVariant;
 import misterpemodder.tmo.main.blocks.BlockStorage.EnumVariant;
-import misterpemodder.tmo.main.blocks.base.BlockMulti;
+import misterpemodder.tmo.main.blocks.base.BlockMultiTMO;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
-import misterpemodder.tmo.main.blocks.properties.IBlockNames;
-import misterpemodder.tmo.main.blocks.properties.IBlockValues;
-import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -17,7 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class BlockStorage extends BlockMulti<EnumVariant> {
+public class BlockStorage extends BlockMultiTMO<EnumVariant> {
 	
 	public static final PropertyEnum<EnumVariant> VARIANT = PropertyEnum.create("variant", EnumVariant.class);
 	public static EnumVariant[] blockVariants = EnumVariant.values();

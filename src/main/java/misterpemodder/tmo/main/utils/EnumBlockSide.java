@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableMap;
 
-import misterpemodder.tmo.main.Tmo;
+import misterpemodder.hc.main.utils.StringUtils;
 import net.minecraft.util.EnumFacing;
 
 public enum EnumBlockSide {
@@ -70,7 +70,7 @@ public enum EnumBlockSide {
 	}
 	
 	public String getLocalizedName() {
-		return Tmo.proxy.translate("tmo.blockSide."+getName());
+		return StringUtils.translate("tmo.blockSide."+getName());
 	}
 	
 	@Nullable

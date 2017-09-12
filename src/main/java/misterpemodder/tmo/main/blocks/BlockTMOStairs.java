@@ -1,15 +1,15 @@
 package misterpemodder.tmo.main.blocks;
 
-import misterpemodder.tmo.main.blocks.base.BlockMulti;
-import misterpemodder.tmo.main.blocks.base.IBlockTMO;
-import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
+import misterpemodder.hc.main.blocks.BlockMulti;
+import misterpemodder.hc.main.blocks.IHexianBlock;
+import misterpemodder.hc.main.blocks.properties.IBlockVariant;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemBlock;
 
-public class BlockTMOStairs extends BlockStairs implements IBlockTMO {
+public class BlockTMOStairs extends BlockStairs implements IHexianBlock {
 	
 	protected ItemBlock itemBlock;
 	protected BlockMulti<?> baseBlock;

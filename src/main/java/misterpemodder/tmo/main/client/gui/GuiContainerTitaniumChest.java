@@ -3,11 +3,12 @@ package misterpemodder.tmo.main.client.gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import misterpemodder.tmo.main.client.gui.tabs.TabArmorInventory;
-import misterpemodder.tmo.main.client.gui.tabs.TabBase;
+import misterpemodder.hc.main.client.gui.GuiContainerBase;
+import misterpemodder.hc.main.client.gui.tabs.TabBase;
+import misterpemodder.hc.main.client.gui.tabs.TabPlayerInventory;
+import misterpemodder.tmo.main.client.gui.tabs.TabArmorInventoryTMO;
 import misterpemodder.tmo.main.client.gui.tabs.TabInfo;
 import misterpemodder.tmo.main.client.gui.tabs.TabMainTitaniumChest;
-import misterpemodder.tmo.main.client.gui.tabs.TabPlayerInventory;
 import misterpemodder.tmo.main.client.gui.tabs.TabRedstone;
 import misterpemodder.tmo.main.client.gui.tabs.TabSecurity;
 import misterpemodder.tmo.main.inventory.ContainerTitaniumChest;
@@ -31,7 +32,7 @@ public class GuiContainerTitaniumChest extends GuiContainerBase<ContainerTitaniu
 		
 		list.add(new TabPlayerInventory<ContainerTitaniumChest, TileEntityTitaniumChest>());
 		
-		list.add(new TabArmorInventory<ContainerTitaniumChest, TileEntityTitaniumChest>());
+		list.add(new TabArmorInventoryTMO<ContainerTitaniumChest, TileEntityTitaniumChest>());
 		return list;
 	}
 

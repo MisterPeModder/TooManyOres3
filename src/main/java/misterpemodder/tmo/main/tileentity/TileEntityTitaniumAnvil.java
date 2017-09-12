@@ -1,8 +1,9 @@
 package misterpemodder.tmo.main.tileentity;
 
+import misterpemodder.hc.main.capabilty.SyncedItemHandler;
+import misterpemodder.hc.main.tileentity.TileEntityContainerBase;
+import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.api.item.IItemForgeHammer;
-import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.capability.item.SyncedItemHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -67,7 +68,7 @@ public class TileEntityTitaniumAnvil extends TileEntityContainerBase {
 	
 	@Override
 	public ITextComponent getDisplayName() {
-		return new TextComponentString(TextFormatting.getTextWithoutFormattingCodes(Tmo.proxy.translate("tile.blockTitaniumAnvil.name")));
+		return new TextComponentString(TextFormatting.getTextWithoutFormattingCodes(StringUtils.translate("tile.blockTitaniumAnvil.name")));
 	}
 
 	@Override

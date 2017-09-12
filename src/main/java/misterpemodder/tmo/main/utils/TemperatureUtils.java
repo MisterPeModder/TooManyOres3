@@ -2,7 +2,7 @@ package misterpemodder.tmo.main.utils;
 
 import java.util.function.Function;
 
-import misterpemodder.tmo.main.Tmo;
+import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.main.config.ConfigValues;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -39,7 +39,7 @@ public final class TemperatureUtils {
 	public static String getTemperatureString(int kelvins, boolean addDesc) {
 		TemperatureUnit unit = getTemperatureUnit();
 		int temp = (int) unit.fromKelvin(kelvins);
-		String desc = addDesc? TextFormatting.GRAY+Tmo.proxy.translate("gui.temperature.desc")+": ": "";
+		String desc = addDesc? TextFormatting.GRAY+StringUtils.translate("gui.temperature.desc")+": ": "";
 			
 		return (desc+(temp <= getWaterTemperature(unit)? TextFormatting.AQUA : TextFormatting.GOLD)+""+temp+" "+unit.symbol);
 	}

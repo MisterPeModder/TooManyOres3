@@ -5,11 +5,11 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
+import misterpemodder.hc.main.blocks.IHexianBlock;
+import misterpemodder.hc.main.blocks.itemblock.ItemBlockBase;
+import misterpemodder.hc.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.api.IStrongPistonBehavior;
 import misterpemodder.tmo.api.TooManyOresAPI;
-import misterpemodder.tmo.main.blocks.base.IBlockTMO;
-import misterpemodder.tmo.main.blocks.itemblock.ItemBlockBase;
-import misterpemodder.tmo.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import misterpemodder.tmo.main.tileentity.TileEntityStrongPiston;
 import misterpemodder.tmo.main.utils.BlockStrongPistonStructureHelper;
@@ -35,7 +35,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
-public class BlockPistonStrongBase extends BlockPistonBase implements IBlockTMO {
+public class BlockPistonStrongBase extends BlockPistonBase implements IHexianBlock {
 	
 	protected ItemBlockBase itemBlock;
 	protected boolean isSticky;

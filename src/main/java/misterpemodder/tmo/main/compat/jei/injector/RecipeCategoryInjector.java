@@ -8,9 +8,8 @@ import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.BlankRecipeCategory;
+import misterpemodder.hc.main.compat.jei.AbstractRecipeCategory;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
-import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.inventory.elements.ContainerElementTank;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
@@ -18,9 +17,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 
-public class RecipeCategoryInjector extends BlankRecipeCategory<RecipeWrapperInjector> {
+public class RecipeCategoryInjector extends AbstractRecipeCategory<RecipeWrapperInjector> {
 	
-	private final String localizedName;
 	public static final String UID = "tmo.injector.normal";
 	
 	public static final int X_OFFSET = 8;
@@ -31,19 +29,9 @@ public class RecipeCategoryInjector extends BlankRecipeCategory<RecipeWrapperInj
 	private final IDrawable fluidGauge;
 	
 	public RecipeCategoryInjector(IGuiHelper guiHelper) {
-		this.localizedName = Tmo.proxy.translate("gui.jei.category.injector.normal");
+		super(UID, "gui.jei.category.injector.normal");
 		this.background = guiHelper.createDrawable(LOCATION, X_OFFSET, Y_OFFSET, 165, 85, 256, 128);
 		this.fluidGauge = guiHelper.createDrawable(ContainerElementTank.TANK_TEXTURE, 0, 0, 40, 80, 128, 128);
-	}
-
-	@Override
-	public String getUid() {
-		return UID;
-	}
-
-	@Override
-	public String getTitle() {
-		return this.localizedName;
 	}
 
 	@Override

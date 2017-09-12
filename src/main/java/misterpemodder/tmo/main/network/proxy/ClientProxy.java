@@ -1,5 +1,7 @@
-package misterpemodder.tmo.main.proxy;
+package misterpemodder.tmo.main.network.proxy;
 
+import misterpemodder.hc.main.network.proxy.ICommonProxy;
+import misterpemodder.hc.main.utils.RegistryHelper;
 import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.redstone.BlockSpecialRedstoneWire;
 import misterpemodder.tmo.main.client.gui.GuiHandler;
@@ -7,22 +9,21 @@ import misterpemodder.tmo.main.client.render.TileEntityInjectorRenderer;
 import misterpemodder.tmo.main.client.render.TileEntityStrongPistonRenderer;
 import misterpemodder.tmo.main.client.render.TileEntityTitaniumAnvilRenderer;
 import misterpemodder.tmo.main.client.render.TileEntityTitaniumChestRenderer;
-import misterpemodder.tmo.main.init.ModBlocks;
+import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import misterpemodder.tmo.main.init.ModFluids;
-import misterpemodder.tmo.main.init.ModItems;
+import misterpemodder.tmo.main.init.ModItems.TheItems;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import misterpemodder.tmo.main.tileentity.TileEntityStrongPiston;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumAnvil;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
-import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-public class ClientProxy extends CommonProxy {
+public class ClientProxy implements ICommonProxy {
 	
 	public void preInit() {
-		ModItems.registerRenders();
-		ModBlocks.registerRenders();
+		RegistryHelper.registerRenders(TheItems.values());
+		RegistryHelper.registerRenders(TheBlocks.values());
 		ModFluids.registerFluidBlocksRendering();
 	}
 	
@@ -40,11 +41,6 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void postInit() {
 		BlockSpecialRedstoneWire.registerColorHandler();
-	}
-	
-	@Override
-	public String translate(String translateKey, Object... params) {
-		return I18n.format(translateKey, params);
 	}
 	
 }

@@ -1,6 +1,6 @@
 package misterpemodder.tmo.main.fluids;
 
-import misterpemodder.tmo.main.blocks.properties.IBlockNames;
+import misterpemodder.hc.main.blocks.properties.IBlockNames;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraftforge.fluids.Fluid;
 

@@ -1,5 +1,6 @@
 package misterpemodder.tmo.main.blocks.itemblock;
 
+import misterpemodder.hc.main.blocks.itemblock.ItemBlockBase;
 import misterpemodder.tmo.main.blocks.BlockMachineCasing.EnumMachineCasingVariant;
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
 import net.minecraft.creativetab.CreativeTabs;

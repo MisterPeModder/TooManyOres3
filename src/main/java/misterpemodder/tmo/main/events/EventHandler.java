@@ -4,25 +4,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import misterpemodder.tmo.api.block.ILockable;
-import misterpemodder.tmo.api.capability.owner.IOwnerHandler;
-import misterpemodder.tmo.main.Tmo;
+import misterpemodder.hc.api.block.ILockable;
+import misterpemodder.hc.api.capability.owner.IOwnerHandler;
+import misterpemodder.hc.main.apiimpl.capability.owner.CapabilityOwner;
+import misterpemodder.hc.main.enchant.EnchantementBase;
+import misterpemodder.hc.main.tileentity.TileEntityContainerBase;
+import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.main.blocks.BlockLamp;
 import misterpemodder.tmo.main.capability.CapabilityFreezing;
 import misterpemodder.tmo.main.capability.CapabilityFreezing.Freezing;
 import misterpemodder.tmo.main.capability.CapabilityFreezing.IFreezing;
-import misterpemodder.tmo.main.capability.owner.CapabilityOwner;
 import misterpemodder.tmo.main.client.gui.GuiContainerThermoelectricGenerator;
-import misterpemodder.tmo.main.enchant.EnchantementBase;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.init.ModPotions.ThePotions;
 import misterpemodder.tmo.main.items.ItemLock;
-import misterpemodder.tmo.main.items.ItemVariant;
+import misterpemodder.tmo.main.items.TMOItemVariants;
 import misterpemodder.tmo.main.items.materials.TmoToolMaterial;
 import misterpemodder.tmo.main.items.tools.IItemTMOTool;
-import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
-import misterpemodder.tmo.main.utils.StringUtils;
 import misterpemodder.tmo.main.utils.TMORefs;
 import misterpemodder.tmo.main.utils.TemperatureUtils;
 import net.minecraft.block.state.IBlockState;
@@ -91,9 +90,9 @@ public class EventHandler {
 					ScaledResolution res = event.getResolution();
 					int h = res.getScaledHeight()/20;
 					if(state.getBlock() instanceof BlockLamp) {
-						String txt = state.getValue(BlockLamp.INVERTED)? TextFormatting.RED+Tmo.proxy.translate("tile.blockLamp.mode.inverted") : TextFormatting.GREEN+Tmo.proxy.translate("tile.blockLamp.mode.normal");
-						StringUtils.drawCenteredString(mc.fontRendererObj, TextFormatting.BOLD+""+TextFormatting.UNDERLINE+Tmo.proxy.translate("tile.blockLamp.mode.title")+TextFormatting.RESET+" "+TextFormatting.BOLD+""+txt, res.getScaledWidth()/2, res.getScaledHeight()/2 + h);
-						StringUtils.drawCenteredString(mc.fontRendererObj, TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate("tile.blockLamp.mode.hint"), res.getScaledWidth()/2, res.getScaledHeight()/2 + 2*h);
+						String txt = state.getValue(BlockLamp.INVERTED)? TextFormatting.RED+StringUtils.translate("tile.blockLamp.mode.inverted") : TextFormatting.GREEN+StringUtils.translate("tile.blockLamp.mode.normal");
+						StringUtils.drawCenteredString(mc.fontRendererObj, TextFormatting.BOLD+""+TextFormatting.UNDERLINE+StringUtils.translate("tile.blockLamp.mode.title")+TextFormatting.RESET+" "+TextFormatting.BOLD+""+txt, res.getScaledWidth()/2, res.getScaledHeight()/2 + h);
+						StringUtils.drawCenteredString(mc.fontRendererObj, TextFormatting.GRAY+""+TextFormatting.ITALIC+StringUtils.translate("tile.blockLamp.mode.hint"), res.getScaledWidth()/2, res.getScaledHeight()/2 + 2*h);
 					}
 			    }
 			}
@@ -106,7 +105,7 @@ public class EventHandler {
 		if(event.getLeft().getItem() == ModItems.TheItems.LOCK.getItem()) {
 			ItemStack lStack = event.getLeft();
 			ItemStack rStack = event.getRight();
-			ItemVariant.LockVariant variant = ((ItemLock)lStack.getItem()).getVariant(lStack.getMetadata());
+			TMOItemVariants.LockVariant variant = ((ItemLock)lStack.getItem()).getVariant(lStack.getMetadata());
 			ItemStack repairItem = variant.getRepairItem();
 			
 			if(rStack.isItemEqual(repairItem) && variant.isBroken() && rStack.getCount() >= repairItem.getCount()) {
@@ -166,7 +165,7 @@ public class EventHandler {
 			
 			if(flag1 && flag2) {
 				IBlockState state = world.getBlockState(pos);
-				event.getPlayer().sendMessage(new TextComponentString(TextFormatting.RED + Tmo.proxy.translate("protectedBlock.noBreaking", state.getBlock().getItem(world, pos, state).getDisplayName())));
+				event.getPlayer().sendMessage(new TextComponentString(TextFormatting.RED + StringUtils.translate("protectedBlock.noBreaking", state.getBlock().getItem(world, pos, state).getDisplayName())));
 				event.setCanceled(true);
 				if(t instanceof TileEntityContainerBase) {
 					((TileEntityContainerBase)t).sync();
@@ -185,7 +184,7 @@ public class EventHandler {
 			for(Enchantment e : enchants.keySet()) {
 				if(e instanceof EnchantementBase && ((EnchantementBase)e).hasDescription()) {
 					
-					String eName = TextFormatting.RESET+Tmo.proxy.translate(e.getName())+": ";
+					String eName = TextFormatting.RESET+StringUtils.translate(e.getName())+": ";
 					List<String> toAdd = StringUtils.parseTooltip(eName+TextFormatting.GRAY+""+TextFormatting.ITALIC+((EnchantementBase)e).getDescription());
 					
 					event.getToolTip().addAll(toAdd);
@@ -199,7 +198,7 @@ public class EventHandler {
 				for(String str : toAdd)
 					event.getToolTip().add(TextFormatting.GRAY+""+TextFormatting.ITALIC+str);
 			} else {
-				event.getToolTip().add(TextFormatting.GRAY+""+TextFormatting.ITALIC+Tmo.proxy.translate("item.desc"));
+				event.getToolTip().add(TextFormatting.GRAY+""+TextFormatting.ITALIC+StringUtils.translate("item.desc"));
 			}
 		}
 		

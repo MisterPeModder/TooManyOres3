@@ -1,16 +1,16 @@
 package misterpemodder.tmo.main.blocks;
 
+import misterpemodder.hc.main.blocks.properties.IBlockVariant;
 import misterpemodder.tmo.main.blocks.BlockBrick.EnumBrickVariant;
-import misterpemodder.tmo.main.blocks.base.BlockMulti;
+import misterpemodder.tmo.main.blocks.base.BlockMultiTMO;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
-import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.IBlockState;
 
-public class BlockBrick extends BlockMulti<EnumBrickVariant> {
+public class BlockBrick extends BlockMultiTMO<EnumBrickVariant> {
 	
 	public static final PropertyEnum<EnumBrickVariant> VARIANT = PropertyEnum.create("variant", EnumBrickVariant.class);
 	public static EnumBrickVariant[] brickVariants = EnumBrickVariant.values();

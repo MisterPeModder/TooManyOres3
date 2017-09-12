@@ -1,8 +1,6 @@
 #Divers
 itemGroup.TMO=Too Many Ores III
 item.tabIcon.name=Icône
-item.hasNBT.desc=contient des données NBT!
-tmo.missingNo.name=MISSINGNO. (jette-moi loin... §4TRES LOIN§f ok?)
 tmo.config.gui.mainTitle=Confguration de "Beacoup Trop de Minerais" (a.k.a Too Many Ores)
 item.desc=-maintenez shift pour la description-
 
@@ -226,11 +224,9 @@ fluid.liquidIgnum=Essence d'ignum
 fluid.liquidFrozium=Essence de frozium
 
 #Catégories interface
-gui.tab.main.name=Principal
 gui.tab.info.name=Infos
 gui.tab.redstone.name=Redstone
 gui.tab.security.name=Sécurité
-gui.tab.playerInv.name=Inventaire
 gui.tab.io.name=Entrée/Sortie
 gui.tab.io.reset=Effacer
 gui.tab.io.reset.all=Tout effacer

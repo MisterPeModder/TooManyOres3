@@ -2,10 +2,10 @@ package misterpemodder.tmo.main.items.tools;
 
 import java.util.Random;
 
+import misterpemodder.hc.main.utils.ItemStackUtils;
 import misterpemodder.tmo.main.init.ModPotions.ThePotions;
 import misterpemodder.tmo.main.items.EnumItemsNames;
 import misterpemodder.tmo.main.items.materials.TmoToolMaterial;
-import misterpemodder.tmo.main.utils.ItemStackUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,10 +1,10 @@
 package misterpemodder.tmo.main.compat.aa;
 
 import de.ellpeck.actuallyadditions.api.ActuallyAdditionsAPI;
+import misterpemodder.hc.main.utils.ItemStackUtils;
 import misterpemodder.tmo.main.config.ConfigValues;
 import misterpemodder.tmo.main.init.ModItems.TheItems;
-import misterpemodder.tmo.main.items.ItemVariant.IngotVariant;
-import misterpemodder.tmo.main.utils.ItemStackUtils;
+import misterpemodder.tmo.main.items.TMOItemVariants.IngotVariant;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

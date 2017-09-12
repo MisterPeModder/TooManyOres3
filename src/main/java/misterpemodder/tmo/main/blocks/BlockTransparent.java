@@ -1,8 +1,8 @@
 package misterpemodder.tmo.main.blocks;
 
-import misterpemodder.tmo.main.blocks.base.BlockBase;
+import misterpemodder.hc.main.blocks.properties.IBlockValues;
+import misterpemodder.tmo.main.blocks.base.BlockBaseTMO;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
-import misterpemodder.tmo.main.blocks.properties.IBlockValues;
 import misterpemodder.tmo.main.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBeacon;
@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockTransparent extends BlockBase{
+public class BlockTransparent extends BlockBaseTMO {
 
 	public BlockTransparent(EnumBlocksNames n, IBlockValues v) {
 		super(n, v);

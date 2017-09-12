@@ -8,10 +8,10 @@ import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoAccessor;
 import mcjty.theoneprobe.api.ProbeMode;
-import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.blocks.base.BlockBase;
-import misterpemodder.tmo.main.blocks.properties.IBlockNames;
-import misterpemodder.tmo.main.blocks.properties.IBlockValues;
+import misterpemodder.hc.main.blocks.properties.IBlockNames;
+import misterpemodder.hc.main.blocks.properties.IBlockValues;
+import misterpemodder.hc.main.utils.StringUtils;
+import misterpemodder.tmo.main.blocks.base.BlockBaseTMO;
 import misterpemodder.tmo.main.config.ConfigValues;
 import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import net.minecraft.block.Block;
@@ -32,7 +32,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-public class BlockLamp extends BlockBase implements IProbeInfoAccessor{
+public class BlockLamp extends BlockBaseTMO implements IProbeInfoAccessor{
 	
 	//blockstates
 	public static final PropertyBool ACTIVATED = PropertyBool.create("activated");
@@ -140,8 +140,8 @@ public class BlockLamp extends BlockBase implements IProbeInfoAccessor{
 	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
 		if(ConfigValues.BoolValues.TOP_COMPAT.currentValue) {
 			IBlockState state = world.getBlockState(data.getPos());
-			String txt = state.getValue(BlockLamp.INVERTED)? TextFormatting.RED+Tmo.proxy.translate("tile.blockLamp.mode.inverted") : TextFormatting.GREEN+Tmo.proxy.translate("tile.blockLamp.mode.normal");
-			probeInfo.text(Tmo.proxy.translate("tile.blockLamp.mode.title")+" "+txt);
+			String txt = state.getValue(BlockLamp.INVERTED)? TextFormatting.RED+StringUtils.translate("tile.blockLamp.mode.inverted") : TextFormatting.GREEN+StringUtils.translate("tile.blockLamp.mode.normal");
+			probeInfo.text(StringUtils.translate("tile.blockLamp.mode.title")+" "+txt);
 		}
 	}
 	

@@ -1,6 +1,6 @@
 package misterpemodder.tmo.main.capability.fluid;
 
-import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
+import misterpemodder.hc.main.tileentity.TileEntityContainerBase;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;

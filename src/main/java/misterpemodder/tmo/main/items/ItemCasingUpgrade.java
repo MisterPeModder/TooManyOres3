@@ -1,7 +1,8 @@
 package misterpemodder.tmo.main.items;
 
+import misterpemodder.hc.main.items.ItemMulti;
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
-import misterpemodder.tmo.main.items.ItemVariant.CasingUpgradeVariant;
+import misterpemodder.tmo.main.items.TMOItemVariants.CasingUpgradeVariant;
 import misterpemodder.tmo.main.tileentity.TileEntityCraftingMachine;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

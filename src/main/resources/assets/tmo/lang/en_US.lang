@@ -2,8 +2,6 @@
 #Misc
 itemGroup.TMO=Too Many Ores III
 item.tabIcon.name=Tab Icon
-item.hasNBT.desc=Has NBT data!
-tmo.missingNo.name=MISSINGNO. (throw me away pls :3)
 tmo.config.gui.mainTitle=Too Many Ores Config
 item.desc=-hold shift for description-
 tmo.ioType.item=Items
@@ -151,7 +149,6 @@ item.titaniumBucket.desc.emptyContent=Contains: nothing.
 item.titaniumBucket.desc=Right-click to place fluids.\nShift-right-click to take fluids.
 
 #Blocks
-tile.blockGeneric.name=Unammed Block
 tile.blockStorage.blockTitanium.name=Titanium Block
 tile.blockStorage.blockTitaniumDark.name=Dark Titanium Block
 tile.blockStorage.blockTitaniumPoor.name=Titanium Block
@@ -254,11 +251,9 @@ fluid.liquidFrozium=Frozium Fuel
 tile.liquidFrozium.name=Frozium Fuel
 
 #GUI
-gui.tab.main.name=Main
 gui.tab.info.name=Info
 gui.tab.redstone.name=Redstone
 gui.tab.security.name=Security
-gui.tab.playerInv.name=Inventory
 gui.tab.playerArmorInv.name=Armor & Crafting
 gui.tab.titaniumAnvil.name=Titanium Anvil: Repair & Name
 gui.tab.io.name=IO
@@ -318,7 +313,7 @@ enchantment.hammerXpCostReduction.tooltip=Reduction
 #Potion
 effect.tmo.freezing=Freezing
 effect.tmo.freezing.message=You are frozen!
-tipped_arrow.effect..tmo.freezing=Arrow of Freezing
+tipped_arrow.effect.tmo.freezing=Arrow of Freezing
 potion.effect.tmo.freezing=Potion of Freezing
 splash_potion.effect.tmo.freezing=Splash Potion of Freezing
 lingering_potion.effect.tmo.freezing=Lingering Potion of Freezing

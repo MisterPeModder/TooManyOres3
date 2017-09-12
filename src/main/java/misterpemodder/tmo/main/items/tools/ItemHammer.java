@@ -6,15 +6,15 @@ import java.util.Random;
 
 import com.google.common.collect.Multimap;
 
+import misterpemodder.hc.main.items.ItemBase;
+import misterpemodder.hc.main.utils.ItemStackUtils;
+import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.api.item.IItemForgeHammer;
-import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.enchant.EnchantementXpCostReduction;
 import misterpemodder.tmo.main.init.ModEnchants;
 import misterpemodder.tmo.main.init.ModEnchants.TheEnchants;
 import misterpemodder.tmo.main.items.EnumItemsNames;
-import misterpemodder.tmo.main.items.base.ItemBase;
 import misterpemodder.tmo.main.items.materials.TmoToolMaterial;
-import misterpemodder.tmo.main.utils.ItemStackUtils;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -125,7 +125,7 @@ public class ItemHammer extends ItemBase implements IItemForgeHammer {
     		
     		int r = Math.abs(Math.min(90, ((IItemForgeHammer)stack.getItem()).getExperienceCostReduction(stack)));
     		
-    		tooltip.add(TextFormatting.AQUA+Tmo.proxy.translate("enchantment.hammerXpCostReduction.tooltip")+": "+TextFormatting.GREEN+r+(e>0? " +"+e+"%":"%"));
+    		tooltip.add(TextFormatting.AQUA+StringUtils.translate("enchantment.hammerXpCostReduction.tooltip")+": "+TextFormatting.GREEN+r+(e>0? " +"+e+"%":"%"));
 		}
     }
 	

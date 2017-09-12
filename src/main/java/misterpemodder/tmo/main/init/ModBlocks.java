@@ -1,5 +1,9 @@
 package misterpemodder.tmo.main.init;
 
+import misterpemodder.hc.main.blocks.BlockMulti;
+import misterpemodder.hc.main.blocks.IHexianBlock;
+import misterpemodder.hc.main.blocks.properties.IHexianBlockList;
+import misterpemodder.hc.main.utils.RegistryHelper;
 import misterpemodder.tmo.main.blocks.BlockBrick;
 import misterpemodder.tmo.main.blocks.BlockDeco;
 import misterpemodder.tmo.main.blocks.BlockExploder;
@@ -9,9 +13,6 @@ import misterpemodder.tmo.main.blocks.BlockOre;
 import misterpemodder.tmo.main.blocks.BlockStorage;
 import misterpemodder.tmo.main.blocks.BlockTMOStairs;
 import misterpemodder.tmo.main.blocks.BlockTransparent;
-import misterpemodder.tmo.main.blocks.base.BlockMulti;
-import misterpemodder.tmo.main.blocks.base.IBlockTMO;
-import misterpemodder.tmo.main.blocks.base.IBlockTileEntity;
 import misterpemodder.tmo.main.blocks.containers.BlockDestabilizer;
 import misterpemodder.tmo.main.blocks.containers.BlockInjector;
 import misterpemodder.tmo.main.blocks.containers.BlockThermoelectricGenerator;
@@ -32,13 +33,11 @@ import net.minecraft.block.Block;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.common.registry.IForgeRegistry;
 
 @Mod.EventBusSubscriber(modid = TMORefs.MOD_ID)
 public class ModBlocks {
 	
-	public static enum TheBlocks {
+	public static enum TheBlocks implements IHexianBlockList {
 		BRICK(new BlockBrick()),
 		ORE(new BlockOre()),
 		FROZIUM_BLOCK(new BlockTransparent(EnumBlocksNames.FROZIUM_BLOCK, EnumBlocksValues.FROZIUM_BLOCK)),
@@ -72,17 +71,19 @@ public class ModBlocks {
 		WEAK_REDSTONE_TORCH(new BlockSpecialRedstoneTorch(true, EnumBlocksNames.WEAK_REDSTONE_TORCH)),
 		WEAK_REDSTONE_TORCH_UNLIT(new BlockSpecialRedstoneTorch(false, EnumBlocksNames.WEAK_REDSTONE_TORCH_UNLIT)),
 		;
-		private IBlockTMO block;
+		private IHexianBlock block;
 		
+		@Override
 		public Block getBlock() {
 			return (Block)this.block;
 		}
 		
-		public IBlockTMO getBlockTMO() {
+		@Override
+		public IHexianBlock getHexianBlock() {
 			return this.block;
 		}
 		
-		TheBlocks(IBlockTMO block) {
+		TheBlocks(IHexianBlock block) {
 			this.block = block;
 		}
 		
@@ -90,34 +91,7 @@ public class ModBlocks {
 	
 	@SubscribeEvent
 	public static void registerBlocksEvent(RegistryEvent.Register<Block> event) {
-		register(event.getRegistry());
-	}
-	
-	private static void register(IForgeRegistry<Block> registry) {
-		TMORefs.LOGGER.info("Registering Blocks...");
-		for(TheBlocks b : TheBlocks.values()) {
-			IBlockTMO block = b.getBlockTMO();
-			registry.register(b.getBlock());
-			if(block.hasOwnItemBlock())
-				ModItems.ITEM_BLOCKS.add(block.getItemBlock());
-			if(block instanceof IBlockTileEntity) {
-				GameRegistry.registerTileEntity(((IBlockTileEntity<?>)block).getTileEntityClass(), b.getBlock().getRegistryName().toString());
-			}
-		}
-	}
-	
-	public static void registerRenders() {
-		for(TheBlocks bl : TheBlocks.values()) {
-			IBlockTMO b = bl.getBlockTMO();
-			if(b.hasOwnItemBlock())
-				b.registerItemRender();
-		}
-	}
-	
-	public static void registerOreDict() {
-		for (TheBlocks b : TheBlocks.values()) {
-			b.getBlockTMO().registerOreDict();
-		}
+		RegistryHelper.registerBlocks(TheBlocks.values(), event.getRegistry());
 	}
 	
 }

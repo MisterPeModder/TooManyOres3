@@ -1,11 +1,12 @@
 package misterpemodder.tmo.main.items;
 
-import misterpemodder.tmo.main.items.ItemVariant.DustVariant;
+import misterpemodder.hc.main.items.ItemMulti;
+import misterpemodder.tmo.main.items.TMOItemVariants.DustVariant;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 
-public class ItemDust extends ItemMulti<ItemVariant.DustVariant> {
+public class ItemDust extends ItemMulti<TMOItemVariants.DustVariant> {
 
 	public ItemDust() {
 		super(EnumItemsNames.DUST, DustVariant.dustVariants, "_dust");

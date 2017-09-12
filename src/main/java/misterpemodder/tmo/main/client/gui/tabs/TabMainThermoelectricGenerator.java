@@ -6,15 +6,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import misterpemodder.tmo.main.Tmo;
+import misterpemodder.hc.main.client.gui.GuiContainerBase;
+import misterpemodder.hc.main.client.gui.tabs.TabMain;
+import misterpemodder.hc.main.inventory.elements.ContainerElementVerticalEnergyBar;
+import misterpemodder.hc.main.inventory.slot.IHidableSlot;
+import misterpemodder.hc.main.inventory.slot.SlotHidable;
+import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.main.blocks.BlockMachineCasing.EnumMachineCasingVariant;
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
-import misterpemodder.tmo.main.client.gui.GuiContainerBase;
 import misterpemodder.tmo.main.inventory.ContainerThermoelectricGenerator;
 import misterpemodder.tmo.main.inventory.elements.ContainerElementTank;
-import misterpemodder.tmo.main.inventory.elements.ContainerElementVerticalEnergyBar;
-import misterpemodder.tmo.main.inventory.slot.IHidable;
-import misterpemodder.tmo.main.inventory.slot.SlotHidable;
 import misterpemodder.tmo.main.tileentity.TileEntityThemoelectricGenerator;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import misterpemodder.tmo.main.utils.TemperatureUtils;
@@ -27,9 +28,11 @@ import net.minecraftforge.items.IItemHandler;
 
 public class TabMainThermoelectricGenerator extends TabMain<ContainerThermoelectricGenerator, TileEntityThemoelectricGenerator> {
 	
+	public static final String ID = "tmo.main.thermoElectricGenerator";
+	
 	@Override
-	public TabID getTabID() {
-		return TabID.MAIN_THERMOELECTRIC_GENERATOR;
+	public String getTabID() {
+		return ID;
 	}
 
 	@Override
@@ -114,7 +117,7 @@ public class TabMainThermoelectricGenerator extends TabMain<ContainerThermoelect
 			}
 			
 			if(!str.isEmpty()) {
-				strs.add(Tmo.proxy.translate(str));
+				strs.add(StringUtils.translate(str));
 			}
 		} 
 		
@@ -134,20 +137,20 @@ public class TabMainThermoelectricGenerator extends TabMain<ContainerThermoelect
 		
 		if(strs.isEmpty() && mouseX > ox+156 && mouseX < ox+204 && mouseY > oy+13 && mouseY < 65+oy) {
 			if(mouseY < 33+oy) {
-				strs.add(Tmo.proxy.translate("gui.thermoElectricGenerator.text.temperature.desc"));
+				strs.add(StringUtils.translate("gui.thermoElectricGenerator.text.temperature.desc"));
 			} else if(mouseY < 50+oy) {
-				strs.add(Tmo.proxy.translate("gui.thermoElectricGenerator.text.power.desc.1"));
+				strs.add(StringUtils.translate("gui.thermoElectricGenerator.text.power.desc.1"));
 				float powerBonus = TileEntityThemoelectricGenerator.getPowerBonus(casing);
 				if(powerBonus > 1.0F) {
 					float f = Math.round((powerBonus-1.0F)*100.0F);
-					strs.add(String.format(TextFormatting.GRAY+"%s: "+TextFormatting.GREEN+"+%d", Tmo.proxy.translate("gui.thermoElectricGenerator.text.power.desc.2"), (int)f)+"%");
+					strs.add(String.format(TextFormatting.GRAY+"%s: "+TextFormatting.GREEN+"+%d", StringUtils.translate("gui.thermoElectricGenerator.text.power.desc.2"), (int)f)+"%");
 				}
 			} else {
-				strs.add(Tmo.proxy.translate("gui.thermoElectricGenerator.text.fluid.desc.1"));
+				strs.add(StringUtils.translate("gui.thermoElectricGenerator.text.fluid.desc.1"));
 				int fluidConsumption = TileEntityThemoelectricGenerator.getFluidConsumption(casing);
 				if(fluidConsumption > 1) {
 					int i = (fluidConsumption-1)*100;
-					strs.add(String.format(TextFormatting.GRAY+"%s: "+TextFormatting.RED+"+%d", Tmo.proxy.translate("gui.thermoElectricGenerator.text.fluid.desc.2"), i)+"%");
+					strs.add(String.format(TextFormatting.GRAY+"%s: "+TextFormatting.RED+"+%d", StringUtils.translate("gui.thermoElectricGenerator.text.fluid.desc.2"), i)+"%");
 				}
 			}
 		}
@@ -169,7 +172,7 @@ public class TabMainThermoelectricGenerator extends TabMain<ContainerThermoelect
 	}
 	
 	@Override
-	public boolean shouldDisplaySlot(IHidable slot) {
+	public boolean shouldDisplaySlot(IHidableSlot slot) {
 		if(slot instanceof SlotHidable) {
 			TileEntityThemoelectricGenerator te = getTileEntity();
 			IItemHandler h = ((SlotHidable)slot).getItemHandler();

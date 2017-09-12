@@ -3,16 +3,19 @@ package misterpemodder.tmo.main.init;
 import java.util.ArrayList;
 import java.util.List;
 
+import misterpemodder.hc.main.items.IHexianItem;
+import misterpemodder.hc.main.items.ItemBase;
+import misterpemodder.hc.main.items.ItemMulti;
+import misterpemodder.hc.main.items.properties.IHexianItemList;
+import misterpemodder.hc.main.utils.RegistryHelper;
 import misterpemodder.tmo.main.items.EnumItemsNames;
 import misterpemodder.tmo.main.items.ItemCasingUpgrade;
 import misterpemodder.tmo.main.items.ItemDust;
+import misterpemodder.tmo.main.items.ItemIngot;
 import misterpemodder.tmo.main.items.ItemLock;
-import misterpemodder.tmo.main.items.ItemMulti;
 import misterpemodder.tmo.main.items.ItemTitaniumBucket;
 import misterpemodder.tmo.main.items.ItemTmoArmor;
-import misterpemodder.tmo.main.items.ItemVariant;
-import misterpemodder.tmo.main.items.base.ITMOItem;
-import misterpemodder.tmo.main.items.base.ItemBase;
+import misterpemodder.tmo.main.items.TMOItemVariants;
 import misterpemodder.tmo.main.items.materials.TmoArmorMaterial;
 import misterpemodder.tmo.main.items.materials.TmoToolMaterial;
 import misterpemodder.tmo.main.items.tools.ItemHammer;
@@ -29,18 +32,17 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.IForgeRegistry;
 
 @Mod.EventBusSubscriber(modid = TMORefs.MOD_ID)
 public class ModItems {
 	
 	static  List<ItemBlock> ITEM_BLOCKS = new ArrayList<>();
 	
-	public enum TheItems  {
+	public enum TheItems implements IHexianItemList {
 		TAB_ICON(new ItemBase(EnumItemsNames.TAB_ICON), null),
-		INGOT(new ItemMulti<>(EnumItemsNames.INGOT, ItemVariant.IngotVariant.ingotVariants, "_ingot")),
-		GEM(new ItemMulti<>(EnumItemsNames.GEM, ItemVariant.GemVariant.gemVariants, "_gem")),
-		PLATE(new ItemMulti<>(EnumItemsNames.PLATE, ItemVariant.PlateVariant.plateVariants, "_plate")),
+		INGOT(new ItemIngot()),
+		GEM(new ItemMulti<>(EnumItemsNames.GEM, TMOItemVariants.GemVariant.gemVariants, "_gem")),
+		PLATE(new ItemMulti<>(EnumItemsNames.PLATE, TMOItemVariants.PlateVariant.plateVariants, "_plate")),
 		LOCK(new ItemLock()),
 		TITANIUM_BUCKET(new ItemTitaniumBucket()),
 		CASING_UPGRADE(new ItemCasingUpgrade()),
@@ -118,26 +120,29 @@ public class ModItems {
 		HALLOWED_BOOTS(new ItemTmoArmor(EnumItemsNames.BOOTS_HALLOWED, TmoArmorMaterial.HALLOWED, EntityEquipmentSlot.FEET)),
 		;
 		
-		private ITMOItem item;
+		private IHexianItem item;
 		private final CreativeTabs tab;
 		
+		@Override
 		public Item getItem() {
 			return (Item) this.item;
 		}
 		
-		public ITMOItem getTMOItem() {
+		@Override
+		public IHexianItem getHexianItem() {
 			return this.item;
 		}
 		
+		@Override
 		public CreativeTabs getCreativeTab() {
 			return this.tab;
 		}
 		
-		TheItems(ITMOItem item) {
+		TheItems(IHexianItem item) {
 			this(item, TMORefs.TMO_TAB);
 		}
 		
-		TheItems(ITMOItem item, CreativeTabs tab) {
+		TheItems(IHexianItem item, CreativeTabs tab) {
 			this.item = item;
 			this.tab = tab;
 		}
@@ -146,41 +151,7 @@ public class ModItems {
 	
 	@SubscribeEvent
 	public static void registerBlocksEvent(RegistryEvent.Register<Item> event) {
-		register(event.getRegistry());
-	}
-	
-	private static void register(IForgeRegistry<Item> registry) {
-		TMORefs.LOGGER.info("Registering Items...");
-		for(TheItems i : TheItems.values()) {
-			registry.register(i.getItem());
-		}
-		if(!ITEM_BLOCKS.isEmpty()) {
-			TMORefs.LOGGER.info("Registering ItemsBlocks...");
-			for(ItemBlock i : ITEM_BLOCKS) {
-				registry.register(i);
-			}
-		}
-	}
-	
-	public static void registerOreDict() {
-		for (TheItems i : TheItems.values()) {
-			if(i.getItem() instanceof ItemBase) {
-				((ItemBase) i.getItem()).registerOreDict();
-			}
-		}
-	}
-	
-	public static void registerRenders() {
-		for(TheItems i : TheItems.values()) {
-			i.getTMOItem().registerRender();
-		}
-	}
-	
-	public static void registerCreativeTabItems() {
-		for(TheItems i : TheItems.values()) {
-			if(i.getTMOItem().isEnabled() && i.tab != null)
-				i.getItem().setCreativeTab(i.tab);
-		}
+		RegistryHelper.registerItems(TheItems.values(), event.getRegistry());
 	}
 	
 }

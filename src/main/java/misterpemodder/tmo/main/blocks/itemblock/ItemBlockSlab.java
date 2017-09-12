@@ -1,5 +1,6 @@
 package misterpemodder.tmo.main.blocks.itemblock;
 
+import misterpemodder.hc.main.blocks.itemblock.ItemBlockMulti;
 import misterpemodder.tmo.main.blocks.slab.BlockAbstractSlab;
 import misterpemodder.tmo.main.blocks.slab.BlockHalfSlab;
 import net.minecraft.block.Block;

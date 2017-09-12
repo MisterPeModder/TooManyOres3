@@ -3,11 +3,12 @@ package misterpemodder.tmo.main.client.gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import misterpemodder.tmo.main.client.gui.tabs.TabArmorInventory;
-import misterpemodder.tmo.main.client.gui.tabs.TabBase;
+import misterpemodder.hc.main.client.gui.GuiContainerBase;
+import misterpemodder.hc.main.client.gui.tabs.TabBase;
+import misterpemodder.hc.main.client.gui.tabs.TabPlayerInventory;
+import misterpemodder.tmo.main.client.gui.tabs.TabArmorInventoryTMO;
 import misterpemodder.tmo.main.client.gui.tabs.TabInfo;
 import misterpemodder.tmo.main.client.gui.tabs.TabMainTitaniumAnvil;
-import misterpemodder.tmo.main.client.gui.tabs.TabPlayerInventory;
 import misterpemodder.tmo.main.inventory.ContainerTitaniumAnvil;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumAnvil;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -24,7 +25,7 @@ public class GuiContainerTitaniumAnvil extends GuiContainerBase<ContainerTitaniu
 		list.add(new TabMainTitaniumAnvil());
 		list.add(new TabInfo<ContainerTitaniumAnvil, TileEntityTitaniumAnvil>(false));
 		list.add(new TabPlayerInventory<ContainerTitaniumAnvil, TileEntityTitaniumAnvil>());
-		list.add(new TabArmorInventory<ContainerTitaniumAnvil, TileEntityTitaniumAnvil>());
+		list.add(new TabArmorInventoryTMO<ContainerTitaniumAnvil, TileEntityTitaniumAnvil>());
 		return list;
 	}
 

@@ -5,7 +5,8 @@ import java.util.List;
 import mezz.jei.api.ingredients.IIngredientRegistry;
 import mezz.jei.api.recipe.IRecipeWrapper;
 
-public abstract class RecipeMaker<T extends IRecipeWrapper>{
+@Deprecated
+public abstract class RecipeMaker<T extends IRecipeWrapper> {
 	
 	public RecipeMaker(){}
 	

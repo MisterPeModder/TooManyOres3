@@ -1,8 +1,8 @@
 package misterpemodder.tmo.main.blocks;
-import misterpemodder.tmo.main.blocks.base.BlockMulti;
-import misterpemodder.tmo.main.blocks.properties.IBlockNames;
-import misterpemodder.tmo.main.blocks.properties.IBlockValues;
-import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
+import misterpemodder.hc.main.blocks.properties.IBlockNames;
+import misterpemodder.hc.main.blocks.properties.IBlockValues;
+import misterpemodder.hc.main.blocks.properties.IBlockVariant;
+import misterpemodder.tmo.main.blocks.base.BlockMultiTMO;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -10,7 +10,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.IBlockState;
 
-public class BlockDeco extends BlockMulti<BlockDeco.EnumVariant> {
+public class BlockDeco extends BlockMultiTMO<BlockDeco.EnumVariant> {
 	
 	public static final PropertyEnum<BlockDeco.EnumVariant> VARIANT = PropertyEnum.create("variant", BlockDeco.EnumVariant.class);
 	public static BlockDeco.EnumVariant[] blockVariants = EnumVariant.values();

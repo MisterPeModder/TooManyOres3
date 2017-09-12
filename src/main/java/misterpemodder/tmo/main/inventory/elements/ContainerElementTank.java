@@ -6,13 +6,12 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import misterpemodder.tmo.main.Tmo;
-import misterpemodder.tmo.main.client.gui.GuiContainerBase;
-import misterpemodder.tmo.main.client.gui.tabs.TabBase;
-import misterpemodder.tmo.main.client.gui.tabs.TabBase.TabID;
+import misterpemodder.hc.main.client.gui.GuiContainerBase;
+import misterpemodder.hc.main.client.gui.tabs.TabBase;
+import misterpemodder.hc.main.inventory.ContainerBase;
+import misterpemodder.hc.main.inventory.elements.ISyncedContainerElement;
+import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.main.client.render.RenderTank;
-import misterpemodder.tmo.main.inventory.ContainerBase;
-import misterpemodder.tmo.main.inventory.ISyncedContainerElement;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import misterpemodder.tmo.main.utils.TemperatureUtils;
@@ -80,19 +79,19 @@ public class ContainerElementTank extends Gui implements ISyncedContainerElement
 	public List<String> getHoverDesc(int mouseX, int mouseY, GuiContainerBase<?,?> c, boolean showTemperature) {
 		List<String> strs = new ArrayList<>();
 		if (isButtonHovered(mouseX, mouseY, c)) {
-			strs.add(TextFormatting.RED + "" + TextFormatting.BOLD + Tmo.proxy.translate("gui.tank.clear"));
+			strs.add(TextFormatting.RED + "" + TextFormatting.BOLD + StringUtils.translate("gui.tank.clear"));
 			if (GuiScreen.isShiftKeyDown()) {
-				strs.add(TextFormatting.RED + Tmo.proxy.translate("gui.tank.clear.confirm"));
+				strs.add(TextFormatting.RED + StringUtils.translate("gui.tank.clear.confirm"));
 			} else {
-				strs.add(TextFormatting.GRAY + "" + TextFormatting.ITALIC + "-" + Tmo.proxy.translate("gui.tank.clear.hint") + "-");
+				strs.add(TextFormatting.GRAY + "" + TextFormatting.ITALIC + "-" + StringUtils.translate("gui.tank.clear.hint") + "-");
 			}
 		} else if (isTankHovered(mouseX, mouseY, c)) {
 			FluidStack stack = tank.getFluid();
 
 			if (stack == null || stack.getFluid() == null || stack.amount <= 0) {
-				strs = Arrays.asList(Tmo.proxy.translate("gui.tank.empty"));
+				strs = Arrays.asList(StringUtils.translate("gui.tank.empty"));
 			} else {
-				strs = Arrays.asList(stack.getFluid().getRarity(stack).rarityColor + stack.getLocalizedName(), Tmo.proxy.translate("gui.tank.contents", stack.amount, tank.getCapacity()), TemperatureUtils.getFluidTemperatureString(stack, true));
+				strs = Arrays.asList(stack.getFluid().getRarity(stack).rarityColor + stack.getLocalizedName(), StringUtils.translate("gui.tank.contents", stack.amount, tank.getCapacity()), TemperatureUtils.getFluidTemperatureString(stack, true));
 			}
 		}
 		return strs;
@@ -108,7 +107,7 @@ public class ContainerElementTank extends Gui implements ISyncedContainerElement
 				tank.drain(TileEntityInjector.CAPACITY, true);
 				NBTTagCompound data = new NBTTagCompound();
 				data.setShort("tank_id", id);
-				TabBase.sendButtonPacket(TabID.MISC, CLEAR_TANK_BUTTON_ID, c.mc.world, container.getTileEntity().getPos(), data);
+				TabBase.sendButtonPacket(TabBase.MISC_TAB_ID, CLEAR_TANK_BUTTON_ID, c.mc.world, container.getTileEntity().getPos(), data);
 			}
 
 			return true;

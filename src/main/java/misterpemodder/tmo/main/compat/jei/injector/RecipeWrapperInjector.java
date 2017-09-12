@@ -4,8 +4,8 @@ import java.awt.Color;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
+import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
-import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.apiimpl.recipe.InjectorSimpleRecipe;
 import misterpemodder.tmo.main.compat.jei.DrawableArrow;
 import net.minecraft.client.Minecraft;
@@ -52,8 +52,8 @@ public class RecipeWrapperInjector extends BlankRecipeWrapper {
 		arrow.setInverted(transferMode == TransferMode.EXTRACTION);
 		arrow.draw(minecraft, 64-RecipeCategoryInjector.X_OFFSET, 39-RecipeCategoryInjector.Y_OFFSET);
 
-		String str1 = Tmo.proxy.translate("gui.jei.category.injector.mode")+": ";
-		String str2 = Tmo.proxy.translate("gui.jei.category.injector.mode."+(transferMode == TransferMode.INJECTION? "injection":"extraction"));
+		String str1 = StringUtils.translate("gui.jei.category.injector.mode")+": ";
+		String str2 = StringUtils.translate("gui.jei.category.injector.mode."+(transferMode == TransferMode.INJECTION? "injection":"extraction"));
 		int color = (transferMode == TransferMode.INJECTION?Color.CYAN:Color.ORANGE).getRGB();
 			
 		int x = 56-RecipeCategoryInjector.X_OFFSET;

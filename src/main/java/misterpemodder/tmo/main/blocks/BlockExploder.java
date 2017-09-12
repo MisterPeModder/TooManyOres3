@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import misterpemodder.hc.main.blocks.properties.IBlockVariant;
 import misterpemodder.tmo.main.blocks.BlockExploder.EnumExploderVariant;
-import misterpemodder.tmo.main.blocks.base.BlockMulti;
+import misterpemodder.tmo.main.blocks.base.BlockMultiTMO;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
-import misterpemodder.tmo.main.blocks.properties.IBlockVariant;
 import misterpemodder.tmo.main.config.ConfigValues;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneWire;
@@ -40,7 +40,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockExploder extends BlockMulti<EnumExploderVariant> {
+public class BlockExploder extends BlockMultiTMO<EnumExploderVariant> {
 	
 	public static final AxisAlignedBB EXPLODER_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.9375D, 1);
 	public static final PropertyEnum<EnumExploderVariant> VARIANT = PropertyEnum.create("variant", EnumExploderVariant.class);

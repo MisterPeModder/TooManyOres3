@@ -3,9 +3,10 @@ package misterpemodder.tmo.main.client.gui.tabs;
 import java.awt.Dimension;
 import java.awt.Point;
 
-import misterpemodder.tmo.main.inventory.ContainerBase;
-import misterpemodder.tmo.main.inventory.slot.IHidable;
-import misterpemodder.tmo.main.tileentity.TileEntityContainerBase;
+import misterpemodder.hc.main.client.gui.tabs.TabBase;
+import misterpemodder.hc.main.inventory.ContainerBase;
+import misterpemodder.hc.main.inventory.slot.IHidableSlot;
+import misterpemodder.hc.main.tileentity.TileEntityContainerBase;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -20,8 +21,8 @@ public class TabInfo<C extends ContainerBase<TE>, TE extends TileEntityContainer
 	}
 	
 	@Override
-	public TabID getTabID() {
-		return TabID.INFO;
+	public String getTabID() {
+		return TabBase.INFO_TAB_ID;
 	}
 	
 	@Override
@@ -44,7 +45,7 @@ public class TabInfo<C extends ContainerBase<TE>, TE extends TileEntityContainer
 	}
 
 	@Override
-	public boolean shouldDisplaySlot(IHidable slot) {
+	public boolean shouldDisplaySlot(IHidableSlot slot) {
 		return false;
 	}
 

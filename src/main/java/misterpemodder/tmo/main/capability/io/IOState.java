@@ -6,7 +6,7 @@ import java.util.TreeSet;
 
 import javax.annotation.Nullable;
 
-import misterpemodder.tmo.main.Tmo;
+import misterpemodder.hc.main.utils.StringUtils;
 import net.minecraft.util.text.TextFormatting;
 
 public enum IOState implements Comparable<IOState> {
@@ -30,11 +30,11 @@ public enum IOState implements Comparable<IOState> {
 	}
 	
 	public String getLocalizedName() {
-		return Tmo.proxy.translate("gui.tab.io.state."+getId());
+		return StringUtils.translate("gui.tab.io.state."+getId());
 	}
 	
 	public String getLocalizedNameColored() {
-		return this.color + Tmo.proxy.translate("gui.tab.io.state."+getId());
+		return this.color + StringUtils.translate("gui.tab.io.state."+getId());
 	}
 	
 	public boolean canInsert() {

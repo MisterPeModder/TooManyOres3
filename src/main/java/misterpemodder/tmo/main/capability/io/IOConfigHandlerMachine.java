@@ -7,13 +7,11 @@ import javax.annotation.Nullable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
+import misterpemodder.hc.main.network.packet.PacketHandler;
 import misterpemodder.tmo.api.capability.io.IIOConfigHandler;
 import misterpemodder.tmo.api.capability.io.IIOType;
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
-import misterpemodder.tmo.main.network.TMOPacketHandler;
-import misterpemodder.tmo.main.network.packet.PacketClientToServer;
-import misterpemodder.tmo.main.network.packet.PacketServerToClient;
 import misterpemodder.tmo.main.tileentity.TileEntityMachine;
 import misterpemodder.tmo.main.utils.EnumBlockSide;
 import net.minecraft.block.state.IBlockState;
@@ -165,14 +163,14 @@ public class IOConfigHandlerMachine implements IIOConfigHandler, INBTSerializabl
 		if(world.isRemote) {
 			toSend.setBoolean("to_server", true);
 			toSend.setInteger("world_dim_id", dimId);
-			TMOPacketHandler.network.sendToServer(new PacketClientToServer(PacketDataHandlers.IO_CONFIG_SYNC_HANDLER, toSend));
+			PacketHandler.sendToServer(PacketDataHandlers.IO_CONFIG_SYNC_HANDLER, toSend);
 		
 			BlockPos pos = te.getPos();
 			IBlockState blockState = world.getBlockState(pos);
 			world.notifyBlockUpdate(pos, blockState, blockState.getActualState(world, pos), 3);
 		
 		} else {
-			TMOPacketHandler.network.sendToDimension(new PacketServerToClient(PacketDataHandlers.IO_CONFIG_SYNC_HANDLER, toSend), dimId);
+			PacketHandler.sendToDimension(PacketDataHandlers.IO_CONFIG_SYNC_HANDLER, toSend, dimId);
 		}
 	}
 
