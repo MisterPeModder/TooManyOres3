@@ -25,8 +25,10 @@ import de.ellpeck.actuallyadditions.api.ActuallyAdditionsAPI;
 import misterpemodder.hc.main.AbstractMod;
 import misterpemodder.hc.main.compat.craftingtweaks.CraftingTweaksCompat;
 import misterpemodder.hc.main.network.HexianNetworkWrapper;
+import misterpemodder.hc.main.network.packet.IPacketHandler;
 import misterpemodder.hc.main.network.packet.PacketHandler;
 import misterpemodder.hc.main.network.proxy.ICommonProxy;
+import misterpemodder.hc.main.utils.GuiHelper;
 import misterpemodder.hc.main.utils.RegistryHelper;
 import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.main.apiimpl.DefaultStrongPistonBehavior;
@@ -36,6 +38,7 @@ import misterpemodder.tmo.main.apiimpl.RegistryHandler;
 import misterpemodder.tmo.main.apiimpl.SlimeBlock;
 import misterpemodder.tmo.main.apiimpl.io.IOType;
 import misterpemodder.tmo.main.capability.CapabilityFreezing;
+import misterpemodder.tmo.main.client.gui.EnumGuiElements;
 import misterpemodder.tmo.main.client.gui.tabs.TMOButtonClickHandlers;
 import misterpemodder.tmo.main.commands.CommandTMO;
 import misterpemodder.tmo.main.compat.aa.ActAddCompat;
@@ -65,6 +68,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(
@@ -75,17 +79,28 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 		acceptedMinecraftVersions = TMORefs.ACCEPTED_MC_VERSIONS,
 		guiFactory = "misterpemodder.tmo.main.config.ConfigGuiFactory"
 	)
-public class Tmo extends AbstractMod {
+public class TooManyOres extends AbstractMod {
 
 	@Instance(TMORefs.MOD_ID)
-	public static Tmo instance;
+	public static TooManyOres instance;
 
 	@SidedProxy(modId = TMORefs.MOD_ID, clientSide = TMORefs.CLIENT_PROXY_CLASS, serverSide = TMORefs.SERVER_PROXY_CLASS)
 	public static ICommonProxy proxy;
 	
+	public static final IPacketHandler PACKET_HANDLER = new PacketHandler() {
+		@Override
+		protected SimpleNetworkWrapper getNetworkWrapper() {
+			return TooManyOres.instance.getNetworkWrapper();
+		}
+	};
+	
 	static {
         FluidRegistry.enableUniversalBucket();
     }
+	
+	public IPacketHandler getPacketHandler() {
+		return PACKET_HANDLER;
+	}
 	
 	@Override
 	public ICommonProxy getProxy() {
@@ -141,6 +156,7 @@ public class Tmo extends AbstractMod {
 		SlimeBlock.registerSlimeBlocksInternal();
 		TooManyOresAPI.registryHandler.registerStrongPistonBehavior(new DefaultStrongPistonBehavior());
 		EnderMatterItems.register();
+		GuiHelper.registerGuiElements(instance, EnumGuiElements.values());
 		
 		RegistryHelper.registerCreativeTabItems(TheItems.values());
 		RegistryHelper.registerOreDict(TheItems.values());

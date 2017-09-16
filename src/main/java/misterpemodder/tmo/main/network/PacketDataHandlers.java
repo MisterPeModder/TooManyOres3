@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import misterpemodder.hc.main.network.IPacketDataHandler;
-import misterpemodder.hc.main.network.packet.PacketHandler;
+import misterpemodder.tmo.main.TooManyOres;
 import misterpemodder.tmo.main.capability.CapabilityFreezing;
 import misterpemodder.tmo.main.capability.CapabilityFreezing.IFreezing;
 import misterpemodder.tmo.main.inventory.ContainerTitaniumAnvil;
@@ -130,7 +130,7 @@ public enum PacketDataHandlers implements IPacketDataHandler {
 				if(toServer) {
 					data.removeTag("to_server");
 					data.removeTag("world_dim_id");
-					PacketHandler.sendToDimension(IO_CONFIG_SYNC_HANDLER, data, dimId);
+					TooManyOres.PACKET_HANDLER.sendToDimension(IO_CONFIG_SYNC_HANDLER, data, dimId);
 				}
 			}
  			

@@ -15,12 +15,12 @@ import misterpemodder.hc.api.capability.owner.IOwnerHandler;
 import misterpemodder.hc.api.item.IItemLock;
 import misterpemodder.hc.main.apiimpl.capability.owner.CapabilityOwner;
 import misterpemodder.hc.main.blocks.BlockContainerBase;
+import misterpemodder.hc.main.utils.GuiHelper;
 import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.api.IStrongPistonBehavior;
-import misterpemodder.tmo.main.Tmo;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
-import misterpemodder.tmo.main.client.gui.GuiHandler;
+import misterpemodder.tmo.main.client.gui.EnumGuiElements;
 import misterpemodder.tmo.main.config.ConfigValues;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import misterpemodder.tmo.main.utils.TMORefs;
@@ -141,7 +141,7 @@ public class BlockTitaniumChest extends BlockContainerBase<TileEntityTitaniumChe
 			}
 				
 			te.onInvOpen(player);
-			player.openGui(Tmo.instance, GuiHandler.EnumGuiElements.TITANIUM_CHEST.ID, world, pos.getX(), pos.getY(), pos.getZ());
+			GuiHelper.openGui(player, EnumGuiElements.TITANIUM_CHEST, world, pos);
 		}
 		return true;
 	}

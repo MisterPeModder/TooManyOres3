@@ -3,9 +3,10 @@ package misterpemodder.tmo.main.blocks.containers;
 import java.util.ArrayList;
 import java.util.List;
 
+import misterpemodder.hc.main.utils.GuiHelper.IGuiElement;
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
-import misterpemodder.tmo.main.client.gui.GuiHandler.EnumGuiElements;
+import misterpemodder.tmo.main.client.gui.EnumGuiElements;
 import misterpemodder.tmo.main.tileentity.TileEntityDestabilizer;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -57,7 +58,7 @@ public class BlockDestabilizer extends BlockMachine<TileEntityDestabilizer> {
 	}
 	
 	@Override
-	protected EnumGuiElements getGuiElements() {
+	protected IGuiElement getGuiElements() {
 		return EnumGuiElements.CRYSTAL_DESTABILIZER;
 	}
 	

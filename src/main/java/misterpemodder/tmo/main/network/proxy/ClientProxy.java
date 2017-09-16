@@ -1,10 +1,10 @@
 package misterpemodder.tmo.main.network.proxy;
 
 import misterpemodder.hc.main.network.proxy.ICommonProxy;
+import misterpemodder.hc.main.utils.GuiHelper;
 import misterpemodder.hc.main.utils.RegistryHelper;
-import misterpemodder.tmo.main.Tmo;
+import misterpemodder.tmo.main.TooManyOres;
 import misterpemodder.tmo.main.blocks.redstone.BlockSpecialRedstoneWire;
-import misterpemodder.tmo.main.client.gui.GuiHandler;
 import misterpemodder.tmo.main.client.render.TileEntityInjectorRenderer;
 import misterpemodder.tmo.main.client.render.TileEntityStrongPistonRenderer;
 import misterpemodder.tmo.main.client.render.TileEntityTitaniumAnvilRenderer;
@@ -28,7 +28,7 @@ public class ClientProxy implements ICommonProxy {
 	}
 	
 	public void init() {
-		NetworkRegistry.INSTANCE.registerGuiHandler(Tmo.instance, new GuiHandler());
+		NetworkRegistry.INSTANCE.registerGuiHandler(TooManyOres.instance, new GuiHelper());
 		
 		//TESRs
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTitaniumChest.class, new TileEntityTitaniumChestRenderer());

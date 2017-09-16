@@ -1,7 +1,7 @@
 package misterpemodder.tmo.main.capability;
 
 import misterpemodder.hc.api.capability.owner.IOwnerHandler;
-import misterpemodder.hc.main.network.packet.PacketHandler;
+import misterpemodder.tmo.main.TooManyOres;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -81,7 +81,7 @@ public class CapabilityFreezing {
 					NetworkRegistry.TargetPoint target = new TargetPoint(entity.getEntityWorld().provider.getDimension(), entity.posX, entity.posY, entity.posZ, 128);
 					toSend.setTag("entity_uuid", NBTUtil.createUUIDTag(entity.getUniqueID()));
 					toSend.setTag("freezing_cap", this.serializeNBT());
-					PacketHandler.sendToAllAround(PacketDataHandlers.FREEZING_CAPABILITY_UPDATE_HANDLER, toSend, target);
+					TooManyOres.PACKET_HANDLER.sendToAllAround(PacketDataHandlers.FREEZING_CAPABILITY_UPDATE_HANDLER, toSend, target);
 				}
 			}
 		}

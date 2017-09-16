@@ -13,8 +13,8 @@ import misterpemodder.hc.main.client.gui.RecipeClickableAreaHC;
 import misterpemodder.hc.main.client.gui.tabs.TabMain;
 import misterpemodder.hc.main.inventory.slot.IHidableSlot;
 import misterpemodder.hc.main.inventory.slot.SlotHidable;
-import misterpemodder.hc.main.network.packet.PacketHandler;
 import misterpemodder.hc.main.utils.StringUtils;
+import misterpemodder.tmo.main.TooManyOres;
 import misterpemodder.tmo.main.enchant.EnchantementXpCostReduction;
 import misterpemodder.tmo.main.inventory.ContainerTitaniumAnvil;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
@@ -214,7 +214,7 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
         toSend.setInteger("world_dim_id", Minecraft.getMinecraft().world.provider.getDimension());
 		toSend.setTag("player_id", NBTUtil.createUUIDTag(Minecraft.getMinecraft().player.getUniqueID()));
 		toSend.setTag("input_item", this.anvil.input.getStackInSlot(0).serializeNBT());
-		PacketHandler.sendToServer(PacketDataHandlers.ANVIL_ITEM_NAME_HANDLER, toSend);
+		TooManyOres.PACKET_HANDLER.sendToServer(PacketDataHandlers.ANVIL_ITEM_NAME_HANDLER, toSend);
     }
     
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {

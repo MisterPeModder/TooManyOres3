@@ -8,12 +8,12 @@ import com.google.common.collect.ImmutableList;
 
 import misterpemodder.hc.main.blocks.BlockContainerBase;
 import misterpemodder.hc.main.blocks.properties.IBlockNames;
-import misterpemodder.tmo.main.Tmo;
+import misterpemodder.hc.main.utils.GuiHelper;
+import misterpemodder.hc.main.utils.GuiHelper.IGuiElement;
 import misterpemodder.tmo.main.blocks.BlockMachineCasing.EnumMachineCasingVariant;
 import misterpemodder.tmo.main.blocks.itemblock.ItemBlockMachine;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
 import misterpemodder.tmo.main.blocks.properties.PropertyIOPortState;
-import misterpemodder.tmo.main.client.gui.GuiHandler.EnumGuiElements;
 import misterpemodder.tmo.main.tileentity.TileEntityMachine;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.properties.IProperty;
@@ -127,7 +127,7 @@ public abstract class BlockMachine<TE extends TileEntityMachine> extends BlockCo
 		return false;
 	}
 	
-	protected abstract EnumGuiElements getGuiElements();
+	protected abstract IGuiElement getGuiElements();
 	
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
@@ -140,7 +140,7 @@ public abstract class BlockMachine<TE extends TileEntityMachine> extends BlockCo
 			TE te = getTileEntity(world, pos);
 			te.sync();
 			te.onInvOpen(player);
-			player.openGui(Tmo.instance, getGuiElements().ID, world, pos.getX(), pos.getY(), pos.getZ());
+			GuiHelper.openGui(player, getGuiElements(), world, pos);
 		}
 		return true;
 	}

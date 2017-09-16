@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Random;
 
 import misterpemodder.hc.main.blocks.BlockTileEntity;
-import misterpemodder.tmo.main.Tmo;
+import misterpemodder.hc.main.utils.GuiHelper;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksValues;
-import misterpemodder.tmo.main.client.gui.GuiHandler;
+import misterpemodder.tmo.main.client.gui.EnumGuiElements;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumAnvil;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.Block;
@@ -109,7 +109,7 @@ public class BlockTitaniumAnvil extends BlockTileEntity<TileEntityTitaniumAnvil>
 			return true;
 		}
 		else if(this.getTileEntity(world, pos) != null) {
-			player.openGui(Tmo.instance, GuiHandler.EnumGuiElements.TITANIUM_ANVIL.ID, world, pos.getX(), pos.getY(), pos.getZ());
+			GuiHelper.openGui(player, EnumGuiElements.TITANIUM_ANVIL, world, pos);
 		}
 		return true;
 	}

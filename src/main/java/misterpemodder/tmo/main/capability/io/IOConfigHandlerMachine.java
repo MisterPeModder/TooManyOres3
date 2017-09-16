@@ -7,9 +7,9 @@ import javax.annotation.Nullable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
-import misterpemodder.hc.main.network.packet.PacketHandler;
 import misterpemodder.tmo.api.capability.io.IIOConfigHandler;
 import misterpemodder.tmo.api.capability.io.IIOType;
+import misterpemodder.tmo.main.TooManyOres;
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
 import misterpemodder.tmo.main.network.PacketDataHandlers;
 import misterpemodder.tmo.main.tileentity.TileEntityMachine;
@@ -163,14 +163,14 @@ public class IOConfigHandlerMachine implements IIOConfigHandler, INBTSerializabl
 		if(world.isRemote) {
 			toSend.setBoolean("to_server", true);
 			toSend.setInteger("world_dim_id", dimId);
-			PacketHandler.sendToServer(PacketDataHandlers.IO_CONFIG_SYNC_HANDLER, toSend);
+			TooManyOres.PACKET_HANDLER.sendToServer(PacketDataHandlers.IO_CONFIG_SYNC_HANDLER, toSend);
 		
 			BlockPos pos = te.getPos();
 			IBlockState blockState = world.getBlockState(pos);
 			world.notifyBlockUpdate(pos, blockState, blockState.getActualState(world, pos), 3);
 		
 		} else {
-			PacketHandler.sendToDimension(PacketDataHandlers.IO_CONFIG_SYNC_HANDLER, toSend, dimId);
+			TooManyOres.PACKET_HANDLER.sendToDimension(PacketDataHandlers.IO_CONFIG_SYNC_HANDLER, toSend, dimId);
 		}
 	}
 

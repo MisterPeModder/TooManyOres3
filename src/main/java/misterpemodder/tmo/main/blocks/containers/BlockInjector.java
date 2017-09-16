@@ -2,10 +2,11 @@ package misterpemodder.tmo.main.blocks.containers;
 
 import java.util.List;
 
+import misterpemodder.hc.main.utils.GuiHelper.IGuiElement;
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
 import misterpemodder.tmo.main.blocks.properties.EnumBlocksNames;
 import misterpemodder.tmo.main.blocks.properties.PropertyIOPortState;
-import misterpemodder.tmo.main.client.gui.GuiHandler.EnumGuiElements;
+import misterpemodder.tmo.main.client.gui.EnumGuiElements;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -64,7 +65,7 @@ public class BlockInjector extends BlockMachine<TileEntityInjector> {
 	}
 	
 	@Override
-	protected EnumGuiElements getGuiElements() {
+	protected IGuiElement getGuiElements() {
 		return EnumGuiElements.INJECTOR;
 	}
 
