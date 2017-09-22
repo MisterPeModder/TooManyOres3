@@ -10,14 +10,17 @@ import misterpemodder.hc.main.client.gui.GuiContainerBase;
 import misterpemodder.hc.main.client.gui.tabs.TabBase;
 import misterpemodder.hc.main.inventory.ContainerBase;
 import misterpemodder.hc.main.inventory.slot.IHidableSlot;
-import misterpemodder.hc.main.inventory.slot.SlotHidable;
+import misterpemodder.hc.main.inventory.slot.SlotDisableable;
 import misterpemodder.hc.main.tileentity.TileEntityContainerBase;
+import misterpemodder.hc.main.utils.ItemStackUtils;
 import misterpemodder.hc.main.utils.StringUtils;
+import misterpemodder.tmo.main.init.ModItems.TheItems;
+import misterpemodder.tmo.main.items.TMOItemVariants.LockVariant;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLockIconButton;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -27,6 +30,8 @@ public class TabSecurity<C extends ContainerBase<TE>, TE extends TileEntityConta
 	public static final int LOCK_BUTTON_ID = 10;
 	private final boolean isLarge;
 	
+	public static final String ID = TMORefs.MOD_ID + ".security";
+	
 	public TabSecurity(boolean isLarge) {
 		super(TabPos.TOP_LEFT);
 		this.isLarge = isLarge;
@@ -34,7 +39,7 @@ public class TabSecurity<C extends ContainerBase<TE>, TE extends TileEntityConta
 	
 	@Override
 	public String getTabID() {
-		return TabBase.SECURITY_TAB_ID;
+		return ID;
 	}
 	
 	@Override
@@ -72,23 +77,22 @@ public class TabSecurity<C extends ContainerBase<TE>, TE extends TileEntityConta
 
 	@Override
 	public ItemStack getItemStack() {
-		return new ItemStack(Blocks.STRUCTURE_VOID);
+		return ItemStackUtils.newVariantStack(TheItems.LOCK, LockVariant.BASIC);
 	}
 
 	@Override
 	public TabTexture getTabTexture() {
-		if(isLarge) {
-			return new TabTexture(DEFAULT_TAB_LOCATION, new Point(96,0), new Point(64, 0), new ResourceLocationTmo("textures/gui/container/titanium_chest/security.png"), new Dimension(212, 132), new Dimension(256, 256));
-		} else {
-			return new TabTexture(DEFAULT_TAB_LOCATION, new Point(96,0), new Point(64, 0), new ResourceLocationTmo("textures/gui/container/security.png"), new Dimension(212, 100));
-		}
+		if(isLarge)
+			return new TabTexture(TMORefs.TAB_LOCATION, new Point(96 ,0), new Point(64, 0), new ResourceLocationTmo("textures/gui/container/titanium_chest/security.png"), new Dimension(212, 132), new Dimension(256, 256));
+		else
+			return new TabTexture(TMORefs.TAB_LOCATION, new Point(96, 0), new Point(64, 0), new ResourceLocationTmo("textures/gui/container/security.png"), new Dimension(212, 100));
 	}
 
 	@Override
 	public boolean shouldDisplaySlot(IHidableSlot slot) {
 		TileEntity te = guiContainer.container.getTileEntity();
-		if(te instanceof ILockable && slot instanceof SlotHidable) {
-			return ((SlotHidable)slot).getItemHandler() == ((ILockable)te).getLockItemHandler();
+		if(te instanceof ILockable && slot instanceof SlotDisableable) {
+			return ((SlotDisableable)slot).getItemHandler() == ((ILockable)te).getLockItemHandler();
 		}
 		return false;
 	}
@@ -106,7 +110,7 @@ public class TabSecurity<C extends ContainerBase<TE>, TE extends TileEntityConta
 	@Override
 	public void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
-		if(guiContainer.isPointInRegion(8, 18, 16, 16, mouseX, mouseY)) {
+		if(guiContainer.isPointInTheRegion(8, 18, 16, 16, mouseX, mouseY)) {
 			GuiContainerBase.addHoveringText(Arrays.asList(StringUtils.translate("gui.slot.lock.name"), StringUtils.translate("gui.slot.lock.desc")), 250);
 	    }
 	}

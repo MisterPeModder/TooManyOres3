@@ -1,7 +1,5 @@
 package misterpemodder.tmo.main.client.gui.tabs;
 
-import java.awt.Dimension;
-import java.awt.Point;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +8,7 @@ import misterpemodder.hc.main.client.gui.GuiContainerBase;
 import misterpemodder.hc.main.client.gui.RecipeClickableAreaHC;
 import misterpemodder.hc.main.client.gui.tabs.TabMain;
 import misterpemodder.hc.main.inventory.slot.IHidableSlot;
-import misterpemodder.hc.main.inventory.slot.SlotHidable;
+import misterpemodder.hc.main.inventory.slot.SlotDisableable;
 import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.main.compat.jei.destabilizer.RecipeCategoryDestabilizer;
 import misterpemodder.tmo.main.compat.jei.endermatter.RecipeCategoryEnderMatter;
@@ -32,15 +30,15 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 
 	@Override
 	public TabTexture getTabTexture() {
-		return new TabTexture(DEFAULT_TAB_LOCATION, new Point(0,0), new Point(32, 0), new ResourceLocationTmo("textures/gui/container/destabilizer_main.png"), new Dimension(212, 100));
+		return new TabTexture(new ResourceLocationTmo("textures/gui/container/destabilizer_main.png"));
 	}
 	
 	@Override
 	public void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 		
-		if(geElementTank() != null) {
-			geElementTank().drawTank(mouseX, mouseY, guiContainer);
+		if(getElementTank() != null) {
+			getElementTank().drawTank(mouseX, mouseY, guiContainer);
 		}
 		
 		ContainerElementArrow arrow = guiContainer.container.arrow;
@@ -63,9 +61,9 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 	public void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		
-		List<String> strs = this.geElementTank() != null? this.geElementTank().getHoverDesc(mouseX, mouseY, guiContainer) : new ArrayList<>();
+		List<String> strs = this.getElementTank() != null? this.getElementTank().getHoverDesc(mouseX, mouseY, guiContainer) : new ArrayList<>();
 		
-		if(strs.isEmpty() && guiContainer.isPointInRegion(12, 83, 138, 6, mouseX, mouseY)) {
+		if(strs.isEmpty() && guiContainer.isPointInTheRegion(12, 83, 138, 6, mouseX, mouseY)) {
 			TileEntityDestabilizer te = getTileEntity();
 			if(te != null) {
 				strs.add(StringUtils.translate("gui.bar.ender")+": "+te.getEnderMatterAmount());
@@ -80,16 +78,16 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 	
 	@Override
 	public void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-		if(geElementTank() == null || !this.geElementTank().mouseClicked(mouseX, mouseY, mouseButton, guiContainer)) {
+		if(getElementTank() == null || !this.getElementTank().mouseClicked(mouseX, mouseY, mouseButton, guiContainer)) {
 			super.mouseClicked(mouseX, mouseY, mouseButton);
 		}
 	}
 	
 	@Override
 	public boolean shouldDisplaySlot(IHidableSlot slot) {
-		if(slot instanceof SlotHidable) {
+		if(slot instanceof SlotDisableable) {
 			TileEntityDestabilizer te = getTileEntity();
-			IItemHandler h = ((SlotHidable)slot).getItemHandler();
+			IItemHandler h = ((SlotDisableable)slot).getItemHandler();
 			return h == te.getInventory() || h == te.getEnder();
 		}
 		return false;
@@ -108,7 +106,7 @@ public class TabMainDestabilizer extends TabMain<ContainerDestabilizer, TileEnti
 		};
 	}
 	
-	private ContainerElementTank geElementTank() {
+	private ContainerElementTank getElementTank() {
 		return guiContainer.container.tank;
 	}
 

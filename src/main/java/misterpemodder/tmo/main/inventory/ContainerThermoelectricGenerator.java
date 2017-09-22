@@ -5,7 +5,7 @@ import java.util.List;
 
 import misterpemodder.hc.main.inventory.elements.ContainerElementVerticalEnergyBar;
 import misterpemodder.hc.main.inventory.elements.ISyncedContainerElement;
-import misterpemodder.hc.main.inventory.slot.SlotHidable;
+import misterpemodder.hc.main.inventory.slot.SlotDisableable;
 import misterpemodder.tmo.main.inventory.elements.ContainerElementTank;
 import misterpemodder.tmo.main.tileentity.TileEntityThemoelectricGenerator;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,6 +36,7 @@ public class ContainerThermoelectricGenerator extends ContainerBaseTMO<TileEntit
 	public ContainerElementTank rightTank;
 	public ContainerElementVerticalEnergyBar energyBar;
 	private ContainerElementSmallEnergyBar smallEnergyBar;
+	private static final List<Integer> DEFAULT_SLOT_INDEXES = Arrays.asList(41,42,43,44);
 
 	public ContainerThermoelectricGenerator(TileEntityThemoelectricGenerator te, InventoryPlayer playerInv) {
 		super(te, playerInv, 100);
@@ -43,16 +44,16 @@ public class ContainerThermoelectricGenerator extends ContainerBaseTMO<TileEntit
 
 	@Override
 	protected List<Integer> getDefaultSlotIndexes() {
-		return Arrays.asList(41,42,43,44);
+		return DEFAULT_SLOT_INDEXES;
 	}
 	
 	@Override
 	protected void setTeSlots(TileEntityThemoelectricGenerator te) {
-		this.addSlotToContainer(new SlotHidable(te.getInventory(), 0, 159, 74, true));
-		this.addSlotToContainer(new SlotHidable(te.getInventory(), 1, 186, 70, true));
+		this.addSlotToContainer(new SlotDisableable(te.getInventory(), 0, 159, 74, true));
+		this.addSlotToContainer(new SlotDisableable(te.getInventory(), 1, 186, 70, true));
 		
-		this.addSlotToContainer(new SlotHidable(te.getTankBucketSlots(), 0, 50, 14, true));
-		this.addSlotToContainer(new SlotHidable(te.getTankBucketSlots(), 1, 88, 14, true));
+		this.addSlotToContainer(new SlotDisableable(te.getTankBucketSlots(), 0, 50, 14, true));
+		this.addSlotToContainer(new SlotDisableable(te.getTankBucketSlots(), 1, 88, 14, true));
 	}
 	
 	@Override
@@ -109,24 +110,13 @@ public class ContainerThermoelectricGenerator extends ContainerBaseTMO<TileEntit
         return itemstack;
     }
 	
-	@Override
-	public void onContainerClosed(EntityPlayer playerIn) {
-		super.onContainerClosed(playerIn);
-		
-		for (int i = 0; i < 9; ++i) {
-            ItemStack itemstack = this.craftMatrix.removeStackFromSlot(i);
-            if (!itemstack.isEmpty()) {
-            	if (!this.mergeItemStack(itemstack, 0, 42, false)) {
-            		playerIn.dropItem(itemstack, false);
-            	}
-            }
-        }
-
-        this.craftResult.setInventorySlotContents(0, ItemStack.EMPTY);
-	}
-	
 	public int getSmallEnergyBarFillPercent() {
 		return this.smallEnergyBar != null ? this.smallEnergyBar.fillPercent : 0;
+	}
+	
+	@Override
+	protected boolean mergeItemStackMainInv(ItemStack stack) {
+		return this.mergeItemStack(stack, 0, 42, false);
 	}
 	
 	private static class ContainerElementSmallEnergyBar implements ISyncedContainerElement {
@@ -168,6 +158,11 @@ public class ContainerThermoelectricGenerator extends ContainerBaseTMO<TileEntit
 			this.fillPercent = data.getInteger("percent");
 		}
 		
+	}
+	
+	@Override
+	public boolean canInteractWith(EntityPlayer playerIn) {
+		return true;
 	}
 
 }

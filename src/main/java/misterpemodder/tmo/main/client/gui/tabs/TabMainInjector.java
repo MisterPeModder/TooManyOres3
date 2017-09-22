@@ -1,7 +1,5 @@
 package misterpemodder.tmo.main.client.gui.tabs;
 
-import java.awt.Dimension;
-import java.awt.Point;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +9,7 @@ import misterpemodder.hc.main.client.gui.RecipeClickableAreaHC;
 import misterpemodder.hc.main.client.gui.tabs.TabBase;
 import misterpemodder.hc.main.client.gui.tabs.TabMain;
 import misterpemodder.hc.main.inventory.slot.IHidableSlot;
-import misterpemodder.hc.main.inventory.slot.SlotHidable;
+import misterpemodder.hc.main.inventory.slot.SlotDisableable;
 import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.api.recipe.IInjectorRecipe.TransferMode;
 import misterpemodder.tmo.main.compat.jei.injector.RecipeCategoryInjector;
@@ -41,7 +39,7 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 
 	@Override
 	public TabTexture getTabTexture() {
-		return new TabTexture(DEFAULT_TAB_LOCATION, new Point(0,0), new Point(32, 0), new ResourceLocationTmo("textures/gui/container/injector_main.png"), new Dimension(212, 100));
+		return new TabTexture(new ResourceLocationTmo("textures/gui/container/injector_main.png"));
 	}
 	
 	@Override
@@ -115,9 +113,9 @@ public class TabMainInjector extends TabMain<ContainerInjector, TileEntityInject
 	
 	@Override
 	public boolean shouldDisplaySlot(IHidableSlot slot) {
-		if(slot instanceof SlotHidable) {
+		if(slot instanceof SlotDisableable) {
 			TileEntityInjector te = getTileEntity();
-			IItemHandler h = ((SlotHidable)slot).getItemHandler();
+			IItemHandler h = ((SlotDisableable)slot).getItemHandler();
 			return h == te.getInventory() || h == te.output;
 		}
 		return false;

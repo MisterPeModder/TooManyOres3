@@ -8,6 +8,7 @@ import misterpemodder.hc.main.inventory.ContainerBase;
 import misterpemodder.hc.main.inventory.slot.IHidableSlot;
 import misterpemodder.hc.main.tileentity.TileEntityContainerBase;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
@@ -37,11 +38,10 @@ public class TabInfo<C extends ContainerBase<TE>, TE extends TileEntityContainer
 
 	@Override
 	public TabTexture getTabTexture() {
-		if(isLarge) {
-			return new TabTexture(DEFAULT_TAB_LOCATION, new Point(0,28), new Point(32, 28), new ResourceLocationTmo("textures/gui/container/titanium_chest/info.png"), new Dimension(212, 132), new Dimension(256, 256));
-		} else {
-			return new TabTexture(DEFAULT_TAB_LOCATION, new Point(0,28), new Point(32, 28), new ResourceLocationTmo("textures/gui/container/info.png"), new Dimension(212, 100));
-		}
+		if(isLarge)
+			return new TabTexture(TMORefs.TAB_LOCATION, new Point(0, 0), new Point(32, 0), new ResourceLocationTmo("textures/gui/container/titanium_chest/info.png"), new Dimension(212, 132), new Dimension(256, 256));
+		else
+			return new TabTexture(TMORefs.TAB_LOCATION, new Point(0, 0), new Point(32, 0), new ResourceLocationTmo("textures/gui/container/info.png"), new Dimension(212, 100));
 	}
 
 	@Override

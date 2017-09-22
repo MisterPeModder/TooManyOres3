@@ -1,6 +1,6 @@
 package misterpemodder.tmo.main.capability.item;
 
-import misterpemodder.hc.main.capabilty.SyncedItemHandler;
+import misterpemodder.hc.main.capabilty.item.SyncedItemHandler;
 import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.main.capability.IMachineElementHandler;
 import misterpemodder.tmo.main.capability.io.IOConfigHandlerMachine;

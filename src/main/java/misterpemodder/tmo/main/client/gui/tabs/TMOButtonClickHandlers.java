@@ -13,7 +13,7 @@ import misterpemodder.tmo.main.tileentity.TileEntityMachine;
 import net.minecraftforge.common.util.Constants;
 
 public enum TMOButtonClickHandlers {
-	SECURITY(TabBase.SECURITY_TAB_ID, (bId, world, pos, te, info) -> {
+	SECURITY(TabSecurity.ID, (bId, world, pos, te, info) -> {
 		if(bId == TabSecurity.LOCK_BUTTON_ID) {
 			if(te instanceof ILockable && info.hasKey("locked")) {
 				((ILockable)te).setLocked(info.getBoolean("locked"));
@@ -32,7 +32,7 @@ public enum TMOButtonClickHandlers {
 		}
 		return false;
 	}),
-	IO(TabBase.IO_TAB_ID, (bId, world, pos, te, info) -> {
+	IO(TabIO.ID, (bId, world, pos, te, info) -> {
 		if(te instanceof TileEntityMachine && info.hasKey("autoPushPull")) {
 			boolean autoPushPull = info.getBoolean("autoPushPull");
 			if(bId == TabIO.AUTO_PUSH_BUTTON_ID) {

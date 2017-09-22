@@ -1,9 +1,8 @@
 package misterpemodder.tmo.main;
 
 import misterpemodder.tmo.main.init.ModEnchants;
-import misterpemodder.tmo.main.utils.TMORefs;
+import misterpemodder.tmo.main.init.ModItems.TheItems;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class TMOTab extends CreativeTabs {
@@ -16,7 +15,7 @@ public class TMOTab extends CreativeTabs {
 
 	@Override
 	public ItemStack getTabIconItem() {
-		return new ItemStack(Item.getByNameOrId(TMORefs.PREFIX+"tab_icon"));
+		return new ItemStack(TheItems.TAB_ICON.getItem());
 	}
 	
 	@Override

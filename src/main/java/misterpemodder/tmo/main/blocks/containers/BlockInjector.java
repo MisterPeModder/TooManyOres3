@@ -10,6 +10,7 @@ import misterpemodder.tmo.main.client.gui.EnumGuiElements;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -40,7 +41,7 @@ public class BlockInjector extends BlockMachine<TileEntityInjector> {
 	}
 
 	@Override
-	public TileEntityInjector createNewTileEntity(World world, IBlockState state) {
+	public TileEntityInjector createTileEntity(World world, IBlockState state) {
 		return new TileEntityInjector();
 	}
 	
@@ -67,6 +68,11 @@ public class BlockInjector extends BlockMachine<TileEntityInjector> {
 	@Override
 	protected IGuiElement getGuiElements() {
 		return EnumGuiElements.INJECTOR;
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World worldIn, int meta) {
+		return new TileEntityInjector();
 	}
 
 }

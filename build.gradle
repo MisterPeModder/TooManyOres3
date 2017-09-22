@@ -27,6 +27,7 @@ minecraft {
     
     runDir = "run"
     mappings = "snapshot_20161220"
+    makeObfSourceJar = false
 }
 
 
@@ -46,24 +47,24 @@ processResources {
 }
 
 repositories {
-  maven { //JEI
-    url = "http://dvs1.progwml6.com/files/maven"
-  }
-  maven { // The One Probe
-    name 'tterrag maven'
-    url "http://maven.tterrag.com/"
+	maven { //JEI
+		url = "http://dvs1.progwml6.com/files/maven"
+	}
+	maven { // The One Probe
+		name 'tterrag maven'
+		url "http://maven.tterrag.com/"
 	}
 }
 
 dependencies {
-  deobfCompile "mezz.jei:jei_${mc_version}:${jei_version}:api"
-  runtime "mezz.jei:jei_${mc_version}:${jei_version}"
-  deobfCompile "mcjty.theoneprobe:TheOneProbe:${top_version}"
+	deobfCompile "mezz.jei:jei_${mc_version}:${jei_version}"
+  	runtime "mezz.jei:jei_${mc_version}:${jei_version}"
+  	deobfCompile "mcjty.theoneprobe:TheOneProbe:${top_version}"
 }
 
 sourceSets {
     main {
-        java { srcDirs = ["$projectDir/src/main/java"] }
+		java { srcDirs = ["$projectDir/src/main/java"] }
         resources { srcDirs = ["$projectDir/src/main/resources"] }
     }
 }

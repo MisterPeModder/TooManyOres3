@@ -1,7 +1,5 @@
 package misterpemodder.tmo.main.client.gui.tabs;
 
-import java.awt.Dimension;
-import java.awt.Point;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +8,7 @@ import misterpemodder.hc.main.client.gui.GuiContainerBase;
 import misterpemodder.hc.main.client.gui.tabs.TabMain;
 import misterpemodder.hc.main.inventory.elements.ContainerElementVerticalEnergyBar;
 import misterpemodder.hc.main.inventory.slot.IHidableSlot;
-import misterpemodder.hc.main.inventory.slot.SlotHidable;
+import misterpemodder.hc.main.inventory.slot.SlotDisableable;
 import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.main.blocks.BlockMachineCasing.EnumMachineCasingVariant;
 import misterpemodder.tmo.main.blocks.base.BlockMachine;
@@ -37,7 +35,7 @@ public class TabMainThermoelectricGenerator extends TabMain<ContainerThermoelect
 
 	@Override
 	public TabTexture getTabTexture() {
-		return new TabTexture(DEFAULT_TAB_LOCATION, new Point(0,0), new Point(32, 0), new ResourceLocationTmo("textures/gui/container/thermo_generator.png"), new Dimension(212, 100));
+		return new TabTexture(new ResourceLocationTmo("textures/gui/container/thermo_generator.png"));
 	}
 	
 	@Override
@@ -127,10 +125,10 @@ public class TabMainThermoelectricGenerator extends TabMain<ContainerThermoelect
 			if(tank != null) {
 				strs.addAll(tank.getHoverDesc(mouseX, mouseY, guiContainer));
 			}
-			if(getEnergyBar() != null && guiContainer.isPointInRegion(68, 13, 18, 82, mouseX, mouseY)) {
+			if(getEnergyBar() != null && guiContainer.isPointInTheRegion(68, 13, 18, 82, mouseX, mouseY)) {
 				strs.addAll(getEnergyBar().getDisplayText());
 			}
-			else if(guiContainer.isPointInRegion(184, 88, 20, 8, mouseX, mouseY)) {
+			else if(guiContainer.isPointInTheRegion(184, 88, 20, 8, mouseX, mouseY)) {
 				strs.add(guiContainer.container.getSmallEnergyBarFillPercent() + "%");
 			}
 		}
@@ -173,9 +171,9 @@ public class TabMainThermoelectricGenerator extends TabMain<ContainerThermoelect
 	
 	@Override
 	public boolean shouldDisplaySlot(IHidableSlot slot) {
-		if(slot instanceof SlotHidable) {
+		if(slot instanceof SlotDisableable) {
 			TileEntityThemoelectricGenerator te = getTileEntity();
-			IItemHandler h = ((SlotHidable)slot).getItemHandler();
+			IItemHandler h = ((SlotDisableable)slot).getItemHandler();
 			return h == te.getInventory() || h == te.getTankBucketSlots();
 		}
 		return false;

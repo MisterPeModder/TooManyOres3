@@ -116,11 +116,11 @@ public class ContainerElementTank extends Gui implements ISyncedContainerElement
 	}
 
 	private boolean isButtonHovered(int mouseX, int mouseY, GuiContainerBase<?,?> c) {
-		return c.isPointInRegion(x + (isButtonLeft? 0 : 29), y, 11, 11, mouseX, mouseY);
+		return c.isPointInTheRegion(x + (isButtonLeft? 0 : 29), y, 11, 11, mouseX, mouseY);
 	}
 	
 	public boolean isTankHovered(int mouseX, int mouseY, GuiContainerBase<?,?> c) {
-		return c.isPointInRegion(x, y, WIDTH, HEIGHT, mouseX, mouseY);
+		return c.isPointInTheRegion(x, y, WIDTH, HEIGHT, mouseX, mouseY);
 	}
 
 	@Override

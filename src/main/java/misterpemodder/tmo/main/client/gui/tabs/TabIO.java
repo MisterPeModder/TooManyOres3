@@ -22,6 +22,7 @@ import misterpemodder.tmo.main.client.gui.GuiButtonToggle;
 import misterpemodder.tmo.main.tileentity.TileEntityMachine;
 import misterpemodder.tmo.main.utils.EnumBlockSide;
 import misterpemodder.tmo.main.utils.ResourceLocationTmo;
+import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -47,6 +48,8 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine> ex
 	public static final int IO_LEFT_BUTTON_ID = 40;
 	public static final int IO_RIGHT_BUTTON_ID = 41;
 	
+	public static final String ID = TMORefs.MOD_ID + ".io";
+	
 	private final IOConfigHandlerMachine configHandler;
 	private static int ioIndex = 0;
 
@@ -57,7 +60,7 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine> ex
 	
 	@Override
 	public String getTabID() {
-		return TabBase.IO_TAB_ID;
+		return ID;
 	}
 	
 	@Override
@@ -82,7 +85,7 @@ public class TabIO<C extends ContainerBase<TE>, TE extends TileEntityMachine> ex
 
 	@Override
 	public TabTexture getTabTexture() {
-		return new TabTexture(DEFAULT_TAB_LOCATION, new Point(96,28), new Point(64, 28), new ResourceLocationTmo("textures/gui/container/io.png"), new Dimension(212, 100));
+		return new TabTexture(TMORefs.TAB_LOCATION, new Point(96, 28), new Point(64, 28), new ResourceLocationTmo("textures/gui/container/io.png"), new Dimension(212, 100));
 	}
 	
 	@Override

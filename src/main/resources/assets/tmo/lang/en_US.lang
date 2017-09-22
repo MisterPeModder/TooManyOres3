@@ -293,9 +293,6 @@ gui.thermoElectricGenerator.text.temperature.desc=Temperature difference
 gui.bar.ender=Ender matter
 gui.temperature.desc=Temperature
 
-#Security
-protectedBlock.noBreaking=You don't have the permissions to break this %s!
-
 #Death Messages
 death.tmo.fluid.frozium.0=%s has been transformed into an ice cube
 death.tmo.fluid.frozium.1=%s wasn't warm enough.

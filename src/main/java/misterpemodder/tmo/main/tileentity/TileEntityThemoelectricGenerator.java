@@ -7,7 +7,7 @@ import javax.annotation.Nonnull;
 import org.apache.commons.lang3.tuple.Pair;
 
 import misterpemodder.hc.main.blocks.properties.IBlockNames;
-import misterpemodder.hc.main.capabilty.SyncedItemHandler;
+import misterpemodder.hc.main.capabilty.item.SyncedItemHandler;
 import misterpemodder.tmo.api.TooManyOresAPI;
 import misterpemodder.tmo.main.blocks.BlockMachineCasing.EnumMachineCasingVariant;
 import misterpemodder.tmo.main.blocks.base.BlockMachine;

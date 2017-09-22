@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import misterpemodder.tmo.main.TMOTab;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.util.ResourceLocation;
 
 public class TMORefs {
 	public static final String MOD_ID = "tmo";
@@ -19,7 +20,7 @@ public class TMORefs {
 	
 	public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
 	
-	public static CreativeTabs TMO_TAB = new TMOTab("TMO");
+	public static final CreativeTabs TMO_TAB = new TMOTab("TMO");
 	
 	public static final String PREFIX = TMORefs.MOD_ID+":";
 	
@@ -29,5 +30,7 @@ public class TMORefs {
 	public static boolean topLoaded = false;
 	public static boolean baublesEnabled = false;
 	public static final String TOP_TAG = "theoneprobe";
+	
+	public static final ResourceLocation TAB_LOCATION = new ResourceLocationTmo("textures/gui/container/tabs.png");
 	
 }

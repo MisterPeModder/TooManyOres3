@@ -53,7 +53,7 @@ public class BlockDestabilizer extends BlockMachine<TileEntityDestabilizer> {
 	}
 
 	@Override
-	public TileEntityDestabilizer createNewTileEntity(World world, IBlockState state) {
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityDestabilizer();
 	}
 	

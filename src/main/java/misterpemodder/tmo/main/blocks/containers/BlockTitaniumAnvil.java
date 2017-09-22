@@ -97,7 +97,7 @@ public class BlockTitaniumAnvil extends BlockTileEntity<TileEntityTitaniumAnvil>
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, IBlockState state) {
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityTitaniumAnvil();
 	}
 	

@@ -266,9 +266,6 @@ gui.thermoElectricGenerator.text.temperature.desc=Difference de temperature
 gui.bar.ender=Matière de l'ender
 gui.temperature.desc=Temperature
 
-#Sécurité
-protectedBlock.noBreaking=Vous n'avez pas les permissions pour casser ce(tte) %s!
-
 #Messages de mort
 death.tmo.fluid.frozium.0=%s à été transformé en glaçon.
 death.tmo.fluid.frozium.1=%s n'était pas assez chaud.

@@ -7,7 +7,7 @@ import com.google.common.base.Predicate;
 
 import misterpemodder.hc.main.inventory.elements.ISyncedContainerElement;
 import misterpemodder.hc.main.inventory.slot.SlotFiltered;
-import misterpemodder.hc.main.inventory.slot.SlotHidable;
+import misterpemodder.hc.main.inventory.slot.SlotDisableable;
 import misterpemodder.tmo.main.inventory.elements.ContainerElementTank;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,7 +44,7 @@ public class ContainerInjector extends ContainerCraftingMachine<TileEntityInject
 	
 	@Override
 	protected void setTeSlots(TileEntityInjector te) {
-		this.addSlotToContainer(new SlotHidable(te.getInventory(), 0, 107, 42, true));
+		this.addSlotToContainer(new SlotDisableable(te.getInventory(), 0, 107, 42, true));
 		
 		this.addSlotToContainer(new SlotFiltered(te.output, 0, 155, 42, true, new Predicate<ItemStack>(){
 			public boolean apply(ItemStack t) {
@@ -101,19 +101,13 @@ public class ContainerInjector extends ContainerCraftingMachine<TileEntityInject
     }
 	
 	@Override
-	public void onContainerClosed(EntityPlayer playerIn) {
-		super.onContainerClosed(playerIn);
-		
-		for (int i = 0; i < 9; ++i) {
-            ItemStack itemstack = this.craftMatrix.removeStackFromSlot(i);
-            if (!itemstack.isEmpty()) {
-            	if (!this.mergeItemStack(itemstack, 0, 42, false)) {
-            		playerIn.dropItem(itemstack, false);
-            	}
-            }
-        }
-
-        this.craftResult.setInventorySlotContents(0, ItemStack.EMPTY);
+	protected boolean mergeItemStackMainInv(ItemStack stack) {
+		return this.mergeItemStack(stack, 0, 42, false);
+	}
+	
+	@Override
+	public boolean canInteractWith(EntityPlayer playerIn) {
+		return true;
 	}
 
 }

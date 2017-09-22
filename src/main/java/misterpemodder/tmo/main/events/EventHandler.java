@@ -4,11 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import misterpemodder.hc.api.block.ILockable;
-import misterpemodder.hc.api.capability.owner.IOwnerHandler;
-import misterpemodder.hc.main.apiimpl.capability.owner.CapabilityOwner;
 import misterpemodder.hc.main.enchant.EnchantementBase;
-import misterpemodder.hc.main.tileentity.TileEntityContainerBase;
 import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.main.blocks.BlockLamp;
 import misterpemodder.tmo.main.capability.CapabilityFreezing;
@@ -44,16 +40,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameRules.ValueType;
 import net.minecraft.world.GameType;
-import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
@@ -62,7 +54,6 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -145,35 +136,6 @@ public class EventHandler {
 		if(!event.getWorld().getGameRules().hasRule("dropInvContents")) {
 			event.getWorld().getGameRules().addGameRule("dropInvContents", "true", ValueType.BOOLEAN_VALUE);
 		}
-	}
-	
-	@SubscribeEvent
-	public static void blockBreakEvent(BlockEvent.BreakEvent event) {
-		World world = event.getWorld();
-		BlockPos pos = event.getPos();
-		TileEntity t = world.getTileEntity(pos);
-		
-		if(t != null) {
-			
-			boolean flag1 = t instanceof ILockable && ((ILockable)t).isLocked();
-			
-			IOwnerHandler ownerHandler = t.getCapability(CapabilityOwner.OWNER_HANDLER_CAPABILITY, null);
-			boolean flag2 = false;
-			if(ownerHandler != null) {
-				flag2 = ownerHandler.hasOwner() && !ownerHandler.isOwner(event.getPlayer());
-			}
-			
-			if(flag1 && flag2) {
-				IBlockState state = world.getBlockState(pos);
-				event.getPlayer().sendMessage(new TextComponentString(TextFormatting.RED + StringUtils.translate("protectedBlock.noBreaking", state.getBlock().getItem(world, pos, state).getDisplayName())));
-				event.setCanceled(true);
-				if(t instanceof TileEntityContainerBase) {
-					((TileEntityContainerBase)t).sync();
-					t.markDirty();
-				}
-			}
-		}
-		
 	}
 	
 	@SubscribeEvent

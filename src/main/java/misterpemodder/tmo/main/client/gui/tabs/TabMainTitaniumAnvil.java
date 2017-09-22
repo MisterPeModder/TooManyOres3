@@ -1,7 +1,5 @@
 package misterpemodder.tmo.main.client.gui.tabs;
 
-import java.awt.Dimension;
-import java.awt.Point;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -12,7 +10,7 @@ import misterpemodder.hc.main.client.gui.GuiContainerBase;
 import misterpemodder.hc.main.client.gui.RecipeClickableAreaHC;
 import misterpemodder.hc.main.client.gui.tabs.TabMain;
 import misterpemodder.hc.main.inventory.slot.IHidableSlot;
-import misterpemodder.hc.main.inventory.slot.SlotHidable;
+import misterpemodder.hc.main.inventory.slot.SlotDisableable;
 import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.main.TooManyOres;
 import misterpemodder.tmo.main.enchant.EnchantementXpCostReduction;
@@ -60,7 +58,7 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
 
 	@Override
 	public TabTexture getTabTexture() {
-		return new TabTexture(DEFAULT_TAB_LOCATION, new Point(0,0), new Point(32, 0), new ResourceLocationTmo("textures/gui/container/anvil_main.png"), new Dimension(212, 100));
+		return new TabTexture(new ResourceLocationTmo("textures/gui/container/anvil_main.png"));
 	}
 	
 	public void initButtons(int topX, int topY) {
@@ -96,9 +94,9 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
 	
 	@Override
 	public boolean shouldDisplaySlot(IHidableSlot slot) {
-		if(slot instanceof SlotHidable) {
+		if(slot instanceof SlotDisableable) {
 			ContainerTitaniumAnvil c = guiContainer.container;
-			return ((SlotHidable)slot).getItemHandler() == c.input || ((SlotHidable)slot).getItemHandler() == c.output || super.shouldDisplaySlot(slot);
+			return ((SlotDisableable)slot).getItemHandler() == c.input || ((SlotDisableable)slot).getItemHandler() == c.output || super.shouldDisplaySlot(slot);
 		}
 		return false;
 	}
@@ -137,10 +135,10 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
         this.nameField.drawTextBox();
 		
 		guiContainer.getFontRenderer().drawString(StringUtils.translate("gui.tab.titaniumAnvil.name"), 8, 6, 4210752);
-		if(guiContainer.isPointInRegion(45, 26, 16, 16, mouseX, mouseY) && !guiContainer.container.getSlot(41).getHasStack()) {
+		if(guiContainer.isPointInTheRegion(45, 26, 16, 16, mouseX, mouseY) && !guiContainer.container.getSlot(41).getHasStack()) {
 			GuiContainerBase.addHoveringText(Arrays.asList(StringUtils.translate("gui.slot.hammer.name")), 250);
 	    }
-		else if(guiContainer.isPointInRegion(nameField.xPosition-guiContainer.getGuiLeft(), nameField.yPosition-guiContainer.getGuiTop(), nameField.width, nameField.height, mouseX, mouseY) && !nameField.getText().isEmpty()) {
+		else if(guiContainer.isPointInTheRegion(nameField.xPosition-guiContainer.getGuiLeft(), nameField.yPosition-guiContainer.getGuiTop(), nameField.width, nameField.height, mouseX, mouseY) && !nameField.getText().isEmpty()) {
 			GuiContainerBase.addHoveringText(Arrays.asList(TextFormatting.GRAY+""+TextFormatting.ITALIC+StringUtils.translate("gui.anvil.nameField.clear")), 250);
 		}
 
@@ -218,7 +216,7 @@ public class TabMainTitaniumAnvil extends TabMain<ContainerTitaniumAnvil, TileEn
     }
     
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-    	boolean flag = guiContainer.isPointInRegion(nameField.xPosition-guiContainer.getGuiLeft(), nameField.yPosition-guiContainer.getGuiTop(), nameField.width, nameField.height, mouseX, mouseY);
+    	boolean flag = guiContainer.isPointInTheRegion(nameField.xPosition-guiContainer.getGuiLeft(), nameField.yPosition-guiContainer.getGuiTop(), nameField.width, nameField.height, mouseX, mouseY);
     	if(flag && mouseButton == 1) {
     		this.nameField.setText("");
     		this.renameItem();

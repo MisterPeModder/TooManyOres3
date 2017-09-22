@@ -1,6 +1,6 @@
 package misterpemodder.tmo.main.tileentity;
 
-import misterpemodder.hc.main.capabilty.SyncedItemHandler;
+import misterpemodder.hc.main.capabilty.item.SyncedItemHandler;
 import misterpemodder.hc.main.tileentity.TileEntityContainerBase;
 import misterpemodder.hc.main.utils.StringUtils;
 import misterpemodder.tmo.api.item.IItemForgeHammer;

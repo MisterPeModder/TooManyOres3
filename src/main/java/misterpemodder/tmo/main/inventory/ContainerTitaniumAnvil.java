@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Predicate;
 
 import misterpemodder.hc.main.inventory.slot.SlotFiltered;
-import misterpemodder.hc.main.inventory.slot.SlotHidable;
+import misterpemodder.hc.main.inventory.slot.SlotDisableable;
 import misterpemodder.tmo.api.item.IItemForgeHammer;
 import misterpemodder.tmo.main.enchant.EnchantementXpCostReduction;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumAnvil;
@@ -57,6 +57,8 @@ public class ContainerTitaniumAnvil extends ContainerBaseTMO<TileEntityTitaniumA
 	 * Crafing result   0-0 ... 54 - 54
 	 * Baubles          0-6 ... 55 - 61
 	 */
+    
+    private static final List<Integer> DEFAULT_SLOT_INDEXES = Arrays.asList(41,42,43,44);
 
 	public ContainerTitaniumAnvil(TileEntityTitaniumAnvil te, InventoryPlayer playerInv) {
 		super(te, playerInv, 100);
@@ -64,7 +66,7 @@ public class ContainerTitaniumAnvil extends ContainerBaseTMO<TileEntityTitaniumA
 	
 	@Override
 	protected List<Integer> getDefaultSlotIndexes() {
-		return Arrays.asList(41,42,43,44);
+		return DEFAULT_SLOT_INDEXES;
 	}
 
 	@Override
@@ -99,8 +101,8 @@ public class ContainerTitaniumAnvil extends ContainerBaseTMO<TileEntityTitaniumA
 			}
 		});
 		
-		this.addSlotToContainer(new SlotHidable(input, 0, 45, 53, true));
-		this.addSlotToContainer(new SlotHidable(input, 1, 94, 53, true));
+		this.addSlotToContainer(new SlotDisableable(input, 0, 45, 53, true));
+		this.addSlotToContainer(new SlotDisableable(input, 1, 94, 53, true));
 		
 		Predicate<ItemStack> t = new Predicate<ItemStack>(){
 			public boolean apply(ItemStack t) {
@@ -198,15 +200,6 @@ public class ContainerTitaniumAnvil extends ContainerBaseTMO<TileEntityTitaniumA
 	
 	public void onContainerClosed(EntityPlayer playerIn) {
         super.onContainerClosed(playerIn);
-
-        for(int i = 0; i < 9; ++i) {
-            ItemStack itemstack = this.craftMatrix.removeStackFromSlot(i);
-            if (!itemstack.isEmpty()) {
-            	if (!this.mergeItemStack(itemstack, 0, 36, false)) {
-            		playerIn.dropItem(itemstack, false);
-            	}
-            }
-        }
         
         for(int i = 0; i < 2; ++i) {
         	ItemStack stack = input.extractItem(i, input.getStackInSlot(i).getCount(), false);
@@ -216,10 +209,14 @@ public class ContainerTitaniumAnvil extends ContainerBaseTMO<TileEntityTitaniumA
             	}
             }
         }
-
-        craftResult.setInventorySlotContents(0, ItemStack.EMPTY);
+        
         output.setStackInSlot(0, ItemStack.EMPTY);
     }
+	
+	@Override
+	protected boolean mergeItemStackMainInv(ItemStack stack) {
+		return this.mergeItemStack(stack, 0, 36, false);
+	}
 	
 	public void onCraftMatrixChanged(IInventory inventory) {
         super.onCraftMatrixChanged(inventory);
@@ -454,5 +451,10 @@ public class ContainerTitaniumAnvil extends ContainerBaseTMO<TileEntityTitaniumA
 
         this.updateRepairOutput();
     }
+	
+	@Override
+	public boolean canInteractWith(EntityPlayer playerIn) {
+		return true;
+	}
 
 }

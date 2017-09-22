@@ -1,10 +1,7 @@
 package misterpemodder.tmo.main.inventory;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import invtweaks.api.container.ChestContainer;
-import misterpemodder.hc.main.inventory.slot.SlotHidable;
+import misterpemodder.hc.main.inventory.slot.SlotDisableable;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -28,7 +25,7 @@ public class ContainerTitaniumChest extends ContainerBaseTMO<TileEntityTitaniumC
 	 * Titanium Chest 	0-65 .. 42 - 107
 	 * Crafing result   0-0 ... 108 - 108
 	 * Crafing matrix   0-8 ... 109 - 117
-	 * Baubles          0-6 ... 118 - 124 
+	 * Baubles          0-6 ... 118 - 124
 	 */
 
 	public ContainerTitaniumChest(TileEntityTitaniumChest te, InventoryPlayer playerInv) {
@@ -36,16 +33,11 @@ public class ContainerTitaniumChest extends ContainerBaseTMO<TileEntityTitaniumC
 	}
 	
 	@Override
-	protected List<Integer> getDefaultSlotIndexes() {
-		return new ArrayList<>();
-	}
-	
-	@Override
 	protected void setTeSlots(TileEntityTitaniumChest te) {
 		ItemStackHandler h = te.getInventory();
 		for (int y = 0; y < ContainerTitaniumChest.numRows; ++y) {
             for (int x = 0; x < 11; ++x) {
-                this.addSlotToContainer(new SlotHidable(h, x + y * 11, 8 + x * 18, 18 + y * 18, false));
+                this.addSlotToContainer(new SlotDisableable(h, x + y * 11, 8 + x * 18, 18 + y * 18, false));
             }
         }
 	}
@@ -102,19 +94,14 @@ public class ContainerTitaniumChest extends ContainerBaseTMO<TileEntityTitaniumC
         return itemstack;
     }
 	
-	public void onContainerClosed(EntityPlayer playerIn) {
-        super.onContainerClosed(playerIn);
-
-        for (int i = 0; i < 9; ++i) {
-            ItemStack itemstack = this.craftMatrix.removeStackFromSlot(i);
-            if (!itemstack.isEmpty()) {
-            	if (!this.mergeItemStack(itemstack, 42, 107, false)) {
-            		playerIn.dropItem(itemstack, false);
-            	}
-            }
-        }
-
-        this.craftResult.setInventorySlotContents(0, ItemStack.EMPTY);
-    }
+	@Override
+	protected boolean mergeItemStackMainInv(ItemStack stack) {
+		return this.mergeItemStack(stack, 42, 107, false);
+	}
+	
+	@Override
+	public boolean canInteractWith(EntityPlayer playerIn) {
+		return true;
+	}
 
 }
