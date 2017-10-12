@@ -3,7 +3,6 @@ package misterpemodder.tmo.main.client.gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import misterpemodder.hc.main.client.gui.GuiContainerBase;
 import misterpemodder.hc.main.client.gui.tabs.TabBase;
 import misterpemodder.hc.main.client.gui.tabs.TabPlayerInventory;
 import misterpemodder.tmo.main.client.gui.tabs.TabArmorInventoryTMO;
@@ -14,7 +13,7 @@ import misterpemodder.tmo.main.inventory.ContainerInjector;
 import misterpemodder.tmo.main.tileentity.TileEntityInjector;
 import net.minecraft.entity.player.InventoryPlayer;
 
-public class GuiContainerInjector extends GuiContainerBase<ContainerInjector, TileEntityInjector> {
+public class GuiContainerInjector extends GuiContainerBaseTMO<ContainerInjector, TileEntityInjector> {
 	
 	public GuiContainerInjector(InventoryPlayer playerInv, TileEntityInjector te) {
 		super(new ContainerInjector(te, playerInv));

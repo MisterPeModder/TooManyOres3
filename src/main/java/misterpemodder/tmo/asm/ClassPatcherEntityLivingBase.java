@@ -21,7 +21,7 @@ public class ClassPatcherEntityLivingBase extends ClassPatcher {
 
 	@Override
 	public boolean matches(String transformedClassName) {
-		return transformedClassName.equals("net.minecraft.client.renderer.entity.RenderLivingBase") || transformedClassName.equals("net.minecraft.entity.player.EntityPlayer");
+		return transformedClassName.equals("net.minecraft.entity.EntityLivingBase") || transformedClassName.equals("net.minecraft.entity.player.EntityPlayer");
 	}
 
 	@Override
@@ -45,6 +45,7 @@ public class ClassPatcherEntityLivingBase extends ClassPatcher {
 					@Override
 					public void makePatch(MethodNode method, AbstractInsnNode targetNode, int nodeIndex) {
 						AbstractInsnNode[] nodes = method.instructions.toArray();
+						
         				for(int j = nodeIndex+1; j < nodes.length; j++) {
         					AbstractInsnNode n = nodes[j];
         					method.instructions.remove(n);
@@ -52,6 +53,7 @@ public class ClassPatcherEntityLivingBase extends ClassPatcher {
         				}
         				
         				method.instructions.insert(targetNode, new MethodInsnNode(INVOKESTATIC, "misterpemodder/tmo/asm/EntityLivingBaseHandler", "isMovementBlocked", "(Lnet/minecraft/entity/EntityLivingBase;)Z", false));
+
 					}
 					
 				});

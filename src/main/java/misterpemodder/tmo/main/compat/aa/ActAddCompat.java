@@ -11,8 +11,10 @@ import net.minecraft.item.ItemStack;
 
 public final class ActAddCompat {
 	
+	public static boolean actAddLoaded = false;
+	
 	public static void init() {
-		if(TMORefs.actAddLoaded) {
+		if(ActAddCompat.actAddLoaded) {
 			TMORefs.LOGGER.info("Found Actually Additions: Loading integration...");
 			
 			registerMiningLensOres();

@@ -57,7 +57,7 @@ public class BlockPistonStrongBase extends BlockPistonBase implements IHexianBlo
 		this.setHarvestLevel("pickaxe", 1);
 		
 		this.isSticky = isSticky;
-		this.shouldBeExtended = ReflectionHelper.findMethod(BlockPistonBase.class, Blocks.PISTON, new String[]{"shouldBeExtended"}, World.class, BlockPos.class, EnumFacing.class);
+		this.shouldBeExtended = ReflectionHelper.findMethod(BlockPistonBase.class, "shouldBeExtended", "func_176318_b", World.class, BlockPos.class, EnumFacing.class);
 	}
 
 	@Override

@@ -26,11 +26,7 @@ public class TMORefs {
 	
 	public static final String JEI_DESC_UNLOC_NAME = ".jeidesc";
 	
-	public static boolean actAddLoaded = false;
-	public static boolean topLoaded = false;
 	public static boolean baublesEnabled = false;
-	public static final String TOP_TAG = "theoneprobe";
-	
 	public static final ResourceLocation TAB_LOCATION = new ResourceLocationTmo("textures/gui/container/tabs.png");
 	
 }

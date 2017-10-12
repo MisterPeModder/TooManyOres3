@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import misterpemodder.hc.main.items.IHexianItem;
 import misterpemodder.hc.main.utils.ItemStackUtils;
+import misterpemodder.tmo.main.compat.top.TheOneProbeCompat;
 import misterpemodder.tmo.main.items.materials.TmoArmorMaterial;
 import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -40,7 +41,7 @@ public class ItemTmoArmor extends ItemArmor implements IHexianItem{
 			this.addPropertyOverride(new ResourceLocation("probe"), new IItemPropertyGetter() {
 	            @SideOnly(Side.CLIENT)
 	            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
-	            	if(stack.hasTagCompound() && stack.getTagCompound().hasKey(TMORefs.TOP_TAG)) {
+	            	if(stack.hasTagCompound() && stack.getTagCompound().hasKey(TheOneProbeCompat.TOP_TAG)) {
 	            		return 1.0F;
 	            	}
 	            	return 0.0F;
@@ -56,7 +57,7 @@ public class ItemTmoArmor extends ItemArmor implements IHexianItem{
 		if(((ItemTmoArmor) itemIn).armorType == EntityEquipmentSlot.HEAD) {
 			ItemStack helmetStack = new ItemStack(itemIn);
 			NBTTagCompound tag = new NBTTagCompound();
-			tag.setInteger(TMORefs.TOP_TAG, 1);
+			tag.setInteger(TheOneProbeCompat.TOP_TAG, 1);
 			helmetStack.setTagCompound(tag);
 			subItems.add(helmetStack);
 		}

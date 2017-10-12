@@ -6,6 +6,7 @@ import java.util.List;
 import misterpemodder.hc.main.items.properties.ItemVariant;
 import misterpemodder.hc.main.utils.ItemStackUtils;
 import misterpemodder.tmo.main.blocks.BlockDeco;
+import misterpemodder.tmo.main.compat.top.TheOneProbeCompat;
 import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.init.ModItems.TheItems;
@@ -43,7 +44,7 @@ public final class Crafting {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TheBlocks.DECORATION.getBlock(), 16, BlockDeco.EnumVariant.TITANIUM_PLATING.getMeta()), "TT ", "TT ", "   ", 'T', "plateTitanium"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TheBlocks.DECORATION.getBlock(), 16, BlockDeco.EnumVariant.COPPER_DECO_BLOCK.getMeta()), "CC ", "CC ", "   ", 'C', "ingotCopper"));
 		
-		if(TMORefs.topLoaded) {
+		if(TheOneProbeCompat.topLoaded) {
 			RecipeSorter.register(TMORefs.PREFIX+"proberecipe", RecipeProbe.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
 			GameRegistry.addRecipe(new RecipeProbe());
 		}

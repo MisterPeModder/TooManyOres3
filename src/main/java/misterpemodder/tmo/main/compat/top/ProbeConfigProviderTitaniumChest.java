@@ -1,43 +1,25 @@
 package misterpemodder.tmo.main.compat.top;
 
-import com.google.common.base.Function;
-
 import mcjty.theoneprobe.api.IProbeConfig;
 import mcjty.theoneprobe.api.IProbeConfig.ConfigMode;
 import mcjty.theoneprobe.api.IProbeConfigProvider;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeHitEntityData;
-import mcjty.theoneprobe.api.ITheOneProbe;
 import misterpemodder.hc.api.capability.owner.IOwnerHandler;
 import misterpemodder.hc.main.apiimpl.capability.owner.CapabilityOwner;
 import misterpemodder.tmo.main.config.ConfigValues;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumChest;
-import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.event.FMLInterModComms;
 
 public class ProbeConfigProviderTitaniumChest implements IProbeConfigProvider {
 	
 	private ConfigMode showChestContentsOld;
 	private ConfigMode showChestContentsDetailedOld;
 	private boolean configModified = false;
-	
-	public static void init() {
-		if(TMORefs.topLoaded) {
-			TMORefs.LOGGER.info("Found The One Probe: Sending request for the ITheOneProbe instance...");
-			FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", GetTheOneProbe.class.getName());
-		} else {
-			TMORefs.LOGGER.info("The One Probe not found: integration not loading");
-		}
-	}
-	
-	public static void getTheOneProbe(ITheOneProbe theOneProbe) {
-		theOneProbe.registerProbeConfigProvider(new ProbeConfigProviderTitaniumChest());
-	}
 	
 	public void getProbeConfig(IProbeConfig config, EntityPlayer player, World world, Entity entity, IProbeHitEntityData data) {}
 
@@ -68,15 +50,6 @@ public class ProbeConfigProviderTitaniumChest implements IProbeConfigProvider {
     	}
     }
     
-    public static class GetTheOneProbe implements Function<ITheOneProbe, Void> {
 
-		@Override
-		public Void apply(ITheOneProbe theOneProbe) {
-			TMORefs.LOGGER.info("=> Registering: Titanium Chest probe config provider"); 
-			theOneProbe.registerProbeConfigProvider(new ProbeConfigProviderTitaniumChest());
-			return null;
-		}
-    	
-    }
 
 }

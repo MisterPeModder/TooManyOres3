@@ -31,8 +31,10 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Optional;
 
-public class BlockLamp extends BlockBaseTMO implements IProbeInfoAccessor{
+@Optional.Interface(iface = "mcjty.theoneprobe.api.IProbeInfoAccessor", modid = "theoneprobe")
+public class BlockLamp extends BlockBaseTMO implements IProbeInfoAccessor {
 	
 	//blockstates
 	public static final PropertyBool ACTIVATED = PropertyBool.create("activated");
@@ -137,6 +139,7 @@ public class BlockLamp extends BlockBaseTMO implements IProbeInfoAccessor{
 	}
 	
 	@Override
+	@Optional.Method(modid = "theoneprobe")
 	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
 		if(ConfigValues.BoolValues.TOP_COMPAT.currentValue) {
 			IBlockState state = world.getBlockState(data.getPos());

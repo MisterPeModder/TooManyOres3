@@ -1,7 +1,7 @@
 package misterpemodder.tmo.main.init.crafting;
 
+import misterpemodder.tmo.main.compat.top.TheOneProbeCompat;
 import misterpemodder.tmo.main.items.ItemTmoArmor;
-import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -21,7 +21,7 @@ public class RecipeProbe implements IRecipe {
 		for (int i = 0; i < inv.getSizeInventory(); ++i) {
             ItemStack stack = inv.getStackInSlot(i);
             
-            if(stack.getItem() instanceof ItemTmoArmor && (!stack.hasTagCompound() || !stack.getTagCompound().hasKey(TMORefs.TOP_TAG))) {
+            if(stack.getItem() instanceof ItemTmoArmor && (!stack.hasTagCompound() || !stack.getTagCompound().hasKey(TheOneProbeCompat.TOP_TAG))) {
             	if(((ItemTmoArmor)stack.getItem()).armorType == EntityEquipmentSlot.HEAD) {
             		helmetCount++;
             	}
@@ -54,7 +54,7 @@ public class RecipeProbe implements IRecipe {
             		} else {
             			compound = new NBTTagCompound();
             		}
-            		compound.setInteger(TMORefs.TOP_TAG, 1);
+            		compound.setInteger(TheOneProbeCompat.TOP_TAG, 1);
             		result.setTagCompound(compound);
             	}
             }

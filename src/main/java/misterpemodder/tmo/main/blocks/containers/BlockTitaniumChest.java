@@ -53,6 +53,7 @@ public class BlockTitaniumChest extends BlockCustomChest<TileEntityTitaniumChest
 	}
 
 	@Override
+	@Optional.Method(modid = "theoneprobe")
 	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
 		TileEntity te = world.getTileEntity(data.getPos());
 		if(te != null && te instanceof TileEntityTitaniumChest && ConfigValues.BoolValues.TOP_COMPAT.currentValue) { 

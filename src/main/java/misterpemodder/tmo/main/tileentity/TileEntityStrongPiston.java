@@ -28,7 +28,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
-import net.minecraftforge.fml.relauncher.ReflectionHelper.UnableToFindMethodException;
 
 public class TileEntityStrongPiston extends TileEntityPiston {
 	
@@ -44,13 +43,16 @@ public class TileEntityStrongPiston extends TileEntityPiston {
 	public NBTTagCompound containedTileEntityNBT;
 	
 	static {
-		lastProgressField = ReflectionHelper.findField(TileEntityPiston.class, "lastProgress");
-		progressField = ReflectionHelper.findField(TileEntityPiston.class, "progress");
-		moving_entity = ReflectionHelper.findField(TileEntityPiston.class, "MOVING_ENTITY");
-		moveByPositionAndProgressMethod = tryFindMethod(TileEntityPiston.class, new String[]{"moveByPositionAndProgress"}, AxisAlignedBB.class, AxisAlignedBB.class);
-		getMovementAreaMethod = tryFindMethod(TileEntityPiston.class, new String[]{"getMovementArea"}, AxisAlignedBB.class, AxisAlignedBB.class, EnumFacing.class, double.class);
-		getMovementMethod = tryFindMethod(TileEntityPiston.class, new String[]{"getMovement"}, double.class, AxisAlignedBB.class, EnumFacing.class, AxisAlignedBB.class);
-		fixEntityWithinPistonBaseMethod = tryFindMethod(TileEntityPiston.class, new String[]{"fixEntityWithinPistonBase"}, void.class, Entity.class, EnumFacing.class, double.class);
+		
+		//TODO Use access transformers instead.
+		lastProgressField = ReflectionHelper.findField(TileEntityPiston.class, "lastProgress", "field_145870_n");
+		progressField = ReflectionHelper.findField(TileEntityPiston.class, "progress", "field_145873_m");
+		moving_entity = ReflectionHelper.findField(TileEntityPiston.class, "MOVING_ENTITY", "field_190613_i");
+		
+		moveByPositionAndProgressMethod = ReflectionHelper.findMethod(TileEntityPiston.class, "moveByPositionAndProgress", "func_190607_a", AxisAlignedBB.class, AxisAlignedBB.class);
+		getMovementAreaMethod = ReflectionHelper.findMethod(TileEntityPiston.class, "getMovementArea", "func_190610_a", AxisAlignedBB.class, AxisAlignedBB.class, EnumFacing.class, double.class);
+		getMovementMethod = ReflectionHelper.findMethod(TileEntityPiston.class, "getMovement", "func_190612_a", double.class, AxisAlignedBB.class, EnumFacing.class, AxisAlignedBB.class);
+		fixEntityWithinPistonBaseMethod = ReflectionHelper.findMethod(TileEntityPiston.class, "fixEntityWithinPistonBase", "func_190605_a", void.class, Entity.class, EnumFacing.class, double.class);
 	}
 	
 	public TileEntityStrongPiston() {}
@@ -63,23 +65,6 @@ public class TileEntityStrongPiston extends TileEntityPiston {
         	this.containedTileEntityClazz = tileEntityIn.getClass();
         }
     }
-	
-	/**Fallback method to avoid as much as possible errors due to different mappings*/
-	public static Method tryFindMethod(Class<?> clazz, String[] methodNames, Class<?> returnType, Class<?>... methodTypes) {
-		try {
-			return ReflectionHelper.findMethod(clazz, null, methodNames, methodTypes);
-		} catch(UnableToFindMethodException e) {
-			
-		}
-		
-		Method m = null;
-		for(Method method : clazz.getDeclaredMethods()) {
-			if(returnType == method.getReturnType() && method.getParameterTypes().equals(methodTypes)) {
-				return m;
-			}
-		}
-		throw new UnableToFindMethodException(methodNames, new NoSuchMethodException());
-	}
 	
 	public void setContainedTileEntity(World world, BlockPos pos) {
 		try {

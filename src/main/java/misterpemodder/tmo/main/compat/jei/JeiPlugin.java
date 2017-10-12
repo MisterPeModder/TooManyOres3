@@ -38,6 +38,7 @@ import misterpemodder.tmo.main.compat.jei.injector.RecipeHandlerInjector;
 import misterpemodder.tmo.main.compat.jei.injector.RecipeMakerInjector;
 import misterpemodder.tmo.main.compat.jei.probeHelmet.ProbeHelmetRecipeHandler;
 import misterpemodder.tmo.main.compat.jei.probeHelmet.ProbeHelmetRecipeMaker;
+import misterpemodder.tmo.main.compat.top.TheOneProbeCompat;
 import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import misterpemodder.tmo.main.init.ModItems;
 import misterpemodder.tmo.main.init.ModItems.TheItems;
@@ -81,7 +82,7 @@ public class JeiPlugin implements IModPlugin {
 		
 		this.addDescriptions(modRegistry, modRegistry.getIngredientRegistry());
 		
-		if(TMORefs.topLoaded) {
+		if(TheOneProbeCompat.topLoaded) {
 			modRegistry.addRecipeHandlers(new ProbeHelmetRecipeHandler());
 			this.addRecipeMaker(new ProbeHelmetRecipeMaker());
 		}

@@ -3,7 +3,6 @@ package misterpemodder.tmo.main.client.gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import misterpemodder.hc.main.client.gui.GuiContainerBase;
 import misterpemodder.hc.main.client.gui.tabs.TabBase;
 import misterpemodder.hc.main.client.gui.tabs.TabPlayerInventory;
 import misterpemodder.tmo.main.client.gui.tabs.TabArmorInventoryTMO;
@@ -13,7 +12,7 @@ import misterpemodder.tmo.main.inventory.ContainerTitaniumAnvil;
 import misterpemodder.tmo.main.tileentity.TileEntityTitaniumAnvil;
 import net.minecraft.entity.player.InventoryPlayer;
 
-public class GuiContainerTitaniumAnvil extends GuiContainerBase<ContainerTitaniumAnvil, TileEntityTitaniumAnvil>{
+public class GuiContainerTitaniumAnvil extends GuiContainerBaseTMO<ContainerTitaniumAnvil, TileEntityTitaniumAnvil>{
 
 	public GuiContainerTitaniumAnvil(InventoryPlayer playerInv, TileEntityTitaniumAnvil te) {
 		super(new ContainerTitaniumAnvil(te, playerInv));

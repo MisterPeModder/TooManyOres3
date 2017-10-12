@@ -5,10 +5,10 @@ import static misterpemodder.tmo.api.TooManyOresAPI.registryHandler;
 import de.ellpeck.actuallyadditions.api.ActuallyAdditionsAPI;
 import misterpemodder.hc.main.utils.ItemStackUtils;
 import misterpemodder.tmo.main.blocks.BlockStorage;
+import misterpemodder.tmo.main.compat.aa.ActAddCompat;
 import misterpemodder.tmo.main.init.ModBlocks.TheBlocks;
 import misterpemodder.tmo.main.init.ModItems.TheItems;
 import misterpemodder.tmo.main.items.TMOItemVariants.IngotVariant;
-import misterpemodder.tmo.main.utils.TMORefs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -25,7 +25,7 @@ public final class EnderMatterItems {
 		registryHandler.registerEnderMatterItem(ItemStackUtils.newVariantStack(TheItems.INGOT, IngotVariant.ENDER_MATTER_INGOT), 64);
 		registryHandler.registerEnderMatterItem(new ItemStack(TheBlocks.STORAGE_BLOCK.getBlock(),1,BlockStorage.EnumVariant.ENDER_MATTER_BLOCK.getMeta()), 576);
 		
-		if(TMORefs.actAddLoaded) {
+		if(ActAddCompat.actAddLoaded) {
 			registerModItem(ActuallyAdditionsAPI.MOD_ID, "item_misc", 1, 19, 1000);
 			registerModItem(ActuallyAdditionsAPI.MOD_ID, "block_misc", 1, 6, 128);
 		}

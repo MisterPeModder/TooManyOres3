@@ -42,7 +42,7 @@ import misterpemodder.tmo.main.client.gui.EnumGuiElements;
 import misterpemodder.tmo.main.client.gui.tabs.TMOButtonClickHandlers;
 import misterpemodder.tmo.main.commands.CommandTMO;
 import misterpemodder.tmo.main.compat.aa.ActAddCompat;
-import misterpemodder.tmo.main.compat.top.ProbeConfigProviderTitaniumChest;
+import misterpemodder.tmo.main.compat.top.TheOneProbeCompat;
 import misterpemodder.tmo.main.config.ConfigHandler;
 import misterpemodder.tmo.main.config.ConfigValues;
 import misterpemodder.tmo.main.init.MachineRecipes;
@@ -149,8 +149,8 @@ public class TooManyOres extends AbstractMod {
 		
 		super.initialization(event);
 		
-		TMORefs.actAddLoaded = Loader.isModLoaded(ActuallyAdditionsAPI.MOD_ID);
-		TMORefs.topLoaded = Loader.isModLoaded("theoneprobe");
+		ActAddCompat.actAddLoaded = Loader.isModLoaded(ActuallyAdditionsAPI.MOD_ID);
+		TheOneProbeCompat.topLoaded = Loader.isModLoaded("theoneprobe");
 		TMORefs.baublesEnabled = ConfigValues.BoolValues.BAUBLES_COMPAT.currentValue;
 		
 		SlimeBlock.registerSlimeBlocksInternal();
@@ -165,7 +165,7 @@ public class TooManyOres extends AbstractMod {
 		ModBrewing.registerBrewingRecipes();
 		MachineRecipes.registerRecipes();
 		ActAddCompat.init();
-		ProbeConfigProviderTitaniumChest.init();
+		TheOneProbeCompat.init();
 
 	}
 
