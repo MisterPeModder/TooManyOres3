@@ -1,4 +1,4 @@
-# Fabric Example Mod
+# Too Many Ores 3
 
 The minecraft 1.14 version of TooManyOres3.
 
