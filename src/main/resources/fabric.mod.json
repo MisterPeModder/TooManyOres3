@@ -2,7 +2,7 @@
   "id": "tmo",
   "name": "Too Many Ores",
   "description": "Experimental TMO port.",
-  "version": "0.0.1",
+  "version": "3.0.0",
   "side": "universal",
   "initializer": "misterpemodder.tmo.TooManyOres",
   "requires": {

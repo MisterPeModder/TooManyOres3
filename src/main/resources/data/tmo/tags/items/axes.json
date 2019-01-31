@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "tmo:titanium_axe",
+    "tmo:dark_titanium_axe",
+    "tmo:copper_axe",
+    "tmo:frozium_axe",
+    "tmo:ignum_axe"
+  ]
+}

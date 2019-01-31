@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "tmo:titanium_pickaxe",
+    "tmo:dark_titanium_pickaxe",
+    "tmo:copper_pickaxe",
+    "tmo:frozium_pickaxe",
+    "tmo:ignum_pickaxe"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "tmo:titanium_shovel",
+    "tmo:dark_titanium_shovel",
+    "tmo:copper_shovel",
+    "tmo:frozium_shovel",
+    "tmo:ignum_shovel"
+  ]
+}

@@ -1,9 +1,9 @@
 {
   "required": true,
-  "package": "misterpemodder.tmo.mixin",
+  "package": "misterpemodder.tmo.mixin.client",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "ExampleMixin"
+    "ItemRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

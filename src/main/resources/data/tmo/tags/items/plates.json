@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "tmo:titanium_plate",
+    "tmo:iron_plate",
+    "tmo:redstone_plate",
+    "tmo:hallowed_plate"
+  ]
+}

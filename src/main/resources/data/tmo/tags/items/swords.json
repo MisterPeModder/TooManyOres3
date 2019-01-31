@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "tmo:titanium_sword",
+    "tmo:dark_titanium_sword",
+    "tmo:copper_sword",
+    "tmo:frozium_sword",
+    "tmo:ignum_sword"
+  ]
+}

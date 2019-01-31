@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "tmo:titanium_ingot",
+    "tmo:dark_titanium_ingot",
+    "tmo:poor_titanium_ingot",
+    "tmo:titanite_ingot",
+    "tmo:copper_ingot",
+    "tmo:darkanium_ingot",
+    "tmo:ender_matter_ingot",
+    "tmo:ancient_gold_ingot",
+    "tmo:platinum_ingot",
+    "tmo:redstone_ingot",
+    "tmo:carbon_ingot"
+  ]
+}

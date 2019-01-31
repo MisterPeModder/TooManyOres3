@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "tmo:titanium_hoe",
+    "tmo:dark_titanium_hoe",
+    "tmo:copper_hoe",
+    "tmo:frozium_hoe",
+    "tmo:ignum_hoe"
+  ]
+}

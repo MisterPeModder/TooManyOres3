@@ -1,13 +1,18 @@
 package misterpemodder.tmo;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import misterpemodder.tmo.item.TmoItems;
+import misterpemodder.tmo.tags.TmoItemTags;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.util.registry.Registry;
 
 public class TooManyOres implements ModInitializer {
+	public static final Logger LOGGER = LogManager.getLogger("TooManyOres");
+
 	@Override
 	public void onInitialize() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
-		System.out.println("Hello Fabric world!");
+		TmoItems.register(Registry.ITEM);
+		TmoItemTags.AXES.entries();
 	}
 }

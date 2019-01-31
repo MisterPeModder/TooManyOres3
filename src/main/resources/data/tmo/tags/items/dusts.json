@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "tmo:titanium_dust",
+    "tmo:dirty_titanium_dust",
+    "tmo:poor_titanium_dust",
+    "tmo:titanite_dust",
+    "tmo:copper_dust",
+    "tmo:dirty_copper_dust",
+    "tmo:ancient_gold_dust",
+    "tmo:platinum_dust",
+    "tmo:dirty_platinum_dust",
+    "tmo:frozium_dust",
+    "tmo:ignum_dust"
+  ]
+}
