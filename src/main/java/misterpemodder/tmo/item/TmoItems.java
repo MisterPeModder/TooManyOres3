@@ -10,6 +10,8 @@ import misterpemodder.tmo.item.tool.HammerItem;
 import misterpemodder.tmo.item.tool.TmoAxeItem;
 import misterpemodder.tmo.item.tool.TmoHoeItem;
 import misterpemodder.tmo.item.tool.TmoPickaxeItem;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
@@ -134,6 +136,69 @@ public final class TmoItems {
       add("frozium_hammer", new HammerItem(TmoToolMaterials.FROZIUM));
   public static final HammerItem IGNUM_HAMMER =
       add("ignum_hammer", new HammerItem(TmoToolMaterials.IGNUM));
+
+  public static final ArmorItem TITANIUM_HELMET =
+      add("titanium_helmet", new TmoArmorItem(TmoArmorMaterials.TITANIUM, EquipmentSlot.HEAD));
+  public static final ArmorItem TITANIUM_CHESTPLATE =
+      add("titanium_chestplate", new TmoArmorItem(TmoArmorMaterials.TITANIUM, EquipmentSlot.CHEST));
+  public static final ArmorItem TITANIUM_LEGGINGS =
+      add("titanium_leggings", new TmoArmorItem(TmoArmorMaterials.TITANIUM, EquipmentSlot.LEGS));
+  public static final ArmorItem TITANIUM_BOOTS =
+      add("titanium_boots", new TmoArmorItem(TmoArmorMaterials.TITANIUM, EquipmentSlot.FEET));
+
+  public static final ArmorItem DARK_TITANIUM_HELMET = add("dark_titanium_helmet",
+      new TmoArmorItem(TmoArmorMaterials.DARK_TITANIUM, EquipmentSlot.HEAD));
+  public static final ArmorItem DARK_TITANIUM_CHESTPLATE = add("dark_titanium_chestplate",
+      new TmoArmorItem(TmoArmorMaterials.DARK_TITANIUM, EquipmentSlot.CHEST));
+  public static final ArmorItem DARK_TITANIUM_LEGGINGS = add("dark_titanium_leggings",
+      new TmoArmorItem(TmoArmorMaterials.DARK_TITANIUM, EquipmentSlot.LEGS));
+  public static final ArmorItem DARK_TITANIUM_BOOTS = add("dark_titanium_boots",
+      new TmoArmorItem(TmoArmorMaterials.DARK_TITANIUM, EquipmentSlot.FEET));
+
+  public static final ArmorItem COPPER_HELMET =
+      add("copper_helmet", new TmoArmorItem(TmoArmorMaterials.COPPER, EquipmentSlot.HEAD));
+  public static final ArmorItem COPPER_CHESTPLATE =
+      add("copper_chestplate", new TmoArmorItem(TmoArmorMaterials.COPPER, EquipmentSlot.CHEST));
+  public static final ArmorItem COPPER_LEGGINGS =
+      add("copper_leggings", new TmoArmorItem(TmoArmorMaterials.COPPER, EquipmentSlot.LEGS));
+  public static final ArmorItem COPPER_BOOTS =
+      add("copper_boots", new TmoArmorItem(TmoArmorMaterials.COPPER, EquipmentSlot.FEET));
+
+  public static final ArmorItem FROZIUM_HELMET =
+      add("frozium_helmet", new TmoArmorItem(TmoArmorMaterials.FROZIUM, EquipmentSlot.HEAD));
+  public static final ArmorItem FROZIUM_CHESTPLATE =
+      add("frozium_chestplate", new TmoArmorItem(TmoArmorMaterials.FROZIUM, EquipmentSlot.CHEST));
+  public static final ArmorItem FROZIUM_LEGGINGS =
+      add("frozium_leggings", new TmoArmorItem(TmoArmorMaterials.FROZIUM, EquipmentSlot.LEGS));
+  public static final ArmorItem FROZIUM_BOOTS =
+      add("frozium_boots", new TmoArmorItem(TmoArmorMaterials.FROZIUM, EquipmentSlot.FEET));
+
+  public static final ArmorItem IGNUM_HELMET =
+      add("ignum_helmet", new TmoArmorItem(TmoArmorMaterials.IGNUM, EquipmentSlot.HEAD));
+  public static final ArmorItem IGNUM_CHESTPLATE =
+      add("ignum_chestplate", new TmoArmorItem(TmoArmorMaterials.IGNUM, EquipmentSlot.CHEST));
+  public static final ArmorItem IGNUM_LEGGINGS =
+      add("ignum_leggings", new TmoArmorItem(TmoArmorMaterials.IGNUM, EquipmentSlot.LEGS));
+  public static final ArmorItem IGNUM_BOOTS =
+      add("ignum_boots", new TmoArmorItem(TmoArmorMaterials.IGNUM, EquipmentSlot.FEET));
+
+  public static final ArmorItem DARKANIUM_HELMET =
+      add("darkanium_helmet", new TmoArmorItem(TmoArmorMaterials.DARKANIUM, EquipmentSlot.HEAD));
+  public static final ArmorItem DARKANIUM_CHESTPLATE = add("darkanium_chestplate",
+      new TmoArmorItem(TmoArmorMaterials.DARKANIUM, EquipmentSlot.CHEST));
+  public static final ArmorItem DARKANIUM_LEGGINGS =
+      add("darkanium_leggings", new TmoArmorItem(TmoArmorMaterials.DARKANIUM, EquipmentSlot.LEGS));
+  public static final ArmorItem DARKANIUM_BOOTS =
+      add("darkanium_boots", new TmoArmorItem(TmoArmorMaterials.DARKANIUM, EquipmentSlot.FEET));
+
+  public static final ArmorItem HALLOWED_HELMET =
+      add("hallowed_helmet", new TmoArmorItem(TmoArmorMaterials.HALLOWED, EquipmentSlot.HEAD));
+  public static final ArmorItem HALLOWED_CHESTPLATE =
+      add("hallowed_chestplate", new TmoArmorItem(TmoArmorMaterials.HALLOWED, EquipmentSlot.CHEST));
+  public static final ArmorItem HALLOWED_LEGGINGS =
+      add("hallowed_leggings", new TmoArmorItem(TmoArmorMaterials.HALLOWED, EquipmentSlot.LEGS));
+  public static final ArmorItem HALLOWED_BOOTS =
+      add("hallowed_boots", new TmoArmorItem(TmoArmorMaterials.HALLOWED, EquipmentSlot.FEET));
 
   private static <T extends Item> T add(String id, T item) {
     TMO_ITEMS.put(new Identifier(TmoConstants.MOD_ID, id), item);
