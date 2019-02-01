@@ -1,7 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "tmo:items/darkanium_helmet",
-		"layer1": "tmo:items/helmet_probe"
+        "layer0": "tmo:item/darkanium_helmet",
+        "layer1": "tmo:item/helmet_probe"
     }
 }

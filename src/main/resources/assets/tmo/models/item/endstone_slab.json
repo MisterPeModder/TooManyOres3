@@ -1,6 +1,6 @@
 {
     "parent": "tmo:block/half_slab_all",
-	"textures": {
-        "all": "tmo:blocks/endstone_brick_clean"
+    "textures": {
+        "all": "tmo:block/endstone_brick_clean"
     }
 }

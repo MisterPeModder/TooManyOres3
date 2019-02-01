@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "tmo:items/copper_pickaxe"
+        "layer0": "tmo:item/copper_pickaxe"
     }
 }

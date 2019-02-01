@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "tmo:items/titanium_shovel"
+        "layer0": "tmo:item/titanium_shovel"
     }
 }

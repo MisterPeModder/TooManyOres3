@@ -1,29 +1,81 @@
 {
-    "forge_marker": 1,
-    "defaults": {
-        "textures": {
-            "all": "tmo:blocks/titanium_ore"
-        },
-        "model": "cube_all",
-        "uvlock": true,
+	"forge_marker": 1,
+	"defaults": {
+		"textures": {
+			"all": "tmo:block/titanium_ore"
+		},
+		"model": "cube_all",
+		"uvlock": true,
 		"transform": "forge:default-block"
-    },
+	},
 	"variants": {
-        "normal": [{}],
-        "inventory": [{}],
+		"normal": [
+			{}
+		],
+		"inventory": [
+			{}
+		],
 		"variant": {
-			"titanium": {"textures": {"all": "tmo:blocks/titanium_ore"}},
-			"ancient_gold": {"textures": {"all": "tmo:blocks/ancient_gold_ore"}},
-			"darkanium": {"textures": {"all": "tmo:blocks/darkanium_ore"}},
-			"nether_darkanium": {"textures": {"all": "tmo:blocks/darkanium_ore_nether"}},
-			"frozium": {"textures": {"all": "tmo:blocks/frozium_ore"}},
-			"ignum": {"textures": {"all": "tmo:blocks/ignum_ore"}},
-			"nether_ignum": {"textures": {"all": "tmo:blocks/ignum_ore_nether"}},
-			"platinum": {"textures": {"all": "tmo:blocks/platinum_ore"}},
-			"nether_platinum": {"textures": {"all": "tmo:blocks/platinum_ore_nether"}},
-			"ender_matter": {"textures": {"all": "tmo:blocks/ender_matter_ore"}},
-			"copper": {"textures": {"all": "tmo:blocks/copper_ore"}},
-			"carbon": {"textures": {"all": "tmo:blocks/carbon_ore"}}
+			"titanium": {
+				"textures": {
+					"all": "tmo:block/titanium_ore"
+				}
+			},
+			"ancient_gold": {
+				"textures": {
+					"all": "tmo:block/ancient_gold_ore"
+				}
+			},
+			"darkanium": {
+				"textures": {
+					"all": "tmo:block/darkanium_ore"
+				}
+			},
+			"nether_darkanium": {
+				"textures": {
+					"all": "tmo:block/darkanium_ore_nether"
+				}
+			},
+			"frozium": {
+				"textures": {
+					"all": "tmo:block/frozium_ore"
+				}
+			},
+			"ignum": {
+				"textures": {
+					"all": "tmo:block/ignum_ore"
+				}
+			},
+			"nether_ignum": {
+				"textures": {
+					"all": "tmo:block/ignum_ore_nether"
+				}
+			},
+			"platinum": {
+				"textures": {
+					"all": "tmo:block/platinum_ore"
+				}
+			},
+			"nether_platinum": {
+				"textures": {
+					"all": "tmo:block/platinum_ore_nether"
+				}
+			},
+			"ender_matter": {
+				"textures": {
+					"all": "tmo:block/ender_matter_ore"
+				}
+			},
+			"copper": {
+				"textures": {
+					"all": "tmo:block/copper_ore"
+				}
+			},
+			"carbon": {
+				"textures": {
+					"all": "tmo:block/carbon_ore"
+				}
+			}
 		}
-    }
+	}
 }

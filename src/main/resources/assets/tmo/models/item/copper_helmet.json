@@ -1,7 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "tmo:items/copper_helmet"
+        "layer0": "tmo:item/copper_helmet"
     },
     "overrides": [
         {

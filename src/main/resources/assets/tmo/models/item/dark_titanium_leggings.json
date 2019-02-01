@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "tmo:items/dark_titanium_leggings"
+        "layer0": "tmo:item/dark_titanium_leggings"
     }
 }

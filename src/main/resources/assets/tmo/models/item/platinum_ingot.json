@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "tmo:items/platinum_ingot"
+        "layer0": "tmo:item/platinum_ingot"
     }
 }

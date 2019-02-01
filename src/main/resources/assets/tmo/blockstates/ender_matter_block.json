@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tmo:block/ender_matter_block"
+    }
+  }
+}

@@ -1,7 +1,0 @@
-{
-    "parent": "block/cube_all",
-    "textures": {
-		"particle": "tmo:blocks/gold_brick",
-        "all": "tmo:blocks/gold_brick"
-    }
-}

@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "tmo:items/poor_titanium_dust"
+        "layer0": "tmo:item/poor_titanium_dust"
     }
 }

@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "tmo:titanium_block",
+    "tmo:ancient_gold_block",
+    "tmo:platinum_block",
+    "tmo:darkanium_block",
+    "tmo:frozium_block",
+    "tmo:ignum_block",
+    "tmo:ender_matter_block",
+    "tmo:copper_block",
+    "tmo:titanite_block",
+    "tmo:poor_titanium_block"
+  ]
+}

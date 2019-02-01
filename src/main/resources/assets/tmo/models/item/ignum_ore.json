@@ -1,6 +1,3 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "tmo:blocks/ignum_ore"
-    }
+  "parent": "tmo:block/ignum_ore"
 }

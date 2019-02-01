@@ -1,6 +1,3 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "tmo:blocks/ancient_gold_ore"
-    }
+  "parent": "tmo:block/ancient_gold_ore"
 }

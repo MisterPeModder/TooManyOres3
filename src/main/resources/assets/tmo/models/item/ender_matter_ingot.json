@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "tmo:items/ender_matter_ingot"
+        "layer0": "tmo:item/ender_matter_ingot"
     }
 }

@@ -1,6 +1,6 @@
 {
     "parent": "tmo:block/half_slab_all",
-	"textures": {
-        "all": "tmo:blocks/ignum_brick"
+    "textures": {
+        "all": "tmo:block/ignum_brick"
     }
 }

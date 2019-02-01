@@ -1,0 +1,7 @@
+{
+  "parent": "tmo:block/ore_template",
+  "textures": {
+    "base": "minecraft:block/stone",
+    "ore": "tmo:block/copper_ore"
+  }
+}

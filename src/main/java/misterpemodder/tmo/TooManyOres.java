@@ -2,6 +2,7 @@ package misterpemodder.tmo;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import misterpemodder.tmo.block.TmoBlocks;
 import misterpemodder.tmo.item.TmoItems;
 import misterpemodder.tmo.tags.TmoItemTags;
 import net.fabricmc.api.ModInitializer;
@@ -12,6 +13,7 @@ public class TooManyOres implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		TmoBlocks.register(Registry.BLOCK, Registry.ITEM);
 		TmoItems.register(Registry.ITEM);
 		TmoItemTags.AXES.entries();
 	}

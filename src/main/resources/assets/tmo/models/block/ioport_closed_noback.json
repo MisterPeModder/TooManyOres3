@@ -1,19 +1,68 @@
 {
     "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
     "textures": {
-        "all": "tmo:blocks/ioport_closed"
+        "all": "tmo:block/ioport_closed"
     },
     "elements": [
         {
             "name": "main",
-            "from": [ 4.0, 4.0, 0.7 ], 
-            "to": [ 12.0, 12.0, 1.7 ], 
+            "from": [
+                4.0,
+                4.0,
+                0.7
+            ],
+            "to": [
+                12.0,
+                12.0,
+                1.7
+            ],
             "faces": {
-                "north": { "texture": "#all", "uv": [ 4.0, 4.0, 12.0, 12.0 ] },
-                "east": { "texture": "#all", "uv": [ 4.0, 4.0, 5.0, 12.0 ] },
-                "west": { "texture": "#all", "uv": [ 11.0, 4.0, 12.0, 12.0 ] },
-                "up": { "texture": "#all", "uv": [ 4.0, 4.0, 12.0, 5.0 ] },
-                "down": { "texture": "#all", "uv": [ 4.0, 11.0, 12.0, 12.0 ], "rotation": 180 }
+                "north": {
+                    "texture": "#all",
+                    "uv": [
+                        4.0,
+                        4.0,
+                        12.0,
+                        12.0
+                    ]
+                },
+                "east": {
+                    "texture": "#all",
+                    "uv": [
+                        4.0,
+                        4.0,
+                        5.0,
+                        12.0
+                    ]
+                },
+                "west": {
+                    "texture": "#all",
+                    "uv": [
+                        11.0,
+                        4.0,
+                        12.0,
+                        12.0
+                    ]
+                },
+                "up": {
+                    "texture": "#all",
+                    "uv": [
+                        4.0,
+                        4.0,
+                        12.0,
+                        5.0
+                    ]
+                },
+                "down": {
+                    "texture": "#all",
+                    "uv": [
+                        4.0,
+                        11.0,
+                        12.0,
+                        12.0
+                    ],
+                    "rotation": 180
+                }
             }
         }
     ]

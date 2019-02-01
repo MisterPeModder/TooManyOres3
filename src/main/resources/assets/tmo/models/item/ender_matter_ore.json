@@ -1,6 +1,3 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "tmo:blocks/ender_matter_ore"
-    }
+  "parent": "tmo:block/ender_matter_ore"
 }

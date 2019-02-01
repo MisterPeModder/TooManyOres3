@@ -2,18 +2,30 @@
     "forge_marker": 1,
     "defaults": {
         "textures": {
-            "all": "tmo:blocks/titanium_plating"
+            "all": "tmo:block/titanium_plating"
         },
         "model": "cube_all",
         "uvlock": true,
-		"transform": "forge:default-block"
+        "transform": "forge:default-block"
     },
-	"variants": {
-        "normal": [{}],
-        "inventory": [{}],
-		"variant": {
-			"titanium_plating": {"textures": {"all": "tmo:blocks/titanium_plating"}},
-			"copper_decoration": {"textures": {"all": "tmo:blocks/copper_decoration"}}
-		}
+    "variants": {
+        "normal": [
+            {}
+        ],
+        "inventory": [
+            {}
+        ],
+        "variant": {
+            "titanium_plating": {
+                "textures": {
+                    "all": "tmo:block/titanium_plating"
+                }
+            },
+            "copper_decoration": {
+                "textures": {
+                    "all": "tmo:block/copper_decoration"
+                }
+            }
+        }
     }
 }

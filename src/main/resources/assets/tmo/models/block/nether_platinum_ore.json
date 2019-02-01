@@ -1,0 +1,7 @@
+{
+  "parent": "tmo:block/ore_template",
+  "textures": {
+    "base": "minecraft:block/netherrack",
+    "ore": "tmo:block/nether_platinum_ore"
+  }
+}

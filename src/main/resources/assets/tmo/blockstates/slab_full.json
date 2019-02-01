@@ -2,23 +2,55 @@
     "forge_marker": 1,
     "defaults": {
         "textures": {
-            "all": "tmo:blocks/ancient_gold_brick"
+            "all": "tmo:block/ancient_gold_brick"
         },
         "model": "cube_all",
         "uvlock": true,
-		"transform": "forge:default-block"
+        "transform": "forge:default-block"
     },
-	"variants": {
-        "normal": [{}],
-        "inventory": [{}],
-		"variant": {
-			"ancient_gold": {"textures": {"all": "tmo:blocks/ancient_gold_brick"}},
-			"darkanium": {"textures": {"all": "tmo:blocks/darkanium_brick"}},
-			"endstone": {"textures": {"all": "tmo:blocks/endstone_brick_clean"}},
-			"frozium": {"textures": {"all": "tmo:blocks/frozium_brick"}},
-			"ignum": {"textures": {"all": "tmo:blocks/ignum_brick"}},
-			"gold": {"textures": {"all": "tmo:blocks/gold_brick"}},
-			"platinum": {"textures": {"all": "tmo:blocks/platinum_brick"}}
-		}
+    "variants": {
+        "normal": [
+            {}
+        ],
+        "inventory": [
+            {}
+        ],
+        "variant": {
+            "ancient_gold": {
+                "textures": {
+                    "all": "tmo:block/ancient_gold_brick"
+                }
+            },
+            "darkanium": {
+                "textures": {
+                    "all": "tmo:block/darkanium_brick"
+                }
+            },
+            "endstone": {
+                "textures": {
+                    "all": "tmo:block/endstone_brick_clean"
+                }
+            },
+            "frozium": {
+                "textures": {
+                    "all": "tmo:block/frozium_brick"
+                }
+            },
+            "ignum": {
+                "textures": {
+                    "all": "tmo:block/ignum_brick"
+                }
+            },
+            "gold": {
+                "textures": {
+                    "all": "tmo:block/gold_brick"
+                }
+            },
+            "platinum": {
+                "textures": {
+                    "all": "tmo:block/platinum_brick"
+                }
+            }
+        }
     }
 }

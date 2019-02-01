@@ -3,6 +3,9 @@
   "package": "misterpemodder.tmo.mixin.common",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "BeaconBlockEntityMixin",
+    "BeaconContainerInventoryMixin",
+    "BeaconContainerSlotPaymentMixin",
     "EnchantmentMixin",
     "ItemMixin"
   ],

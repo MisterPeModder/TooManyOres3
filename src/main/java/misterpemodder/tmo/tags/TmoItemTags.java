@@ -8,6 +8,7 @@ import net.minecraft.util.Identifier;
 
 public final class TmoItemTags {
   public static final Tag<Item> AXES = register("axes");
+  public static final Tag<Item> BEACON_PAYMENT = TagRegistry.item(new Identifier("beacon_payment"));
   public static final Tag<Item> DUSTS = register("dusts");
   public static final Tag<Item> GEMS = register("gems");
   public static final Tag<Item> HAMMERS = register("hammers");

@@ -1,30 +1,38 @@
 {
-    "forge_marker": 1,
-    "defaults": {
+	"forge_marker": 1,
+	"defaults": {
 		"textures": {
-			"all": "tmo:blocks/ancient_gold_lamp",
+			"all": "tmo:block/ancient_gold_lamp",
 			"particle": "#all"
-        },
-        "model": "tmo:lamp",
-        "uvlock": true,
+		},
+		"model": "tmo:lamp",
+		"uvlock": true,
 		"transform": "forge:default-block"
-    },
-    "variants": {
-        "normal": [{}],
-        "inventory": [{}],
+	},
+	"variants": {
+		"normal": [
+			{}
+		],
+		"inventory": [
+			{}
+		],
 		"inverted": {
 			"true": {},
 			"false": {}
 		},
 		"activated": {
-			"true": {"textures": {
-				"all": "tmo:blocks/ancient_gold_lamp",
-				"particle": "tmo:blocks/ancient_gold_lamp"
-			}},
-			"false": {"textures": {
-				"all": "tmo:blocks/ancient_gold_lamp_unlit",
-				"particle": "tmo:blocks/ancient_gold_lamp_unlit"
-			}}
+			"true": {
+				"textures": {
+					"all": "tmo:block/ancient_gold_lamp",
+					"particle": "tmo:blocks/ancient_gold_lamp"
+				}
+			},
+			"false": {
+				"textures": {
+					"all": "tmo:block/ancient_gold_lamp_unlit",
+					"particle": "tmo:blocks/ancient_gold_lamp_unlit"
+				}
+			}
 		}
-    }
+	}
 }

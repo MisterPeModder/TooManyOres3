@@ -1,7 +1,0 @@
-{
-    "parent": "block/cube_all",
-    "textures": {
-		"particle": "tmo:blocks/ignum_brick",
-        "all": "tmo:blocks/ignum_brick"
-    }
-}

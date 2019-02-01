@@ -1,7 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "tmo:items/titanium_helmet"
+        "layer0": "tmo:item/titanium_helmet"
     },
     "overrides": [
         {

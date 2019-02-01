@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "tmo:items/frozium_shovel"
+        "layer0": "tmo:item/frozium_shovel"
     }
 }

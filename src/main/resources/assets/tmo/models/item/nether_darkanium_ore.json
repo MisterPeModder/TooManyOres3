@@ -1,6 +1,3 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "tmo:blocks/darkanium_ore_nether"
-    }
+  "parent": "tmo:block/nether_darkanium_ore"
 }

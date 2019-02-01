@@ -1,6 +1,3 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "tmo:blocks/frozium_ore"
-    }
+  "parent": "tmo:block/frozium_ore"
 }

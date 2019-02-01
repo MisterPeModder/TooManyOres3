@@ -1,7 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "tmo:items/frozium_helmet"
+        "layer0": "tmo:item/frozium_helmet"
     },
     "overrides": [
         {

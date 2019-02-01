@@ -23,7 +23,7 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
 public final class TmoItems {
-  private static final Map<Identifier, Item> TMO_ITEMS = new HashMap<>();
+  private static final Map<Identifier, Item> ITEMS = new HashMap<>();
 
   public static final Item TAB_ICON = add("tab_icon", new Item(new Item.Settings()));
   public static final Item TITANIUM_INGOT =
@@ -201,15 +201,15 @@ public final class TmoItems {
       add("hallowed_boots", new TmoArmorItem(TmoArmorMaterials.HALLOWED, EquipmentSlot.FEET));
 
   private static <T extends Item> T add(String id, T item) {
-    TMO_ITEMS.put(new Identifier(TmoConstants.MOD_ID, id), item);
+    ITEMS.put(new Identifier(TmoConstants.MOD_ID, id), item);
     return item;
   }
 
   public static void register(Registry<? super Item> registry) {
-    TooManyOres.LOGGER.info("[TooManyOres] Registering {} items...", TMO_ITEMS.size());
-    for (Map.Entry<Identifier, Item> entry : TMO_ITEMS.entrySet())
+    TooManyOres.LOGGER.info("[TooManyOres] Registering {} items...", ITEMS.size());
+    for (Map.Entry<Identifier, Item> entry : ITEMS.entrySet())
       Registry.register(registry, entry.getKey(), entry.getValue());
-    TMO_ITEMS.clear();
+    ITEMS.clear();
     TooManyOres.LOGGER.info("[TooManyOres] done!");
   }
 

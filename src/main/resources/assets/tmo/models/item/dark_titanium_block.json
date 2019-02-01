@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "tmo:blocks/dark_titanium_block"
+        "all": "tmo:block/dark_titanium_block"
     }
 }

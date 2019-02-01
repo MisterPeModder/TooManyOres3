@@ -1,6 +1,6 @@
 {
     "parent": "tmo:block/half_slab_all",
-	"textures": {
-        "all": "tmo:blocks/gold_brick"
+    "textures": {
+        "all": "tmo:block/gold_brick"
     }
 }
