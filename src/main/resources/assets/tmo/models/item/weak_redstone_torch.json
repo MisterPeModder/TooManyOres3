@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "tmo:blocks/weak_redstone_torch_on"
+        "layer0": "tmo:block/weak_redstone_torch_on"
     }
 }

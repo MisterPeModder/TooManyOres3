@@ -1,25 +1,29 @@
 {
-    "forge_marker": 1,
-    "defaults": {
-		"model": "cube_all",
-		"textures": {
-			"all":"tmo:blocks/strong_piston_top_normal"
-		}
-	},
-    "variants": {
-        "normal": [{}],
-        "inventory": [{}],
-        "facing": {
-			"up": {},
-			"down": {},
-            "north": {},
-            "south": {},
-            "west": {},
-            "east": {}
-        },
-		"type": {
-			"normal": {},
-			"sticky": {}
-		}
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "tmo:block/strong_piston_top_normal"
     }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "facing": {
+      "up": {},
+      "down": {},
+      "north": {},
+      "south": {},
+      "west": {},
+      "east": {}
+    },
+    "type": {
+      "normal": {},
+      "sticky": {}
+    }
+  }
 }

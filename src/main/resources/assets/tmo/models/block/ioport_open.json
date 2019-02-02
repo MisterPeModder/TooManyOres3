@@ -1,8 +1,8 @@
 {
     "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
     "textures": {
-        "front": "tmo:blocks/ioport_open",
-		"back": "tmo:blocks/ioport_back"
+        "front": "tmo:block/ioport_open",
+		"back": "tmo:block/ioport_back"
     },
     "elements": [
         {

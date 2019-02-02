@@ -1,14 +1,14 @@
 {
     "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
     "textures": {
-		"particle": "tmo:blocks/strong_piston_top_inner",
-        "0": "tmo:blocks/strong_piston_top_normal",
-        "1": "tmo:blocks/strong_piston_side",
-        "2": "tmo:blocks/strong_piston_top_inner",
-        "3": "tmo:blocks/strong_piston_extension",
-        "4": "tmo:blocks/strong_piston_top_sticky",
-        "5": "tmo:blocks/strong_piston_top_inner",
-        "6": "tmo:blocks/strong_piston_extension"
+		"particle": "tmo:block/strong_piston_top_inner",
+        "0": "tmo:block/strong_piston_top_normal",
+        "1": "tmo:block/strong_piston_side",
+        "2": "tmo:block/strong_piston_top_inner",
+        "3": "tmo:block/strong_piston_extension",
+        "4": "tmo:block/strong_piston_top_sticky",
+        "5": "tmo:block/strong_piston_top_inner",
+        "6": "tmo:block/strong_piston_extension"
     },
     "elements": [
         {

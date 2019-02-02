@@ -2,14 +2,14 @@
     "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
 	"parent": "block/block",
     "textures": {
-		"particle": "tmo:blocks/titanium_block",
-		"0": "tmo:blocks/machine_casing_side",
-        "1": "tmo:blocks/ioport_down_open",
-        "2": "tmo:blocks/machine_casing_bottom",
-        "3": "tmo:blocks/injector_front",
-        "4": "tmo:blocks/injector_tank",
-        "5": "tmo:blocks/injector_tank_side",
-        "6": "tmo:blocks/ioport_open"
+		"particle": "tmo:block/titanium_block",
+		"0": "tmo:block/machine_casing_side",
+        "1": "tmo:block/ioport_down_open",
+        "2": "tmo:block/machine_casing_bottom",
+        "3": "tmo:block/injector_front",
+        "4": "tmo:block/injector_tank",
+        "5": "tmo:block/injector_tank_side",
+        "6": "tmo:block/ioport_open"
     },
     "elements": [
 		{

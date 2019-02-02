@@ -1,7 +1,7 @@
 {
 	"parent": "tmo:block/injector_inventory",
 	"textures": {
-		"0": "tmo:blocks/basic_machine_casing_side",
-		"2": "tmo:blocks/basic_machine_casing_bottom"
+		"0": "tmo:block/basic_machine_casing_side",
+		"2": "tmo:block/basic_machine_casing_bottom"
 	}
 }

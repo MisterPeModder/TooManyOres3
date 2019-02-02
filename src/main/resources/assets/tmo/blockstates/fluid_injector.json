@@ -1,104 +1,116 @@
 {
-    "forge_marker": 1,
-    "defaults": {
-		"model": "tmo:injector",
-		"transform": "forge:default-block"
-	},
-    "variants": {
-        "normal": [{}],
-        "inventory": [{}],
-        "facing": {
-            "north": {},
-            "south": {"y": 180},
-            "west": {"y": 270},
-            "east": {"y": 90}
-        },
-		"casing": {
-			"standard": {},
-			"basic": {"textures": {
-					"0": "tmo:blocks/basic_machine_casing_side",
-					"2": "tmo:blocks/basic_machine_casing_bottom"
-				}
-			},
-			"improved": {"textures": {
-					"0": "tmo:blocks/improved_machine_casing_side",
-					"2": "tmo:blocks/improved_machine_casing_bottom"
-				}
-			}
-		},
-		"down_ioport": {
-			"open": {
-				"textures": {
-					"1": "tmo:blocks/ioport_down_open"
-				}
-			},
-			"closed": {
-				"textures": {
-					"1": "tmo:blocks/ioport_down_closed"
-				}
-			},
-			"disabled": {
-				"textures": {
-					"1": "tmo:blocks/ioport_down_closed"
-				}
-			}
-		},
-		"back_ioport": {
-			"open": {
-				"submodel": {
-					"back_ioport": {
-						"model": "tmo:ioport_open_noback",
-						"y": 180
-					}
-				}
-			},
-			"closed": {
-				"submodel": {
-					"back_ioport": {
-						"model": "tmo:ioport_closed_noback",
-						"y": 180
-					}
-				}
-			},
-			"disabled": {}
-		},
-		"left_ioport": {
-			"open": {
-				"submodel": {
-					"left_ioport": {
-						"model": "tmo:ioport_open",
-						"y": 90
-					}
-				}
-			},
-			"closed": {
-				"submodel": {
-					"left_ioport": {
-						"model": "tmo:ioport_closed",
-						"y": 90
-					}
-				}
-			},
-			"disabled": {}
-		},
-		"right_ioport": {
-			"open": {
-				"submodel": {
-					"right_ioport": {
-						"model": "tmo:ioport_open",
-						"y": 270
-					}
-				}
-			},
-			"closed": {
-				"submodel": {
-					"right_ioport": {
-						"model": "tmo:ioport_closed",
-						"y": 270
-					}
-				}
-			},
-			"disabled": {}
-		}
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tmo:injector",
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "facing": {
+      "north": {},
+      "south": {
+        "y": 180
+      },
+      "west": {
+        "y": 270
+      },
+      "east": {
+        "y": 90
+      }
+    },
+    "casing": {
+      "standard": {},
+      "basic": {
+        "textures": {
+          "0": "tmo:block/basic_machine_casing_side",
+          "2": "tmo:block/basic_machine_casing_bottom"
+        }
+      },
+      "improved": {
+        "textures": {
+          "0": "tmo:block/improved_machine_casing_side",
+          "2": "tmo:block/improved_machine_casing_bottom"
+        }
+      }
+    },
+    "down_ioport": {
+      "open": {
+        "textures": {
+          "1": "tmo:block/ioport_down_open"
+        }
+      },
+      "closed": {
+        "textures": {
+          "1": "tmo:block/ioport_down_closed"
+        }
+      },
+      "disabled": {
+        "textures": {
+          "1": "tmo:block/ioport_down_closed"
+        }
+      }
+    },
+    "back_ioport": {
+      "open": {
+        "submodel": {
+          "back_ioport": {
+            "model": "tmo:ioport_open_noback",
+            "y": 180
+          }
+        }
+      },
+      "closed": {
+        "submodel": {
+          "back_ioport": {
+            "model": "tmo:ioport_closed_noback",
+            "y": 180
+          }
+        }
+      },
+      "disabled": {}
+    },
+    "left_ioport": {
+      "open": {
+        "submodel": {
+          "left_ioport": {
+            "model": "tmo:ioport_open",
+            "y": 90
+          }
+        }
+      },
+      "closed": {
+        "submodel": {
+          "left_ioport": {
+            "model": "tmo:ioport_closed",
+            "y": 90
+          }
+        }
+      },
+      "disabled": {}
+    },
+    "right_ioport": {
+      "open": {
+        "submodel": {
+          "right_ioport": {
+            "model": "tmo:ioport_open",
+            "y": 270
+          }
+        }
+      },
+      "closed": {
+        "submodel": {
+          "right_ioport": {
+            "model": "tmo:ioport_closed",
+            "y": 270
+          }
+        }
+      },
+      "disabled": {}
     }
+  }
 }

@@ -1,93 +1,433 @@
-{	
-	"parent": "block/block",
-    "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
-	 "display": {
-        "fixed": {
-            "rotation": [ 0, 90, 0 ],
-            "translation": [ 0, 0, 0 ],
-            "scale": [ 0.5, 0.5, 0.5 ]
+{
+  "parent": "block/block",
+  "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
+  "display": {
+    "fixed": {
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  },
+  "textures": {
+    "particle": "tmo:block/titanium_block",
+    "0": "tmo:block/titanium_block",
+    "1": "tmo:block/titanium_anvil_side"
+  },
+  "elements": [
+    {
+      "name": "Base",
+      "from": [
+        2.0,
+        0.0,
+        2.0
+      ],
+      "to": [
+        14.0,
+        4.0,
+        14.0
+      ],
+      "faces": {
+        "north": {
+          "texture": "#0",
+          "uv": [
+            1.0,
+            12.0,
+            14.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#0",
+          "uv": [
+            4.0,
+            2.0,
+            0.0,
+            14.0
+          ],
+          "rotation": 90
+        },
+        "south": {
+          "texture": "#0",
+          "uv": [
+            2.0,
+            12.0,
+            14.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#0",
+          "uv": [
+            0.0,
+            2.0,
+            4.0,
+            14.0
+          ],
+          "rotation": 270
+        },
+        "up": {
+          "texture": "#0",
+          "uv": [
+            2.0,
+            2.0,
+            14.0,
+            14.0
+          ],
+          "rotation": 180
+        },
+        "down": {
+          "texture": "#0",
+          "uv": [
+            2.0,
+            2.0,
+            14.0,
+            14.0
+          ],
+          "rotation": 180,
+          "cullface": "down"
         }
+      }
     },
-    "textures": {
-		"particle": "tmo:blocks/titanium_block",
-        "0": "tmo:blocks/titanium_block",
-        "1": "tmo:blocks/titanium_anvil_side"
-    },
-    "elements": [
-        {
-            "name": "Base",
-            "from": [ 2.0, 0.0, 2.0 ], 
-            "to": [ 14.0, 4.0, 14.0 ], 
-            "faces": {
-                "north": { "texture": "#0", "uv": [ 1.0, 12.0, 14.0, 16.0 ] },
-                "east": { "texture": "#0", "uv": [ 4.0, 2.0, 0.0, 14.0 ], "rotation": 90 },
-                "south": { "texture": "#0", "uv": [ 2.0, 12.0, 14.0, 16.0 ] },
-                "west": { "texture": "#0", "uv": [ 0.0, 2.0, 4.0, 14.0 ], "rotation": 270 },
-                "up": { "texture": "#0", "uv": [ 2.0, 2.0, 14.0, 14.0 ], "rotation": 180 },
-                "down": { "texture": "#0", "uv": [ 2.0, 2.0, 14.0, 14.0 ], "rotation": 180, "cullface": "down" }
-            }
+    {
+      "name": "Lp",
+      "from": [
+        4.0,
+        4.0,
+        3.0
+      ],
+      "to": [
+        12.0,
+        5.0,
+        13.0
+      ],
+      "faces": {
+        "north": {
+          "texture": "#0",
+          "uv": [
+            4.0,
+            15.0,
+            12.0,
+            16.0
+          ]
         },
-        {
-            "name": "Lp",
-            "from": [ 4.0, 4.0, 3.0 ], 
-            "to": [ 12.0, 5.0, 13.0 ], 
-            "faces": {
-                "north": { "texture": "#0", "uv": [ 4.0, 15.0, 12.0, 16.0 ] },
-                "east": { "texture": "#0", "uv": [ 1.0, 3.0, 0.0, 13.0 ], "rotation": 270 },
-                "south": { "texture": "#0", "uv": [ 4.0, 15.0, 12.0, 16.0 ] },
-                "west": { "texture": "#0", "uv": [ 0.0, 3.0, 1.0, 13.0 ], "rotation": 90 },
-                "up": { "texture": "#0", "uv": [ 4.0, 3.0, 12.0, 13.0 ], "rotation": 180 }
-            }
+        "east": {
+          "texture": "#0",
+          "uv": [
+            1.0,
+            3.0,
+            0.0,
+            13.0
+          ],
+          "rotation": 270
         },
-        {
-            "name": "Wp",
-            "from": [ 6.0, 5.0, 4.0 ], 
-            "to": [ 10.0, 10.0, 12.0 ], 
-            "faces": {
-                "north": { "texture": "#0", "uv": [ 6.0, 6.0, 10.0, 11.0 ] },
-                "east": { "texture": "#0", "uv": [ 10.0, 4.0, 5.0, 12.0 ], "rotation": 270 },
-                "south": { "texture": "#0", "uv": [ 6.0, 6.0, 10.0, 11.0 ] },
-                "west": { "texture": "#0", "uv": [ 5.0, 4.0, 10.0, 12.0 ], "rotation": 90 }
-            }
+        "south": {
+          "texture": "#0",
+          "uv": [
+            4.0,
+            15.0,
+            12.0,
+            16.0
+          ]
         },
-        {
-            "name": "Top",
-            "from": [ 3.0, 10.0, 0.0 ], 
-            "to": [ 13.0, 16.0, 16.0 ], 
-            "faces": {
-                "north": { "texture": "#1", "uv": [ 0.0, 6.0, 10.0, 12.0 ] },
-                "east": { "texture": "#1", "uv": [ 0.0, 0.0, 16.0, 6.0 ] },
-                "south": { "texture": "#1", "uv": [ 0.0, 6.0, 10.0, 12.0 ] },
-                "west": { "texture": "#1", "uv": [ 0.0, 0.0, 16.0, 6.0 ] },
-                "up": { "texture": "#0", "uv": [ 3.0, 0.0, 13.0, 16.0 ], "rotation": 180 },
-                "down": { "texture": "#0", "uv": [ 3.0, 0.0, 13.0, 16.0 ], "rotation": 180 }
-            }
+        "west": {
+          "texture": "#0",
+          "uv": [
+            0.0,
+            3.0,
+            1.0,
+            13.0
+          ],
+          "rotation": 90
         },
-        {
-            "name": "Ring_L",
-            "from": [ 5.5, 6.0, 3.5 ], 
-            "to": [ 10.5, 7.0, 12.5 ], 
-            "faces": {
-                "north": { "texture": "#1", "uv": [ 12.0, 13.0, 16.0, 14.0 ] },
-                "east": { "texture": "#1", "uv": [ 12.0, 6.0, 13.0, 14.0 ], "rotation": 90 },
-                "south": { "texture": "#1", "uv": [ 12.0, 6.0, 16.0, 7.0 ] },
-                "west": { "texture": "#1", "uv": [ 15.0, 6.0, 16.0, 14.0 ], "rotation": 90 },
-                "up": { "texture": "#1", "uv": [ 12.0, 6.0, 16.0, 14.0 ] },
-                "down": { "texture": "#1", "uv": [ 12.0, 6.0, 16.0, 14.0 ] }
-            }
-        },
-        {
-            "name": "Ring_U",
-            "from": [ 5.5, 8.0, 3.5 ], 
-            "to": [ 10.5, 9.0, 12.5 ], 
-            "faces": {
-                "north": { "texture": "#1", "uv": [ 12.0, 13.0, 16.0, 14.0 ] },
-                "east": { "texture": "#1", "uv": [ 12.0, 6.0, 13.0, 14.0 ], "rotation": 90 },
-                "south": { "texture": "#1", "uv": [ 12.0, 6.0, 16.0, 7.0 ] },
-                "west": { "texture": "#1", "uv": [ 15.0, 6.0, 16.0, 14.0 ], "rotation": 90 },
-                "up": { "texture": "#1", "uv": [ 12.0, 6.0, 16.0, 14.0 ] },
-                "down": { "texture": "#1", "uv": [ 12.0, 6.0, 16.0, 14.0 ] }
-            }
+        "up": {
+          "texture": "#0",
+          "uv": [
+            4.0,
+            3.0,
+            12.0,
+            13.0
+          ],
+          "rotation": 180
         }
-    ]
+      }
+    },
+    {
+      "name": "Wp",
+      "from": [
+        6.0,
+        5.0,
+        4.0
+      ],
+      "to": [
+        10.0,
+        10.0,
+        12.0
+      ],
+      "faces": {
+        "north": {
+          "texture": "#0",
+          "uv": [
+            6.0,
+            6.0,
+            10.0,
+            11.0
+          ]
+        },
+        "east": {
+          "texture": "#0",
+          "uv": [
+            10.0,
+            4.0,
+            5.0,
+            12.0
+          ],
+          "rotation": 270
+        },
+        "south": {
+          "texture": "#0",
+          "uv": [
+            6.0,
+            6.0,
+            10.0,
+            11.0
+          ]
+        },
+        "west": {
+          "texture": "#0",
+          "uv": [
+            5.0,
+            4.0,
+            10.0,
+            12.0
+          ],
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "name": "Top",
+      "from": [
+        3.0,
+        10.0,
+        0.0
+      ],
+      "to": [
+        13.0,
+        16.0,
+        16.0
+      ],
+      "faces": {
+        "north": {
+          "texture": "#1",
+          "uv": [
+            0.0,
+            6.0,
+            10.0,
+            12.0
+          ]
+        },
+        "east": {
+          "texture": "#1",
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            6.0
+          ]
+        },
+        "south": {
+          "texture": "#1",
+          "uv": [
+            0.0,
+            6.0,
+            10.0,
+            12.0
+          ]
+        },
+        "west": {
+          "texture": "#1",
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            6.0
+          ]
+        },
+        "up": {
+          "texture": "#0",
+          "uv": [
+            3.0,
+            0.0,
+            13.0,
+            16.0
+          ],
+          "rotation": 180
+        },
+        "down": {
+          "texture": "#0",
+          "uv": [
+            3.0,
+            0.0,
+            13.0,
+            16.0
+          ],
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "name": "Ring_L",
+      "from": [
+        5.5,
+        6.0,
+        3.5
+      ],
+      "to": [
+        10.5,
+        7.0,
+        12.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#1",
+          "uv": [
+            12.0,
+            13.0,
+            16.0,
+            14.0
+          ]
+        },
+        "east": {
+          "texture": "#1",
+          "uv": [
+            12.0,
+            6.0,
+            13.0,
+            14.0
+          ],
+          "rotation": 90
+        },
+        "south": {
+          "texture": "#1",
+          "uv": [
+            12.0,
+            6.0,
+            16.0,
+            7.0
+          ]
+        },
+        "west": {
+          "texture": "#1",
+          "uv": [
+            15.0,
+            6.0,
+            16.0,
+            14.0
+          ],
+          "rotation": 90
+        },
+        "up": {
+          "texture": "#1",
+          "uv": [
+            12.0,
+            6.0,
+            16.0,
+            14.0
+          ]
+        },
+        "down": {
+          "texture": "#1",
+          "uv": [
+            12.0,
+            6.0,
+            16.0,
+            14.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "Ring_U",
+      "from": [
+        5.5,
+        8.0,
+        3.5
+      ],
+      "to": [
+        10.5,
+        9.0,
+        12.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#1",
+          "uv": [
+            12.0,
+            13.0,
+            16.0,
+            14.0
+          ]
+        },
+        "east": {
+          "texture": "#1",
+          "uv": [
+            12.0,
+            6.0,
+            13.0,
+            14.0
+          ],
+          "rotation": 90
+        },
+        "south": {
+          "texture": "#1",
+          "uv": [
+            12.0,
+            6.0,
+            16.0,
+            7.0
+          ]
+        },
+        "west": {
+          "texture": "#1",
+          "uv": [
+            15.0,
+            6.0,
+            16.0,
+            14.0
+          ],
+          "rotation": 90
+        },
+        "up": {
+          "texture": "#1",
+          "uv": [
+            12.0,
+            6.0,
+            16.0,
+            14.0
+          ]
+        },
+        "down": {
+          "texture": "#1",
+          "uv": [
+            12.0,
+            6.0,
+            16.0,
+            14.0
+          ]
+        }
+      }
+    }
+  ]
 }

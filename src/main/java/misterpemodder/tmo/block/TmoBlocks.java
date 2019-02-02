@@ -2,8 +2,9 @@ package misterpemodder.tmo.block;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import misterpemodder.tmo.TmoConstants;
-import misterpemodder.tmo.TooManyOres;
 import net.fabricmc.fabric.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.Settings;
@@ -19,6 +20,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public final class TmoBlocks {
+  private static final Logger LOGGER = LogManager.getLogger();
   private static final Map<Identifier, Block> BLOCKS = new HashMap<>();
   private static final Map<Identifier, BlockItem> BLOCKS_ITEMS = new HashMap<>();
 
@@ -130,6 +132,10 @@ public final class TmoBlocks {
       add("darkanium_lamp", new LampBlock(FabricBlockSettings.of(Material.REDSTONE_LAMP)
           .lightLevel(15).strength(0.3F, 0.3F).sounds(BlockSoundGroup.GLASS).build()));
 
+  public static final TitaniumAnvilBlock TITANIUM_ANVIL = add("titanium_anvil",
+      new TitaniumAnvilBlock(FabricBlockSettings.of(Material.ANVIL, MaterialColor.BLUE)
+          .strength(10.0F, 1200.0F).sounds(BlockSoundGroup.ANVIL).build()));
+
   private static <T extends Block> T add(String name, T block) {
     return add(name, block, true);
   }
@@ -145,13 +151,12 @@ public final class TmoBlocks {
 
   public static void register(Registry<? super Block> blockRegistry,
       Registry<? super Item> itemRegistry) {
-    TooManyOres.LOGGER.info("[TooManyOres] Registering {} blocks (with {} block items)...",
-        BLOCKS.size(), BLOCKS_ITEMS.size());
+    LOGGER.info("[TooManyOres] Registering {} blocks (with {} block items).", BLOCKS.size(),
+        BLOCKS_ITEMS.size());
     for (Map.Entry<Identifier, Block> entry : BLOCKS.entrySet())
       Registry.register(blockRegistry, entry.getKey(), entry.getValue());
     for (Map.Entry<Identifier, BlockItem> entry : BLOCKS_ITEMS.entrySet())
       Registry.register(itemRegistry, entry.getKey(), entry.getValue());
     BLOCKS.clear();
-    TooManyOres.LOGGER.info("[TooManyOres] done!");
   }
 }

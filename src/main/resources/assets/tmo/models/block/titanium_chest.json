@@ -2,7 +2,7 @@
     "parent": "block/block",
     "textures": {
         "texture": "tmo:entity/titanium_chest",
-        "particle": "tmo:blocks/titanium_block"
+        "particle": "tmo:block/titanium_block"
     },
     "elements": [
         {   "from": [ 1, 0, 1 ],

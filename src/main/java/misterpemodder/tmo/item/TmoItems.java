@@ -2,14 +2,15 @@ package misterpemodder.tmo.item;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import misterpemodder.tmo.TmoConstants;
-import misterpemodder.tmo.TooManyOres;
-import misterpemodder.tmo.item.tool.TmoShovelItem;
-import misterpemodder.tmo.item.tool.TmoSwordItem;
 import misterpemodder.tmo.item.tool.HammerItem;
 import misterpemodder.tmo.item.tool.TmoAxeItem;
 import misterpemodder.tmo.item.tool.TmoHoeItem;
 import misterpemodder.tmo.item.tool.TmoPickaxeItem;
+import misterpemodder.tmo.item.tool.TmoShovelItem;
+import misterpemodder.tmo.item.tool.TmoSwordItem;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.AxeItem;
@@ -23,6 +24,7 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
 public final class TmoItems {
+  private static final Logger LOGGER = LogManager.getLogger();
   private static final Map<Identifier, Item> ITEMS = new HashMap<>();
 
   public static final Item TAB_ICON = add("tab_icon", new Item(new Item.Settings()));
@@ -206,11 +208,10 @@ public final class TmoItems {
   }
 
   public static void register(Registry<? super Item> registry) {
-    TooManyOres.LOGGER.info("[TooManyOres] Registering {} items...", ITEMS.size());
+    LOGGER.info("[TooManyOres] Registering {} items...", ITEMS.size());
     for (Map.Entry<Identifier, Item> entry : ITEMS.entrySet())
       Registry.register(registry, entry.getKey(), entry.getValue());
     ITEMS.clear();
-    TooManyOres.LOGGER.info("[TooManyOres] done!");
   }
 
   private static class Settings extends Item.Settings {

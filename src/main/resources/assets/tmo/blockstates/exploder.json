@@ -1,21 +1,33 @@
 {
-    "forge_marker": 1,
-    "defaults": {
-		"textures": {},
-		"model": "tmo:exploder",
-		"transform": "forge:default-block"
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {},
+    "model": "tmo:exploder",
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "activated": {
+      "true": {},
+      "false": {}
     },
-    "variants": {
-        "normal": [{}],
-        "inventory": [{}],
-		"activated": {
-			"true": {},
-			"false": {}
-		},
-		"variant": {
-			"normal": {},
-			"fiery": {"textures": {"2": "tmo:blocks/exploder_fiery"}},
-			"supercharged": {"textures": {"2": "tmo:blocks/exploder_supercharged"}}
-		}
+    "variant": {
+      "normal": {},
+      "fiery": {
+        "textures": {
+          "2": "tmo:block/exploder_fiery"
+        }
+      },
+      "supercharged": {
+        "textures": {
+          "2": "tmo:block/exploder_supercharged"
+        }
+      }
     }
+  }
 }

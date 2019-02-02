@@ -1,9 +1,9 @@
 {
     "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
     "textures": {
-        "particle": "tmo:blocks/redstone_block_strong",
-        "0": "tmo:blocks/redstone_block_strong",
-        "1": "tmo:blocks/machine_casing_top"
+        "particle": "tmo:block/redstone_block_strong",
+        "0": "tmo:block/redstone_block_strong",
+        "1": "tmo:block/machine_casing_top"
     },
     "elements": [
         {

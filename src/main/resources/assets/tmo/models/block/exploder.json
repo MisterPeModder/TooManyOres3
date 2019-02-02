@@ -2,12 +2,12 @@
     "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
 	"parent": "block/block",
     "textures": {
-        "particle": "tmo:blocks/exploder_top",
-        "0": "tmo:blocks/machine_casing_side",
-        "1": "tmo:blocks/machine_casing_bottom_1",
-		"2": "tmo:blocks/exploder",
-		"3": "tmo:blocks/exploder_top",
-        "4": "tmo:blocks/machine_casing_top"
+        "particle": "tmo:block/exploder_top",
+        "0": "tmo:block/machine_casing_side",
+        "1": "tmo:block/machine_casing_bottom_1",
+		"2": "tmo:block/exploder",
+		"3": "tmo:block/exploder_top",
+        "4": "tmo:block/machine_casing_top"
     },
     "elements": [
         {

@@ -1,23 +1,31 @@
 {
-    "forge_marker": 1,
-    "defaults": {
-		"textures": {},
-		"model": "tmo:machine_casing",
-		"transform": "forge:default-block"
-    },
-    "variants": {
-        "normal": [{}],
-        "inventory": [{}],
-		"variant": {
-			"standard": {},
-			"basic": {"textures": {
-				"0": "tmo:blocks/basic_machine_casing_side",
-				"1": "tmo:blocks/basic_machine_casing_bottom_1"
-			}},
-			"improved": {"textures": {
-				"0": "tmo:blocks/improved_machine_casing_side",
-				"1": "tmo:blocks/improved_machine_casing_bottom_1"
-			}}
-		}
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {},
+    "model": "tmo:machine_casing",
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "variant": {
+      "standard": {},
+      "basic": {
+        "textures": {
+          "0": "tmo:block/basic_machine_casing_side",
+          "1": "tmo:block/basic_machine_casing_bottom_1"
+        }
+      },
+      "improved": {
+        "textures": {
+          "0": "tmo:block/improved_machine_casing_side",
+          "1": "tmo:block/improved_machine_casing_bottom_1"
+        }
+      }
     }
+  }
 }

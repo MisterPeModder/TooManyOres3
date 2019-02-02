@@ -1,6 +1,6 @@
 {
     "parent": "tmo:block/exploder",
 	"textures": {
-        "2": "tmo:blocks/exploder_fiery"
+        "2": "tmo:block/exploder_fiery"
     }
 }

@@ -26,7 +26,7 @@ public class LampBlock extends Block {
 
   public LampBlock(Block.Settings settings) {
     super(settings);
-    setDefaultState(getDefaultState().with(LIT, false).with(INVERTED, false));
+    setDefaultState(getStateFactory().getDefaultState().with(LIT, false).with(INVERTED, false));
   }
 
   @Override
@@ -46,8 +46,9 @@ public class LampBlock extends Block {
   }
 
   @Override
-  public BlockState getPlacementState(ItemPlacementContext itemPlacementContext_1) {
-    return this.getDefaultState();
+  public BlockState getPlacementState(ItemPlacementContext context) {
+    return getValidState(getDefaultState(),
+        context.getWorld().isReceivingRedstonePower(context.getBlockPos()));
   }
 
   @Override
