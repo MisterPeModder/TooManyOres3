@@ -2,6 +2,6 @@
   "parent": "tmo:block/ore_template",
   "textures": {
     "base": "minecraft:block/netherrack",
-    "ore": "tmo:block/nether_darkanium_ore"
+    "ore": "tmo:block/darkanium_ore"
   }
 }

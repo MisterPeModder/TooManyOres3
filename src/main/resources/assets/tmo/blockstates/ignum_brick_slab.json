@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "tmo:block/ignum_brick_slab"
+    },
+    "type=double": {
+      "model": "tmo:block/ignum_bricks"
+    },
+    "type=top": {
+      "model": "tmo:block/ignum_brick_slab_top"
+    }
+  }
+}

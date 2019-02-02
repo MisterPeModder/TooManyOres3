@@ -1,38 +1,20 @@
 {
-	"forge_marker": 1,
-	"defaults": {
-		"textures": {
-			"all": "tmo:block/darkanium_lamp",
-			"particle": "#all"
-		},
-		"model": "tmo:lamp",
-		"uvlock": true,
-		"transform": "forge:default-block"
-	},
-	"variants": {
-		"normal": [
-			{}
-		],
-		"inventory": [
-			{}
-		],
-		"inverted": {
-			"true": {},
-			"false": {}
-		},
-		"activated": {
-			"true": {
-				"textures": {
-					"all": "tmo:block/darkanium_lamp",
-					"particle": "tmo:blocks/darkanium_lamp"
-				}
-			},
-			"false": {
-				"textures": {
-					"all": "tmo:block/darkanium_lamp_unlit",
-					"particle": "tmo:blocks/darkanium_lamp_unlit"
-				}
-			}
-		}
-	}
+  "multipart": [
+    {
+      "when": {
+        "lit": true
+      },
+      "apply": {
+        "model": "tmo:block/darkanium_lamp"
+      }
+    },
+    {
+      "when": {
+        "lit": false
+      },
+      "apply": {
+        "model": "tmo:block/darkanium_lamp_unlit"
+      }
+    }
+  ]
 }

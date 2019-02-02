@@ -1,0 +1,6 @@
+{
+  "parent": "tmo:block/lamp",
+  "textures": {
+    "all": "tmo:block/darkanium_lamp"
+  }
+}

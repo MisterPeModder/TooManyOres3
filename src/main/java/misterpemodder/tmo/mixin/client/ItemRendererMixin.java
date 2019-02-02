@@ -15,7 +15,7 @@ public final class ItemRendererMixin {
   @Redirect(
       at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;hsvToRgb(FFF)I",
           ordinal = 0),
-      method = "renderItemOverlaysInGUIWithText(Lnet/minecraft/client/font/FontRenderer;"
+      method = "renderGuiItemOverlay(Lnet/minecraft/client/font/FontRenderer;"
           + "Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V")
   private int modifyDurablityBarColor(float h, float s, float v, FontRenderer fontRenderer,
       ItemStack stack, int int_1, int int_2, @Nullable String text) {

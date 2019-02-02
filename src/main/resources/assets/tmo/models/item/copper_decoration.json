@@ -1,6 +1,3 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "tmo:block/copper_decoration"
-    }
+  "parent": "tmo:block/copper_decoration"
 }

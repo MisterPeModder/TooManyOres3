@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "tmo:block/platinum_bricks",
+    "top": "tmo:block/platinum_bricks",
+    "side": "tmo:block/platinum_bricks"
+  }
+}

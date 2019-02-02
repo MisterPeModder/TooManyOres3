@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "tmo:block/frozium_bricks",
+    "top": "tmo:block/frozium_bricks",
+    "side": "tmo:block/frozium_bricks"
+  }
+}

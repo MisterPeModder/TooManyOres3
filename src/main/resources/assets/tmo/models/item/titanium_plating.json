@@ -1,6 +1,3 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "tmo:block/titanium_plating"
-    }
+  "parent": "tmo:block/titanium_plating"
 }

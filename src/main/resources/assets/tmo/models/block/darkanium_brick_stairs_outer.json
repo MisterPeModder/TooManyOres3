@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "tmo:block/darkanium_bricks",
+    "top": "tmo:block/darkanium_bricks",
+    "side": "tmo:block/darkanium_bricks"
+  }
+}

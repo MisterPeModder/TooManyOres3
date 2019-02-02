@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "tmo:block/ancient_gold_brick_slab"
+    },
+    "type=double": {
+      "model": "tmo:block/ancient_gold_bricks"
+    },
+    "type=top": {
+      "model": "tmo:block/ancient_gold_brick_slab_top"
+    }
+  }
+}

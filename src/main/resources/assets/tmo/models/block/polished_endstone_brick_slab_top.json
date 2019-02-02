@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "tmo:block/polished_endstone_bricks",
+    "top": "tmo:block/polished_endstone_bricks",
+    "side": "tmo:block/polished_endstone_bricks"
+  }
+}
