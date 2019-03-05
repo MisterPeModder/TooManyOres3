@@ -4,7 +4,11 @@
   "description": "Experimental TMO port.",
   "version": "${version}",
   "side": "universal",
-  "initializer": "com.misterpemodder.tmo.TooManyOres",
+  "initializers": [
+    "com.misterpemodder.tmo.client.TooManyOresClient",
+    "com.misterpemodder.tmo.TooManyOres",
+    "com.misterpemodder.tmo.TooManyOresNetworking"
+  ],
   "requires": {
     "fabric": "*"
   },

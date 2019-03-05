@@ -1,13 +1,20 @@
 package com.misterpemodder.tmo.block.entity;
 
+import java.util.Iterator;
+import com.misterpemodder.tmo.TooManyOresNetworking;
 import com.misterpemodder.tmo.tag.TmoItemTags;
+import io.netty.buffer.Unpooled;
+import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
+import net.fabricmc.fabric.api.server.PlayerStream;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.network.packet.BlockEntityUpdateS2CPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.BasicInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.PacketByteBuf;
 
 public class TitaniumAnvilBlockEntity extends BlockEntity implements Inventory {
   protected Inventory inventory;
@@ -54,17 +61,41 @@ public class TitaniumAnvilBlockEntity extends BlockEntity implements Inventory {
 
   @Override
   public ItemStack takeInvStack(int slot, int count) {
-    return this.inventory.takeInvStack(slot, count);
+    ItemStack stack = this.inventory.takeInvStack(slot, count);
+    /*
+     * if (stack != ItemStack.EMPTY) markDirty();
+     */
+    return stack;
   }
 
   @Override
   public ItemStack removeInvStack(int slot) {
-    return this.inventory.removeInvStack(slot);
+    ItemStack stack = this.inventory.removeInvStack(slot);
+    /*
+     * if (stack != ItemStack.EMPTY) markDirty();
+     */
+    return stack;
   }
 
   @Override
   public void setInvStack(int slot, ItemStack stack) {
+    // ItemStack hammer = this.inventory.getInvStack(0);
     this.inventory.setInvStack(slot, stack);
+    /*
+     * if (!ItemStack.areEqual(hammer, stack)) markDirty();
+     */
+  }
+
+  @Override
+  public void clear() {
+    /*
+     * if (!this.inventory.isInvEmpty()) markDirty();
+     */
+    this.inventory.clear();
+  }
+
+  public void setHammerStack(ItemStack stack) {
+    setInvStack(0, stack);
   }
 
   @Override
@@ -82,8 +113,35 @@ public class TitaniumAnvilBlockEntity extends BlockEntity implements Inventory {
     return this.inventory.isValidInvStack(slot, stack);
   }
 
+
   @Override
-  public void clear() {
-    this.inventory.clear();
+  public BlockEntityUpdateS2CPacket toUpdatePacket() {
+    return new BlockEntityUpdateS2CPacket(this.pos, 13, this.toInitialChunkDataTag());
+  }
+
+  protected void sync(CompoundTag hammerTag, PlayerEntity player) {
+    PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+    buf.writeBlockPos(getPos());
+    buf.writeCompoundTag(hammerTag);
+    ServerSidePacketRegistry.INSTANCE.sendToPlayer(player,
+        TooManyOresNetworking.TITANIUM_ANVIL_SYNC, buf);
+  }
+
+  @Override
+  public void markDirty() {
+    super.markDirty();
+    if (!hasWorld() || getWorld().isClient())
+      return;
+    CompoundTag hammerTag = new CompoundTag();
+    ItemStack hammerStack = this.inventory.getInvStack(0);
+    if (!hammerStack.isEmpty())
+      hammerStack.toTag(hammerTag);
+    for (Iterator<PlayerEntity> iter = PlayerStream.watching(this).iterator(); iter.hasNext();)
+      sync(hammerTag, iter.next());
+  }
+
+  @Override
+  public CompoundTag toInitialChunkDataTag() {
+    return toTag(new CompoundTag());
   }
 }
