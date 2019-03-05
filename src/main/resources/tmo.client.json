@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "misterpemodder.tmo.mixin.client",
+  "package": "com.misterpemodder.tmo.mixin.client",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "BlockColorMapMixin",

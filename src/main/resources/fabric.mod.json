@@ -4,7 +4,7 @@
   "description": "Experimental TMO port.",
   "version": "${version}",
   "side": "universal",
-  "initializer": "misterpemodder.tmo.TooManyOres",
+  "initializer": "com.misterpemodder.tmo.TooManyOres",
   "requires": {
     "fabric": "*"
   },
