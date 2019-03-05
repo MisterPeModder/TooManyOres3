@@ -59,8 +59,7 @@ public class LampBlock extends Block {
     if (heldStack == null)
       return false;
     Item item = heldStack.getItem();
-    // field_8530 -> REDSTONE_TORCH
-    if ((item == Items.field_8530 || item == TmoBlocks.WEAK_REDSTONE_TORCH.getItem())
+    if ((item == Items.REDSTONE_TORCH || item == TmoBlocks.WEAK_REDSTONE_TORCH.getItem())
         && player.abilities.allowModifyWorld) {
       if (!world.isClient) {
         // method_11572 -> cycleProperty

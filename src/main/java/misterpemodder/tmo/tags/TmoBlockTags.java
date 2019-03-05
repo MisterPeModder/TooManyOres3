@@ -1,7 +1,7 @@
 package misterpemodder.tmo.tags;
 
 import misterpemodder.tmo.TmoConstants;
-import net.fabricmc.fabric.tags.TagRegistry;
+import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;

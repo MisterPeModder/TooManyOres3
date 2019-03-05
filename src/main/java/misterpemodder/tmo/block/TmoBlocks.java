@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 import misterpemodder.tmo.TmoConstants;
 import misterpemodder.tmo.block.ExploderBlock.ExploderType;
 import misterpemodder.tmo.block.SpecialRedstoneWireBlock.WireType;
-import net.fabricmc.fabric.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.Settings;
 import net.minecraft.block.Blocks;

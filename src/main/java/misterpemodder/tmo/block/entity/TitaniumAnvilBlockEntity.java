@@ -83,7 +83,7 @@ public class TitaniumAnvilBlockEntity extends BlockEntity implements Inventory {
   }
 
   @Override
-  public void clearInv() {
-    this.inventory.clearInv();
+  public void clear() {
+    this.inventory.clear();
   }
 }
