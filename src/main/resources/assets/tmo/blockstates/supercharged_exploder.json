@@ -1,0 +1,9 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "tmo:block/supercharged_exploder"
+      }
+    }
+  ]
+}

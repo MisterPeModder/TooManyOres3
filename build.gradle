@@ -16,7 +16,7 @@ dependencies {
 	minecraft "com.mojang:minecraft:$mcVersion"
 	mappings "net.fabricmc:yarn:$mcVersion.6"
 	modCompile "net.fabricmc:fabric-loader:0.3.5.106"
-	modCompile "net.fabricmc:fabric:0.1.5.87"
+	modCompile "net.fabricmc:fabric:0.1.5.88"
 
 	// mod menu
 	modCompile "io.github.prospector.modmenu:ModMenu:1.1.1-21"

@@ -13,7 +13,7 @@ public class TmoArmorItem extends ArmorItem implements BlinkingItem {
   }
 
   @Override
-  public int getDurabilityBarColor(ItemStack stack, int originalColor) {
-    return BlinkingItem.super.getDurabilityBarColor(stack, originalColor);
+  public int tmoGetDurabilityBarColor(ItemStack stack, int originalColor) {
+    return BlinkingItem.super.tmoGetDurabilityBarColor(stack, originalColor);
   }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "block/torch_wall",
+  "textures": {
+    "torch": "tmo:block/weak_redstone_torch"
+  }
+}

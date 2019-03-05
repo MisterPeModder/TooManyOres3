@@ -1,33 +1,9 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "textures": {},
-    "model": "tmo:exploder",
-    "transform": "forge:default-block"
-  },
-  "variants": {
-    "normal": [
-      {}
-    ],
-    "inventory": [
-      {}
-    ],
-    "activated": {
-      "true": {},
-      "false": {}
-    },
-    "variant": {
-      "normal": {},
-      "fiery": {
-        "textures": {
-          "2": "tmo:block/exploder_fiery"
-        }
-      },
-      "supercharged": {
-        "textures": {
-          "2": "tmo:block/exploder_supercharged"
-        }
+  "multipart": [
+    {
+      "apply": {
+        "model": "tmo:block/exploder"
       }
     }
-  }
+  ]
 }

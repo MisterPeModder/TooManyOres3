@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.state.StateFactory.Builder;
+import net.minecraft.state.StateFactory;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Hand;
@@ -32,7 +32,7 @@ public class LampBlock extends Block {
   @Override
   public boolean isSimpleFullBlock(BlockState blockState_1, BlockView blockView_1,
       BlockPos blockPos_1) {
-    return super.isSimpleFullBlock(blockState_1, blockView_1, blockPos_1);
+    return true;
   }
 
   @Override
@@ -42,13 +42,14 @@ public class LampBlock extends Block {
 
   @Override
   public BlockRenderLayer getRenderLayer() {
-    return BlockRenderLayer.CUTOUT;
+    return BlockRenderLayer.SOLID;
   }
 
   @Override
   public BlockState getPlacementState(ItemPlacementContext context) {
-    return getValidState(getDefaultState(),
-        context.getWorld().isReceivingRedstonePower(context.getBlockPos()));
+    BlockState state = getDefaultState();
+    return state.with(LIT,
+        state.get(INVERTED) ^ context.getWorld().isReceivingRedstonePower(context.getBlockPos()));
   }
 
   @Override
@@ -59,8 +60,7 @@ public class LampBlock extends Block {
       return false;
     Item item = heldStack.getItem();
     // field_8530 -> REDSTONE_TORCH
-    if ((item == Items.field_8530
-    /* || item == BlockItem.getItemFromBlock(TmoBlocks.WEAK_REDSTONE_TORCH.getBlock()) */)
+    if ((item == Items.field_8530 || item == TmoBlocks.WEAK_REDSTONE_TORCH.getItem())
         && player.abilities.allowModifyWorld) {
       if (!world.isClient) {
         // method_11572 -> cycleProperty
@@ -75,39 +75,31 @@ public class LampBlock extends Block {
     return false;
   }
 
-  private boolean isValidState(BlockState state, boolean blockPowered) {
-    if (state.get(LIT))
-      return state.get(INVERTED) ^ blockPowered;
-    else
-      return state.get(INVERTED) && blockPowered;
-  }
-
-  private BlockState getValidState(BlockState state, boolean blockPowered) {
-    if (state.get(INVERTED))
-      return state.with(LIT, !blockPowered);
-    else
-      return state.with(LIT, blockPowered);
-  }
-
   @Override
   public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block_1,
       BlockPos neighbor) {
-    if (!world.isClient && !isValidState(state, world.isReceivingRedstonePower(pos)))
-      world.getBlockTickScheduler().schedule(pos, this, 4);
-  }
-
-  @Override
-  public void onScheduledTick(BlockState state, World world, BlockPos pos, Random random) {
     if (!world.isClient) {
-      boolean blockPowered = world.isReceivingRedstonePower(pos);
-      if (!isValidState(state, blockPowered)) {
-        world.setBlockState(pos, getValidState(state, blockPowered), 2);
+      boolean flag = state.get(LIT) ^ state.get(INVERTED);
+      if (flag != world.isReceivingRedstonePower(pos)) {
+        if (flag)
+          world.getBlockTickScheduler().schedule(pos, this, 4);
+        else
+          world.setBlockState(pos, state.method_11572(LIT), 2); // method_11572 -> cycle
       }
     }
   }
 
   @Override
-  protected void appendProperties(Builder<Block, BlockState> stateFactory) {
+  public void onScheduledTick(BlockState state, World world, BlockPos pos, Random random) {
+    if (!world.isClient) {
+      boolean shouldBeLit = state.get(INVERTED) ^ world.isReceivingRedstonePower(pos);
+      if (state.get(LIT) != shouldBeLit)
+        world.setBlockState(pos, state.with(LIT, shouldBeLit), 2);
+    }
+  }
+
+  @Override
+  protected void appendProperties(StateFactory.Builder<Block, BlockState> stateFactory) {
     stateFactory.with(LIT).with(INVERTED);
   }
 }

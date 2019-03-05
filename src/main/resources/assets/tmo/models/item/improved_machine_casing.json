@@ -1,7 +1,3 @@
 {
-    "parent": "tmo:block/machine_casing",
-	"textures": {
-        "0": "tmo:block/improved_machine_casing_side",
-		"1": "tmo:block/improved_machine_casing_bottom_1"
-    }
+  "parent": "tmo:block/improved_machine_casing"
 }

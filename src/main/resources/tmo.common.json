@@ -6,8 +6,10 @@
     "BeaconBlockEntityMixin",
     "BeaconContainerInventoryMixin",
     "BeaconContainerSlotPaymentMixin",
+    "BlockMixin",
     "EnchantmentMixin",
-    "ItemMixin"
+    "ItemMixin",
+    "RedstoneWireBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

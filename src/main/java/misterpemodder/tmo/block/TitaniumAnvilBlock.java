@@ -17,6 +17,8 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateFactory;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
@@ -103,6 +105,21 @@ public class TitaniumAnvilBlock extends FallingBlock implements BlockEntityProvi
   public void onDestroyedOnLanding(World world, BlockPos pos) {
     world.playSound(null, pos, SoundEvents.BLOCK_ANVIL_DESTROY, SoundCategory.BLOCK, 1.0F,
         world.random.nextFloat() * 0.1F + 0.9F);
+  }
+
+  public BlockState rotate(BlockState state, Rotation rotation) {
+    return (BlockState) state.with(FACING, rotation.rotate((Direction) state.get(FACING)));
+  }
+
+  @Override
+  public BlockState mirror(BlockState state, Mirror mirror) {
+    switch (mirror) {
+      case FRONT_BACK:
+      case LEFT_RIGHT:
+        return state.with(FACING, state.get(FACING).getOpposite());
+      default:
+        return state;
+    }
   }
 
   static {

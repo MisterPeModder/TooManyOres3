@@ -49,13 +49,13 @@ public class HammerItem extends ToolItem implements BlinkingItem {
   }
 
   @Override
-  public boolean canApplyEnchantment(ItemStack stack, Enchantment enchantment) {
+  public boolean tmoCanApplyEnchantment(ItemStack stack, Enchantment enchantment) {
     return enchantment.type == EnchantmentTarget.WEAPON;
   }
 
   @Override
   @Environment(EnvType.CLIENT)
-  public int getDurabilityBarColor(ItemStack stack, int originalColor) {
-    return BlinkingItem.super.getDurabilityBarColor(stack, originalColor);
+  public int tmoGetDurabilityBarColor(ItemStack stack, int originalColor) {
+    return BlinkingItem.super.tmoGetDurabilityBarColor(stack, originalColor);
   }
 }

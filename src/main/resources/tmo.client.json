@@ -3,6 +3,7 @@
   "package": "misterpemodder.tmo.mixin.client",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "BlockColorMapMixin",
     "ItemRendererMixin"
   ],
   "injectors": {

@@ -13,7 +13,7 @@ public final class EnchantmentMixin {
   @Inject(at = @At("HEAD"), method = "isAcceptableItem(Lnet/minecraft/item/ItemStack;)Z",
       cancellable = true)
   private void changeAcceptableItem(ItemStack stack, CallbackInfoReturnable<Boolean> ci) {
-    if (((ItemHook) stack.getItem()).canApplyEnchantment(stack, (Enchantment) (Object) this))
+    if (((ItemHook) stack.getItem()).tmoCanApplyEnchantment(stack, (Enchantment) (Object) this))
       ci.setReturnValue(true);
   }
 }

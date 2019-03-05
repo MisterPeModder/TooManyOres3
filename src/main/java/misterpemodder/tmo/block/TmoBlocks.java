@@ -2,27 +2,34 @@ package misterpemodder.tmo.block;
 
 import java.util.HashMap;
 import java.util.Map;
+import javax.annotation.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import misterpemodder.tmo.TmoConstants;
+import misterpemodder.tmo.block.ExploderBlock.ExploderType;
+import misterpemodder.tmo.block.SpecialRedstoneWireBlock.WireType;
 import net.fabricmc.fabric.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.Settings;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.block.OreBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.item.Item;
+import net.minecraft.item.StringItem;
 import net.minecraft.item.block.BlockItem;
+import net.minecraft.item.block.WallStandingBlockItem;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
 public final class TmoBlocks {
   private static final Logger LOGGER = LogManager.getLogger();
   private static final Map<Identifier, Block> BLOCKS = new HashMap<>();
-  private static final Map<Identifier, BlockItem> BLOCKS_ITEMS = new HashMap<>();
+  private static final Map<Identifier, BlockItem> BLOCK_ITEMS = new HashMap<>();
 
   public static final Block ANCIENT_GOLD_BRICKS = add("ancient_gold_bricks",
       new Block(Settings.of(Material.STONE, MaterialColor.GOLD).strength(2.0F, 10.0F)));
@@ -136,27 +143,92 @@ public final class TmoBlocks {
       new TitaniumAnvilBlock(FabricBlockSettings.of(Material.ANVIL, MaterialColor.BLUE)
           .strength(10.0F, 1200.0F).sounds(BlockSoundGroup.ANVIL).build()));
 
-  private static <T extends Block> T add(String name, T block) {
-    return add(name, block, true);
+  public static final StrongRedstoneBlock STRONG_REDSTONE_BLOCK = add("strong_redstone_block",
+      new StrongRedstoneBlock(FabricBlockSettings.of(Material.METAL, MaterialColor.IRON)
+          .strength(5.0F, 7.0F).sounds(BlockSoundGroup.METAL).build()));
+
+  public static final Block MACHINE_CASING = add("machine_casing",
+      new CutoutBlock(FabricBlockSettings.of(Material.METAL, MaterialColor.IRON)
+          .strength(5.0F, 7.0F).sounds(BlockSoundGroup.METAL).build()),
+      Rarity.RARE);
+  public static final Block BASIC_MACHINE_CASING = add("basic_machine_casing",
+      new CutoutBlock(FabricBlockSettings.of(Material.METAL, MaterialColor.IRON)
+          .strength(5.0F, 7.0F).sounds(BlockSoundGroup.METAL).build()));
+  public static final Block IMPROVED_MACHINE_CASING = add("improved_machine_casing",
+      new CutoutBlock(FabricBlockSettings.of(Material.METAL, MaterialColor.IRON)
+          .strength(5.0F, 7.0F).sounds(BlockSoundGroup.METAL).build()),
+      Rarity.EPIC);
+
+  public static final ExploderBlock EXPLODER = add("exploder",
+      new ExploderBlock(ExploderType.NORMAL,
+          FabricBlockSettings.of(Material.METAL, MaterialColor.IRON).strength(5.0F, 0.0F)
+              .sounds(BlockSoundGroup.METAL).build()));
+  public static final ExploderBlock FIERY_EXPLODER = add("fiery_exploder",
+      new ExploderBlock(ExploderType.FIERY,
+          FabricBlockSettings.of(Material.METAL, MaterialColor.IRON).strength(5.0F, 0.0F)
+              .sounds(BlockSoundGroup.METAL).build()),
+      Rarity.UNCOMMON);
+  public static final ExploderBlock SUPERCHARGED_EXPLODER = add("supercharged_exploder",
+      new ExploderBlock(ExploderType.SUPERCHARGED,
+          FabricBlockSettings.of(Material.METAL, MaterialColor.IRON).strength(5.0F, 0.0F)
+              .sounds(BlockSoundGroup.METAL).build()),
+      Rarity.RARE);
+
+  public static final SpecialRedstoneWireBlock TITANIUM_REDSTONE_WIRE =
+      add("titanium_redstone_wire",
+          new SpecialRedstoneWireBlock(WireType.WEAK, Settings.copy(Blocks.REDSTONE_WIRE)),
+          (BlockItem) null);
+  public static final SpecialRedstoneWireBlock COPPER_REDSTONE_WIRE = add("copper_redstone_wire",
+      new SpecialRedstoneWireBlock(WireType.STRONG, Settings.copy(Blocks.REDSTONE_WIRE)),
+      (BlockItem) null);
+  public static final WeakRedstoneTorchBlock WEAK_REDSTONE_TORCH = add("weak_redstone_torch",
+      new WeakRedstoneTorchBlock(Settings.copy(Blocks.REDSTONE_TORCH)), (BlockItem) null);
+  public static final WeakRedstoneTorchWallBlock WEAK_REDSTONE_WALL_TORCH = add(
+      "weak_redstone_wall_torch",
+      new WeakRedstoneTorchWallBlock(Settings.copy(Blocks.REDSTONE_WALL_TORCH)), (BlockItem) null);
+
+  static {
+    addBlockItem("titanium_redstone", new StringItem(TITANIUM_REDSTONE_WIRE,
+        new Item.Settings().itemGroup(TmoConstants.ITEM_GROUP)));
+    addBlockItem("copper_redstone", new StringItem(COPPER_REDSTONE_WIRE,
+        new Item.Settings().itemGroup(TmoConstants.ITEM_GROUP)));
+    addBlockItem("weak_redstone_torch", new WallStandingBlockItem(WEAK_REDSTONE_TORCH,
+        WEAK_REDSTONE_WALL_TORCH, new Item.Settings().itemGroup(TmoConstants.ITEM_GROUP)));
   }
 
-  private static <T extends Block> T add(String name, T block, boolean hasBlockItem) {
+  private static <T extends BlockItem> T addBlockItem(String name, T blockItem) {
+    if (blockItem != null)
+      BLOCK_ITEMS.put(new Identifier(TmoConstants.MOD_ID, name), blockItem);
+    return blockItem;
+  }
+
+  private static <T extends Block> T add(String name, T block) {
+    return add(name, block,
+        new BlockItem(block, new Item.Settings().itemGroup(TmoConstants.ITEM_GROUP)));
+  }
+
+  private static <T extends Block> T add(String name, T block, Rarity rarity) {
+    return add(name, block, new BlockItem(block,
+        new Item.Settings().rarity(rarity).itemGroup(TmoConstants.ITEM_GROUP)));
+  }
+
+  private static <T extends Block> T add(String name, T block, @Nullable BlockItem blockItem) {
     Identifier id = new Identifier(TmoConstants.MOD_ID, name);
     BLOCKS.put(id, block);
-    if (hasBlockItem)
-      BLOCKS_ITEMS.put(id,
-          new BlockItem(block, new Item.Settings().itemGroup(TmoConstants.ITEM_GROUP)));
+    if (blockItem != null)
+      BLOCK_ITEMS.put(id, blockItem);
     return block;
   }
 
   public static void register(Registry<? super Block> blockRegistry,
       Registry<? super Item> itemRegistry) {
     LOGGER.info("[TooManyOres] Registering {} blocks (with {} block items).", BLOCKS.size(),
-        BLOCKS_ITEMS.size());
+        BLOCK_ITEMS.size());
     for (Map.Entry<Identifier, Block> entry : BLOCKS.entrySet())
       Registry.register(blockRegistry, entry.getKey(), entry.getValue());
-    for (Map.Entry<Identifier, BlockItem> entry : BLOCKS_ITEMS.entrySet())
+    for (Map.Entry<Identifier, BlockItem> entry : BLOCK_ITEMS.entrySet())
       Registry.register(itemRegistry, entry.getKey(), entry.getValue());
     BLOCKS.clear();
+    BLOCK_ITEMS.clear();
   }
 }

@@ -19,6 +19,7 @@ public final class ItemRendererMixin {
           + "Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V")
   private int modifyDurablityBarColor(float h, float s, float v, FontRenderer fontRenderer,
       ItemStack stack, int int_1, int int_2, @Nullable String text) {
-    return ((ItemHook) stack.getItem()).getDurabilityBarColor(stack, MathHelper.hsvToRgb(h, s, v));
+    return ((ItemHook) stack.getItem()).tmoGetDurabilityBarColor(stack,
+        MathHelper.hsvToRgb(h, s, v));
   }
 }

@@ -9,12 +9,12 @@ import net.minecraft.item.ItemStack;
 @Mixin(Item.class)
 public final class ItemMixin implements ItemHook {
   @Override
-  public boolean canApplyEnchantment(ItemStack stack, Enchantment enchantment) {
+  public boolean tmoCanApplyEnchantment(ItemStack stack, Enchantment enchantment) {
     return false;
   }
 
   @Override
-  public int getDurabilityBarColor(ItemStack stack, int originalColor) {
+  public int tmoGetDurabilityBarColor(ItemStack stack, int originalColor) {
     return originalColor;
   }
 }

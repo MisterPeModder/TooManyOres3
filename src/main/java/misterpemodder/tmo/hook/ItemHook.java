@@ -9,7 +9,7 @@ public interface ItemHook {
   /**
    * Is the passed enchantment compatible with this itemstack?
    */
-  default boolean canApplyEnchantment(ItemStack stack, Enchantment enchantment) {
+  default boolean tmoCanApplyEnchantment(ItemStack stack, Enchantment enchantment) {
     return false;
   }
 
@@ -22,7 +22,7 @@ public interface ItemHook {
    * @return The RBG color.
    */
   @Environment(EnvType.CLIENT)
-  default int getDurabilityBarColor(ItemStack stack, int originalColor) {
+  default int tmoGetDurabilityBarColor(ItemStack stack, int originalColor) {
     return originalColor;
   }
 }

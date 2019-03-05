@@ -226,6 +226,7 @@
             16.0,
             16.0
           ],
+          "cullface": "down",
           "rotation": 180
         },
         "west": {
@@ -246,6 +247,7 @@
             16.0,
             16.0
           ],
+          "cullface": "north",
           "rotation": 180
         },
         "down": {
@@ -302,6 +304,7 @@
             16.0,
             16.0
           ],
+          "cullface": "up",
           "rotation": 180
         },
         "west": {
@@ -333,6 +336,7 @@
             16.0,
             1.0
           ],
+          "cullface": "north",
           "rotation": 180
         }
       }
@@ -358,6 +362,7 @@
             16.0,
             16.0
           ],
+          "cullface": "down",
           "rotation": 180
         },
         "east": {
@@ -397,7 +402,8 @@
             15.0,
             16.0,
             16.0
-          ]
+          ],
+          "cullface": "south"
         },
         "down": {
           "texture": "#0",
@@ -432,6 +438,7 @@
             16.0,
             1.0
           ],
+          "cullface": "up",
           "rotation": 180
         },
         "east": {
@@ -481,7 +488,8 @@
             0.0,
             16.0,
             1.0
-          ]
+          ],
+          "cullface": "south"
         }
       }
     },
@@ -505,7 +513,8 @@
             15.0,
             15.0,
             16.0
-          ]
+          ],
+          "cullface": "down"
         },
         "west": {
           "texture": "#0",
@@ -514,7 +523,8 @@
             15.0,
             15.0,
             16.0
-          ]
+          ],
+          "cullface": "west"
         },
         "up": {
           "texture": "#0",
@@ -523,7 +533,8 @@
             1.0,
             16.0,
             15.0
-          ]
+          ],
+          "cullface": "west"
         },
         "down": {
           "texture": "#0",
@@ -558,6 +569,7 @@
             15.0,
             1.0
           ],
+          "cullface": "up",
           "rotation": 180
         },
         "west": {
@@ -588,6 +600,7 @@
             16.0,
             15.0
           ],
+          "cullface": "west",
           "rotation": 180
         }
       }
@@ -623,6 +636,7 @@
             15.0,
             16.0
           ],
+          "cullface": "down",
           "rotation": 180
         },
         "up": {
@@ -633,6 +647,7 @@
             1.0,
             15.0
           ],
+          "cullface": "east",
           "rotation": 180
         },
         "down": {
@@ -678,6 +693,7 @@
             15.0,
             1.0
           ],
+          "cullface": "up",
           "rotation": 180
         },
         "up": {
@@ -698,7 +714,8 @@
             1.0,
             1.0,
             15.0
-          ]
+          ],
+          "cullface": "east"
         }
       }
     },
@@ -732,7 +749,8 @@
             1.0,
             16.0,
             15.0
-          ]
+          ],
+          "cullface": "north"
         },
         "south": {
           "texture": "#0",
@@ -741,7 +759,8 @@
             1.0,
             1.0,
             15.0
-          ]
+          ],
+          "cullface": "west"
         },
         "west": {
           "texture": "#0",
@@ -795,7 +814,8 @@
             1.0,
             16.0,
             15.0
-          ]
+          ],
+          "cullface": "east"
         },
         "west": {
           "texture": "#0",
@@ -804,7 +824,8 @@
             1.0,
             1.0,
             15.0
-          ]
+          ],
+          "cullface": "north"
         }
       }
     },
@@ -828,7 +849,8 @@
             1.0,
             1.0,
             15.0
-          ]
+          ],
+          "cullface": "east"
         },
         "east": {
           "texture": "#0",
@@ -857,7 +879,8 @@
             1.0,
             16.0,
             15.0
-          ]
+          ],
+          "cullface": "south"
         }
       }
     },
@@ -881,7 +904,8 @@
             1.0,
             16.0,
             15.0
-          ]
+          ],
+          "cullface": "west"
         },
         "east": {
           "texture": "#0",
@@ -890,7 +914,8 @@
             1.0,
             16.0,
             15.0
-          ]
+          ],
+          "cullface": "south"
         },
         "south": {
           "texture": "#0",
