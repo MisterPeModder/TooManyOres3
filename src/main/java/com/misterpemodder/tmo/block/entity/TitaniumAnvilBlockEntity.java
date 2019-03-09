@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.fabricmc.fabric.api.server.PlayerStream;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.network.packet.BlockEntityUpdateS2CPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.BasicInventory;
@@ -19,14 +20,18 @@ import net.minecraft.util.PacketByteBuf;
 public class TitaniumAnvilBlockEntity extends BlockEntity implements Inventory {
   protected Inventory inventory;
 
-  public TitaniumAnvilBlockEntity() {
-    super(TmoBlockEntityTypes.TITANIUM_ANVIL);
+  protected <T extends BlockEntity> TitaniumAnvilBlockEntity(BlockEntityType<T> type) {
+    super(type);
     this.inventory = new BasicInventory(1) {
       @Override
       public boolean isValidInvStack(int slot, ItemStack stack) {
         return TmoItemTags.HAMMERS.contains(stack.getItem());
       }
     };
+  }
+
+  public TitaniumAnvilBlockEntity() {
+    this(TmoBlockEntityTypes.TITANIUM_ANVIL);
   }
 
   @Override

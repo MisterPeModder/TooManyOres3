@@ -17,6 +17,8 @@ public final class TmoBlockEntityTypes {
 
   public static final BlockEntityType<TitaniumAnvilBlockEntity> TITANIUM_ANVIL =
       create("titanium_anvil", TitaniumAnvilBlockEntity::new);
+  public static final BlockEntityType<StrongPistonBlockEntity> STRONG_PISTON =
+      create("strong_piston", StrongPistonBlockEntity::new);
 
   private static <BE extends BlockEntity> BlockEntityType<BE> create(String id,
       Supplier<BE> createBe) {

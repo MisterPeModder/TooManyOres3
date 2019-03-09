@@ -11,6 +11,7 @@ import com.misterpemodder.tmo.block.SpecialRedstoneWireBlock.WireType;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.Settings;
+import net.minecraft.block.enums.PistonType;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
@@ -186,6 +187,17 @@ public final class TmoBlocks {
   public static final WeakRedstoneTorchWallBlock WEAK_REDSTONE_WALL_TORCH = add(
       "weak_redstone_wall_torch",
       new WeakRedstoneTorchWallBlock(Settings.copy(Blocks.REDSTONE_WALL_TORCH)), (BlockItem) null);
+
+  public static final StrongPistonBlock STRONG_PISTON = add("strong_piston",
+      new StrongPistonBlock(PistonType.NORMAL,
+          FabricBlockSettings.of(Material.METAL, MaterialColor.IRON).strength(2.0F, 10.0F)
+              .sounds(BlockSoundGroup.METAL).build()));
+  public static final StrongPistonBlock STICKY_STRONG_PISTON = add("sticky_strong_piston",
+      new StrongPistonBlock(PistonType.STICKY, Settings.copy(STRONG_PISTON)));
+  public static final MovingStrongPistonBlock MOVING_STRONG_PISTON = add("moving_strong_piston",
+      new MovingStrongPistonBlock(Settings.copy(STRONG_PISTON)), (BlockItem) null);
+  public static final StrongPistonHeadBlock STRONG_PISTON_HEAD = add("strong_piston_head",
+      new StrongPistonHeadBlock(Settings.copy(STRONG_PISTON)), (BlockItem) null);
 
   static {
     addBlockItem("titanium_redstone", new StringItem(TITANIUM_REDSTONE_WIRE,

@@ -1,6 +1,8 @@
 package com.misterpemodder.tmo.client;
 
+import com.misterpemodder.tmo.block.entity.StrongPistonBlockEntity;
 import com.misterpemodder.tmo.block.entity.TitaniumAnvilBlockEntity;
+import com.misterpemodder.tmo.client.render.StrongPistonBlockEntityRenderer;
 import com.misterpemodder.tmo.client.render.TitaniumAnvilBlockEntityRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.render.BlockEntityRendererRegistry;
@@ -10,5 +12,7 @@ public final class TooManyOresClient implements ClientModInitializer {
   public void onInitializeClient() {
     BlockEntityRendererRegistry.INSTANCE.register(TitaniumAnvilBlockEntity.class,
         new TitaniumAnvilBlockEntityRenderer());
+    BlockEntityRendererRegistry.INSTANCE.register(StrongPistonBlockEntity.class,
+        new StrongPistonBlockEntityRenderer());
   }
 }

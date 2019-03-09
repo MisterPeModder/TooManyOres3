@@ -1,23 +1,73 @@
 {
-    "forge_marker": 1,
-    "defaults": {
-		"model": "tmo:strong_piston_full",
-		"transform": "forge:default-block"
-	},
-    "variants": {
-        "normal": [{}],
-        "inventory": [{}],
-		"extended": {
-			"true": { "model": "tmo:strong_piston_noextension" },
-			"false": {}
-		},
-        "facing": {
-			"down": {"x": 90},
-			"up": {"x": 270},
-            "north": {},
-            "south": {"y": 180},
-            "west": {"y": 270},
-            "east": {"y": 90}
-        }
+  "variants": {
+    "extension_type=none,facing=down": {
+      "model": "tmo:block/strong_piston_full",
+      "x": 90
+    },
+    "extension_type=none,facing=up": {
+      "model": "tmo:block/strong_piston_full",
+      "x": 270
+    },
+    "extension_type=none,facing=north": {
+      "model": "tmo:block/strong_piston_full"
+    },
+    "extension_type=none,facing=south": {
+      "model": "tmo:block/strong_piston_full",
+      "y": 180
+    },
+    "extension_type=none,facing=west": {
+      "model": "tmo:block/strong_piston_full",
+      "y": 270
+    },
+    "extension_type=none,facing=east": {
+      "model": "tmo:block/strong_piston_full",
+      "y": 90
+    },
+    "extension_type=partial,facing=down": {
+      "model": "tmo:block/strong_piston_noextension",
+      "x": 90
+    },
+    "extension_type=partial,facing=up": {
+      "model": "tmo:block/strong_piston_noextension",
+      "x": 270
+    },
+    "extension_type=partial,facing=north": {
+      "model": "tmo:block/strong_piston_noextension"
+    },
+    "extension_type=partial,facing=south": {
+      "model": "tmo:block/strong_piston_noextension",
+      "y": 180
+    },
+    "extension_type=partial,facing=west": {
+      "model": "tmo:block/strong_piston_noextension",
+      "y": 270
+    },
+    "extension_type=partial,facing=east": {
+      "model": "tmo:block/strong_piston_noextension",
+      "y": 90
+    },
+    "extension_type=extended,facing=down": {
+      "model": "tmo:block/strong_piston_extended",
+      "x": 90
+    },
+    "extension_type=extended,facing=up": {
+      "model": "tmo:block/strong_piston_extended",
+      "x": 270
+    },
+    "extension_type=extended,facing=north": {
+      "model": "tmo:block/strong_piston_extended"
+    },
+    "extension_type=extended,facing=south": {
+      "model": "tmo:block/strong_piston_extended",
+      "y": 180
+    },
+    "extension_type=extended,facing=west": {
+      "model": "tmo:block/strong_piston_extended",
+      "y": 270
+    },
+    "extension_type=extended,facing=east": {
+      "model": "tmo:block/strong_piston_extended",
+      "y": 90
     }
+  }
 }

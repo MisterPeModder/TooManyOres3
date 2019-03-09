@@ -42,6 +42,7 @@ public class TitaniumAnvilBlock extends FallingBlock implements BlockEntityProvi
         context.getPlayerHorizontalFacing().rotateYClockwise());
   }
 
+  @Override
   public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos,
       VerticalEntityPosition verticalEntityPosition_1) {
     Direction direction_1 = (Direction) state.get(FACING);
