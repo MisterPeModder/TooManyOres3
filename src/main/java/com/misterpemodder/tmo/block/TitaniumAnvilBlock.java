@@ -1,6 +1,7 @@
 package com.misterpemodder.tmo.block;
 
 import com.misterpemodder.tmo.block.entity.TitaniumAnvilBlockEntity;
+import com.misterpemodder.tmo.util.VoxelShapeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockPlacementEnvironment;
@@ -22,7 +23,6 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
@@ -124,13 +124,10 @@ public class TitaniumAnvilBlock extends FallingBlock implements BlockEntityProvi
   }
 
   static {
-    X_AXIS_SHAPE = VoxelShapes.union(Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 14.0D),
-        Block.createCuboidShape(3.0D, 4.0D, 4.0D, 13.0D, 5.0D, 12.0D),
-        Block.createCuboidShape(4.0D, 5.0D, 6.0D, 12.0D, 10.0D, 10.0D),
-        Block.createCuboidShape(0.0D, 10.0D, 3.0D, 16.0D, 16.0D, 13.0D));
-    Z_AXIS_SHAPE = VoxelShapes.union(Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 14.0D),
-        Block.createCuboidShape(4.0D, 4.0D, 3.0D, 12.0D, 5.0D, 13.0D),
-        Block.createCuboidShape(6.0D, 5.0D, 4.0D, 10.0D, 10.0D, 12.0D),
-        Block.createCuboidShape(3.0D, 10.0D, 0.0D, 13.0D, 16.0D, 16.0D));
+    VoxelShapeBuilder builder = new VoxelShapeBuilder().origin(8.0, 8.0, 8.0)
+        .add(2.0, 0.0, 2.0, 12.0, 4.0, 12.0).add(4.0, 4.0, 3.0, 8.0, 1.0, 10.0)
+        .add(6.0, 5.0, 4.0, 4.0, 5.0, 8.0).add(3.0, 10.0, 0.0, 10.0, 6.0, 16.0);
+    X_AXIS_SHAPE = builder.rotateY(90.0F).build();
+    Z_AXIS_SHAPE = builder.build();
   }
 }

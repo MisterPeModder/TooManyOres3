@@ -1,6 +1,6 @@
 package com.misterpemodder.tmo.block;
 
-import com.misterpemodder.tmo.util.VoxelShapeUtil;
+import com.misterpemodder.tmo.util.VoxelShapeBuilder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -22,7 +22,6 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.ViewableWorld;
@@ -169,58 +168,22 @@ public class StrongPistonHeadBlock extends FacingBlock {
   }
 
   static {
-    final VoxelShape headDown =
-        VoxelShapes.union(VoxelShapeUtil.fromDims(0.0, 0.0, 0.0, 16.0, 4.0, 16.0),
-            VoxelShapeUtil.fromDims(5.0, 4.0, 5.0, 6.0, 1.0, 6.0));
-    final VoxelShape headUp =
-        VoxelShapes.union(VoxelShapeUtil.fromDims(0.0, 12.0, 0.0, 16.0, 4.0, 16.0),
-            VoxelShapeUtil.fromDims(5.0, 11.0, 5.0, 6.0, 1.0, 6.0));
-    final VoxelShape headNorth =
-        VoxelShapes.union(VoxelShapeUtil.fromDims(0.0, 0.0, 0.0, 16.0, 16.0, 4.0),
-            VoxelShapeUtil.fromDims(5.0, 5.0, 4.0, 6.0, 6.0, 1.0));
-    final VoxelShape headSouth =
-        VoxelShapes.union(VoxelShapeUtil.fromDims(0.0, 0.0, 12.0, 16.0, 16.0, 4.0),
-            VoxelShapeUtil.fromDims(5.0, 5.0, 11.0, 6.0, 6.0, 1.0));
-    final VoxelShape headWest =
-        VoxelShapes.union(VoxelShapeUtil.fromDims(0.0, 0.0, 0.0, 4.0, 16.0, 16.0),
-            VoxelShapeUtil.fromDims(4.0, 5.0, 5.0, 1.0, 6.0, 6.0));
-    final VoxelShape headEast =
-        VoxelShapes.union(VoxelShapeUtil.fromDims(12.0, 0.0, 0.0, 4.0, 16.0, 16.0),
-            VoxelShapeUtil.fromDims(11.0, 5.0, 5.0, 1.0, 6.0, 6.0));
-    SHORT_SHAPE_DOWN =
-        VoxelShapes.union(headDown, VoxelShapeUtil.fromDims(6.0, 5.0, 6.0, 4.0, 3.0, 4.0),
-            VoxelShapeUtil.fromDims(5.0, 8.0, 5.0, 6.0, 8.0, 6.0));
-    LONG_SHAPE_DOWN =
-        VoxelShapes.union(headDown, VoxelShapeUtil.fromDims(6.0, 5.0, 6.0, 4.0, 7.0, 4.0),
-            VoxelShapeUtil.fromDims(5.0, 12.0, 5.0, 6.0, 8.0, 6.0));
-    SHORT_SHAPE_UP =
-        VoxelShapes.union(headUp, VoxelShapeUtil.fromDims(6.0, 8.0, 6.0, 4.0, 3.0, 4.0),
-            VoxelShapeUtil.fromDims(5.0, 0.0, 5.0, 6.0, 8.0, 6.0));
-    LONG_SHAPE_UP = VoxelShapes.union(headUp, VoxelShapeUtil.fromDims(6.0, 4.0, 6.0, 4.0, 7.0, 4.0),
-        VoxelShapeUtil.fromDims(5.0, -4.0, 5.0, 6.0, 8.0, 6.0));
-    SHORT_SHAPE_NORTH =
-        VoxelShapes.union(headNorth, VoxelShapeUtil.fromDims(6.0, 6.0, 5.0, 4.0, 4.0, 3.0),
-            VoxelShapeUtil.fromDims(5.0, 5.0, 8.0, 6.0, 6.0, 8.0));
-    LONG_SHAPE_NORTH =
-        VoxelShapes.union(headNorth, VoxelShapeUtil.fromDims(6.0, 6.0, 5.0, 4.0, 4.0, 7.0),
-            VoxelShapeUtil.fromDims(5.0, 5.0, 12.0, 6.0, 6.0, 8.0));
-    SHORT_SHAPE_SOUTH =
-        VoxelShapes.union(headSouth, VoxelShapeUtil.fromDims(6.0, 6.0, 8.0, 4.0, 4.0, 3.0),
-            VoxelShapeUtil.fromDims(5.0, 5.0, 0.0, 6.0, 6.0, 8.0));
-    LONG_SHAPE_SOUTH =
-        VoxelShapes.union(headSouth, VoxelShapeUtil.fromDims(6.0, 6.0, 4.0, 4.0, 4.0, 7.0),
-            VoxelShapeUtil.fromDims(5.0, 5.0, -4.0, 6.0, 6.0, 8.0));
-    SHORT_SHAPE_WEST =
-        VoxelShapes.union(headWest, VoxelShapeUtil.fromDims(5.0, 6.0, 6.0, 3.0, 4.0, 4.0),
-            VoxelShapeUtil.fromDims(8.0, 5.0, 5.0, 8.0, 6.0, 6.0));
-    LONG_SHAPE_WEST =
-        VoxelShapes.union(headWest, VoxelShapeUtil.fromDims(5.0, 6.0, 6.0, 7.0, 4.0, 4.0),
-            VoxelShapeUtil.fromDims(12.0, 5.0, 5.0, 8.0, 6.0, 6.0));
-    SHORT_SHAPE_EAST =
-        VoxelShapes.union(headEast, VoxelShapeUtil.fromDims(8.0, 6.0, 6.0, 3.0, 4.0, 4.0),
-            VoxelShapeUtil.fromDims(0.0, 5.0, 5.0, 8.0, 6.0, 6.0));
-    LONG_SHAPE_EAST =
-        VoxelShapes.union(headEast, VoxelShapeUtil.fromDims(4.0, 6.0, 6.0, 7.0, 4.0, 4.0),
-            VoxelShapeUtil.fromDims(-4.0, 5.0, 5.0, 8.0, 6.0, 6.0));
+    VoxelShapeBuilder shortShapeBuilder = new VoxelShapeBuilder().origin(8.0, 8.0, 8.0)
+        .add(5.0, 5.0, 4.0, 6.0, 6.0, 9.0).add(0.0, 0.0, 0.0, 16.0, 16.0, 4.0);
+    VoxelShapeBuilder longShapeBuilder = new VoxelShapeBuilder().origin(8.0, 8.0, 8.0)
+        .add(6.0, 6.0, 5.0, 4.0, 4.0, 7.0).add(5.0, 5.0, 4.0, 6.0, 6.0, 1.0)
+        .add(0.0, 0.0, 0.0, 16.0, 16.0, 4.0).add(5.0, 5.0, 12.0, 6.0, 6.0, 8.0);
+    SHORT_SHAPE_SOUTH = shortShapeBuilder.rotateY(180.0F).build();
+    LONG_SHAPE_SOUTH = longShapeBuilder.rotateY(180.0F).build();
+    SHORT_SHAPE_EAST = shortShapeBuilder.rotateY(270.0F).build();
+    LONG_SHAPE_EAST = longShapeBuilder.rotateY(270.0F).build();
+    SHORT_SHAPE_NORTH = shortShapeBuilder.build();
+    LONG_SHAPE_NORTH = longShapeBuilder.build();
+    SHORT_SHAPE_WEST = shortShapeBuilder.rotateY(90.0F).build();
+    LONG_SHAPE_WEST = longShapeBuilder.rotateY(90.0F).build();
+    SHORT_SHAPE_DOWN = shortShapeBuilder.rotateX(90.0F).build();
+    LONG_SHAPE_DOWN = longShapeBuilder.rotateX(90.0F).build();
+    SHORT_SHAPE_UP = shortShapeBuilder.rotateX(270.0F).build();
+    LONG_SHAPE_UP = longShapeBuilder.rotateX(270.0F).build();
   }
 }

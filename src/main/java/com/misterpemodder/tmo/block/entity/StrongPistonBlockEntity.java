@@ -263,20 +263,30 @@ public class StrongPistonBlockEntity extends BlockEntity implements Tickable {
   }
 
   public void finishMovement() {
-    if (this.progress < 1.0f && this.world != null) {
-      updateBase();
-      this.nextProgress = 1.0f;
-      this.progress = this.nextProgress;
-      this.world.removeBlockEntity(this.pos);
-      this.invalidate();
-      if (this.world.getBlockState(this.pos).getBlock() == getContainerBlock()) {
-        BlockState state;
-        if (this.source)
-          state = Blocks.AIR.getDefaultState();
-        else
-          state = Block.getRenderingState(this.pushedBlock, this.world, this.pos);
-        this.world.setBlockState(this.pos, state, 3);
-        this.world.updateNeighbor(this.pos, state.getBlock(), this.pos);
+    if (this.world != null) {
+      if (this.progress < 1.0F) {
+        this.nextProgress = 1.0F;
+        this.progress = this.nextProgress;
+        this.world.removeBlockEntity(this.pos);
+        this.invalidate();
+        if (this.world.getBlockState(this.pos).getBlock() == getContainerBlock()) {
+          BlockState state;
+          if (this.source) {
+            state = Blocks.AIR.getDefaultState();
+            BlockPos basePos = this.pos.offset(this.facing.getOpposite());
+            BlockState baseState = this.world.getBlockState(basePos);
+            if (baseState.getBlock() instanceof StrongPistonBlock)
+              this.world.setBlockState(basePos,
+                  baseState.with(StrongPistonBlock.EXTENSION_TYPE, ExtensionType.EXTENDED), 16);
+            this.updateBase = false;
+          } else {
+            state = Block.getRenderingState(this.pushedBlock, this.world, this.pos);
+          }
+          this.world.setBlockState(this.pos, state, 3);
+          this.world.updateNeighbor(this.pos, state.getBlock(), this.pos);
+        }
+      } else {
+        updateBase();
       }
     }
   }
@@ -291,7 +301,7 @@ public class StrongPistonBlockEntity extends BlockEntity implements Tickable {
       BlockState baseState = this.world.getBlockState(basePos);
       if (baseState.getBlock() instanceof StrongPistonBlock)
         this.world.setBlockState(basePos,
-            baseState.with(StrongPistonBlock.EXTENSION_TYPE, ExtensionType.EXTENDED), 32);
+            baseState.with(StrongPistonBlock.EXTENSION_TYPE, ExtensionType.EXTENDED), 16);
       this.updateBase = false;
     }
   }

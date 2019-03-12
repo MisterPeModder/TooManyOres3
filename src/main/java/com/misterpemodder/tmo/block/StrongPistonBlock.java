@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import com.misterpemodder.tmo.block.entity.StrongPistonBlockEntity;
+import com.misterpemodder.tmo.util.VoxelShapeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPlacementEnvironment;
 import net.minecraft.block.BlockRenderLayer;
@@ -199,9 +200,8 @@ public class StrongPistonBlock extends FacingBlock {
       }
     }
     if (type == 0) {
-      if (!this.move(world, pos, direction, true)) {
+      if (!this.move(world, pos, direction, true))
         return false;
-      }
       world.setBlockState(pos, state.with(EXTENSION_TYPE, ExtensionType.PARTIAL), 67);
       world.playSound(null, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.BLOCK, 0.5f,
           world.random.nextFloat() * 0.25f + 0.6f);
@@ -409,11 +409,13 @@ public class StrongPistonBlock extends FacingBlock {
   }
 
   static {
-    EAST_EXTENDED_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 12.0, 16.0, 16.0);
-    WEST_EXTENDED_SHAPE = Block.createCuboidShape(4.0, 0.0, 0.0, 16.0, 16.0, 16.0);
-    SOUTH_EXTENDED_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 12.0);
-    NORTH_EXTENDED_SHAPE = Block.createCuboidShape(0.0, 0.0, 4.0, 16.0, 16.0, 16.0);
-    UP_EXTENDED_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 12.0, 16.0);
-    DOWN_EXTENDED_SHAPE = Block.createCuboidShape(0.0, 4.0, 0.0, 16.0, 16.0, 16.0);
+    VoxelShapeBuilder builder =
+        new VoxelShapeBuilder().origin(8.0, 8.0, 8.0).add(0.0, 0.0, 0.0, 16.0, 16.0, 12.0);
+    SOUTH_EXTENDED_SHAPE = builder.build();
+    EAST_EXTENDED_SHAPE = builder.rotateY(90.0F).build();
+    NORTH_EXTENDED_SHAPE = builder.rotateY(180.0F).build();
+    WEST_EXTENDED_SHAPE = builder.rotateY(270.0F).build();
+    DOWN_EXTENDED_SHAPE = builder.rotateX(270.0F).build();
+    UP_EXTENDED_SHAPE = builder.rotateX(90.0F).build();
   }
 }
